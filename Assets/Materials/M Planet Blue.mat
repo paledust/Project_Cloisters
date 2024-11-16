@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M Planet
+  m_Name: M Planet Blue
   m_Shader: {fileID: 4800000, guid: cdd7b5651c766194fb19ef9bc96a0c78, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -78,7 +78,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _RampMap:
-        m_Texture: {fileID: 2800000, guid: 83a2a1bb5223a4a4a9c3b94d17e7321b, type: 3}
+        m_Texture: {fileID: 2800000, guid: ffd2d177af7d50341a4f5ca9a2cee844, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
@@ -111,22 +111,23 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _EnvironmentReflections: 1
-    - _FresnelBias: 0.1
-    - _FresnelPower: 0.96
-    - _FresnelScale: 1.5
+    - _FresnelBias: 0.15
+    - _FresnelPower: 1.2
+    - _FresnelScale: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0
     - _NoiseMax: 1
     - _NoiseMin: 0
-    - _NoiseTiling: 0.5
+    - _NoiseStrength: 0.5
+    - _NoiseTiling: 1
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _RampOffset: -0.37
-    - _RampScale: 1.7
+    - _RampOffset: -0.2
+    - _RampScale: 1
     - _ReceiveShadows: 1
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
@@ -137,9 +138,9 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Direction: {r: 0, g: 1, b: 0, a: 0}
+    - _Color: {r: 0.84176856, g: 0.78679246, b: 1, a: 1}
+    - _Direction: {r: 0.9, g: 0.5, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _FresnelColor: {r: 1, g: 0.90943396, b: 0.95737976, a: 1}
+    - _FresnelColor: {r: 1.6086812, g: 2.0812953, b: 1.0134056, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
