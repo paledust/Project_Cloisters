@@ -18,7 +18,7 @@ public abstract class Basic_Clickable : MonoBehaviour
 #region Interaction Function
     public virtual void OnHover(PlayerController player){}
     public virtual void OnExitHover(){}
-    public virtual void OnClick(PlayerController player){}
+    public virtual void OnClick(PlayerController player, Vector3 hitPos){}
     public virtual void OnRelease(PlayerController player){}
     public virtual void OnFailClick(PlayerController player){}
     protected virtual void OnBecomeInteractable(){}

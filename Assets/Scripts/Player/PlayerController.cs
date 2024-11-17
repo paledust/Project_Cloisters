@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     public Basic_Clickable m_holdingInteractable{get; private set;} //Currently holding interactable.
     public Vector2 PointerScrPos{get; private set;}
 
+    private Vector3 hoverPos;
     private Camera mainCam;
 
     void Start()
@@ -27,7 +28,7 @@ public class PlayerController : MonoBehaviour
         Ray ray = mainCam.ScreenPointToRay(PointerScrPos);
         if(Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, 1<<Service.InteractableLayer)){
             Basic_Clickable hit_Interactable = hit.collider.GetComponent<Basic_Clickable>();
-            Vector3 hoverPos = hit.point;
+            hoverPos = hit.point;
             if(hit_Interactable!=null){
                 if(m_hoveringInteractable != hit_Interactable) {
                     if(m_hoveringInteractable!=null) m_hoveringInteractable.OnExitHover();
@@ -62,7 +63,7 @@ public class PlayerController : MonoBehaviour
     }
     void InteractWithClickable(){
         if(m_hoveringInteractable.m_isInteractable){
-            m_hoveringInteractable.OnClick(this);
+            m_hoveringInteractable.OnClick(this, hoverPos);
             AudioManager.Instance.PlaySoundEffect(playerAudio, m_hoveringInteractable.sfx_clickSound, 1);
         }
         else{
@@ -70,6 +71,7 @@ public class PlayerController : MonoBehaviour
             AudioManager.Instance.PlaySoundEffect(playerAudio, string.Empty, 0);
         }
     }
+    public void HoldInteractable(Basic_Clickable interactable)=>m_holdingInteractable = interactable;
 #endregion
 
 #region Player Input

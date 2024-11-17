@@ -21,6 +21,7 @@ Shader "AmplifyShaders_CartoonPlanet"
 		_RampOffset("RampOffset", Float) = 0
 		_VNoiseOnRamp("VNoiseOnRamp", Float) = 0
 		_VNoiseOnFresnel("VNoiseOnFresnel", Float) = 0
+		_PlanetMapSpeed("PlanetMapSpeed", Vector) = (0,0,0,0)
 
 
 		//_TessPhongStrength( "Tess Phong Strength", Range( 0, 1 ) ) = 0.5
@@ -253,6 +254,7 @@ Shader "AmplifyShaders_CartoonPlanet"
 			float4 _Color;
 			float4 _MainTex_ST;
 			float3 _Direction;
+			float2 _PlanetMapSpeed;
 			float _RampScale;
 			float _RampOffset;
 			float _VNoiseOnRamp;
@@ -446,7 +448,8 @@ Shader "AmplifyShaders_CartoonPlanet"
 				float3 ase_worldNormal = IN.ase_texcoord4.xyz;
 				float dotResult32 = dot( _Direction , ase_worldNormal );
 				float2 uv_MainTex = IN.ase_texcoord5.xy * _MainTex_ST.xy + _MainTex_ST.zw;
-				float vertexNoise56 = tex2D( _MainTex, uv_MainTex ).r;
+				float2 panner71 = ( 1.0 * _Time.y * _PlanetMapSpeed + uv_MainTex);
+				float vertexNoise56 = tex2D( _MainTex, panner71 ).r;
 				float2 temp_cast_0 = (saturate( ( ((dotResult32*0.5 + 0.5)*_RampScale + _RampOffset) - ( vertexNoise56 * _VNoiseOnRamp ) ) )).xx;
 				float3 lightingColor44 = ( _Color.rgb * tex2D( _RampMap, temp_cast_0 ).rgb );
 				float3 blendOpSrc42 = _FresnelColor.rgb;
@@ -553,6 +556,7 @@ Shader "AmplifyShaders_CartoonPlanet"
 			float4 _Color;
 			float4 _MainTex_ST;
 			float3 _Direction;
+			float2 _PlanetMapSpeed;
 			float _RampScale;
 			float _RampOffset;
 			float _VNoiseOnRamp;
@@ -816,6 +820,7 @@ Shader "AmplifyShaders_CartoonPlanet"
 			float4 _Color;
 			float4 _MainTex_ST;
 			float3 _Direction;
+			float2 _PlanetMapSpeed;
 			float _RampScale;
 			float _RampOffset;
 			float _VNoiseOnRamp;
@@ -1052,6 +1057,7 @@ Shader "AmplifyShaders_CartoonPlanet"
 			float4 _Color;
 			float4 _MainTex_ST;
 			float3 _Direction;
+			float2 _PlanetMapSpeed;
 			float _RampScale;
 			float _RampOffset;
 			float _VNoiseOnRamp;
@@ -1275,6 +1281,7 @@ Shader "AmplifyShaders_CartoonPlanet"
 			float4 _Color;
 			float4 _MainTex_ST;
 			float3 _Direction;
+			float2 _PlanetMapSpeed;
 			float _RampScale;
 			float _RampOffset;
 			float _VNoiseOnRamp;
@@ -1504,6 +1511,7 @@ Shader "AmplifyShaders_CartoonPlanet"
 			float4 _Color;
 			float4 _MainTex_ST;
 			float3 _Direction;
+			float2 _PlanetMapSpeed;
 			float _RampScale;
 			float _RampOffset;
 			float _VNoiseOnRamp;
@@ -1713,7 +1721,6 @@ Node;AmplifyShaderEditor.SimpleMultiplyOpNode;52;-2464,1392;Inherit;False;2;2;0;
 Node;AmplifyShaderEditor.RegisterLocalVarNode;22;-2320,1392;Inherit;False;worldNoise;-1;True;1;0;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.WorldNormalVector;33;-3152,640;Inherit;False;False;1;0;FLOAT3;0,0,1;False;4;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3
 Node;AmplifyShaderEditor.Vector3Node;31;-3152,496;Inherit;False;Property;_Direction;Direction;9;0;Create;True;0;0;0;False;0;False;1,0,0;0,0,0;0;4;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3
-Node;AmplifyShaderEditor.TextureCoordinatesNode;54;-3216,-64;Inherit;False;0;55;2;3;2;SAMPLER2D;;False;0;FLOAT2;1,1;False;1;FLOAT2;0,0;False;5;FLOAT2;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.RegisterLocalVarNode;56;-2736,-64;Inherit;False;vertexNoise;-1;True;1;0;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.GetLocalVarNode;23;-2496,2112;Inherit;False;22;worldNoise;1;0;OBJECT;;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SamplerNode;55;-3008,-64;Inherit;True;Property;_MainTex;MainTex;1;0;Create;True;0;0;0;False;0;False;-1;e77e50664873809498937c7f032f4658;e77e50664873809498937c7f032f4658;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;6;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4;FLOAT3;5
@@ -1731,6 +1738,9 @@ Node;AmplifyShaderEditor.SimpleMultiplyOpNode;69;-2080,2320;Inherit;False;2;2;0;
 Node;AmplifyShaderEditor.GetLocalVarNode;60;-2304,2320;Inherit;False;56;vertexNoise;1;0;OBJECT;;False;1;FLOAT;0
 Node;AmplifyShaderEditor.RangedFloatNode;70;-2368,2400;Inherit;False;Property;_VNoiseOnFresnel;VNoiseOnFresnel;14;0;Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.RangedFloatNode;67;-2640,416;Inherit;False;Property;_VNoiseOnRamp;VNoiseOnRamp;13;0;Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.TextureCoordinatesNode;54;-3664,-48;Inherit;False;0;55;2;3;2;SAMPLER2D;;False;0;FLOAT2;1,1;False;1;FLOAT2;0,0;False;5;FLOAT2;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.PannerNode;71;-3440,-48;Inherit;False;3;0;FLOAT2;0,0;False;2;FLOAT2;0,0;False;1;FLOAT;1;False;1;FLOAT2;0
+Node;AmplifyShaderEditor.Vector2Node;72;-3664,80;Inherit;False;Property;_PlanetMapSpeed;PlanetMapSpeed;15;0;Create;True;0;0;0;False;0;False;0,0;0,0;0;3;FLOAT2;0;FLOAT;1;FLOAT;2
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;0;144,240;Float;False;False;-1;2;UnityEditor.ShaderGraphUnlitGUI;0;1;New Amplify Shader;2992e84f91cbeb14eab234972e07ea9d;True;ExtraPrePass;0;0;ExtraPrePass;5;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;False;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;False;False;False;True;4;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;UniversalMaterialType=Unlit;True;3;True;12;all;0;False;True;1;1;False;;0;False;;0;1;False;;0;False;;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;1;False;;True;3;False;;True;True;0;False;;0;False;;True;0;False;False;0;;0;0;Standard;0;False;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;2;0,0;Float;False;False;-1;2;UnityEditor.ShaderGraphUnlitGUI;0;1;New Amplify Shader;2992e84f91cbeb14eab234972e07ea9d;True;ShadowCaster;0;2;ShadowCaster;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;False;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;False;False;False;True;4;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;UniversalMaterialType=Unlit;True;3;True;12;all;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;False;False;True;False;False;False;False;0;False;;False;False;False;False;False;False;False;False;False;True;1;False;;True;3;False;;False;True;1;LightMode=ShadowCaster;False;False;0;;0;0;Standard;0;False;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;3;0,0;Float;False;False;-1;2;UnityEditor.ShaderGraphUnlitGUI;0;1;New Amplify Shader;2992e84f91cbeb14eab234972e07ea9d;True;DepthOnly;0;3;DepthOnly;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;False;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;False;False;False;True;4;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;UniversalMaterialType=Unlit;True;3;True;12;all;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;False;False;True;False;False;False;False;0;False;;False;False;False;False;False;False;False;False;False;True;1;False;;False;False;True;1;LightMode=DepthOnly;False;False;0;;0;0;Standard;0;False;0
@@ -1767,7 +1777,7 @@ WireConnection;52;0;18;1
 WireConnection;52;1;53;0
 WireConnection;22;0;52;0
 WireConnection;56;0;55;1
-WireConnection;55;1;54;0
+WireConnection;55;1;71;0
 WireConnection;57;0;24;0
 WireConnection;24;0;61;0
 WireConnection;61;0;15;0
@@ -1782,6 +1792,8 @@ WireConnection;68;0;39;0
 WireConnection;68;1;66;0
 WireConnection;69;0;60;0
 WireConnection;69;1;70;0
+WireConnection;71;0;54;0
+WireConnection;71;2;72;0
 WireConnection;1;2;42;0
 ASEEND*/
-//CHKSM=9E09A130F19CCBBE1E891F287FE459434E045B54
+//CHKSM=59C48CF210E49F89B143C1A0E2BB0CF877789DF9
