@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
 
                     m_hoveringInteractable = hit_Interactable;
                     if(m_hoveringInteractable.m_isInteractable) m_hoveringInteractable.OnHover(this);
-                    PlayerManager.Instance.UpdateCursorState(CURSOR_STATE.INTERACT);
+                    if(!m_holdingInteractable) PlayerManager.Instance.UpdateCursorState(CURSOR_STATE.INTERACT);
                 }
             }
             else{
@@ -53,13 +53,15 @@ public class PlayerController : MonoBehaviour
             m_hoveringInteractable.OnExitHover();
             m_hoveringInteractable = null;
         }
-        PlayerManager.Instance.UpdateCursorState(CURSOR_STATE.DEFAULT);
+        if(!m_holdingInteractable) PlayerManager.Instance.UpdateCursorState(CURSOR_STATE.DEFAULT);
     }
     void ClearHoldingInteractable(){
         if(m_holdingInteractable != null){
             m_holdingInteractable.OnRelease(this);
             m_holdingInteractable = null;
         }
+        if(!m_hoveringInteractable) PlayerManager.Instance.UpdateCursorState(CURSOR_STATE.DEFAULT);
+        else PlayerManager.Instance.UpdateCursorState(CURSOR_STATE.INTERACT);
     }
     void InteractWithClickable(){
         if(m_hoveringInteractable.m_isInteractable){
@@ -71,7 +73,10 @@ public class PlayerController : MonoBehaviour
             AudioManager.Instance.PlaySoundEffect(playerAudio, string.Empty, 0);
         }
     }
-    public void HoldInteractable(Basic_Clickable interactable)=>m_holdingInteractable = interactable;
+    public void HoldInteractable(Basic_Clickable interactable){
+        m_holdingInteractable = interactable;
+        PlayerManager.Instance.UpdateCursorState(CURSOR_STATE.DRAG);
+    }
 #endregion
 
 #region Player Input

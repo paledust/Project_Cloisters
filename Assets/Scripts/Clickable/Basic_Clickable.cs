@@ -5,13 +5,11 @@ public abstract class Basic_Clickable : MonoBehaviour
 [Header("Clickable Basic")]
     public string sfx_clickSound = string.Empty;
     [SerializeField] protected Collider hitbox;
-    [SerializeField] protected CURSOR_STATE cursorState = CURSOR_STATE.INTERACT;
     [SerializeField] protected bool isFrozen = false; //If not available, player can still click on object but will show stop sign
 
     public bool m_isFrozen{get{return isFrozen;}}
     public bool m_isInteractable{get{return gameObject.activeInHierarchy && !isFrozen && hitbox.enabled;}}
     public Collider m_hitbox{get{return hitbox;}}
-    public CURSOR_STATE m_cursorState{get{return cursorState;}}
     
     void Reset()=>hitbox = GetComponent<Collider>();
 

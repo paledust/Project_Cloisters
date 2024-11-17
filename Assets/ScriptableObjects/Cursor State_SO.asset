@@ -19,3 +19,6 @@ MonoBehaviour:
   - cursorState: 1
     texture: {fileID: 2800000, guid: ae95241668257034fb766b360d5a79c6, type: 3}
     offset: {x: 26, y: 12}
+  - cursorState: 2
+    texture: {fileID: 2800000, guid: fa2d08998f03e284a81d426319e0c093, type: 3}
+    offset: {x: 26, y: 12}
