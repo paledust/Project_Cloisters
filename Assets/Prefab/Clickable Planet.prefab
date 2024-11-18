@@ -61,14 +61,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sfx_clickSound: group_click
   hitbox: {fileID: 4167929499371950567}
-  cursorState: 1
   isFrozen: 0
-  dragStrength: 40
+  planetAxisTrans: {fileID: 7673807578959812770}
+  planetTrans: {fileID: 4167929500767803095}
+  dragStrength: 35
   idleAngularSpeed: 40
   maxAngularSpeed: 2000
+  maxVerticalAngle: 20
   controllingAngularLerp: 5
   releaseAngularLerp: 1
-  planetTrans: {fileID: 4167929500767803095}
 --- !u!1 &4167929500767803096
 GameObject:
   m_ObjectHideFlags: 0

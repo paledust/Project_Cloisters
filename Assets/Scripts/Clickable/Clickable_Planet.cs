@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class Clickable_Planet : Basic_Clickable
 {
+    [SerializeField] private Transform planetAxisTrans;
     [SerializeField] private Transform planetTrans;
 [Header("Control")]
     [SerializeField] private float dragStrength = 1f;
     [SerializeField] private float idleAngularSpeed = 2f;
     [SerializeField] private float maxAngularSpeed = 200f;
+    [SerializeField] private float maxVerticalAngle = 20;
 [Header("AngularSpeed Lerp")]
     [SerializeField] private float controllingAngularLerp = 10f;
     [SerializeField] private float releaseAngularLerp = 1f;
@@ -17,37 +19,38 @@ public class Clickable_Planet : Basic_Clickable
 
     private float initDepth;
     private float lastAngle;
+    private float verticalAngle;
     private Vector3 hitPos;
-    private Vector3 rotateAxis;
     private PlayerController playerController;
     private Camera mainCam;
 
     void Start(){
         mainCam = Camera.main;
-        rotateAxis = Vector3.forward;
+        verticalAngle = 0;
     }
     void Update(){
         if(playerController!=null){
             Vector3 cursorPos = playerController.PointerScrPos;
             cursorPos.z = initDepth;
             cursorPos = mainCam.ScreenToWorldPoint(cursorPos);
-            // rotateAxis = Vector3.Lerp(rotateAxis, Vector3.Cross(Vector3.back, cursorPos - initPos).normalized, Time.deltaTime * controllingAngularLerp);
             
             float angle = (cursorPos - hitPos).x * dragStrength;
             if(Time.deltaTime>0) m_angularSpeed = Mathf.Lerp(m_angularSpeed, Mathf.Clamp((angle-lastAngle)/Time.deltaTime, -maxAngularSpeed, maxAngularSpeed), Time.deltaTime*controllingAngularLerp);
-
             lastAngle = angle;
+
+            float targetAngle = (cursorPos-hitPos).y * dragStrength * 0.25f;
+            targetAngle = Mathf.Clamp(targetAngle, -maxVerticalAngle, maxVerticalAngle);
+            verticalAngle = Mathf.Lerp(verticalAngle, targetAngle, Time.deltaTime*controllingAngularLerp);
         }
         else{
-            // rotateAxis = Vector3.Lerp(rotateAxis, Vector3.up, Time.deltaTime*releaseAngularLerp);
+            verticalAngle = Mathf.Lerp(verticalAngle, 0, Time.deltaTime*releaseAngularLerp);
             m_angularSpeed = Mathf.Lerp(m_angularSpeed, idleAngularSpeed, Time.deltaTime*releaseAngularLerp);
             if(Mathf.Abs(m_angularSpeed-idleAngularSpeed)<=0.01f) m_angularSpeed = idleAngularSpeed;
         }
-
-
     }
     void FixedUpdate(){
-        planetTrans.Rotate(rotateAxis, -m_angularSpeed*Time.fixedDeltaTime, Space.Self);
+        planetTrans.Rotate(Vector3.forward, -m_angularSpeed*Time.fixedDeltaTime, Space.Self);
+        planetAxisTrans.localRotation = Quaternion.Euler(verticalAngle,0,0);
     }
     public override void OnClick(PlayerController player, Vector3 hitPos)
     {

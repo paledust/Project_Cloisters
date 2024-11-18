@@ -18,7 +18,7 @@ MonoBehaviour:
   sfx_group_info_list:
   - audio_group_name: group_click
     audioClips:
-    - {fileID: 8300000, guid: d0dba11d4081931458527aef8771cf36, type: 3}
-    - {fileID: 8300000, guid: 4378cf1fff8ee6a478b5c9bdb8c1c279, type: 3}
-    - {fileID: 8300000, guid: 027a1e870282f3e4cabd8678386bf7b9, type: 3}
-    - {fileID: 8300000, guid: 27e8de481af08ac468e6284414d2dd94, type: 3}
+    - {fileID: 8300000, guid: 1e7172822a9a3e7449ed115df56dd577, type: 3}
+    - {fileID: 8300000, guid: 35902380e169b824bbaef05f8d32b8dc, type: 3}
+    - {fileID: 8300000, guid: ddbb4f1258d6e8a4b9ab9dadf3cfd439, type: 3}
+    - {fileID: 8300000, guid: 2f7df720f993e324dba41bc4117ef4b7, type: 3}

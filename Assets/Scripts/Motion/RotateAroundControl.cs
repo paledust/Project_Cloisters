@@ -14,5 +14,9 @@ public class RotateAroundControl : MonoBehaviour
     void Update()
     {
         rotateAround.angularSpeed = Mathf.Lerp(rotateAround.angularSpeed, clickable_Planet.m_angularSpeed*speedScale - speedOffset, Time.deltaTime * controlAgility);
+        Vector3 euler = rotateAround.m_target.eulerAngles;
+        if(euler.x > 180) euler.x -= 360;
+        euler *= 0.5f;
+        rotateAround.axisAdjust = Vector3.Lerp(rotateAround.axisAdjust, euler, Time.deltaTime * controlAgility * 0.5f);
     }
 }
