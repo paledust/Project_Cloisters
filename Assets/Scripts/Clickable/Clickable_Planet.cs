@@ -38,7 +38,7 @@ public class Clickable_Planet : Basic_Clickable
             if(Time.deltaTime>0) m_angularSpeed = Mathf.Lerp(m_angularSpeed, Mathf.Clamp((angle-lastAngle)/Time.deltaTime, -maxAngularSpeed, maxAngularSpeed), Time.deltaTime*controllingAngularLerp);
             lastAngle = angle;
 
-            float targetAngle = (cursorPos-hitPos).y * dragStrength * 0.25f;
+            float targetAngle = (cursorPos-hitPos).y * dragStrength * 0.5f;
             targetAngle = Mathf.Clamp(targetAngle, -maxVerticalAngle, maxVerticalAngle);
             verticalAngle = Mathf.Lerp(verticalAngle, targetAngle, Time.deltaTime*controllingAngularLerp);
         }
