@@ -16,17 +16,20 @@ public class Clickable_Planet : Basic_Clickable
     [SerializeField] private float releaseAngularLerp = 1f;
 
     public float m_angularSpeed{get; private set;}
+    public bool m_isControlling{get{return playerController!=null;}}
 
     private float initDepth;
     private float lastAngle;
     private float verticalAngle;
     private Vector3 hitPos;
-    private PlayerController playerController;
     private Camera mainCam;
+    private PlayerController playerController;
+    private CoroutineExcuter sizeChanger;
 
     void Start(){
         mainCam = Camera.main;
         verticalAngle = 0;
+        sizeChanger = new CoroutineExcuter(this);
     }
     void Update(){
         if(playerController!=null){
@@ -60,10 +63,21 @@ public class Clickable_Planet : Basic_Clickable
         playerController.HoldInteractable(this);
         this.hitPos = hitPos;
         initDepth = Camera.main.WorldToScreenPoint(this.hitPos).z;
+
+        sizeChanger.Excute(coroutineChangePlanetSize(1.02f, 0.4f, EasingFunc.Easing.FunctionType.BackEaseOut));
     }
     public override void OnRelease(PlayerController player)
     {
         base.OnRelease(player);
         playerController = null;
+        sizeChanger.Excute(coroutineChangePlanetSize(1f, 0.5f));
+    }
+    IEnumerator coroutineChangePlanetSize(float targetSize, float duration, EasingFunc.Easing.FunctionType easeType = EasingFunc.Easing.FunctionType.QuadEaseOut){
+        var easeFunc = EasingFunc.Easing.GetFunctionWithTypeEnum(easeType);
+        Vector3 initSize = planetAxisTrans.localScale;
+
+        yield return new WaitForLoop(duration, (t)=>{
+            planetAxisTrans.localScale = Vector3.LerpUnclamped(initSize, targetSize*Vector3.one, easeFunc(t));
+        });
     }
 }

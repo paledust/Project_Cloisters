@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-
+    [SerializeField] private PlayerInput input;
 [Header("Audio")]
     [SerializeField] private AudioSource playerAudio;
 
@@ -76,6 +76,18 @@ public class PlayerController : MonoBehaviour
     public void HoldInteractable(Basic_Clickable interactable){
         m_holdingInteractable = interactable;
         PlayerManager.Instance.UpdateCursorState(CURSOR_STATE.DRAG);
+    }
+    public void CheckControllable(){
+        if(PlayerManager.Instance.m_canControl){
+            input.ActivateInput();
+            this.enabled = true;
+        }
+        else{
+            this.enabled = false;
+            if(m_hoveringInteractable) ClearHoveringInteractable();
+            if(m_holdingInteractable) ClearHoldingInteractable();
+            input.DeactivateInput();
+        }
     }
 #endregion
 
