@@ -9,6 +9,7 @@ public class Plan_ZoomToBluePlanet : MonoBehaviour
     [SerializeField] private PlayableDirector endTimeline;
 [Header("Interaction")]
     [SerializeField] private float angleTolrence = 10;
+    [SerializeField] private Transform centerPos;
 [Header("Planet")]
     [SerializeField] private Transform surroundPlanet;
     [SerializeField] private Transform centerPlanet;
@@ -27,11 +28,27 @@ public class Plan_ZoomToBluePlanet : MonoBehaviour
         if(angle < angleTolrence && !isDone){
             isDone = true;
             this.enabled = false;
-            GoToNextPlanet();
+            StartCoroutine(coroutineNextPlanet());
         }
     }
     void OnDisable(){
         EventHandler.E_OnPlanetReachPos -= GoToNextPlanet;
+    }
+    IEnumerator coroutineNextPlanet(){
+        clickable_redPlanet.DisableHitbox();
+        surroundPlanet.GetComponent<RotateAround>().enabled = false;
+
+        Vector3 startPos = surroundPlanet.position;
+        Vector3 finalPos = centerPos.position;
+        yield return new WaitForLoop(0.5f, (t)=>{
+            surroundPlanet.position = Vector3.Lerp(startPos, finalPos, EasingFunc.Easing.QuadEaseOut(t));
+        });
+
+        EventHandler.Call_OnTransitionBegin();
+        endTimeline.Play();
+        StartCoroutine(CommonCoroutine.delayAction(()=>{
+            EventHandler.Call_OnTransitionEnd();
+        },(float)endTimeline.duration));
     }
     
     void GoToNextPlanet(){

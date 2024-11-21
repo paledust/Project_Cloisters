@@ -64,12 +64,12 @@ MonoBehaviour:
   isFrozen: 0
   planetAxisTrans: {fileID: 7673807578959812770}
   planetTrans: {fileID: 4167929500767803095}
-  dragStrength: 35
+  dragStrength: 50
   idleAngularSpeed: 40
-  maxAngularSpeed: 2000
+  maxAngularSpeed: 1000
   maxVerticalAngle: 20
-  controllingAngularLerp: 5
-  releaseAngularLerp: 1
+  controllingAngularLerp: 7
+  releaseAngularLerp: 0.6
 --- !u!1 &4167929500767803096
 GameObject:
   m_ObjectHideFlags: 0

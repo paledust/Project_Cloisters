@@ -89,21 +89,24 @@ Shader "AmplifyShaders/Sprite AdvancedDistort"
 			#include "Packages/com.unity.render-pipelines.universal/Shaders/2D/Include/SurfaceData2D.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Debug/Debugging2D.hlsl"
 
-			
+			#pragma multi_compile_instancing
+
 
 			sampler2D _MainTex;
 			sampler2D _NoiseMap;
 			sampler2D _DetailNoiseMap;
+			UNITY_INSTANCING_BUFFER_START(AmplifyShadersSpriteAdvancedDistort)
+				UNITY_DEFINE_INSTANCED_PROP(float, _UVFade)
+				UNITY_DEFINE_INSTANCED_PROP(float, _UVFadeSmooth)
+				UNITY_DEFINE_INSTANCED_PROP(float, _DetailFade)
+				UNITY_DEFINE_INSTANCED_PROP(float, _DetailFadeSmooth)
+				UNITY_DEFINE_INSTANCED_PROP(float, _DetailStrength)
+			UNITY_INSTANCING_BUFFER_END(AmplifyShadersSpriteAdvancedDistort)
 			CBUFFER_START( UnityPerMaterial )
 			float2 _NoiseSpeed;
 			float2 _NoiseTile;
-			float _UVFade;
-			float _UVFadeSmooth;
 			float _InverseNoise;
-			float _DetailFade;
-			float _DetailFadeSmooth;
 			float _DetailScale;
-			float _DetailStrength;
 			CBUFFER_END
 
 
@@ -179,7 +182,9 @@ Shader "AmplifyShaders/Sprite AdvancedDistort"
 				UNITY_SETUP_INSTANCE_ID(IN);
 				UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(IN);
 
-				float smoothstepResult11 = smoothstep( _UVFade , ( _UVFade + _UVFadeSmooth ) , IN.texCoord0.xy.x);
+				float _UVFade_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifyShadersSpriteAdvancedDistort,_UVFade);
+				float _UVFadeSmooth_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifyShadersSpriteAdvancedDistort,_UVFadeSmooth);
+				float smoothstepResult11 = smoothstep( _UVFade_Instance , ( _UVFade_Instance + _UVFadeSmooth_Instance ) , IN.texCoord0.xy.x);
 				float3 ase_worldPos = IN.ase_texcoord3.xyz;
 				float2 appendResult66 = (float2(ase_worldPos.x , ase_worldPos.y));
 				float2 panner6 = ( 1.0 * _Time.y * _NoiseSpeed + ( appendResult66 * _NoiseTile ));
@@ -187,9 +192,12 @@ Shader "AmplifyShaders/Sprite AdvancedDistort"
 				float lerpResult23 = lerp( tex2DNode17.r , ( 1.0 - tex2DNode17.r ) , _InverseNoise);
 				float temp_output_35_0 = ( (smoothstepResult11*2.0 + -1.0) + lerpResult23 );
 				float temp_output_47_0 = step( 0.5 , temp_output_35_0 );
-				float smoothstepResult39 = smoothstep( _DetailFade , ( _DetailFade + _DetailFadeSmooth ) , ( 1.0 - IN.texCoord0.xy.x ));
+				float _DetailFade_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifyShadersSpriteAdvancedDistort,_DetailFade);
+				float _DetailFadeSmooth_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifyShadersSpriteAdvancedDistort,_DetailFadeSmooth);
+				float smoothstepResult39 = smoothstep( _DetailFade_Instance , ( _DetailFade_Instance + _DetailFadeSmooth_Instance ) , ( 1.0 - IN.texCoord0.xy.x ));
 				float2 appendResult30 = (float2(ase_worldPos.x , ase_worldPos.y));
-				float temp_output_31_0 = ( tex2D( _DetailNoiseMap, ( appendResult30 * _DetailScale ) ).r * _DetailStrength );
+				float _DetailStrength_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifyShadersSpriteAdvancedDistort,_DetailStrength);
+				float temp_output_31_0 = ( tex2D( _DetailNoiseMap, ( appendResult30 * _DetailScale ) ).r * _DetailStrength_Instance );
 				float4 appendResult20 = (float4(tex2D( _MainTex, IN.texCoord0.xy ).rgb , saturate( ( temp_output_47_0 - ( smoothstepResult39 * temp_output_31_0 ) ) )));
 				
 				float4 Color = appendResult20;
@@ -267,21 +275,24 @@ Shader "AmplifyShaders/Sprite AdvancedDistort"
 			#include "Packages/com.unity.render-pipelines.universal/Shaders/2D/Include/SurfaceData2D.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Debug/Debugging2D.hlsl"
 
-			
+			#pragma multi_compile_instancing
+
 
 			sampler2D _MainTex;
 			sampler2D _NoiseMap;
 			sampler2D _DetailNoiseMap;
+			UNITY_INSTANCING_BUFFER_START(AmplifyShadersSpriteAdvancedDistort)
+				UNITY_DEFINE_INSTANCED_PROP(float, _UVFade)
+				UNITY_DEFINE_INSTANCED_PROP(float, _UVFadeSmooth)
+				UNITY_DEFINE_INSTANCED_PROP(float, _DetailFade)
+				UNITY_DEFINE_INSTANCED_PROP(float, _DetailFadeSmooth)
+				UNITY_DEFINE_INSTANCED_PROP(float, _DetailStrength)
+			UNITY_INSTANCING_BUFFER_END(AmplifyShadersSpriteAdvancedDistort)
 			CBUFFER_START( UnityPerMaterial )
 			float2 _NoiseSpeed;
 			float2 _NoiseTile;
-			float _UVFade;
-			float _UVFadeSmooth;
 			float _InverseNoise;
-			float _DetailFade;
-			float _DetailFadeSmooth;
 			float _DetailScale;
-			float _DetailStrength;
 			CBUFFER_END
 
 
@@ -357,7 +368,9 @@ Shader "AmplifyShaders/Sprite AdvancedDistort"
 				UNITY_SETUP_INSTANCE_ID(IN);
 				UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(IN);
 
-				float smoothstepResult11 = smoothstep( _UVFade , ( _UVFade + _UVFadeSmooth ) , IN.texCoord0.xy.x);
+				float _UVFade_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifyShadersSpriteAdvancedDistort,_UVFade);
+				float _UVFadeSmooth_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifyShadersSpriteAdvancedDistort,_UVFadeSmooth);
+				float smoothstepResult11 = smoothstep( _UVFade_Instance , ( _UVFade_Instance + _UVFadeSmooth_Instance ) , IN.texCoord0.xy.x);
 				float3 ase_worldPos = IN.ase_texcoord3.xyz;
 				float2 appendResult66 = (float2(ase_worldPos.x , ase_worldPos.y));
 				float2 panner6 = ( 1.0 * _Time.y * _NoiseSpeed + ( appendResult66 * _NoiseTile ));
@@ -365,9 +378,12 @@ Shader "AmplifyShaders/Sprite AdvancedDistort"
 				float lerpResult23 = lerp( tex2DNode17.r , ( 1.0 - tex2DNode17.r ) , _InverseNoise);
 				float temp_output_35_0 = ( (smoothstepResult11*2.0 + -1.0) + lerpResult23 );
 				float temp_output_47_0 = step( 0.5 , temp_output_35_0 );
-				float smoothstepResult39 = smoothstep( _DetailFade , ( _DetailFade + _DetailFadeSmooth ) , ( 1.0 - IN.texCoord0.xy.x ));
+				float _DetailFade_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifyShadersSpriteAdvancedDistort,_DetailFade);
+				float _DetailFadeSmooth_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifyShadersSpriteAdvancedDistort,_DetailFadeSmooth);
+				float smoothstepResult39 = smoothstep( _DetailFade_Instance , ( _DetailFade_Instance + _DetailFadeSmooth_Instance ) , ( 1.0 - IN.texCoord0.xy.x ));
 				float2 appendResult30 = (float2(ase_worldPos.x , ase_worldPos.y));
-				float temp_output_31_0 = ( tex2D( _DetailNoiseMap, ( appendResult30 * _DetailScale ) ).r * _DetailStrength );
+				float _DetailStrength_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifyShadersSpriteAdvancedDistort,_DetailStrength);
+				float temp_output_31_0 = ( tex2D( _DetailNoiseMap, ( appendResult30 * _DetailScale ) ).r * _DetailStrength_Instance );
 				float4 appendResult20 = (float4(tex2D( _MainTex, IN.texCoord0.xy ).rgb , saturate( ( temp_output_47_0 - ( smoothstepResult39 * temp_output_31_0 ) ) )));
 				
 				float4 Color = appendResult20;
@@ -433,21 +449,24 @@ Shader "AmplifyShaders/Sprite AdvancedDistort"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ShaderGraphFunctions.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/ShaderPass.hlsl"
 
-			
+			#pragma multi_compile_instancing
+
 
 			sampler2D _MainTex;
 			sampler2D _NoiseMap;
 			sampler2D _DetailNoiseMap;
+			UNITY_INSTANCING_BUFFER_START(AmplifyShadersSpriteAdvancedDistort)
+				UNITY_DEFINE_INSTANCED_PROP(float, _UVFade)
+				UNITY_DEFINE_INSTANCED_PROP(float, _UVFadeSmooth)
+				UNITY_DEFINE_INSTANCED_PROP(float, _DetailFade)
+				UNITY_DEFINE_INSTANCED_PROP(float, _DetailFadeSmooth)
+				UNITY_DEFINE_INSTANCED_PROP(float, _DetailStrength)
+			UNITY_INSTANCING_BUFFER_END(AmplifyShadersSpriteAdvancedDistort)
 			CBUFFER_START( UnityPerMaterial )
 			float2 _NoiseSpeed;
 			float2 _NoiseTile;
-			float _UVFade;
-			float _UVFadeSmooth;
 			float _InverseNoise;
-			float _DetailFade;
-			float _DetailFadeSmooth;
 			float _DetailScale;
-			float _DetailStrength;
 			CBUFFER_END
 
 
@@ -509,7 +528,9 @@ Shader "AmplifyShaders/Sprite AdvancedDistort"
 
 			half4 frag(VertexOutput IN) : SV_TARGET
 			{
-				float smoothstepResult11 = smoothstep( _UVFade , ( _UVFade + _UVFadeSmooth ) , IN.ase_texcoord.xy.x);
+				float _UVFade_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifyShadersSpriteAdvancedDistort,_UVFade);
+				float _UVFadeSmooth_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifyShadersSpriteAdvancedDistort,_UVFadeSmooth);
+				float smoothstepResult11 = smoothstep( _UVFade_Instance , ( _UVFade_Instance + _UVFadeSmooth_Instance ) , IN.ase_texcoord.xy.x);
 				float3 ase_worldPos = IN.ase_texcoord1.xyz;
 				float2 appendResult66 = (float2(ase_worldPos.x , ase_worldPos.y));
 				float2 panner6 = ( 1.0 * _Time.y * _NoiseSpeed + ( appendResult66 * _NoiseTile ));
@@ -517,9 +538,12 @@ Shader "AmplifyShaders/Sprite AdvancedDistort"
 				float lerpResult23 = lerp( tex2DNode17.r , ( 1.0 - tex2DNode17.r ) , _InverseNoise);
 				float temp_output_35_0 = ( (smoothstepResult11*2.0 + -1.0) + lerpResult23 );
 				float temp_output_47_0 = step( 0.5 , temp_output_35_0 );
-				float smoothstepResult39 = smoothstep( _DetailFade , ( _DetailFade + _DetailFadeSmooth ) , ( 1.0 - IN.ase_texcoord.xy.x ));
+				float _DetailFade_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifyShadersSpriteAdvancedDistort,_DetailFade);
+				float _DetailFadeSmooth_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifyShadersSpriteAdvancedDistort,_DetailFadeSmooth);
+				float smoothstepResult39 = smoothstep( _DetailFade_Instance , ( _DetailFade_Instance + _DetailFadeSmooth_Instance ) , ( 1.0 - IN.ase_texcoord.xy.x ));
 				float2 appendResult30 = (float2(ase_worldPos.x , ase_worldPos.y));
-				float temp_output_31_0 = ( tex2D( _DetailNoiseMap, ( appendResult30 * _DetailScale ) ).r * _DetailStrength );
+				float _DetailStrength_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifyShadersSpriteAdvancedDistort,_DetailStrength);
+				float temp_output_31_0 = ( tex2D( _DetailNoiseMap, ( appendResult30 * _DetailScale ) ).r * _DetailStrength_Instance );
 				float4 appendResult20 = (float4(tex2D( _MainTex, IN.ase_texcoord.xy ).rgb , saturate( ( temp_output_47_0 - ( smoothstepResult39 * temp_output_31_0 ) ) )));
 				
 				float4 Color = appendResult20;
@@ -565,21 +589,24 @@ Shader "AmplifyShaders/Sprite AdvancedDistort"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ShaderGraphFunctions.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/ShaderPass.hlsl"
 
-        	
+        	#pragma multi_compile_instancing
+
 
 			sampler2D _MainTex;
 			sampler2D _NoiseMap;
 			sampler2D _DetailNoiseMap;
+			UNITY_INSTANCING_BUFFER_START(AmplifyShadersSpriteAdvancedDistort)
+				UNITY_DEFINE_INSTANCED_PROP(float, _UVFade)
+				UNITY_DEFINE_INSTANCED_PROP(float, _UVFadeSmooth)
+				UNITY_DEFINE_INSTANCED_PROP(float, _DetailFade)
+				UNITY_DEFINE_INSTANCED_PROP(float, _DetailFadeSmooth)
+				UNITY_DEFINE_INSTANCED_PROP(float, _DetailStrength)
+			UNITY_INSTANCING_BUFFER_END(AmplifyShadersSpriteAdvancedDistort)
 			CBUFFER_START( UnityPerMaterial )
 			float2 _NoiseSpeed;
 			float2 _NoiseTile;
-			float _UVFade;
-			float _UVFadeSmooth;
 			float _InverseNoise;
-			float _DetailFade;
-			float _DetailFadeSmooth;
 			float _DetailScale;
-			float _DetailStrength;
 			CBUFFER_END
 
 
@@ -640,7 +667,9 @@ Shader "AmplifyShaders/Sprite AdvancedDistort"
 
 			half4 frag(VertexOutput IN ) : SV_TARGET
 			{
-				float smoothstepResult11 = smoothstep( _UVFade , ( _UVFade + _UVFadeSmooth ) , IN.ase_texcoord.xy.x);
+				float _UVFade_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifyShadersSpriteAdvancedDistort,_UVFade);
+				float _UVFadeSmooth_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifyShadersSpriteAdvancedDistort,_UVFadeSmooth);
+				float smoothstepResult11 = smoothstep( _UVFade_Instance , ( _UVFade_Instance + _UVFadeSmooth_Instance ) , IN.ase_texcoord.xy.x);
 				float3 ase_worldPos = IN.ase_texcoord1.xyz;
 				float2 appendResult66 = (float2(ase_worldPos.x , ase_worldPos.y));
 				float2 panner6 = ( 1.0 * _Time.y * _NoiseSpeed + ( appendResult66 * _NoiseTile ));
@@ -648,9 +677,12 @@ Shader "AmplifyShaders/Sprite AdvancedDistort"
 				float lerpResult23 = lerp( tex2DNode17.r , ( 1.0 - tex2DNode17.r ) , _InverseNoise);
 				float temp_output_35_0 = ( (smoothstepResult11*2.0 + -1.0) + lerpResult23 );
 				float temp_output_47_0 = step( 0.5 , temp_output_35_0 );
-				float smoothstepResult39 = smoothstep( _DetailFade , ( _DetailFade + _DetailFadeSmooth ) , ( 1.0 - IN.ase_texcoord.xy.x ));
+				float _DetailFade_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifyShadersSpriteAdvancedDistort,_DetailFade);
+				float _DetailFadeSmooth_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifyShadersSpriteAdvancedDistort,_DetailFadeSmooth);
+				float smoothstepResult39 = smoothstep( _DetailFade_Instance , ( _DetailFade_Instance + _DetailFadeSmooth_Instance ) , ( 1.0 - IN.ase_texcoord.xy.x ));
 				float2 appendResult30 = (float2(ase_worldPos.x , ase_worldPos.y));
-				float temp_output_31_0 = ( tex2D( _DetailNoiseMap, ( appendResult30 * _DetailScale ) ).r * _DetailStrength );
+				float _DetailStrength_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifyShadersSpriteAdvancedDistort,_DetailStrength);
+				float temp_output_31_0 = ( tex2D( _DetailNoiseMap, ( appendResult30 * _DetailScale ) ).r * _DetailStrength_Instance );
 				float4 appendResult20 = (float4(tex2D( _MainTex, IN.ase_texcoord.xy ).rgb , saturate( ( temp_output_47_0 - ( smoothstepResult39 * temp_output_31_0 ) ) )));
 				
 				float4 Color = appendResult20;
@@ -674,10 +706,10 @@ Node;AmplifyShaderEditor.DynamicAppendNode;66;-3312,-256;Inherit;False;FLOAT2;4;
 Node;AmplifyShaderEditor.Vector2Node;70;-3312,-128;Inherit;False;Property;_NoiseTile;NoiseTile;5;0;Create;True;0;0;0;False;0;False;1,1;0,0;0;3;FLOAT2;0;FLOAT;1;FLOAT;2
 Node;AmplifyShaderEditor.Vector2Node;7;-2944,-128;Inherit;False;Property;_NoiseSpeed;NoiseSpeed;1;0;Create;True;0;0;0;False;0;False;0.2,0.2;0,0;0;3;FLOAT2;0;FLOAT;1;FLOAT;2
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;71;-3136,-256;Inherit;False;2;2;0;FLOAT2;0,0;False;1;FLOAT2;0,0;False;1;FLOAT2;0
-Node;AmplifyShaderEditor.RangedFloatNode;14;-2864,-416;Inherit;False;Property;_UVFadeSmooth;UVFadeSmooth;3;0;Create;True;0;0;0;False;0;False;1;0;0;0;0;1;FLOAT;0
-Node;AmplifyShaderEditor.RangedFloatNode;12;-2832,-496;Inherit;False;Property;_UVFade;UVFade;2;0;Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.PannerNode;6;-2688,-256;Inherit;False;3;0;FLOAT2;0,0;False;2;FLOAT2;1,1;False;1;FLOAT;1;False;1;FLOAT2;0
 Node;AmplifyShaderEditor.WorldPosInputsNode;29;-2144,192;Inherit;False;0;4;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3
+Node;AmplifyShaderEditor.RangedFloatNode;12;-2832,-496;Inherit;False;InstancedProperty;_UVFade;UVFade;2;0;Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;14;-2864,-416;Inherit;False;InstancedProperty;_UVFadeSmooth;UVFadeSmooth;3;0;Create;True;0;0;0;False;0;False;1;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleAddOpNode;13;-2640,-448;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.TexCoordVertexDataNode;8;-2896,-624;Inherit;False;0;2;0;5;FLOAT2;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.SamplerNode;17;-2480,-256;Inherit;True;Property;_NoiseMap;NoiseMap;4;0;Create;True;0;0;0;False;0;False;-1;184854303c9362c43b86499202498085;184854303c9362c43b86499202498085;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;6;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4;FLOAT3;5
@@ -686,15 +718,15 @@ Node;AmplifyShaderEditor.RangedFloatNode;60;-1942.863,404.1714;Inherit;False;Pro
 Node;AmplifyShaderEditor.SmoothstepOpNode;11;-2336,-528;Inherit;True;3;0;FLOAT;0;False;1;FLOAT;0.68;False;2;FLOAT;0.02;False;1;FLOAT;0
 Node;AmplifyShaderEditor.RangedFloatNode;22;-2384,-32;Inherit;False;Property;_InverseNoise;InverseNoise;7;1;[Toggle];Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.OneMinusNode;24;-2192,-160;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
-Node;AmplifyShaderEditor.RangedFloatNode;41;-1632,48;Inherit;False;Property;_DetailFadeSmooth;DetailFadeSmooth;10;0;Create;True;0;0;0;False;0;False;1;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;59;-1769.863,312.1714;Inherit;False;2;2;0;FLOAT2;0,0;False;1;FLOAT;0;False;1;FLOAT2;0
-Node;AmplifyShaderEditor.RangedFloatNode;40;-1568,-32;Inherit;False;Property;_DetailFade;DetailFade;9;0;Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;40;-1568,-32;Inherit;False;InstancedProperty;_DetailFade;DetailFade;9;0;Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;41;-1632,48;Inherit;False;InstancedProperty;_DetailFadeSmooth;DetailFadeSmooth;10;0;Create;True;0;0;0;False;0;False;1;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.ScaleAndOffsetNode;36;-2080,-528;Inherit;False;3;0;FLOAT;0;False;1;FLOAT;2;False;2;FLOAT;-1;False;1;FLOAT;0
 Node;AmplifyShaderEditor.LerpOp;23;-2000,-208;Inherit;False;3;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SamplerNode;26;-1520,208;Inherit;True;Property;_DetailNoiseMap;DetailNoiseMap;6;0;Create;True;0;0;0;False;0;False;-1;2b7311c45ec18d14ca7aa0825cfcff7b;184854303c9362c43b86499202498085;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;6;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4;FLOAT3;5
 Node;AmplifyShaderEditor.OneMinusNode;62;-1552,-112;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleAddOpNode;42;-1360,16;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
-Node;AmplifyShaderEditor.RangedFloatNode;32;-1424,400;Inherit;False;Property;_DetailStrength;DetailStrength;8;0;Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;32;-1424,400;Inherit;False;InstancedProperty;_DetailStrength;DetailStrength;8;0;Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleAddOpNode;35;-1632,-336;Inherit;True;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SmoothstepOpNode;39;-1216,-80;Inherit;True;3;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;1;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;31;-1200,256;Inherit;True;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
@@ -712,7 +744,7 @@ Node;AmplifyShaderEditor.TextureCoordinatesNode;21;-3376,-416;Inherit;False;0;17
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;1;0,0;Float;False;False;-1;2;UnityEditor.ShaderGraph.GenericShaderGraphMaterialGUI;0;1;New Amplify Shader;cf964e524c8e69742b1d21fbe2ebcc4a;True;Sprite Unlit Forward;0;1;Sprite Unlit Forward;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;True;0;True;12;all;0;False;True;2;5;False;;10;False;;3;1;False;;10;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;2;False;;True;3;False;;True;True;0;False;;0;False;;True;1;LightMode=UniversalForward;False;False;0;;0;0;Standard;0;False;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;2;0,0;Float;False;False;-1;2;UnityEditor.ShaderGraph.GenericShaderGraphMaterialGUI;0;1;New Amplify Shader;cf964e524c8e69742b1d21fbe2ebcc4a;True;SceneSelectionPass;0;2;SceneSelectionPass;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;True;0;True;12;all;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;1;LightMode=SceneSelectionPass;False;False;0;;0;0;Standard;0;False;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;3;0,0;Float;False;False;-1;2;UnityEditor.ShaderGraph.GenericShaderGraphMaterialGUI;0;1;New Amplify Shader;cf964e524c8e69742b1d21fbe2ebcc4a;True;ScenePickingPass;0;3;ScenePickingPass;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;True;0;True;12;all;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;1;LightMode=Picking;False;False;0;;0;0;Standard;0;False;0
-Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;0;144,-416;Float;False;True;-1;2;UnityEditor.ShaderGraph.GenericShaderGraphMaterialGUI;0;14;AmplifyShaders/Sprite AdvancedDistort;cf964e524c8e69742b1d21fbe2ebcc4a;True;Sprite Unlit;0;0;Sprite Unlit;4;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;True;0;True;12;all;0;False;True;2;5;False;;10;False;;3;1;False;;10;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;2;False;;True;3;False;;True;True;0;False;;0;False;;True;1;LightMode=Universal2D;False;False;0;;0;0;Standard;3;Vertex Position;1;0;Debug Display;0;0;External Alpha;0;0;0;4;True;True;True;True;False;;False;0
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;0;144,-416;Float;False;True;-1;2;UnityEditor.ShaderGraph.GenericShaderGraphMaterialGUI;0;15;AmplifyShaders/Sprite AdvancedDistort;cf964e524c8e69742b1d21fbe2ebcc4a;True;Sprite Unlit;0;0;Sprite Unlit;4;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;True;0;True;12;all;0;False;True;2;5;False;;10;False;;3;1;False;;10;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;2;False;;True;3;False;;True;True;0;False;;0;False;;True;1;LightMode=Universal2D;False;False;0;;0;0;Standard;3;Vertex Position;1;0;Debug Display;0;0;External Alpha;0;0;0;4;True;True;True;True;False;;False;0
 WireConnection;66;0;65;1
 WireConnection;66;1;65;2
 WireConnection;71;0;66;0
@@ -762,4 +794,4 @@ WireConnection;57;0;39;0
 WireConnection;57;1;31;0
 WireConnection;0;1;20;0
 ASEEND*/
-//CHKSM=08D54855E74B9222EE0EFAD85B98511F316D7FE5
+//CHKSM=83D5B6E11D0E56B87AF3EDAF796F4A6529F539F7

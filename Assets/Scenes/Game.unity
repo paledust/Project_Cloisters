@@ -518,7 +518,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1100682930}
   m_Father: {fileID: 1577591385}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -536,7 +537,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clickable_redPlanet: {fileID: 1245741496}
   endTimeline: {fileID: 1451488549}
-  angleTolrence: 10
+  angleTolrence: 3
+  centerPos: {fileID: 1100682930}
   surroundPlanet: {fileID: 746570626}
   centerPlanet: {fileID: 1245741495}
 --- !u!1 &179842570
@@ -593,10 +595,10 @@ MonoBehaviour:
   - {fileID: 1056015577}
   - {fileID: 1271954873}
   - {fileID: 1173034785}
-  waveFactor: -0.0025
+  waveFactor: 0
   skyTrans: {fileID: 1150392009}
   maxOffset: 35
-  skySpeedFactor: -0.01
+  skySpeedFactor: -0.03
   floatingMotions:
   - {fileID: 903155669}
   - {fileID: 758035712}
@@ -608,7 +610,9 @@ MonoBehaviour:
   - {fileID: 905243064}
   - {fileID: 45807800}
   - {fileID: 649985110}
-  motionFactor: 0.02
+  motionFactor: 0
+  p_star: {fileID: 2142763644}
+  starFactor: -0.006
 --- !u!114 &179842573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -624,7 +628,7 @@ MonoBehaviour:
   mixingCamera: {fileID: 2054699262}
   maxBlend: 0.5
   blendStartAngle: 0
-  blendLength: 130
+  blendLength: 150
   blendCurve:
     serializedVersion: 2
     m_Curve:
@@ -638,14 +642,14 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.78012824
-      value: 0.61285025
-      inSlope: 1.4915802
-      outSlope: 1.4915802
+      time: 0.75394416
+      value: 0.6223107
+      inSlope: 1.7051253
+      outSlope: 1.7051253
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.33333334
+      outWeight: 0.21760993
     - serializedVersion: 3
       time: 1
       value: 1
@@ -676,8 +680,8 @@ MonoBehaviour:
   rotateAround: {fileID: 746570631}
   clickable_Planet: {fileID: 1245741496}
   controlAgility: 2
-  speedScale: 0.05
-  speedOffset: 0.2
+  speedScale: 0.2
+  speedOffset: 0.8
 --- !u!1 &220842876
 GameObject:
   m_ObjectHideFlags: 3
@@ -873,6 +877,7 @@ GameObject:
   m_Component:
   - component: {fileID: 502392122}
   - component: {fileID: 502392123}
+  - component: {fileID: 502392124}
   m_Layer: 0
   m_Name: BK (2)
   m_TagString: Untagged
@@ -947,6 +952,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &502392124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 502392121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaf1b7225a27c4140b66137672e3f213, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isUpdating: 1
+  meshRenderer: {fileID: 502392123}
+  UVFade: -0.1
+  UVFadeSmooth: 0.6
+  DetailStrength: 1.7
+  DetailFade: 0.7
+  DetailFadeSmooth: 0.1
 --- !u!1 &519813845
 GameObject:
   m_ObjectHideFlags: 0
@@ -6590,6 +6614,37 @@ MonoBehaviour:
   m_MaximumFOV: 60
   m_MinimumOrthoSize: 1
   m_MaximumOrthoSize: 5000
+--- !u!1 &1100682929
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1100682930}
+  m_Layer: 0
+  m_Name: RefPos_BluePlanetPos
+  m_TagString: Untagged
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1100682930
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1100682929}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.937, z: -8.051}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 142299634}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1129342934
 GameObject:
   m_ObjectHideFlags: 0
@@ -12078,7 +12133,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1582279699}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.5399647, y: 3.47571, z: 1.8619766}
+  m_LocalPosition: {x: -5.5399647, y: 3.44271, z: 1.8619766}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -12219,6 +12274,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1797774909}
   - component: {fileID: 1797774910}
+  - component: {fileID: 1797774911}
   m_Layer: 0
   m_Name: BK
   m_TagString: Untagged
@@ -12233,14 +12289,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1797774908}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -28.8, y: -3.3, z: 21.2}
-  m_LocalScale: {x: 1.349159, y: 1.1255331, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0.0699035, w: 0.99755377}
+  m_LocalPosition: {x: -33.1, y: -1.7, z: 21.2}
+  m_LocalScale: {x: 1.6408472, y: 1.1255331, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1150392009}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -8.017}
 --- !u!212 &1797774910
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -12293,6 +12349,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1797774911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1797774908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaf1b7225a27c4140b66137672e3f213, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isUpdating: 1
+  meshRenderer: {fileID: 1797774910}
+  UVFade: -0.12
+  UVFadeSmooth: 0.55
+  DetailStrength: 1.75
+  DetailFade: 0.71
+  DetailFadeSmooth: 0.11
 --- !u!1 &1805941790
 GameObject:
   m_ObjectHideFlags: 0
@@ -12818,8 +12893,8 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 5
-      minScalar: 4
+      scalar: 3
+      minScalar: 2
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -13569,7 +13644,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 6
+      scalar: 8
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -14198,7 +14273,7 @@ ParticleSystem:
     flipU: 0
     flipV: 0
   VelocityModule:
-    enabled: 0
+    enabled: 1
     x:
       serializedVersion: 2
       minMaxState: 0
@@ -14782,7 +14857,7 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    inWorldSpace: 0
+    inWorldSpace: 1
   InheritVelocityModule:
     enabled: 0
     m_Mode: 0
@@ -16645,7 +16720,7 @@ ParticleSystem:
     lifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.1
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -16695,7 +16770,7 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    minVertexDistance: 0.2
+    minVertexDistance: 0.01
     textureMode: 0
     ribbonCount: 1
     shadowBias: 0.5
@@ -16715,7 +16790,7 @@ ParticleSystem:
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
-        key1: {r: 1, g: 1, b: 1, a: 1}
+        key1: {r: 1, g: 1, b: 1, a: 0}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -16789,7 +16864,7 @@ ParticleSystem:
           outWeight: 0.33333334
         - serializedVersion: 3
           time: 1
-          value: 1
+          value: 0
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -16825,13 +16900,13 @@ ParticleSystem:
         m_RotationOrder: 4
     colorOverTrail:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 1
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 1}
+      maxColor: {r: 1, g: 1, b: 1, a: 0.34117648}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
-        key1: {r: 1, g: 1, b: 1, a: 1}
+        key1: {r: 1, g: 1, b: 1, a: 0}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}

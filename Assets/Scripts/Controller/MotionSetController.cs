@@ -18,9 +18,16 @@ public class MotionSetController : MonoBehaviour
 [Header("Circles")]
     [SerializeField] private FloatingMotion[] floatingMotions;
     [SerializeField] private float motionFactor = 1;
+[Header("Star")]
+    [SerializeField] private ParticleSystem p_star;
+    [SerializeField] private float starFactor = 1;
 
     private float speed = 0;
+    private ParticleSystem.VelocityOverLifetimeModule velModule;
 
+    void Start(){
+        velModule = p_star.velocityOverLifetime;
+    }
     void Update()
     {
         speed = Mathf.Lerp(speed, clickable_Planet.m_angularSpeed*speedScale - (clickable_Planet.m_isControlling?0:speedOffset), Time.deltaTime * controlAgility);
@@ -37,5 +44,7 @@ public class MotionSetController : MonoBehaviour
         for(int i=0; i<floatingMotions.Length; i++){
             floatingMotions[i].floatPhase += speed * motionFactor * Time.deltaTime;
         }
+
+        velModule.x = speed * starFactor;
     }
 }
