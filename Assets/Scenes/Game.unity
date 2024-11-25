@@ -172,6 +172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactionControllers:
   - {fileID: 179842575}
+  - {fileID: 1382798985}
 --- !u!114 &27715352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11844,6 +11845,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1382798984}
+  - component: {fileID: 1382798985}
   m_Layer: 0
   m_Name: IC_Narrative
   m_TagString: Untagged
@@ -11866,6 +11868,19 @@ Transform:
   m_Father: {fileID: 27715350}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1382798985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1382798983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c7b7200f90a90d4e94b2fd2fc218687, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionAssetsGroup: {fileID: 320034176}
 --- !u!1 &1388349386
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,7 +5,7 @@ using UnityEngine;
 [AddComponentMenu("InteractionController")]
 public abstract class IC_Basic : MonoBehaviour
 {
-    [SerializeField] private GameObject interactionAssetsGroup;
+    [SerializeField] protected GameObject interactionAssetsGroup;
     public bool m_isDone{get; private set;} = false;
     public bool m_isPlaying{get; private set;} = false;
     

@@ -46,10 +46,6 @@ public class IC_Intro : IC_Basic
             surroundPlanet.position = Vector3.Lerp(startPos, finalPos, EasingFunc.Easing.QuadEaseOut(t));
         });
 
-        EventHandler.Call_OnTransitionBegin();
         endTimeline.Play();
-        StartCoroutine(CommonCoroutine.delayAction(()=>{
-            EventHandler.Call_OnTransitionEnd();
-        },(float)endTimeline.duration));
     }
 }
