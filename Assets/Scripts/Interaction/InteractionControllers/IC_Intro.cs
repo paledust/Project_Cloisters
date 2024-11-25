@@ -3,21 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 
-public class Plan_ZoomToBluePlanet : MonoBehaviour
+[AddComponentMenu("Interaction Controller/IC_Intro")]
+public class IC_Intro : IC_Basic
 {
-    [SerializeField] private Clickable_Planet clickable_redPlanet;
-    [SerializeField] private PlayableDirector endTimeline;
 [Header("Interaction")]
-    [SerializeField] private float angleTolrence = 10;
+    [SerializeField] private Clickable_Planet clickable_redPlanet;
     [SerializeField] private Transform centerPos;
+    [SerializeField] private float angleTolrence = 10;
 [Header("Planet")]
     [SerializeField] private Transform surroundPlanet;
     [SerializeField] private Transform centerPlanet;
+[Header("End")]
+    [SerializeField] private PlayableDirector endTimeline;
 
-    private bool isDone = false;
-
-    void OnEnable(){
-        EventHandler.E_OnPlanetReachPos += GoToNextPlanet;
+    protected override void Initialize()
+    {
+        this.enabled = true;
+        clickable_redPlanet.EnableHitbox();
+    }
+    protected override void CleanUp()
+    {
+        this.enabled = false;
+        clickable_redPlanet.DisableHitbox();
     }
     void Update(){
         Vector3 diff = surroundPlanet.position - centerPlanet.position;
@@ -25,17 +32,12 @@ public class Plan_ZoomToBluePlanet : MonoBehaviour
         float angle = Vector3.SignedAngle(diff, Vector3.back, Vector3.up);
         angle = Mathf.Abs(angle);
 
-        if(angle < angleTolrence && !isDone){
-            isDone = true;
-            this.enabled = false;
-            StartCoroutine(coroutineNextPlanet());
+        if(angle < angleTolrence && !m_isDone){
+            EventHandler.Call_OnEndInteraction(this);
+            StartCoroutine(coroutinePutPlanetToCenter());
         }
     }
-    void OnDisable(){
-        EventHandler.E_OnPlanetReachPos -= GoToNextPlanet;
-    }
-    IEnumerator coroutineNextPlanet(){
-        clickable_redPlanet.DisableHitbox();
+    IEnumerator coroutinePutPlanetToCenter(){
         surroundPlanet.GetComponent<RotateAround>().enabled = false;
 
         Vector3 startPos = surroundPlanet.position;
@@ -45,15 +47,6 @@ public class Plan_ZoomToBluePlanet : MonoBehaviour
         });
 
         EventHandler.Call_OnTransitionBegin();
-        endTimeline.Play();
-        StartCoroutine(CommonCoroutine.delayAction(()=>{
-            EventHandler.Call_OnTransitionEnd();
-        },(float)endTimeline.duration));
-    }
-    
-    void GoToNextPlanet(){
-        EventHandler.Call_OnTransitionBegin();
-        clickable_redPlanet.DisableHitbox();
         endTimeline.Play();
         StartCoroutine(CommonCoroutine.delayAction(()=>{
             EventHandler.Call_OnTransitionEnd();

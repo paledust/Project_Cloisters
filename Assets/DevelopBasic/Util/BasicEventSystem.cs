@@ -15,12 +15,15 @@ public static class EventHandler
     public static event Action E_OnCompleteSave;
     public static void Call_OnCompleteSave()=>E_OnCompleteSave?.Invoke();
 
+    public static event Action E_OnNextInteraction;
+    public static void Call_OnNextInteraction()=>E_OnNextInteraction?.Invoke();
+    public static event Action<IC_Basic> E_OnEndInteraction;
+    public static void Call_OnEndInteraction(IC_Basic interactionController)=>E_OnEndInteraction?.Invoke(interactionController);
+
 #region Interaction Event
     public static event Action E_OnTransitionBegin;
     public static void Call_OnTransitionBegin()=>E_OnTransitionBegin?.Invoke();
     public static event Action E_OnTransitionEnd;
     public static void Call_OnTransitionEnd()=>E_OnTransitionEnd?.Invoke();
-    public static event Action E_OnPlanetReachPos;
-    public static void Call_OnPlanetReachPos()=>E_OnPlanetReachPos?.Invoke();
 #endregion
 }
