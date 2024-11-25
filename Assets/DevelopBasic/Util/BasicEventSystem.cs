@@ -19,6 +19,11 @@ public static class EventHandler
     public static void Call_OnNextInteraction()=>E_OnNextInteraction?.Invoke();
     public static event Action<IC_Basic> E_OnEndInteraction;
     public static void Call_OnEndInteraction(IC_Basic interactionController)=>E_OnEndInteraction?.Invoke(interactionController);
+    public static event Action<IC_Basic> E_OnInteractionUnreachable;
+    public static void Call_OnInteractionUnreachable(IC_Basic interactionController)=>E_OnInteractionUnreachable?.Invoke(interactionController);
+    public static event Action<IC_Basic> E_OnInteractionReachable;
+    public static void Call_OnInteractionReachable(IC_Basic interactionController)=>E_OnInteractionReachable?.Invoke(interactionController);
+
 
 #region Interaction Event
     public static event Action E_OnTransitionBegin;

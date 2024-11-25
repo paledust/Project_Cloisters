@@ -16,12 +16,12 @@ public class IC_Intro : IC_Basic
 [Header("End")]
     [SerializeField] private PlayableDirector endTimeline;
 
-    protected override void Initialize()
+    protected override void OnInteractionStart()
     {
         this.enabled = true;
         clickable_redPlanet.EnableHitbox();
     }
-    protected override void CleanUp()
+    protected override void OnInteractionEnd()
     {
         this.enabled = false;
         clickable_redPlanet.DisableHitbox();
@@ -48,6 +48,7 @@ public class IC_Intro : IC_Basic
 
         endTimeline.Play();
         yield return new WaitForSeconds((float)endTimeline.duration);
-        interactionAssetsGroup.SetActive(false);
+        yield return null;
+        EventHandler.Call_OnInteractionUnreachable(this);
     }
 }

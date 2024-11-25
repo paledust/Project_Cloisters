@@ -10,9 +10,17 @@ public class Initiator : MonoBehaviour
     void Start()
     {
     #if UNITY_EDITOR
-        interController_Manager.StartInteraction(StartIndex);
+        interController_Manager.StartAtInteraction(StartIndex);
     #else
         interController_Manager.StartInteraction(0);
     #endif
     }
+
+#if UNITY_EDITOR
+    [ContextMenu("Set Up Scene To Interactions")]
+    public void Editor_SetUpInteractions(){
+        interController_Manager.CleanUpAllInteractions();
+        interController_Manager.Editor_ActivateInteractions(StartIndex);
+    }
+#endif
 }
