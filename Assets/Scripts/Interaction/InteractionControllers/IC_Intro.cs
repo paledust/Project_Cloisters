@@ -47,5 +47,7 @@ public class IC_Intro : IC_Basic
         });
 
         endTimeline.Play();
+        yield return new WaitForSeconds((float)endTimeline.duration);
+        interactionAssetsGroup.SetActive(false);
     }
 }
