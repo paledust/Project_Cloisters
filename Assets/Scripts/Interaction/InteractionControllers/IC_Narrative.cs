@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class IC_Narrative : IC_Basic
 {
-    protected override void OnInteractionStart()
+    [SerializeField] private RippleParticleController rippleParticleController;
+    protected override void LoadAssets()
     {
+        base.LoadAssets();
+        rippleParticleController.enabled = true;
+    }
+    protected override void UnloadAssets()
+    {
+        rippleParticleController.enabled = false;
     }
 }

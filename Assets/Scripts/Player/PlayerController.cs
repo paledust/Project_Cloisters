@@ -45,6 +45,10 @@ public class PlayerController : MonoBehaviour
         else{
             ClearHoveringInteractable();
         }
+
+        if(m_holdingInteractable!=null){
+            m_holdingInteractable.ControllingUpdate(this);
+        }
     }
 
 #region Handle Interactable
@@ -72,6 +76,11 @@ public class PlayerController : MonoBehaviour
             m_hoveringInteractable.OnFailClick(this);
             AudioManager.Instance.PlaySoundEffect(playerAudio, string.Empty, 0);
         }
+    }
+    public Vector3 GetCursorWorldPoint(float depth){
+        Vector3 mousePoint = PointerScrPos;
+        mousePoint.z = depth;
+        return mainCam.ScreenToWorldPoint(mousePoint);
     }
     public void HoldInteractable(Basic_Clickable interactable){
         m_holdingInteractable = interactable;
