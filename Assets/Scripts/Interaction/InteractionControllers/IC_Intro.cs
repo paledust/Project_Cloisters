@@ -6,6 +6,10 @@ using UnityEngine.Playables;
 [AddComponentMenu("Interaction Controller/IC_Intro")]
 public class IC_Intro : IC_Basic
 {
+[Header("Controller")]
+    [SerializeField] private MotionSetController motionController;
+    [SerializeField] private PlanetCameraController camController;
+    [SerializeField] private RotateAroundController rotateController;
 [Header("Interaction")]
     [SerializeField] private Clickable_Planet clickable_redPlanet;
     [SerializeField] private Transform centerPos;
@@ -19,12 +23,22 @@ public class IC_Intro : IC_Basic
     protected override void OnInteractionStart()
     {
         this.enabled = true;
+        motionController.enabled = true;
+        camController.enabled = true;
+        rotateController.enabled = true;
         clickable_redPlanet.EnableHitbox();
     }
     protected override void OnInteractionEnd()
     {
         this.enabled = false;
         clickable_redPlanet.DisableHitbox();
+    }
+    protected override void UnloadAssets()
+    {
+        base.UnloadAssets();
+        motionController.enabled = false;
+        camController.enabled = false;
+        rotateController.enabled = false;
     }
     void Update(){
         Vector3 diff = surroundPlanet.position - centerPlanet.position;
@@ -47,8 +61,7 @@ public class IC_Intro : IC_Basic
         });
 
         endTimeline.Play();
-        yield return new WaitForSeconds((float)endTimeline.duration);
-        yield return null;
+        yield return new WaitForSeconds(1f);
         EventHandler.Call_OnInteractionUnreachable(this);
     }
 }
