@@ -17,6 +17,7 @@ public class Clickable_Circle : Basic_Clickable
     [SerializeField] private float maxfollowSpeed = 10;
     [SerializeField] private float lerpSpeed = 5;
     [SerializeField] private float followFactor = 1;
+    [SerializeField, Range(0, 1)] private float speedDrag = 0;
 [Header("Circle Animation Control")]
     [SerializeField] private CircleMotion[] circleMotions;
     private float camDepth;
@@ -26,7 +27,7 @@ public class Clickable_Circle : Basic_Clickable
         camDepth = Camera.main.WorldToScreenPoint(transform.position).z;
     }
     void Update(){
-        velocity *= 0.99f;
+        velocity *= (1-speedDrag);
         for(int i=0; i<circleMotions.Length; i++){
             circleMotions[i].MotionUpdate(velocity);
         }

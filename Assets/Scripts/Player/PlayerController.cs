@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
 
                     m_hoveringInteractable = hit_Interactable;
                     if(m_hoveringInteractable.m_isInteractable) m_hoveringInteractable.OnHover(this);
-                    if(!m_holdingInteractable) PlayerManager.Instance.UpdateCursorState(CURSOR_STATE.INTERACT);
+                    if(!m_holdingInteractable) PlayerManager.Instance.UpdateCursorState(CURSOR_STATE.HOVER);
                 }
             }
             else{
@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour
             m_holdingInteractable = null;
         }
         if(!m_hoveringInteractable) PlayerManager.Instance.UpdateCursorState(CURSOR_STATE.DEFAULT);
-        else PlayerManager.Instance.UpdateCursorState(CURSOR_STATE.INTERACT);
+        else PlayerManager.Instance.UpdateCursorState(CURSOR_STATE.HOVER);
     }
     void InteractWithClickable(){
         if(m_hoveringInteractable.m_isInteractable){
