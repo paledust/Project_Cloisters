@@ -14,10 +14,17 @@ public class Clickable_Circle : Basic_Clickable
             circleTrans.localPosition = Vector3.Lerp(circleTrans.localPosition, Vector3.ClampMagnitude(motion*controlFactor, maxOffset), Time.deltaTime*lerpSpeed);
         }
     }
+    [SerializeField] private Rigidbody m_rigid;
     [SerializeField] private float maxfollowSpeed = 10;
     [SerializeField] private float lerpSpeed = 5;
     [SerializeField] private float followFactor = 1;
     [SerializeField, Range(0, 1)] private float speedDrag = 0;
+[Header("Collision")]
+    [SerializeField] private Transform bounceCircle;
+    [SerializeField] private float bounceFactor;
+    [SerializeField] private float collisionFactor;
+    [SerializeField] private float bounceSize;
+    [SerializeField] private AnimationCurve bounceCurve;
 [Header("Circle Animation Control")]
     [SerializeField] private CircleMotion[] circleMotions;
     private float camDepth;
@@ -33,12 +40,19 @@ public class Clickable_Circle : Basic_Clickable
         }
     }
     void FixedUpdate(){
-        transform.position += velocity * Time.fixedDeltaTime;
+        m_rigid.MovePosition(m_rigid.position + velocity * Time.fixedDeltaTime);
     }
     public override void OnClick(PlayerController player, Vector3 hitPos)
     {
         player.HoldInteractable(this);
+        m_rigid.isKinematic = true;
     }
+    public override void OnRelease(PlayerController player)
+    {
+        base.OnRelease(player);
+        m_rigid.isKinematic = false;
+    }
+
     public override void ControllingUpdate(PlayerController player)
     {
         Vector3 cursorPoint = player.GetCursorWorldPoint(camDepth);
@@ -46,5 +60,15 @@ public class Clickable_Circle : Basic_Clickable
         diff = Vector3.ClampMagnitude(diff*followFactor, maxfollowSpeed);
 
         velocity = Vector3.Lerp(velocity, diff, lerpSpeed*Time.deltaTime);
+    }
+    void OnCollisionEnter(Collision collision){
+        float strength = collision.impulse.magnitude;
+        float factor = m_rigid.isKinematic?bounceFactor:collisionFactor;
+        StartCoroutine(coroutineBounceCircle(bounceCircle, 1f, factor, bounceCurve));
+    }
+    IEnumerator coroutineBounceCircle(Transform circleTrans, float duration, float deformFactor, AnimationCurve bounceCurve){
+        yield return new WaitForLoop(duration, (t)=>{
+            circleTrans.localScale = Vector3.one * bounceSize *(1+deformFactor*bounceCurve.Evaluate(t));
+        });
     }
 }
