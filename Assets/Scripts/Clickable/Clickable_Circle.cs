@@ -39,6 +39,8 @@ public class Clickable_Circle : Basic_Clickable
             isWobbling = false;
         }
     }
+[Header("Circle Control")]
+    [SerializeField] private int circleClass = 3;
     [SerializeField] private Rigidbody m_rigid;
     [SerializeField] private float maxfollowSpeed = 10;
     [SerializeField] private float lerpSpeed = 5;
@@ -46,6 +48,7 @@ public class Clickable_Circle : Basic_Clickable
     [SerializeField, Range(0, 1)] private float speedDrag = 0;
 [Header("Particles")]
     [SerializeField] private ParticleSystem p_trail;
+    [SerializeField] private ParticleSystem p_ripple;
 [Header("Collision")]
     [SerializeField] private float bounceFactor;
     [SerializeField] private float collisionFactor;
@@ -58,6 +61,8 @@ public class Clickable_Circle : Basic_Clickable
     [SerializeField] private CircleMotion[] circleMotions;
     private float camDepth;
     private Vector3 velocity;
+
+    public int m_circleClass{get{return circleClass;}}
 
     void Start(){
         camDepth = Camera.main.WorldToScreenPoint(transform.position).z;
@@ -95,12 +100,18 @@ public class Clickable_Circle : Basic_Clickable
 
         velocity = Vector3.Lerp(velocity, diff, lerpSpeed*Time.deltaTime);
     }
+    public int IncreaseCircleClass(){
+        circleClass ++;
+        return circleClass;
+    }
     void OnCollisionEnter(Collision collision){
         float strength = collision.relativeVelocity.magnitude;
         float factor = m_rigid.isKinematic?bounceFactor:collisionFactor;
-        
         for(int i=0; i<circleWobbles.Length; i++){
             circleWobbles[i].WobbleCircle(Mathf.Min(maxBounce, strength * factor * boucneScale), bounceCurve, bounceDuration);
         }
+
+        var otherCircle = collision.gameObject.GetComponent<Clickable_Circle>();
+        if(otherCircle.m_circleClass==3 && circleClass==3) p_ripple.Play();
     }
 }
