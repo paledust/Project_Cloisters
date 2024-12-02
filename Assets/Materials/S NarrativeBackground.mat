@@ -126,7 +126,7 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
-    - _VoronoidSpeed: 0.5
+    - _VoronoidSpeed: 0.75
     - _Wave2Amp: 2
     - _Wave2Freq: 4
     - _Wave2Speed: -0.3
@@ -150,7 +150,7 @@ Material:
     - _Tint: {r: 1, g: 1, b: 1, a: 1}
     - _Tint1: {r: 1.0717734, g: 1.0717734, b: 1.0717734, a: 1}
     - _Tint2: {r: 2, g: 0.74339616, b: 0.74339616, a: 1}
-    - _VoronoidTiling: {r: 3, g: 1.6, b: 0.2, a: -0.5}
+    - _VoronoidTiling: {r: 3, g: 1.6, b: 0.02, a: -0.05}
   m_BuildTextureStacks: []
 --- !u!114 &6146349599876804879
 MonoBehaviour:

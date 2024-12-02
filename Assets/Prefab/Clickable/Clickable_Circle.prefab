@@ -50,7 +50,7 @@ ParticleSystem:
   emitterVelocityMode: 0
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -4822,6 +4822,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4337985783366546287}
   - component: {fileID: 4337985783366546284}
+  - component: {fileID: 1003191364589243398}
   m_Layer: 0
   m_Name: Circle (1)
   m_TagString: Untagged
@@ -4896,6 +4897,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1003191364589243398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4337985783366546286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64875f00c3a05564397562df0b3f00a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isUpdating: 1
+  meshRenderer: {fileID: 4337985783366546284}
+  WobbleStrength: 0
 --- !u!1 &4337985783502979385
 GameObject:
   m_ObjectHideFlags: 0
@@ -5101,25 +5117,27 @@ MonoBehaviour:
   lerpSpeed: 5
   followFactor: 5
   speedDrag: 0.05
-  bounceCircle: {fileID: 4337985783947377352}
-  bounceFactor: 0.25
-  collisionFactor: 1
-  bounceSize: 0.14263
+  p_trail: {fileID: 4337985782930849926}
+  bounceFactor: 0.3
+  collisionFactor: 0.6
+  boucneScale: 0.5
+  maxBounce: 1
+  bounceDuration: 1
   bounceCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: -0.99881506
-      outSlope: -0.99881506
+      inSlope: -10.150458
+      outSlope: -10.150458
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 0.098517716
-      value: -0.09840098
+      value: -1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -5128,7 +5146,7 @@ MonoBehaviour:
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 0.25697473
-      value: 0.082214564
+      value: 0.78643703
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -5137,7 +5155,7 @@ MonoBehaviour:
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 0.44746464
-      value: -0.039307207
+      value: -0.45326477
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -5146,7 +5164,7 @@ MonoBehaviour:
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 0.5974529
-      value: 0.036413886
+      value: 0.24152425
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -5154,8 +5172,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.72326815
-      value: -0.017074771
+      time: 0.7172073
+      value: -0.14470133
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -5163,8 +5181,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.8047414
-      value: 0.009905234
+      time: 0.812759
+      value: 0.072102286
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -5172,8 +5190,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.89132833
-      value: -0.0026210118
+      time: 0.8728652
+      value: -0.03947928
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -5192,6 +5210,11 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  circleWobbles:
+  - perRendererWobbles: {fileID: 762397713989493850}
+    WobbleFactor: 1
+  - perRendererWobbles: {fileID: 1003191364589243398}
+    WobbleFactor: 0.5
   circleMotions:
   - circleTrans: {fileID: 4337985783947377352}
     lerpSpeed: 2
@@ -5219,6 +5242,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4337985783947377352}
   - component: {fileID: 4337985783947377353}
+  - component: {fileID: 762397713989493850}
   m_Layer: 0
   m_Name: Circle
   m_TagString: Untagged
@@ -5293,6 +5317,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &762397713989493850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4337985783947377355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64875f00c3a05564397562df0b3f00a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isUpdating: 1
+  meshRenderer: {fileID: 4337985783947377353}
+  WobbleStrength: 0
 --- !u!1 &4337985784200938173
 GameObject:
   m_ObjectHideFlags: 0

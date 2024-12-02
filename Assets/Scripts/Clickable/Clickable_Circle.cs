@@ -14,18 +14,47 @@ public class Clickable_Circle : Basic_Clickable
             circleTrans.localPosition = Vector3.Lerp(circleTrans.localPosition, Vector3.ClampMagnitude(motion*controlFactor, maxOffset), Time.deltaTime*lerpSpeed);
         }
     }
+    [System.Serializable]
+    public class CircleWobble{
+        public PerRendererWobbles perRendererWobbles;
+        [Range(0, 1)]
+        public float WobbleFactor;
+
+        private bool isWobbling;
+        private CoroutineExcuter wobbler;
+
+        public void WobbleCircle(float wobbleStrength, AnimationCurve wobbleCurve, float duration){
+            if(wobbler==null) wobbler = new CoroutineExcuter(perRendererWobbles);
+
+            if(!isWobbling)
+                wobbler.Excute(coroutineWobble(wobbleStrength*WobbleFactor, wobbleCurve, duration));
+        }
+        IEnumerator coroutineWobble(float wobbleStrength, AnimationCurve wobbleCurve, float duration){
+            isWobbling = true;
+            var wobble = perRendererWobbles;
+            yield return new WaitForLoop(duration, (t)=>{
+                wobble.WobbleStrength = wobbleStrength*wobbleCurve.Evaluate(t);
+                if(t>0.75f && isWobbling) isWobbling = false;
+            });
+            isWobbling = false;
+        }
+    }
     [SerializeField] private Rigidbody m_rigid;
     [SerializeField] private float maxfollowSpeed = 10;
     [SerializeField] private float lerpSpeed = 5;
     [SerializeField] private float followFactor = 1;
     [SerializeField, Range(0, 1)] private float speedDrag = 0;
+[Header("Particles")]
+    [SerializeField] private ParticleSystem p_trail;
 [Header("Collision")]
-    [SerializeField] private Transform bounceCircle;
     [SerializeField] private float bounceFactor;
     [SerializeField] private float collisionFactor;
-    [SerializeField] private float bounceSize;
+    [SerializeField] private float boucneScale = 0.01f;
+    [SerializeField] private float maxBounce;
+    [SerializeField] private float bounceDuration; 
     [SerializeField] private AnimationCurve bounceCurve;
 [Header("Circle Animation Control")]
+    [SerializeField] private CircleWobble[] circleWobbles;
     [SerializeField] private CircleMotion[] circleMotions;
     private float camDepth;
     private Vector3 velocity;
@@ -40,16 +69,21 @@ public class Clickable_Circle : Basic_Clickable
         }
     }
     void FixedUpdate(){
-        m_rigid.MovePosition(m_rigid.position + velocity * Time.fixedDeltaTime);
+        if(m_rigid.isKinematic)
+            m_rigid.MovePosition(m_rigid.position + velocity * Time.fixedDeltaTime);
     }
     public override void OnClick(PlayerController player, Vector3 hitPos)
     {
+        base.OnClick(player, hitPos);
+
         player.HoldInteractable(this);
+        p_trail.Play(true);
         m_rigid.isKinematic = true;
     }
     public override void OnRelease(PlayerController player)
     {
         base.OnRelease(player);
+        p_trail.Stop(true);
         m_rigid.isKinematic = false;
     }
 
@@ -62,13 +96,11 @@ public class Clickable_Circle : Basic_Clickable
         velocity = Vector3.Lerp(velocity, diff, lerpSpeed*Time.deltaTime);
     }
     void OnCollisionEnter(Collision collision){
-        float strength = collision.impulse.magnitude;
+        float strength = collision.relativeVelocity.magnitude;
         float factor = m_rigid.isKinematic?bounceFactor:collisionFactor;
-        StartCoroutine(coroutineBounceCircle(bounceCircle, 1f, factor, bounceCurve));
-    }
-    IEnumerator coroutineBounceCircle(Transform circleTrans, float duration, float deformFactor, AnimationCurve bounceCurve){
-        yield return new WaitForLoop(duration, (t)=>{
-            circleTrans.localScale = Vector3.one * bounceSize *(1+deformFactor*bounceCurve.Evaluate(t));
-        });
+        
+        for(int i=0; i<circleWobbles.Length; i++){
+            circleWobbles[i].WobbleCircle(Mathf.Min(maxBounce, strength * factor * boucneScale), bounceCurve, bounceDuration);
+        }
     }
 }

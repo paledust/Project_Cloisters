@@ -173,6 +173,8 @@ Material:
     - _UseTextureColor: 0
     - _VNoiseOnFresnel: 0.3
     - _VNoiseOnRamp: 0.3
+    - _WobbleAngle: 0
+    - _WobbleStrength: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
