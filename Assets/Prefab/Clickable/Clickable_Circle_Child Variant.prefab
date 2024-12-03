@@ -117,6 +117,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4337985783848230490, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4337985783848230491, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
         type: 3}
       propertyPath: m_Enabled
@@ -147,8 +152,19 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9116136308850967213, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
+        type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c221e6f97fdc78f4db73057f2ae9b5b3, type: 3}
+--- !u!212 &4527830689330121473 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 4337985783947377353, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
+    type: 3}
+  m_PrefabInstance: {fileID: 208723676672225736}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &4527830689499131788 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4337985783848230468, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
@@ -168,6 +184,8 @@ Animation:
   m_Animations:
   - {fileID: 7400000, guid: 4f0556b6c3caeaa4184e7221008b0881, type: 2}
   - {fileID: 7400000, guid: 28dfcb4a660959c499a8c124c2a82156, type: 2}
+  - {fileID: 7400000, guid: 26f5a1b5112dbd84b92571531e1c34a3, type: 2}
+  - {fileID: 7400000, guid: 6efdf2db6b9603a408dd829032ab41bf, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
@@ -184,9 +202,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cba911c387714143822293a65c62468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  state: 0
+  m_bigCircleRenderer: {fileID: 4527830689330121473}
+  m_collider: {fileID: 4527830689499131794}
+  circleRoot: {fileID: 5930211030656330819}
+  floatingParam:
+    floatingForce: 0.5
   m_circle: {fileID: 4527830689499131795}
-  growCollisionStrength: 0.2
+  m_rigid: {fileID: 8964006862732702565}
   growAnim: {fileID: 3675650337772343011}
+  growCollisionStrength: 0.2
+--- !u!135 &4527830689499131794 stripped
+SphereCollider:
+  m_CorrespondingSourceObject: {fileID: 4337985783848230490, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
+    type: 3}
+  m_PrefabInstance: {fileID: 208723676672225736}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &4527830689499131795 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4337985783848230491, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
@@ -199,3 +230,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e57199abd75dcd24daae47092d7821d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &5930211030656330819 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5812421507260702091, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
+    type: 3}
+  m_PrefabInstance: {fileID: 208723676672225736}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &8964006862732702565 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 9116136308850967213, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
+    type: 3}
+  m_PrefabInstance: {fileID: 208723676672225736}
+  m_PrefabAsset: {fileID: 0}

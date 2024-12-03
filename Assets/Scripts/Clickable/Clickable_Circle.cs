@@ -29,6 +29,10 @@ public class Clickable_Circle : Basic_Clickable
             if(!isWobbling)
                 wobbler.Excute(coroutineWobble(wobbleStrength*WobbleFactor, wobbleCurve, duration));
         }
+        public void ResetWobble(){
+            isWobbling = false;
+            perRendererWobbles.WobbleStrength = 0;
+        }
         IEnumerator coroutineWobble(float wobbleStrength, AnimationCurve wobbleCurve, float duration){
             isWobbling = true;
             var wobble = perRendererWobbles;
@@ -40,7 +44,6 @@ public class Clickable_Circle : Basic_Clickable
         }
     }
 [Header("Circle Control")]
-    [SerializeField] private Transform root;
     [SerializeField] private Rigidbody m_rigid;
     [SerializeField] private int circleClass = 3;
     [SerializeField] private float maxfollowSpeed = 10;
@@ -64,7 +67,6 @@ public class Clickable_Circle : Basic_Clickable
     private float camDepth;
     private Vector3 velocity;
 
-    public float RootSize{get{return root.localScale.x;}}
     public bool IsGrownCircle{get{return circleClass == 3;}}
     public int m_circleClass{get{return circleClass;}}
 
@@ -108,6 +110,11 @@ public class Clickable_Circle : Basic_Clickable
     public int IncreaseCircleClass(){
         circleClass ++;
         return circleClass;
+    }
+    public void ResetWobble(){
+        for(int i=0; i<circleWobbles.Length; i++){
+            circleWobbles[i].ResetWobble();
+        }        
     }
     public void TriggerCollideRipple()=>p_ripple.Play(true);
     void OnCollisionEnter(Collision collision){

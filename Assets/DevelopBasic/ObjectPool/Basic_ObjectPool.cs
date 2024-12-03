@@ -5,23 +5,23 @@ using UnityEngine;
 
 public class Basic_ObjectPool<T> : MonoBehaviour where T: MonoBehaviour
 {
-    [SerializeField] private GameObject poolPrefab;
-    [SerializeField] private int MaxAmount = 15;
+    [SerializeField] protected GameObject poolPrefab;
+    [SerializeField] protected int MaxAmount = 15;
 
-    private List<T> pools;
-    private int neededAmount = 0;
+    protected List<T> pools;
+    protected int neededAmount = 0;
 
     public static Action<T> E_OnThisRecycle;
     public static void Call_OnThisRecycle(T target)=>E_OnThisRecycle?.Invoke(target);
     
-    void Awake(){
+    protected virtual void Awake(){
         pools = new List<T>();
         neededAmount = 0;
     }
     void OnDestroy(){
         CleanUp();
     }
-    T GetObjFromPool(Predicate<T> condition){
+    protected T GetObjFromPool(Predicate<T> condition){
         var pendingObj = pools.Find(x=>condition(x));
         if(pendingObj!=null){
             PrepareTarget(pendingObj);
