@@ -7,9 +7,9 @@ public abstract class IC_Basic : MonoBehaviour
 {
     [SerializeField] protected GameObject interactionAssetsGroup;
 
-    public bool m_isLoaded{get; private set;} = false;
-    public bool m_isDone{get; private set;} = false;
-    public bool m_isPlaying{get; private set;} = false;
+    public bool m_isLoaded{get; protected set;} = false;
+    public bool m_isDone{get; protected set;} = false;
+    public bool m_isPlaying{get; protected set;} = false;
 
 //This might be an async function
     public void PreloadInteraction(){

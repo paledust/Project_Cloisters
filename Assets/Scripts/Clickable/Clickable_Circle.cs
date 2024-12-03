@@ -40,8 +40,9 @@ public class Clickable_Circle : Basic_Clickable
         }
     }
 [Header("Circle Control")]
-    [SerializeField] private int circleClass = 3;
+    [SerializeField] private Transform root;
     [SerializeField] private Rigidbody m_rigid;
+    [SerializeField] private int circleClass = 3;
     [SerializeField] private float maxfollowSpeed = 10;
     [SerializeField] private float lerpSpeed = 5;
     [SerializeField] private float followFactor = 1;
@@ -59,9 +60,12 @@ public class Clickable_Circle : Basic_Clickable
 [Header("Circle Animation Control")]
     [SerializeField] private CircleWobble[] circleWobbles;
     [SerializeField] private CircleMotion[] circleMotions;
+
     private float camDepth;
     private Vector3 velocity;
 
+    public float RootSize{get{return root.localScale.x;}}
+    public bool IsGrownCircle{get{return circleClass == 3;}}
     public int m_circleClass{get{return circleClass;}}
 
     void Start(){
@@ -84,6 +88,7 @@ public class Clickable_Circle : Basic_Clickable
         player.HoldInteractable(this);
         p_trail.Play(true);
         m_rigid.isKinematic = true;
+        EventHandler.Call_OnControlCircle(this);
     }
     public override void OnRelease(PlayerController player)
     {
@@ -104,6 +109,7 @@ public class Clickable_Circle : Basic_Clickable
         circleClass ++;
         return circleClass;
     }
+    public void TriggerCollideRipple()=>p_ripple.Play(true);
     void OnCollisionEnter(Collision collision){
         float strength = collision.relativeVelocity.magnitude;
         float factor = m_rigid.isKinematic?bounceFactor:collisionFactor;
@@ -112,6 +118,8 @@ public class Clickable_Circle : Basic_Clickable
         }
 
         var otherCircle = collision.gameObject.GetComponent<Clickable_Circle>();
-        if(otherCircle.m_circleClass==3 && circleClass==3) p_ripple.Play();
+        if(otherCircle.IsGrownCircle && IsGrownCircle){
+            EventHandler.Call_OnClickableCircleCollide(otherCircle);
+        }
     }
 }

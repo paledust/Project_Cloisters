@@ -22,7 +22,6 @@ Shader "AmplifyShaders/Particle/WobbleDissolve"
 		_DetailNoiseScale("DetailNoiseScale", Float) = 1
 		_DetailStrength("DetailStrength", Float) = 1
 		_WobbleStrength("WobbleStrength", Float) = 0.2
-		_WobbleAngle("WobbleAngle", Float) = 0
 
 		[HideInInspector][NoScaleOffset] unity_Lightmaps("unity_Lightmaps", 2DArray) = "" {}
         [HideInInspector][NoScaleOffset] unity_LightmapsInd("unity_LightmapsInd", 2DArray) = "" {}
@@ -99,7 +98,6 @@ Shader "AmplifyShaders/Particle/WobbleDissolve"
 			sampler2D _MainTex;
 			sampler2D _DetailNoiseMap;
 			CBUFFER_START( UnityPerMaterial )
-			float _WobbleAngle;
 			float _WobbleStrength;
 			float _EmissionTint;
 			float _UseTextureColor;
@@ -185,10 +183,7 @@ Shader "AmplifyShaders/Particle/WobbleDissolve"
 
 				float2 break165 = ( v.uv0.xy - float2( 0.5,0.5 ) );
 				float2 appendResult167 = (float2(-break165.x , break165.y));
-				float cos161 = cos( ( radians( _WobbleAngle ) * 2.0 ) );
-				float sin161 = sin( ( radians( _WobbleAngle ) * 2.0 ) );
-				float2 rotator161 = mul( appendResult167 - float2( 0,0 ) , float2x2( cos161 , -sin161 , sin161 , cos161 )) + float2( 0,0 );
-				float2 break174 = ( rotator161 * _WobbleStrength );
+				float2 break174 = ( appendResult167 * _WobbleStrength );
 				float3 appendResult173 = (float3(break174.x , break174.y , 0.0));
 				
 				float3 ase_worldPos = TransformObjectToWorld( (v.positionOS).xyz );
@@ -319,7 +314,6 @@ Shader "AmplifyShaders/Particle/WobbleDissolve"
 			sampler2D _MainTex;
 			sampler2D _DetailNoiseMap;
 			CBUFFER_START( UnityPerMaterial )
-			float _WobbleAngle;
 			float _WobbleStrength;
 			float _EmissionTint;
 			float _UseTextureColor;
@@ -404,10 +398,7 @@ Shader "AmplifyShaders/Particle/WobbleDissolve"
 
 				float2 break165 = ( v.uv0.xy - float2( 0.5,0.5 ) );
 				float2 appendResult167 = (float2(-break165.x , break165.y));
-				float cos161 = cos( ( radians( _WobbleAngle ) * 2.0 ) );
-				float sin161 = sin( ( radians( _WobbleAngle ) * 2.0 ) );
-				float2 rotator161 = mul( appendResult167 - float2( 0,0 ) , float2x2( cos161 , -sin161 , sin161 , cos161 )) + float2( 0,0 );
-				float2 break174 = ( rotator161 * _WobbleStrength );
+				float2 break174 = ( appendResult167 * _WobbleStrength );
 				float3 appendResult173 = (float3(break174.x , break174.y , 0.0));
 				
 				float3 ase_worldPos = TransformObjectToWorld( (v.positionOS).xyz );
@@ -527,7 +518,6 @@ Shader "AmplifyShaders/Particle/WobbleDissolve"
 			sampler2D _MainTex;
 			sampler2D _DetailNoiseMap;
 			CBUFFER_START( UnityPerMaterial )
-			float _WobbleAngle;
 			float _WobbleStrength;
 			float _EmissionTint;
 			float _UseTextureColor;
@@ -604,10 +594,7 @@ Shader "AmplifyShaders/Particle/WobbleDissolve"
 
 				float2 break165 = ( v.ase_texcoord.xy - float2( 0.5,0.5 ) );
 				float2 appendResult167 = (float2(-break165.x , break165.y));
-				float cos161 = cos( ( radians( _WobbleAngle ) * 2.0 ) );
-				float sin161 = sin( ( radians( _WobbleAngle ) * 2.0 ) );
-				float2 rotator161 = mul( appendResult167 - float2( 0,0 ) , float2x2( cos161 , -sin161 , sin161 , cos161 )) + float2( 0,0 );
-				float2 break174 = ( rotator161 * _WobbleStrength );
+				float2 break174 = ( appendResult167 * _WobbleStrength );
 				float3 appendResult173 = (float3(break174.x , break174.y , 0.0));
 				
 				float3 ase_worldPos = TransformObjectToWorld( (v.positionOS).xyz );
@@ -701,7 +688,6 @@ Shader "AmplifyShaders/Particle/WobbleDissolve"
 			sampler2D _MainTex;
 			sampler2D _DetailNoiseMap;
 			CBUFFER_START( UnityPerMaterial )
-			float _WobbleAngle;
 			float _WobbleStrength;
 			float _EmissionTint;
 			float _UseTextureColor;
@@ -777,10 +763,7 @@ Shader "AmplifyShaders/Particle/WobbleDissolve"
 
 				float2 break165 = ( v.ase_texcoord.xy - float2( 0.5,0.5 ) );
 				float2 appendResult167 = (float2(-break165.x , break165.y));
-				float cos161 = cos( ( radians( _WobbleAngle ) * 2.0 ) );
-				float sin161 = sin( ( radians( _WobbleAngle ) * 2.0 ) );
-				float2 rotator161 = mul( appendResult167 - float2( 0,0 ) , float2x2( cos161 , -sin161 , sin161 , cos161 )) + float2( 0,0 );
-				float2 break174 = ( rotator161 * _WobbleStrength );
+				float2 break174 = ( appendResult167 * _WobbleStrength );
 				float3 appendResult173 = (float3(break174.x , break174.y , 0.0));
 				
 				float3 ase_worldPos = TransformObjectToWorld( (v.positionOS).xyz );
@@ -876,18 +859,14 @@ Node;AmplifyShaderEditor.GetLocalVarNode;118;-560,-464;Inherit;False;107;detail;
 Node;AmplifyShaderEditor.SimpleAddOpNode;139;-635.8285,-389.0378;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.RegisterLocalVarNode;106;-2128,-256;Inherit;False;dissolve;-1;True;1;0;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.BreakToComponentsNode;165;-480,512;Inherit;False;FLOAT2;1;0;FLOAT2;0,0;False;16;FLOAT;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4;FLOAT;5;FLOAT;6;FLOAT;7;FLOAT;8;FLOAT;9;FLOAT;10;FLOAT;11;FLOAT;12;FLOAT;13;FLOAT;14;FLOAT;15
-Node;AmplifyShaderEditor.RangedFloatNode;169;-672,752;Inherit;False;Property;_WobbleAngle;WobbleAngle;16;0;Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.GetLocalVarNode;124;-384,-384;Inherit;False;106;dissolve;1;0;OBJECT;;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleSubtractOpNode;117;-368,-544;Inherit;False;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.NegateNode;168;-352,496;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
-Node;AmplifyShaderEditor.RadiansOpNode;183;-432,752;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleSubtractOpNode;123;-176,-512;Inherit;False;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
-Node;AmplifyShaderEditor.SimpleMultiplyOpNode;182;-208,752;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;2;False;1;FLOAT;0
 Node;AmplifyShaderEditor.DynamicAppendNode;167;-208,496;Inherit;True;FLOAT2;4;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;1;FLOAT2;0
 Node;AmplifyShaderEditor.RangedFloatNode;67;-592,-880;Inherit;False;Property;_EmissionTint;EmissionTint;3;0;Create;True;0;0;0;False;0;False;1;3.55;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.ComponentMaskNode;70;-624,-960;Inherit;False;True;True;True;False;1;0;COLOR;0,0,0,0;False;1;FLOAT3;0
 Node;AmplifyShaderEditor.SaturateNode;122;-16,-544;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
-Node;AmplifyShaderEditor.RotatorNode;161;64,512;Inherit;True;3;0;FLOAT2;0,0;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;1;FLOAT2;0
 Node;AmplifyShaderEditor.RangedFloatNode;163;96,736;Inherit;False;Property;_WobbleStrength;WobbleStrength;15;0;Create;True;0;0;0;False;0;False;0.2;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.RangedFloatNode;72;176,-528;Inherit;False;Property;_Opacity;Opacity;0;0;Create;True;0;0;0;False;0;False;1;1;0;1;0;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;105;240,-672;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
@@ -940,21 +919,17 @@ WireConnection;165;0;159;0
 WireConnection;117;0;139;0
 WireConnection;117;1;118;0
 WireConnection;168;0;165;0
-WireConnection;183;0;169;0
 WireConnection;123;0;117;0
 WireConnection;123;1;124;0
-WireConnection;182;0;183;0
 WireConnection;167;0;168;0
 WireConnection;167;1;165;1
 WireConnection;70;0;2;0
 WireConnection;122;0;123;0
-WireConnection;161;0;167;0
-WireConnection;161;2;182;0
 WireConnection;105;0;122;0
 WireConnection;105;1;2;4
 WireConnection;68;0;70;0
 WireConnection;68;1;67;0
-WireConnection;164;0;161;0
+WireConnection;164;0;167;0
 WireConnection;164;1;163;0
 WireConnection;103;0;105;0
 WireConnection;103;1;72;0
@@ -968,4 +943,4 @@ WireConnection;173;1;174;1
 WireConnection;113;1;69;0
 WireConnection;113;3;173;0
 ASEEND*/
-//CHKSM=7ED1A0A5B59D1707562483DCC19871B02D193F83
+//CHKSM=210DF930569F1822668B4C6FAFD9EFDA8A432BCD

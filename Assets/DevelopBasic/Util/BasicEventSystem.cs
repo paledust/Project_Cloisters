@@ -30,5 +30,9 @@ public static class EventHandler
     public static void Call_OnTransitionBegin()=>E_OnTransitionBegin?.Invoke();
     public static event Action E_OnTransitionEnd;
     public static void Call_OnTransitionEnd()=>E_OnTransitionEnd?.Invoke();
+    public static event Action<Clickable_Circle> E_OnControlCircle;
+    public static void Call_OnControlCircle(Clickable_Circle circle)=>E_OnControlCircle?.Invoke(circle);
+    public static Action<Clickable_Circle> E_OnClickableCircleCollide;
+    public static void Call_OnClickableCircleCollide(Clickable_Circle collidedCircle)=>E_OnClickableCircleCollide?.Invoke(collidedCircle);
 #endregion
 }

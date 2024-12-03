@@ -15,7 +15,7 @@ public class CollidableCircle : MonoBehaviour
 
         if(strength<growCollisionStrength) return;
         var otherCircle = other.gameObject.GetComponent<Clickable_Circle>();
-        if(otherCircle.m_circleClass == 3){
+        if(otherCircle.IsGrownCircle){
             if(!isGrowing){
                 isGrowing = true;
                 switch(m_circle.m_circleClass){
