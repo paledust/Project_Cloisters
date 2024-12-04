@@ -34,7 +34,6 @@ public class SmallCircleSpawner : Basic_ObjectPool<CollidableCircle>
                 var go = GetObjFromPool(x=>!x.gameObject.activeSelf);
                 if(go!=null) {
                     go.gameObject.SetActive(true);
-                    go.ResetGrowingAndWobble();
                     go.FloatUp(Random.Range(4f, 5f));
                 }
             }

@@ -4,6 +4,22 @@ using UnityEngine;
 
 public class CollidableCircle : MonoBehaviour
 {
+    [System.Serializable]
+    public struct ResizableTrans{
+        public Transform circleTrans;
+        public float classOneSize;
+        public float classTwoSize;
+        public void ResetSize(int circleClass){
+            switch(circleClass){
+                case 1:
+                    circleTrans.localScale = Vector3.one*classOneSize;
+                    break;
+                case 2:
+                    circleTrans.localScale = Vector3.one*classTwoSize;
+                    break;
+            }
+        }
+    }
     [SerializeField] private SpriteRenderer m_bigCircleRenderer;
     [SerializeField] private SphereCollider m_collider;
     [SerializeField] private Transform renderRoot;
@@ -17,15 +33,14 @@ public class CollidableCircle : MonoBehaviour
     [SerializeField] private PerRendererOpacity[] circleOpacity;
 [Header("Grow")]
     [SerializeField] private float growCollisionStrength = 2;
-
+[Header("Reset Size")]
+    [SerializeField] private ResizableTrans[] resetCircles;
     public bool Collidable{get{return m_collider.enabled;}}
     public bool IsGrowing{get; private set;} = false;
     public bool IsVisible{get{return m_bigCircleRenderer.isVisible;}}
 
     private const string GrowClassTwoClip = "CircleGrow_Class_2";
     private const string GrowClassThreeClip = "CircleGrow_Class_3";
-    private const string ClassOneIdle = "CircleIdle_Class_1";
-    private const string ClassTwoIdle = "CircleIdle_Class_2";
     private const string CircleFloat = "CircleFloat";
 
     void OnCollisionEnter(Collision other){
@@ -61,19 +76,17 @@ public class CollidableCircle : MonoBehaviour
         m_circle.ResetWobble();
         IsGrowing = false;
         int currentClass = m_circle.m_circleClass;
-        switch(currentClass){
-            case 1:
-                circleAnime.Play(ClassOneIdle);
-                break;
-            case 2:
-                circleAnime.Play(ClassTwoIdle);
-                break;
+        for(int i=0; i<resetCircles.Length; i++){
+            resetCircles[i].ResetSize(currentClass);
         }
     }
     public void FloatUp(float duration){
         StartCoroutine(coroutineFloatingUp(duration));
     }
-    public void AE_EnableHitbox()=>m_circle.EnableHitbox();
+    public void AE_EnableHitbox(){
+        float size = renderRoot.transform.localScale.x;
+        StartCoroutine(coroutineGrowHitbox(2f, size));
+    }
     public void AE_GrowingDone(){
         IsGrowing = false;
         int circleClass = m_circle.IncreaseCircleClass();
@@ -81,16 +94,23 @@ public class CollidableCircle : MonoBehaviour
         switch(circleClass){
             case 2:
                 m_rigid.mass = 3;
-                m_rigid.drag = 3;
+                m_rigid.drag = 6;
                 break;
             case 3:
                 m_rigid.mass = 8;
-                m_rigid.drag = 7;
+                m_rigid.drag = 8;
                 m_circle.enabled = true;
                 m_circle.EnableRaycast();
 
                 break;
         }
+    }
+    IEnumerator coroutineGrowHitbox(float duration, float scaleFactor){
+        m_collider.radius = 0;
+        m_circle.EnableHitbox();
+        yield return new WaitForLoop(duration, (t)=>{
+            m_collider.radius = Mathf.Lerp(0, 0.16f*scaleFactor, t);
+        });
     }
     IEnumerator coroutineFloatingUp(float duration){
         Vector3 circlePos = Vector3.zero;
