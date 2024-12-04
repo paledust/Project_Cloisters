@@ -7,6 +7,7 @@ public class IC_Narrative : IC_Basic
     [SerializeField] private RippleParticleController rippleParticleController;
     [SerializeField] private SmallCircleSpawner circleSpawner;
     [SerializeField] private NarrativeSpawner narrativeSpawner;
+    [SerializeField] private ParticleSystem p_collideBurst;
 
     private Clickable_Circle lastCircle;
 
@@ -36,10 +37,12 @@ public class IC_Narrative : IC_Basic
         EventHandler.E_OnClickableCircleCollide -= OnCircleCollide;
     }
     void OnControlCircleHandler(Clickable_Circle circle)=>lastCircle = circle;
-    void OnCircleCollide(Clickable_Circle collidedCircle){
+    void OnCircleCollide(Clickable_Circle collidedCircle, Vector3 contact, Vector3 diff){
         if(collidedCircle != lastCircle && collidedCircle.IsGrownCircle){
-            // EventHandler.Call_OnEndInteraction(this);
             collidedCircle.TriggerCollideRipple();
+            p_collideBurst.transform.position = contact;
+            p_collideBurst.transform.rotation = Quaternion.Euler(0,0,Vector3.SignedAngle(Vector3.right, diff, Vector3.forward));
+            p_collideBurst.Play(true);
             StartCoroutine(CommonCoroutine.delayAction(()=>{
                 narrativeSpawner.PlaceText();
             }, 0.5f));

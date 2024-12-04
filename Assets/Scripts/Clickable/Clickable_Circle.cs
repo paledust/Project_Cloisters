@@ -126,7 +126,7 @@ public class Clickable_Circle : Basic_Clickable
 
         var otherCircle = collision.gameObject.GetComponent<Clickable_Circle>();
         if(otherCircle.IsGrownCircle && IsGrownCircle){
-            EventHandler.Call_OnClickableCircleCollide(otherCircle);
+            EventHandler.Call_OnClickableCircleCollide(otherCircle, collision.contacts[0].point, transform.position - collision.transform.position);
         }
     }
 }
