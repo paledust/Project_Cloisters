@@ -103,7 +103,6 @@ public class CollidableCircle : MonoBehaviour
             circlePos.y = noiseAmp * (Mathf.PerlinNoise(t*noiseFreq, 0.12345f+seed.y)*2-1) * EasingFunc.Easing.QuadEaseIn(1-t);
             circleRoot.localPosition = circlePos;
         });
-        yield return new WaitForSeconds(0.2f);
         IsGrowing = false;
     }
 }
