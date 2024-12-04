@@ -5,6 +5,13 @@ using UnityEngine;
 public class NarrativeSpawner : Basic_ObjectPool<NarrativeText>
 {
     [SerializeField] private RectSelector rectSelector;
+    [SerializeField] private float spawnStep;
+    private float spawnTime;
+    protected override void Awake()
+    {
+        base.Awake();
+        spawnTime = 0;
+    }
     protected override void PrepareTarget(NarrativeText target)
     {
         base.PrepareTarget(target);
@@ -19,10 +26,13 @@ public class NarrativeSpawner : Basic_ObjectPool<NarrativeText>
         }
     }
     public void PlaceText(){
-        var go = GetObjFromPool(x=>!x.gameObject.activeSelf);
-        if(go!=null){
-            go.gameObject.SetActive(true);
-            go.FadeInText();
+        if(Time.time - spawnTime>spawnStep){
+            spawnTime = Time.time;
+            var go = GetObjFromPool(x=>!x.gameObject.activeSelf);
+            if(go!=null){
+                go.gameObject.SetActive(true);
+                go.FadeInText();
+            }
         }
     }
     void OnDrawGizmosSelected(){

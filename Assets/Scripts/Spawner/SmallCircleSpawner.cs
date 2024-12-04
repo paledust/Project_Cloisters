@@ -9,7 +9,6 @@ public class SmallCircleSpawner : Basic_ObjectPool<CollidableCircle>
     [SerializeField] private Vector2Int spawnAmountRange;
 [Header("Spawn Settings")]
     [SerializeField] private Vector2 spawnSize;
-    [SerializeField] private Vector2 floatUpForceRange;
     private float currentCycle;
     private float spanwTimer;
     protected override void Awake(){
@@ -22,7 +21,7 @@ public class SmallCircleSpawner : Basic_ObjectPool<CollidableCircle>
         base.PrepareTarget(target);
         target.GetComponent<Clickable_Circle>().DisableHitbox();
         target.ResetGrowingAndWobble();
-        target.ResetMotion(floatUpForceRange.GetRndValueInVector2Range());
+        target.ResetMotion();
         target.ResetSize(spawnSize.GetRndValueInVector2Range());
         target.transform.position = rectSelector.GetPoint();
     }
@@ -33,7 +32,10 @@ public class SmallCircleSpawner : Basic_ObjectPool<CollidableCircle>
             int amount = spawnAmountRange.GetRndValueInVector2Range();
             for(int i=0;i<amount;i++){
                 var go = GetObjFromPool(x=>!x.gameObject.activeSelf);
-                if(go!=null) go.gameObject.SetActive(true);
+                if(go!=null) {
+                    go.gameObject.SetActive(true);
+                    go.FloatUp(Random.Range(4f, 5f));
+                }
             }
         }
         for(int i=0; i<pools.Count; i++){
