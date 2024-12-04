@@ -4,17 +4,12 @@ using UnityEngine;
 
 public class CollidableCircle : MonoBehaviour
 {
-    [System.Serializable]
-    public struct FloatingParam{
-        public float floatingForce;
-    }
     public enum CollidableCircleState{Floating, Idle}
     [SerializeField, ShowOnly] 
     private CollidableCircleState state = CollidableCircleState.Floating;
     [SerializeField] private SpriteRenderer m_bigCircleRenderer;
     [SerializeField] private SphereCollider m_collider;
     [SerializeField] private Transform circleRoot;
-    [SerializeField] private FloatingParam floatingParam;
     [SerializeField] private Clickable_Circle m_circle;
     [SerializeField] private Rigidbody m_rigid;
     [SerializeField] private Animation growAnim;
@@ -49,15 +44,6 @@ public class CollidableCircle : MonoBehaviour
             }
         }
     }
-    void FixedUpdate(){
-        m_rigid.AddForce(Vector3.up*floatingParam.floatingForce, ForceMode.VelocityChange);
-        switch(state){
-            case CollidableCircleState.Floating:
-                break;
-            case CollidableCircleState.Idle:
-                break;
-        }
-    }
     void Update(){
         if(IsVisible && !m_collider.enabled){
             m_collider.enabled = true;
@@ -69,7 +55,6 @@ public class CollidableCircle : MonoBehaviour
     }
     public void ResetFloat(float floatingForce){
         state = CollidableCircleState.Floating;
-        floatingParam.floatingForce = floatingForce;
     }
     public void ResetGrowingAndWobble(){
         m_circle.ResetWobble();

@@ -16,7 +16,11 @@ public static class ExtensionMethods{
         
         return planeOffset + planePoint;
     }
-    public static float GetRndValueInVector2Range(this Vector2 range){return Random.Range(range.x, range.y);}
-    public static int GetRndValueInVector2Range(this Vector2Int range){return Random.Range(range.x, range.y);}
+    public static float GetRndValueInVector2Range(this Vector2 range){
+        return (range.y < range.x)?Random.Range(range.y, range.x):Random.Range(range.x, range.y);
+    }
+    public static int GetRndValueInVector2Range(this Vector2Int range){
+        return (range.y < range.x)?Random.Range(range.y, range.x):Random.Range(range.x, range.y);
+    }
 }
 #endregion

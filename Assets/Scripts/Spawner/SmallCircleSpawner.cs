@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class SmallCircleSpawner : Basic_ObjectPool<CollidableCircle>
 {
-    [SerializeField] private Transform spawnStart;
-    [SerializeField] private float SpawnRadius;
-    [SerializeField] private float maxOffset;
+    [SerializeField] private RectSelector rectSelector;
     [SerializeField] private Vector2 spawnCycleRange;
     [SerializeField] private Vector2Int spawnAmountRange;
 [Header("Spawn Settings")]
@@ -26,7 +24,8 @@ public class SmallCircleSpawner : Basic_ObjectPool<CollidableCircle>
         target.ResetGrowingAndWobble();
         target.ResetFloat(floatUpForceRange.GetRndValueInVector2Range());
         target.ResetSize(spawnSize.GetRndValueInVector2Range());
-        target.transform.position = spawnStart.position + Vector3.right * Random.Range(-SpawnRadius, SpawnRadius) * 0.5f;
+
+        target.transform.position = rectSelector.GetPoint();
         target.gameObject.SetActive(true);
     }
     void Update(){
@@ -46,7 +45,6 @@ public class SmallCircleSpawner : Basic_ObjectPool<CollidableCircle>
         }
     }
     void OnDrawGizmosSelected(){
-        Gizmos.color = new Color(0,1,0,0.25f);
-        Gizmos.DrawCube(spawnStart.position + Vector3.up * maxOffset * 0.5f, new Vector3(SpawnRadius, maxOffset, 0.01f));
+        rectSelector.DrawGizmo(new Color(0,1,0,0.25f));
     }
 }

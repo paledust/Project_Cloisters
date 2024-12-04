@@ -135,7 +135,7 @@ Material:
     - _DstBlend: 0
     - _EdgeMin: 0.82
     - _EdgeSmooth: 0.42
-    - _EdgeStrength: 1
+    - _EdgeStrength: 1.5
     - _EmissionTint: 1
     - _EnvironmentReflections: 1
     - _FadeLength: 1.5
