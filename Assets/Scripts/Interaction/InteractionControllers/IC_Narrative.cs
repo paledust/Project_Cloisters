@@ -6,8 +6,7 @@ public class IC_Narrative : IC_Basic
 {
     [SerializeField] private RippleParticleController rippleParticleController;
     [SerializeField] private SmallCircleSpawner circleSpawner;
-[Header("Collision")]
-    [SerializeField] private NarrativeText narrativeText;
+    [SerializeField] private NarrativeSpawner narrativeSpawner;
 
     private Clickable_Circle lastCircle;
 
@@ -15,11 +14,13 @@ public class IC_Narrative : IC_Basic
     {
         base.LoadAssets();
         rippleParticleController.enabled = true;
+        narrativeSpawner.enabled = true;
         circleSpawner.enabled = true;
     }
     protected override void UnloadAssets()
     {
         rippleParticleController.enabled = false;
+        narrativeSpawner.enabled = false;
     }
     protected override void OnInteractionStart()
     {
@@ -40,8 +41,7 @@ public class IC_Narrative : IC_Basic
             // EventHandler.Call_OnEndInteraction(this);
             collidedCircle.TriggerCollideRipple();
             StartCoroutine(CommonCoroutine.delayAction(()=>{
-                narrativeText.gameObject.SetActive(true);
-                narrativeText.FadeInText();
+                narrativeSpawner.PlaceText();
             }, 0.5f));
         }
     }

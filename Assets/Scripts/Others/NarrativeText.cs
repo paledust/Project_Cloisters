@@ -7,8 +7,10 @@ using UnityEngine;
 public class NarrativeText : MonoBehaviour
 {
     [SerializeField] private Animation textFadeAnime;
-    private const string fadeInName = "NarrativeFadeIn";
     public void FadeInText(){
-        textFadeAnime.Play(fadeInName);
+        textFadeAnime.Play();
+        StartCoroutine(CommonCoroutine.delayAction(()=>{
+            gameObject.SetActive(false);
+        }, textFadeAnime.clip.length));
     }
 }

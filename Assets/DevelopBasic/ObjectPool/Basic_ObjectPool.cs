@@ -11,9 +11,6 @@ public class Basic_ObjectPool<T> : MonoBehaviour where T: MonoBehaviour
     protected List<T> pools;
     protected int neededAmount = 0;
 
-    public static Action<T> E_OnThisRecycle;
-    public static void Call_OnThisRecycle(T target)=>E_OnThisRecycle?.Invoke(target);
-    
     protected virtual void Awake(){
         pools = new List<T>();
         neededAmount = 0;
@@ -23,16 +20,19 @@ public class Basic_ObjectPool<T> : MonoBehaviour where T: MonoBehaviour
     }
     protected T GetObjFromPool(Predicate<T> condition){
         var pendingObj = pools.Find(x=>condition(x));
+    //Find object from pool
         if(pendingObj!=null){
             PrepareTarget(pendingObj);
             return pendingObj;
         }
+    //If not try Spawn one
         else{
             if(pools.Count<MaxAmount){
                 var obj = SpawnTarget();
                 pools.Add(obj);
                 return obj;
             }
+        //If spawn too much, then return null and marked as needing one.
             else{
                 neededAmount ++;
                 return null;
@@ -50,7 +50,7 @@ public class Basic_ObjectPool<T> : MonoBehaviour where T: MonoBehaviour
         }
         pools.Clear();        
     }
-    void RecycleTarget(T target){
+    protected void RecycleTarget(T target){
         if(neededAmount > 0){
             PrepareTarget(target);
             neededAmount --;

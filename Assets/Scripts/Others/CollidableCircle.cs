@@ -53,8 +53,9 @@ public class CollidableCircle : MonoBehaviour
         circleRoot.transform.localScale = Vector3.one * size;
         m_collider.radius = 0.16f*size;
     }
-    public void ResetFloat(float floatingForce){
+    public void ResetMotion(float floatingForce){
         state = CollidableCircleState.Floating;
+        m_rigid.velocity = Vector3.zero;
     }
     public void ResetGrowingAndWobble(){
         m_circle.ResetWobble();

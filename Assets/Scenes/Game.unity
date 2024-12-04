@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -611,37 +611,6 @@ MonoBehaviour:
   surroundPlanet: {fileID: 746570626}
   centerPlanet: {fileID: 474192024}
   endTimeline: {fileID: 1451488549}
---- !u!1 &197125041
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 197125042}
-  m_Layer: 0
-  m_Name: SpawnPos
-  m_TagString: Untagged
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &197125042
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 197125041}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.6, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 509934361}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &206905093
 GameObject:
   m_ObjectHideFlags: 0
@@ -5855,7 +5824,7 @@ PrefabInstance:
     - target: {fileID: 4527830689499131789, guid: cd8e26b321cb4374a98041df5cf8bc8f,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4527830689499131789, guid: cd8e26b321cb4374a98041df5cf8bc8f,
         type: 3}
@@ -5865,7 +5834,7 @@ PrefabInstance:
     - target: {fileID: 4527830689499131789, guid: cd8e26b321cb4374a98041df5cf8bc8f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.727
+      value: 0.12699997
       objectReference: {fileID: 0}
     - target: {fileID: 4527830689499131789, guid: cd8e26b321cb4374a98041df5cf8bc8f,
         type: 3}
@@ -6049,11 +6018,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 509934360}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.7}
+  m_LocalPosition: {x: 0, y: 0.6, z: 1.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 197125042}
   - {fileID: 1658207983}
   - {fileID: 471451999}
   m_Father: {fileID: 320034177}
@@ -10930,7 +10898,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 590064088}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.9}
+  m_LocalPosition: {x: 0, y: 0.6, z: 1.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -21982,7 +21950,7 @@ MonoBehaviour:
   interactionAssetsGroup: {fileID: 320034176}
   rippleParticleController: {fileID: 1382798986}
   circleSpawner: {fileID: 1382798987}
-  narrativeText: {fileID: 216077216339178789}
+  narrativeSpawner: {fileID: 1382798988}
 --- !u!114 &1382798986
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22029,15 +21997,8 @@ MonoBehaviour:
   poolPrefab: {fileID: 4527830689499131788, guid: cd8e26b321cb4374a98041df5cf8bc8f,
     type: 3}
   MaxAmount: 8
-  spawnCenter: {fileID: 197125042}
-  spawnRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1.6
-    height: 0.9
   rectSelector:
-    centerTrans: {fileID: 197125042}
+    centerTrans: {fileID: 509934361}
     rect:
       serializedVersion: 2
       x: 0
@@ -22055,7 +22016,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1382798983}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 14391dc164faf924e95bb7b8d761df33, type: 3}
   m_Name: 
@@ -22063,21 +22024,14 @@ MonoBehaviour:
   poolPrefab: {fileID: 216077215904548991, guid: 7c39ca6c5a0f4d845bde1af0589b6b8d,
     type: 3}
   MaxAmount: 5
-  spawnCenter: {fileID: 197125042}
-  spawnRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1.6
-    height: 0
   rectSelector:
-    centerTrans: {fileID: 197125042}
+    centerTrans: {fileID: 590064089}
     rect:
       serializedVersion: 2
       x: 0
       y: 0
-      width: 1.6
-      height: 0.9
+      width: 1.2
+      height: 0.88
 --- !u!1 &1388349386
 GameObject:
   m_ObjectHideFlags: 0
@@ -32979,12 +32933,12 @@ PrefabInstance:
     - target: {fileID: 216077215904548984, guid: 7c39ca6c5a0f4d845bde1af0589b6b8d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.371
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 216077215904548984, guid: 7c39ca6c5a0f4d845bde1af0589b6b8d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.789
+      value: 1.048
       objectReference: {fileID: 0}
     - target: {fileID: 216077215904548984, guid: 7c39ca6c5a0f4d845bde1af0589b6b8d,
         type: 3}
@@ -33018,18 +32972,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c39ca6c5a0f4d845bde1af0589b6b8d, type: 3}
---- !u!114 &216077216339178789 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7790118413316594892, guid: 7c39ca6c5a0f4d845bde1af0589b6b8d,
-    type: 3}
-  m_PrefabInstance: {fileID: 216077216339178788}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8fb7c707770ceaa4ebb4fda3c5d9cd1b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &4167929500273692767
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33114,7 +33056,7 @@ PrefabInstance:
     - target: {fileID: 4337985783848230469, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4337985783848230469, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
         type: 3}
@@ -33124,7 +33066,7 @@ PrefabInstance:
     - target: {fileID: 4337985783848230469, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.58
+      value: -0.02000004
       objectReference: {fileID: 0}
     - target: {fileID: 4337985783848230469, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
         type: 3}

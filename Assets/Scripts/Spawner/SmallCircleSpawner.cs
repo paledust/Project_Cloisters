@@ -22,11 +22,9 @@ public class SmallCircleSpawner : Basic_ObjectPool<CollidableCircle>
         base.PrepareTarget(target);
         target.GetComponent<Clickable_Circle>().DisableHitbox();
         target.ResetGrowingAndWobble();
-        target.ResetFloat(floatUpForceRange.GetRndValueInVector2Range());
+        target.ResetMotion(floatUpForceRange.GetRndValueInVector2Range());
         target.ResetSize(spawnSize.GetRndValueInVector2Range());
-
         target.transform.position = rectSelector.GetPoint();
-        target.gameObject.SetActive(true);
     }
     void Update(){
         if(Time.time-spanwTimer>=currentCycle){
@@ -34,13 +32,15 @@ public class SmallCircleSpawner : Basic_ObjectPool<CollidableCircle>
             currentCycle = spawnCycleRange.GetRndValueInVector2Range();
             int amount = spawnAmountRange.GetRndValueInVector2Range();
             for(int i=0;i<amount;i++){
-                GetObjFromPool(x=>!x.gameObject.activeSelf);
+                var go = GetObjFromPool(x=>!x.gameObject.activeSelf);
+                if(go!=null) go.gameObject.SetActive(true);
             }
         }
         for(int i=0; i<pools.Count; i++){
             if(pools[i].Collidable && !pools[i].IsVisible)
             {
                 pools[i].gameObject.SetActive(false);
+                RecycleTarget(pools[i]);
             }
         }
     }
