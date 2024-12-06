@@ -94,11 +94,11 @@ public class CollidableCircle : MonoBehaviour
         switch(circleClass){
             case 2:
                 m_rigid.mass = 3;
-                m_rigid.drag = 6;
+                m_rigid.drag = 3.5f;
                 break;
             case 3:
                 m_rigid.mass = 8;
-                m_rigid.drag = 8;
+                m_rigid.drag = 5;
                 m_circle.enabled = true;
                 m_circle.EnableRaycast();
 

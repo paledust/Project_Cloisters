@@ -5280,7 +5280,7 @@ MonoBehaviour:
   isFrozen: 0
   m_rigid: {fileID: 9116136308850967213}
   circleClass: 3
-  maxfollowSpeed: 15
+  maxfollowSpeed: 10
   lerpSpeed: 5
   followFactor: 5
   speedDrag: 0.05
