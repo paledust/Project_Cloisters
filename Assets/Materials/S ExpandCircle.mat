@@ -7,10 +7,11 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M StylizedGlass
-  m_Shader: {fileID: 4800000, guid: 43e53d6e91347c949b66fd362ca90b8b, type: 3}
+  m_Name: S ExpandCircle
+  m_Shader: {fileID: 4800000, guid: fffbbd4cffc9024418eb470eb8276e41, type: 3}
   m_ValidKeywords: []
-  m_InvalidKeywords: []
+  m_InvalidKeywords:
+  - _INVERSENOISE_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -53,7 +54,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NoiseMap:
-        m_Texture: {fileID: 2800000, guid: d87b3c91ca4427d43b327de44ec644b6, type: 3}
+        m_Texture: {fileID: 2800000, guid: 1c9c12e29dba65f489a1e60d73635451, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -65,6 +66,18 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture0:
+        m_Texture: {fileID: 2800000, guid: 2b7311c45ec18d14ca7aa0825cfcff7b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _WavyNoiseTex:
+        m_Texture: {fileID: 2800000, guid: 8035005feb8f6c44db61a3f886180b9c, type: 3}
+        m_Scale: {x: 1, y: 0.5}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -86,8 +99,12 @@ Material:
     - _AlphaCutoff: 0.5
     - _Blend: 0
     - _BumpScale: 1
+    - _Circle: 0
+    - _CircleRadius: 0.26
+    - _CircleSmooth: 0.002
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
+    - _ColorSmoothness: 0.3
     - _Cull: 2
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
@@ -97,32 +114,55 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
+    - _Glow: -0.05
+    - _GlowSmooth: 0.1
+    - _GlowStrength: 0.5
+    - _InverseNoise: 1
+    - _LengthScale: 1
     - _Metallic: 0
-    - _NoiseScale: 5
-    - _NoiseStrength: 0.5
+    - _Noise: 0
+    - _NoiseMin: 0.85
+    - _NoiseSmooth: 1
+    - _NoiseStrength: 0.15
+    - _NoiseTile: 2
     - _OcclusionStrength: 1
     - _Parallax: 0.005
-    - _QueueControl: 0
     - _QueueOffset: 0
+    - _RadialScale: 0.5
     - _ReceiveShadows: 1
-    - _ShadeMin: 0
-    - _ShadeSmooth: 1
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
+    - _VoronoidSpeed: 0.75
+    - _Wave2Amp: 2
+    - _Wave2Freq: 4
+    - _Wave2Speed: -0.3
+    - _WaveAmp: 2
+    - _WaveFreq: 7
+    - _WaveOffset: -0.18
+    - _WavePhase: 0
+    - _WaveSmoothness: 0.1
+    - _WaveSpeed: -0.1
+    - _WaveStrength: 0.12
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _BrightColor: {r: 1, g: 1, b: 1, a: 1}
+    - _BrightColor: {r: 0.361, g: 0.6675472, b: 1, a: 1}
+    - _CircleScale: {r: 1, g: 0.57, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _DarkColor: {r: 0, g: 0, b: 0, a: 1}
+    - _DarkColor: {r: 1, g: 0.9490196, b: 0.99393, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _NoisePan: {r: -0.1, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+    - _Tint: {r: 1, g: 1, b: 1, a: 1}
+    - _Tint1: {r: 1.0717734, g: 1.0717734, b: 1.0717734, a: 1}
+    - _Tint2: {r: 2, g: 0.74339616, b: 0.74339616, a: 1}
+    - _VoronoidTiling: {r: 3, g: 1.6, b: 0.02, a: -0.05}
   m_BuildTextureStacks: []
---- !u!114 &1433756251198927498
+--- !u!114 &6146349599876804879
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
