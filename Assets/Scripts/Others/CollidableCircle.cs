@@ -81,6 +81,7 @@ public class CollidableCircle : MonoBehaviour
         }
     }
     public void FloatUp(float duration){
+        IsGrowing = true;
         StartCoroutine(coroutineFloatingUp(duration));
     }
     public void AE_EnableHitbox(){
@@ -108,21 +109,21 @@ public class CollidableCircle : MonoBehaviour
     IEnumerator coroutineGrowHitbox(float duration, float scaleFactor){
         m_collider.radius = 0;
         m_circle.EnableHitbox();
+        IsGrowing = true;
         yield return new WaitForLoop(duration, (t)=>{
             m_collider.radius = Mathf.Lerp(0, 0.16f*scaleFactor, t);
         });
+        IsGrowing = false;
     }
     IEnumerator coroutineFloatingUp(float duration){
         Vector3 circlePos = Vector3.zero;
         Vector2 seed = Random.insideUnitCircle;
         circleAnime[CircleFloat].speed = circleAnime[CircleFloat].length/duration;
         circleAnime.Play(CircleFloat);
-        IsGrowing = true;
         yield return new WaitForLoop(duration, (t)=>{
             circlePos.x = noiseAmp * (Mathf.PerlinNoise(t*noiseFreq, seed.x)*2-1) * EasingFunc.Easing.QuadEaseIn(1-t);
             circlePos.y = noiseAmp * (Mathf.PerlinNoise(t*noiseFreq, 0.12345f+seed.y)*2-1) * EasingFunc.Easing.QuadEaseIn(1-t);
             circleRoot.localPosition = circlePos;
         });
-        IsGrowing = false;
     }
 }
