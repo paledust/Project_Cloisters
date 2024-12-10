@@ -54,7 +54,7 @@ public class IC_Narrative : IC_Basic
     }
     void OnControlCircleHandler(Clickable_Circle circle)=>lastCircle = circle;
     void OnGrownCircleCollide(Clickable_Circle collidedCircle, Vector3 contact, Vector3 diff, float strength){
-        if(collidedCircle != lastCircle && strength >= collisionStrength){
+        if(strength >= collisionStrength){
         //Play Collision Particle
             p_collideBurst.transform.position = contact;
             p_collideBurst.transform.rotation = Quaternion.Euler(0,0,Vector3.SignedAngle(Vector3.right, diff, Vector3.forward));
@@ -67,12 +67,14 @@ public class IC_Narrative : IC_Basic
             collidedCircle.TriggerCollideRipple();
             StartCoroutine(CommonCoroutine.delayAction(()=>{
                 narrativeSpawner.PlaceText();
-                if(!isEnding){
-                    isEnding = true;
-                    for(int i=0; i<heroCircleSprites.Length; i++){
-                        StartCoroutine(coroutineTransitionCircle(heroCircleSprites[i], transition));
+                if(collidedCircle.enabled){
+                    if(!isEnding){
+                        isEnding = true;
+                        for(int i=0; i<heroCircleSprites.Length; i++){
+                            StartCoroutine(coroutineTransitionCircle(heroCircleSprites[i], transition));
+                        }
+                        StartCoroutine(coroutineEndInteraction());   
                     }
-                    StartCoroutine(coroutineEndInteraction());   
                 }
             }, 0.5f));
         }

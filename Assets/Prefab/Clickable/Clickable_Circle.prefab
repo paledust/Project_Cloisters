@@ -5211,6 +5211,7 @@ GameObject:
   - component: {fileID: 4337985783848230490}
   - component: {fileID: 9116136308850967213}
   - component: {fileID: 4337985783848230491}
+  - component: {fileID: 7737823439299809085}
   m_Layer: 3
   m_Name: Clickable_Circle
   m_TagString: Untagged
@@ -5289,7 +5290,7 @@ MonoBehaviour:
   bounceFactor: 0.3
   collisionFactor: 0.6
   boucneScale: 0.5
-  maxBounce: 1
+  bounceRange: {x: 0.2, y: 1}
   bounceDuration: 1
   bounceCurve:
     serializedVersion: 2
@@ -5383,6 +5384,19 @@ MonoBehaviour:
     WobbleFactor: 1
   - perRendererWobbles: {fileID: 1003191364589243398}
     WobbleFactor: 0.5
+  circleMotionControl: {fileID: 7737823439299809085}
+--- !u!114 &7737823439299809085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4337985783848230468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aca6ce4551e39ce4fbb70481189631ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   circleMotions:
   - circleTrans: {fileID: 4337985783947377352}
     lerpSpeed: 2

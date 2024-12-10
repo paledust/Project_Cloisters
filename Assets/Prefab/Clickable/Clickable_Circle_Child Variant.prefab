@@ -387,6 +387,21 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 7737823439299809085, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
+        type: 3}
+      propertyPath: circleMotions.Array.data[1].controlFactor
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7737823439299809085, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
+        type: 3}
+      propertyPath: circleMotions.Array.data[2].controlFactor
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7737823439299809085, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
+        type: 3}
+      propertyPath: circleMotions.Array.data[3].controlFactor
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 8972965964003141590, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
         type: 3}
       propertyPath: opacity
@@ -470,6 +485,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cba911c387714143822293a65c62468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  circleMotionControl: {fileID: 7604271312251059957}
   m_bigCircleRenderer: {fileID: 4527830689330121473}
   m_collider: {fileID: 4527830689499131794}
   renderRoot: {fileID: 5930211030656330819}
@@ -485,7 +501,8 @@ MonoBehaviour:
   - {fileID: 4955151163406364964}
   - {fileID: 3177708216321764037}
   - {fileID: 6570535277837000763}
-  growCollisionStrength: 0.2
+  controlGrowCollisionStrength: 0.1
+  otherGrowCollisionStrength: 0.025
   resetCircles:
   - circleTrans: {fileID: 4527830689499131789}
     classOneSize: 0.5
@@ -575,6 +592,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 04234217817ba70478bd410e4aed5ca4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7604271312251059957 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7737823439299809085, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
+    type: 3}
+  m_PrefabInstance: {fileID: 208723676672225736}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4527830689499131788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aca6ce4551e39ce4fbb70481189631ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!54 &8964006862732702565 stripped

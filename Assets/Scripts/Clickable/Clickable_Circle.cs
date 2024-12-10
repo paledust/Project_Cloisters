@@ -5,16 +5,6 @@ using UnityEngine;
 public class Clickable_Circle : Basic_Clickable
 {
     [System.Serializable]
-    public struct CircleMotion{
-        public Transform circleTrans;
-        public float lerpSpeed;
-        public float controlFactor;
-        public float maxOffset;
-        public void MotionUpdate(Vector3 motion){
-            circleTrans.localPosition = Vector3.Lerp(circleTrans.localPosition, Vector3.ClampMagnitude(motion*controlFactor, maxOffset), Time.deltaTime*lerpSpeed);
-        }
-    }
-    [System.Serializable]
     public class CircleWobble{
         public PerRendererWobbles perRendererWobbles;
         [Range(0, 1)]
@@ -57,12 +47,12 @@ public class Clickable_Circle : Basic_Clickable
     [SerializeField] private float bounceFactor;
     [SerializeField] private float collisionFactor;
     [SerializeField] private float boucneScale = 0.01f;
-    [SerializeField] private float maxBounce;
+    [SerializeField] private Vector2 bounceRange;
     [SerializeField] private float bounceDuration; 
     [SerializeField] private AnimationCurve bounceCurve;
 [Header("Circle Animation Control")]
     [SerializeField] private CircleWobble[] circleWobbles;
-    [SerializeField] private CircleMotion[] circleMotions;
+    [SerializeField] private CircleMotionControl circleMotionControl;
 
     private float camDepth;
     private Vector3 velocity;
@@ -75,9 +65,7 @@ public class Clickable_Circle : Basic_Clickable
     }
     void Update(){
         velocity *= (1-speedDrag);
-        for(int i=0; i<circleMotions.Length; i++){
-            circleMotions[i].MotionUpdate(velocity);
-        }
+        circleMotionControl.UpdateCircleMotion(velocity);
     }
     void FixedUpdate(){
         if(m_rigid.isKinematic)
@@ -121,7 +109,7 @@ public class Clickable_Circle : Basic_Clickable
         float strength = collision.rigidbody.velocity.magnitude;
         float factor = m_rigid.isKinematic?bounceFactor:collisionFactor;
         for(int i=0; i<circleWobbles.Length; i++){
-            circleWobbles[i].WobbleCircle(Mathf.Min(maxBounce, strength * factor * boucneScale), bounceCurve, bounceDuration);
+            circleWobbles[i].WobbleCircle(Mathf.Clamp(strength * factor * boucneScale, bounceRange.x, bounceRange.y), bounceCurve, bounceDuration);
         }
 
         var otherCircle = collision.gameObject.GetComponent<Clickable_Circle>();

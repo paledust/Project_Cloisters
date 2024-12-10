@@ -20,6 +20,7 @@ public class CollidableCircle : MonoBehaviour
             }
         }
     }
+    [SerializeField] private CircleMotionControl circleMotionControl;
     [SerializeField] private SpriteRenderer m_bigCircleRenderer;
     [SerializeField] private SphereCollider m_collider;
     [SerializeField] private Transform renderRoot;
@@ -32,25 +33,48 @@ public class CollidableCircle : MonoBehaviour
     [SerializeField] private float noiseAmp = 0.1f;
     [SerializeField] private PerRendererOpacity[] circleOpacity;
 [Header("Grow")]
-    [SerializeField] private float growCollisionStrength = 2;
+    [SerializeField] private float controlGrowCollisionStrength = 2;
+    [SerializeField] private float otherGrowCollisionStrength = 0.01f;
 [Header("Reset Size")]
     [SerializeField] private ResizableTrans[] resetCircles;
+
     private bool isGrowing = false;
     private bool isFloating = false;
+
     public bool Collidable{get{return m_collider.enabled;}}
-    public bool CanGrow{get{return !isGrowing && !isFloating;}}
+    public bool CanGrow{get{return !m_circle.IsGrownCircle && !isGrowing && !isFloating;}}
     public bool IsVisible{get{return m_bigCircleRenderer.isVisible;}}
 
+    private CoroutineExcuter velChanger;
+    private Vector3 targetPoint;
     private const string GrowClassTwoClip = "CircleGrow_Class_2";
     private const string GrowClassThreeClip = "CircleGrow_Class_3";
     private const string CircleFloat = "CircleFloat";
 
+    void Start(){
+        velChanger = new CoroutineExcuter(this);
+    }
+    void Update(){
+        circleMotionControl.UpdateCircleMotion(m_rigid.velocity);
+    }
     void OnCollisionEnter(Collision other){
-        float strength = other.rigidbody.velocity.magnitude;
+        velChanger.Abort();
 
-        if(strength<growCollisionStrength) return;
         var otherCircle = other.gameObject.GetComponent<Clickable_Circle>();
+
+        if(!otherCircle.enabled){
+            Vector3 separate = other.relativeVelocity;
+            separate.z = 0;
+            m_rigid.velocity = separate*(0.6f+m_circle.m_circleClass*0.1f);
+            other.rigidbody.velocity = -separate*(0.6f+m_circle.m_circleClass*0.1f);
+        }
+
         if(otherCircle.IsGrownCircle){
+            float strength = otherCircle.enabled?other.rigidbody.velocity.magnitude:other.relativeVelocity.magnitude;
+            if(strength<(otherCircle.enabled?controlGrowCollisionStrength:otherGrowCollisionStrength)) {
+                StartCoroutine(CommonCoroutine.delayAction(()=>BeginVelocitySlerp(), 0.25f));
+                return;
+            }
             if(CanGrow){
                 isGrowing = true;
                 switch(m_circle.m_circleClass){
@@ -62,6 +86,12 @@ public class CollidableCircle : MonoBehaviour
                         break;
                 }
             }
+            else{
+                StartCoroutine(CommonCoroutine.delayAction(()=>BeginVelocitySlerp(), 0.25f));
+            }
+        }
+        else{
+            StartCoroutine(CommonCoroutine.delayAction(()=>BeginVelocitySlerp(), 0.25f));
         }
     }
     public void ResetSize(float size){
@@ -111,6 +141,21 @@ public class CollidableCircle : MonoBehaviour
 
                 break;
         }
+        BeginVelocitySlerp();
+    }
+    void BeginVelocitySlerp(){
+        Vector3 point = SmallCircleSpawner.m_rectSelector.GetPoint();
+        targetPoint = point;
+        point.z = transform.position.z;
+        velChanger.Excute(coroutineSlerpVelocity(point, 0.2f, Random.Range(0.05f, 0.08f), Random.Range(4f, 5f)));
+    }
+    IEnumerator coroutineSlerpVelocity(Vector3 target, float velFactor, float maxMag, float duration){
+        Vector3 startVel = m_rigid.velocity;
+        Vector3 targetVel = Vector3.ClampMagnitude(velFactor*(target - m_rigid.position), maxMag);
+        yield return new WaitForLoop(duration, (t)=>{
+            m_rigid.velocity = Vector3.Slerp(startVel, targetVel, t);
+        });
+        BeginVelocitySlerp();
     }
     IEnumerator coroutineGrowHitbox(float duration, float scaleFactor){
         m_collider.radius = 0;
@@ -129,5 +174,12 @@ public class CollidableCircle : MonoBehaviour
             circlePos.y = noiseAmp * (Mathf.PerlinNoise(t*noiseFreq, 0.12345f+seed.y)*2-1) * EasingFunc.Easing.QuadEaseIn(1-t);
             circleRoot.localPosition = circlePos;
         });
+
+        BeginVelocitySlerp();
+    }
+    void OnDrawGizmos(){
+        Gizmos.color = Color.green;
+        Gizmos.DrawSphere(targetPoint, 0.01f);
+        DebugExtension.DrawArrow(m_rigid.position, m_rigid.velocity, Color.blue);
     }
 }

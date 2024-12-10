@@ -9,7 +9,7 @@ public abstract class Basic_Clickable : MonoBehaviour
     
     public bool m_isInteractable{get{return gameObject.activeInHierarchy && !isFrozen && hitbox.enabled;}}
     public Collider m_hitbox{get{return hitbox;}}
-    protected bool isControlling;
+    public bool isControlling{get; private set;}
     
     void Reset()=>hitbox = GetComponent<Collider>();
 

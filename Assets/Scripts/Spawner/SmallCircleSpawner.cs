@@ -9,10 +9,15 @@ public class SmallCircleSpawner : Basic_ObjectPool<CollidableCircle>
     [SerializeField] private Vector2Int spawnAmountRange;
 [Header("Spawn Settings")]
     [SerializeField] private Vector2 spawnSize;
+
+    public static RectSelector m_rectSelector;
+    
     private float currentCycle;
     private float spanwTimer;
+
     protected override void Awake(){
         base.Awake();
+        m_rectSelector = rectSelector;
         currentCycle = spawnCycleRange.GetRndValueInVector2Range();
         spanwTimer = Time.time-currentCycle;
     }
@@ -38,6 +43,7 @@ public class SmallCircleSpawner : Basic_ObjectPool<CollidableCircle>
                 }
             }
         }
+
         for(int i=0; i<pools.Count; i++){
             if(pools[i].Collidable && !pools[i].IsVisible)
             {
