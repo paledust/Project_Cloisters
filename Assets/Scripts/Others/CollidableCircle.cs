@@ -35,8 +35,10 @@ public class CollidableCircle : MonoBehaviour
     [SerializeField] private float growCollisionStrength = 2;
 [Header("Reset Size")]
     [SerializeField] private ResizableTrans[] resetCircles;
+    private bool isGrowing = false;
+    private bool isFloating = false;
     public bool Collidable{get{return m_collider.enabled;}}
-    public bool IsGrowing{get; private set;} = false;
+    public bool CanGrow{get{return !isGrowing && !isFloating;}}
     public bool IsVisible{get{return m_bigCircleRenderer.isVisible;}}
 
     private const string GrowClassTwoClip = "CircleGrow_Class_2";
@@ -49,8 +51,8 @@ public class CollidableCircle : MonoBehaviour
         if(strength<growCollisionStrength) return;
         var otherCircle = other.gameObject.GetComponent<Clickable_Circle>();
         if(otherCircle.IsGrownCircle){
-            if(!IsGrowing){
-                IsGrowing = true;
+            if(CanGrow){
+                isGrowing = true;
                 switch(m_circle.m_circleClass){
                     case 1:
                         circleAnime.Play(GrowClassTwoClip);
@@ -73,23 +75,27 @@ public class CollidableCircle : MonoBehaviour
         for(int i=0; i<circleOpacity.Length; i++)
             circleOpacity[i].opacity = 0;
 
+        isFloating = false;
+        isGrowing  = false;
         m_circle.ResetWobble();
-        IsGrowing = false;
         int currentClass = m_circle.m_circleClass;
         for(int i=0; i<resetCircles.Length; i++){
             resetCircles[i].ResetSize(currentClass);
         }
     }
     public void FloatUp(float duration){
-        IsGrowing = true;
+        isFloating = true;
         StartCoroutine(coroutineFloatingUp(duration));
     }
     public void AE_EnableHitbox(){
         float size = renderRoot.transform.localScale.x;
         StartCoroutine(coroutineGrowHitbox(2f, size));
     }
+    public void AE_FloatDone(){
+        isFloating = false;
+    }
     public void AE_GrowingDone(){
-        IsGrowing = false;
+        isGrowing = false;
         int circleClass = m_circle.IncreaseCircleClass();
 
         switch(circleClass){
@@ -100,8 +106,8 @@ public class CollidableCircle : MonoBehaviour
             case 3:
                 m_rigid.mass = 8;
                 m_rigid.drag = 5;
-                m_circle.enabled = true;
-                m_circle.EnableRaycast();
+                // m_circle.enabled = true;
+                // m_circle.EnableRaycast();
 
                 break;
         }
@@ -109,11 +115,9 @@ public class CollidableCircle : MonoBehaviour
     IEnumerator coroutineGrowHitbox(float duration, float scaleFactor){
         m_collider.radius = 0;
         m_circle.EnableHitbox();
-        IsGrowing = true;
         yield return new WaitForLoop(duration, (t)=>{
             m_collider.radius = Mathf.Lerp(0, 0.16f*scaleFactor, t);
         });
-        IsGrowing = false;
     }
     IEnumerator coroutineFloatingUp(float duration){
         Vector3 circlePos = Vector3.zero;
