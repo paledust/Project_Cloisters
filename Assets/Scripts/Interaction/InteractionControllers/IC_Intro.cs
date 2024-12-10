@@ -20,6 +20,8 @@ public class IC_Intro : IC_Basic
 [Header("End")]
     [SerializeField] private PlayableDirector endTimeline;
 
+    private Vector3 lastSurroundPlanetPos;
+
     protected override void OnInteractionStart()
     {
         this.enabled = true;
@@ -48,16 +50,22 @@ public class IC_Intro : IC_Basic
 
         if(angle < angleTolrence && !m_isDone){
             EventHandler.Call_OnEndInteraction(this);
-            StartCoroutine(coroutinePutPlanetToCenter());
+            StartCoroutine(coroutinePutPlanetToCenter((surroundPlanet.position-lastSurroundPlanetPos)/Time.deltaTime));
         }
+        lastSurroundPlanetPos = surroundPlanet.position;
     }
-    IEnumerator coroutinePutPlanetToCenter(){
+    IEnumerator coroutinePutPlanetToCenter(Vector3 startVelocity){
         surroundPlanet.GetComponent<RotateAround>().enabled = false;
 
         Vector3 startPos = surroundPlanet.position;
         Vector3 finalPos = centerPos.position;
+        Vector3 startVel = startVelocity;
+        Vector3 endVel   = (finalPos-startPos)*0.01f;
+        Vector3 dynamicPos = startPos;
         yield return new WaitForLoop(0.5f, (t)=>{
-            surroundPlanet.position = Vector3.Lerp(startPos, finalPos, EasingFunc.Easing.QuadEaseOut(t));
+            dynamicPos = dynamicPos + Vector3.Slerp(startVel, endVel, t)*Time.deltaTime;
+            Vector3 staticPos  = Vector3.Lerp(startPos, finalPos, EasingFunc.Easing.SmoothInOut(t));
+            surroundPlanet.position = Vector3.Lerp(dynamicPos, staticPos, EasingFunc.Easing.SmoothInOut(t));
         });
 
         endTimeline.Play();
