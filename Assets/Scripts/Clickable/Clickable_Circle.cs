@@ -118,7 +118,7 @@ public class Clickable_Circle : Basic_Clickable
     }
     public void TriggerCollideRipple()=>p_ripple.Play(true);
     void OnCollisionEnter(Collision collision){
-        float strength = collision.relativeVelocity.magnitude;
+        float strength = collision.rigidbody.velocity.magnitude;
         float factor = m_rigid.isKinematic?bounceFactor:collisionFactor;
         for(int i=0; i<circleWobbles.Length; i++){
             circleWobbles[i].WobbleCircle(Mathf.Min(maxBounce, strength * factor * boucneScale), bounceCurve, bounceDuration);
@@ -126,7 +126,7 @@ public class Clickable_Circle : Basic_Clickable
 
         var otherCircle = collision.gameObject.GetComponent<Clickable_Circle>();
         if(otherCircle.IsGrownCircle && IsGrownCircle){
-            EventHandler.Call_OnClickableCircleCollide(otherCircle, collision.contacts[0].point, transform.position - collision.transform.position);
+            EventHandler.Call_OnClickableCircleCollide(otherCircle, collision.contacts[0].point, transform.position - collision.transform.position, strength);
         }
     }
 }

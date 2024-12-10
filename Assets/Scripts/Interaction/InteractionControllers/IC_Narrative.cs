@@ -17,6 +17,7 @@ public class IC_Narrative : IC_Basic
     [SerializeField] private float effectiveCollisionStep = 3;
 [Header("End")]
     [SerializeField] private float transition = 10;
+    [SerializeField] private float collisionStrength = 0.1f;
     [SerializeField] private PlayableDirector TL_End;
 [Header("Hero Circle Control")]
     [SerializeField] private HeroCircleTransistor[] heroCircleSprites;
@@ -41,7 +42,7 @@ public class IC_Narrative : IC_Basic
     {
         base.OnInteractionStart();
         EventHandler.E_OnControlCircle += OnControlCircleHandler;
-        EventHandler.E_OnClickableCircleCollide += OnCircleCollide;
+        EventHandler.E_OnClickableCircleCollide += OnGrownCircleCollide;
         lastCollisionTime = Time.time - effectiveCollisionStep;
     }
     protected override void OnInteractionEnd()
@@ -49,11 +50,11 @@ public class IC_Narrative : IC_Basic
         base.OnInteractionEnd();
         circleSpawner.enabled = false;
         EventHandler.E_OnControlCircle -= OnControlCircleHandler;
-        EventHandler.E_OnClickableCircleCollide -= OnCircleCollide;
+        EventHandler.E_OnClickableCircleCollide -= OnGrownCircleCollide;
     }
     void OnControlCircleHandler(Clickable_Circle circle)=>lastCircle = circle;
-    void OnCircleCollide(Clickable_Circle collidedCircle, Vector3 contact, Vector3 diff){
-        if(collidedCircle != lastCircle && collidedCircle.IsGrownCircle){
+    void OnGrownCircleCollide(Clickable_Circle collidedCircle, Vector3 contact, Vector3 diff, float strength){
+        if(collidedCircle != lastCircle && strength >= collisionStrength){
         //Play Collision Particle
             p_collideBurst.transform.position = contact;
             p_collideBurst.transform.rotation = Quaternion.Euler(0,0,Vector3.SignedAngle(Vector3.right, diff, Vector3.forward));
