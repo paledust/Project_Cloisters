@@ -11,7 +11,11 @@ Material:
   m_Shader: {fileID: 4800000, guid: fffbbd4cffc9024418eb470eb8276e41, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords:
+  - _DISSOLVETYPE_RADIUS
+  - _EDGEBLEND_ADDITIVE
+  - _FILLCOLORMODE_MULTIPLY
   - _INVERSENOISE_ON
+  - _USEGLOW_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -41,6 +45,14 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _DissolveGuideTex:
+        m_Texture: {fileID: 2800000, guid: 2b7311c45ec18d14ca7aa0825cfcff7b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DissolveNoise:
+        m_Texture: {fileID: 2800000, guid: f2f418f568349cf46bfc621bba074c7a, type: 3}
+        m_Scale: {x: 4, y: 3}
+        m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -55,6 +67,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _NoiseMap:
         m_Texture: {fileID: 2800000, guid: 1c9c12e29dba65f489a1e60d73635451, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NoiseTex:
+        m_Texture: {fileID: 2800000, guid: bb0317c311208f748b6e5956565eb30c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -98,9 +114,12 @@ Material:
     - _AlphaClip: 0
     - _AlphaCutoff: 0.5
     - _Blend: 0
+    - _BlinkMax: 1
+    - _BlinkMin: 0
+    - _BlinkSpeed: 1
     - _BumpScale: 1
     - _Circle: 0
-    - _CircleRadius: 0.26
+    - _CircleRadius: 0.14
     - _CircleSmooth: 0.002
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
@@ -109,32 +128,63 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
+    - _Dissolve: 0
+    - _DissolveDirection: 0
+    - _DissolveDistance: 0.2
+    - _DissolveLength: 0.16
+    - _DissolveNoiseStrength: 0.1
+    - _DissolveRadius: 0.32
+    - _DissolveSmooth: 0.01
+    - _DissolveSoftness: 0.01
+    - _DissolveType: 0
     - _DstBlend: 0
+    - _EdgeBlend: 1
+    - _EdgeSoftness: 0.01
+    - _EdgeValue: 0.05
+    - _EmissionScale: 1
     - _EnvironmentReflections: 1
+    - _FillColorMode: 0
+    - _FlipX: 0
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Glow: -0.05
+    - _GlowPatternScale: 0.58
     - _GlowSmooth: 0.1
+    - _GlowSoftness: 0.89
     - _GlowStrength: 0.5
+    - _GlowValue: -0.37
+    - _HurScale: 1
+    - _HurlMin: 0
+    - _HurlStrength: -0.13
     - _InverseNoise: 1
     - _LengthScale: 1
     - _Metallic: 0
     - _Noise: 0
+    - _NoiseMax1: 0
     - _NoiseMin: 0.85
+    - _NoiseMin1: -1
     - _NoiseSmooth: 1
     - _NoiseStrength: 0.15
     - _NoiseTile: 2
+    - _NoiseTiling1: 1
     - _OcclusionStrength: 1
     - _Parallax: 0.005
+    - _PatternScale: 0.5
     - _QueueOffset: 0
+    - _RNDSeed: 0
     - _RadialScale: 0.5
+    - _RadiusCenterX: 0.5
+    - _RadiusCenterY: 0.5
     - _ReceiveShadows: 1
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
+    - _UseGlow: 1
+    - _UseRectUV: 0
+    - _Use_Blink: 0
     - _VoronoidSpeed: 0.75
     - _Wave2Amp: 2
     - _Wave2Freq: 4
@@ -146,6 +196,8 @@ Material:
     - _WaveSmoothness: 0.1
     - _WaveSpeed: -0.1
     - _WaveStrength: 0.12
+    - _WhisperModeOnly: 0
+    - _WhisperValueEffector: 5
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
@@ -154,9 +206,16 @@ Material:
     - _CircleScale: {r: 1, g: 0.57, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DarkColor: {r: 1, g: 0.9490196, b: 0.99393, a: 1}
+    - _DissolvePanSpeed: {r: 0, g: 0, b: 0, a: 0}
+    - _EdgeColor: {r: 0, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _FillColor: {r: 1, g: 1, b: 1, a: 1}
+    - _GlowColor: {r: 1, g: 0.8153611, b: 0.7490566, a: 1}
     - _NoisePan: {r: -0.1, g: 0, b: 0, a: 0}
+    - _NoiseSpeed1: {r: 1, g: 1, b: 0, a: 0}
+    - _NoiseUVOffset: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+    - _SpriteRect: {r: 1, g: 1, b: 1, a: 1}
     - _Tint: {r: 1, g: 1, b: 1, a: 1}
     - _Tint1: {r: 1.0717734, g: 1.0717734, b: 1.0717734, a: 1}
     - _Tint2: {r: 2, g: 0.74339616, b: 0.74339616, a: 1}

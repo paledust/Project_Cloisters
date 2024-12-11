@@ -2,17 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PerRendererExpand : MonoBehaviour
+public class PerRendererExpand : PerRendererBehavior
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public float circleRadius = 0.2f;
+    public float noiseStrength = 0.15f;
 
-    // Update is called once per frame
-    void Update()
+    private static readonly int CircleRadiusID = Shader.PropertyToID("_CircleRadius");
+    private static readonly int NoiseStrengthID = Shader.PropertyToID("_NoiseStrength");
+
+    protected override void UpdateProperties()
     {
-        
+        base.UpdateProperties();
+        mpb.SetFloat(CircleRadiusID, circleRadius);
+        mpb.SetFloat(NoiseStrengthID, noiseStrength);
     }
 }

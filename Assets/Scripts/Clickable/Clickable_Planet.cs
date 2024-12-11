@@ -16,6 +16,7 @@ public class Clickable_Planet : Basic_Clickable
     [SerializeField] private float releaseAngularLerp = 1f;
 
     public float m_angularSpeed{get; private set;}
+    public float m_accumulateYaw{get; private set;}
     public bool m_isControlling{get{return playerController!=null;}}
 
     private float initDepth;
@@ -52,9 +53,11 @@ public class Clickable_Planet : Basic_Clickable
         }
     }
     void FixedUpdate(){
+        m_accumulateYaw -= m_angularSpeed*Time.fixedDeltaTime;
         planetTrans.Rotate(Vector3.forward, -m_angularSpeed*Time.fixedDeltaTime, Space.Self);
         planetAxisTrans.localRotation = Quaternion.Euler(verticalAngle,0,0);
     }
+
     public override void OnClick(PlayerController player, Vector3 hitPos)
     {
         base.OnClick(player, hitPos);
