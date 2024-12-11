@@ -10,6 +10,7 @@ public class CircleExpandingController : MonoBehaviour
     [SerializeField] private float controlFactor = 0.1f;
     [SerializeField] private float radiusFlickFreq = 15;
     [SerializeField] private float externalNoiseMoveFactor = 1;
+    [SerializeField] private Vector2 yawRange;
     [SerializeField] private AnimationCurve shrinkCurve;
     [SerializeField] private AnimationCurve noiseCurve;
     [SerializeField] private AnimationCurve noiseMinCurve;
@@ -25,7 +26,7 @@ public class CircleExpandingController : MonoBehaviour
 
     void Update()
     {
-        targetValue += controlFactor * clickable_Planet.m_angularSpeed * Time.deltaTime;
+        targetValue = (-clickable_Planet.m_accumulateYaw-yawRange.x)/(yawRange.y-yawRange.x);
         targetValue = Mathf.Clamp01(targetValue);
         controlValue = Mathf.Lerp(controlValue, targetValue, Time.deltaTime*controlAgility);
 

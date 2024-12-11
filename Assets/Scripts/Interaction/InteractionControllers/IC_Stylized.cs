@@ -6,15 +6,19 @@ public class IC_Stylized : IC_Basic
 {
     [SerializeField] private Clickable_Planet clickablePlanet;
     [SerializeField] private CircleExpandingController circleExpandingController;
+    [SerializeField] private CircleExplodeController circleExplodeController;
+    [SerializeField] private CircleDissolveController circleDissolveController;
     protected override void LoadAssets()
     {
         base.LoadAssets();
         circleExpandingController.enabled = true;
+        circleDissolveController.enabled = false;
     }
     protected override void UnloadAssets()
     {
         base.UnloadAssets();
         circleExpandingController.enabled = false;
+        circleDissolveController.enabled = false;
     }
     protected override void OnInteractionStart()
     {
@@ -25,5 +29,15 @@ public class IC_Stylized : IC_Basic
     {
         base.OnInteractionEnd();
         clickablePlanet.DisableHitbox();
+    }
+    public void StartExpand(){
+        circleDissolveController.enabled = false;
+        circleExpandingController.enabled = true;
+        circleExplodeController.enabled = true;
+    }
+    public void StartDissovle(){
+        circleDissolveController.enabled = true;
+        circleExpandingController.enabled = false;
+        circleExplodeController.enabled = false;
     }
 }

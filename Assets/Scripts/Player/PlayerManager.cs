@@ -17,6 +17,7 @@ public class PlayerManager : Singleton<PlayerManager>
         EventHandler.E_AfterLoadScene += FindPlayer;
         EventHandler.E_OnTransitionBegin += TransitionBeginHandler;
         EventHandler.E_OnTransitionEnd += TransitionEndHandler;
+        EventHandler.E_OnFlashInput += FlashInputHandler;
     }
     void Start(){
         FindPlayer();
@@ -32,17 +33,21 @@ public class PlayerManager : Singleton<PlayerManager>
         EventHandler.E_AfterLoadScene -= FindPlayer;
         EventHandler.E_OnTransitionBegin -= TransitionBeginHandler;
         EventHandler.E_OnTransitionEnd -= TransitionEndHandler;
+        EventHandler.E_OnFlashInput -= FlashInputHandler;
     }
     void TransitionBeginHandler(){
         IsInTransition = true;
-        currentPlayer.CheckControllable();
+        currentPlayer?.CheckControllable();
     }
     void TransitionEndHandler(){
         IsInTransition = false;
-        currentPlayer.CheckControllable();
+        currentPlayer?.CheckControllable();
     }
     void FindPlayer(){
         currentPlayer = FindObjectOfType<PlayerController>();
+    }
+    void FlashInputHandler(){
+        currentPlayer?.ReleaseCurrentHolding();
     }
     public void UpdateCursorState(CURSOR_STATE newState)=>UI_Manager.Instance.UpdateCursorState(newState);
 }

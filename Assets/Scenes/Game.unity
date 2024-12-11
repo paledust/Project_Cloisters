@@ -26010,6 +26010,7 @@ GameObject:
   - component: {fileID: 594864033}
   - component: {fileID: 594864034}
   - component: {fileID: 594864035}
+  - component: {fileID: 594864036}
   m_Layer: 0
   m_Name: IC Stylized
   m_TagString: Untagged
@@ -26047,6 +26048,8 @@ MonoBehaviour:
   interactionAssetsGroup: {fileID: 1531122234}
   clickablePlanet: {fileID: 1197893087}
   circleExpandingController: {fileID: 594864034}
+  circleExplodeController: {fileID: 594864035}
+  circleDissolveController: {fileID: 594864036}
 --- !u!114 &594864034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26054,7 +26057,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 594864031}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 72360c9f4e672544bb58560a23c0f5d1, type: 3}
   m_Name: 
@@ -26065,6 +26068,7 @@ MonoBehaviour:
   controlFactor: 0.00075
   radiusFlickFreq: 18
   externalNoiseMoveFactor: 20
+  yawRange: {x: 0, y: 1800}
   shrinkCurve:
     serializedVersion: 2
     m_Curve:
@@ -26215,12 +26219,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cad361ada640c86499034e6f5a2a53af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stylizedController: {fileID: 594864033}
   expandCircle: {fileID: 451293572}
+  clickable_Planet: {fileID: 1197893087}
   expandController: {fileID: 594864034}
   explodeRadius: 0.17
   p_explode: {fileID: 1896718117}
   targetRadius: 0.24
   targetNoise: 0.22
+--- !u!114 &594864036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 594864031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a4f91a8f4074ce40a6b21f1ff570f1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clickable_Planet: {fileID: 1197893087}
+  expandCircle: {fileID: 451293572}
+  dissolveMaxAngle: 720
+  dissolveRadius: 1.2
 --- !u!1 &601070081
 GameObject:
   m_ObjectHideFlags: 0
@@ -42680,8 +42702,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5880977012390747775, guid: 75e2a487e01f5ac4482f92663c5d3040,
         type: 3}
+      propertyPath: useSpring
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5880977012390747775, guid: 75e2a487e01f5ac4482f92663c5d3040,
+        type: 3}
       propertyPath: dragStrength
-      value: 1000
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5880977012390747775, guid: 75e2a487e01f5ac4482f92663c5d3040,
         type: 3}
@@ -64763,6 +64790,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Clickable Planet
+      objectReference: {fileID: 0}
+    - target: {fileID: 5880977012390747775, guid: 75e2a487e01f5ac4482f92663c5d3040,
+        type: 3}
+      propertyPath: dragStrength
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5880977012390747775, guid: 75e2a487e01f5ac4482f92663c5d3040,
+        type: 3}
+      propertyPath: releaseAngularLerp
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7673807578959812770, guid: 75e2a487e01f5ac4482f92663c5d3040,
         type: 3}

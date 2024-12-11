@@ -87,6 +87,7 @@ public class PlayerController : MonoBehaviour
         m_holdingInteractable = interactable;
         PlayerManager.Instance.UpdateCursorState(CURSOR_STATE.DRAG);
     }
+    public void ReleaseCurrentHolding()=>ClearHoldingInteractable();
     public void CheckControllable(){
         if(PlayerManager.Instance.m_canControl){
             input.ActivateInput();

@@ -26,6 +26,8 @@ public static class EventHandler
 
 
 #region Interaction Event
+    public static event Action E_OnFlashInput;
+    public static void Call_OnFlashInput()=>E_OnFlashInput();
     public static event Action E_OnTransitionBegin;
     public static void Call_OnTransitionBegin()=>E_OnTransitionBegin?.Invoke();
     public static event Action E_OnTransitionEnd;
