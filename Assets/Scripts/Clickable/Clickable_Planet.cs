@@ -34,6 +34,7 @@ public class Clickable_Planet : Basic_Clickable
     }
     void Update(){
         if(playerController!=null){
+            Vector2 delta = playerController.PointerDelta;
             Vector3 cursorPos = playerController.PointerScrPos;
             cursorPos.z = initDepth;
             cursorPos = mainCam.ScreenToWorldPoint(cursorPos);
@@ -57,7 +58,6 @@ public class Clickable_Planet : Basic_Clickable
         planetTrans.Rotate(Vector3.forward, -m_angularSpeed*Time.fixedDeltaTime, Space.Self);
         planetAxisTrans.localRotation = Quaternion.Euler(verticalAngle,0,0);
     }
-
     public override void OnClick(PlayerController player, Vector3 hitPos)
     {
         base.OnClick(player, hitPos);

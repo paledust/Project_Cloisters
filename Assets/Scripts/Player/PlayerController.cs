@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     public Basic_Clickable m_hoveringInteractable{get; private set;} //The hovering interactable.
     public Basic_Clickable m_holdingInteractable{get; private set;} //Currently holding interactable.
     public Vector2 PointerScrPos{get; private set;}
+    public Vector2 PointerDelta{get; private set;}
 
     private Vector3 hoverPos;
     private Camera mainCam;
@@ -101,6 +102,9 @@ public class PlayerController : MonoBehaviour
 #endregion
 
 #region Player Input
+    void OnPointerMove(InputValue value){
+        PointerDelta = value.Get<Vector2>();
+    }
     void OnPointerPos(InputValue value){
         Vector2 _scrPos = value.Get<Vector2>();
         _scrPos.x = Mathf.Clamp(_scrPos.x, 0, Screen.width);
