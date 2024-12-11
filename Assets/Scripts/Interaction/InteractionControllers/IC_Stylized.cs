@@ -31,11 +31,17 @@ public class IC_Stylized : IC_Basic
         clickablePlanet.DisableHitbox();
     }
     public void StartExpand(){
+        circleExplodeController.ResetController();
+        circleExpandingController.ResetController();
+        clickablePlanet.FormSpring();
+
         circleDissolveController.enabled = false;
         circleExpandingController.enabled = true;
         circleExplodeController.enabled = true;
     }
     public void StartDissovle(){
+        circleDissolveController.ResetController();
+
         circleDissolveController.enabled = true;
         circleExpandingController.enabled = false;
         circleExplodeController.enabled = false;

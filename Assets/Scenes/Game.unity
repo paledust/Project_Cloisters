@@ -16090,7 +16090,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isUpdating: 1
   meshRenderer: {fileID: 451293571}
-  circleRadius: 0.08
+  circleRadius: 0.045
   noiseStrength: 0.1
   noiseMin: 0.85
   externalNoiseMovement: 0
@@ -26164,13 +26164,13 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.0741394
-      inSlope: 0.08931455
-      outSlope: 0.08931455
+      value: 0.045
+      inSlope: 0.1799412
+      outSlope: 0.1799412
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.16585194
+      outWeight: 0.057611845
     - serializedVersion: 3
       time: 1
       value: 0.14
@@ -26239,6 +26239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a4f91a8f4074ce40a6b21f1ff570f1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  iC_Stylized: {fileID: 594864033}
   clickable_Planet: {fileID: 1197893087}
   expandCircle: {fileID: 451293572}
   dissolveMaxAngle: 720

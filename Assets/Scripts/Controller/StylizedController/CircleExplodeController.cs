@@ -14,9 +14,7 @@ public class CircleExplodeController : MonoBehaviour
     [SerializeField] private float targetNoise = 0.3f;
     private bool exploded = false;
 
-    void OnDisable(){
-        exploded = false;
-    }
+    public void ResetController()=>exploded = false;
     void Update()
     {
         if(expandCircle.circleRadius>=explodeRadius && !exploded){

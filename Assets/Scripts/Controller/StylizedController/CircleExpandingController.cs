@@ -19,14 +19,28 @@ public class CircleExpandingController : MonoBehaviour
     // [SerializeField, Range(0, 1)] 
     private float targetValue;
     private float controlValue;
+    private float offsetAngle;
     private Vector3 initScale;
+    public void ResetController(){
+        offsetAngle = clickable_Planet.m_accumulateYaw;
+        targetValue = controlValue = 0;
+
+        expandCircle.noiseMin = noiseMinCurve.Evaluate(0);
+        expandCircle.circleRadius = radiusCurve.Evaluate(0);
+        expandCircle.noiseStrength = noiseCurve.Evaluate(0);
+        expandCircle.externalNoiseMovement = 0;
+
+        Vector3 scale = initScale;
+        scale.y *= shrinkCurve.Evaluate(0);
+        expandCircle.transform.localScale = scale;
+    }
     void Start(){
+        offsetAngle = 0;
         initScale = expandCircle.transform.localScale;
     }
-
     void Update()
     {
-        targetValue = (-clickable_Planet.m_accumulateYaw-yawRange.x)/(yawRange.y-yawRange.x);
+        targetValue = (-clickable_Planet.m_accumulateYaw+offsetAngle-yawRange.x)/(yawRange.y-yawRange.x);
         targetValue = Mathf.Clamp01(targetValue);
         controlValue = Mathf.Lerp(controlValue, targetValue, Time.deltaTime*controlAgility);
 
