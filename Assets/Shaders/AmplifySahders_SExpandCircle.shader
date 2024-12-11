@@ -13,6 +13,8 @@ Shader "AmplifySahders/Sprite ExpandCircle"
 		_GlowSmooth("GlowSmooth", Float) = 1
 		_GlowStrength("GlowStrength", Range( 0 , 1)) = 1
 		_NoiseMap("NoiseMap", 2D) = "white" {}
+		_NoiseMin("NoiseMin", Float) = 0
+		_NoiseSmooth("NoiseSmooth", Float) = 1
 		_NoiseStrength("NoiseStrength", Float) = 0.2
 		_NoisePan("NoisePan", Vector) = (0,0,0,0)
 		_RadialScale("RadialScale", Float) = 1
@@ -111,14 +113,16 @@ Shader "AmplifySahders/Sprite ExpandCircle"
 			float _DissolveSmooth;
 			float _Dissolve;
 			float _GlowStrength;
-			float _Glow;
-			float _HurScale;
+			float _GlowSmooth;
 			float _NoiseStrength;
+			float _HurScale;
 			float _LengthScale;
 			float _RadialScale;
+			float _NoiseSmooth;
+			float _NoiseMin;
 			float _CircleRadius;
 			float _CircleSmooth;
-			float _GlowSmooth;
+			float _Glow;
 			float _HurlStrength;
 			CBUFFER_END
 
@@ -203,7 +207,8 @@ Shader "AmplifySahders/Sprite ExpandCircle"
 				float2 break39_g3 = temp_output_34_0_g3;
 				float2 appendResult50_g3 = (float2(( _RadialScale * ( length( temp_output_34_0_g3 ) * 2.0 ) ) , ( ( atan2( break39_g3.x , break39_g3.y ) * ( 1.0 / TWO_PI ) ) * _LengthScale )));
 				float2 panner37 = ( 1.0 * _Time.y * appendResult73 + appendResult50_g3);
-				float temp_output_42_0 = ( -( temp_output_23_0 - _CircleRadius ) + ( tex2D( _NoiseMap, panner37 ).r * _NoiseStrength ) );
+				float smoothstepResult94 = smoothstep( _NoiseMin , ( _NoiseMin + _NoiseSmooth ) , tex2D( _NoiseMap, panner37 ).r);
+				float temp_output_42_0 = ( -( temp_output_23_0 - _CircleRadius ) + ( smoothstepResult94 * _NoiseStrength ) );
 				float smoothstepResult12 = smoothstep( 0.0 , ( 0.0 + _CircleSmooth ) , temp_output_42_0);
 				float smoothstepResult43 = smoothstep( _Glow , ( _Glow + _GlowSmooth ) , temp_output_42_0);
 				float2 appendResult74 = (float2(_NoisePan.z , _NoisePan.w));
@@ -313,14 +318,16 @@ Shader "AmplifySahders/Sprite ExpandCircle"
 			float _DissolveSmooth;
 			float _Dissolve;
 			float _GlowStrength;
-			float _Glow;
-			float _HurScale;
+			float _GlowSmooth;
 			float _NoiseStrength;
+			float _HurScale;
 			float _LengthScale;
 			float _RadialScale;
+			float _NoiseSmooth;
+			float _NoiseMin;
 			float _CircleRadius;
 			float _CircleSmooth;
-			float _GlowSmooth;
+			float _Glow;
 			float _HurlStrength;
 			CBUFFER_END
 
@@ -405,7 +412,8 @@ Shader "AmplifySahders/Sprite ExpandCircle"
 				float2 break39_g3 = temp_output_34_0_g3;
 				float2 appendResult50_g3 = (float2(( _RadialScale * ( length( temp_output_34_0_g3 ) * 2.0 ) ) , ( ( atan2( break39_g3.x , break39_g3.y ) * ( 1.0 / TWO_PI ) ) * _LengthScale )));
 				float2 panner37 = ( 1.0 * _Time.y * appendResult73 + appendResult50_g3);
-				float temp_output_42_0 = ( -( temp_output_23_0 - _CircleRadius ) + ( tex2D( _NoiseMap, panner37 ).r * _NoiseStrength ) );
+				float smoothstepResult94 = smoothstep( _NoiseMin , ( _NoiseMin + _NoiseSmooth ) , tex2D( _NoiseMap, panner37 ).r);
+				float temp_output_42_0 = ( -( temp_output_23_0 - _CircleRadius ) + ( smoothstepResult94 * _NoiseStrength ) );
 				float smoothstepResult12 = smoothstep( 0.0 , ( 0.0 + _CircleSmooth ) , temp_output_42_0);
 				float smoothstepResult43 = smoothstep( _Glow , ( _Glow + _GlowSmooth ) , temp_output_42_0);
 				float2 appendResult74 = (float2(_NoisePan.z , _NoisePan.w));
@@ -503,14 +511,16 @@ Shader "AmplifySahders/Sprite ExpandCircle"
 			float _DissolveSmooth;
 			float _Dissolve;
 			float _GlowStrength;
-			float _Glow;
-			float _HurScale;
+			float _GlowSmooth;
 			float _NoiseStrength;
+			float _HurScale;
 			float _LengthScale;
 			float _RadialScale;
+			float _NoiseSmooth;
+			float _NoiseMin;
 			float _CircleRadius;
 			float _CircleSmooth;
-			float _GlowSmooth;
+			float _Glow;
 			float _HurlStrength;
 			CBUFFER_END
 
@@ -583,7 +593,8 @@ Shader "AmplifySahders/Sprite ExpandCircle"
 				float2 break39_g3 = temp_output_34_0_g3;
 				float2 appendResult50_g3 = (float2(( _RadialScale * ( length( temp_output_34_0_g3 ) * 2.0 ) ) , ( ( atan2( break39_g3.x , break39_g3.y ) * ( 1.0 / TWO_PI ) ) * _LengthScale )));
 				float2 panner37 = ( 1.0 * _Time.y * appendResult73 + appendResult50_g3);
-				float temp_output_42_0 = ( -( temp_output_23_0 - _CircleRadius ) + ( tex2D( _NoiseMap, panner37 ).r * _NoiseStrength ) );
+				float smoothstepResult94 = smoothstep( _NoiseMin , ( _NoiseMin + _NoiseSmooth ) , tex2D( _NoiseMap, panner37 ).r);
+				float temp_output_42_0 = ( -( temp_output_23_0 - _CircleRadius ) + ( smoothstepResult94 * _NoiseStrength ) );
 				float smoothstepResult12 = smoothstep( 0.0 , ( 0.0 + _CircleSmooth ) , temp_output_42_0);
 				float smoothstepResult43 = smoothstep( _Glow , ( _Glow + _GlowSmooth ) , temp_output_42_0);
 				float2 appendResult74 = (float2(_NoisePan.z , _NoisePan.w));
@@ -661,14 +672,16 @@ Shader "AmplifySahders/Sprite ExpandCircle"
 			float _DissolveSmooth;
 			float _Dissolve;
 			float _GlowStrength;
-			float _Glow;
-			float _HurScale;
+			float _GlowSmooth;
 			float _NoiseStrength;
+			float _HurScale;
 			float _LengthScale;
 			float _RadialScale;
+			float _NoiseSmooth;
+			float _NoiseMin;
 			float _CircleRadius;
 			float _CircleSmooth;
-			float _GlowSmooth;
+			float _Glow;
 			float _HurlStrength;
 			CBUFFER_END
 
@@ -740,7 +753,8 @@ Shader "AmplifySahders/Sprite ExpandCircle"
 				float2 break39_g3 = temp_output_34_0_g3;
 				float2 appendResult50_g3 = (float2(( _RadialScale * ( length( temp_output_34_0_g3 ) * 2.0 ) ) , ( ( atan2( break39_g3.x , break39_g3.y ) * ( 1.0 / TWO_PI ) ) * _LengthScale )));
 				float2 panner37 = ( 1.0 * _Time.y * appendResult73 + appendResult50_g3);
-				float temp_output_42_0 = ( -( temp_output_23_0 - _CircleRadius ) + ( tex2D( _NoiseMap, panner37 ).r * _NoiseStrength ) );
+				float smoothstepResult94 = smoothstep( _NoiseMin , ( _NoiseMin + _NoiseSmooth ) , tex2D( _NoiseMap, panner37 ).r);
+				float temp_output_42_0 = ( -( temp_output_23_0 - _CircleRadius ) + ( smoothstepResult94 * _NoiseStrength ) );
 				float smoothstepResult12 = smoothstep( 0.0 , ( 0.0 + _CircleSmooth ) , temp_output_42_0);
 				float smoothstepResult43 = smoothstep( _Glow , ( _Glow + _GlowSmooth ) , temp_output_42_0);
 				float2 appendResult74 = (float2(_NoisePan.z , _NoisePan.w));
@@ -776,43 +790,47 @@ Shader "AmplifySahders/Sprite ExpandCircle"
 }
 /*ASEBEGIN
 Version=19800
-Node;AmplifyShaderEditor.Vector4Node;72;-1328,1040;Inherit;False;Property;_NoisePan;NoisePan;8;0;Create;True;0;0;0;False;0;False;0,0,0,0;0,0,0,0;0;5;FLOAT4;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.Vector4Node;72;-1328,1040;Inherit;False;Property;_NoisePan;NoisePan;10;0;Create;True;0;0;0;False;0;False;0,0,0,0;0,0,0,0;0;5;FLOAT4;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.DynamicAppendNode;74;-1136,1152;Inherit;False;FLOAT2;4;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;1;FLOAT2;0
 Node;AmplifyShaderEditor.ScreenPosInputsNode;81;-1696,1920;Float;False;0;False;0;5;FLOAT4;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.RegisterLocalVarNode;75;-992,1152;Inherit;False;dissolvePan;-1;True;1;0;FLOAT2;0,0;False;1;FLOAT2;0
 Node;AmplifyShaderEditor.DynamicAppendNode;82;-1488,1920;Inherit;False;FLOAT2;4;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;1;FLOAT2;0
+Node;AmplifyShaderEditor.RangedFloatNode;35;-1424,816;Inherit;False;Property;_RadialScale;RadialScale;11;0;Create;True;0;0;0;False;0;False;1;1;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;36;-1424,896;Inherit;False;Property;_LengthScale;LengthScale;12;0;Create;True;0;0;0;False;0;False;1;1;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.TextureCoordinatesNode;27;-1456,688;Inherit;False;0;26;2;3;2;SAMPLER2D;;False;0;FLOAT2;1,1;False;1;FLOAT2;0,0;False;5;FLOAT2;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.TextureCoordinatesNode;51;-1600,1504;Inherit;False;0;52;2;3;2;SAMPLER2D;;False;0;FLOAT2;1,1;False;1;FLOAT2;0,0;False;5;FLOAT2;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.GetLocalVarNode;77;-1568,1632;Inherit;False;75;dissolvePan;1;0;OBJECT;;False;1;FLOAT2;0
 Node;AmplifyShaderEditor.TextureCoordinatesNode;4;-1280,384;Inherit;False;0;-1;2;3;2;SAMPLER2D;;False;0;FLOAT2;1,1;False;1;FLOAT2;0,0;False;5;FLOAT2;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.Vector2Node;7;-1248,512;Inherit;False;Constant;_Vector0;Vector 0;0;0;Create;True;0;0;0;False;0;False;0.5,0.5;0,0;0;3;FLOAT2;0;FLOAT;1;FLOAT;2
-Node;AmplifyShaderEditor.RangedFloatNode;35;-1424,816;Inherit;False;Property;_RadialScale;RadialScale;9;0;Create;True;0;0;0;False;0;False;1;1;0;0;0;1;FLOAT;0
-Node;AmplifyShaderEditor.RangedFloatNode;36;-1424,896;Inherit;False;Property;_LengthScale;LengthScale;10;0;Create;True;0;0;0;False;0;False;1;1;0;0;0;1;FLOAT;0
-Node;AmplifyShaderEditor.TextureCoordinatesNode;27;-1456,688;Inherit;False;0;26;2;3;2;SAMPLER2D;;False;0;FLOAT2;1,1;False;1;FLOAT2;0,0;False;5;FLOAT2;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.SimpleDivideOpNode;83;-1328,1984;Inherit;False;2;0;FLOAT2;0,0;False;1;FLOAT;0;False;1;FLOAT2;0
-Node;AmplifyShaderEditor.RangedFloatNode;87;-1328,2128;Inherit;False;Property;_HurScale;HurScale;16;0;Create;True;0;0;0;False;0;False;1;1;0;0;0;1;FLOAT;0
-Node;AmplifyShaderEditor.SimpleSubtractOpNode;22;-1024,448;Inherit;False;2;0;FLOAT2;0,0;False;1;FLOAT2;0,0;False;1;FLOAT2;0
+Node;AmplifyShaderEditor.RangedFloatNode;87;-1328,2128;Inherit;False;Property;_HurScale;HurScale;18;0;Create;True;0;0;0;False;0;False;1;1;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.FunctionNode;30;-1216,768;Inherit;False;Polar Coordinates;-1;;3;7dab8e02884cf104ebefaa2e788e4162;0;4;1;FLOAT2;0,0;False;2;FLOAT2;0.5,0.5;False;3;FLOAT;1;False;4;FLOAT;1;False;3;FLOAT2;0;FLOAT;55;FLOAT;56
 Node;AmplifyShaderEditor.DynamicAppendNode;73;-1136,1024;Inherit;False;FLOAT2;4;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;1;FLOAT2;0
+Node;AmplifyShaderEditor.SimpleSubtractOpNode;22;-1024,448;Inherit;False;2;0;FLOAT2;0,0;False;1;FLOAT2;0,0;False;1;FLOAT2;0
 Node;AmplifyShaderEditor.PannerNode;76;-1360,1504;Inherit;False;3;0;FLOAT2;0,0;False;2;FLOAT2;0,0;False;1;FLOAT;1;False;1;FLOAT2;0
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;85;-1168,2080;Inherit;False;2;2;0;FLOAT2;0,0;False;1;FLOAT;0;False;1;FLOAT2;0
+Node;AmplifyShaderEditor.PannerNode;37;-880,848;Inherit;False;3;0;FLOAT2;0,0;False;2;FLOAT2;0,0;False;1;FLOAT;1;False;1;FLOAT2;0
+Node;AmplifyShaderEditor.RangedFloatNode;95;-688,1040;Inherit;False;Property;_NoiseMin;NoiseMin;7;0;Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;97;-720,1120;Inherit;False;Property;_NoiseSmooth;NoiseSmooth;8;0;Create;True;0;0;0;False;0;False;1;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.RangedFloatNode;17;-880,544;Inherit;False;Property;_CircleRadius;CircleRadius;1;0;Create;True;0;0;0;False;0;False;0.3;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.LengthOpNode;23;-848,448;Inherit;False;1;0;FLOAT2;0,0;False;1;FLOAT;0
-Node;AmplifyShaderEditor.PannerNode;37;-880,848;Inherit;False;3;0;FLOAT2;0,0;False;2;FLOAT2;0,0;False;1;FLOAT;1;False;1;FLOAT2;0
-Node;AmplifyShaderEditor.SamplerNode;52;-1168,1504;Inherit;True;Property;_DissolveNoise;DissolveNoise;12;0;Create;True;0;0;0;False;0;False;-1;184854303c9362c43b86499202498085;184854303c9362c43b86499202498085;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;6;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4;FLOAT3;5
-Node;AmplifyShaderEditor.RangedFloatNode;60;-1136,1760;Inherit;False;Property;_DissolveNoiseStrength;DissolveNoiseStrength;13;0;Create;True;0;0;0;False;0;False;0.1;0;0;0;0;1;FLOAT;0
-Node;AmplifyShaderEditor.RangedFloatNode;93;-960,2304;Inherit;False;Property;_HurlStrength;HurlStrength;17;0;Create;True;0;0;0;False;0;False;0.5;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.SamplerNode;52;-1168,1504;Inherit;True;Property;_DissolveNoise;DissolveNoise;14;0;Create;True;0;0;0;False;0;False;-1;184854303c9362c43b86499202498085;184854303c9362c43b86499202498085;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;6;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4;FLOAT3;5
+Node;AmplifyShaderEditor.RangedFloatNode;60;-1136,1760;Inherit;False;Property;_DissolveNoiseStrength;DissolveNoiseStrength;15;0;Create;True;0;0;0;False;0;False;0.1;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;93;-960,2304;Inherit;False;Property;_HurlStrength;HurlStrength;19;0;Create;True;0;0;0;False;0;False;0.5;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.FunctionNode;89;-1008,2080;Inherit;True;Random Range;-1;;4;7b754edb8aebbfb4a9ace907af661cfc;0;3;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT;1;False;1;FLOAT;0
-Node;AmplifyShaderEditor.RangedFloatNode;55;-832,224;Inherit;False;Property;_DissolveDistance;DissolveDistance;11;0;Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0
-Node;AmplifyShaderEditor.SimpleSubtractOpNode;16;-656,448;Inherit;True;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SamplerNode;26;-704,848;Inherit;True;Property;_NoiseMap;NoiseMap;6;0;Create;True;0;0;0;False;0;False;-1;1c9c12e29dba65f489a1e60d73635451;a2f128330bdd0984aabbc6d45c920f6e;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;6;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4;FLOAT3;5
-Node;AmplifyShaderEditor.RangedFloatNode;34;-576,1056;Inherit;False;Property;_NoiseStrength;NoiseStrength;7;0;Create;True;0;0;0;False;0;False;0.2;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.SimpleAddOpNode;96;-528,1040;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;55;-832,224;Inherit;False;Property;_DissolveDistance;DissolveDistance;13;0;Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.SimpleSubtractOpNode;16;-656,448;Inherit;True;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;59;-864,1664;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;92;-722.4958,2230.331;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;34;-464,1168;Inherit;False;Property;_NoiseStrength;NoiseStrength;9;0;Create;True;0;0;0;False;0;False;0.2;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.SmoothstepOpNode;94;-400,896;Inherit;False;3;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;1;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleSubtractOpNode;78;-608,192;Inherit;False;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.NegateNode;18;-400,448;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
-Node;AmplifyShaderEditor.SimpleMultiplyOpNode;33;-384,960;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.RegisterLocalVarNode;53;-720,1648;Inherit;False;dissolveGuide;-1;True;1;0;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.RegisterLocalVarNode;88;-528,2080;Inherit;False;hurNoise;-1;True;1;0;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.SimpleMultiplyOpNode;33;-272,1072;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleSubtractOpNode;54;-464,192;Inherit;False;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleAddOpNode;42;-80,448;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.RangedFloatNode;46;-16,832;Inherit;False;Property;_Glow;Glow;3;0;Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0
@@ -824,8 +842,8 @@ Node;AmplifyShaderEditor.RangedFloatNode;14;208,608;Inherit;False;Property;_Circ
 Node;AmplifyShaderEditor.RangedFloatNode;13;240,528;Inherit;False;Constant;_Circle;Circle;2;0;Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleAddOpNode;45;144,880;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.WireNode;71;-128,768;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
-Node;AmplifyShaderEditor.RangedFloatNode;64;-16,352;Inherit;False;Property;_DissolveSmooth;DissolveSmooth;15;0;Create;True;0;0;0;False;0;False;0.01;0;0;0;0;1;FLOAT;0
-Node;AmplifyShaderEditor.RangedFloatNode;63;16,272;Inherit;False;Property;_Dissolve;Dissolve;14;0;Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;64;-16,352;Inherit;False;Property;_DissolveSmooth;DissolveSmooth;17;0;Create;True;0;0;0;False;0;False;0.01;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;63;16,272;Inherit;False;Property;_Dissolve;Dissolve;16;0;Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleAddOpNode;19;400,576;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SmoothstepOpNode;43;368,816;Inherit;False;3;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;1;False;1;FLOAT;0
 Node;AmplifyShaderEditor.RangedFloatNode;50;272,944;Inherit;False;Property;_GlowStrength;GlowStrength;5;0;Create;True;0;0;0;False;0;False;1;1;0;1;0;1;FLOAT;0
@@ -856,36 +874,41 @@ WireConnection;82;0;81;1
 WireConnection;82;1;81;2
 WireConnection;83;0;82;0
 WireConnection;83;1;81;4
-WireConnection;22;0;4;0
-WireConnection;22;1;7;0
 WireConnection;30;1;27;0
 WireConnection;30;3;35;0
 WireConnection;30;4;36;0
 WireConnection;73;0;72;1
 WireConnection;73;1;72;2
+WireConnection;22;0;4;0
+WireConnection;22;1;7;0
 WireConnection;76;0;51;0
 WireConnection;76;2;77;0
 WireConnection;85;0;83;0
 WireConnection;85;1;87;0
-WireConnection;23;0;22;0
 WireConnection;37;0;30;0
 WireConnection;37;2;73;0
+WireConnection;23;0;22;0
 WireConnection;52;1;76;0
 WireConnection;89;1;85;0
+WireConnection;26;1;37;0
+WireConnection;96;0;95;0
+WireConnection;96;1;97;0
 WireConnection;16;0;23;0
 WireConnection;16;1;17;0
-WireConnection;26;1;37;0
 WireConnection;59;0;52;1
 WireConnection;59;1;60;0
 WireConnection;92;0;89;0
 WireConnection;92;1;93;0
+WireConnection;94;0;26;1
+WireConnection;94;1;95;0
+WireConnection;94;2;96;0
 WireConnection;78;0;17;0
 WireConnection;78;1;55;0
 WireConnection;18;0;16;0
-WireConnection;33;0;26;1
-WireConnection;33;1;34;0
 WireConnection;53;0;59;0
 WireConnection;88;0;92;0
+WireConnection;33;0;94;0
+WireConnection;33;1;34;0
 WireConnection;54;0;23;0
 WireConnection;54;1;78;0
 WireConnection;42;0;18;0
@@ -926,4 +949,4 @@ WireConnection;9;0;8;5
 WireConnection;9;3;21;0
 WireConnection;0;1;9;0
 ASEEND*/
-//CHKSM=6B2C7A584A18FBB7C412E7FBDCD45BBFD2B56177
+//CHKSM=829BA27EA0D629959D652A1FD5B3B80F590E1D08
