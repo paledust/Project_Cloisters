@@ -16093,6 +16093,7 @@ MonoBehaviour:
   circleRadius: 0.08
   noiseStrength: 0.1
   noiseMin: 0.85
+  externalNoiseMovement: 0
 --- !u!212 &473470508 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 4337985783502979391, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
@@ -26063,6 +26064,40 @@ MonoBehaviour:
   controlAgility: 5
   controlFactor: 0.00075
   radiusFlickFreq: 18
+  externalNoiseMoveFactor: 20
+  shrinkCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.8647447
+      value: 0.7808723
+      inSlope: -0.58321875
+      outSlope: -0.58321875
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.065261744
+      outWeight: 0.34857526
+    - serializedVersion: 3
+      time: 1
+      value: 0.7
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   noiseCurve:
     serializedVersion: 2
     m_Curve:
@@ -26184,6 +26219,8 @@ MonoBehaviour:
   expandController: {fileID: 594864034}
   explodeRadius: 0.17
   p_explode: {fileID: 1896718117}
+  targetRadius: 0.24
+  targetNoise: 0.22
 --- !u!1 &601070081
 GameObject:
   m_ObjectHideFlags: 0

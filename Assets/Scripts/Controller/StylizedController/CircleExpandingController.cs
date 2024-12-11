@@ -9,6 +9,8 @@ public class CircleExpandingController : MonoBehaviour
     [SerializeField] private float controlAgility = 5;
     [SerializeField] private float controlFactor = 0.1f;
     [SerializeField] private float radiusFlickFreq = 15;
+    [SerializeField] private float externalNoiseMoveFactor = 1;
+    [SerializeField] private AnimationCurve shrinkCurve;
     [SerializeField] private AnimationCurve noiseCurve;
     [SerializeField] private AnimationCurve noiseMinCurve;
     [SerializeField] private AnimationCurve radiusCurve;
@@ -16,6 +18,10 @@ public class CircleExpandingController : MonoBehaviour
     // [SerializeField, Range(0, 1)] 
     private float targetValue;
     private float controlValue;
+    private Vector3 initScale;
+    void Start(){
+        initScale = expandCircle.transform.localScale;
+    }
 
     void Update()
     {
@@ -28,10 +34,9 @@ public class CircleExpandingController : MonoBehaviour
         expandCircle.noiseMin = noiseMinCurve.Evaluate(controlValue);
         expandCircle.circleRadius = radiusCurve.Evaluate(controlValue) + radiusFlick;
         expandCircle.noiseStrength = noiseCurve.Evaluate(controlValue);
-    }
-    IEnumerator coroutineExplodeExpand(float duration){
-        yield return new WaitForLoop(duration, (t)=>{
-            
-        });
+        expandCircle.externalNoiseMovement += controlFactor * externalNoiseMoveFactor;
+        Vector3 scale = initScale;
+        scale.y *= shrinkCurve.Evaluate(controlValue);
+        expandCircle.transform.localScale = scale;
     }
 }

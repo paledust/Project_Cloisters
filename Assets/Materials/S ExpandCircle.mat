@@ -66,7 +66,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NoiseMap:
-        m_Texture: {fileID: 2800000, guid: 294d2174b02863240834618f672d00d6, type: 3}
+        m_Texture: {fileID: 2800000, guid: 1c9c12e29dba65f489a1e60d73635451, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NoiseTex:
@@ -143,6 +143,7 @@ Material:
     - _EdgeValue: 0.05
     - _EmissionScale: 1
     - _EnvironmentReflections: 1
+    - _ExternalNoiseMovement: 0
     - _FillColorMode: 0
     - _FlipX: 0
     - _GlossMapScale: 0
@@ -211,7 +212,7 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FillColor: {r: 1, g: 1, b: 1, a: 1}
     - _GlowColor: {r: 1, g: 0.8153611, b: 0.7490566, a: 1}
-    - _NoisePan: {r: -2.5, g: 0.05, b: 0, a: 0}
+    - _NoisePan: {r: -0.2, g: 0.005, b: 0.1, a: 0.1}
     - _NoiseSpeed1: {r: 1, g: 1, b: 0, a: 0}
     - _NoiseUVOffset: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
