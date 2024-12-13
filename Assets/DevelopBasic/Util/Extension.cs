@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Build.Pipeline;
 using UnityEngine;
 
 #region Extension
@@ -18,6 +19,12 @@ public static class ExtensionMethods{
     }
     public static float GetRndValueInVector2Range(this Vector2 range){
         return (range.y < range.x)?Random.Range(range.y, range.x):Random.Range(range.x, range.y);
+    }
+    public static float GetMax(this Vector2 range){
+        return (range.y > range.x)?range.y:range.x;
+    }
+    public static float GetMin(this Vector2 range){
+        return (range.y < range.x)?range.y:range.x;
     }
     public static int GetRndValueInVector2Range(this Vector2Int range){
         return (range.y < range.x)?Random.Range(range.y, range.x):Random.Range(range.x, range.y);

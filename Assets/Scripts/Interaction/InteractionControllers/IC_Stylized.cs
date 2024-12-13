@@ -8,17 +8,20 @@ public class IC_Stylized : IC_Basic
     [SerializeField] private CircleExpandingController circleExpandingController;
     [SerializeField] private CircleExplodeController circleExplodeController;
     [SerializeField] private CircleDissolveController circleDissolveController;
+    [SerializeField] private GeoFragmentController geoFragmentController;
     protected override void LoadAssets()
     {
         base.LoadAssets();
-        circleExpandingController.enabled = true;
-        circleDissolveController.enabled = false;
+        StartExpand();
+        geoFragmentController.enabled = true;
     }
     protected override void UnloadAssets()
     {
         base.UnloadAssets();
         circleExpandingController.enabled = false;
+        circleExplodeController.enabled = false;
         circleDissolveController.enabled = false;
+        geoFragmentController.enabled = false;
     }
     protected override void OnInteractionStart()
     {
@@ -31,6 +34,7 @@ public class IC_Stylized : IC_Basic
         clickablePlanet.DisableHitbox();
     }
     public void StartExpand(){
+        geoFragmentController.StartExpand();
         circleExplodeController.ResetController();
         circleExpandingController.ResetController();
         clickablePlanet.FormSpring();
@@ -40,8 +44,8 @@ public class IC_Stylized : IC_Basic
         circleExplodeController.enabled = true;
     }
     public void StartDissovle(){
+        geoFragmentController.StartDissolve();
         circleDissolveController.ResetController();
-
         circleDissolveController.enabled = true;
         circleExpandingController.enabled = false;
         circleExplodeController.enabled = false;
