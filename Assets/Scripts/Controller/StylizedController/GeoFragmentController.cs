@@ -15,58 +15,83 @@ public class GeoFragmentController : MonoBehaviour
             this.innerDistance = innerDistance;
         }
         public Vector3 GetPos(float normalizedTime){
-            float dist = normalizedTime>=0?outerDistance:(-innerDistance);
+            float dist = normalizedTime>=0?outerDistance:innerDistance;
             return ray.origin + ray.direction*(normalizedTime*dist);
         }
     }
     public enum GeoControlState{Expand, Dissolve}
-    [SerializeField] private GeoControlState state;
+    [SerializeField, ShowOnly] private GeoControlState state;
+    [SerializeField] private Clickable_Planet clickablePlanet;
     [SerializeField] private Transform center;
     [SerializeField] private GameObject[] geoFrags;
+[Header("Expand")]
+    [SerializeField] private float expandRadius = 1800;
     [SerializeField] private float expandPosAngleRND;
     [SerializeField] private Vector2 expandRadiusRange;
     [SerializeField] private Vector2 expandPosRatioRND;
+    [SerializeField] private float finalExpandFactor = 1.5f;
+[Header("Dissolve")]
     [SerializeField] private Vector2 RayTrailRadiusRange;
+    [SerializeField] private float dissolveRadius;
 
-    [SerializeField, Range(0, 1)] 
     private float expandFactor = 0;
+    private float dissolveFactor = 0;
+    private float offsetAngle = 0;
     private RayTrail[] geoTrails;
     private Vector3[] geoPoses;
 
     void Update(){
         switch(state){
             case GeoControlState.Expand:
+                expandFactor = (-clickablePlanet.m_accumulateYaw+offsetAngle)/expandRadius;
             //Rotate Geo and expand along the shape
                 for(int i=0; i<geoFrags.Length; i++){
                     geoFrags[i].transform.localPosition = geoPoses[i] * Mathf.Lerp(expandRadiusRange.x, expandRadiusRange.y, expandFactor);
                 }
                 break;
             case GeoControlState.Dissolve:
+                dissolveFactor = (-clickablePlanet.m_accumulateYaw+offsetAngle)/dissolveRadius;
             //Move geo along the trail
                 for(int i=0; i<geoFrags.Length; i++){
+                    geoFrags[i].transform.localPosition = geoTrails[i].GetPos(dissolveFactor);
                 }
                 break;
         }
     }
     public void StartExpand(){
-        state = GeoControlState.Expand;
+        offsetAngle = clickablePlanet.m_accumulateYaw;
     //Regenerate certain amount of geos
+        expandFactor = 0;
     //Reposition geos to center of the sphere
         geoPoses = new Vector3[geoFrags.Length];
         for(int i=0; i<geoPoses.Length; i++){
             geoPoses[i] = Quaternion.Euler(0, 0, Random.Range(-expandPosAngleRND, expandPosAngleRND)+360*i/(geoPoses.Length-1)) * Vector2.right * expandPosRatioRND.GetRndValueInVector2Range();
         }
+        state = GeoControlState.Expand;
     }
     public void StartDissolve(){
-        state = GeoControlState.Dissolve;
-    //Generate Ray trail and place geos on the right track
-        geoTrails = new RayTrail[geoFrags.Length];
+        StartCoroutine(coroutineExplodeToDissolve(1f, finalExpandFactor));
+    }
+    IEnumerator coroutineExplodeToDissolve(float duration, float finalFactor = 1.5f){
+        this.enabled = false;
+        Vector3[] originPoses = new Vector3[geoFrags.Length];
+        for(int i=0; i<geoFrags.Length; i++){
+            originPoses[i] = geoFrags[i].transform.localPosition;
+        }
+        yield return new WaitForLoop(duration, (t)=>{
+            for(int i=0; i<geoFrags.Length; i++){
+                geoFrags[i].transform.localPosition = Vector3.Lerp(originPoses[i], originPoses[i]*finalFactor, EasingFunc.Easing.QuadEaseOut(t));
+            }
+        });
+        this.enabled = true;
 
+        geoTrails = new RayTrail[geoFrags.Length];
         for(int i=0; i<geoTrails.Length; i++){
             Vector3 geoPos = geoFrags[i].transform.localPosition;
-
-            geoTrails[i] = new RayTrail(new Ray(geoPos, geoPos.normalized), RayTrailRadiusRange.GetRndValueInVector2Range(), geoFrags[i].transform.position.magnitude); 
+            geoTrails[i] = new RayTrail(new Ray(geoPos, geoPos.normalized), RayTrailRadiusRange.GetRndValueInVector2Range(), geoFrags[i].transform.localPosition.magnitude); 
         }
+        offsetAngle = clickablePlanet.m_accumulateYaw;
+        state = GeoControlState.Dissolve;
     }
     void OnDrawGizmosSelected(){
         DebugExtension.DrawCircle(center.position, Vector3.forward, Color.red, expandRadiusRange.y);

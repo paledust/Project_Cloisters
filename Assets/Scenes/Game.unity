@@ -26260,6 +26260,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
+  clickablePlanet: {fileID: 1197893087}
   center: {fileID: 1979351495}
   geoFrags:
   - {fileID: 1791759994}
@@ -26271,11 +26272,15 @@ MonoBehaviour:
   - {fileID: 1607737954}
   - {fileID: 358687494}
   - {fileID: 1771105612}
+  expandRadius: 1800
   expandPosAngleRND: 10
-  expandRadiusRange: {x: 0.1, y: 0.6}
+  expandRadiusRange: {x: 0, y: 0.4}
   expandPosRatioRND: {x: 0.5, y: 1}
+  finalExpandFactor: 2
   RayTrailRadiusRange: {x: 0.8, y: 1.5}
-  expandFactor: 0
+  dissolveRadius: 720
+  expandFactor: 1
+  dissolveFactor: 0
 --- !u!1 &601070081
 GameObject:
   m_ObjectHideFlags: 0

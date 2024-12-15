@@ -9,6 +9,7 @@ public class IC_Stylized : IC_Basic
     [SerializeField] private CircleExplodeController circleExplodeController;
     [SerializeField] private CircleDissolveController circleDissolveController;
     [SerializeField] private GeoFragmentController geoFragmentController;
+
     protected override void LoadAssets()
     {
         base.LoadAssets();
@@ -44,10 +45,13 @@ public class IC_Stylized : IC_Basic
         circleExplodeController.enabled = true;
     }
     public void StartDissovle(){
-        geoFragmentController.StartDissolve();
+        // geoFragmentController.StartDissolve();
         circleDissolveController.ResetController();
         circleDissolveController.enabled = true;
         circleExpandingController.enabled = false;
         circleExplodeController.enabled = false;
+    }
+    public void ExplodeToDissolveTransition(){
+        geoFragmentController.StartDissolve();
     }
 }

@@ -16,11 +16,16 @@ public class CircleExpandingController : MonoBehaviour
     [SerializeField] private AnimationCurve noiseMinCurve;
     [SerializeField] private AnimationCurve radiusCurve;
     [SerializeField] private AnimationCurve radiusFlickAmpCurve;
-    // [SerializeField, Range(0, 1)] 
+
     private float targetValue;
     private float controlValue;
     private float offsetAngle;
     private Vector3 initScale;
+
+    void Awake(){
+        offsetAngle = 0;
+        initScale = expandCircle.transform.localScale;
+    }
     public void ResetController(){
         offsetAngle = clickable_Planet.m_accumulateYaw;
         targetValue = controlValue = 0;
@@ -33,10 +38,6 @@ public class CircleExpandingController : MonoBehaviour
         Vector3 scale = initScale;
         scale.y *= shrinkCurve.Evaluate(0);
         expandCircle.transform.localScale = scale;
-    }
-    void Start(){
-        offsetAngle = 0;
-        initScale = expandCircle.transform.localScale;
     }
     void Update()
     {

@@ -27,6 +27,7 @@ public class CircleExplodeController : MonoBehaviour
         p_explode.Play(true);
         clickable_Planet.BreakSpring();
         EventHandler.Call_OnFlashInput();
+        stylizedController.ExplodeToDissolveTransition();
         float initRadius = expandCircle.circleRadius;
         float initNoiseMin = expandCircle.noiseMin;
         float initNoise = expandCircle.noiseStrength;
