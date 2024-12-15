@@ -9,6 +9,7 @@ public class IC_Stylized : IC_Basic
     [SerializeField] private CircleExplodeController circleExplodeController;
     [SerializeField] private CircleDissolveController circleDissolveController;
     [SerializeField] private GeoFragmentController geoFragmentController;
+    [SerializeField] private GeoTextController geoTextController;
 
     protected override void LoadAssets()
     {
@@ -36,6 +37,7 @@ public class IC_Stylized : IC_Basic
     }
     public void StartExpand(){
         geoFragmentController.StartExpand();
+        
         circleExplodeController.ResetController();
         circleExpandingController.ResetController();
         clickablePlanet.FormSpring();
@@ -45,7 +47,6 @@ public class IC_Stylized : IC_Basic
         circleExplodeController.enabled = true;
     }
     public void StartDissovle(){
-        // geoFragmentController.StartDissolve();
         circleDissolveController.ResetController();
         circleDissolveController.enabled = true;
         circleExpandingController.enabled = false;

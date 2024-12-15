@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M StylizedGlass
-  m_Shader: {fileID: 4800000, guid: 43e53d6e91347c949b66fd362ca90b8b, type: 3}
+  m_Name: M StylizedText
+  m_Shader: {fileID: 4800000, guid: e1b6c5b5533411d4dbe73620594c37ac, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -105,6 +105,7 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
+    - _Scaler: 1000
     - _ShadeMin: 0
     - _ShadeSmooth: 1
     - _Smoothness: 0.5
@@ -116,10 +117,13 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _BrightColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 4.9245777, g: 4.9245777, b: 4.9245777, a: 1}
-    - _DarkColor: {r: 0, g: 0, b: 0, a: 1}
+    - _BrightColor: {r: 1, g: 0.5210202, b: 0, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _DarkColor: {r: 1, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _FrontColor: {r: 1, g: 1, b: 1, a: 1}
+    - _FrontDir: {r: 0, g: 0, b: 1, a: 0}
+    - _GradientDir: {r: 0, g: 1, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &1433756251198927498

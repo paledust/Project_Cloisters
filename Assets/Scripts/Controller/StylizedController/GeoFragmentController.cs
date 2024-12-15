@@ -30,6 +30,7 @@ public class GeoFragmentController : MonoBehaviour
     [SerializeField] private Vector2 expandRadiusRange;
     [SerializeField] private Vector2 expandPosRatioRND;
     [SerializeField] private float finalExpandFactor = 1.5f;
+    [SerializeField] private CurveData geoSizeCurve; 
 [Header("Dissolve")]
     [SerializeField] private Vector2 RayTrailRadiusRange;
     [SerializeField] private float dissolveRadius;
@@ -39,6 +40,7 @@ public class GeoFragmentController : MonoBehaviour
     private float offsetAngle = 0;
     private RayTrail[] geoTrails;
     private Vector3[] geoPoses;
+    private Vector3[] geoScales;
 
     void Update(){
         switch(state){
@@ -47,6 +49,7 @@ public class GeoFragmentController : MonoBehaviour
             //Rotate Geo and expand along the shape
                 for(int i=0; i<geoFrags.Length; i++){
                     geoFrags[i].transform.localPosition = geoPoses[i] * Mathf.Lerp(expandRadiusRange.x, expandRadiusRange.y, expandFactor);
+                    geoFrags[i].transform.localScale = geoScales[i] * geoSizeCurve.Evaluate(expandFactor);
                 }
                 break;
             case GeoControlState.Dissolve:
@@ -64,8 +67,10 @@ public class GeoFragmentController : MonoBehaviour
         expandFactor = 0;
     //Reposition geos to center of the sphere
         geoPoses = new Vector3[geoFrags.Length];
+        geoScales = new Vector3[geoFrags.Length];
         for(int i=0; i<geoPoses.Length; i++){
             geoPoses[i] = Quaternion.Euler(0, 0, Random.Range(-expandPosAngleRND, expandPosAngleRND)+360*i/(geoPoses.Length-1)) * Vector2.right * expandPosRatioRND.GetRndValueInVector2Range();
+            geoScales[i] = geoFrags[i].transform.localScale;
         }
         state = GeoControlState.Expand;
     }
