@@ -435,7 +435,7 @@ Shader "AmplifyShaders/Mesh GradientSide"
 				float smoothstepResult14 = smoothstep( _ShadeMin_Instance , ( _ShadeMin_Instance + _ShadeSmooth_Instance ) , (dotResult32*0.5 + 0.5));
 				float3 lerpResult15 = lerp( _DarkColor , _BrightColor , smoothstepResult14);
 				float dotResult12 = dot( input.ase_normal , _FrontDir );
-				float isFront29 = step( abs( dotResult12 ) , 0.5 );
+				float isFront29 = step( abs( dotResult12 ) , 0.9 );
 				float3 lerpResult33 = lerp( _FrontColor_Instance , lerpResult15 , isFront29);
 				
 				float3 BakedAlbedo = 0;
@@ -1720,7 +1720,6 @@ Node;AmplifyShaderEditor.ColorNode;21;-848,-368;Inherit;False;Property;_DarkColo
 Node;AmplifyShaderEditor.SimpleAddOpNode;20;-944,80;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.RangedFloatNode;18;-1248,64;Inherit;False;InstancedProperty;_ShadeMin;ShadeMin;0;0;Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.RangedFloatNode;19;-1280,144;Inherit;False;InstancedProperty;_ShadeSmooth;ShadeSmooth;1;0;Create;True;0;0;0;False;0;False;1;1;0;0;0;1;FLOAT;0
-Node;AmplifyShaderEditor.ScaleAndOffsetNode;17;-1312,-80;Inherit;False;3;0;FLOAT;0;False;1;FLOAT;0.5;False;2;FLOAT;0.5;False;1;FLOAT;0
 Node;AmplifyShaderEditor.Vector3Node;31;-1696,-272;Inherit;False;Property;_GradientDir;GradientDir;6;0;Create;True;0;0;0;False;0;False;1,0,0;0,0,0;0;4;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3
 Node;AmplifyShaderEditor.DotProductOpNode;32;-1447.959,-185.2866;Inherit;False;2;0;FLOAT3;0,0,0;False;1;FLOAT3;0,0,0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.GetLocalVarNode;30;-512,80;Inherit;False;29;isFront;1;0;OBJECT;;False;1;FLOAT;0
@@ -1733,8 +1732,9 @@ Node;AmplifyShaderEditor.DotProductOpNode;12;-2848,128;Inherit;False;2;0;FLOAT3;
 Node;AmplifyShaderEditor.Vector3Node;27;-3072,224;Inherit;False;Property;_FrontDir;FrontDir;5;0;Create;True;0;0;0;False;0;False;0,1,0;0,1,0;0;4;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3
 Node;AmplifyShaderEditor.NormalVertexDataNode;11;-3072,32;Inherit;False;0;5;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.AbsOpNode;36;-2704,128;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
-Node;AmplifyShaderEditor.StepOpNode;28;-2528,128;Inherit;True;2;0;FLOAT;0;False;1;FLOAT;0.5;False;1;FLOAT;0
 Node;AmplifyShaderEditor.RegisterLocalVarNode;29;-2272,128;Inherit;False;isFront;-1;True;1;0;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.ScaleAndOffsetNode;17;-1312,-80;Inherit;False;3;0;FLOAT;0;False;1;FLOAT;0.5;False;2;FLOAT;0.5;False;1;FLOAT;0
+Node;AmplifyShaderEditor.StepOpNode;28;-2528,128;Inherit;True;2;0;FLOAT;0;False;1;FLOAT;0.9;False;1;FLOAT;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;0;0,-144;Float;False;False;-1;2;UnityEditor.ShaderGraphUnlitGUI;0;13;New Amplify Shader;2992e84f91cbeb14eab234972e07ea9d;True;ExtraPrePass;0;0;ExtraPrePass;5;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;False;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;False;False;False;True;4;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;UniversalMaterialType=Unlit;True;3;True;12;all;0;False;True;1;1;False;;0;False;;0;1;False;;0;False;;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;1;False;;True;3;False;;True;True;0;False;;0;False;;True;0;False;False;0;;0;0;Standard;0;False;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;2;0,0;Float;False;False;-1;2;UnityEditor.ShaderGraphUnlitGUI;0;13;New Amplify Shader;2992e84f91cbeb14eab234972e07ea9d;True;ShadowCaster;0;2;ShadowCaster;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;False;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;False;False;False;True;4;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;UniversalMaterialType=Unlit;True;3;True;12;all;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;False;False;True;False;False;False;False;0;False;;False;False;False;False;False;False;False;False;False;True;1;False;;True;3;False;;False;True;1;LightMode=ShadowCaster;False;False;0;;0;0;Standard;0;False;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;3;0,0;Float;False;False;-1;2;UnityEditor.ShaderGraphUnlitGUI;0;13;New Amplify Shader;2992e84f91cbeb14eab234972e07ea9d;True;DepthOnly;0;3;DepthOnly;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;False;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;False;False;False;True;4;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;UniversalMaterialType=Unlit;True;3;True;12;all;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;False;False;True;False;False;False;False;0;False;;False;False;False;False;False;False;False;False;False;True;1;False;;False;False;True;1;LightMode=DepthOnly;False;False;0;;0;0;Standard;0;False;0
@@ -1753,7 +1753,6 @@ WireConnection;15;1;22;0
 WireConnection;15;2;14;0
 WireConnection;20;0;18;0
 WireConnection;20;1;19;0
-WireConnection;17;0;32;0
 WireConnection;32;0;31;0
 WireConnection;32;1;34;0
 WireConnection;33;0;23;0
@@ -1764,8 +1763,9 @@ WireConnection;34;1;35;0
 WireConnection;12;0;11;0
 WireConnection;12;1;27;0
 WireConnection;36;0;12;0
-WireConnection;28;0;36;0
 WireConnection;29;0;28;0
+WireConnection;17;0;32;0
+WireConnection;28;0;36;0
 WireConnection;1;2;33;0
 ASEEND*/
-//CHKSM=8260BB4C8DDDA786E406AD79EEC61DFE8DBBBCC0
+//CHKSM=A49971E2224C50D16BC281139B804D231C3FED27
