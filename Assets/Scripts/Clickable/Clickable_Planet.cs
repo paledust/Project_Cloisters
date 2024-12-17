@@ -25,6 +25,7 @@ public class Clickable_Planet : Basic_Clickable
     private float targetVerticalAngle;
     private float verticalAngle;
     private float zeroSpringAngle = 0;
+    
     private PlayerController playerController;
     private CoroutineExcuter sizeChanger;
 

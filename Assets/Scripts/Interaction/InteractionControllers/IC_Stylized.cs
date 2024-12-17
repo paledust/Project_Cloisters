@@ -53,6 +53,17 @@ public class IC_Stylized : IC_Basic
         circleExplodeController.enabled = false;
     }
     public void ExplodeToDissolveTransition(){
+        int count = Random.Range(2, 4);
+        for(int i=0; i<count; i++){
+            geoTextController.ShowText();
+        }
         geoFragmentController.StartDissolve();
+    }
+    public void OnAllTextOut(){
+        EventHandler.Call_OnFlashInput();
+        EventHandler.Call_OnEndInteraction(this);
+        StartCoroutine(CommonCoroutine.delayAction(()=>{
+            geoTextController.PutTextTogether();
+        }, 1.2f));
     }
 }

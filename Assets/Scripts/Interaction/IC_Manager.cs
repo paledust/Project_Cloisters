@@ -10,15 +10,15 @@ public class IC_Manager : MonoBehaviour
     private int loadedIC_Count = 0;
 
     void Awake(){
-        EventHandler.E_OnInteractionReachable += PreloadInteraction; 
-        EventHandler.E_OnNextInteraction += NextInteraction;
-        EventHandler.E_OnEndInteraction  += EndInteraction;
+        EventHandler.E_OnInteractionReachable   += PreloadInteraction; 
+        EventHandler.E_OnNextInteraction        += NextInteraction;
+        EventHandler.E_OnEndInteraction         += EndInteraction;
         EventHandler.E_OnInteractionUnreachable += CleanUpInteraction;
     }
     void OnDestroy(){
-        EventHandler.E_OnInteractionReachable -= PreloadInteraction; 
-        EventHandler.E_OnNextInteraction += NextInteraction;
-        EventHandler.E_OnEndInteraction  += EndInteraction;
+        EventHandler.E_OnInteractionReachable   -= PreloadInteraction; 
+        EventHandler.E_OnNextInteraction        -= NextInteraction;
+        EventHandler.E_OnEndInteraction         -= EndInteraction;
         EventHandler.E_OnInteractionUnreachable -= CleanUpInteraction; 
     }
     void NextInteraction(){
