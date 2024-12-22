@@ -9,6 +9,8 @@ public class AngleMotion : MonoBehaviour
     [SerializeField] private Vector3 axis = Vector3.forward;
     [SerializeField] private bool snappyRotate = false;
     [SerializeField] private float snappyStep = 1;
+    [Range(0, 1)]
+    public float ControlFactor;
 
     private float timer = 0;
     private float seed;
@@ -31,7 +33,7 @@ public class AngleMotion : MonoBehaviour
             transform.localRotation = Quaternion.Euler(axis * angle)*initRot;
         }
         else{
-            transform.localRotation = Quaternion.Euler(axis * Mathf.Sin((timer + seed)*Mathf.PI) * maxAngle)*initRot;
+            transform.localRotation = Quaternion.Euler(ControlFactor * axis * Mathf.Sin((timer + seed)*Mathf.PI) * maxAngle)*initRot;
         }
     }
 }

@@ -35,6 +35,7 @@ public class IC_Narrative : IC_Basic
     }
     protected override void UnloadAssets()
     {
+        base.UnloadAssets();
         rippleParticleController.enabled = false;
         narrativeSpawner.enabled = false;
     }

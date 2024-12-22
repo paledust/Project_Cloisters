@@ -38,10 +38,17 @@ public class GeoFragmentController : MonoBehaviour
     private float expandFactor = 0;
     private float dissolveFactor = 0;
     private float offsetAngle = 0;
+    private int[] geoIndexShuffles;
     private RayTrail[] geoTrails;
     private Vector3[] geoPoses;
     private Vector3[] geoScales;
-
+    
+    void Awake(){
+        geoIndexShuffles = new int[geoFrags.Length];
+        for(int i=0; i<geoIndexShuffles.Length; i++){
+            geoIndexShuffles[i] = i;
+        }
+    }
     void Update(){
         switch(state){
             case GeoControlState.Expand:
@@ -62,6 +69,7 @@ public class GeoFragmentController : MonoBehaviour
         }
     }
     public void StartExpand(){
+        Service.Shuffle(ref geoIndexShuffles);
         offsetAngle = clickablePlanet.m_accumulateYaw;
     //Regenerate certain amount of geos
         expandFactor = 0;
@@ -69,25 +77,15 @@ public class GeoFragmentController : MonoBehaviour
         geoPoses = new Vector3[geoFrags.Length];
         geoScales = new Vector3[geoFrags.Length];
         for(int i=0; i<geoPoses.Length; i++){
-            geoPoses[i] = Quaternion.Euler(0, 0, Random.Range(-expandPosAngleRND, expandPosAngleRND)+360*i/(geoPoses.Length-1)) * Vector2.right * expandPosRatioRND.GetRndValueInVector2Range();
+            geoPoses[geoIndexShuffles[i]] = Quaternion.Euler(0, 0, Random.Range(-expandPosAngleRND, expandPosAngleRND)+360*i/geoPoses.Length) * Vector2.right * expandPosRatioRND.GetRndValueInVector2Range();
             geoScales[i] = geoFrags[i].transform.localScale;
         }
         state = GeoControlState.Expand;
     }
-    public void StartDissolve(){
+    public void StartTransition(){
         StartCoroutine(coroutineExplodeToDissolve(1f, finalExpandFactor));
     }
-    IEnumerator coroutineExplodeToDissolve(float duration, float finalFactor = 1.5f){
-        this.enabled = false;
-        Vector3[] originPoses = new Vector3[geoFrags.Length];
-        for(int i=0; i<geoFrags.Length; i++){
-            originPoses[i] = geoFrags[i].transform.localPosition;
-        }
-        yield return new WaitForLoop(duration, (t)=>{
-            for(int i=0; i<geoFrags.Length; i++){
-                geoFrags[i].transform.localPosition = Vector3.Lerp(originPoses[i], originPoses[i]*finalFactor, EasingFunc.Easing.QuadEaseOut(t));
-            }
-        });
+    public void StartDissolving(){
         this.enabled = true;
 
         geoTrails = new RayTrail[geoFrags.Length];
@@ -97,6 +95,18 @@ public class GeoFragmentController : MonoBehaviour
         }
         offsetAngle = clickablePlanet.m_accumulateYaw;
         state = GeoControlState.Dissolve;
+    }
+    IEnumerator coroutineExplodeToDissolve(float duration, float finalFactor = 1.5f){
+        this.enabled = false;
+        Vector3[] originPoses = new Vector3[geoFrags.Length];
+        for(int i=0; i<geoFrags.Length; i++){
+            originPoses[i] = geoFrags[i].transform.localPosition;
+        }
+        yield return new WaitForLoop(duration, (t)=>{
+            for(int i=0; i<geoFrags.Length; i++){
+                geoFrags[i].transform.localPosition = Vector3.Lerp(originPoses[i], originPoses[i]*finalFactor, EasingFunc.Easing.CircEaseOut(t));
+            }
+        });
     }
     void OnDrawGizmosSelected(){
         DebugExtension.DrawCircle(center.position, Vector3.forward, Color.red, expandRadiusRange.y);

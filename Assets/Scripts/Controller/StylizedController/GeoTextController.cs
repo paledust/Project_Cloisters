@@ -1,10 +1,12 @@
 using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
 public class GeoTextController : MonoBehaviour
 {
+[Header("Text Fly")]
     [SerializeField] private IC_Stylized ic_stylized;
     [SerializeField] private Transform planetCenter;
     [SerializeField] private GameObject[] textObjs;
@@ -15,7 +17,24 @@ public class GeoTextController : MonoBehaviour
     [SerializeField] private float flyTime = 0.5f;
     [SerializeField] private float flyRadius = 2;
     [SerializeField, Range(0.00001f, 0.99999f)] private float eclipseRatio = 1;
+[Header("Text Shift")]
+    [SerializeField] private Clickable_Planet clickablePlanet;
+    [SerializeField] private Vector2 textShiftRange;
+    [SerializeField] private float textShiftScale = 0.2f;
+    [SerializeField] private float textShiftLerpSpeed = 2;
 
+    private float shiftFactor;
+    Stack<ShiftData> shiftDataList = new Stack<ShiftData>();
+
+    private struct ShiftData{
+        public Transform textTrans;
+        public Vector3 originalPos;
+        public float shiftDistance;
+        public void UpdateShiftTrans(Vector3 centerPos, float t)
+        {
+            textTrans.position = originalPos + (originalPos - centerPos).normalized * shiftDistance * t;
+        }
+    }
     private int textIndex = 0;
     private int[] dirIndex;
     void Awake(){
@@ -25,7 +44,14 @@ public class GeoTextController : MonoBehaviour
         }
         Service.Shuffle(ref dirIndex);
     }
-
+    void Update()
+    {
+        float targetShiftFactor = clickablePlanet.m_angularSpeed * textShiftScale;
+        shiftFactor = Mathf.LerpUnclamped(shiftFactor, targetShiftFactor, Time.deltaTime*textShiftLerpSpeed);
+        foreach(var shiftText in shiftDataList){
+            shiftText.UpdateShiftTrans(planetCenter.position, shiftFactor);
+        }
+    }
     public void ShowText(){
         if(textIndex>=textObjs.Length) return;
 
@@ -42,12 +68,21 @@ public class GeoTextController : MonoBehaviour
 
         Vector3 finalPos = planetCenter.position + ejectDir*ejectLength + Vector3.back * 0.3f;
 
-        textTrans.DOMove(finalPos, flyTime).SetEase(flyCurve);
+        textTrans.DOMove(finalPos, flyTime).SetEase(flyCurve).OnComplete(()=>{
+            ShiftData shiftData = new ShiftData(){
+                textTrans = textTrans,
+                originalPos = textTrans.position,
+                shiftDistance = textShiftRange.GetRndValueInVector2Range()
+            };
+
+            shiftDataList.Push(shiftData);
+        });
         textTrans.DOScale(Vector3.one*50, flyTime).SetEase(scaleCurve);
         textTrans.DORotateQuaternion(Quaternion.Euler(Random.Range(-20,20), Random.Range(-20,20), Random.Range(-80,80)+360)*textTrans.rotation, flyTime).SetEase(flyCurve);
         textIndex ++;
 
         if(textIndex>=textObjs.Length){
+            shiftDataList.Clear();
             ic_stylized.OnAllTextOut();
         }
     }

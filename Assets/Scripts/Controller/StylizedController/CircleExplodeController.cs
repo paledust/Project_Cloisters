@@ -37,6 +37,6 @@ public class CircleExplodeController : MonoBehaviour
             expandCircle.noiseMin = Mathf.Lerp(initNoiseMin, 0f, _t);
             expandCircle.noiseStrength = Mathf.Lerp(initNoise, targetNoise, _t);
         });
-        stylizedController.StartDissovle();
+        // stylizedController.StartDissovle();
     }
 }
