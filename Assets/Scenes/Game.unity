@@ -27183,8 +27183,8 @@ MonoBehaviour:
   explodeShift: 20
   clickablePlanet: {fileID: 1197893087}
   textShiftRange: {x: 0.005, y: 0.01}
-  textShiftScale: 0.01
-  textShiftLerpSpeed: 1
+  textShiftScale: 0.012
+  textShiftLerpSpeed: 2
 --- !u!1 &601070081
 GameObject:
   m_ObjectHideFlags: 0
