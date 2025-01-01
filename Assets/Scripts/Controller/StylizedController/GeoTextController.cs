@@ -18,21 +18,24 @@ public class GeoTextController : MonoBehaviour
     [SerializeField] private float flyRadius = 2;
     [SerializeField, Range(0.00001f, 0.99999f)] private float eclipseRatio = 1;
 [Header("Text Shift")]
+    [SerializeField] private float explodeShift = 100;
     [SerializeField] private Clickable_Planet clickablePlanet;
     [SerializeField] private Vector2 textShiftRange;
     [SerializeField] private float textShiftScale = 0.2f;
     [SerializeField] private float textShiftLerpSpeed = 2;
 
+    private bool shiftExploding = false;
     private float shiftFactor;
-    Stack<ShiftData> shiftDataList = new Stack<ShiftData>();
+    private Stack<ShiftData> shiftDataList = new Stack<ShiftData>();
 
     private struct ShiftData{
         public Transform textTrans;
         public Vector3 originalPos;
         public float shiftDistance;
+        public float shiftOffset;
         public void UpdateShiftTrans(Vector3 centerPos, float t)
         {
-            textTrans.position = originalPos + (originalPos - centerPos).normalized * shiftDistance * t;
+            textTrans.position = originalPos + (originalPos - centerPos).normalized * shiftDistance * (t-shiftOffset);
         }
     }
     private int textIndex = 0;
@@ -47,7 +50,8 @@ public class GeoTextController : MonoBehaviour
     void Update()
     {
         float targetShiftFactor = clickablePlanet.m_angularSpeed * textShiftScale;
-        shiftFactor = Mathf.LerpUnclamped(shiftFactor, targetShiftFactor, Time.deltaTime*textShiftLerpSpeed);
+        if(!shiftExploding)
+            shiftFactor = Mathf.LerpUnclamped(shiftFactor, targetShiftFactor, Time.deltaTime*textShiftLerpSpeed);
         foreach(var shiftText in shiftDataList){
             shiftText.UpdateShiftTrans(planetCenter.position, shiftFactor);
         }
@@ -55,6 +59,7 @@ public class GeoTextController : MonoBehaviour
     public void ShowText(){
         if(textIndex>=textObjs.Length) return;
 
+        StartCoroutine(coroutineLerpShiftFactor(explodeShift, 1f));
         var textTrans = textObjs[textIndex].transform;
         float unitAngle = 360f/(0f+textObjs.Length);
         float angle = unitAngle*dirIndex[textIndex]+Random.Range(-10f, 10f);
@@ -72,7 +77,8 @@ public class GeoTextController : MonoBehaviour
             ShiftData shiftData = new ShiftData(){
                 textTrans = textTrans,
                 originalPos = textTrans.position,
-                shiftDistance = textShiftRange.GetRndValueInVector2Range()
+                shiftDistance = textShiftRange.GetRndValueInVector2Range(),
+                shiftOffset = shiftFactor
             };
 
             shiftDataList.Push(shiftData);
@@ -97,5 +103,13 @@ public class GeoTextController : MonoBehaviour
             textObjs[index].transform.DORotateQuaternion(finalTrans[index].rotation, Random.Range(1f,1.2f)).SetEase(finalizeCurve).SetDelay(delay, false);
             delay += Random.Range(0.0f, 0.15f);
         }
+    }
+    IEnumerator coroutineLerpShiftFactor(float targetValue, float duration){
+        shiftExploding = true;
+        float initFactor = shiftFactor;
+        yield return new WaitForLoop(duration, (t)=>{
+            shiftFactor = Mathf.Lerp(initFactor, targetValue, EasingFunc.Easing.QuadEaseOut(t));
+        });
+        shiftExploding = false;
     }
 }
