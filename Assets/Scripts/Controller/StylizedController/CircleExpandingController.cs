@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CircleExpandingController : MonoBehaviour
 {
-    [SerializeField] private Clickable_Planet clickable_Planet;
+    [SerializeField] private Clickable_ObjectRotator clickable_Planet;
     [SerializeField] private PerRendererExpand expandCircle;
     [SerializeField] private float controlAgility = 5;
     [SerializeField] private float controlFactor = 0.1f;

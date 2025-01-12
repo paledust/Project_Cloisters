@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7895705955670701}
   - component: {fileID: 7895705955670700}
   - component: {fileID: 7895705955670707}
+  - component: {fileID: 4331233067623927040}
   m_Layer: 0
   m_Name: SmallPlanet
   m_TagString: Untagged
@@ -103,3 +104,22 @@ MonoBehaviour:
   Tint: {r: 1, g: 1, b: 1, a: 1}
   ShadeMin: 0
   ShadeSmooth: 1
+--- !u!114 &4331233067623927040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7895705955670689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1448c7f0ca9703344a8185b88610edb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floatFreq: 0.1
+  floatHeight: 0.02
+  floatOffset: 0.01
+  floatPhase: 0
+  ControlFactor: 1
+  noiseScale: 0.2
+  noiseFreq: 0.2

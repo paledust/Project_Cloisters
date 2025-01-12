@@ -19,7 +19,7 @@ public class GeoTextController : MonoBehaviour
     [SerializeField, Range(0.00001f, 0.99999f)] private float eclipseRatio = 1;
 [Header("Text Shift")]
     [SerializeField] private float explodeShift = 100;
-    [SerializeField] private Clickable_Planet clickablePlanet;
+    [SerializeField] private Clickable_ObjectRotator clickablePlanet;
     [SerializeField] private Vector2 textShiftRange;
     [SerializeField] private float textShiftScale = 0.2f;
     [SerializeField] private float textShiftLerpSpeed = 2;

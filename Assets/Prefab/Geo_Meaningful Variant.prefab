@@ -7,6 +7,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2318761119102041509, guid: 40299887124e1fe478b716dc1c0cbc31,
+        type: 3}
+      propertyPath: reflectionStrength
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3691867995975511009, guid: 40299887124e1fe478b716dc1c0cbc31,
+        type: 3}
+      propertyPath: floatFreq
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3691867995975511009, guid: 40299887124e1fe478b716dc1c0cbc31,
+        type: 3}
+      propertyPath: floatHeight
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 3691867995975511009, guid: 40299887124e1fe478b716dc1c0cbc31,
+        type: 3}
+      propertyPath: floatOffset
+      value: 0.01
+      objectReference: {fileID: 0}
     - target: {fileID: 6611199322826332702, guid: 40299887124e1fe478b716dc1c0cbc31,
         type: 3}
       propertyPath: Tint.b
@@ -135,11 +155,26 @@ PrefabInstance:
     - target: {fileID: 6611199323516168535, guid: 40299887124e1fe478b716dc1c0cbc31,
         type: 3}
       propertyPath: m_Name
-      value: Geo_Meaningful
+      value: Geo_Meaningful Variant
       objectReference: {fileID: 0}
     - target: {fileID: 6611199323516168535, guid: 40299887124e1fe478b716dc1c0cbc31,
         type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7175607320178456274, guid: 40299887124e1fe478b716dc1c0cbc31,
+        type: 3}
+      propertyPath: freq
+      value: 0.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 7175607320178456274, guid: 40299887124e1fe478b716dc1c0cbc31,
+        type: 3}
+      propertyPath: maxAngle
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7175607320178456274, guid: 40299887124e1fe478b716dc1c0cbc31,
+        type: 3}
+      propertyPath: ControlFactor
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7753738585415594580, guid: 40299887124e1fe478b716dc1c0cbc31,

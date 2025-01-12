@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MotionSetController : MonoBehaviour
 {
-    [SerializeField] private Clickable_Planet clickable_Planet;
+    [SerializeField] private Clickable_ObjectRotator clickable_Planet;
     [SerializeField] private float speedScale;
     [SerializeField] private float speedOffset;
     [SerializeField] private float controlAgility = 5;

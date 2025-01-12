@@ -11,7 +11,7 @@ public class IC_Intro : IC_Basic
     [SerializeField] private PlanetCameraController camController;
     [SerializeField] private RotateAroundController rotateController;
 [Header("Interaction")]
-    [SerializeField] private Clickable_Planet clickable_redPlanet;
+    [SerializeField] private Clickable_ObjectRotator clickable_redPlanet;
     [SerializeField] private Transform centerPos;
     [SerializeField] private float angleTolrence = 10;
 [Header("Planet")]

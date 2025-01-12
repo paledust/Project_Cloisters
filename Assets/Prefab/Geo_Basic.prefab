@@ -189,6 +189,21 @@ MonoBehaviour:
   snappyRotate: 0
   snappyStep: 1
   ControlFactor: 0
+--- !u!114 &2318761119102041509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6304717391411603275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09d50a0f35ac8034cb29489ca34f8f1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isUpdating: 1
+  meshRenderer: {fileID: 5511886289281959582}
+  reflectionStrength: 0
 --- !u!4 &6644229730941844977 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1f18c89016ca0f8448e1f84c1b77f790,

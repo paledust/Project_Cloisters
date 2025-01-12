@@ -62,14 +62,16 @@ MonoBehaviour:
   sfx_clickSound: group_click
   hitbox: {fileID: 4167929499371950567}
   isFrozen: 0
-  planetAxisTrans: {fileID: 7673807578959812770}
-  planetTrans: {fileID: 4167929500767803095}
+  pitchRotationTrans: {fileID: 7673807578959812770}
+  yawRotationTrans: {fileID: 4167929500767803095}
   dragStrength: 50
   idleAngularSpeed: 40
   maxAngularSpeed: 1000
   maxVerticalAngle: 20
   controllingAngularLerp: 7
   releaseAngularLerp: 0.6
+  useSpring: 0
+  springFactor: 2
 --- !u!1 &4167929500767803096
 GameObject:
   m_ObjectHideFlags: 0

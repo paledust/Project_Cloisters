@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class IC_Stylized : IC_Basic
 {
-    [SerializeField] private Clickable_Planet clickablePlanet;
+    [SerializeField] private Clickable_ObjectRotator clickablePlanet;
     [SerializeField] private CircleExpandingController circleExpandingController;
     [SerializeField] private CircleExplodeController circleExplodeController;
     [SerializeField] private CircleDissolveController circleDissolveController;

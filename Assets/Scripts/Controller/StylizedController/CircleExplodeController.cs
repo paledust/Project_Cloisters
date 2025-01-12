@@ -6,7 +6,7 @@ public class CircleExplodeController : MonoBehaviour
 {
     [SerializeField] private IC_Stylized stylizedController;
     [SerializeField] private PerRendererExpand expandCircle;
-    [SerializeField] private Clickable_Planet clickable_Planet;
+    [SerializeField] private Clickable_ObjectRotator clickable_Planet;
     [SerializeField] private CircleExpandingController expandController;
     [SerializeField] private float explodeRadius;
     [SerializeField] private ParticleSystem p_explode;

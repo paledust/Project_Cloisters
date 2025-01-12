@@ -5,7 +5,7 @@ using UnityEngine;
 public class RotateAroundController : MonoBehaviour
 {
     [SerializeField] private RotateAround rotateAround;
-    [SerializeField] private Clickable_Planet clickable_Planet;
+    [SerializeField] private Clickable_ObjectRotator clickable_Planet;
     [SerializeField] private float controlAgility = 5;
 [Header("Speed Remapping")]
     [SerializeField] private float speedScale;

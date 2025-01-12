@@ -21,7 +21,7 @@ public class GeoFragmentController : MonoBehaviour
     }
     public enum GeoControlState{Expand, Dissolve}
     [SerializeField, ShowOnly] private GeoControlState state;
-    [SerializeField] private Clickable_Planet clickablePlanet;
+    [SerializeField] private Clickable_ObjectRotator clickablePlanet;
     [SerializeField] private Transform center;
     [SerializeField] private GameObject[] geoFrags;
 [Header("Expand")]

@@ -5,7 +5,7 @@ using UnityEngine;
 public class CircleDissolveController : MonoBehaviour
 {
     [SerializeField] private IC_Stylized iC_Stylized;
-    [SerializeField] private Clickable_Planet clickable_Planet;
+    [SerializeField] private Clickable_ObjectRotator clickable_Planet;
     [SerializeField] private PerRendererExpand expandCircle;
     [SerializeField] private float dissolveMaxAngle;
     [SerializeField] private float dissolveRadius;
