@@ -9,6 +9,7 @@ public class Clickable_ObjectRotator : Basic_Clickable
     [SerializeField] private float dragStrength = 1f;
     [SerializeField] private float idleAngularSpeed = 2f;
     [SerializeField] private float maxAngularSpeed = 200f;
+    [SerializeField] private bool verticalAccumulate = false;
     [SerializeField] private float maxVerticalAngle = 20;
 [Header("AngularSpeed Lerp")]
     [SerializeField] private float controllingAngularLerp = 10f;
@@ -32,6 +33,7 @@ public class Clickable_ObjectRotator : Basic_Clickable
     void Start(){
         sizeChanger = new CoroutineExcuter(this);
         pitchOffset = pitchRotationTrans.localEulerAngles.x;
+        pitchAngle = pitchOffset;
     }
     void Update(){
         if(playerController!=null){
@@ -40,11 +42,17 @@ public class Clickable_ObjectRotator : Basic_Clickable
             m_angularSpeed = Mathf.Lerp(m_angularSpeed, Mathf.Clamp(delta.x * dragStrength, -maxAngularSpeed, maxAngularSpeed), Time.deltaTime*controllingAngularLerp);
 
             targetPitchAngle += delta.y * dragStrength * 0.5f * Time.deltaTime;
-            targetPitchAngle = Mathf.Clamp(targetPitchAngle, -maxVerticalAngle, maxVerticalAngle);
-            pitchAngle = Mathf.Lerp(pitchAngle, targetPitchAngle, Time.deltaTime*controllingAngularLerp);
+            float finalAngle = Mathf.Clamp(targetPitchAngle + pitchOffset, -maxVerticalAngle, maxVerticalAngle);
+            pitchAngle = Mathf.Lerp(pitchAngle, finalAngle, Time.deltaTime*controllingAngularLerp);
         }
         else{
-            pitchAngle = Mathf.Lerp(pitchAngle, 0, Time.deltaTime*releaseAngularLerp);
+            float finalAngle = 0;
+            if(verticalAccumulate) 
+                finalAngle = Mathf.Clamp(targetPitchAngle + pitchOffset, -maxVerticalAngle, maxVerticalAngle);
+            else 
+                finalAngle = pitchOffset;
+
+            pitchAngle = Mathf.Lerp(pitchAngle, finalAngle, Time.deltaTime*releaseAngularLerp);
             m_angularSpeed = Mathf.Lerp(m_angularSpeed, idleAngularSpeed, Time.deltaTime*releaseAngularLerp);
             if(Mathf.Abs(m_angularSpeed-idleAngularSpeed)<=0.01f) m_angularSpeed = idleAngularSpeed;
         }

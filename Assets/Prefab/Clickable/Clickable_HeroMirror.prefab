@@ -86,7 +86,7 @@ MonoBehaviour:
   dragStrength: 5
   idleAngularSpeed: 0
   maxAngularSpeed: 500
-  accumulatedVertical: 0
+  verticalAccumulate: 0
   maxVerticalAngle: 40
   controllingAngularLerp: 10
   releaseAngularLerp: 1
@@ -259,7 +259,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_settings:
     m_ResolutionMultiplier: 0
-    m_ClipPlaneOffset: 0.01
+    m_ClipPlaneOffset: 0.017
     m_ReflectLayers:
       serializedVersion: 2
       m_Bits: 1

@@ -125,7 +125,7 @@ Material:
     - _FoamIntensity: 0.04
     - _FresnelBias: 0
     - _FresnelOpacity: 0.52
-    - _FresnelOpacitySmooth: 0.1
+    - _FresnelOpacitySmooth: 0.2
     - _FresnelPower: 1
     - _FresnelScale: 1
     - _GlossMapScale: 1
@@ -144,7 +144,7 @@ Material:
     - _QueueOffset: 0
     - _ReceiveShadows: 0
     - _ReflectionDistortion: 0.391
-    - _ReflectionIntensity: 1
+    - _ReflectionIntensity: 2
     - _RippleScale: -0.8
     - _Smoothness: 0.818
     - _SmoothnessTextureChannel: 0
