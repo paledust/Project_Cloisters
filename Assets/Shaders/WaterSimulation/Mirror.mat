@@ -145,11 +145,18 @@ Material:
     - _ReceiveShadows: 0
     - _ReflectionDistortion: 0.391
     - _ReflectionIntensity: 2
+    - _ReflectionStrapScale: 1
     - _RippleScale: -0.8
+    - _Shear: -0.2
     - _Smoothness: 0.818
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _StrapOffset: 0.38
+    - _StrapPan: 1
+    - _StrapScale: 1.9
+    - _StrapSmooth: 0.02
+    - _StrapStrength: 0.5
     - _UVSec: 0
     - _UseDistanceFade: 0
     - _UseRippleNormal: 1
@@ -179,4 +186,5 @@ Material:
     - _RadiationColor1: {r: 0.5943396, g: 0.54787964, b: 0.2214756, a: 1}
     - _RadiationColor2: {r: 0.6509434, g: 0.5172165, b: 0.48759344, a: 1}
     - _ShalowColor: {r: 1, g: 1, b: 1, a: 1}
+    - _StrapColor: {r: 0.9716981, g: 0.83786047, b: 0.83786047, a: 1}
   m_BuildTextureStacks: []
