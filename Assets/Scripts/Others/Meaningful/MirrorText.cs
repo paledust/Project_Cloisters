@@ -7,27 +7,25 @@ using TMPro;
 public class MirrorText : MonoBehaviour
 {
     [SerializeField, ColorUsage(true, true)] public Color foundColor;
-    [SerializeField] private TextMeshPro tmp;
     [SerializeField] private char textChar;
 
-    private PerRendererColor perRendererColor;
+    [SerializeField] private PerRendererStylizedShade fontColor;
     private Color originColor;
 
     public char TextChar => textChar;
 
     void Awake()
     {
-        perRendererColor = GetComponent<PerRendererColor>();
-        originColor = perRendererColor.hdrTint;
+        originColor = fontColor.Tint;
     }
     public void OnMirrorTextFound()
     {
         DOTween.Kill(this);
-        DOTween.To(()=>perRendererColor.hdrTint, x=>perRendererColor.hdrTint = x, foundColor, 0.5f).SetId(this);
+        DOTween.To(()=>fontColor.Tint, x=>fontColor.Tint = x, foundColor, 0.5f).SetId(this);
     }
     public void OnMirrorTextHide()
     {
         DOTween.Kill(this);
-        DOTween.To(()=>perRendererColor.hdrTint, x=>perRendererColor.hdrTint = x, originColor, 0.5f).SetId(this);
+        DOTween.To(()=>fontColor.Tint, x=>fontColor.Tint = x, originColor, 0.5f).SetId(this);
     }
 }
