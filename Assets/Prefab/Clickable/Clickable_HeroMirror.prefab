@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1520769983141112898}
   - component: {fileID: 5897721432112148927}
   m_Layer: 3
-  m_Name: Clickable Interaction
+  m_Name: Clickable Mirror
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42,7 +42,7 @@ BoxCollider:
   m_GameObject: {fileID: 1603018881477947607}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1.2457384, y: 1.2457383, z: 0.14330134}
   m_Center: {x: 0, y: 0, z: 0.00000023841858}
@@ -66,7 +66,7 @@ MonoBehaviour:
   dragStrength: 5
   idleAngularSpeed: 0
   maxAngularSpeed: 500
-  verticalAccumulate: 0
+  verticalAccumulate: 1
   maxVerticalAngle: 40
   controllingAngularLerp: 10
   releaseAngularLerp: 1
@@ -146,6 +146,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8347407509909487194}
   - component: {fileID: 6917014520607232297}
+  - component: {fileID: 205437484449596921}
   m_Layer: 3
   m_Name: Clickable_HeroMirror
   m_TagString: Untagged
@@ -182,6 +183,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mirrorTrans: {fileID: 8440476972217594787}
+--- !u!114 &205437484449596921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8347407509909487173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e412da6deb22e04cac4ae3b283a2740, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rootTrans: {fileID: 8440476972217594787}
+  castRadius: 0.15
+  showTextDistance: 0.2
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  mirrorTextShowConstroller: {fileID: 0}
 --- !u!1001 &8347407509945114467
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -339,7 +359,7 @@ MonoBehaviour:
     m_ClipPlaneOffset: 0.017
     m_ReflectLayers:
       serializedVersion: 2
-      m_Bits: 1
+      m_Bits: 3
     m_Shadows: 0
   target: {fileID: 253504854755465067}
   m_planeOffset: 0

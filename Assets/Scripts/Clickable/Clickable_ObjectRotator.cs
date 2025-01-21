@@ -42,13 +42,14 @@ public class Clickable_ObjectRotator : Basic_Clickable
             m_angularSpeed = Mathf.Lerp(m_angularSpeed, Mathf.Clamp(delta.x * dragStrength, -maxAngularSpeed, maxAngularSpeed), Time.deltaTime*controllingAngularLerp);
 
             targetPitchAngle += delta.y * dragStrength * 0.5f * Time.deltaTime;
-            float finalAngle = Mathf.Clamp(targetPitchAngle + pitchOffset, -maxVerticalAngle, maxVerticalAngle);
+            targetPitchAngle = Mathf.Clamp(targetPitchAngle, -maxVerticalAngle - pitchOffset, maxVerticalAngle - pitchOffset);
+            float finalAngle = targetPitchAngle + pitchOffset;
             pitchAngle = Mathf.Lerp(pitchAngle, finalAngle, Time.deltaTime*controllingAngularLerp);
         }
         else{
             float finalAngle = 0;
             if(verticalAccumulate) 
-                finalAngle = Mathf.Clamp(targetPitchAngle + pitchOffset, -maxVerticalAngle, maxVerticalAngle);
+                finalAngle = targetPitchAngle + pitchOffset;
             else 
                 finalAngle = pitchOffset;
 

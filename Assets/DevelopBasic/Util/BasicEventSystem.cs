@@ -27,6 +27,8 @@ public static class EventHandler
     public static void Call_OnFlashInput()=>E_OnFlashInput();
     
 #region Interaction Event
+    public static event Action<char> E_OnMirrorText;
+    public static void Call_OnMirrorText(char c)=>E_OnMirrorText?.Invoke(c);
     public static event Action E_OnTransitionBegin;
     public static void Call_OnTransitionBegin()=>E_OnTransitionBegin?.Invoke();
     public static event Action E_OnTransitionEnd;

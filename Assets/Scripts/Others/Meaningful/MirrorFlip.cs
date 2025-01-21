@@ -5,11 +5,6 @@ using UnityEngine;
 public class MirrorFlip : MonoBehaviour
 {
     [SerializeField] private Transform mirrorTrans;
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
