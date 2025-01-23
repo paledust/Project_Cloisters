@@ -53,6 +53,16 @@ public class MirrorTextCatcher : MonoBehaviour
         {
             Vector3 dir = GetReflectDir(rootTrans.position-currentText.transform.position);
             Vector3 up  = GetReflectDir(currentText.transform.up);
+
+            if(currentText.TryFocusMirrorText(hit.point))
+            {
+                mirrorTextShowConstroller.FocusText();
+            }
+            else
+            {
+                mirrorTextShowConstroller.UnfocusText();
+            }
+            mirrorTextShowConstroller.TintText(currentText.m_focusFactor);
             mirrorTextShowConstroller.PlaceText(rootTrans.position + dir * showTextDistance, Quaternion.LookRotation(-GetReflectDir(currentText.transform.forward), up));
         }
     }
@@ -63,6 +73,7 @@ public class MirrorTextCatcher : MonoBehaviour
             currentText.OnMirrorTextHide();
             currentText = null;
 
+            mirrorTextShowConstroller.UnfocusText();
             mirrorTextShowConstroller.HideMirrorText();
         }        
     }

@@ -7,20 +7,29 @@ using DG.Tweening;
 public class MirrorTextShowConstroller : MonoBehaviour
 {
     [SerializeField] private TextMeshPro tmp;
+    private bool isFocusingText = false;
+
+    private static readonly Color clearColor = new Color(1,1,1,0);
+    private static readonly Color maxColor = new Color(1,1,1,0.2f);
+
     public void PlaceText(Vector3 pos, Quaternion rot)
     {
         tmp.transform.position = pos;
         tmp.transform.rotation = rot;
     }
+    public void TintText(float focusFactor)
+    {
+        tmp.color = Color.Lerp(maxColor, clearColor, focusFactor);
+    }
     public void ShowMirrorText(char textChar)
     {
         tmp.text = textChar.ToString();
-        DOTween.Kill(tmp);
-        tmp.DOColor(new Color(1,1,1,0.5f), 2f);
     }
     public void HideMirrorText()
     {
         DOTween.Kill(tmp);
-        tmp.DOColor(new Color(1,1,1,0), 0.1f);
+        tmp.DOColor(clearColor, 0.1f);
     }
+    public void FocusText(){}
+    public void UnfocusText(){}
 }

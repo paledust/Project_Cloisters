@@ -149,7 +149,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.1525183
+  m_Radius: 3
   m_Center: {x: 0.000050122264, y: -0.0881266, z: -0.000000003939566}
 --- !u!114 &540870252
 MonoBehaviour:
@@ -166,6 +166,8 @@ MonoBehaviour:
   foundColor: {r: 2, g: 2, b: 2, a: 1}
   textChar: 77
   fontColor: {fileID: 5025343742690784402}
+  focusRadius: 0.2
+  searchRadius: 0.5
 --- !u!114 &540870253
 MonoBehaviour:
   m_ObjectHideFlags: 0
