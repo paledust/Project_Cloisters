@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class IC_Stylized : IC_Basic
 {
@@ -10,6 +11,7 @@ public class IC_Stylized : IC_Basic
     [SerializeField] private CircleDissolveController circleDissolveController;
     [SerializeField] private GeoFragmentController geoFragmentController;
     [SerializeField] private GeoTextController geoTextController;
+    [SerializeField] private PlayableDirector tl_end;
 
     private bool transitioning = false;
 
@@ -74,8 +76,14 @@ public class IC_Stylized : IC_Basic
     public void OnAllTextOut(){
         EventHandler.Call_OnFlashInput();
         EventHandler.Call_OnEndInteraction(this);
-        StartCoroutine(CommonCoroutine.delayAction(()=>{
-            geoTextController.PutTextTogether();
-        }, 1.2f));
+        StartCoroutine(coroutineEnd());
+    }
+    IEnumerator coroutineEnd(){
+        yield return new WaitForSeconds(1.2f);
+        geoTextController.PutTextTogether();
+        yield return new WaitForSeconds(3f);
+        tl_end.Play();
+        yield return new WaitForSeconds(3.5f);
+        EventHandler.Call_OnInteractionUnreachable(this);
     }
 }

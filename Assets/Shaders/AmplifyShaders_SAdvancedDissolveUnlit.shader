@@ -1,4 +1,4 @@
-// Made with Amplify Shader Editor v1.9.8
+// Made with Amplify Shader Editor v1.9.8.1
 // Available at the Unity Asset Store - http://u3d.as/y3X 
 Shader "AmplifyShaders/Sprite AdvancedDissolve Unlit"
 {
@@ -22,7 +22,7 @@ Shader "AmplifyShaders/Sprite AdvancedDissolve Unlit"
 		[KeywordEnum(Radius,TexBased,U_Direction,V_Direction,World_Direction)] _DissolveType("DissolveType", Float) = 0
 		_RadiusCenterX("RadiusCenterX", Float) = 0.5
 		_RadiusCenterY("RadiusCenterY", Float) = 0.5
-		_DissolveRadius("DissolveRadius", Float) = 0.5
+		_DissolveStart("DissolveStart", Float) = 0.5
 		_DissolveLength("DissolveLength", Float) = 0.1
 		_DissolveGuideTex("DissolveGuideTex", 2D) = "white" {}
 		_EdgeValue("EdgeValue", Float) = 0
@@ -85,7 +85,7 @@ Shader "AmplifyShaders/Sprite AdvancedDissolve Unlit"
 
 			HLSLPROGRAM
 
-			#define ASE_VERSION 19800
+			#define ASE_VERSION 19801
 			#define ASE_SRP_VERSION 120112
 
 
@@ -130,7 +130,7 @@ Shader "AmplifyShaders/Sprite AdvancedDissolve Unlit"
 				UNITY_DEFINE_INSTANCED_PROP(float4, _MainTex_ST)
 				UNITY_DEFINE_INSTANCED_PROP(float4, _SpriteRect)
 				UNITY_DEFINE_INSTANCED_PROP(float2, _NoiseUVOffset)
-				UNITY_DEFINE_INSTANCED_PROP(float, _DissolveRadius)
+				UNITY_DEFINE_INSTANCED_PROP(float, _DissolveStart)
 				UNITY_DEFINE_INSTANCED_PROP(float, _DissolveLength)
 				UNITY_DEFINE_INSTANCED_PROP(float, _EmissionScale)
 				UNITY_DEFINE_INSTANCED_PROP(float, _RNDSeed)
@@ -229,7 +229,7 @@ Shader "AmplifyShaders/Sprite AdvancedDissolve Unlit"
 				UNITY_TRANSFER_INSTANCE_ID(v, o);
 				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
 
-				float3 ase_positionWS = TransformObjectToWorld( (v.positionOS).xyz );
+				float3 ase_positionWS = TransformObjectToWorld( ( v.positionOS ).xyz );
 				o.ase_texcoord3.xyz = ase_positionWS;
 				
 				
@@ -317,8 +317,8 @@ Shader "AmplifyShaders/Sprite AdvancedDissolve Unlit"
 				#else
 				float staticSwitch93 = worldRadiusLength266;
 				#endif
-				float _DissolveRadius_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifyShadersSpriteAdvancedDissolveUnlit,_DissolveRadius);
-				float dissolveRadius151 = _DissolveRadius_Instance;
+				float _DissolveStart_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifyShadersSpriteAdvancedDissolveUnlit,_DissolveStart);
+				float dissolveRadius151 = _DissolveStart_Instance;
 				float _DissolveLength_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifyShadersSpriteAdvancedDissolveUnlit,_DissolveLength);
 				float dissolveLength152 = _DissolveLength_Instance;
 				float temp_output_21_0_g31 = dissolveLength152;
@@ -410,7 +410,7 @@ Shader "AmplifyShaders/Sprite AdvancedDissolve Unlit"
 
 			HLSLPROGRAM
 
-			#define ASE_VERSION 19800
+			#define ASE_VERSION 19801
 			#define ASE_SRP_VERSION 120112
 
 
@@ -455,7 +455,7 @@ Shader "AmplifyShaders/Sprite AdvancedDissolve Unlit"
 				UNITY_DEFINE_INSTANCED_PROP(float4, _MainTex_ST)
 				UNITY_DEFINE_INSTANCED_PROP(float4, _SpriteRect)
 				UNITY_DEFINE_INSTANCED_PROP(float2, _NoiseUVOffset)
-				UNITY_DEFINE_INSTANCED_PROP(float, _DissolveRadius)
+				UNITY_DEFINE_INSTANCED_PROP(float, _DissolveStart)
 				UNITY_DEFINE_INSTANCED_PROP(float, _DissolveLength)
 				UNITY_DEFINE_INSTANCED_PROP(float, _EmissionScale)
 				UNITY_DEFINE_INSTANCED_PROP(float, _RNDSeed)
@@ -553,7 +553,7 @@ Shader "AmplifyShaders/Sprite AdvancedDissolve Unlit"
 				UNITY_TRANSFER_INSTANCE_ID(v, o);
 				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
 
-				float3 ase_positionWS = TransformObjectToWorld( (v.positionOS).xyz );
+				float3 ase_positionWS = TransformObjectToWorld( ( v.positionOS ).xyz );
 				o.ase_texcoord3.xyz = ase_positionWS;
 				
 				
@@ -642,8 +642,8 @@ Shader "AmplifyShaders/Sprite AdvancedDissolve Unlit"
 				#else
 				float staticSwitch93 = worldRadiusLength266;
 				#endif
-				float _DissolveRadius_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifyShadersSpriteAdvancedDissolveUnlit,_DissolveRadius);
-				float dissolveRadius151 = _DissolveRadius_Instance;
+				float _DissolveStart_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifyShadersSpriteAdvancedDissolveUnlit,_DissolveStart);
+				float dissolveRadius151 = _DissolveStart_Instance;
 				float _DissolveLength_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifyShadersSpriteAdvancedDissolveUnlit,_DissolveLength);
 				float dissolveLength152 = _DissolveLength_Instance;
 				float temp_output_21_0_g31 = dissolveLength152;
@@ -730,7 +730,7 @@ Shader "AmplifyShaders/Sprite AdvancedDissolve Unlit"
 
             HLSLPROGRAM
 
-			#define ASE_VERSION 19800
+			#define ASE_VERSION 19801
 			#define ASE_SRP_VERSION 120112
 
 
@@ -768,7 +768,7 @@ Shader "AmplifyShaders/Sprite AdvancedDissolve Unlit"
 				UNITY_DEFINE_INSTANCED_PROP(float4, _MainTex_ST)
 				UNITY_DEFINE_INSTANCED_PROP(float4, _SpriteRect)
 				UNITY_DEFINE_INSTANCED_PROP(float2, _NoiseUVOffset)
-				UNITY_DEFINE_INSTANCED_PROP(float, _DissolveRadius)
+				UNITY_DEFINE_INSTANCED_PROP(float, _DissolveStart)
 				UNITY_DEFINE_INSTANCED_PROP(float, _DissolveLength)
 				UNITY_DEFINE_INSTANCED_PROP(float, _EmissionScale)
 				UNITY_DEFINE_INSTANCED_PROP(float, _RNDSeed)
@@ -858,7 +858,7 @@ Shader "AmplifyShaders/Sprite AdvancedDissolve Unlit"
 				UNITY_TRANSFER_INSTANCE_ID(v, o);
 				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
 
-				float3 ase_positionWS = TransformObjectToWorld( (v.positionOS).xyz );
+				float3 ase_positionWS = TransformObjectToWorld( ( v.positionOS ).xyz );
 				o.ase_texcoord.xyz = ase_positionWS;
 				
 				o.ase_texcoord1.xy = v.ase_texcoord.xy;
@@ -941,8 +941,8 @@ Shader "AmplifyShaders/Sprite AdvancedDissolve Unlit"
 				#else
 				float staticSwitch93 = worldRadiusLength266;
 				#endif
-				float _DissolveRadius_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifyShadersSpriteAdvancedDissolveUnlit,_DissolveRadius);
-				float dissolveRadius151 = _DissolveRadius_Instance;
+				float _DissolveStart_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifyShadersSpriteAdvancedDissolveUnlit,_DissolveStart);
+				float dissolveRadius151 = _DissolveStart_Instance;
 				float _DissolveLength_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifyShadersSpriteAdvancedDissolveUnlit,_DissolveLength);
 				float dissolveLength152 = _DissolveLength_Instance;
 				float temp_output_21_0_g31 = dissolveLength152;
@@ -1009,7 +1009,7 @@ Shader "AmplifyShaders/Sprite AdvancedDissolve Unlit"
 
             HLSLPROGRAM
 
-			#define ASE_VERSION 19800
+			#define ASE_VERSION 19801
 			#define ASE_SRP_VERSION 120112
 
 
@@ -1047,7 +1047,7 @@ Shader "AmplifyShaders/Sprite AdvancedDissolve Unlit"
 				UNITY_DEFINE_INSTANCED_PROP(float4, _MainTex_ST)
 				UNITY_DEFINE_INSTANCED_PROP(float4, _SpriteRect)
 				UNITY_DEFINE_INSTANCED_PROP(float2, _NoiseUVOffset)
-				UNITY_DEFINE_INSTANCED_PROP(float, _DissolveRadius)
+				UNITY_DEFINE_INSTANCED_PROP(float, _DissolveStart)
 				UNITY_DEFINE_INSTANCED_PROP(float, _DissolveLength)
 				UNITY_DEFINE_INSTANCED_PROP(float, _EmissionScale)
 				UNITY_DEFINE_INSTANCED_PROP(float, _RNDSeed)
@@ -1136,7 +1136,7 @@ Shader "AmplifyShaders/Sprite AdvancedDissolve Unlit"
 				UNITY_TRANSFER_INSTANCE_ID(v, o);
 				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
 
-				float3 ase_positionWS = TransformObjectToWorld( (v.positionOS).xyz );
+				float3 ase_positionWS = TransformObjectToWorld( ( v.positionOS ).xyz );
 				o.ase_texcoord.xyz = ase_positionWS;
 				
 				o.ase_texcoord1.xy = v.ase_texcoord.xy;
@@ -1219,8 +1219,8 @@ Shader "AmplifyShaders/Sprite AdvancedDissolve Unlit"
 				#else
 				float staticSwitch93 = worldRadiusLength266;
 				#endif
-				float _DissolveRadius_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifyShadersSpriteAdvancedDissolveUnlit,_DissolveRadius);
-				float dissolveRadius151 = _DissolveRadius_Instance;
+				float _DissolveStart_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifyShadersSpriteAdvancedDissolveUnlit,_DissolveStart);
+				float dissolveRadius151 = _DissolveStart_Instance;
 				float _DissolveLength_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifyShadersSpriteAdvancedDissolveUnlit,_DissolveLength);
 				float dissolveLength152 = _DissolveLength_Instance;
 				float temp_output_21_0_g31 = dissolveLength152;
@@ -1276,13 +1276,14 @@ Shader "AmplifyShaders/Sprite AdvancedDissolve Unlit"
         }
 		
 	}
-	CustomEditor "ASEMaterialInspector"
+	CustomEditor "AmplifyShaderEditor.MaterialInspector"
 	FallBack "Hidden/Shader Graph/FallbackError"
 	
 	Fallback "Hidden/InternalErrorShader"
 }
 /*ASEBEGIN
-Version=19800
+Version=19801
+Node;AmplifyShaderEditor.CommentaryNode;306;-7794,-386;Inherit;False;637.4478;987.8835;Comment;12;125;162;151;152;166;35;25;26;81;160;307;129;Parameter;1,1,1,1;0;0
 Node;AmplifyShaderEditor.CommentaryNode;262;-6395.907,1233.859;Inherit;False;2424.785;713.9421;Comment;15;248;249;238;250;252;253;251;245;254;247;255;237;241;242;279;World Direction Dissolve;1,1,1,1;0;0
 Node;AmplifyShaderEditor.TexturePropertyNode;129;-7744,-128;Inherit;True;Property;_MainTex;MainTex;0;0;Create;True;0;0;0;False;0;False;None;None;False;white;Auto;Texture2D;-1;0;2;SAMPLER2D;0;SAMPLERSTATE;1
 Node;AmplifyShaderEditor.RangedFloatNode;238;-6262.403,1492.29;Inherit;False;Property;_DissolveDirection;DissolveDirection;32;0;Create;True;0;0;0;False;0;False;0;0;0;360;0;1;FLOAT;0
@@ -1290,7 +1291,7 @@ Node;AmplifyShaderEditor.RegisterLocalVarNode;307;-7456,-144;Inherit;False;mainT
 Node;AmplifyShaderEditor.RadiansOpNode;250;-5965.071,1493.524;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.GetLocalVarNode;308;-6048,-1168;Inherit;False;307;mainTex;1;0;OBJECT;;False;1;SAMPLER2D;0
 Node;AmplifyShaderEditor.SinOpNode;249;-5768.094,1546.089;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
-Node;AmplifyShaderEditor.TexelSizeNode;131;-5872,-1168;Inherit;False;-1;1;0;SAMPLER2D;;False;5;FLOAT4;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.TexelSizeNode;131;-5872,-1168;Inherit;False;-1;Create;1;0;SAMPLER2D;;False;5;FLOAT4;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.CosOpNode;248;-5770.094,1444.09;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.NegateNode;252;-5602.176,1545.131;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.DynamicAppendNode;132;-5680,-1104;Inherit;False;FLOAT2;4;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;1;FLOAT2;0
@@ -1306,11 +1307,11 @@ Node;AmplifyShaderEditor.RangedFloatNode;139;-5088,-1104;Inherit;False;Property;
 Node;AmplifyShaderEditor.RangedFloatNode;140;-5088,-1024;Inherit;False;Property;_RadiusCenterY;RadiusCenterY;16;0;Create;True;0;0;0;False;0;False;0.5;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.Vector3Node;247;-5186.674,1647.569;Inherit;False;Constant;_Vector1;Vector 1;32;0;Create;True;0;0;0;False;0;False;1,0,0;0,0,0;0;4;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3
 Node;AmplifyShaderEditor.CommentaryNode;213;-7776,-1008;Inherit;False;1073.408;482.3657;Comment;7;206;207;126;90;165;89;208;world UV;1,1,1,1;0;0
-Node;AmplifyShaderEditor.Vector2Node;125;-7760,96;Inherit;False;Property;_DissolvePanSpeed;DissolvePanSpeed;8;0;Create;True;0;0;0;False;0;False;0,0;0,0;0;3;FLOAT2;0;FLOAT;1;FLOAT;2
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;254;-4972.504,1550.082;Inherit;False;2;2;0;FLOAT3x3;0,0,0,1,1,1,1,0,1;False;1;FLOAT3;0,0,0;False;1;FLOAT3;0
 Node;AmplifyShaderEditor.WorldPosInputsNode;237;-4961.518,1341.669;Inherit;False;0;4;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3
 Node;AmplifyShaderEditor.RegisterLocalVarNode;143;-4912,-1232;Inherit;False;uv;-1;True;1;0;FLOAT2;0,0;False;1;FLOAT2;0
 Node;AmplifyShaderEditor.DynamicAppendNode;141;-4912,-1072;Inherit;False;FLOAT2;4;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;1;FLOAT2;0
+Node;AmplifyShaderEditor.Vector2Node;125;-7760,96;Inherit;False;Property;_DissolvePanSpeed;DissolvePanSpeed;8;0;Create;True;0;0;0;False;0;False;0,0;0,0;0;3;FLOAT2;0;FLOAT;1;FLOAT;2
 Node;AmplifyShaderEditor.WorldPosInputsNode;89;-7728,-784;Inherit;False;0;4;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3
 Node;AmplifyShaderEditor.RegisterLocalVarNode;160;-7520,96;Inherit;False;dissolvePanSpeed;-1;True;1;0;FLOAT2;0,0;False;1;FLOAT2;0
 Node;AmplifyShaderEditor.ComponentMaskNode;255;-4825.753,1549.034;Inherit;False;True;True;False;True;1;0;FLOAT3;0,0,0;False;1;FLOAT2;0
@@ -1331,13 +1332,13 @@ Node;AmplifyShaderEditor.GetLocalVarNode;175;-3152,-80;Inherit;False;143;uv;1;0;
 Node;AmplifyShaderEditor.SimpleAddOpNode;207;-7072,-832;Inherit;False;2;2;0;FLOAT2;0,0;False;1;FLOAT2;0,0;False;1;FLOAT2;0
 Node;AmplifyShaderEditor.TexturePropertyNode;81;-7744,-336;Inherit;True;Property;_NoiseTex;NoiseTex;6;0;Create;True;0;0;0;False;0;False;97a921d248636704ead1a9dcc3b43211;97a921d248636704ead1a9dcc3b43211;False;white;Auto;Texture2D;-1;0;2;SAMPLER2D;0;SAMPLERSTATE;1
 Node;AmplifyShaderEditor.RangedFloatNode;26;-7744,320;Inherit;False;InstancedProperty;_DissolveLength;DissolveLength;18;0;Create;True;0;0;0;False;0;False;0.1;0;0;0;0;1;FLOAT;0
-Node;AmplifyShaderEditor.RangedFloatNode;25;-7744,224;Inherit;False;InstancedProperty;_DissolveRadius;DissolveRadius;17;0;Create;True;0;0;0;False;0;False;0.5;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.RangedFloatNode;35;-7744,400;Inherit;False;Property;_PatternScale;PatternScale;13;0;Create;True;0;0;0;False;0;False;1;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.ComponentMaskNode;195;-2944,48;Inherit;False;False;True;True;True;1;0;FLOAT2;0,0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.ComponentMaskNode;176;-2912,-80;Inherit;False;True;False;True;True;1;0;FLOAT2;0,0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.OneMinusNode;272;-2848,-320;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.GetLocalVarNode;269;-2944,-432;Inherit;False;266;worldRadiusLength;1;0;OBJECT;;False;1;FLOAT;0
 Node;AmplifyShaderEditor.GetLocalVarNode;280;-2976,176;Inherit;False;279;worldLineDissolve;1;0;OBJECT;;False;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;25;-7744,224;Inherit;False;InstancedProperty;_DissolveStart;DissolveStart;17;0;Create;True;0;0;0;False;0;False;0.5;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.RegisterLocalVarNode;166;-7456,-336;Inherit;False;noiseTex;-1;True;1;0;SAMPLER2D;;False;1;SAMPLER2D;0
 Node;AmplifyShaderEditor.RegisterLocalVarNode;152;-7520,320;Inherit;False;dissolveLength;-1;True;1;0;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.RegisterLocalVarNode;151;-7520,224;Inherit;False;dissolveRadius;-1;True;1;0;FLOAT;0;False;1;FLOAT;0
@@ -1428,11 +1429,10 @@ Node;AmplifyShaderEditor.SimpleMultiplyOpNode;229;1637.388,-26.47536;Inherit;Fal
 Node;AmplifyShaderEditor.WireNode;230;2640,-384;Inherit;False;1;0;FLOAT3;0,0,0;False;1;FLOAT3;0
 Node;AmplifyShaderEditor.StaticSwitch;231;1824,-128;Inherit;False;Property;_Use_Blink;Use_Blink;27;0;Create;True;0;0;0;False;0;False;0;0;0;True;;Toggle;2;Key0;Key1;Create;True;True;All;9;1;FLOAT;0;False;0;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;4;FLOAT;0;False;5;FLOAT;0;False;6;FLOAT;0;False;7;FLOAT;0;False;8;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.DynamicAppendNode;122;2784,-304;Inherit;False;FLOAT4;4;0;FLOAT3;0,0,0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;1;FLOAT4;0
-Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;73;771.9996,-195.7002;Float;False;False;-1;2;ASEMaterialInspector;0;15;New Amplify Shader;cf964e524c8e69742b1d21fbe2ebcc4a;True;Sprite Unlit Forward;0;1;Sprite Unlit Forward;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;True;0;True;12;all;0;False;True;2;5;False;;10;False;;3;1;False;;10;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;2;False;;True;3;False;;True;True;0;False;;0;False;;True;1;LightMode=UniversalForward;False;False;0;Hidden/InternalErrorShader;0;0;Standard;0;False;0
-Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;74;771.9996,-195.7002;Float;False;False;-1;2;ASEMaterialInspector;0;15;New Amplify Shader;cf964e524c8e69742b1d21fbe2ebcc4a;True;SceneSelectionPass;0;2;SceneSelectionPass;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;True;0;True;12;all;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;1;LightMode=SceneSelectionPass;False;False;0;Hidden/InternalErrorShader;0;0;Standard;0;False;0
-Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;75;771.9996,-195.7002;Float;False;False;-1;2;ASEMaterialInspector;0;15;New Amplify Shader;cf964e524c8e69742b1d21fbe2ebcc4a;True;ScenePickingPass;0;3;ScenePickingPass;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;True;0;True;12;all;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;1;LightMode=Picking;False;False;0;Hidden/InternalErrorShader;0;0;Standard;0;False;0
-Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;72;3024,-304;Float;False;True;-1;2;ASEMaterialInspector;0;15;AmplifyShaders/Sprite AdvancedDissolve Unlit;cf964e524c8e69742b1d21fbe2ebcc4a;True;Sprite Unlit;0;0;Sprite Unlit;4;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;True;0;True;12;all;0;False;True;2;5;False;;10;False;;3;1;False;;10;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;2;False;;True;3;False;;True;True;0;False;;0;False;;True;1;LightMode=Universal2D;False;False;0;Hidden/InternalErrorShader;0;0;Standard;3;Vertex Position;1;0;Debug Display;0;0;External Alpha;0;0;0;4;True;True;True;True;False;;False;0
-Node;AmplifyShaderEditor.CommentaryNode;306;-7794,-386;Inherit;False;634.4478;987.8835;Comment;0;Parameter;1,1,1,1;0;0
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;73;771.9996,-195.7002;Float;False;False;-1;2;AmplifyShaderEditor.MaterialInspector;0;15;New Amplify Shader;cf964e524c8e69742b1d21fbe2ebcc4a;True;Sprite Unlit Forward;0;1;Sprite Unlit Forward;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;True;0;True;12;all;0;False;True;2;5;False;;10;False;;3;1;False;;10;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;2;False;;True;3;False;;True;True;0;False;;0;False;;True;1;LightMode=UniversalForward;False;False;0;Hidden/InternalErrorShader;0;0;Standard;0;False;0
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;74;771.9996,-195.7002;Float;False;False;-1;2;AmplifyShaderEditor.MaterialInspector;0;15;New Amplify Shader;cf964e524c8e69742b1d21fbe2ebcc4a;True;SceneSelectionPass;0;2;SceneSelectionPass;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;True;0;True;12;all;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;1;LightMode=SceneSelectionPass;False;False;0;Hidden/InternalErrorShader;0;0;Standard;0;False;0
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;75;771.9996,-195.7002;Float;False;False;-1;2;AmplifyShaderEditor.MaterialInspector;0;15;New Amplify Shader;cf964e524c8e69742b1d21fbe2ebcc4a;True;ScenePickingPass;0;3;ScenePickingPass;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;True;0;True;12;all;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;1;LightMode=Picking;False;False;0;Hidden/InternalErrorShader;0;0;Standard;0;False;0
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;72;3024,-304;Float;False;True;-1;2;AmplifyShaderEditor.MaterialInspector;0;15;AmplifyShaders/Sprite AdvancedDissolve Unlit;cf964e524c8e69742b1d21fbe2ebcc4a;True;Sprite Unlit;0;0;Sprite Unlit;4;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;True;0;True;12;all;0;False;True;2;5;False;;10;False;;3;1;False;;10;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;2;False;;True;3;False;;True;True;0;False;;0;False;;True;1;LightMode=Universal2D;False;False;0;Hidden/InternalErrorShader;0;0;Standard;3;Vertex Position;1;0;Debug Display;0;0;External Alpha;0;0;0;4;True;True;True;True;False;;False;0
 WireConnection;307;0;129;0
 WireConnection;250;0;238;0
 WireConnection;249;0;250;0
@@ -1585,4 +1585,4 @@ WireConnection;122;0;230;0
 WireConnection;122;3;231;0
 WireConnection;72;1;122;0
 ASEEND*/
-//CHKSM=12F7938A38D655E532266A9FD4C4FC4083F84AB1
+//CHKSM=99F58901AEB1FF2D1DD3021B044D44CB77014191

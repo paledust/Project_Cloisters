@@ -10,7 +10,7 @@ public class MirrorTextShowConstroller : MonoBehaviour
     private bool isFocusingText = false;
 
     private static readonly Color clearColor = new Color(1,1,1,0);
-    private static readonly Color maxColor = new Color(1,1,1,0.2f);
+    private static readonly Color maxColor = new Color(1,1,1,0.1f);
 
     public void PlaceText(Vector3 pos, Quaternion rot)
     {
@@ -30,6 +30,18 @@ public class MirrorTextShowConstroller : MonoBehaviour
         DOTween.Kill(tmp);
         tmp.DOColor(clearColor, 0.1f);
     }
-    public void FocusText(){}
-    public void UnfocusText(){}
+    public void FocusText()
+    {
+        if(!isFocusingText)
+        {
+            isFocusingText = true;
+        }
+    }
+    public void UnfocusText()
+    {
+        if(isFocusingText)
+        {
+            isFocusingText = false;
+        }
+    }
 }

@@ -10,20 +10,20 @@ public class IC_Meaningful : IC_Basic
     public struct TextShownData
     {
         public string recieveChar;
-        public TextMeshPro[] showingTMP;
+        public SpriteRenderer[] spriteRenderers;
     }
     [SerializeField] private Clickable_ObjectRotator clickable_Mirror;
     [SerializeField] private TextShownData[] textShownDatas;
-    private Dictionary<char, TextMeshPro[]> showingDict;
+    private Dictionary<char, SpriteRenderer[]> showingDict;
     void Awake()
     {
-        showingDict = new Dictionary<char, TextMeshPro[]>();
+        showingDict = new Dictionary<char, SpriteRenderer[]>();
         foreach(var item in textShownDatas)
         {
-            showingDict.Add(item.recieveChar[0], item.showingTMP);
-            foreach(var text in item.showingTMP)
+            showingDict.Add(item.recieveChar[0], item.spriteRenderers);
+            foreach(var spriterenderer in item.spriteRenderers)
             {
-                text.color = new Color(1,1,1,0);
+                spriterenderer.color = new Color(1,1,1,0);
             }
         }
     }
@@ -43,16 +43,17 @@ public class IC_Meaningful : IC_Basic
     {
         if(showingDict.ContainsKey(c))
         {
-            foreach(var value in showingDict[c])
+            foreach(var spriterenderer in showingDict[c])
             {
-                value.DOColor(Color.white, 2f).SetEase(Ease.OutQuad);
+                spriterenderer.DOKill();
+                spriterenderer.DOFade(1, 2f).SetEase(Ease.InOutQuad)
+                .OnComplete(()=>{
+                    showingDict.Remove(c);
+                    if(showingDict.Count == 0)
+                    {
+                    }
+                });
             }
-            showingDict.Remove(c);
-        }
-
-        if(showingDict.Count == 0)
-        {
-            EventHandler.Call_OnEndInteraction(this);
         }
     }
 }
