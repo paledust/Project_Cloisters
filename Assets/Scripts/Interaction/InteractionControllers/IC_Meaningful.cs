@@ -1,33 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
-using TMPro;
 using UnityEngine;
 
 public class IC_Meaningful : IC_Basic
 {
     [System.Serializable]
-    public struct TextShownData
+    public class TextShownData
     {
-        public string recieveChar;
-        public SpriteRenderer[] spriteRenderers;
-        public Mesh textMesh;
+        public char recieveChar;
+        public Transform[] charPoses;
     }
     [SerializeField] private Clickable_ObjectRotator clickable_Mirror;
-    [SerializeField] private TextShownData[] textShownDatas;
-    private Dictionary<char, SpriteRenderer[]> showingDict;
-    void Awake()
-    {
-        showingDict = new Dictionary<char, SpriteRenderer[]>();
-        foreach(var item in textShownDatas)
-        {
-            showingDict.Add(item.recieveChar[0], item.spriteRenderers);
-            foreach(var spriterenderer in item.spriteRenderers)
-            {
-                spriterenderer.color = new Color(1,1,1,0);
-            }
-        }
-    }
+    [SerializeField] private List<TextShownData> textShownDatas;
+
     protected override void OnInteractionStart()
     {
         base.OnInteractionStart();
@@ -40,21 +26,35 @@ public class IC_Meaningful : IC_Basic
         EventHandler.E_OnMirrorText -= ShowText;
         clickable_Mirror.DisableHitbox();
     }
-    void ShowText(char c)
+    void ShowText(MirrorText mirrorText)
     {
-        if(showingDict.ContainsKey(c))
+        var data = textShownDatas.Find(x=>x.recieveChar==mirrorText.TextChar);
+        if(data == null) return;
+
+        textShownDatas.Remove(data);
+
+        int count = 0;
+        MirrorText tempText = mirrorText;
+        foreach(var pos in data.charPoses)
         {
-            foreach(var spriterenderer in showingDict[c])
+            if(count > 0)
             {
-                spriterenderer.DOKill();
-                spriterenderer.DOFade(1, 2f).SetEase(Ease.InOutQuad)
-                .OnComplete(()=>{
-                    showingDict.Remove(c);
-                    if(showingDict.Count == 0)
-                    {
-                    }
-                });
+                tempText = Instantiate(mirrorText.gameObject).GetComponent<MirrorText>();
+                tempText.transform.position = mirrorText.transform.position;
+                tempText.transform.rotation = mirrorText.transform.rotation;
+                tempText.CopyText(mirrorText);
             }
+            float duration = Random.Range(2,2.5f);
+            
+            tempText.transform.DORotateQuaternion(Quaternion.identity, duration).SetEase(Ease.InOutQuad);
+            tempText.transform.DOScale(pos.localScale, duration).SetEase(Ease.InOutQuad);
+            tempText.transform.DOMove(pos.position, duration).SetEase(Ease.InOutQuad)
+            .OnComplete(()=>{
+                if(textShownDatas.Count == 0)
+                {
+                }
+            });
+            count ++;
         }
     }
 }

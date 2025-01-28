@@ -34,7 +34,6 @@ public class MirrorTextCatcher : MonoBehaviour
                 {
                     TryClearCurrentText();
                     currentText = mirrorText;
-                    currentText.OnMirrorTextFound();
 
                     mirrorTextShowConstroller.ShowMirrorText(currentText.TextChar);
                 }
@@ -62,6 +61,7 @@ public class MirrorTextCatcher : MonoBehaviour
             {
                 mirrorTextShowConstroller.UnfocusText();
             }
+            
             mirrorTextShowConstroller.TintText(currentText.m_focusFactor);
             mirrorTextShowConstroller.PlaceText(rootTrans.position + dir * showTextDistance, Quaternion.LookRotation(-GetReflectDir(currentText.transform.forward), up));
         }

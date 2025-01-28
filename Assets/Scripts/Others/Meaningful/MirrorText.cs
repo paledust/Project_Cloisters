@@ -29,7 +29,16 @@ public class MirrorText : MonoBehaviour
     {
         originColor = fontColor.Tint;
     }
-    public void OnMirrorTextFound(){}
+    public void CopyText(MirrorText mirrorText)
+    {
+        isFocus = mirrorText.isFocus;
+        isRevealed = mirrorText.isRevealed;
+        focusFactor = mirrorText.focusFactor;
+        textChar = mirrorText.textChar;
+        hitbox.enabled = mirrorText.hitbox.enabled;
+        fontColor.Tint = mirrorText.fontColor.Tint;
+        DOTween.To(()=>fontColor.Tint, x=>fontColor.Tint = x, Color.white, 2f);
+    }
     public bool TryFocusMirrorText(Vector3 hitPoint)
     {
         Vector3 diff = hitPoint - transform.position;
@@ -43,16 +52,19 @@ public class MirrorText : MonoBehaviour
             if(!isFocus)
             {
                 isFocus = true;
+                transform.DOKill();
+                transform.DOScale(0.18f, 1f)
+                .SetEase(Ease.InQuad);
+
                 DOTween.Kill(this);
                 DOTween.To(()=>fontColor.Tint, x=>fontColor.Tint = x, foundColor, 1f)
                 .SetEase(Ease.InQuad)
                 .SetId(this)
                 .OnComplete(()=>{
-                    isFocus = false;
-                    isRevealed = true;
                     hitbox.enabled = false;
+                    isRevealed = true;
+                    isFocus = false;
                     p_spot.Play();
-                    EventHandler.Call_OnMirrorText(textChar);
 
                 //Reposition TextMesh
                     Vector3 dir = GetReflectDir(mirrorCenter.position-transform.position);
@@ -65,13 +77,15 @@ public class MirrorText : MonoBehaviour
                     transform.position = newPos;
                     transform.rotation = Quaternion.LookRotation(-GetReflectDir(transform.forward), up);
                     transform.localScale = transform.localScale * 0.25f;
+                    fontColor.gameObject.layer = LayerMask.NameToLayer("NoReflex");
+
                     transform.DOKill();
                     transform.DOScale(0.27f*0.25f, 0.5f)
-                    .SetEase(Ease.OutBack, 2.5f);
+                    .SetEase(Ease.OutBack, 2.5f).OnComplete(()=>{
+                        EventHandler.Call_OnMirrorText(this);
+                        DOTween.To(()=>fontColor.Tint, x=>fontColor.Tint = x, Color.white, 2f);
+                    });
                 });
-                transform.DOKill();
-                transform.DOScale(0.18f, 1f)
-                .SetEase(Ease.InQuad);
             }
         }
         else
