@@ -11,6 +11,7 @@ public class IC_Meaningful : IC_Basic
     {
         public string recieveChar;
         public SpriteRenderer[] spriteRenderers;
+        public Mesh textMesh;
     }
     [SerializeField] private Clickable_ObjectRotator clickable_Mirror;
     [SerializeField] private TextShownData[] textShownDatas;

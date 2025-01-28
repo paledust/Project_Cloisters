@@ -10129,7 +10129,7 @@ PrefabInstance:
     - target: {fileID: 540870252, guid: 92d13b7e87071984fbd52493e147dc9e, type: 3}
       propertyPath: mirrorCenter
       value: 
-      objectReference: {fileID: 906301264}
+      objectReference: {fileID: 1669217538}
     - target: {fileID: 2030039656246198959, guid: 92d13b7e87071984fbd52493e147dc9e,
         type: 3}
       propertyPath: m_Name
@@ -55043,7 +55043,7 @@ PrefabInstance:
     - target: {fileID: 540870252, guid: 92d13b7e87071984fbd52493e147dc9e, type: 3}
       propertyPath: mirrorCenter
       value: 
-      objectReference: {fileID: 906301264}
+      objectReference: {fileID: 1669217538}
     - target: {fileID: 2030039656246198959, guid: 92d13b7e87071984fbd52493e147dc9e,
         type: 3}
       propertyPath: m_Name
@@ -55932,7 +55932,7 @@ PrefabInstance:
     - target: {fileID: 540870252, guid: 92d13b7e87071984fbd52493e147dc9e, type: 3}
       propertyPath: mirrorCenter
       value: 
-      objectReference: {fileID: 906301264}
+      objectReference: {fileID: 1669217538}
     - target: {fileID: 2030039656246198959, guid: 92d13b7e87071984fbd52493e147dc9e,
         type: 3}
       propertyPath: m_Name
@@ -67975,7 +67975,7 @@ PrefabInstance:
     - target: {fileID: 540870252, guid: 92d13b7e87071984fbd52493e147dc9e, type: 3}
       propertyPath: mirrorCenter
       value: 
-      objectReference: {fileID: 906301264}
+      objectReference: {fileID: 1669217538}
     - target: {fileID: 2030039656246198959, guid: 92d13b7e87071984fbd52493e147dc9e,
         type: 3}
       propertyPath: m_Name
@@ -84061,7 +84061,7 @@ PrefabInstance:
     - target: {fileID: 540870252, guid: 92d13b7e87071984fbd52493e147dc9e, type: 3}
       propertyPath: mirrorCenter
       value: 
-      objectReference: {fileID: 906301264}
+      objectReference: {fileID: 1669217538}
     - target: {fileID: 2030039656246198959, guid: 92d13b7e87071984fbd52493e147dc9e,
         type: 3}
       propertyPath: m_Name
@@ -84305,7 +84305,7 @@ PrefabInstance:
     - target: {fileID: 540870252, guid: 92d13b7e87071984fbd52493e147dc9e, type: 3}
       propertyPath: mirrorCenter
       value: 
-      objectReference: {fileID: 906301264}
+      objectReference: {fileID: 1669217538}
     - target: {fileID: 2030039656246198959, guid: 92d13b7e87071984fbd52493e147dc9e,
         type: 3}
       propertyPath: m_Name
@@ -84584,31 +84584,49 @@ MonoBehaviour:
   - recieveChar: M
     spriteRenderers:
     - {fileID: 303717302}
+    textMesh: {fileID: -3214572557560747977, guid: 38ca3a36d6548984fb65b6e7fe742e28,
+      type: 3}
   - recieveChar: e
     spriteRenderers:
     - {fileID: 106801063}
+    textMesh: {fileID: -6802166547658790415, guid: 38ca3a36d6548984fb65b6e7fe742e28,
+      type: 3}
   - recieveChar: a
     spriteRenderers:
     - {fileID: 242351484}
+    textMesh: {fileID: 156805814407401358, guid: 38ca3a36d6548984fb65b6e7fe742e28,
+      type: 3}
   - recieveChar: n
     spriteRenderers:
     - {fileID: 455285160}
     - {fileID: 1423675376}
+    textMesh: {fileID: 7108973131618760135, guid: 38ca3a36d6548984fb65b6e7fe742e28,
+      type: 3}
   - recieveChar: i
     spriteRenderers:
     - {fileID: 1357420391}
+    textMesh: {fileID: -2521245407137789825, guid: 38ca3a36d6548984fb65b6e7fe742e28,
+      type: 3}
   - recieveChar: g
     spriteRenderers:
     - {fileID: 776429594}
+    textMesh: {fileID: -7393420385775474653, guid: 38ca3a36d6548984fb65b6e7fe742e28,
+      type: 3}
   - recieveChar: f
     spriteRenderers:
     - {fileID: 2099696860}
+    textMesh: {fileID: -5109216338744078623, guid: 38ca3a36d6548984fb65b6e7fe742e28,
+      type: 3}
   - recieveChar: u
     spriteRenderers:
     - {fileID: 1885244727}
+    textMesh: {fileID: -3212728170383785931, guid: 38ca3a36d6548984fb65b6e7fe742e28,
+      type: 3}
   - recieveChar: l
     spriteRenderers:
     - {fileID: 1174903860}
+    textMesh: {fileID: 582977817089021278, guid: 38ca3a36d6548984fb65b6e7fe742e28,
+      type: 3}
 --- !u!114 &2005268744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85012,7 +85030,7 @@ PrefabInstance:
     - target: {fileID: 540870252, guid: 92d13b7e87071984fbd52493e147dc9e, type: 3}
       propertyPath: mirrorCenter
       value: 
-      objectReference: {fileID: 906301264}
+      objectReference: {fileID: 1669217538}
     - target: {fileID: 2030039656246198959, guid: 92d13b7e87071984fbd52493e147dc9e,
         type: 3}
       propertyPath: m_Name
@@ -85332,7 +85350,7 @@ PrefabInstance:
     - target: {fileID: 540870252, guid: 92d13b7e87071984fbd52493e147dc9e, type: 3}
       propertyPath: mirrorCenter
       value: 
-      objectReference: {fileID: 906301264}
+      objectReference: {fileID: 1669217538}
     - target: {fileID: 2030039656246198959, guid: 92d13b7e87071984fbd52493e147dc9e,
         type: 3}
       propertyPath: m_Name
@@ -90986,7 +91004,7 @@ PrefabInstance:
     - target: {fileID: 540870252, guid: 92d13b7e87071984fbd52493e147dc9e, type: 3}
       propertyPath: mirrorCenter
       value: 
-      objectReference: {fileID: 906301264}
+      objectReference: {fileID: 1669217538}
     - target: {fileID: 2030039656246198959, guid: 92d13b7e87071984fbd52493e147dc9e,
         type: 3}
       propertyPath: m_Name

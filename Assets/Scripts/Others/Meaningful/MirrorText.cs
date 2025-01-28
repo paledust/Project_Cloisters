@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-using System.Runtime.CompilerServices;
 
 public class MirrorText : MonoBehaviour
 {
@@ -14,6 +13,9 @@ public class MirrorText : MonoBehaviour
     [SerializeField] private Collider hitbox;
     [SerializeField] private Transform mirrorCenter;
     [SerializeField] private ParticleSystem p_spot;
+[Header("Motion")]
+    [SerializeField] private AngleMotion angleMotion;
+    [SerializeField] private FloatingMotion floatMotion;
 
     private Color originColor;
     private bool isFocus = false;
@@ -51,8 +53,20 @@ public class MirrorText : MonoBehaviour
                     hitbox.enabled = false;
                     p_spot.Play();
                     EventHandler.Call_OnMirrorText(textChar);
+
+                //Reposition TextMesh
+                    Vector3 dir = GetReflectDir(mirrorCenter.position-transform.position);
+                    Vector3 up  = GetReflectDir(transform.up);
+                    angleMotion.enabled = false;
+                    floatMotion.enabled = false;
+
+                    Vector3 newPos = mirrorCenter.position - dir;
+                    newPos = Camera.main.transform.position + (newPos-Camera.main.transform.position)*0.25f;
+                    transform.position = newPos;
+                    transform.rotation = Quaternion.LookRotation(-GetReflectDir(transform.forward), up);
+                    transform.localScale = transform.localScale * 0.25f;
                     transform.DOKill();
-                    transform.DOScale(0.27f, 0.5f)
+                    transform.DOScale(0.27f*0.25f, 0.5f)
                     .SetEase(Ease.OutBack, 2.5f);
                 });
                 transform.DOKill();
@@ -69,6 +83,12 @@ public class MirrorText : MonoBehaviour
         }
         
         return isFocus;
+    }
+    //InDirection pointing to mirror, output direction point outside of mirror
+    Vector3 GetReflectDir(in Vector3 inDir)
+    {
+        Vector3 n = Vector3.Dot(mirrorCenter.forward, inDir) * mirrorCenter.forward;
+        return inDir - n*2;
     }
     public void OnMirrorTextHide()
     {
