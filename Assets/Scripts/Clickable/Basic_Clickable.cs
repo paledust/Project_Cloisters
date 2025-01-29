@@ -14,12 +14,14 @@ public abstract class Basic_Clickable : MonoBehaviour
 
     public event Action onClick;
     public event Action onRelease;
+    public event Action onHover;
+    public event Action onExitHover;
     
     void Reset()=>hitbox = GetComponent<Collider>();
 
 #region Interaction Function
-    public virtual void OnHover(PlayerController player){}
-    public virtual void OnExitHover(){}
+    public virtual void OnHover(PlayerController player){onHover?.Invoke();}
+    public virtual void OnExitHover(){onExitHover?.Invoke();}
     public virtual void OnClick(PlayerController player, Vector3 hitPos){
         isControlling = true;
         onClick?.Invoke();

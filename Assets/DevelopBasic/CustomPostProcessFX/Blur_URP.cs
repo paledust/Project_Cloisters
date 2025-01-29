@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
-
-#if UNIVERSAL_PIPELINE_CORE_INCLUDED 
 using UnityEngine.Rendering.Universal;
 
 [System.Serializable, VolumeComponentMenuForRenderPipeline("Custom/Blur_URP", typeof(UniversalRenderPipeline))]
@@ -72,4 +70,3 @@ public class Blur_URP_Pass : ScriptableRenderPass
         cmd.ReleaseTemporaryRT(BlurRT_ID_H);
     }
 }
-#endif

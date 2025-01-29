@@ -26,17 +26,23 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Ray ray = mainCam.ScreenPointToRay(PointerScrPos);
-        if(Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, 1<<Service.InteractableLayer)){
-            Basic_Clickable hit_Interactable = hit.collider.GetComponent<Basic_Clickable>();
-            hoverPos = hit.point;
-            if(hit_Interactable!=null){
-                if(m_hoveringInteractable != hit_Interactable) {
-                    if(m_hoveringInteractable!=null) m_hoveringInteractable.OnExitHover();
+        if(m_holdingInteractable==null)
+        {
+            Ray ray = mainCam.ScreenPointToRay(PointerScrPos);
+            if(Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, 1<<Service.InteractableLayer)){
+                Basic_Clickable hit_Interactable = hit.collider.GetComponent<Basic_Clickable>();
+                hoverPos = hit.point;
+                if(hit_Interactable!=null){
+                    if(m_hoveringInteractable != hit_Interactable) {
+                        if(m_hoveringInteractable!=null) m_hoveringInteractable.OnExitHover();
 
-                    m_hoveringInteractable = hit_Interactable;
-                    if(m_hoveringInteractable.m_isInteractable) m_hoveringInteractable.OnHover(this);
-                    if(!m_holdingInteractable) PlayerManager.Instance.UpdateCursorState(CURSOR_STATE.HOVER);
+                        m_hoveringInteractable = hit_Interactable;
+                        if(m_hoveringInteractable.m_isInteractable) m_hoveringInteractable.OnHover(this);
+                        if(!m_holdingInteractable) PlayerManager.Instance.UpdateCursorState(CURSOR_STATE.HOVER);
+                    }
+                }
+                else{
+                    ClearHoveringInteractable();
                 }
             }
             else{
@@ -44,10 +50,6 @@ public class PlayerController : MonoBehaviour
             }
         }
         else{
-            ClearHoveringInteractable();
-        }
-
-        if(m_holdingInteractable!=null){
             m_holdingInteractable.ControllingUpdate(this);
         }
     }

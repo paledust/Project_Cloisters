@@ -11,6 +11,10 @@ public class Clickable_ObjectRotator : Basic_Clickable
     [SerializeField] private float maxAngularSpeed = 200f;
     [SerializeField] private bool verticalAccumulate = false;
     [SerializeField] private float maxVerticalAngle = 20;
+[Header("Resize")]
+    [SerializeField] private float resizeFactor = 1.02f;
+    [SerializeField] private float resizeTime = 0.4f;
+    [SerializeField] private float backTime = 0.5f;
 [Header("AngularSpeed Lerp")]
     [SerializeField] private float controllingAngularLerp = 10f;
     [SerializeField] private float releaseAngularLerp = 1f;
@@ -70,13 +74,13 @@ public class Clickable_ObjectRotator : Basic_Clickable
         playerController = player;
         playerController.HoldInteractable(this);
 
-        sizeChanger.Excute(coroutineChangePlanetSize(1.02f, 0.4f, EasingFunc.Easing.FunctionType.BackEaseOut));
+        sizeChanger.Excute(coroutineChangePlanetSize(resizeFactor, resizeTime, EasingFunc.Easing.FunctionType.BackEaseOut));
     }
     public override void OnRelease(PlayerController player)
     {
         base.OnRelease(player);
         playerController = null;
-        sizeChanger.Excute(coroutineChangePlanetSize(1f, 0.5f));
+        sizeChanger.Excute(coroutineChangePlanetSize(1f, backTime));
     }
     public void BreakSpring(){
         useSpring = false;
