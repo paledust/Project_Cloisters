@@ -57,7 +57,7 @@ MonoBehaviour:
   maxAngularSpeed: 1200
   verticalAccumulate: 0
   maxVerticalAngle: 10
-  resizeFactor: 1.5
+  resizeFactor: 1.1
   resizeTime: 0.3
   backTime: 0.5
   controllingAngularLerp: 10
@@ -139,17 +139,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: ea3c364094ffefc4f97514ee1f8f5555,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 200
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ea3c364094ffefc4f97514ee1f8f5555,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 200
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ea3c364094ffefc4f97514ee1f8f5555,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 200
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ea3c364094ffefc4f97514ee1f8f5555,
         type: 3}
