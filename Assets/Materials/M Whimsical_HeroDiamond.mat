@@ -136,8 +136,8 @@ Material:
     - _Metallic: 0
     - _NoiseMax: 1
     - _NoiseMin: 0
-    - _NoiseStrength: 0.25
-    - _NoiseTiling: 10
+    - _NoiseStrength: 0.19
+    - _NoiseTiling: 12
     - _NormalSpace: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
@@ -192,5 +192,7 @@ Material:
     - _PlanetMapSpeed: {r: 0.02, g: 0.05, b: 0, a: 0}
     - _ReflectionColor: {r: 1, g: 0.56037736, b: 0.56037736, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+    - _ViewScale: {r: 1, g: 1, b: 1, a: 0}
+    - _ViewShift: {r: 0, g: 0, b: 0, a: 0}
     - _ZoomInColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
