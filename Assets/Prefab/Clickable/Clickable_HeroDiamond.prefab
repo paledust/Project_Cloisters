@@ -52,9 +52,9 @@ MonoBehaviour:
   isFrozen: 0
   pitchRotationTrans: {fileID: 6235808070560946394}
   yawRotationTrans: {fileID: 6235808070743501218}
-  dragStrength: 12
+  dragStrength: 2
   idleAngularSpeed: 5
-  maxAngularSpeed: 1200
+  maxAngularSpeed: 800
   verticalAccumulate: 0
   maxVerticalAngle: 10
   resizeFactor: 1.1
