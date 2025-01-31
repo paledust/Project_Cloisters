@@ -2900,7 +2900,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     separateAxes: 1
-    frequency: 0.4
+    frequency: 1
     damping: 1
     octaves: 1
     octaveMultiplier: 0.5
@@ -3122,7 +3122,7 @@ ParticleSystem:
     positionAmount:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.005
+      scalar: 0.05
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -4936,6 +4936,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   crystalOpacity: {fileID: 5832020838595113144}
   ringColor: {fileID: 4140575008510602202}
+  p_crystal: {fileID: 8730296531186790481}
+  rotationSpeed: 5
 --- !u!1001 &4140575008510602198
 PrefabInstance:
   m_ObjectHideFlags: 0
