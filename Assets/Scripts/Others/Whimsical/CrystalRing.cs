@@ -9,10 +9,15 @@ public class CrystalRing : MonoBehaviour
 [Header("Crystal Ring")]
     [SerializeField] private ParticleSystem p_crystal;
     [SerializeField] private float rotationSpeed = 20;
+
     public void UpdateRingColor(float opacity)
     {
         crystalOpacity.opacity = opacity;
         ringColor.tint.a = opacity;
+    }
+    public void UpdateRingPhase(float phase)
+    {
+        p_crystal.transform.Rotate(0,0,phase,Space.Self);
     }
     void Update()
     {

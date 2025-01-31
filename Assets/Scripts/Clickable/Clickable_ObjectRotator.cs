@@ -34,6 +34,8 @@ public class Clickable_ObjectRotator : Basic_Clickable
     private PlayerController playerController;
     private CoroutineExcuter sizeChanger;
 
+    public float m_pitchAngle=>pitchAngle;
+
     void Start(){
         sizeChanger = new CoroutineExcuter(this);
         pitchOffset = pitchRotationTrans.localEulerAngles.x;

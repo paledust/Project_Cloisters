@@ -56327,6 +56327,8 @@ MonoBehaviour:
   - {fileID: 1032301132}
   - {fileID: 1807425186}
   - {fileID: 1748564926}
+  ringRoot: {fileID: 1467812005}
+  pitchToRingPitch: 1
   opacityCurve:
     serializedVersion: 2
     m_Curve:
@@ -56371,6 +56373,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   ringScaleRange: {x: 0.5, y: 2}
   speedToExpand: 0.01
+  speedToRingRotate: 0.35
   rollRange: {x: 10, y: 20}
   pitchRange: {x: 5, y: 10}
 --- !u!1001 &1282314527
