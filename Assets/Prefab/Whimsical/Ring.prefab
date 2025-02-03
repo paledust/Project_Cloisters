@@ -978,7 +978,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 150
+        scalar: 100
         minScalar: 30
         maxCurve:
           serializedVersion: 2
@@ -4861,7 +4861,7 @@ ParticleSystemRenderer:
   m_AllowRoll: 1
   m_FreeformStretching: 0
   m_RotateWithStretchDirection: 1
-  m_VertexStreams: 00010304
+  m_VertexStreams: 0017
   m_Mesh: {fileID: -1313825736986228178, guid: 687219612d1809a4bb887f36c059f2a5, type: 3}
   m_Mesh1: {fileID: -5558149944106735259, guid: 687219612d1809a4bb887f36c059f2a5,
     type: 3}
@@ -5039,6 +5039,17 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 4140575008510602198}
   m_PrefabAsset: {fileID: 0}
+--- !u!210 &2218028487026200945
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3870613917246903943}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: -1
 --- !u!114 &4140575008510602202
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -22,8 +22,10 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: M Whimsical_HeroDiamond
   m_Shader: {fileID: 4800000, guid: b51f4e1496a04204abb46450cc0927e4, type: 3}
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
+  m_ValidKeywords:
+  - _RECEIVE_SHADOWS_OFF
+  m_InvalidKeywords:
+  - _RECEIVESHADOWS_OFF
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
@@ -57,6 +59,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _DistortNoise:
+        m_Texture: {fileID: 2800000, guid: 5258764dd7274cb47bd6b840cf79dfb2, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -86,7 +92,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ShimmerNoise:
-        m_Texture: {fileID: 2800000, guid: 5d45166194cb7bf47b32e1f0a307a90c, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5258764dd7274cb47bd6b840cf79dfb2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
@@ -111,9 +117,13 @@ Material:
     - _AlphaCutoff: 0.5
     - _AnisopicLevel: 0
     - _AnisopicSmooth: 0
-    - _AnisotropyLevel: 0.45
-    - _AnisotropySmooth: -0.4
-    - _AnisotropyStrength: 0.5
+    - _AnisotropyLevel: 0.445
+    - _AnisotropySmooth: 0.1
+    - _AnisotropyStrength: 0.12
+    - _AnistrophyLevel: 0.88
+    - _AnistrophySmooth: 0.19
+    - _BTPower: 100
+    - _BiTangent: 0.32
     - _Blend: 0
     - _BumpScale: 1
     - _ClearCoatMask: 0
@@ -123,30 +133,42 @@ Material:
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
+    - _EdgeNoise: 0.5
     - _EnvironmentReflections: 1
     - _FadeLength: 1
     - _FadeStart: -100
-    - _Float0: 0
+    - _Float0: 50
     - _FresnelBias: 0
+    - _FresnelLevel: 0.35
     - _FresnelPower: 0.89
     - _FresnelScale: 1.5
+    - _FresnelSmooth: 0.25
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0
+    - _MidLine: -0.19
+    - _MidLine1: -0.16
+    - _MidLine2: -0.16
+    - _MidLineSmooth: 0.45
+    - _MidLineSmooth1: 0.23
+    - _MidLineSmooth2: 0.23
+    - _NoiseMaskPower: 1
+    - _NoiseMaskScale: 1
     - _NoiseMax: 1
     - _NoiseMin: 0
-    - _NoiseStrength: 0.19
-    - _NoiseTiling: 12
+    - _NoiseStrength: 0.1
+    - _NoiseTiling: 0.2
     - _NormalSpace: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
+    - _Power: 550
     - _QueueControl: 0
     - _QueueOffset: 0
     - _RampNoiseStrength: -1.06
     - _RampOffset: -2.18
     - _RampScale: 3.1
-    - _ReceiveShadows: 1
+    - _ReceiveShadows: 0
     - _ReflectFactor: 0.2
     - _ReflectionStrapScale: 1
     - _ReflectionStrength: 0
@@ -158,9 +180,9 @@ Material:
     - _ShimmerLevel: 0
     - _ShimmerMin: 0.5
     - _ShimmerNoiseStrength: 0.5
-    - _ShimmerSmooth: 1
-    - _ShimmerStrength: 0.09
-    - _ShimmerTile: 280
+    - _ShimmerSmooth: 0.5
+    - _ShimmerStrength: 0.5
+    - _ShimmerTile: 450
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -168,30 +190,42 @@ Material:
     - _StrapOffset: 0.38
     - _StrapSmooth: 0.02
     - _Surface: 0
+    - _TPower: 100
+    - _Tangent: -0.08
     - _Tile: 500
     - _Tiling: 1
     - _VNoiseOnFresnel: 0.42
     - _VNoiseOnRamp: 0.38
     - _WorkflowMode: 1
     - _ZWrite: 1
+    - _phase: 0
     - _shimmerStrength: 0.5
     m_Colors:
+    - _AnistrophyStrength: {r: 0, g: 0.35, b: 2.5, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BrightColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Color1: {r: 1, g: 0.48490566, b: 0.65060025, a: 0}
-    - _Color2: {r: 1, g: 0.5886792, b: 0.83381253, a: 0}
-    - _Color3: {r: 1, g: 0.2396226, b: 0.46877727, a: 0}
-    - _Color4: {r: 0.33333337, g: 0.8117647, b: 1, a: 0}
+    - _Color1: {r: 1, g: 0.48490554, b: 0.65060025, a: 1}
+    - _Color2: {r: 1, g: 0.23921564, b: 0.47058815, a: 1}
+    - _Color3: {r: 1, g: 0.67358494, b: 0.7728555, a: 1}
+    - _Color4: {r: 0, g: 0.53754807, b: 0.8784314, a: 1}
+    - _ColorEdge: {r: 2, g: 1.082353, b: 0, a: 1}
+    - _ColorEdge1: {r: 1, g: 0.027450982, b: 0, a: 1}
+    - _ColorEdge2: {r: 1, g: 0.92156863, b: 0, a: 1}
     - _DarkColor: {r: 1, g: 1, b: 1, a: 1}
     - _Direction: {r: 0.4, g: 0.7, b: -0.6, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FresenelDirOffset: {r: 0, g: 0.2, b: 0, a: 0}
     - _FresnelColor: {r: 2.072162, g: 0.7297614, b: 0.1531598, a: 1}
-    - _NoiseSpeed: {r: 0, g: 0.002, b: -0.002, a: 0}
+    - _LerpColor1: {r: 0.27561596, g: 0.35032603, b: 0.696, a: 1}
+    - _LerpColor2: {r: 1, g: 0.6924528, b: 0.6924528, a: 1}
+    - _LerpColor3: {r: 1, g: 0.4377358, b: 0.5630229, a: 1}
+    - _LerpColor4: {r: 0.7560131, g: 0.49411765, b: 0.7647059, a: 1}
+    - _NoiseSpeed: {r: 0, g: 0, b: -1, a: 0}
     - _PlanetMapSpeed: {r: 0.02, g: 0.05, b: 0, a: 0}
     - _ReflectionColor: {r: 1, g: 0.56037736, b: 0.56037736, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+    - _Vector0: {r: 0, g: 0, b: 1, a: 0}
     - _ViewScale: {r: 1, g: 1, b: 1, a: 0}
     - _ViewShift: {r: 0, g: 0, b: 0, a: 0}
     - _ZoomInColor: {r: 1, g: 1, b: 1, a: 1}

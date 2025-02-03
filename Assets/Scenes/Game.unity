@@ -44357,26 +44357,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1467812005}
     m_Modifications:
-    - target: {fileID: 375702512007586251, guid: 4dbe2170a13ebdd4fab663b15dff9fa2,
-        type: 3}
-      propertyPath: m_UseCustomVertexStreams
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 375702512007586251, guid: 4dbe2170a13ebdd4fab663b15dff9fa2,
-        type: 3}
-      propertyPath: m_VertexStreams.Array.data[1]
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 375702512007586251, guid: 4dbe2170a13ebdd4fab663b15dff9fa2,
-        type: 3}
-      propertyPath: m_VertexStreams.Array.data[2]
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 375702512007586251, guid: 4dbe2170a13ebdd4fab663b15dff9fa2,
-        type: 3}
-      propertyPath: m_VertexStreams.Array.data[3]
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: 4140575008052102840, guid: 4dbe2170a13ebdd4fab663b15dff9fa2,
         type: 3}
       propertyPath: m_RootOrder
@@ -44451,11 +44431,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Ring (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 8730296531186790481, guid: 4dbe2170a13ebdd4fab663b15dff9fa2,
-        type: 3}
-      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.scalar
-      value: 90
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4dbe2170a13ebdd4fab663b15dff9fa2, type: 3}
@@ -69024,26 +68999,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1467812005}
     m_Modifications:
-    - target: {fileID: 375702512007586251, guid: 4dbe2170a13ebdd4fab663b15dff9fa2,
-        type: 3}
-      propertyPath: m_UseCustomVertexStreams
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 375702512007586251, guid: 4dbe2170a13ebdd4fab663b15dff9fa2,
-        type: 3}
-      propertyPath: m_VertexStreams.Array.data[1]
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 375702512007586251, guid: 4dbe2170a13ebdd4fab663b15dff9fa2,
-        type: 3}
-      propertyPath: m_VertexStreams.Array.data[2]
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 375702512007586251, guid: 4dbe2170a13ebdd4fab663b15dff9fa2,
-        type: 3}
-      propertyPath: m_VertexStreams.Array.data[3]
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: 4140575008052102840, guid: 4dbe2170a13ebdd4fab663b15dff9fa2,
         type: 3}
       propertyPath: m_RootOrder
@@ -69118,11 +69073,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Ring (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 8730296531186790481, guid: 4dbe2170a13ebdd4fab663b15dff9fa2,
-        type: 3}
-      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.scalar
-      value: 90
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4dbe2170a13ebdd4fab663b15dff9fa2, type: 3}
@@ -86609,7 +86559,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2084566783
 Transform:
   m_ObjectHideFlags: 0
@@ -92241,26 +92191,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1467812005}
     m_Modifications:
-    - target: {fileID: 375702512007586251, guid: 4dbe2170a13ebdd4fab663b15dff9fa2,
-        type: 3}
-      propertyPath: m_UseCustomVertexStreams
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 375702512007586251, guid: 4dbe2170a13ebdd4fab663b15dff9fa2,
-        type: 3}
-      propertyPath: m_VertexStreams.Array.data[1]
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 375702512007586251, guid: 4dbe2170a13ebdd4fab663b15dff9fa2,
-        type: 3}
-      propertyPath: m_VertexStreams.Array.data[2]
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 375702512007586251, guid: 4dbe2170a13ebdd4fab663b15dff9fa2,
-        type: 3}
-      propertyPath: m_VertexStreams.Array.data[3]
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: 4140575008052102840, guid: 4dbe2170a13ebdd4fab663b15dff9fa2,
         type: 3}
       propertyPath: m_RootOrder
@@ -92335,11 +92265,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Ring
-      objectReference: {fileID: 0}
-    - target: {fileID: 8730296531186790481, guid: 4dbe2170a13ebdd4fab663b15dff9fa2,
-        type: 3}
-      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.scalar
-      value: 90
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4dbe2170a13ebdd4fab663b15dff9fa2, type: 3}
@@ -92657,6 +92582,11 @@ PrefabInstance:
     - target: {fileID: 6235808070560946394, guid: 05b06ddead44dfc45a226cfc780b31d3,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6235808070560946395, guid: 05b06ddead44dfc45a226cfc780b31d3,
+        type: 3}
+      propertyPath: idleAngularSpeed
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
