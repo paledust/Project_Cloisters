@@ -3,6 +3,7 @@ guid: b51f4e1496a04204abb46450cc0927e4
 ShaderImporter:
   externalObjects: {}
   defaultTextures:
+  - _DiamondRamp: {fileID: 2800000, guid: f007c20dd7b7edb499619dda9d15b601, type: 3}
   - _DistortNoise: {fileID: 2800000, guid: bb0317c311208f748b6e5956565eb30c, type: 3}
   nonModifiableTextures: []
   preprocessorOverride: 0

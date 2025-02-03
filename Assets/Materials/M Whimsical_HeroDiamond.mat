@@ -59,6 +59,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _DiamondRamp:
+        m_Texture: {fileID: 2800000, guid: f007c20dd7b7edb499619dda9d15b601, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _DistortNoise:
         m_Texture: {fileID: 2800000, guid: 5258764dd7274cb47bd6b840cf79dfb2, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -137,7 +141,7 @@ Material:
     - _EnvironmentReflections: 1
     - _FadeLength: 1
     - _FadeStart: -100
-    - _Float0: 50
+    - _Float0: 0.2
     - _FresnelBias: 0
     - _FresnelLevel: 0.35
     - _FresnelPower: 0.89
@@ -153,6 +157,7 @@ Material:
     - _MidLineSmooth: 0.45
     - _MidLineSmooth1: 0.23
     - _MidLineSmooth2: 0.23
+    - _MidlineStrength: 0.34
     - _NoiseMaskPower: 1
     - _NoiseMaskScale: 1
     - _NoiseMax: 1
@@ -162,12 +167,16 @@ Material:
     - _NormalSpace: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
+    - _PhaseOffset: 1.47
     - _Power: 550
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _RampLevel: 0.76
     - _RampNoiseStrength: -1.06
     - _RampOffset: -2.18
-    - _RampScale: 3.1
+    - _RampScale: 4
+    - _RampShimmer: 0.25
+    - _RampSmooth: 0.5
     - _ReceiveShadows: 0
     - _ReflectFactor: 0.2
     - _ReflectionStrapScale: 1
@@ -183,9 +192,13 @@ Material:
     - _ShimmerSmooth: 0.5
     - _ShimmerStrength: 0.5
     - _ShimmerTile: 450
+    - _ShimmerTune: 0
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
+    - _SpecPower: 100
     - _SpecularHighlights: 1
+    - _SpecularOffset: 3
+    - _SpecularOffsetScale: 4
     - _SrcBlend: 1
     - _StrapOffset: 0.38
     - _StrapSmooth: 0.02
@@ -206,14 +219,15 @@ Material:
     - _BrightColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Color1: {r: 1, g: 0.48490554, b: 0.65060025, a: 1}
-    - _Color2: {r: 1, g: 0.23921564, b: 0.47058815, a: 1}
+    - _Color2: {r: 1, g: 0.23921567, b: 0.47058836, a: 1}
     - _Color3: {r: 1, g: 0.67358494, b: 0.7728555, a: 1}
-    - _Color4: {r: 0, g: 0.53754807, b: 0.8784314, a: 1}
+    - _Color4: {r: 0, g: 0.5296517, b: 0.866, a: 1}
     - _ColorEdge: {r: 2, g: 1.082353, b: 0, a: 1}
     - _ColorEdge1: {r: 1, g: 0.027450982, b: 0, a: 1}
     - _ColorEdge2: {r: 1, g: 0.92156863, b: 0, a: 1}
     - _DarkColor: {r: 1, g: 1, b: 1, a: 1}
     - _Direction: {r: 0.4, g: 0.7, b: -0.6, a: 0}
+    - _EdgeColor: {r: 1, g: 0.8532846, b: 0.0037735105, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FresenelDirOffset: {r: 0, g: 0.2, b: 0, a: 0}
     - _FresnelColor: {r: 2.072162, g: 0.7297614, b: 0.1531598, a: 1}
