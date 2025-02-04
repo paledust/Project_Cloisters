@@ -7,11 +7,7 @@ public static class Service{
     public static int InteractableLayer = LayerMask.NameToLayer("Interactable");
     public static int IgnoreRaycastLayer = LayerMask.NameToLayer("Ignore Raycast");
 #region HelperFunction
-    /// <summary>
-    /// Return a list of all active and inactive objects of T type in loaded scenes.
-    /// </summary>
-    /// <typeparam name="T">Object Type</typeparam>
-    /// <returns></returns>
+    public static float Fract(float value)=>value-Mathf.Floor(value);
     public static T[] FindComponentsOfTypeIncludingDisable<T>(){
         int sceneCount = UnityEngine.SceneManagement.SceneManager.sceneCount;
         var MatchObjects = new List<T> ();
