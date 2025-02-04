@@ -5,7 +5,8 @@ using UnityEngine;
 public class CrystalRing : MonoBehaviour
 {
     [SerializeField] private PerRendererOpacity crystalOpacity;
-    [SerializeField] private PerRendererColor ringColor;
+    [SerializeField] private PerRendererCrystalParticle crystalPhase;
+    [SerializeField] private PerRendererOpacity ringOpacity;
 [Header("Crystal Ring")]
     [SerializeField] private ParticleSystem p_crystal;
     [SerializeField] private float rotationSpeed = 20;
@@ -13,7 +14,7 @@ public class CrystalRing : MonoBehaviour
     public void UpdateRingColor(float opacity)
     {
         crystalOpacity.opacity = opacity;
-        ringColor.tint.a = opacity;
+        ringOpacity.opacity = opacity;
     }
     public void UpdateRingPhase(float phase)
     {
@@ -22,6 +23,7 @@ public class CrystalRing : MonoBehaviour
     void Update()
     {
         p_crystal.transform.Rotate(0,0,rotationSpeed*Time.deltaTime,Space.Self);
+        crystalPhase.phaseOffset = p_crystal.transform.localEulerAngles.y/360;
     }
     public void RefreshParticle()
     {

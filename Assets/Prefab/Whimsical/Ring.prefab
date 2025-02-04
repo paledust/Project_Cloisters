@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8730296531186790481}
   - component: {fileID: 375702512007586251}
   - component: {fileID: 5832020838595113144}
+  - component: {fileID: 200815230043310888}
   m_Layer: 0
   m_Name: P Crystals
   m_TagString: Untagged
@@ -4855,13 +4856,13 @@ ParticleSystemRenderer:
   m_RenderAlignment: 2
   m_Pivot: {x: 0, y: 0, z: 0}
   m_Flip: {x: 0, y: 0, z: 1}
-  m_UseCustomVertexStreams: 0
+  m_UseCustomVertexStreams: 1
   m_EnableGPUInstancing: 1
   m_ApplyActiveColorSpace: 1
   m_AllowRoll: 1
   m_FreeformStretching: 0
   m_RotateWithStretchDirection: 1
-  m_VertexStreams: 0017
+  m_VertexStreams: 000417
   m_Mesh: {fileID: -1313825736986228178, guid: 687219612d1809a4bb887f36c059f2a5, type: 3}
   m_Mesh1: {fileID: -5558149944106735259, guid: 687219612d1809a4bb887f36c059f2a5,
     type: 3}
@@ -4888,6 +4889,22 @@ MonoBehaviour:
   isUpdating: 1
   meshRenderer: {fileID: 375702512007586251}
   opacity: 1
+--- !u!114 &200815230043310888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3704860363672025927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab7c1f054ceadee428cc9ba4041a3d9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isUpdating: 1
+  meshRenderer: {fileID: 375702512007586251}
+  phaseOffset: 0
+  phaseMultiplier: 25
 --- !u!1 &4140575008052102841
 GameObject:
   m_ObjectHideFlags: 0
@@ -4935,7 +4952,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   crystalOpacity: {fileID: 5832020838595113144}
-  ringColor: {fileID: 4140575008510602202}
+  crystalPhase: {fileID: 200815230043310888}
+  ringOpacity: {fileID: 8949444636614358095}
   p_crystal: {fileID: 8730296531186790481}
   rotationSpeed: 5
 --- !u!1001 &4140575008510602198
@@ -5050,7 +5068,7 @@ SortingGroup:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
---- !u!114 &4140575008510602202
+--- !u!114 &8949444636614358095
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5059,15 +5077,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 3870613917246903943}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a13fa51ec838344595d6f68cefa5c2e, type: 3}
+  m_Script: {fileID: 11500000, guid: 04234217817ba70478bd410e4aed5ca4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isUpdating: 1
   meshRenderer: {fileID: 3366390872030639954}
-  tint: {r: 1, g: 1, b: 1, a: 1}
-  hdrTint: {r: 1, g: 1, b: 1, a: 1}
-  useHDR: 0
-  ColorName: _Color
+  opacity: 1
 --- !u!4 &4538782303662312509 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4873d24638af7794bb313aeb605113b2,
