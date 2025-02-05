@@ -189,8 +189,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tmp: {fileID: 8554373234669498876}
   chargeValue: 0
-  blinkFreq: 7.5
-  phase: 0
+  chargeDim: 0.1
+  blinkFreq: 8.5
+  fadeInTime: 0.35
+  fadeOutTime: 0.2
+  perRendererColor: {fileID: 509792960820809809}
+  birghtColor: {r: 2.9960785, g: 2.9960785, b: 2.9960785, a: 1}
+  phase: 0.35
 --- !u!114 &509792960820809809
 MonoBehaviour:
   m_ObjectHideFlags: 0

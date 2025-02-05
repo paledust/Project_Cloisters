@@ -56462,6 +56462,95 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionAssetsGroup: {fileID: 1652011118}
+  chargeTexts:
+  - {fileID: 8554373233758221569}
+  - {fileID: 1204382762}
+  - {fileID: 1880184160}
+  - {fileID: 1206900165}
+  - {fileID: 563073424}
+  - {fileID: 1732338496}
+  - {fileID: 360995251}
+  - {fileID: 1278559852}
+  - {fileID: 406574720}
+  fullyChargeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 4.644172
+      outSlope: 4.644172
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.16990072
+    - serializedVersion: 3
+      time: 0.19675991
+      value: 0.510661
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.36859587
+      value: -0.36255848
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5637155
+      value: 0.3159995
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.69955814
+      value: -0.18944652
+      inSlope: -1.9614228
+      outSlope: -1.9614228
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.843687
+      value: 0.14227033
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.9281093
+      value: -0.07020929
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  count: 0
 --- !u!114 &1281400411
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56486,8 +56575,8 @@ MonoBehaviour:
   - {fileID: 406574720}
   diamond: {fileID: 1943220756}
   minimumAngularSpeed: 50
-  chargeSpeed: 0.75
-  dropSpeed: 1
+  chargeSpeed: 1
+  dropSpeed: 0.35
   totalChargeValue: 0
 --- !u!114 &1281400412
 MonoBehaviour:
@@ -93011,11 +93100,6 @@ PrefabInstance:
     - target: {fileID: 6235808070560946394, guid: 05b06ddead44dfc45a226cfc780b31d3,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6235808070560946395, guid: 05b06ddead44dfc45a226cfc780b31d3,
-        type: 3}
-      propertyPath: idleAngularSpeed
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
