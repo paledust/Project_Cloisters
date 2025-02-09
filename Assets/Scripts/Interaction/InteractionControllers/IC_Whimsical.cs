@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class IC_Whimsical : IC_Basic
 {
-    [SerializeField] private List<ChargeText> chargeTexts;
-    [SerializeField] private AnimationCurve fullyChargeCurve;
+    [SerializeField] private WhimsicalTextController textController;
     [SerializeField] int count = 0;
     protected override void OnInteractionStart()
     {
@@ -20,12 +19,9 @@ public class IC_Whimsical : IC_Basic
     void CountText(bool isCharged)
     {
         count += isCharged?1:-1;
-        if(count >= chargeTexts.Count)
+        if(count >= textController.TotalTextCount)
         {
-            foreach(var text in chargeTexts)
-            {
-                text.StayCharged(Random.Range(0.5f, 1f), fullyChargeCurve);
-            }
+            textController.CompleteCharge();
             EventHandler.Call_OnEndInteraction(this);
         }
     }

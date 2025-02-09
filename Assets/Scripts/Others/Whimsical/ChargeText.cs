@@ -98,6 +98,10 @@ public class ChargeText : MonoBehaviour
             }   
         }
     }
+    void OnDestroy()
+    {
+        Debug.LogWarning("Destroied : ");
+    }
     IEnumerator coroutineFadeText(float duration, AnimationCurve curve)
     {
         yield return new WaitForLoop(duration, (t)=>{

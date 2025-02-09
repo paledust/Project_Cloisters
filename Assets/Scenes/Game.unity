@@ -5074,6 +5074,7 @@ Transform:
   - {fileID: 594864032}
   - {fileID: 2005268742}
   - {fileID: 1281400409}
+  - {fileID: 975206077}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10434,6 +10435,37 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3065793507615847258}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &87636801
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 87636802}
+  m_Layer: 0
+  m_Name: '#6 Experimental'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &87636802
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 87636801}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1388349387}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &96294356
 GameObject:
   m_ObjectHideFlags: 0
@@ -44905,6 +44937,51 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 24416424}
+--- !u!1 &975206076
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 975206077}
+  - component: {fileID: 975206078}
+  m_Layer: 0
+  m_Name: IC Experimental
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &975206077
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 975206076}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 27715350}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &975206078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 975206076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 417cdf3418c9c4345a3bcfcd9e81e211, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionAssetsGroup: {fileID: 87636801}
 --- !u!1001 &978177926
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -56463,6 +56540,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionAssetsGroup: {fileID: 1652011118}
+  textController: {fileID: 1281400411}
+  count: 0
+--- !u!114 &1281400411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1281400408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ad6c7a1f5553d54eab7d49729aae66c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   chargeTexts:
   - {fileID: 8554373233758221569}
   - {fileID: 1204382762}
@@ -56473,6 +56564,7 @@ MonoBehaviour:
   - {fileID: 360995251}
   - {fileID: 1278559852}
   - {fileID: 406574720}
+  diamond: {fileID: 1943220756}
   fullyChargeCurve:
     serializedVersion: 2
     m_Curve:
@@ -56551,33 +56643,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  count: 0
---- !u!114 &1281400411
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1281400408}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ad6c7a1f5553d54eab7d49729aae66c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  chargeTexts:
-  - {fileID: 8554373233758221569}
-  - {fileID: 1204382762}
-  - {fileID: 1880184160}
-  - {fileID: 1206900165}
-  - {fileID: 563073424}
-  - {fileID: 1732338496}
-  - {fileID: 360995251}
-  - {fileID: 1278559852}
-  - {fileID: 406574720}
-  diamond: {fileID: 1943220756}
   minimumAngularSpeed: 50
   chargeSpeed: 1
-  dropSpeed: 0.35
+  dropSpeed: 0.65
   totalChargeValue: 0
 --- !u!114 &1281400412
 MonoBehaviour:
@@ -56659,7 +56727,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   phase: 0
   crystal: {fileID: 1532898171}
-  speedToPhaseSpeed: 1
+  speedToPhaseSpeed: 4
   shadeGradient:
     serializedVersion: 2
     key0: {r: 0, g: 0.5764706, b: 1, a: 1}
@@ -57655,6 +57723,7 @@ Transform:
   - {fileID: 1531122235}
   - {fileID: 1567444745}
   - {fileID: 1652011119}
+  - {fileID: 87636802}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
