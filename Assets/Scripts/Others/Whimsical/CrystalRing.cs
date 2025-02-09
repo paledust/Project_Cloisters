@@ -11,6 +11,7 @@ public class CrystalRing : MonoBehaviour
     [SerializeField] private PerRendererOpacity ringOpacity;
 [Header("Crystal Ring")]
     [SerializeField] private ParticleSystem p_crystal;
+    [SerializeField] private ParticleSystem p_burstCircle;
     [SerializeField] private float rotationSpeed = 20;
 
     public void UpdateRingColor(float opacity)
@@ -33,5 +34,6 @@ public class CrystalRing : MonoBehaviour
     {
         p_crystal.Clear(true);
         p_crystal.Play(true);
+        p_burstCircle.Play(true);
     }
 }
