@@ -1,4 +1,4 @@
-// Made with Amplify Shader Editor v1.9.7.1
+// Made with Amplify Shader Editor v1.9.8.1
 // Available at the Unity Asset Store - http://u3d.as/y3X 
 Shader "AmplifyShaders/Sprite WavyColor"
 {
@@ -56,7 +56,7 @@ Shader "AmplifyShaders/Sprite WavyColor"
 
 			HLSLPROGRAM
 
-			#define ASE_VERSION 19701
+			#define ASE_VERSION 19801
 			#define ASE_SRP_VERSION 120112
 
 
@@ -130,38 +130,38 @@ Shader "AmplifyShaders/Sprite WavyColor"
 
 			float4 _RendererColor;
 
-			float2 voronoihash23( float2 p )
-			{
-				
-				p = float2( dot( p, float2( 127.1, 311.7 ) ), dot( p, float2( 269.5, 183.3 ) ) );
-				return frac( sin( p ) *43758.5453);
-			}
+					float2 voronoihash23( float2 p )
+					{
+						
+						p = float2( dot( p, float2( 127.1, 311.7 ) ), dot( p, float2( 269.5, 183.3 ) ) );
+						return frac( sin( p ) *43758.5453);
+					}
 			
-			float voronoi23( float2 v, float time, inout float2 id, inout float2 mr, float smoothness, inout float2 smoothId )
-			{
-				float2 n = floor( v );
-				float2 f = frac( v );
-				float F1 = 8.0;
-				float F2 = 8.0; float2 mg = 0;
-				for ( int j = -1; j <= 1; j++ )
-				{
-					for ( int i = -1; i <= 1; i++ )
-				 	{
-				 		float2 g = float2( i, j );
-				 		float2 o = voronoihash23( n + g );
-						o = ( sin( time + o * 6.2831 ) * 0.5 + 0.5 ); float2 r = f - g - o;
-						float d = 0.5 * dot( r, r );
-				 		if( d<F1 ) {
-				 			F2 = F1;
-				 			F1 = d; mg = g; mr = r; id = o;
-				 		} else if( d<F2 ) {
-				 			F2 = d;
-				
-				 		}
-				 	}
-				}
-				return F1;
-			}
+					float voronoi23( float2 v, float time, inout float2 id, inout float2 mr, float smoothness, inout float2 smoothId )
+					{
+						float2 n = floor( v );
+						float2 f = frac( v );
+						float F1 = 8.0;
+						float F2 = 8.0; float2 mg = 0;
+						for ( int j = -1; j <= 1; j++ )
+						{
+							for ( int i = -1; i <= 1; i++ )
+						 	{
+						 		float2 g = float2( i, j );
+						 		float2 o = voronoihash23( n + g );
+								o = ( sin( time + o * 6.2831 ) * 0.5 + 0.5 ); float2 r = f - g - o;
+								float d = 0.5 * dot( r, r );
+						 		if( d<F1 ) {
+						 			F2 = F1;
+						 			F1 = d; mg = g; mr = r; id = o;
+						 		} else if( d<F2 ) {
+						 			F2 = d;
+						
+						 		}
+						 	}
+						}
+						return F1;
+					}
 			
 
 			VertexOutput vert( VertexInput v  )
@@ -263,7 +263,7 @@ Shader "AmplifyShaders/Sprite WavyColor"
 
 			HLSLPROGRAM
 
-			#define ASE_VERSION 19701
+			#define ASE_VERSION 19801
 			#define ASE_SRP_VERSION 120112
 
 
@@ -337,38 +337,38 @@ Shader "AmplifyShaders/Sprite WavyColor"
 
 			float4 _RendererColor;
 
-			float2 voronoihash23( float2 p )
-			{
-				
-				p = float2( dot( p, float2( 127.1, 311.7 ) ), dot( p, float2( 269.5, 183.3 ) ) );
-				return frac( sin( p ) *43758.5453);
-			}
+					float2 voronoihash23( float2 p )
+					{
+						
+						p = float2( dot( p, float2( 127.1, 311.7 ) ), dot( p, float2( 269.5, 183.3 ) ) );
+						return frac( sin( p ) *43758.5453);
+					}
 			
-			float voronoi23( float2 v, float time, inout float2 id, inout float2 mr, float smoothness, inout float2 smoothId )
-			{
-				float2 n = floor( v );
-				float2 f = frac( v );
-				float F1 = 8.0;
-				float F2 = 8.0; float2 mg = 0;
-				for ( int j = -1; j <= 1; j++ )
-				{
-					for ( int i = -1; i <= 1; i++ )
-				 	{
-				 		float2 g = float2( i, j );
-				 		float2 o = voronoihash23( n + g );
-						o = ( sin( time + o * 6.2831 ) * 0.5 + 0.5 ); float2 r = f - g - o;
-						float d = 0.5 * dot( r, r );
-				 		if( d<F1 ) {
-				 			F2 = F1;
-				 			F1 = d; mg = g; mr = r; id = o;
-				 		} else if( d<F2 ) {
-				 			F2 = d;
-				
-				 		}
-				 	}
-				}
-				return F1;
-			}
+					float voronoi23( float2 v, float time, inout float2 id, inout float2 mr, float smoothness, inout float2 smoothId )
+					{
+						float2 n = floor( v );
+						float2 f = frac( v );
+						float F1 = 8.0;
+						float F2 = 8.0; float2 mg = 0;
+						for ( int j = -1; j <= 1; j++ )
+						{
+							for ( int i = -1; i <= 1; i++ )
+						 	{
+						 		float2 g = float2( i, j );
+						 		float2 o = voronoihash23( n + g );
+								o = ( sin( time + o * 6.2831 ) * 0.5 + 0.5 ); float2 r = f - g - o;
+								float d = 0.5 * dot( r, r );
+						 		if( d<F1 ) {
+						 			F2 = F1;
+						 			F1 = d; mg = g; mr = r; id = o;
+						 		} else if( d<F2 ) {
+						 			F2 = d;
+						
+						 		}
+						 	}
+						}
+						return F1;
+					}
 			
 
 			VertexOutput vert( VertexInput v  )
@@ -465,7 +465,7 @@ Shader "AmplifyShaders/Sprite WavyColor"
 
             HLSLPROGRAM
 
-			#define ASE_VERSION 19701
+			#define ASE_VERSION 19801
 			#define ASE_SRP_VERSION 120112
 
 
@@ -522,38 +522,38 @@ Shader "AmplifyShaders/Sprite WavyColor"
             int _ObjectId;
             int _PassValue;
 
-			float2 voronoihash23( float2 p )
-			{
-				
-				p = float2( dot( p, float2( 127.1, 311.7 ) ), dot( p, float2( 269.5, 183.3 ) ) );
-				return frac( sin( p ) *43758.5453);
-			}
+					float2 voronoihash23( float2 p )
+					{
+						
+						p = float2( dot( p, float2( 127.1, 311.7 ) ), dot( p, float2( 269.5, 183.3 ) ) );
+						return frac( sin( p ) *43758.5453);
+					}
 			
-			float voronoi23( float2 v, float time, inout float2 id, inout float2 mr, float smoothness, inout float2 smoothId )
-			{
-				float2 n = floor( v );
-				float2 f = frac( v );
-				float F1 = 8.0;
-				float F2 = 8.0; float2 mg = 0;
-				for ( int j = -1; j <= 1; j++ )
-				{
-					for ( int i = -1; i <= 1; i++ )
-				 	{
-				 		float2 g = float2( i, j );
-				 		float2 o = voronoihash23( n + g );
-						o = ( sin( time + o * 6.2831 ) * 0.5 + 0.5 ); float2 r = f - g - o;
-						float d = 0.5 * dot( r, r );
-				 		if( d<F1 ) {
-				 			F2 = F1;
-				 			F1 = d; mg = g; mr = r; id = o;
-				 		} else if( d<F2 ) {
-				 			F2 = d;
-				
-				 		}
-				 	}
-				}
-				return F1;
-			}
+					float voronoi23( float2 v, float time, inout float2 id, inout float2 mr, float smoothness, inout float2 smoothId )
+					{
+						float2 n = floor( v );
+						float2 f = frac( v );
+						float F1 = 8.0;
+						float F2 = 8.0; float2 mg = 0;
+						for ( int j = -1; j <= 1; j++ )
+						{
+							for ( int i = -1; i <= 1; i++ )
+						 	{
+						 		float2 g = float2( i, j );
+						 		float2 o = voronoihash23( n + g );
+								o = ( sin( time + o * 6.2831 ) * 0.5 + 0.5 ); float2 r = f - g - o;
+								float d = 0.5 * dot( r, r );
+						 		if( d<F1 ) {
+						 			F2 = F1;
+						 			F1 = d; mg = g; mr = r; id = o;
+						 		} else if( d<F2 ) {
+						 			F2 = d;
+						
+						 		}
+						 	}
+						}
+						return F1;
+					}
 			
 
 			VertexOutput vert(VertexInput v )
@@ -626,7 +626,7 @@ Shader "AmplifyShaders/Sprite WavyColor"
 
             HLSLPROGRAM
 
-			#define ASE_VERSION 19701
+			#define ASE_VERSION 19801
 			#define ASE_SRP_VERSION 120112
 
 
@@ -682,38 +682,38 @@ Shader "AmplifyShaders/Sprite WavyColor"
 
             float4 _SelectionID;
 
-			float2 voronoihash23( float2 p )
-			{
-				
-				p = float2( dot( p, float2( 127.1, 311.7 ) ), dot( p, float2( 269.5, 183.3 ) ) );
-				return frac( sin( p ) *43758.5453);
-			}
+					float2 voronoihash23( float2 p )
+					{
+						
+						p = float2( dot( p, float2( 127.1, 311.7 ) ), dot( p, float2( 269.5, 183.3 ) ) );
+						return frac( sin( p ) *43758.5453);
+					}
 			
-			float voronoi23( float2 v, float time, inout float2 id, inout float2 mr, float smoothness, inout float2 smoothId )
-			{
-				float2 n = floor( v );
-				float2 f = frac( v );
-				float F1 = 8.0;
-				float F2 = 8.0; float2 mg = 0;
-				for ( int j = -1; j <= 1; j++ )
-				{
-					for ( int i = -1; i <= 1; i++ )
-				 	{
-				 		float2 g = float2( i, j );
-				 		float2 o = voronoihash23( n + g );
-						o = ( sin( time + o * 6.2831 ) * 0.5 + 0.5 ); float2 r = f - g - o;
-						float d = 0.5 * dot( r, r );
-				 		if( d<F1 ) {
-				 			F2 = F1;
-				 			F1 = d; mg = g; mr = r; id = o;
-				 		} else if( d<F2 ) {
-				 			F2 = d;
-				
-				 		}
-				 	}
-				}
-				return F1;
-			}
+					float voronoi23( float2 v, float time, inout float2 id, inout float2 mr, float smoothness, inout float2 smoothId )
+					{
+						float2 n = floor( v );
+						float2 f = frac( v );
+						float F1 = 8.0;
+						float F2 = 8.0; float2 mg = 0;
+						for ( int j = -1; j <= 1; j++ )
+						{
+							for ( int i = -1; i <= 1; i++ )
+						 	{
+						 		float2 g = float2( i, j );
+						 		float2 o = voronoihash23( n + g );
+								o = ( sin( time + o * 6.2831 ) * 0.5 + 0.5 ); float2 r = f - g - o;
+								float d = 0.5 * dot( r, r );
+						 		if( d<F1 ) {
+						 			F2 = F1;
+						 			F1 = d; mg = g; mr = r; id = o;
+						 		} else if( d<F2 ) {
+						 			F2 = d;
+						
+						 		}
+						 	}
+						}
+						return F1;
+					}
 			
 
 			VertexOutput vert(VertexInput v  )
@@ -781,33 +781,33 @@ Shader "AmplifyShaders/Sprite WavyColor"
 	Fallback Off
 }
 /*ASEBEGIN
-Version=19701
+Version=19801
 Node;AmplifyShaderEditor.Vector4Node;24;-2688,-928;Inherit;False;Property;_VoronoidTiling;VoronoidTiling;5;0;Create;True;0;0;0;False;0;False;1,1,0,0;1,1,0,0;0;5;FLOAT4;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.TexCoordVertexDataNode;26;-2560,-1072;Inherit;False;0;2;0;5;FLOAT2;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.DynamicAppendNode;25;-2496,-928;Inherit;False;FLOAT2;4;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;1;FLOAT2;0
 Node;AmplifyShaderEditor.DynamicAppendNode;29;-2496,-832;Inherit;False;FLOAT2;4;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;1;FLOAT2;0
-Node;AmplifyShaderEditor.RangedFloatNode;31;-2704,-704;Inherit;False;Property;_VoronoidSpeed;VoronoidSpeed;7;0;Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;27;-2320,-1008;Inherit;False;2;2;0;FLOAT2;0,0;False;1;FLOAT2;0,0;False;1;FLOAT2;0
+Node;AmplifyShaderEditor.RangedFloatNode;31;-2704,-704;Inherit;False;Property;_VoronoidSpeed;VoronoidSpeed;7;0;Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleTimeNode;32;-2528,-704;Inherit;False;1;0;FLOAT;1;False;1;FLOAT;0
 Node;AmplifyShaderEditor.PannerNode;30;-2144,-848;Inherit;False;3;0;FLOAT2;0,0;False;2;FLOAT2;0,0;False;1;FLOAT;1;False;1;FLOAT2;0
-Node;AmplifyShaderEditor.VoronoiNode;23;-1904,-736;Inherit;False;0;0;1;0;1;False;1;False;False;False;4;0;FLOAT2;0,0;False;1;FLOAT;0;False;2;FLOAT;1;False;3;FLOAT;0;False;3;FLOAT;0;FLOAT2;1;FLOAT2;2
+Node;AmplifyShaderEditor.VoronoiNode;23;-1920,-736;Inherit;False;0;0;1;0;1;False;1;False;False;False;4;0;FLOAT2;0,0;False;1;FLOAT;0;False;2;FLOAT;1;False;3;FLOAT;0;False;3;FLOAT;0;FLOAT2;1;FLOAT2;2
 Node;AmplifyShaderEditor.RangedFloatNode;19;-1632,-64;Inherit;False;Property;_NoiseSmooth;NoiseSmooth;4;0;Create;True;0;0;0;False;0;False;1;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.RangedFloatNode;17;-1600,-144;Inherit;False;Property;_NoiseMin;NoiseMin;3;0;Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.OneMinusNode;34;-1680,-384;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.RangedFloatNode;35;-1680,-304;Inherit;False;Property;_InverseNoise;InverseNoise;6;1;[Toggle];Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleAddOpNode;18;-1456,-144;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.LerpOp;33;-1360,-400;Inherit;False;3;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;1;FLOAT;0
-Node;AmplifyShaderEditor.ColorNode;9;-1200,-672;Inherit;False;Property;_DarkColor;DarkColor;1;0;Create;True;0;0;0;False;0;False;1,1,1,0;0,0,0,0;True;False;0;6;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4;FLOAT3;5
-Node;AmplifyShaderEditor.ColorNode;10;-1200,-528;Inherit;False;Property;_BrightColor;BrightColor;2;0;Create;True;0;0;0;False;0;False;0.1462264,0.5538638,1,1;0,0,0,0;True;False;0;6;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4;FLOAT3;5
-Node;AmplifyShaderEditor.SmoothstepOpNode;16;-1152,-352;Inherit;False;3;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;1;False;1;FLOAT;0
-Node;AmplifyShaderEditor.LerpOp;12;-896,-544;Inherit;True;3;0;FLOAT3;0,0,0;False;1;FLOAT3;0,0,0;False;2;FLOAT;0;False;1;FLOAT3;0
-Node;AmplifyShaderEditor.SamplerNode;4;-928,-848;Inherit;True;Property;_MainTex;MainTex;0;0;Create;True;0;0;0;False;0;False;-1;None;None;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;6;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4;FLOAT3;5
-Node;AmplifyShaderEditor.SimpleMultiplyOpNode;20;-592,-656;Inherit;False;2;2;0;FLOAT3;0,0,0;False;1;FLOAT3;0,0,0;False;1;FLOAT3;0
-Node;AmplifyShaderEditor.DynamicAppendNode;21;-376.1239,-601.5663;Inherit;False;FLOAT4;4;0;FLOAT3;0,0,0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;1;FLOAT4;0
+Node;AmplifyShaderEditor.SmoothstepOpNode;16;-1152,-352;Inherit;True;3;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;1;False;1;FLOAT;0
+Node;AmplifyShaderEditor.ColorNode;9;-544,-704;Inherit;False;Property;_DarkColor;DarkColor;1;0;Create;True;0;0;0;False;0;False;1,1,1,0;0,0,0,0;True;False;0;6;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4;FLOAT3;5
+Node;AmplifyShaderEditor.ColorNode;10;-544,-560;Inherit;False;Property;_BrightColor;BrightColor;2;0;Create;True;0;0;0;False;0;False;0.1462264,0.5538638,1,1;0,0,0,0;True;False;0;6;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4;FLOAT3;5
+Node;AmplifyShaderEditor.LerpOp;12;-128,-496;Inherit;True;3;0;FLOAT3;0,0,0;False;1;FLOAT3;0,0,0;False;2;FLOAT;0;False;1;FLOAT3;0
+Node;AmplifyShaderEditor.SamplerNode;4;-160,-800;Inherit;True;Property;_MainTex;MainTex;0;0;Create;True;0;0;0;False;0;False;-1;None;None;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;6;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4;FLOAT3;5
+Node;AmplifyShaderEditor.SimpleMultiplyOpNode;20;176,-608;Inherit;False;2;2;0;FLOAT3;0,0,0;False;1;FLOAT3;0,0,0;False;1;FLOAT3;0
+Node;AmplifyShaderEditor.DynamicAppendNode;21;384,-544;Inherit;False;FLOAT4;4;0;FLOAT3;0,0,0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;1;FLOAT4;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;1;0,0;Float;False;False;-1;2;UnityEditor.ShaderGraph.GenericShaderGraphMaterialGUI;0;15;New Amplify Shader;cf964e524c8e69742b1d21fbe2ebcc4a;True;Sprite Unlit Forward;0;1;Sprite Unlit Forward;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;True;0;True;12;all;0;False;True;2;5;False;;10;False;;3;1;False;;10;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;2;False;;True;3;False;;True;True;0;False;;0;False;;True;1;LightMode=UniversalForward;False;False;0;;0;0;Standard;0;False;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;2;0,0;Float;False;False;-1;2;UnityEditor.ShaderGraph.GenericShaderGraphMaterialGUI;0;15;New Amplify Shader;cf964e524c8e69742b1d21fbe2ebcc4a;True;SceneSelectionPass;0;2;SceneSelectionPass;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;True;0;True;12;all;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;1;LightMode=SceneSelectionPass;False;False;0;;0;0;Standard;0;False;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;3;0,0;Float;False;False;-1;2;UnityEditor.ShaderGraph.GenericShaderGraphMaterialGUI;0;15;New Amplify Shader;cf964e524c8e69742b1d21fbe2ebcc4a;True;ScenePickingPass;0;3;ScenePickingPass;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;True;0;True;12;all;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;1;LightMode=Picking;False;False;0;;0;0;Standard;0;False;0
-Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;0;-224,-592;Float;False;True;-1;2;UnityEditor.ShaderGraph.GenericShaderGraphMaterialGUI;0;15;AmplifyShaders/Sprite WavyColor;cf964e524c8e69742b1d21fbe2ebcc4a;True;Sprite Unlit;0;0;Sprite Unlit;4;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;True;0;True;12;all;0;False;True;2;5;False;;10;False;;3;1;False;;10;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;2;False;;True;3;False;;True;True;0;False;;0;False;;True;1;LightMode=Universal2D;False;False;0;;0;0;Standard;3;Vertex Position;1;0;Debug Display;0;0;External Alpha;0;0;0;4;True;True;True;True;False;;False;0
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;0;544,-544;Float;False;True;-1;2;UnityEditor.ShaderGraph.GenericShaderGraphMaterialGUI;0;15;AmplifyShaders/Sprite WavyColor;cf964e524c8e69742b1d21fbe2ebcc4a;True;Sprite Unlit;0;0;Sprite Unlit;4;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;True;0;True;12;all;0;False;True;2;5;False;;10;False;;3;1;False;;10;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;2;False;;True;3;False;;True;True;0;False;;0;False;;True;1;LightMode=Universal2D;False;False;0;;0;0;Standard;3;Vertex Position;1;0;Debug Display;0;0;External Alpha;0;0;0;4;True;True;True;True;False;;False;0
 WireConnection;25;0;24;1
 WireConnection;25;1;24;2
 WireConnection;29;0;24;3
@@ -837,4 +837,4 @@ WireConnection;21;0;20;0
 WireConnection;21;3;4;4
 WireConnection;0;1;21;0
 ASEEND*/
-//CHKSM=50A8ACFEF3809ACA4610764ED28E01ABE1895FAA
+//CHKSM=E798BD3F126E008E71E8BC1E74ABF84BEC8EEBC3

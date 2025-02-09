@@ -19,7 +19,7 @@ public class WhimsicalShadeControl : MonoBehaviour
             shades[i].color = shadeGradient.Evaluate(Service.Fract(phase + i*0.25f));
         }
     }
-    void OnDrawGizmos()
+    void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireCube(crystal.transform.position, Vector3.one*proxySize);
