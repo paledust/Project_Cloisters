@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3954394671358968299
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1033347627306513477}
+  m_Layer: 3
+  m_Name: ConnectPoints
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1033347627306513477
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3954394671358968299}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8982843657415732049}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8982843657415732048
 GameObject:
   m_ObjectHideFlags: 0
@@ -10,7 +41,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8982843657415732049}
   - component: {fileID: 8982843657415732050}
+  - component: {fileID: 6240990561836385197}
   - component: {fileID: 5464090182912660596}
+  - component: {fileID: 4792773300764216669}
   m_Layer: 3
   m_Name: Clickable_ExperimentalGeo
   m_TagString: Untagged
@@ -31,6 +64,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8982843658976122207}
+  - {fileID: 1033347627306513477}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -49,6 +83,22 @@ MonoBehaviour:
   sfx_clickSound: group_click
   hitbox: {fileID: 5464090182912660596}
   isFrozen: 0
+  m_rigid: {fileID: 4792773300764216669}
+--- !u!114 &6240990561836385197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8982843657415732048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45f5b378ffcf14b4cac5e91f9c1cdb60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  circularShape: 0
+  moveable: {fileID: 8982843657415732050}
+  m_connectors: []
 --- !u!135 &5464090182912660596
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -62,6 +112,22 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &4792773300764216669
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8982843657415732048}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 15
+  m_AngularDrag: 15
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 56
+  m_CollisionDetection: 0
 --- !u!1 &8982843658976122206
 GameObject:
   m_ObjectHideFlags: 0
@@ -89,7 +155,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 8982843657415732049}
   m_RootOrder: 0
