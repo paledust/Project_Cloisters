@@ -41,7 +41,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8982843657415732049}
   - component: {fileID: 8982843657415732050}
-  - component: {fileID: 6240990561836385197}
   - component: {fileID: 5464090182912660596}
   - component: {fileID: 4792773300764216669}
   m_Layer: 3
@@ -84,21 +83,6 @@ MonoBehaviour:
   hitbox: {fileID: 5464090182912660596}
   isFrozen: 0
   m_rigid: {fileID: 4792773300764216669}
---- !u!114 &6240990561836385197
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8982843657415732048}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45f5b378ffcf14b4cac5e91f9c1cdb60, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  circularShape: 0
-  moveable: {fileID: 8982843657415732050}
-  m_connectors: []
 --- !u!135 &5464090182912660596
 SphereCollider:
   m_ObjectHideFlags: 0
