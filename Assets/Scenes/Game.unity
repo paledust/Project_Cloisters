@@ -9975,7 +9975,7 @@ Transform:
   m_GameObject: {fileID: 38298523}
   m_LocalRotation: {x: -0, y: -0, z: -1, w: 0.0000004023313}
   m_LocalPosition: {x: 0, y: -1.246, z: 0}
-  m_LocalScale: {x: 2.87, y: 0.15, z: 1}
+  m_LocalScale: {x: 2.87, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8982843657392823467}
@@ -10006,7 +10006,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6de01a5052b8abb43ae7c49d3532bb15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRound: 0
+  connectTriggerState: 0
   selfClickable: {fileID: 8982843657392823468}
 --- !u!1 &40553130
 GameObject:
@@ -16323,7 +16323,7 @@ Transform:
   m_GameObject: {fileID: 234358429}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.463, z: 0}
-  m_LocalScale: {x: 2.46, y: 0.15, z: 1}
+  m_LocalScale: {x: 2.46, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1942657932}
@@ -16354,7 +16354,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6de01a5052b8abb43ae7c49d3532bb15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRound: 0
+  connectTriggerState: 0
   selfClickable: {fileID: 1942657933}
 --- !u!1 &244136393
 GameObject:
@@ -16383,7 +16383,7 @@ Transform:
   m_GameObject: {fileID: 244136393}
   m_LocalRotation: {x: -0, y: -0, z: 0.70710677, w: 0.7071068}
   m_LocalPosition: {x: -1.44, y: 0, z: 0}
-  m_LocalScale: {x: 2.46, y: 0.15, z: 1}
+  m_LocalScale: {x: 2.46, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1942657932}
@@ -16414,7 +16414,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6de01a5052b8abb43ae7c49d3532bb15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRound: 0
+  connectTriggerState: 0
   selfClickable: {fileID: 1942657933}
 --- !u!1 &249244185
 GameObject:
@@ -17221,6 +17221,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 665619246}
     m_Modifications:
+    - target: {fileID: 1186632006653217032, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 537029234, guid: 42d62cbee05d23141b6cc3f9b711ca06,
+        type: 3}
     - target: {fileID: 6240990561836385197, guid: e843106840614744cae4702badee9286,
         type: 3}
       propertyPath: circularShape
@@ -22695,7 +22701,7 @@ Transform:
   m_GameObject: {fileID: 466612511}
   m_LocalRotation: {x: -0, y: -0, z: 0.70710677, w: 0.7071068}
   m_LocalPosition: {x: -2.256, y: 0.106, z: 0}
-  m_LocalScale: {x: 2.9, y: 0.15, z: 1}
+  m_LocalScale: {x: 2.9, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1861590885}
@@ -22726,7 +22732,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6de01a5052b8abb43ae7c49d3532bb15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRound: 0
+  connectTriggerState: 0
   selfClickable: {fileID: 1861590886}
 --- !u!212 &473470508 stripped
 SpriteRenderer:
@@ -38900,7 +38906,7 @@ Transform:
   m_GameObject: {fileID: 717523922}
   m_LocalRotation: {x: -0, y: -0, z: -1, w: -0.0000004768371}
   m_LocalPosition: {x: 0, y: -1.482, z: 0}
-  m_LocalScale: {x: 4.01, y: 0.15, z: 1}
+  m_LocalScale: {x: 4.01, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1861590885}
@@ -38931,7 +38937,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6de01a5052b8abb43ae7c49d3532bb15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRound: 0
+  connectTriggerState: 0
   selfClickable: {fileID: 1861590886}
 --- !u!1 &718136411
 GameObject:
@@ -44472,7 +44478,7 @@ PrefabInstance:
     - target: {fileID: 604903855397411312, guid: e4373c655b2b8a14b865e1c6e099224e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.498
+      value: 0.4980011
       objectReference: {fileID: 0}
     - target: {fileID: 604903855397411312, guid: e4373c655b2b8a14b865e1c6e099224e,
         type: 3}
@@ -44805,6 +44811,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 665619246}
     m_Modifications:
+    - target: {fileID: 1186632006653217032, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 2049446554, guid: 42d62cbee05d23141b6cc3f9b711ca06,
+        type: 3}
     - target: {fileID: 6240990561836385197, guid: e843106840614744cae4702badee9286,
         type: 3}
       propertyPath: circularShape
@@ -44960,7 +44972,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6de01a5052b8abb43ae7c49d3532bb15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRound: 1
+  connectTriggerState: 0
   selfClickable: {fileID: 1362495744}
 --- !u!1 &832575517
 GameObject:
@@ -45009,7 +45021,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &843446196
 PrefabInstance:
@@ -45129,7 +45141,7 @@ Transform:
   m_GameObject: {fileID: 852238736}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.1, y: 1.45, z: 0}
-  m_LocalScale: {x: 5.38, y: 0.15, z: 1}
+  m_LocalScale: {x: 5.38, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1316295388}
@@ -45160,7 +45172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6de01a5052b8abb43ae7c49d3532bb15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRound: 0
+  connectTriggerState: 0
   selfClickable: {fileID: 1316295389}
 --- !u!1 &890503853
 GameObject:
@@ -45189,7 +45201,7 @@ Transform:
   m_GameObject: {fileID: 890503853}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.62, z: 0}
-  m_LocalScale: {x: 5.285, y: 0.15, z: 1}
+  m_LocalScale: {x: 5.285, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1060863974}
@@ -45220,7 +45232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6de01a5052b8abb43ae7c49d3532bb15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRound: 0
+  connectTriggerState: 0
   selfClickable: {fileID: 1060863975}
 --- !u!1 &903155666
 GameObject:
@@ -45866,6 +45878,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e35f4ec904422142b0f981c54d130ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  connectionBreakerPrefab: {fileID: 1766277912551381439, guid: 4f210c5fe0b8d75438513c061aa9fdd6,
+    type: 3}
+  intersection: 0.075
+  connectDuration: 0.2
 --- !u!1001 &978177926
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46268,6 +46284,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 665619246}
     m_Modifications:
+    - target: {fileID: 1186632006653217032, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -2116442223, guid: 42d62cbee05d23141b6cc3f9b711ca06,
+        type: 3}
     - target: {fileID: 6240990561836385197, guid: e843106840614744cae4702badee9286,
         type: 3}
       propertyPath: m_connectors.Array.size
@@ -46507,7 +46529,7 @@ Transform:
   m_GameObject: {fileID: 1080224570}
   m_LocalRotation: {x: -0, y: -0, z: 0.4999996, w: 0.8660257}
   m_LocalPosition: {x: -0.874, y: 0.328, z: 0}
-  m_LocalScale: {x: 2.87, y: 0.15, z: 1}
+  m_LocalScale: {x: 2.87, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8982843657392823467}
@@ -46538,7 +46560,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6de01a5052b8abb43ae7c49d3532bb15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRound: 0
+  connectTriggerState: 0
   selfClickable: {fileID: 8982843657392823468}
 --- !u!1 &1088329709
 GameObject:
@@ -46599,7 +46621,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6de01a5052b8abb43ae7c49d3532bb15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRound: 1
+  connectTriggerState: 0
   selfClickable: {fileID: 794465139}
 --- !u!1 &1095816171
 GameObject:
@@ -51655,6 +51677,80 @@ Transform:
   m_Father: {fileID: 556360810}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!1001 &1133227499
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1766277912551381424, guid: 4f210c5fe0b8d75438513c061aa9fdd6,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766277912551381424, guid: 4f210c5fe0b8d75438513c061aa9fdd6,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -160.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766277912551381424, guid: 4f210c5fe0b8d75438513c061aa9fdd6,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.31
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766277912551381424, guid: 4f210c5fe0b8d75438513c061aa9fdd6,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 31.399
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766277912551381424, guid: 4f210c5fe0b8d75438513c061aa9fdd6,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766277912551381424, guid: 4f210c5fe0b8d75438513c061aa9fdd6,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766277912551381424, guid: 4f210c5fe0b8d75438513c061aa9fdd6,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766277912551381424, guid: 4f210c5fe0b8d75438513c061aa9fdd6,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766277912551381424, guid: 4f210c5fe0b8d75438513c061aa9fdd6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766277912551381424, guid: 4f210c5fe0b8d75438513c061aa9fdd6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766277912551381424, guid: 4f210c5fe0b8d75438513c061aa9fdd6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766277912551381439, guid: 4f210c5fe0b8d75438513c061aa9fdd6,
+        type: 3}
+      propertyPath: m_Name
+      value: Clickable_ConnectionBreaker
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766277912551381439, guid: 4f210c5fe0b8d75438513c061aa9fdd6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4f210c5fe0b8d75438513c061aa9fdd6, type: 3}
 --- !u!1 &1150392008
 GameObject:
   m_ObjectHideFlags: 0
@@ -58290,6 +58386,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 665619246}
     m_Modifications:
+    - target: {fileID: 1186632006653217032, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -56101615, guid: 42d62cbee05d23141b6cc3f9b711ca06,
+        type: 3}
     - target: {fileID: 6240990561836385197, guid: e843106840614744cae4702badee9286,
         type: 3}
       propertyPath: m_connectors.Array.size
@@ -58785,7 +58887,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6de01a5052b8abb43ae7c49d3532bb15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRound: 0
+  connectTriggerState: 0
   selfClickable: {fileID: 8982843657392823468}
 --- !u!1001 &1338287515
 PrefabInstance:
@@ -64811,7 +64913,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6de01a5052b8abb43ae7c49d3532bb15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRound: 0
+  connectTriggerState: 0
   selfClickable: {fileID: 1316295389}
 --- !u!1001 &1470284697
 PrefabInstance:
@@ -70357,7 +70459,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6de01a5052b8abb43ae7c49d3532bb15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRound: 0
+  connectTriggerState: 0
   selfClickable: {fileID: 1942657933}
 --- !u!212 &1555903561 stripped
 SpriteRenderer:
@@ -82312,7 +82414,7 @@ Transform:
   m_GameObject: {fileID: 1852301466}
   m_LocalRotation: {x: -0, y: -0, z: -1, w: 0.000000104308114}
   m_LocalPosition: {x: 0, y: -1.611, z: 0}
-  m_LocalScale: {x: 5.285, y: 0.15, z: 1}
+  m_LocalScale: {x: 5.285, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1060863974}
@@ -82343,7 +82445,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6de01a5052b8abb43ae7c49d3532bb15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRound: 0
+  connectTriggerState: 0
   selfClickable: {fileID: 1060863975}
 --- !u!1001 &1861590881
 PrefabInstance:
@@ -82352,6 +82454,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 665619246}
     m_Modifications:
+    - target: {fileID: 1186632006653217032, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -95586929, guid: 42d62cbee05d23141b6cc3f9b711ca06,
+        type: 3}
     - target: {fileID: 6240990561836385197, guid: e843106840614744cae4702badee9286,
         type: 3}
       propertyPath: m_connectors.Array.size
@@ -87841,6 +87949,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 665619246}
     m_Modifications:
+    - target: {fileID: 1186632006653217032, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1999981073, guid: 42d62cbee05d23141b6cc3f9b711ca06,
+        type: 3}
     - target: {fileID: 6240990561836385197, guid: e843106840614744cae4702badee9286,
         type: 3}
       propertyPath: m_connectors.Array.size
@@ -88519,7 +88633,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6de01a5052b8abb43ae7c49d3532bb15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRound: 0
+  connectTriggerState: 0
   selfClickable: {fileID: 1060863975}
 --- !u!1 &2005268741
 GameObject:
@@ -89142,7 +89256,7 @@ Transform:
   m_GameObject: {fileID: 2055262178}
   m_LocalRotation: {x: -0, y: -0, z: -1, w: 0}
   m_LocalPosition: {x: 0, y: -1.447, z: 0}
-  m_LocalScale: {x: 2.46, y: 0.15, z: 1}
+  m_LocalScale: {x: 2.46, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1942657932}
@@ -89173,7 +89287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6de01a5052b8abb43ae7c49d3532bb15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRound: 0
+  connectTriggerState: 0
   selfClickable: {fileID: 1942657933}
 --- !u!1001 &2064518590
 PrefabInstance:

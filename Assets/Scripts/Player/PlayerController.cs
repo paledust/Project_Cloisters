@@ -64,8 +64,9 @@ public class PlayerController : MonoBehaviour
     }
     void ClearHoldingInteractable(){
         if(m_holdingInteractable != null){
-            m_holdingInteractable.OnRelease(this);
+            var holding = m_holdingInteractable;
             m_holdingInteractable = null;
+            holding.OnRelease(this);
         }
         if(!m_hoveringInteractable) PlayerManager.Instance.UpdateCursorState(CURSOR_STATE.DEFAULT);
         else PlayerManager.Instance.UpdateCursorState(CURSOR_STATE.HOVER);

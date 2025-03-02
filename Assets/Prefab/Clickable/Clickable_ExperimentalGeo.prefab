@@ -41,6 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8982843657415732049}
   - component: {fileID: 8982843657415732050}
+  - component: {fileID: 1754560563833497679}
   - component: {fileID: 5464090182912660596}
   - component: {fileID: 4792773300764216669}
   m_Layer: 3
@@ -83,6 +84,21 @@ MonoBehaviour:
   hitbox: {fileID: 5464090182912660596}
   isFrozen: 0
   m_rigid: {fileID: 4792773300764216669}
+--- !u!114 &1754560563833497679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8982843657415732048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 029f6e67060e03f4d9abbf7af530b59a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  connectTriggers: []
+  pendingTrigger: {fileID: 0}
+  occupiedTrigger: {fileID: 0}
 --- !u!135 &5464090182912660596
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -122,6 +138,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8982843658976122207}
   - component: {fileID: 8982843658976122192}
+  - component: {fileID: 1186632006653217032}
   m_Layer: 0
   m_Name: geoRenderer
   m_TagString: Untagged
@@ -195,4 +212,55 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!331 &1186632006653217032
+SpriteMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8982843658976122206}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10758, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 2039951288, guid: 42d62cbee05d23141b6cc3f9b711ca06, type: 3}
+  m_MaskAlphaCutoff: 0.2
+  m_FrontSortingLayerID: 0
+  m_BackSortingLayerID: 0
+  m_FrontSortingLayer: 0
+  m_BackSortingLayer: 0
+  m_FrontSortingOrder: 0
+  m_BackSortingOrder: 0
+  m_IsCustomRangeActive: 0
   m_SpriteSortPoint: 0
