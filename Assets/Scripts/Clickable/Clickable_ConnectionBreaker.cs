@@ -28,8 +28,8 @@ public class Clickable_ConnectionBreaker : Basic_Clickable
         main.m_connectBody.m_rigid.AddTorque(Vector3.forward*breakTorque, ForceMode.Impulse);
         other.m_connectBody.m_rigid.AddForce(-other.transform.up*breakForce, ForceMode.Impulse);
         other.m_connectBody.m_rigid.AddTorque(-Vector3.forward*breakTorque, ForceMode.Impulse);
-        main.SwitchTrigger(true);
-        other.SwitchTrigger(true);
+        main.OnConnectionBreak();
+        other.OnConnectionBreak();
         Destroy(gameObject);
     }
 }

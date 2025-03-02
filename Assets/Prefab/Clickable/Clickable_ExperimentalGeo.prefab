@@ -96,9 +96,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 029f6e67060e03f4d9abbf7af530b59a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  connectTriggers: []
-  pendingTrigger: {fileID: 0}
-  occupiedTrigger: {fileID: 0}
 --- !u!135 &5464090182912660596
 SphereCollider:
   m_ObjectHideFlags: 0

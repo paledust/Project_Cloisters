@@ -7,7 +7,7 @@ public class PlayerManager : Singleton<PlayerManager>
     private bool IsInTransition;
     private PlayerController currentPlayer;
     
-    public bool m_canControl{get{return !IsInTransition;}}
+    public bool m_canControl => !IsInTransition;
 
     void HideCursor()=>Cursor.visible = false;
     void ShowCursor()=>Cursor.visible = true;
@@ -49,5 +49,6 @@ public class PlayerManager : Singleton<PlayerManager>
     void FlashInputHandler(){
         currentPlayer?.ReleaseCurrentHolding();
     }
+    public Vector3 GetCursorWorldPos(float depth)=>currentPlayer.GetCursorWorldPoint(depth);
     public void UpdateCursorState(CURSOR_STATE newState)=>UI_Manager.Instance.UpdateCursorState(newState);
 }

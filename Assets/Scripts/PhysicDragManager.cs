@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Dragger
 {
-    public HingeJoint joint;
+    public Joint joint;
     public Rigidbody rigidbody;
 }
 public class PhysicDragManager : Singleton<PhysicDragManager>

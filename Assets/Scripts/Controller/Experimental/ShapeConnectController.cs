@@ -20,8 +20,8 @@ public class ShapeConnectController : MonoBehaviour
     {
         EventHandler.Call_OnFlashInput();
 
-        main.SwitchTrigger(false);
-        other.SwitchTrigger(false);
+        main.OnConnectionBuild();
+        other.OnConnectionBuild();
         
         var mainBody = main.m_connectBody;
         var otherBody = other.m_connectBody;
@@ -54,7 +54,7 @@ public class ShapeConnectController : MonoBehaviour
             jointBreaker.transform.rotation = main.transform.rotation;
             Vector3 scale = main.transform.localScale;
             scale.y = 1f;
-            scale.z = 5f;
+            scale.z = 3f;
             jointBreaker.transform.localScale = scale;
             jointBreaker.transform.parent = mainBody.transform;
             jointBreaker.InitConnection(joint, main, other);

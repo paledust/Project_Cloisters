@@ -1,6 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class ConnectTrigger : MonoBehaviour
 {
@@ -13,13 +13,15 @@ public class ConnectTrigger : MonoBehaviour
     }
     [SerializeField] private ConnectTriggerState connectTriggerState = ConnectTriggerState.Pending;
     [SerializeField] private Basic_Clickable selfClickable;
+    [SerializeField] private SpriteRenderer alignMask;
     private Collider m_collider;
+    private ConnectTrigger catchingTrigger;
     private List<ConnectTrigger> pendingTriggers;
 
     public Vector3 normal => transform.up.normalized;
     public ConnectBody m_connectBody{get; private set;}
 
-    private const float MIN_CONNECT_DOT = 0.95f;
+    private const float MIN_CONNECT_DOT = 0.92f;
 
     void Reset()
     {
@@ -53,7 +55,7 @@ public class ConnectTrigger : MonoBehaviour
                 int bestIndex = -1;
                 for(int i=pendingTriggers.Count-1; i>=0; i--)
                 {
-                    float dot = Vector3.Dot(normal, -pendingTriggers[i].normal);
+                    float dot = Vector2.Dot(normal, -pendingTriggers[i].normal);
                     if(dot>=MIN_CONNECT_DOT && dot>idealDot)
                     {
                         idealDot = dot;
@@ -63,6 +65,15 @@ public class ConnectTrigger : MonoBehaviour
                 if(bestIndex>=0)
                 {
                     return pendingTriggers[bestIndex];
+                }
+                return null;
+            case ConnectTriggerState.Catching:
+                Vector2 balanceDir = (catchingTrigger.normal - normal).normalized;
+                idealDot = Vector2.Dot(normal, -catchingTrigger.normal);
+                float dist = Vector2.Dot(balanceDir, transform.position-catchingTrigger.transform.position);
+                if(idealDot>=MIN_CONNECT_DOT && Mathf.Abs(dist)<=0.5f)
+                {
+                    return catchingTrigger;
                 }
                 return null;
             default:
@@ -83,18 +94,6 @@ public class ConnectTrigger : MonoBehaviour
                 pendingTriggers.Add(otherTrigger);
             }
         }
-        // if(!selfClickable.isControlling) return;
-
-        // var otherTrigger = other.GetComponent<ConnectTrigger>();
-        // if(otherTrigger == null) return;
-        
-        // if(Vector3.Dot(transform.up.normalized, -otherTrigger.transform.up.normalized)>=MIN_CONNECT_DOT)
-        // {
-        //     if(!m_connectBody.IsConnectedToBody(otherTrigger.m_connectBody))
-        //     {
-        //         EventHandler.Call_OnShapeConnect(this, otherTrigger);
-        //     }
-        // }
     }
     void OnTriggerExit(Collider other)
     {
@@ -110,6 +109,35 @@ public class ConnectTrigger : MonoBehaviour
     public void SwitchTrigger(bool isEnable)
     {
         m_collider.enabled = isEnable;
+    }
+    public void OnConnectionBuild()
+    {
+        ChangeState(ConnectTriggerState.Locking);
+        m_collider.enabled = false;
+    }
+    public void OnConnectionBreak()
+    {
+        m_collider.enabled = true;
+        ChangeState(ConnectTriggerState.Pending);
+    }
+    public void OnConnectionCatch(ConnectTrigger alignTrigger)
+    {
+        catchingTrigger = alignTrigger;
+        catchingTrigger.FadeMask(1f);
+        FadeMask(1f);
+        ChangeState(ConnectTriggerState.Catching);
+    }
+    public void OnLostConnectionCatching()
+    {
+        FadeMask(0f);
+        catchingTrigger.FadeMask(0f);
+        catchingTrigger = null;
+        ChangeState(ConnectTriggerState.Pending);
+    }
+    public void FadeMask(float alpha)
+    {
+        alignMask.DOKill();
+        alignMask.DOFade(alpha, 0.2f);
     }
     void OnDrawGizmos()
     {
