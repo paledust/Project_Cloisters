@@ -118,6 +118,7 @@ public class ConnectTrigger : MonoBehaviour
     public void OnConnectionBreak()
     {
         m_collider.enabled = true;
+        FadeMask(0f);
         ChangeState(ConnectTriggerState.Pending);
     }
     public void OnConnectionCatch(ConnectTrigger alignTrigger)

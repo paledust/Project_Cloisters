@@ -1,9 +1,11 @@
 using UnityEngine;
 using DG.Tweening;
+using System.Drawing;
 
 public class ShapeConnectController : MonoBehaviour
 {
     [SerializeField] private GameObject connectionBreakerPrefab;
+    [SerializeField] private ParticleSystem p_collision;
 [Header("Connection")]
     [SerializeField] private float intersection = 0.1f;
     [SerializeField] private float connectDuration = 0.15f;
@@ -40,27 +42,39 @@ public class ShapeConnectController : MonoBehaviour
         main.m_connectBody.m_rigid.detectCollisions = false;
         other.m_connectBody.m_rigid.detectCollisions = false;
         var seq = DOTween.Sequence();
-        seq.Append(mainBody.transform.DORotateQuaternion(mainBody.transform.rotation *  Quaternion.Euler(0,0,angle), connectDuration).SetEase(Ease.InOutQuad))
-        .Join(mainBody.transform.DOMove(mainBody.transform.position + offset - face*intersection, connectDuration).SetEase(Ease.InOutQuad))
-        .Join(otherBody.transform.DORotateQuaternion(otherBody.transform.rotation * Quaternion.Euler(0,0,-angle), connectDuration).SetEase(Ease.InOutQuad))
-        .Join(otherBody.transform.DOMove(otherBody.transform.position - offset + face*intersection, connectDuration).SetEase(Ease.InOutQuad))
-        .OnComplete(()=>{
-        //Create Joint
-            var joint =mainBody.m_rigid.gameObject.AddComponent<FixedJoint>();
-            joint.connectedBody = otherBody.m_rigid;
-        //Create JointBreaker
-            var jointBreaker = Instantiate(connectionBreakerPrefab, mid, main.transform.rotation).GetComponent<Clickable_ConnectionBreaker>();
-            jointBreaker.transform.position = mid;
-            jointBreaker.transform.rotation = main.transform.rotation;
-            Vector3 scale = main.transform.localScale;
-            scale.y = 1f;
-            scale.z = 3f;
-            jointBreaker.transform.localScale = scale;
-            jointBreaker.transform.parent = mainBody.transform;
-            jointBreaker.InitConnection(joint, main, other);
+        seq.Append(mainBody.transform.DORotateQuaternion(mainBody.transform.rotation *  Quaternion.Euler(0,0,angle), connectDuration*0.5f).SetEase(Ease.InQuad))
+        .Join(mainBody.transform.DOMove(mainBody.transform.position + offset, connectDuration*0.5f).SetEase(Ease.InQuad))
+        .Join(otherBody.transform.DORotateQuaternion(otherBody.transform.rotation * Quaternion.Euler(0,0,-angle), connectDuration*0.5f).SetEase(Ease.InQuad))
+        .Join(otherBody.transform.DOMove(otherBody.transform.position - offset, connectDuration*0.5f).SetEase(Ease.InQuad))
+        .OnComplete(()=>
+        {
+        //Play Particles
+            p_collision.transform.position = main.transform.position;
+            p_collision.Play(true);
+        //Seporate and create Joint
+            var newSeq = DOTween.Sequence();
+            newSeq.Append(mainBody.transform.DOMove(mainBody.transform.position - face * intersection*0.5f, connectDuration*0.5f)).SetEase(Ease.OutQuad)
+            .Join(mainBody.transform.DORotateQuaternion(mainBody.transform.rotation, connectDuration*0.5f).SetEase(Ease.OutQuad))
+            .Join(otherBody.transform.DOMove(otherBody.transform.position + face * intersection*0.5f, connectDuration*0.5f)).SetEase(Ease.OutQuad)
+            .Join(otherBody.transform.DORotateQuaternion(otherBody.transform.rotation, connectDuration*0.5f).SetEase(Ease.OutQuad))
+            .OnComplete(()=>{
+            //Create Joint
+                var joint =mainBody.m_rigid.gameObject.AddComponent<FixedJoint>();
+                joint.connectedBody = otherBody.m_rigid;
+            //Create JointBreaker
+                var jointBreaker = Instantiate(connectionBreakerPrefab, mid, main.transform.rotation).GetComponent<Clickable_ConnectionBreaker>();
+                jointBreaker.transform.position = mid;
+                jointBreaker.transform.rotation = main.transform.rotation;
+                Vector3 scale = main.transform.localScale;
+                scale.y = 1f;
+                scale.z = 3f;
+                jointBreaker.transform.localScale = scale;
+                jointBreaker.transform.parent = mainBody.transform;
+                jointBreaker.InitConnection(joint, main, other);
 
-            main.m_connectBody.m_rigid.detectCollisions = true;
-            other.m_connectBody.m_rigid.detectCollisions = true;
+                main.m_connectBody.m_rigid.detectCollisions = true;
+                other.m_connectBody.m_rigid.detectCollisions = true;
+            });
         });
     }
 }
