@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 //A basic C# Event System
@@ -41,5 +39,11 @@ public static class EventHandler
     public static void Call_OnClickableCircleCollide(Clickable_Circle collidedCircle,Vector3 contact, Vector3 diff, float strength)=>E_OnClickableCircleCollide?.Invoke(collidedCircle, contact, diff, strength);
     public static event Action<ConnectTrigger, ConnectTrigger> E_OnShapeConnect;
     public static void Call_OnShapeConnect(ConnectTrigger main, ConnectTrigger other)=>E_OnShapeConnect?.Invoke(main, other);
+    public static event Action<char> E_OnCollectExperimentalText;
+    public static void Call_OnCollectExperimentalText(char character)=>E_OnCollectExperimentalText?.Invoke(character);
+    public static event Action<Clickable_ConnectionBreaker> E_OnBuildConnectionBreaker;
+    public static void Call_OnBuildConnectionBreaker(Clickable_ConnectionBreaker connectionBreaker)=>E_OnBuildConnectionBreaker?.Invoke(connectionBreaker);
+    public static event Action<Clickable_ConnectionBreaker, Vector3> E_OnBreakConnectionBreaker;
+    public static void Call_OnBreakConnectionBreaker(Clickable_ConnectionBreaker connectionBreaker, Vector3 breakPoint)=>E_OnBreakConnectionBreaker?.Invoke(connectionBreaker, breakPoint);
 #endregion
 }

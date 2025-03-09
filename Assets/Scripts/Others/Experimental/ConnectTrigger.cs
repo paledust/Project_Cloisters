@@ -22,6 +22,8 @@ public class ConnectTrigger : MonoBehaviour
     public ConnectBody m_connectBody{get; private set;}
 
     private const float MIN_CONNECT_DOT = 0.92f;
+    private const float MAX_BREAK_DOT = 0.9f;
+    private const float MAX_BREAK_DIST = 1f;
 
     void Reset()
     {
@@ -71,7 +73,7 @@ public class ConnectTrigger : MonoBehaviour
                 Vector2 balanceDir = (catchingTrigger.normal - normal).normalized;
                 idealDot = Vector2.Dot(normal, -catchingTrigger.normal);
                 float dist = Vector2.Dot(balanceDir, transform.position-catchingTrigger.transform.position);
-                if(idealDot>=MIN_CONNECT_DOT && Mathf.Abs(dist)<=0.5f)
+                if(idealDot>=MAX_BREAK_DOT && Mathf.Abs(dist)<=MAX_BREAK_DIST)
                 {
                     return catchingTrigger;
                 }

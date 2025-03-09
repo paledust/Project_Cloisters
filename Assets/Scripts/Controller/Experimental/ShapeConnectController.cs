@@ -1,11 +1,11 @@
 using UnityEngine;
 using DG.Tweening;
-using System.Drawing;
 
 public class ShapeConnectController : MonoBehaviour
 {
     [SerializeField] private GameObject connectionBreakerPrefab;
     [SerializeField] private ParticleSystem p_collision;
+    [SerializeField] private ParticleSystem p_break;
 [Header("Connection")]
     [SerializeField] private float intersection = 0.1f;
     [SerializeField] private float connectDuration = 0.15f;
@@ -13,10 +13,17 @@ public class ShapeConnectController : MonoBehaviour
     void Awake()
     {
         EventHandler.E_OnShapeConnect += OnShapeConnect;
+        EventHandler.E_OnBreakConnectionBreaker += OnShapeBreak;
     }
     void OnDestroy()
     {
         EventHandler.E_OnShapeConnect -= OnShapeConnect;
+        EventHandler.E_OnBreakConnectionBreaker -= OnShapeBreak;
+    }
+    void OnShapeBreak(Clickable_ConnectionBreaker connectionBreaker, Vector3 breakPoint)
+    {
+        p_break.transform.position = breakPoint;
+        p_break.Play(true);
     }
     void OnShapeConnect(ConnectTrigger main, ConnectTrigger other)
     {
@@ -53,9 +60,9 @@ public class ShapeConnectController : MonoBehaviour
             p_collision.Play(true);
         //Seporate and create Joint
             var newSeq = DOTween.Sequence();
-            newSeq.Append(mainBody.transform.DOMove(mainBody.transform.position - face * intersection*0.5f, connectDuration*0.5f)).SetEase(Ease.OutQuad)
+            newSeq.Append(mainBody.transform.DOMove(mainBody.transform.position - face * intersection, connectDuration*0.5f)).SetEase(Ease.OutQuad)
             .Join(mainBody.transform.DORotateQuaternion(mainBody.transform.rotation, connectDuration*0.5f).SetEase(Ease.OutQuad))
-            .Join(otherBody.transform.DOMove(otherBody.transform.position + face * intersection*0.5f, connectDuration*0.5f)).SetEase(Ease.OutQuad)
+            .Join(otherBody.transform.DOMove(otherBody.transform.position + face * intersection, connectDuration*0.5f)).SetEase(Ease.OutQuad)
             .Join(otherBody.transform.DORotateQuaternion(otherBody.transform.rotation, connectDuration*0.5f).SetEase(Ease.OutQuad))
             .OnComplete(()=>{
             //Create Joint
@@ -74,6 +81,7 @@ public class ShapeConnectController : MonoBehaviour
 
                 main.m_connectBody.m_rigid.detectCollisions = true;
                 other.m_connectBody.m_rigid.detectCollisions = true;
+                EventHandler.Call_OnBuildConnectionBreaker(jointBreaker);
             });
         });
     }

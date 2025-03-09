@@ -151,7 +151,7 @@ MonoBehaviour:
   breakerConnector: {fileID: 2086669284904874536}
   connectParticle: {fileID: 604903856330417164}
   breakParticle: {fileID: 604903856330417164}
-  breakForce: 15
+  breakForce: 12
   breakTorque: 9
 --- !u!1 &8156971324904876617
 GameObject:

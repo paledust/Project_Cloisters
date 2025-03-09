@@ -31,5 +31,6 @@ public class Clickable_ConnectionBreaker : Basic_Clickable
         main.OnConnectionBreak();
         other.OnConnectionBreak();
         Destroy(gameObject);
+        EventHandler.Call_OnBreakConnectionBreaker(this, hitPos);
     }
 }
