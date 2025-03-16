@@ -84,6 +84,13 @@ public class ConnectBody : MonoBehaviour
             }
             SwapConnection(null, null);
         }
+        else
+        {
+            foreach(ConnectTrigger connectTrigger in connectTriggers)
+            {
+                connectTrigger.ResetTrigger();
+            }
+        }
     }
     void SwapConnection(ConnectTrigger selfTrigger, ConnectTrigger otherTrigger)
     {

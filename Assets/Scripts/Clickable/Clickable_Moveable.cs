@@ -11,11 +11,15 @@ public class Clickable_Moveable : Basic_Clickable
         player.HoldInteractable(this);
         dragger = PhysicDragManager.Instance.ConnectToRigid(m_rigid, transform.InverseTransformPoint(hitPos));
         dragger.rigidbody.transform.position = hitPos;
+        m_rigid.drag = 10;
+        m_rigid.angularDrag = 10;
     }
     public override void OnRelease(PlayerController player)
     {
         base.OnRelease(player);
         PhysicDragManager.Instance.BreakJoint();
+        m_rigid.drag = 5;
+        m_rigid.angularDrag = 7;
         dragger = null;
     }
     public override void ControllingUpdate(PlayerController player)

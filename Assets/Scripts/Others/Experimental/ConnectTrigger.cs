@@ -18,12 +18,13 @@ public class ConnectTrigger : MonoBehaviour
     private ConnectTrigger catchingTrigger;
     private List<ConnectTrigger> pendingTriggers;
 
+    public bool m_isLocked => connectTriggerState == ConnectTriggerState.Locking;
     public Vector3 normal => transform.up.normalized;
     public ConnectBody m_connectBody{get; private set;}
 
     private const float MIN_CONNECT_DOT = 0.9f;
     private const float MAX_BREAK_DOT = 0.85f;
-    private const float MAX_BREAK_DIST = 1f;
+    private const float MAX_BREAK_DIST = 1.2f;
 
     void Reset()
     {
@@ -109,9 +110,15 @@ public class ConnectTrigger : MonoBehaviour
             }
         }
     }
-    public void SwitchTrigger(bool isEnable)
+    public void ResetTrigger()
     {
-        m_collider.enabled = isEnable;
+        if(!m_isLocked)
+        {
+            m_collider.enabled = false;
+            catchingTrigger = null;
+            pendingTriggers.Clear();
+            m_collider.enabled = true;
+        }
     }
     public void OnConnectionBuild()
     {
