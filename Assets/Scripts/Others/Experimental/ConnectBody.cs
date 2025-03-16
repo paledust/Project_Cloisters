@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ConnectBody : MonoBehaviour
 {
+    [SerializeField] private ShapeColorChanger shapeColorChanger;
     private ConnectTrigger[] connectTriggers;
     private ConnectTrigger pendingTrigger; //the ideal connected trigger
     private ConnectTrigger occupiedTrigger; //the trigger attached that connected to ideal trigger
@@ -31,6 +32,7 @@ public class ConnectBody : MonoBehaviour
         clickable_Moveable.onRelease -= OnReleaseBody;
     }
     void OnControlBody(){}
+    public void BlinkShape()=>shapeColorChanger.BlinkColor();
     void Update()
     {
         if(clickable_Moveable.isControlling)

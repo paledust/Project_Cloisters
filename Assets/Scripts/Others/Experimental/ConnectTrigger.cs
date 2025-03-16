@@ -21,8 +21,8 @@ public class ConnectTrigger : MonoBehaviour
     public Vector3 normal => transform.up.normalized;
     public ConnectBody m_connectBody{get; private set;}
 
-    private const float MIN_CONNECT_DOT = 0.92f;
-    private const float MAX_BREAK_DOT = 0.9f;
+    private const float MIN_CONNECT_DOT = 0.9f;
+    private const float MAX_BREAK_DOT = 0.85f;
     private const float MAX_BREAK_DIST = 1f;
 
     void Reset()
@@ -70,6 +70,7 @@ public class ConnectTrigger : MonoBehaviour
                 }
                 return null;
             case ConnectTriggerState.Catching:
+                if(!pendingTriggers.Contains(catchingTrigger)) return null;
                 Vector2 balanceDir = (catchingTrigger.normal - normal).normalized;
                 idealDot = Vector2.Dot(normal, -catchingTrigger.normal);
                 float dist = Vector2.Dot(balanceDir, transform.position-catchingTrigger.transform.position);
@@ -126,7 +127,7 @@ public class ConnectTrigger : MonoBehaviour
     public void OnConnectionCatch(ConnectTrigger alignTrigger)
     {
         catchingTrigger = alignTrigger;
-        catchingTrigger.FadeMask(1f);
+        alignTrigger.FadeMask(1f);
         FadeMask(1f);
         ChangeState(ConnectTriggerState.Catching);
     }

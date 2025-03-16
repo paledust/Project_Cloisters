@@ -48,6 +48,7 @@ public class ShapeConnectController : MonoBehaviour
 
         main.m_connectBody.m_rigid.detectCollisions = false;
         other.m_connectBody.m_rigid.detectCollisions = false;
+        
         var seq = DOTween.Sequence();
         seq.Append(mainBody.transform.DORotateQuaternion(mainBody.transform.rotation *  Quaternion.Euler(0,0,angle), connectDuration*0.5f).SetEase(Ease.InQuad))
         .Join(mainBody.transform.DOMove(mainBody.transform.position + offset, connectDuration*0.5f).SetEase(Ease.InQuad))

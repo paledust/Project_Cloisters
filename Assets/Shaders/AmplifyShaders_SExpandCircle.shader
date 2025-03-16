@@ -1,6 +1,6 @@
-// Made with Amplify Shader Editor v1.9.8
+// Made with Amplify Shader Editor v1.9.8.1
 // Available at the Unity Asset Store - http://u3d.as/y3X 
-Shader "AmplifySahders/Sprite ExpandCircle"
+Shader "AmplifyShaders/Sprite ExpandCircle"
 {
 	Properties
 	{
@@ -69,7 +69,7 @@ Shader "AmplifySahders/Sprite ExpandCircle"
 
 			HLSLPROGRAM
 
-			#define ASE_VERSION 19800
+			#define ASE_VERSION 19801
 			#define ASE_SRP_VERSION 120112
 
 
@@ -105,12 +105,12 @@ Shader "AmplifySahders/Sprite ExpandCircle"
 			sampler2D _MainTex;
 			sampler2D _NoiseMap;
 			sampler2D _DissolveNoise;
-			UNITY_INSTANCING_BUFFER_START(AmplifySahdersSpriteExpandCircle)
+			UNITY_INSTANCING_BUFFER_START(AmplifyShadersSpriteExpandCircle)
 				UNITY_DEFINE_INSTANCED_PROP(float4, _MainTex_ST)
 				UNITY_DEFINE_INSTANCED_PROP(float4, _NoiseMap_ST)
 				UNITY_DEFINE_INSTANCED_PROP(float4, _DissolveNoise_ST)
 				UNITY_DEFINE_INSTANCED_PROP(float, _ExternalNoiseMovement)
-			UNITY_INSTANCING_BUFFER_END(AmplifySahdersSpriteExpandCircle)
+			UNITY_INSTANCING_BUFFER_END(AmplifyShadersSpriteExpandCircle)
 			CBUFFER_START( UnityPerMaterial )
 			float4 _NoisePan;
 			float _CircleSmooth;
@@ -170,8 +170,8 @@ Shader "AmplifySahders/Sprite ExpandCircle"
 				UNITY_TRANSFER_INSTANCE_ID(v, o);
 				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
 
-				float4 ase_positionCS = TransformObjectToHClip((v.positionOS).xyz);
-				float4 screenPos = ComputeScreenPos(ase_positionCS);
+				float4 ase_positionCS = TransformObjectToHClip( ( v.positionOS ).xyz );
+				float4 screenPos = ComputeScreenPos( ase_positionCS );
 				o.ase_texcoord3 = screenPos;
 				
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
@@ -202,15 +202,15 @@ Shader "AmplifySahders/Sprite ExpandCircle"
 				UNITY_SETUP_INSTANCE_ID(IN);
 				UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(IN);
 
-				float4 _MainTex_ST_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifySahdersSpriteExpandCircle,_MainTex_ST);
+				float4 _MainTex_ST_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifyShadersSpriteExpandCircle,_MainTex_ST);
 				float2 uv_MainTex = IN.texCoord0.xy * _MainTex_ST_Instance.xy + _MainTex_ST_Instance.zw;
 				float4 tex2DNode8 = tex2D( _MainTex, uv_MainTex );
 				float2 texCoord4 = IN.texCoord0.xy * float2( 1,1 ) + float2( 0,0 );
 				float temp_output_23_0 = length( ( texCoord4 - float2( 0.5,0.5 ) ) );
-				float _ExternalNoiseMovement_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifySahdersSpriteExpandCircle,_ExternalNoiseMovement);
+				float _ExternalNoiseMovement_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifyShadersSpriteExpandCircle,_ExternalNoiseMovement);
 				float2 appendResult100 = (float2(_ExternalNoiseMovement_Instance , 0.0));
 				float2 appendResult73 = (float2(_NoisePan.x , _NoisePan.y));
-				float4 _NoiseMap_ST_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifySahdersSpriteExpandCircle,_NoiseMap_ST);
+				float4 _NoiseMap_ST_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifyShadersSpriteExpandCircle,_NoiseMap_ST);
 				float2 uv_NoiseMap = IN.texCoord0.xy * _NoiseMap_ST_Instance.xy + _NoiseMap_ST_Instance.zw;
 				float2 temp_output_34_0_g3 = ( uv_NoiseMap - float2( 0.5,0.5 ) );
 				float2 break39_g3 = temp_output_34_0_g3;
@@ -222,7 +222,7 @@ Shader "AmplifySahders/Sprite ExpandCircle"
 				float smoothstepResult43 = smoothstep( _Glow , ( _Glow + _GlowSmooth ) , temp_output_42_0);
 				float2 appendResult74 = (float2(_NoisePan.z , _NoisePan.w));
 				float2 dissolvePan75 = appendResult74;
-				float4 _DissolveNoise_ST_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifySahdersSpriteExpandCircle,_DissolveNoise_ST);
+				float4 _DissolveNoise_ST_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifyShadersSpriteExpandCircle,_DissolveNoise_ST);
 				float2 uv_DissolveNoise = IN.texCoord0.xy * _DissolveNoise_ST_Instance.xy + _DissolveNoise_ST_Instance.zw;
 				float2 panner76 = ( 1.0 * _Time.y * dissolvePan75 + uv_DissolveNoise);
 				float dissolveGuide53 = ( tex2D( _DissolveNoise, panner76 ).r * _DissolveNoiseStrength );
@@ -283,7 +283,7 @@ Shader "AmplifySahders/Sprite ExpandCircle"
 
 			HLSLPROGRAM
 
-			#define ASE_VERSION 19800
+			#define ASE_VERSION 19801
 			#define ASE_SRP_VERSION 120112
 
 
@@ -319,12 +319,12 @@ Shader "AmplifySahders/Sprite ExpandCircle"
 			sampler2D _MainTex;
 			sampler2D _NoiseMap;
 			sampler2D _DissolveNoise;
-			UNITY_INSTANCING_BUFFER_START(AmplifySahdersSpriteExpandCircle)
+			UNITY_INSTANCING_BUFFER_START(AmplifyShadersSpriteExpandCircle)
 				UNITY_DEFINE_INSTANCED_PROP(float4, _MainTex_ST)
 				UNITY_DEFINE_INSTANCED_PROP(float4, _NoiseMap_ST)
 				UNITY_DEFINE_INSTANCED_PROP(float4, _DissolveNoise_ST)
 				UNITY_DEFINE_INSTANCED_PROP(float, _ExternalNoiseMovement)
-			UNITY_INSTANCING_BUFFER_END(AmplifySahdersSpriteExpandCircle)
+			UNITY_INSTANCING_BUFFER_END(AmplifyShadersSpriteExpandCircle)
 			CBUFFER_START( UnityPerMaterial )
 			float4 _NoisePan;
 			float _CircleSmooth;
@@ -383,8 +383,8 @@ Shader "AmplifySahders/Sprite ExpandCircle"
 				UNITY_TRANSFER_INSTANCE_ID(v, o);
 				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
 
-				float4 ase_positionCS = TransformObjectToHClip((v.positionOS).xyz);
-				float4 screenPos = ComputeScreenPos(ase_positionCS);
+				float4 ase_positionCS = TransformObjectToHClip( ( v.positionOS ).xyz );
+				float4 screenPos = ComputeScreenPos( ase_positionCS );
 				o.ase_texcoord3 = screenPos;
 				
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
@@ -416,15 +416,15 @@ Shader "AmplifySahders/Sprite ExpandCircle"
 				UNITY_SETUP_INSTANCE_ID(IN);
 				UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(IN);
 
-				float4 _MainTex_ST_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifySahdersSpriteExpandCircle,_MainTex_ST);
+				float4 _MainTex_ST_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifyShadersSpriteExpandCircle,_MainTex_ST);
 				float2 uv_MainTex = IN.texCoord0.xy * _MainTex_ST_Instance.xy + _MainTex_ST_Instance.zw;
 				float4 tex2DNode8 = tex2D( _MainTex, uv_MainTex );
 				float2 texCoord4 = IN.texCoord0.xy * float2( 1,1 ) + float2( 0,0 );
 				float temp_output_23_0 = length( ( texCoord4 - float2( 0.5,0.5 ) ) );
-				float _ExternalNoiseMovement_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifySahdersSpriteExpandCircle,_ExternalNoiseMovement);
+				float _ExternalNoiseMovement_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifyShadersSpriteExpandCircle,_ExternalNoiseMovement);
 				float2 appendResult100 = (float2(_ExternalNoiseMovement_Instance , 0.0));
 				float2 appendResult73 = (float2(_NoisePan.x , _NoisePan.y));
-				float4 _NoiseMap_ST_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifySahdersSpriteExpandCircle,_NoiseMap_ST);
+				float4 _NoiseMap_ST_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifyShadersSpriteExpandCircle,_NoiseMap_ST);
 				float2 uv_NoiseMap = IN.texCoord0.xy * _NoiseMap_ST_Instance.xy + _NoiseMap_ST_Instance.zw;
 				float2 temp_output_34_0_g3 = ( uv_NoiseMap - float2( 0.5,0.5 ) );
 				float2 break39_g3 = temp_output_34_0_g3;
@@ -436,7 +436,7 @@ Shader "AmplifySahders/Sprite ExpandCircle"
 				float smoothstepResult43 = smoothstep( _Glow , ( _Glow + _GlowSmooth ) , temp_output_42_0);
 				float2 appendResult74 = (float2(_NoisePan.z , _NoisePan.w));
 				float2 dissolvePan75 = appendResult74;
-				float4 _DissolveNoise_ST_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifySahdersSpriteExpandCircle,_DissolveNoise_ST);
+				float4 _DissolveNoise_ST_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifyShadersSpriteExpandCircle,_DissolveNoise_ST);
 				float2 uv_DissolveNoise = IN.texCoord0.xy * _DissolveNoise_ST_Instance.xy + _DissolveNoise_ST_Instance.zw;
 				float2 panner76 = ( 1.0 * _Time.y * dissolvePan75 + uv_DissolveNoise);
 				float dissolveGuide53 = ( tex2D( _DissolveNoise, panner76 ).r * _DissolveNoiseStrength );
@@ -492,7 +492,7 @@ Shader "AmplifySahders/Sprite ExpandCircle"
 
             HLSLPROGRAM
 
-			#define ASE_VERSION 19800
+			#define ASE_VERSION 19801
 			#define ASE_SRP_VERSION 120112
 
 
@@ -521,12 +521,12 @@ Shader "AmplifySahders/Sprite ExpandCircle"
 			sampler2D _MainTex;
 			sampler2D _NoiseMap;
 			sampler2D _DissolveNoise;
-			UNITY_INSTANCING_BUFFER_START(AmplifySahdersSpriteExpandCircle)
+			UNITY_INSTANCING_BUFFER_START(AmplifyShadersSpriteExpandCircle)
 				UNITY_DEFINE_INSTANCED_PROP(float4, _MainTex_ST)
 				UNITY_DEFINE_INSTANCED_PROP(float4, _NoiseMap_ST)
 				UNITY_DEFINE_INSTANCED_PROP(float4, _DissolveNoise_ST)
 				UNITY_DEFINE_INSTANCED_PROP(float, _ExternalNoiseMovement)
-			UNITY_INSTANCING_BUFFER_END(AmplifySahdersSpriteExpandCircle)
+			UNITY_INSTANCING_BUFFER_END(AmplifyShadersSpriteExpandCircle)
 			CBUFFER_START( UnityPerMaterial )
 			float4 _NoisePan;
 			float _CircleSmooth;
@@ -577,8 +577,8 @@ Shader "AmplifySahders/Sprite ExpandCircle"
 				UNITY_TRANSFER_INSTANCE_ID(v, o);
 				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
 
-				float4 ase_positionCS = TransformObjectToHClip((v.positionOS).xyz);
-				float4 screenPos = ComputeScreenPos(ase_positionCS);
+				float4 ase_positionCS = TransformObjectToHClip( ( v.positionOS ).xyz );
+				float4 screenPos = ComputeScreenPos( ase_positionCS );
 				o.ase_texcoord1 = screenPos;
 				
 				o.ase_texcoord.xy = v.ase_texcoord.xy;
@@ -606,15 +606,15 @@ Shader "AmplifySahders/Sprite ExpandCircle"
 
 			half4 frag(VertexOutput IN) : SV_TARGET
 			{
-				float4 _MainTex_ST_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifySahdersSpriteExpandCircle,_MainTex_ST);
+				float4 _MainTex_ST_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifyShadersSpriteExpandCircle,_MainTex_ST);
 				float2 uv_MainTex = IN.ase_texcoord.xy * _MainTex_ST_Instance.xy + _MainTex_ST_Instance.zw;
 				float4 tex2DNode8 = tex2D( _MainTex, uv_MainTex );
 				float2 texCoord4 = IN.ase_texcoord.xy * float2( 1,1 ) + float2( 0,0 );
 				float temp_output_23_0 = length( ( texCoord4 - float2( 0.5,0.5 ) ) );
-				float _ExternalNoiseMovement_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifySahdersSpriteExpandCircle,_ExternalNoiseMovement);
+				float _ExternalNoiseMovement_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifyShadersSpriteExpandCircle,_ExternalNoiseMovement);
 				float2 appendResult100 = (float2(_ExternalNoiseMovement_Instance , 0.0));
 				float2 appendResult73 = (float2(_NoisePan.x , _NoisePan.y));
-				float4 _NoiseMap_ST_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifySahdersSpriteExpandCircle,_NoiseMap_ST);
+				float4 _NoiseMap_ST_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifyShadersSpriteExpandCircle,_NoiseMap_ST);
 				float2 uv_NoiseMap = IN.ase_texcoord.xy * _NoiseMap_ST_Instance.xy + _NoiseMap_ST_Instance.zw;
 				float2 temp_output_34_0_g3 = ( uv_NoiseMap - float2( 0.5,0.5 ) );
 				float2 break39_g3 = temp_output_34_0_g3;
@@ -626,7 +626,7 @@ Shader "AmplifySahders/Sprite ExpandCircle"
 				float smoothstepResult43 = smoothstep( _Glow , ( _Glow + _GlowSmooth ) , temp_output_42_0);
 				float2 appendResult74 = (float2(_NoisePan.z , _NoisePan.w));
 				float2 dissolvePan75 = appendResult74;
-				float4 _DissolveNoise_ST_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifySahdersSpriteExpandCircle,_DissolveNoise_ST);
+				float4 _DissolveNoise_ST_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifyShadersSpriteExpandCircle,_DissolveNoise_ST);
 				float2 uv_DissolveNoise = IN.ase_texcoord.xy * _DissolveNoise_ST_Instance.xy + _DissolveNoise_ST_Instance.zw;
 				float2 panner76 = ( 1.0 * _Time.y * dissolvePan75 + uv_DissolveNoise);
 				float dissolveGuide53 = ( tex2D( _DissolveNoise, panner76 ).r * _DissolveNoiseStrength );
@@ -662,7 +662,7 @@ Shader "AmplifySahders/Sprite ExpandCircle"
 
             HLSLPROGRAM
 
-			#define ASE_VERSION 19800
+			#define ASE_VERSION 19801
 			#define ASE_SRP_VERSION 120112
 
 
@@ -691,12 +691,12 @@ Shader "AmplifySahders/Sprite ExpandCircle"
 			sampler2D _MainTex;
 			sampler2D _NoiseMap;
 			sampler2D _DissolveNoise;
-			UNITY_INSTANCING_BUFFER_START(AmplifySahdersSpriteExpandCircle)
+			UNITY_INSTANCING_BUFFER_START(AmplifyShadersSpriteExpandCircle)
 				UNITY_DEFINE_INSTANCED_PROP(float4, _MainTex_ST)
 				UNITY_DEFINE_INSTANCED_PROP(float4, _NoiseMap_ST)
 				UNITY_DEFINE_INSTANCED_PROP(float4, _DissolveNoise_ST)
 				UNITY_DEFINE_INSTANCED_PROP(float, _ExternalNoiseMovement)
-			UNITY_INSTANCING_BUFFER_END(AmplifySahdersSpriteExpandCircle)
+			UNITY_INSTANCING_BUFFER_END(AmplifyShadersSpriteExpandCircle)
 			CBUFFER_START( UnityPerMaterial )
 			float4 _NoisePan;
 			float _CircleSmooth;
@@ -746,8 +746,8 @@ Shader "AmplifySahders/Sprite ExpandCircle"
 				UNITY_TRANSFER_INSTANCE_ID(v, o);
 				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
 
-				float4 ase_positionCS = TransformObjectToHClip((v.positionOS).xyz);
-				float4 screenPos = ComputeScreenPos(ase_positionCS);
+				float4 ase_positionCS = TransformObjectToHClip( ( v.positionOS ).xyz );
+				float4 screenPos = ComputeScreenPos( ase_positionCS );
 				o.ase_texcoord1 = screenPos;
 				
 				o.ase_texcoord.xy = v.ase_texcoord.xy;
@@ -775,15 +775,15 @@ Shader "AmplifySahders/Sprite ExpandCircle"
 
 			half4 frag(VertexOutput IN ) : SV_TARGET
 			{
-				float4 _MainTex_ST_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifySahdersSpriteExpandCircle,_MainTex_ST);
+				float4 _MainTex_ST_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifyShadersSpriteExpandCircle,_MainTex_ST);
 				float2 uv_MainTex = IN.ase_texcoord.xy * _MainTex_ST_Instance.xy + _MainTex_ST_Instance.zw;
 				float4 tex2DNode8 = tex2D( _MainTex, uv_MainTex );
 				float2 texCoord4 = IN.ase_texcoord.xy * float2( 1,1 ) + float2( 0,0 );
 				float temp_output_23_0 = length( ( texCoord4 - float2( 0.5,0.5 ) ) );
-				float _ExternalNoiseMovement_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifySahdersSpriteExpandCircle,_ExternalNoiseMovement);
+				float _ExternalNoiseMovement_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifyShadersSpriteExpandCircle,_ExternalNoiseMovement);
 				float2 appendResult100 = (float2(_ExternalNoiseMovement_Instance , 0.0));
 				float2 appendResult73 = (float2(_NoisePan.x , _NoisePan.y));
-				float4 _NoiseMap_ST_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifySahdersSpriteExpandCircle,_NoiseMap_ST);
+				float4 _NoiseMap_ST_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifyShadersSpriteExpandCircle,_NoiseMap_ST);
 				float2 uv_NoiseMap = IN.ase_texcoord.xy * _NoiseMap_ST_Instance.xy + _NoiseMap_ST_Instance.zw;
 				float2 temp_output_34_0_g3 = ( uv_NoiseMap - float2( 0.5,0.5 ) );
 				float2 break39_g3 = temp_output_34_0_g3;
@@ -795,7 +795,7 @@ Shader "AmplifySahders/Sprite ExpandCircle"
 				float smoothstepResult43 = smoothstep( _Glow , ( _Glow + _GlowSmooth ) , temp_output_42_0);
 				float2 appendResult74 = (float2(_NoisePan.z , _NoisePan.w));
 				float2 dissolvePan75 = appendResult74;
-				float4 _DissolveNoise_ST_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifySahdersSpriteExpandCircle,_DissolveNoise_ST);
+				float4 _DissolveNoise_ST_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifyShadersSpriteExpandCircle,_DissolveNoise_ST);
 				float2 uv_DissolveNoise = IN.ase_texcoord.xy * _DissolveNoise_ST_Instance.xy + _DissolveNoise_ST_Instance.zw;
 				float2 panner76 = ( 1.0 * _Time.y * dissolvePan75 + uv_DissolveNoise);
 				float dissolveGuide53 = ( tex2D( _DissolveNoise, panner76 ).r * _DissolveNoiseStrength );
@@ -826,7 +826,7 @@ Shader "AmplifySahders/Sprite ExpandCircle"
 	Fallback Off
 }
 /*ASEBEGIN
-Version=19800
+Version=19801
 Node;AmplifyShaderEditor.Vector4Node;72;-1632,1040;Inherit;False;Property;_NoisePan;NoisePan;10;0;Create;True;0;0;0;False;0;False;0,0,0,0;0,0,0,0;0;5;FLOAT4;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.ScreenPosInputsNode;81;-1696,1920;Float;False;0;False;0;5;FLOAT4;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.DynamicAppendNode;74;-1440,1152;Inherit;False;FLOAT2;4;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;1;FLOAT2;0
@@ -906,7 +906,7 @@ Node;AmplifyShaderEditor.DynamicAppendNode;9;-432,-144;Inherit;False;FLOAT4;4;0;
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;1;0,0;Float;False;False;-1;2;UnityEditor.ShaderGraph.GenericShaderGraphMaterialGUI;0;1;New Amplify Shader;cf964e524c8e69742b1d21fbe2ebcc4a;True;Sprite Unlit Forward;0;1;Sprite Unlit Forward;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;True;0;True;12;all;0;False;True;2;5;False;;10;False;;3;1;False;;10;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;2;False;;True;3;False;;True;True;0;False;;0;False;;True;1;LightMode=UniversalForward;False;False;0;;0;0;Standard;0;False;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;2;0,0;Float;False;False;-1;2;UnityEditor.ShaderGraph.GenericShaderGraphMaterialGUI;0;1;New Amplify Shader;cf964e524c8e69742b1d21fbe2ebcc4a;True;SceneSelectionPass;0;2;SceneSelectionPass;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;True;0;True;12;all;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;1;LightMode=SceneSelectionPass;False;False;0;;0;0;Standard;0;False;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;3;0,0;Float;False;False;-1;2;UnityEditor.ShaderGraph.GenericShaderGraphMaterialGUI;0;1;New Amplify Shader;cf964e524c8e69742b1d21fbe2ebcc4a;True;ScenePickingPass;0;3;ScenePickingPass;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;True;0;True;12;all;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;1;LightMode=Picking;False;False;0;;0;0;Standard;0;False;0
-Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;0;-272,-144;Float;False;True;-1;2;UnityEditor.ShaderGraph.GenericShaderGraphMaterialGUI;0;15;AmplifySahders/Sprite ExpandCircle;cf964e524c8e69742b1d21fbe2ebcc4a;True;Sprite Unlit;0;0;Sprite Unlit;4;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;True;0;True;12;all;0;False;True;2;5;False;;10;False;;3;1;False;;10;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;2;False;;True;3;False;;True;True;0;False;;0;False;;True;1;LightMode=Universal2D;False;False;0;;0;0;Standard;3;Vertex Position;1;0;Debug Display;0;0;External Alpha;0;0;0;4;True;True;True;True;False;;False;0
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;0;-272,-144;Float;False;True;-1;2;UnityEditor.ShaderGraph.GenericShaderGraphMaterialGUI;0;15;AmplifyShaders/Sprite ExpandCircle;cf964e524c8e69742b1d21fbe2ebcc4a;True;Sprite Unlit;0;0;Sprite Unlit;4;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;True;0;True;12;all;0;False;True;2;5;False;;10;False;;3;1;False;;10;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;2;False;;True;3;False;;True;True;0;False;;0;False;;True;1;LightMode=Universal2D;False;False;0;;0;0;Standard;3;Vertex Position;1;0;Debug Display;0;0;External Alpha;0;0;0;4;True;True;True;True;False;;False;0
 WireConnection;74;0;72;3
 WireConnection;74;1;72;4
 WireConnection;82;0;81;1
@@ -992,4 +992,4 @@ WireConnection;9;0;8;5
 WireConnection;9;3;21;0
 WireConnection;0;1;9;0
 ASEEND*/
-//CHKSM=A0CED1F704C977F97D1F7A3C706DCB0464CD46A6
+//CHKSM=10065267D9D380202A3C55147CF625D91F7A2433

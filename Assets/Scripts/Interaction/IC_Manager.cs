@@ -16,6 +16,7 @@ public class IC_Manager : MonoBehaviour
         EventHandler.E_OnInteractionUnreachable += CleanUpInteraction;
     }
     void OnDestroy(){
+        EndInteraction(interactionControllers[interactionIndex]);
         EventHandler.E_OnInteractionReachable   -= PreloadInteraction; 
         EventHandler.E_OnNextInteraction        -= NextInteraction;
         EventHandler.E_OnEndInteraction         -= EndInteraction;

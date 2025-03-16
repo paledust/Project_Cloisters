@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EStage_ConnectAllShape : ExperimentalStageBasic
@@ -11,7 +10,6 @@ public class EStage_ConnectAllShape : ExperimentalStageBasic
     }
     IEnumerator coroutineCompleteStage()
     {
-        yield return new WaitForSeconds(1f);
-        experimentalController.BreakConnectionAndPopText();
+        yield return coroutineCompleteStageBasic();
     }
 }
