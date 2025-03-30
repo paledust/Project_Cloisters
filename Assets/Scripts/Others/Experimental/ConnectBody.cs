@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ConnectBody : MonoBehaviour
 {
+    [SerializeField] private float sphereRadius;
+    [SerializeField] private bool isSpherical = false;
     [SerializeField] private ShapeColorChanger shapeColorChanger;
     private ConnectTrigger[] connectTriggers;
     private ConnectTrigger pendingTrigger; //the ideal connected trigger
@@ -12,6 +14,8 @@ public class ConnectBody : MonoBehaviour
     private Clickable_Moveable clickable_Moveable;
 
     public Rigidbody m_rigid{get; private set;}
+    public bool m_isSpherical=>isSpherical;
+    public float m_sphereRadius=>isSpherical?sphereRadius:0;
     private bool hasIdealConnection => occupiedTrigger != null;
     private Quaternion offsetRotToOther;
 
@@ -70,8 +74,21 @@ public class ConnectBody : MonoBehaviour
     {
         if(clickable_Moveable.isControlling && hasIdealConnection)
         {
-            Quaternion idealRot = Quaternion.Lerp(m_rigid.rotation, offsetRotToOther * pendingTrigger.m_connectBody.m_rigid.rotation, Time.fixedDeltaTime * 5);
-            m_rigid.MoveRotation(idealRot);
+            if(!m_isSpherical)
+            {
+                Quaternion targetRot;
+                if(pendingTrigger.m_connectBody.m_isSpherical)
+                {
+                    float angle = Vector2.SignedAngle(occupiedTrigger.normal, pendingTrigger.transform.position - transform.position);
+                    targetRot = Quaternion.Euler(0,0,angle) * m_rigid.rotation;
+                }
+                else
+                {
+                    targetRot = offsetRotToOther * pendingTrigger.m_connectBody.m_rigid.rotation;
+                }
+                Quaternion idealRot = Quaternion.Lerp(m_rigid.rotation, targetRot, Time.fixedDeltaTime * (pendingTrigger.m_connectBody.m_isSpherical?10:5));
+                m_rigid.MoveRotation(idealRot);
+            }
         }
     }
     void OnReleaseBody()
@@ -101,10 +118,23 @@ public class ConnectBody : MonoBehaviour
         {
             occupiedTrigger.OnConnectionCatch(pendingTrigger);
         //Find the align rotation
-            float rotation = Vector2.SignedAngle(occupiedTrigger.normal, -pendingTrigger.normal);
-            Quaternion idealRot = Quaternion.Euler(0,0,rotation) * m_rigid.rotation;
-            Quaternion otherBodyRot = pendingTrigger.m_connectBody.m_rigid.rotation;
-            offsetRotToOther = idealRot * Quaternion.Inverse(otherBodyRot);
+            if(!m_isSpherical)
+            {
+                float rotation;
+                if(!otherTrigger.m_connectBody.m_isSpherical) 
+                {
+                    rotation = Vector2.SignedAngle(occupiedTrigger.normal, -pendingTrigger.normal);
+                    Quaternion idealRot = Quaternion.Euler(0,0,rotation) * m_rigid.rotation;
+                    Quaternion otherBodyRot = pendingTrigger.m_connectBody.m_rigid.rotation;
+                    offsetRotToOther = idealRot * Quaternion.Inverse(otherBodyRot);
+                }
+                else
+                {
+                    rotation = Vector2.SignedAngle(occupiedTrigger.normal, otherTrigger.transform.position - transform.position);
+                    Quaternion idealRot = Quaternion.Euler(0,0,rotation) * m_rigid.rotation;
+                    offsetRotToOther = idealRot;
+                }
+            }
 
             m_rigid.freezeRotation = true;
         }
@@ -116,4 +146,12 @@ public class ConnectBody : MonoBehaviour
     public void BuildConnection(ConnectBody body)=>connectBodies.Add(body);
     public void BreakConnection(ConnectBody body)=>connectBodies.Remove(body);
     public bool IsConnectedToBody(ConnectBody body)=>connectBodies.Contains(body);
+    void OnDrawGizmos()
+    {
+        if(isSpherical)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(transform.position, sphereRadius);
+        }
+    }
 }

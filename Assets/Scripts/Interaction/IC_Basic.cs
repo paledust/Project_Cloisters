@@ -1,11 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [AddComponentMenu("InteractionController")]
 public abstract class IC_Basic : MonoBehaviour
 {
     [SerializeField] protected GameObject interactionAssetsGroup;
+[Header("Interaction")]
+    [SerializeField] protected Vector2 interact_rect;
+    [SerializeField] protected float interact_depth;
 
     public bool m_isLoaded{get; private set;} = false;
     public bool m_isDone{get; private set;} = false;
@@ -34,4 +35,11 @@ public abstract class IC_Basic : MonoBehaviour
     protected virtual void UnloadAssets(){m_isLoaded = false;}
     protected virtual void OnInteractionStart(){}
     protected virtual void OnInteractionEnd(){}
+    void OnDrawGizmos()
+    {
+        Gizmos.color = new Color(0,1,0,0.5f);
+        Vector3 pos = Camera.main.transform.position;
+        pos += Camera.main.transform.forward*interact_depth;
+        Gizmos.DrawWireCube(pos, new Vector3(interact_rect.x, interact_rect.y, 0.01f));
+    }
 }

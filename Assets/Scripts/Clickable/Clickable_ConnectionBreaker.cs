@@ -1,12 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Clickable_ConnectionBreaker : Basic_Clickable
 {
-    [SerializeField] private SpriteRenderer breakerConnector;
-    [SerializeField] private ParticleSystem connectParticle;
-    [SerializeField] private ParticleSystem breakParticle;
     [SerializeField] private float breakForce = 20f;
     [SerializeField] private float breakTorque = 30f;
     private ConnectTrigger main;

@@ -7,15 +7,18 @@ public class IC_Experimental : IC_Basic
 {
 [Header("Stage")]
     [SerializeField] private ExperimentalStageBasic[] stages;
+
 [Header("Geo Info")]
+    [SerializeField] private GeoThrowPoint[] throwPoints;
     [SerializeField] private ConnectBody[] connectBodies;
+
 [Header("Collect Text")]
     [SerializeField] private ParticleSystem p_collectText;
     [SerializeField] private Clickable_CollectingText[] draggableText;
     [SerializeField] private List<Clickable_CollectingText> completedTexts;
 
+    private int hiddenShapeFront;
     private int collectedCount = 0;
-    private int hiddenShapeFront = 3;
     private int stageIndex = 0;
     private int textIndex = 0;
     private List<ConnectBody> activeBodies;
@@ -25,8 +28,10 @@ public class IC_Experimental : IC_Basic
     {
         base.OnInteractionStart();
         Service.Shuffle(ref draggableText);
+        Service.Shuffle(ref throwPoints);
         builtConnections = new List<Clickable_ConnectionBreaker>();
         activeBodies = new List<ConnectBody>(FindObjectsOfType<ConnectBody>(false));
+        hiddenShapeFront = activeBodies.Count;
         EventHandler.E_OnCollectExperimentalText += OnCollectionText;
         EventHandler.E_OnBuildConnectionBreaker += OnBuildConnectionBreaker;
         EventHandler.E_OnBreakConnectionBreaker += OnBreakConnectionBreaker;
@@ -100,32 +105,44 @@ public class IC_Experimental : IC_Basic
             var text = draggableText[textIndex];
             text.DisableHitbox();
             text.transform.position = connection.transform.position;
-            text.transform.localScale = Vector3.zero;
+            text.transform.localScale = Vector3.one * 0.5f;
             text.gameObject.SetActive(true);
             text.transform.DOMove(text.transform.position + (Vector3)Random.insideUnitCircle*4, 0.5f).SetEase(Ease.OutQuad);
             text.transform.DORotateQuaternion(Quaternion.Euler(0,0,Random.Range(270, 480))*text.transform.rotation, 0.5f).SetEase(Ease.OutQuad);
-            text.transform.DOScale(Vector3.one, 0.5f).SetEase(Ease.OutBack).OnComplete(()=>text.EnableHitbox());
+            text.transform.DOScale(Vector3.one, 1f).SetEase(Ease.OutBack).OnComplete(()=>text.EnableHitbox());
             textIndex ++;
 
+            //wait for next connection break
+            yield return new WaitForSeconds(Random.Range(0f, 0.2f));
+        }
+        yield return new WaitForSeconds(0.5f);
+        yield return coroutineThrowShape();
+        
+        stageIndex ++;
+        stages[stageIndex].EnterStage();
+
+        EventHandler.Call_OnTransitionEnd();
+    }
+    IEnumerator coroutineThrowShape()
+    {
+        for(int i=0; i<2; i++)
+        {
             //Pop shape
+            Vector3 pos = throwPoints[hiddenShapeFront].transform.position;
+            Vector3 dir = throwPoints[hiddenShapeFront].GetThrowDirection();
             if(hiddenShapeFront<connectBodies.Length)
             {
                 var shape = connectBodies[hiddenShapeFront];
-                shape.transform.position = connection.transform.position;
+                shape.transform.position = pos;
                 shape.transform.localScale = Vector3.zero;
                 shape.gameObject.SetActive(true);
-                Vector3 force = Vector3.right * Random.Range(5, 6);
-                force += Vector3.up*Random.Range(0, 3);
-                force = Random.value>0.5?force:-force;
-                shape.m_rigid.AddForce(force, ForceMode.VelocityChange);
+                shape.m_rigid.AddForce(dir*Random.Range(35, 40), ForceMode.VelocityChange);
                 shape.m_rigid.AddTorque(Vector3.forward * Random.Range(-4, 4), ForceMode.VelocityChange);
                 shape.transform.DOScale(Vector3.one, 0.5f).SetEase(Ease.OutQuad);
                 activeBodies.Add(shape);
                 hiddenShapeFront ++;
+                yield return new WaitForSeconds(Random.Range(0f, 0.1f));
             }
-            //wait for next connection break
-            yield return new WaitForSeconds(Random.Range(0f, 0.2f));
         }
-        EventHandler.Call_OnTransitionEnd();
     }
 }

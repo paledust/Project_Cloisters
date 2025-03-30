@@ -11,6 +11,7 @@ public class ConnectTrigger : MonoBehaviour
         Catching, //Found the best target, and keep focusing 
         Locking, //Connected to target
     }
+    [SerializeField] private bool spherical = false;
     [SerializeField] private ConnectTriggerState connectTriggerState = ConnectTriggerState.Pending;
     [SerializeField] private Basic_Clickable selfClickable;
     [SerializeField] private SpriteRenderer alignMask;
@@ -58,7 +59,11 @@ public class ConnectTrigger : MonoBehaviour
                 int bestIndex = -1;
                 for(int i=pendingTriggers.Count-1; i>=0; i--)
                 {
-                    float dot = Vector2.Dot(normal, -pendingTriggers[i].normal);
+                    float dot; 
+                    if(spherical||pendingTriggers[i].spherical)
+                        dot = 1;
+                    else
+                        dot = Vector2.Dot(normal, -pendingTriggers[i].normal);
                     if(dot>=MIN_CONNECT_DOT && dot>idealDot)
                     {
                         idealDot = dot;
@@ -72,9 +77,39 @@ public class ConnectTrigger : MonoBehaviour
                 return null;
             case ConnectTriggerState.Catching:
                 if(!pendingTriggers.Contains(catchingTrigger)) return null;
-                Vector2 balanceDir = (catchingTrigger.normal - normal).normalized;
-                idealDot = Vector2.Dot(normal, -catchingTrigger.normal);
-                float dist = Vector2.Dot(balanceDir, transform.position-catchingTrigger.transform.position);
+                Vector2 balanceDir;
+                if(spherical)
+                {
+                    if(catchingTrigger.spherical)
+                        balanceDir = (transform.position - catchingTrigger.transform.position).normalized;
+                    else
+                        balanceDir = catchingTrigger.normal;
+                }
+                else
+                {
+                    if(catchingTrigger.spherical)
+                        balanceDir = -normal;
+                    else
+                        balanceDir = (catchingTrigger.normal - normal).normalized;
+                }
+
+                if(spherical || catchingTrigger.spherical) 
+                    idealDot = 1;
+                else
+                    idealDot = Vector2.Dot(normal, -catchingTrigger.normal);
+
+                float dist; 
+
+                Vector2 diff = transform.position-catchingTrigger.transform.position;
+                dist = Vector2.Dot(balanceDir, diff);
+                if(spherical)
+                {
+                    dist -= m_connectBody.m_sphereRadius;
+                }
+                if(catchingTrigger.spherical)
+                {
+                    dist -= catchingTrigger.m_connectBody.m_sphereRadius;
+                }
                 if(idealDot>=MAX_BREAK_DOT && Mathf.Abs(dist)<=MAX_BREAK_DIST)
                 {
                     return catchingTrigger;

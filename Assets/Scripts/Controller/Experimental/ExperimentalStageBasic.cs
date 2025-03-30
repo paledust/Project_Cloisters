@@ -4,6 +4,7 @@ using UnityEngine;
 public abstract class ExperimentalStageBasic : MonoBehaviour
 {
     [SerializeField] protected IC_Experimental experimentalController;
+    public virtual void EnterStage(){}
     public virtual void CompleteStage(){}
     public abstract bool IsDone();
     protected IEnumerator coroutineCompleteStageBasic()
