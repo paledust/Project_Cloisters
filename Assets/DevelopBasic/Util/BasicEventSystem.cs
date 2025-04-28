@@ -39,8 +39,8 @@ public static class EventHandler
     public static void Call_OnClickableCircleCollide(Clickable_Circle collidedCircle,Vector3 contact, Vector3 diff, float strength)=>E_OnClickableCircleCollide?.Invoke(collidedCircle, contact, diff, strength);
     public static event Action<ConnectTrigger, ConnectTrigger> E_OnShapeConnect;
     public static void Call_OnShapeConnect(ConnectTrigger main, ConnectTrigger other)=>E_OnShapeConnect?.Invoke(main, other);
-    public static event Action<Clickable_CollectingText> E_OnCollectExperimentalText;
-    public static void Call_OnCollectExperimentalText(Clickable_CollectingText collectText)=>E_OnCollectExperimentalText?.Invoke(collectText);
+    public static event Action<CollectableText> E_OnCollectExperimentalText;
+    public static void Call_OnCollectExperimentalText(CollectableText collectTextParam)=>E_OnCollectExperimentalText?.Invoke(collectTextParam);
     public static event Action<Clickable_ConnectionBreaker> E_OnBuildConnectionBreaker;
     public static void Call_OnBuildConnectionBreaker(Clickable_ConnectionBreaker connectionBreaker)=>E_OnBuildConnectionBreaker?.Invoke(connectionBreaker);
     public static event Action<Clickable_ConnectionBreaker, Vector3> E_OnBreakConnectionBreaker;

@@ -5,8 +5,8 @@ using UnityEngine;
 public class PerRendererCloseLine : PerRendererBehavior
 {
     [SerializeField] private Color color;
-    [SerializeField, Range(0, 1)] private float progress;
     [SerializeField] private float tiling = 50;
+    [SerializeField, Range(0, 1)] public float progress;
 
     private static readonly int PROGRESS_ID = Shader.PropertyToID("_Progress");
     private static readonly int TILING_ID = Shader.PropertyToID("_Tiling");

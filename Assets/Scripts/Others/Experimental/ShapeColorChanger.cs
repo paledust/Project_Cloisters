@@ -6,32 +6,26 @@ public class ShapeColorChanger : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private float flickerDuration = 0.8f;
     [SerializeField] private int flickerTime = 4;
-    [SerializeField] private Color[] colorSheet;
 
     private CoroutineExcuter colorChanger;
-    private int colorIndex = 0;
 
     void Awake()
     {
         colorChanger = new CoroutineExcuter(this);
     }
-    public void BlinkColor()
+    public void BlinkColor(Color blinkColor1, Color blinkColor2)
     {
-        colorChanger.Excute(coroutineChangeColor(flickerDuration+Random.Range(-0.2f,0.2f), flickerTime));
+        colorChanger.Excute(coroutineChangeColor(flickerDuration+Random.Range(-0.2f,0.2f), flickerTime, blinkColor1, blinkColor2 ));
     }
-    IEnumerator coroutineChangeColor(float duration, int _flickerTime)
+    IEnumerator coroutineChangeColor(float duration, int _flickerTime, Color blinkColor1, Color blinkColor2)
     {
         Color originalCol = spriteRenderer.color;
         Color color = originalCol;
-        int currentIndex = colorIndex;
         yield return new WaitForLoop(duration, (t)=>
         {
-            colorIndex = currentIndex+Mathf.CeilToInt(t*_flickerTime);
-            colorIndex = colorIndex % colorSheet.Length;
-            spriteRenderer.color = colorSheet[colorIndex];
+            int index = Mathf.CeilToInt(t*_flickerTime);
+            spriteRenderer.color = index%2==0?blinkColor1:blinkColor2;
         });
-        colorIndex ++;
-        colorIndex = colorIndex % colorSheet.Length;
-        spriteRenderer.color = colorSheet[colorIndex];
+        spriteRenderer.color = originalCol;
     }
 }

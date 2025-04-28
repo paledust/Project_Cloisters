@@ -7,6 +7,8 @@ public class ConnectBody : MonoBehaviour
     [SerializeField] private float sphereRadius;
     [SerializeField] private bool isSpherical = false;
     [SerializeField] private ShapeColorChanger shapeColorChanger;
+[Header("Vertices")]
+    [SerializeField] private Transform[] points;
     private ConnectTrigger[] connectTriggers;
     private ConnectTrigger pendingTrigger; //the ideal connected trigger
     private ConnectTrigger occupiedTrigger; //the trigger attached that connected to ideal trigger
@@ -36,7 +38,7 @@ public class ConnectBody : MonoBehaviour
         clickable_Moveable.onRelease -= OnReleaseBody;
     }
     void OnControlBody(){}
-    public void BlinkShape()=>shapeColorChanger.BlinkColor();
+    public void BlinkShape(Color blinkColor1, Color blinkColor2)=>shapeColorChanger.BlinkColor(blinkColor1, blinkColor2);
     void Update()
     {
         if(clickable_Moveable.isControlling)
@@ -146,6 +148,26 @@ public class ConnectBody : MonoBehaviour
     public void BuildConnection(ConnectBody body)=>connectBodies.Add(body);
     public void BreakConnection(ConnectBody body)=>connectBodies.Remove(body);
     public bool IsConnectedToBody(ConnectBody body)=>connectBodies.Contains(body);
+    public Vector3 GetCenter()
+    {
+        Vector3 center = m_rigid.centerOfMass;
+        center.z = 0;
+        return transform.TransformPoint(center);
+    }
+    public List<ConnectTrigger> GetAllFreeTrigger()
+    {
+        List<ConnectTrigger> trigger = new List<ConnectTrigger>(connectTriggers);
+        return trigger.FindAll(x=>!x.m_isLocked);
+    }
+    public Vector2[] GetAllPoints()
+    {
+        var vertices = new Vector2[points.Length];
+        for(int i=0; i<points.Length; i++)
+        {
+            vertices[i] = points[i].position;
+        }
+        return vertices;
+    }
     void OnDrawGizmos()
     {
         if(isSpherical)

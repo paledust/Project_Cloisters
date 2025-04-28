@@ -78,7 +78,6 @@ public class PlayerController : MonoBehaviour
         }
         else{
             m_hoveringInteractable.OnFailClick(this);
-            AudioManager.Instance.PlaySoundEffect(playerAudio, string.Empty, 0);
         }
     }
     public Vector3 GetCursorWorldPoint(float depth){
@@ -111,8 +110,6 @@ public class PlayerController : MonoBehaviour
     }
     void OnPointerPos(InputValue value){
         Vector2 _scrPos = value.Get<Vector2>();
-        // _scrPos.x = Mathf.Clamp(_scrPos.x, 0, Screen.width);
-        // _scrPos.y = Mathf.Clamp(_scrPos.y, 0, Screen.height);
         PointerScrPos = _scrPos;
     }
     void OnFire(InputValue value){
