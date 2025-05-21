@@ -5,26 +5,28 @@ using UnityEngine;
 
 public class RangeDetection : MonoBehaviour
 {
+[Header("Basic")]
     [SerializeField] private SpriteRenderer rangeRenderer;
     [SerializeField] private float testPerSec = 1;
     [SerializeField] private Color fullfillColor;
     [SerializeField] private Color defaultColor;
     [SerializeField] private bool isRange;
-
+[Header("Animation")]
+    [SerializeField] private Animation anime;
     private List<ConnectBody> bodyHash;
     private Collider2D m_collider;
     private bool isPunching;
+    private bool hasEnlarged = false;
     private int totalBodyCount;
     private float testTimer = 0;
-
     public int BodyCount => bodyHash.Count;
+
 
     void Awake() => m_collider = GetComponent<Collider2D>();
     void Start()
     {
         bodyHash = new List<ConnectBody>();
     }
-
     void Update()
     {
         testTimer += Time.deltaTime * testPerSec;
@@ -38,6 +40,11 @@ public class RangeDetection : MonoBehaviour
                 PunchCondition(newFlag?fullfillColor:defaultColor);
             }
         }
+    }
+    public void EnlargeDetection()
+    {
+        hasEnlarged = true;
+        anime.Play();
     }
     public void RangeAppear(float scale)
     {
@@ -73,6 +80,7 @@ public class RangeDetection : MonoBehaviour
         return false;
     }
     public void InitRangeDetect(int totalActiveBodyCount) => totalBodyCount = totalActiveBodyCount;
+    public bool CanEnlarge() => !hasEnlarged;
     void OnTriggerEnter2D(Collider2D other)
     {
         var body = other.GetComponentInParent<ConnectBody>();

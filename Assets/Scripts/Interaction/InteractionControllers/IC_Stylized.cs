@@ -31,9 +31,9 @@ public class IC_Stylized : IC_Basic
         geoFragmentController.enabled = false;
         geoTextController.enabled = false;
     }
-    protected override void OnInteractionStart()
+    protected override void OnInteractionEnter()
     {
-        base.OnInteractionStart();
+        base.OnInteractionEnter();
         transitioning = false;
         clickablePlanet.EnableHitbox();
         clickablePlanet.onClick += CompleteExpandToDissolve;

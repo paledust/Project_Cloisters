@@ -10,7 +10,6 @@ public struct TextPopParam
 }
 public class IC_Experimental : IC_Basic
 {
-
 [Header("Stage")]
     [SerializeField] private ExperimentalStageData[] stages;
     [SerializeField] private Color blinkColor1;
@@ -18,6 +17,7 @@ public class IC_Experimental : IC_Basic
 
 [Header("Constraints")]
     [SerializeField] private RangeDetection rangeDetection;
+    [SerializeField] private int enlargeStage = 2;
 
 [Header("Geo Info")]
     [SerializeField] private GeoThrowPoint[] throwPoints;
@@ -34,18 +34,19 @@ public class IC_Experimental : IC_Basic
     private int shapeFront;
     private int stageIndex = 0;
     private int textIndex = 0;
-    private int pendingTextAmount = 0;
     private List<ConnectBody> activeBodies;
     private List<Clickable_ConnectionBreaker> builtConnections;
 
-    protected override void OnInteractionStart()
+    protected override void OnInteractionEnter()
     {
-        base.OnInteractionStart();
+        base.OnInteractionEnter();
         Service.Shuffle(ref popTexts);
         Service.Shuffle(ref throwPoints);
         builtConnections = new List<Clickable_ConnectionBreaker>();
         activeBodies = new List<ConnectBody>(FindObjectsOfType<ConnectBody>(false));
         shapeFront = activeBodies.Count;
+        stageIndex = 0;
+        textIndex = 0;
 
         rangeDetection.RangeAppear(0.8f);
         rangeDetection.InitRangeDetect(activeBodies.Count);
@@ -70,18 +71,18 @@ public class IC_Experimental : IC_Basic
     }
     void OnBuildConnectionBreaker(Clickable_ConnectionBreaker connectionBreaker)
     {
-        if(!builtConnections.Contains(connectionBreaker))
+        if (!builtConnections.Contains(connectionBreaker))
         {
             builtConnections.Add(connectionBreaker);
         }
         //All bodies are connected together
         if(builtConnections.Count >= activeBodies.Count-1)
         {
-            if(rangeDetection.CheckRange())
+            if (rangeDetection.CheckRange())
             {
                 int textAmount = stages[stageIndex].textAmount;
-                pendingTextAmount += textAmount;
-                StartCoroutine(coroutineCompletingStage(textAmount));
+                int throwBodyAmount = stages[stageIndex].throwBodiesAmount;
+                StartCoroutine(coroutineCompletingStage(textAmount, throwBodyAmount));
             }
             else
             {
@@ -94,21 +95,15 @@ public class IC_Experimental : IC_Basic
         p_collectText.transform.position = collectableText.transform.position;
         p_collectText.Play(true);
 
+        var key = collectableText.m_collectKey;
         Destroy(collectableText.gameObject);
 
         //Pop Complete Text
-        Debug.Log(collectableText.m_collectKey);
-        var matchText = completedTexts.Find(x=>x.m_collectKey == collectableText.m_collectKey);
+        var matchText = completedTexts.Find(x=>!x.gameObject.activeSelf && x.m_collectKey == key);
+        float targetScale = matchText.transform.localScale.x;
         matchText.transform.localScale = Vector3.zero;
         matchText.gameObject.SetActive(true);
-        matchText.transform.DOScale(Vector3.one, 0.3f).SetEase(Ease.OutBack, 2);
-
-        //Throw Shapes
-        pendingTextAmount --;
-        if(pendingTextAmount <= 0)
-        {
-            StartCoroutine(coroutineThrowNewShapes(stages[stageIndex].throwBodiesAmount));
-        }
+        matchText.transform.DOScale(Vector3.one*targetScale, 0.3f).SetEase(Ease.OutBack, 2);
     }
     IEnumerator coroutineFailStage()
     {
@@ -125,8 +120,9 @@ public class IC_Experimental : IC_Basic
             yield return new WaitForSeconds(Random.Range(0f, 0.05f));
         }
     }
-    IEnumerator coroutineCompletingStage(int textAmount)
+    IEnumerator coroutineCompletingStage(int textAmount, int throwBodyAmount)
     {
+        EventHandler.Call_OnTransitionBegin();
         yield return new WaitForSeconds(0.4f);
 
         //Break Connections
@@ -155,13 +151,11 @@ public class IC_Experimental : IC_Basic
                 text.CollectText(textCollectDelay.GetRndValueInVector2Range());
             });
             textIndex ++;
-            yield return new WaitForSeconds(Random.Range(0.1f, 0.3f));
         }
-    }
-    IEnumerator coroutineThrowNewShapes(int throwBodyAmount)
-    {
-        yield return new WaitForSeconds(0.5f);
-        EventHandler.Call_OnTransitionBegin();
+
+        //Throw Bodies out
+        yield return new WaitForSeconds(2f);
+
         for(int i=0; i<throwBodyAmount; i++)
         {
             //Pop shape
@@ -173,21 +167,46 @@ public class IC_Experimental : IC_Basic
                 shape.transform.position = pos;
                 shape.transform.localScale = Vector3.zero;
                 shape.gameObject.SetActive(true);
-                shape.m_rigid.AddForce(dir*Random.Range(35, 40), ForceMode.VelocityChange);
-                shape.m_rigid.AddTorque(Vector3.forward * Random.Range(-4, 4), ForceMode.VelocityChange);
                 shape.transform.DOScale(Vector3.one, 0.5f).SetEase(Ease.OutQuad);
                 activeBodies.Add(shape);
                 shapeFront ++;
-                yield return new WaitForSeconds(Random.Range(0.3f, 0.4f));
+                StartCoroutine(coroutineThrowShape(shape.m_rigid, dir*Random.Range(35, 40), Random.Range(-4, 4), 0.5f, 0.5f));
             }
         }
 
         yield return new WaitForSeconds(0.25f);
         
         stageIndex ++;
-        rangeDetection.InitRangeDetect(activeBodies.Count);
 
-        EventHandler.Call_OnTransitionEnd();
+        if(stageIndex == stages.Length)
+        {
+            EventHandler.Call_OnTransitionEnd();
+            EventHandler.Call_OnEndInteraction(this);
+        }
+        else
+        {
+            if(stageIndex>=enlargeStage && rangeDetection.CanEnlarge())
+                rangeDetection.EnlargeDetection();
+
+            rangeDetection.InitRangeDetect(activeBodies.Count);
+
+            EventHandler.Call_OnTransitionEnd();
+        }
+    }
+    IEnumerator coroutineThrowShape(Rigidbody m_rigid, Vector3 maxForce, float maxTorque, float duration, float daccDuration)
+    {
+        Vector3 force = maxForce;
+        float torque = maxTorque;
+        yield return new WaitForLoop(duration, (t)=>{
+            m_rigid.AddForce(force, ForceMode.Acceleration);
+            m_rigid.AddTorque(Vector3.forward * torque, ForceMode.Acceleration);
+        });
+        yield return new WaitForLoop(daccDuration, (t)=>{
+            force = Vector3.Lerp(maxForce, Vector3.zero, t);
+            torque = Mathf.Lerp(maxTorque, 0, t);
+            m_rigid.AddForce(force, ForceMode.Acceleration);
+            m_rigid.AddTorque(Vector3.forward * torque, ForceMode.Acceleration);
+        });
     }
     void OnDrawGizmos()
     {

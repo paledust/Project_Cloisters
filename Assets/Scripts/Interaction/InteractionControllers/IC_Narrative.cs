@@ -39,9 +39,9 @@ public class IC_Narrative : IC_Basic
         rippleParticleController.enabled = false;
         narrativeSpawner.enabled = false;
     }
-    protected override void OnInteractionStart()
+    protected override void OnInteractionEnter()
     {
-        base.OnInteractionStart();
+        base.OnInteractionEnter();
         EventHandler.E_OnControlCircle += OnControlCircleHandler;
         EventHandler.E_OnClickableCircleCollide += OnGrownCircleCollide;
         lastCollisionTime = Time.time - effectiveCollisionStep;

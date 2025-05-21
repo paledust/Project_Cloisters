@@ -6,9 +6,9 @@ public class IC_Whimsical : IC_Basic
 {
     [SerializeField] private WhimsicalTextController textController;
     [SerializeField] int count = 0;
-    protected override void OnInteractionStart()
+    protected override void OnInteractionEnter()
     {
-        base.OnInteractionStart();
+        base.OnInteractionEnter();
         EventHandler.E_OnChargeText += CountText;
     }
     protected override void OnInteractionEnd()

@@ -5,6 +5,7 @@ public class Clickable_Moveable : Basic_Clickable
     [SerializeField] private Rigidbody m_rigid;
     [SerializeField] private float massCenterRadius;
     private Dragger dragger;
+    private Vector3 offset;
     private Vector3 pos;
 
     public override void OnClick(PlayerController player, Vector3 hitPos)
@@ -13,10 +14,13 @@ public class Clickable_Moveable : Basic_Clickable
         player.HoldInteractable(this);
         Vector3 localHit = transform.InverseTransformPoint(hitPos);
         if((localHit - m_rigid.centerOfMass).sqrMagnitude < massCenterRadius * massCenterRadius)
-            localHit = m_rigid.centerOfMass + (localHit - m_rigid.centerOfMass).normalized*0.05f;
+            localHit = m_rigid.centerOfMass + (localHit - m_rigid.centerOfMass).normalized*0.1f;
 
+
+        PhysicDragManager.Instance.SyncDraggerPos(transform.TransformPoint(localHit));
         dragger = PhysicDragManager.Instance.ConnectToRigid(m_rigid, localHit);
-        dragger.rigidbody.transform.position = transform.TransformPoint(localHit);
+        offset = dragger.rigidbody.position - player.GetCursorWorldPoint(32);
+        
         m_rigid.drag = 10;
         m_rigid.angularDrag = 10;
     }
@@ -33,7 +37,7 @@ public class Clickable_Moveable : Basic_Clickable
         base.ControllingUpdate(player);
         if(dragger != null)
         {
-            Vector3 newPos = Vector3.Lerp(dragger.rigidbody.position, player.GetCursorWorldPoint(32), Time.deltaTime * 10);
+            Vector3 newPos = Vector3.Lerp(dragger.rigidbody.position, player.GetCursorWorldPoint(32) + offset, Time.deltaTime * 10);
             dragger.rigidbody.MovePosition(newPos);
         }
     }

@@ -1,11 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [AddComponentMenu("InteractionController_Manager")]
 public class IC_Manager : MonoBehaviour
 {
     [SerializeField] private IC_Basic[] interactionControllers;
+[Header("Debug Option")]
+    [SerializeField] private int StartIndex = 0;
     private int interactionIndex = 0;
     private int loadedIC_Count = 0;
 
@@ -16,12 +16,31 @@ public class IC_Manager : MonoBehaviour
         EventHandler.E_OnInteractionUnreachable += CleanUpInteraction;
     }
     void OnDestroy(){
-        EndInteraction(interactionControllers[interactionIndex]);
         EventHandler.E_OnInteractionReachable   -= PreloadInteraction; 
         EventHandler.E_OnNextInteraction        -= NextInteraction;
         EventHandler.E_OnEndInteraction         -= EndInteraction;
         EventHandler.E_OnInteractionUnreachable -= CleanUpInteraction; 
     }
+    void OnEnable()
+    {
+    #if UNITY_EDITOR
+        StartAtInteraction(StartIndex);
+    #else
+        StartAtInteraction(0);
+    #endif
+    }
+    void OnDisable()
+    {
+        QuitAtInteraction(interactionIndex);
+    }
+
+#if UNITY_EDITOR
+    [ContextMenu("Set Up Scene To Interactions")]
+    public void Editor_SetUpInteractions(){
+        CleanUpAllInteractions();
+        Editor_ActivateInteractions(StartIndex);
+    }
+#endif
     void NextInteraction(){
         interactionIndex ++;
         if(interactionIndex >= interactionControllers.Length){
@@ -61,8 +80,15 @@ public class IC_Manager : MonoBehaviour
         interactionControllers[startIndex].EnterInteraction();
         loadedIC_Count ++;
     }
-    public void CleanUpAllInteractions(){
-        for(int i=0; i<interactionControllers.Length; i++){
+    public void QuitAtInteraction(int quitIndex)
+    {
+        interactionControllers[quitIndex].ExitInteraction();
+        loadedIC_Count = 0;
+    }
+    public void CleanUpAllInteractions()
+    {
+        for (int i = 0; i < interactionControllers.Length; i++)
+        {
             interactionControllers[i].CleanUpInteraction();
         }
     }

@@ -19,7 +19,7 @@ public abstract class IC_Basic : MonoBehaviour
     }
     public void EnterInteraction(){
         m_isPlaying = true;
-        OnInteractionStart();
+        OnInteractionEnter();
     }
     public void ExitInteraction(){
         OnInteractionEnd();
@@ -33,7 +33,7 @@ public abstract class IC_Basic : MonoBehaviour
     }
     protected virtual void LoadAssets(){m_isLoaded = true;}
     protected virtual void UnloadAssets(){m_isLoaded = false;}
-    protected virtual void OnInteractionStart(){}
+    protected virtual void OnInteractionEnter(){}
     protected virtual void OnInteractionEnd(){}
     void OnDrawGizmos()
     {

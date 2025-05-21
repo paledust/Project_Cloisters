@@ -34,7 +34,7 @@ public class ConnectBody : MonoBehaviour
     }
     void OnDestroy()
     {
-        clickable_Moveable.onClick += OnControlBody;
+        clickable_Moveable.onClick -= OnControlBody;
         clickable_Moveable.onRelease -= OnReleaseBody;
     }
     void OnControlBody(){}

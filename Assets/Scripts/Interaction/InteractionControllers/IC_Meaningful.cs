@@ -14,9 +14,9 @@ public class IC_Meaningful : IC_Basic
     [SerializeField] private Clickable_ObjectRotator clickable_Mirror;
     [SerializeField] private List<TextShownData> textShownDatas;
 
-    protected override void OnInteractionStart()
+    protected override void OnInteractionEnter()
     {
-        base.OnInteractionStart();
+        base.OnInteractionEnter();
         EventHandler.E_OnMirrorText += ShowText;
         clickable_Mirror.EnableHitbox();
     }

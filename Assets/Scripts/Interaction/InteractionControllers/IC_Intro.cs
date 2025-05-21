@@ -22,7 +22,7 @@ public class IC_Intro : IC_Basic
 
     private Vector3 lastSurroundPlanetPos;
 
-    protected override void OnInteractionStart()
+    protected override void OnInteractionEnter()
     {
         this.enabled = true;
         motionController.enabled = true;
