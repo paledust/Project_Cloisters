@@ -23,7 +23,7 @@ public class ConnectTrigger : MonoBehaviour
     public Vector3 normal => transform.up.normalized;
     public ConnectBody m_connectBody{get; private set;}
 
-    private const float MIN_CONNECT_DOT = 0.9f;
+    private const float MIN_CONNECT_DOT = 0.925f;
     private const float MAX_BREAK_DOT = 0.85f;
     private const float MAX_BREAK_DIST = 1.2f;
 

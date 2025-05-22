@@ -213,6 +213,7 @@ MonoBehaviour:
   hitbox: {fileID: 5464090182912660596}
   isFrozen: 0
   m_rigid: {fileID: 4792773300764216669}
+  massCenterRadius: 0
 --- !u!114 &1754560563833497679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,7 +237,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8982843657415732048}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 3c49e78d28bf3ee4bb7085d15e8af107, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2

@@ -61,5 +61,5 @@ MonoBehaviour:
   sfx_clickSound: group_click
   hitbox: {fileID: 1766277912551381425}
   isFrozen: 0
-  breakForce: 4
-  breakTorque: 5
+  breakForce: 5
+  breakTorque: 2
