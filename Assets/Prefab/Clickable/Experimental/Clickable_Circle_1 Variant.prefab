@@ -162,6 +162,36 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1074785135901792360, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: points.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1074785135901792360, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: points.Array.data[3]
+      value: 
+      objectReference: {fileID: 960911465}
+    - target: {fileID: 1074785135901792360, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: points.Array.data[4]
+      value: 
+      objectReference: {fileID: 1293274277}
+    - target: {fileID: 1074785135901792360, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: points.Array.data[5]
+      value: 
+      objectReference: {fileID: 1240564650}
+    - target: {fileID: 1074785135901792360, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: points.Array.data[6]
+      value: 
+      objectReference: {fileID: 1624916841}
+    - target: {fileID: 1074785135901792360, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: points.Array.data[7]
+      value: 
+      objectReference: {fileID: 2020707013}
     - target: {fileID: 1186632006653217032, guid: e843106840614744cae4702badee9286,
         type: 3}
       propertyPath: m_Sprite
@@ -235,6 +265,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3983345643960549431, guid: e843106840614744cae4702badee9286,
         type: 3}
+      propertyPath: inactiveColor.b
+      value: 0.65882355
+      objectReference: {fileID: 0}
+    - target: {fileID: 3983345643960549431, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: inactiveColor.g
+      value: 0.31764707
+      objectReference: {fileID: 0}
+    - target: {fileID: 3983345643960549431, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: inactiveColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3983345643960549431, guid: e843106840614744cae4702badee9286,
+        type: 3}
       propertyPath: colorSheet.Array.size
       value: 5
       objectReference: {fileID: 0}
@@ -293,6 +338,27 @@ PrefabInstance:
       propertyPath: colorSheet.Array.data[4].g
       value: 0.57254905
       objectReference: {fileID: 0}
+    - target: {fileID: 4430065969378234566, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 66d47127fae69cf43a0637b973364028,
+        type: 3}
+    - target: {fileID: 4430065969378234566, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.65882355
+      objectReference: {fileID: 0}
+    - target: {fileID: 4430065969378234566, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.31764707
+      objectReference: {fileID: 0}
+    - target: {fileID: 4430065969378234566, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6240990561836385197, guid: e843106840614744cae4702badee9286,
         type: 3}
       propertyPath: circularShape
@@ -312,6 +378,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.003
+      objectReference: {fileID: 0}
+    - target: {fileID: 8098972345482272969, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 8098972345482272969, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 8098972345482272969, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.95
       objectReference: {fileID: 0}
     - target: {fileID: 8746590218325337101, guid: e843106840614744cae4702badee9286,
         type: 3}

@@ -31,10 +31,14 @@ public abstract class IC_Basic : MonoBehaviour
         if(interactionAssetsGroup!=null) interactionAssetsGroup.SetActive(false);
         UnloadAssets();
     }
-    protected virtual void LoadAssets(){m_isLoaded = true;}
-    protected virtual void UnloadAssets(){m_isLoaded = false;}
-    protected virtual void OnInteractionEnter(){}
-    protected virtual void OnInteractionEnd(){}
+//When loading resources
+    protected virtual void LoadAssets() { m_isLoaded = true; }
+//When unloading resources
+    protected virtual void UnloadAssets() { m_isLoaded = false; }
+//When interaction is started
+    protected virtual void OnInteractionEnter() { }
+//When interaction is done
+    protected virtual void OnInteractionEnd() { }
     void OnDrawGizmos()
     {
         Gizmos.color = new Color(0,1,0,0.5f);

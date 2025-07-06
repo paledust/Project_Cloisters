@@ -162,6 +162,36 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1074785135901792360, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: points.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1074785135901792360, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: points.Array.data[3]
+      value: 
+      objectReference: {fileID: 545108442}
+    - target: {fileID: 1074785135901792360, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: points.Array.data[4]
+      value: 
+      objectReference: {fileID: 195732846}
+    - target: {fileID: 1074785135901792360, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: points.Array.data[5]
+      value: 
+      objectReference: {fileID: 1328860942}
+    - target: {fileID: 1074785135901792360, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: points.Array.data[6]
+      value: 
+      objectReference: {fileID: 356652741}
+    - target: {fileID: 1074785135901792360, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: points.Array.data[7]
+      value: 
+      objectReference: {fileID: 112568617}
     - target: {fileID: 1186632006653217032, guid: e843106840614744cae4702badee9286,
         type: 3}
       propertyPath: m_Sprite
@@ -235,6 +265,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3983345643960549431, guid: e843106840614744cae4702badee9286,
         type: 3}
+      propertyPath: inactiveColor.b
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 3983345643960549431, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: inactiveColor.g
+      value: 0.55588233
+      objectReference: {fileID: 0}
+    - target: {fileID: 3983345643960549431, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: inactiveColor.r
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3983345643960549431, guid: e843106840614744cae4702badee9286,
+        type: 3}
       propertyPath: colorSheet.Array.size
       value: 5
       objectReference: {fileID: 0}
@@ -292,6 +337,27 @@ PrefabInstance:
         type: 3}
       propertyPath: colorSheet.Array.data[4].g
       value: 0.57254905
+      objectReference: {fileID: 0}
+    - target: {fileID: 4430065969378234566, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: be76b1c9aa2c6154e8c86b038f28ba0b,
+        type: 3}
+    - target: {fileID: 4430065969378234566, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.30980393
+      objectReference: {fileID: 0}
+    - target: {fileID: 4430065969378234566, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.6745098
+      objectReference: {fileID: 0}
+    - target: {fileID: 4430065969378234566, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.92941177
       objectReference: {fileID: 0}
     - target: {fileID: 6240990561836385197, guid: e843106840614744cae4702badee9286,
         type: 3}

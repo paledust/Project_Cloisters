@@ -14,7 +14,7 @@ public class Clickable_Moveable : Basic_Clickable
         player.HoldInteractable(this);
         Vector3 localHit = transform.InverseTransformPoint(hitPos);
         if((localHit - m_rigid.centerOfMass).sqrMagnitude < massCenterRadius * massCenterRadius)
-            localHit = m_rigid.centerOfMass + (localHit - m_rigid.centerOfMass).normalized*0.05f;
+            localHit = m_rigid.centerOfMass + (localHit - m_rigid.centerOfMass).normalized*0.075f;
 
 
         PhysicDragManager.Instance.SyncDraggerPos(transform.TransformPoint(localHit));

@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -29,34 +28,31 @@ public class ConnectBody : MonoBehaviour
     }
     void Start()
     {
-        clickable_Moveable.onClick += OnControlBody;
         clickable_Moveable.onRelease += OnReleaseBody;
     }
     void OnDestroy()
     {
-        clickable_Moveable.onClick -= OnControlBody;
         clickable_Moveable.onRelease -= OnReleaseBody;
     }
-    void OnControlBody(){}
     public void BlinkShape(Color blinkColor1, Color blinkColor2)=>shapeColorChanger.BlinkColor(blinkColor1, blinkColor2);
     void Update()
     {
-        if(clickable_Moveable.isControlling)
+        if (clickable_Moveable.isControlling)
         {
-            if(!hasIdealConnection)
+            if (!hasIdealConnection)
             {
                 float bestDot;
                 bestDot = 0;
-                foreach(ConnectTrigger connectTrigger in connectTriggers)
+                foreach (ConnectTrigger connectTrigger in connectTriggers)
                 {
                     ConnectTrigger otherTrigger = connectTrigger.UpdateTriggerDetection(out float dot);
-                    if(dot>bestDot)
+                    if (dot > bestDot)
                     {
                         bestDot = dot;
                         SwapConnection(connectTrigger, otherTrigger);
                     }
                 }
-                if(bestDot==0)
+                if (bestDot == 0)
                 {
                     SwapConnection(null, null);
                 }
@@ -64,7 +60,7 @@ public class ConnectBody : MonoBehaviour
             else
             {
                 ConnectTrigger otherTrigger = occupiedTrigger.UpdateTriggerDetection(out float dot);
-                if(otherTrigger == null)
+                if (otherTrigger == null)
                 {
                     occupiedTrigger.OnLostConnectionCatching();
                     SwapConnection(null, null);
@@ -148,16 +144,12 @@ public class ConnectBody : MonoBehaviour
     public void BuildConnection(ConnectBody body)=>connectBodies.Add(body);
     public void BreakConnection(ConnectBody body)=>connectBodies.Remove(body);
     public bool IsConnectedToBody(ConnectBody body)=>connectBodies.Contains(body);
-    public Vector3 GetCenter()
+    public void ChangeActivateState(bool isActivate)
     {
-        Vector3 center = m_rigid.centerOfMass;
-        center.z = 0;
-        return transform.TransformPoint(center);
-    }
-    public List<ConnectTrigger> GetAllFreeTrigger()
-    {
-        List<ConnectTrigger> trigger = new List<ConnectTrigger>(connectTriggers);
-        return trigger.FindAll(x=>!x.m_isLocked);
+        if (isActivate)
+            shapeColorChanger.ChangeToActivateColor();
+        else
+            shapeColorChanger.ChangeToInActivateColor();
     }
     public Vector2[] GetAllPoints()
     {

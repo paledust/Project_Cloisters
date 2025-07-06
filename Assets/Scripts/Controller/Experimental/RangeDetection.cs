@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
@@ -79,6 +78,7 @@ public class RangeDetection : MonoBehaviour
         }
         return false;
     }
+    public bool CheckPoint(Vector2 point) => m_collider.OverlapPoint(point);
     public void InitRangeDetect(int totalActiveBodyCount) => totalBodyCount = totalActiveBodyCount;
     public bool CanEnlarge() => !hasEnlarged;
     void OnTriggerEnter2D(Collider2D other)
@@ -87,7 +87,7 @@ public class RangeDetection : MonoBehaviour
         if(body != null && !bodyHash.Contains(body))
         {
             bodyHash.Add(body);
-            PunchScale(-0.035f);
+            PunchScale(-0.025f);
         }
     }
     void OnTriggerExit2D(Collider2D other)
@@ -96,7 +96,7 @@ public class RangeDetection : MonoBehaviour
         if(body != null && bodyHash.Contains(body))
         {
             bodyHash.Remove(body);
-            PunchScale(0.05f);
+            PunchScale(0.025f);
         }
     }
     void PunchScale(float amount)
