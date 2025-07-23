@@ -99,6 +99,7 @@ Shader "AmplifyShaders/Sprite ExpandCircle"
 			#include "Packages/com.unity.render-pipelines.universal/Shaders/2D/Include/SurfaceData2D.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Debug/Debugging2D.hlsl"
 
+			#define ASE_NEEDS_FRAG_COLOR
 			#pragma multi_compile_instancing
 
 
@@ -238,7 +239,7 @@ Shader "AmplifyShaders/Sprite ExpandCircle"
 				float circle15 = saturate( ( saturate( ( smoothstepResult12 + ( smoothstepResult43 * _GlowStrength ) ) ) - dissolve67 ) );
 				float4 appendResult9 = (float4(tex2DNode8.rgb , ( tex2DNode8.a * circle15 )));
 				
-				float4 Color = appendResult9;
+				float4 Color = ( IN.color * appendResult9 );
 
 				#if ETC1_EXTERNAL_ALPHA
 					float4 alpha = SAMPLE_TEXTURE2D(_AlphaTex, sampler_AlphaTex, IN.texCoord0.xy);
@@ -313,6 +314,7 @@ Shader "AmplifyShaders/Sprite ExpandCircle"
 			#include "Packages/com.unity.render-pipelines.universal/Shaders/2D/Include/SurfaceData2D.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Debug/Debugging2D.hlsl"
 
+			#define ASE_NEEDS_FRAG_COLOR
 			#pragma multi_compile_instancing
 
 
@@ -452,7 +454,7 @@ Shader "AmplifyShaders/Sprite ExpandCircle"
 				float circle15 = saturate( ( saturate( ( smoothstepResult12 + ( smoothstepResult43 * _GlowStrength ) ) ) - dissolve67 ) );
 				float4 appendResult9 = (float4(tex2DNode8.rgb , ( tex2DNode8.a * circle15 )));
 				
-				float4 Color = appendResult9;
+				float4 Color = ( IN.color * appendResult9 );
 
 				#if ETC1_EXTERNAL_ALPHA
 					float4 alpha = SAMPLE_TEXTURE2D( _AlphaTex, sampler_AlphaTex, IN.texCoord0.xy );
@@ -553,6 +555,7 @@ Shader "AmplifyShaders/Sprite ExpandCircle"
 				float3 positionOS : POSITION;
 				float3 normal : NORMAL;
 				float4 tangent : TANGENT;
+				float4 ase_color : COLOR;
 				float4 ase_texcoord : TEXCOORD0;
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 			};
@@ -560,6 +563,7 @@ Shader "AmplifyShaders/Sprite ExpandCircle"
 			struct VertexOutput
 			{
 				float4 positionCS : SV_POSITION;
+				float4 ase_color : COLOR;
 				float4 ase_texcoord : TEXCOORD0;
 				float4 ase_texcoord1 : TEXCOORD1;
 				UNITY_VERTEX_INPUT_INSTANCE_ID
@@ -581,6 +585,7 @@ Shader "AmplifyShaders/Sprite ExpandCircle"
 				float4 screenPos = ComputeScreenPos( ase_positionCS );
 				o.ase_texcoord1 = screenPos;
 				
+				o.ase_color = v.ase_color;
 				o.ase_texcoord.xy = v.ase_texcoord.xy;
 				
 				//setting value to unused interpolator channels and avoid initialization warnings
@@ -642,7 +647,7 @@ Shader "AmplifyShaders/Sprite ExpandCircle"
 				float circle15 = saturate( ( saturate( ( smoothstepResult12 + ( smoothstepResult43 * _GlowStrength ) ) ) - dissolve67 ) );
 				float4 appendResult9 = (float4(tex2DNode8.rgb , ( tex2DNode8.a * circle15 )));
 				
-				float4 Color = appendResult9;
+				float4 Color = ( IN.ase_color * appendResult9 );
 
 				half4 outColor = half4(_ObjectId, _PassValue, 1.0, 1.0);
 				return outColor;
@@ -723,6 +728,7 @@ Shader "AmplifyShaders/Sprite ExpandCircle"
 				float3 positionOS : POSITION;
 				float3 normal : NORMAL;
 				float4 tangent : TANGENT;
+				float4 ase_color : COLOR;
 				float4 ase_texcoord : TEXCOORD0;
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 			};
@@ -730,6 +736,7 @@ Shader "AmplifyShaders/Sprite ExpandCircle"
 			struct VertexOutput
 			{
 				float4 positionCS : SV_POSITION;
+				float4 ase_color : COLOR;
 				float4 ase_texcoord : TEXCOORD0;
 				float4 ase_texcoord1 : TEXCOORD1;
 				UNITY_VERTEX_INPUT_INSTANCE_ID
@@ -750,6 +757,7 @@ Shader "AmplifyShaders/Sprite ExpandCircle"
 				float4 screenPos = ComputeScreenPos( ase_positionCS );
 				o.ase_texcoord1 = screenPos;
 				
+				o.ase_color = v.ase_color;
 				o.ase_texcoord.xy = v.ase_texcoord.xy;
 				
 				//setting value to unused interpolator channels and avoid initialization warnings
@@ -811,7 +819,7 @@ Shader "AmplifyShaders/Sprite ExpandCircle"
 				float circle15 = saturate( ( saturate( ( smoothstepResult12 + ( smoothstepResult43 * _GlowStrength ) ) ) - dissolve67 ) );
 				float4 appendResult9 = (float4(tex2DNode8.rgb , ( tex2DNode8.a * circle15 )));
 				
-				float4 Color = appendResult9;
+				float4 Color = ( IN.ase_color * appendResult9 );
 				half4 outColor = _SelectionID;
 				return outColor;
 			}
@@ -902,11 +910,13 @@ Node;AmplifyShaderEditor.RegisterLocalVarNode;15;1408,624;Inherit;False;circle;-
 Node;AmplifyShaderEditor.GetLocalVarNode;20;-784,48;Inherit;False;15;circle;1;0;OBJECT;;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SamplerNode;8;-896,-160;Inherit;True;Property;_MainTex;MainTex;0;0;Create;True;0;0;0;False;0;False;-1;None;None;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;6;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4;FLOAT3;5
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;21;-608,0;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
-Node;AmplifyShaderEditor.DynamicAppendNode;9;-432,-144;Inherit;False;FLOAT4;4;0;FLOAT3;0,0,0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;1;FLOAT4;0
+Node;AmplifyShaderEditor.DynamicAppendNode;9;-464,-144;Inherit;False;FLOAT4;4;0;FLOAT3;0,0,0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;1;FLOAT4;0
+Node;AmplifyShaderEditor.VertexColorNode;102;-496,-336;Inherit;False;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.SimpleMultiplyOpNode;103;-304,-240;Inherit;False;2;2;0;COLOR;0,0,0,0;False;1;FLOAT4;0,0,0,0;False;1;COLOR;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;1;0,0;Float;False;False;-1;2;UnityEditor.ShaderGraph.GenericShaderGraphMaterialGUI;0;1;New Amplify Shader;cf964e524c8e69742b1d21fbe2ebcc4a;True;Sprite Unlit Forward;0;1;Sprite Unlit Forward;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;True;0;True;12;all;0;False;True;2;5;False;;10;False;;3;1;False;;10;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;2;False;;True;3;False;;True;True;0;False;;0;False;;True;1;LightMode=UniversalForward;False;False;0;;0;0;Standard;0;False;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;2;0,0;Float;False;False;-1;2;UnityEditor.ShaderGraph.GenericShaderGraphMaterialGUI;0;1;New Amplify Shader;cf964e524c8e69742b1d21fbe2ebcc4a;True;SceneSelectionPass;0;2;SceneSelectionPass;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;True;0;True;12;all;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;1;LightMode=SceneSelectionPass;False;False;0;;0;0;Standard;0;False;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;3;0,0;Float;False;False;-1;2;UnityEditor.ShaderGraph.GenericShaderGraphMaterialGUI;0;1;New Amplify Shader;cf964e524c8e69742b1d21fbe2ebcc4a;True;ScenePickingPass;0;3;ScenePickingPass;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;True;0;True;12;all;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;1;LightMode=Picking;False;False;0;;0;0;Standard;0;False;0
-Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;0;-272,-144;Float;False;True;-1;2;UnityEditor.ShaderGraph.GenericShaderGraphMaterialGUI;0;15;AmplifyShaders/Sprite ExpandCircle;cf964e524c8e69742b1d21fbe2ebcc4a;True;Sprite Unlit;0;0;Sprite Unlit;4;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;True;0;True;12;all;0;False;True;2;5;False;;10;False;;3;1;False;;10;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;2;False;;True;3;False;;True;True;0;False;;0;False;;True;1;LightMode=Universal2D;False;False;0;;0;0;Standard;3;Vertex Position;1;0;Debug Display;0;0;External Alpha;0;0;0;4;True;True;True;True;False;;False;0
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;0;-144,-144;Float;False;True;-1;2;UnityEditor.ShaderGraph.GenericShaderGraphMaterialGUI;0;15;AmplifyShaders/Sprite ExpandCircle;cf964e524c8e69742b1d21fbe2ebcc4a;True;Sprite Unlit;0;0;Sprite Unlit;4;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;True;0;True;12;all;0;False;True;2;5;False;;10;False;;3;1;False;;10;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;2;False;;True;3;False;;True;True;0;False;;0;False;;True;1;LightMode=Universal2D;False;False;0;;0;0;Standard;3;Vertex Position;1;0;Debug Display;0;0;External Alpha;0;0;0;4;True;True;True;True;False;;False;0
 WireConnection;74;0;72;3
 WireConnection;74;1;72;4
 WireConnection;82;0;81;1
@@ -990,6 +1000,8 @@ WireConnection;21;0;8;4
 WireConnection;21;1;20;0
 WireConnection;9;0;8;5
 WireConnection;9;3;21;0
-WireConnection;0;1;9;0
+WireConnection;103;0;102;0
+WireConnection;103;1;9;0
+WireConnection;0;1;103;0
 ASEEND*/
-//CHKSM=10065267D9D380202A3C55147CF625D91F7A2433
+//CHKSM=3C1D4F864F169F9B7C2BD7FA518F69CCB2039BD8

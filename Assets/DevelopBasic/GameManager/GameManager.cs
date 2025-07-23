@@ -140,7 +140,7 @@ public class GameManager : Singleton<GameManager>
         Application.Quit();
     }
     IEnumerator RestartLevel(string level){
-        yield return FadeInBlackScreen(3f);
+        yield return FadeInBlackScreen(0.5f);
         IsSwitchingScene = true;
         //TO DO: do something before the last scene is unloaded. e.g: call event of saving 
         EventHandler.Call_BeforeUnloadScene();

@@ -4,7 +4,7 @@ using UnityEngine;
 public abstract class Basic_Clickable : MonoBehaviour
 {
 [Header("Clickable Basic")]
-    public string sfx_clickSound = string.Empty;
+    public string sfx_clickSound = "group_click";
     [SerializeField] protected Collider hitbox;
     [SerializeField] protected bool isFrozen = false; //If not available, player can still click on object but will show stop sign
     

@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class IC_Evocative : IC_Basic
 {
-    
+    private BounceBall bounceBall;
 }

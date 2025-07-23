@@ -6,8 +6,9 @@ using UnityEngine;
 public static class Service{
     public static int InteractableLayer = LayerMask.NameToLayer("Interactable");
     public static int IgnoreRaycastLayer = LayerMask.NameToLayer("Ignore Raycast");
+    public static int DefaultLayer = LayerMask.NameToLayer("Default");
 #region HelperFunction
-    public static float Fract(float value)=>value-Mathf.Floor(value);
+    public static float Fract(float value) => value - Mathf.Floor(value);
     public static T[] FindComponentsOfTypeIncludingDisable<T>(){
         int sceneCount = UnityEngine.SceneManagement.SceneManager.sceneCount;
         var MatchObjects = new List<T> ();
