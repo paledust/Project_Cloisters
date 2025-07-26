@@ -4,7 +4,10 @@ public class BounceBall : MonoBehaviour
 {
     [Header("Speed")]
     [SerializeField] private float maxSpeed = 100f;
-    [SerializeField] private float minSpeed = 10f;
+
+    [Header("Boost")]
+    [SerializeField] private float boostMulti = 4f;
+    [SerializeField] private float boostDeacc = 1;
 
     [Header("Shrink")]
     [SerializeField] private float shrinkFactor = 0.2f;
@@ -15,15 +18,24 @@ public class BounceBall : MonoBehaviour
 
     private BuffProperty currentSpeed;
     private Rigidbody m_rigid;
+    private float realSpeed;
 
     void Awake()
     {
-        currentSpeed = new BuffProperty(0, maxSpeed);
+        currentSpeed = new BuffProperty(10, maxSpeed);
         m_rigid = GetComponent<Rigidbody>();
     }
     void FixedUpdate()
     {
-        m_rigid.velocity = Vector2.Lerp(m_rigid.velocity, m_rigid.velocity.normalized * currentSpeed.cachedValue, Time.fixedDeltaTime * 1);
+        if (realSpeed > currentSpeed.cachedValue)
+        {
+            realSpeed -= Time.fixedDeltaTime * boostDeacc;
+            if(realSpeed < currentSpeed.cachedValue)
+            {
+                realSpeed = currentSpeed.cachedValue;
+            }
+        }
+        m_rigid.velocity = m_rigid.velocity.normalized * realSpeed;
     }
     void LateUpdate()
     {
@@ -35,10 +47,11 @@ public class BounceBall : MonoBehaviour
     }
 
     #region Physics Handler
-    public void Bounce(Vector2 impulse, float speedBoost, AttributeModifyType modifyType = AttributeModifyType.Add)
+    public void Bounce(Vector2 impulse, float speedMod, float speedBoost=1, AttributeModifyType modifyType = AttributeModifyType.Add)
     {
-        currentSpeed.ModifiValue(speedBoost, modifyType);
-        m_rigid.velocity = impulse.normalized * currentSpeed.cachedValue * 2;
+        currentSpeed.ModifiValue(speedMod, modifyType);
+        realSpeed = Mathf.Max(realSpeed, currentSpeed.cachedValue * boostMulti * speedBoost);
+        m_rigid.velocity = impulse.normalized * realSpeed;
     }
     #endregion
 }

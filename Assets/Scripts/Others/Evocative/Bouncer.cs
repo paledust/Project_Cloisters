@@ -1,28 +1,38 @@
 using UnityEngine;
 using DG.Tweening;
 
-public class Bouncer : MonoBehaviour
+public class Bouncer : Basic_Clickable
 {
+    [Header("Feedback")]
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private SpriteRenderer blinkRender;
     [SerializeField] private float bounceSize = 1;
     [SerializeField] private float bounceSpeedBoost = 2;
+
     private bool colliding = false;
+    private Rigidbody m_rigid;
+    void Awake()
+    {
+        m_rigid = GetComponent<Rigidbody>();
+    }
+
     void OnCollisionEnter(Collision collision)
     {
-        if (!colliding && collision.impulse.magnitude > 0)
+        if (!colliding)
         {
             colliding = true;
+            Vector2 vel = m_rigid.velocity + collision.relativeVelocity;
+            vel = Vector2.Reflect(vel, collision.GetContact(0).normal).normalized;
+
             var bounceBall = collision.gameObject.GetComponent<BounceBall>();
             if (bounceBall != null)
             {
-                bounceBall.Bounce(collision.impulse, bounceSpeedBoost);
+                bounceBall.Bounce(vel, 0, bounceSpeedBoost);
+                blinkRender.DOKill();
+                blinkRender.DOFade(1, 0.1f).OnComplete(() => blinkRender.DOFade(0, 0.05f));
                 spriteRenderer.transform.localScale = Vector3.one;
                 spriteRenderer.transform.DOKill();
                 spriteRenderer.transform.DOPunchScale(bounceSize * Vector3.one, 0.1f, 1, 2).SetEase(Ease.OutQuad);
-
-                blinkRender.DOKill();
-                blinkRender.DOFade(1, 0.1f).OnComplete(()=>blinkRender.DOFade(0,0.2f));
             }
         }
     }
