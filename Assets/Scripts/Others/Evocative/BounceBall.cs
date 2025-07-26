@@ -30,7 +30,7 @@ public class BounceBall : MonoBehaviour
         if (realSpeed > currentSpeed.cachedValue)
         {
             realSpeed -= Time.fixedDeltaTime * boostDeacc;
-            if(realSpeed < currentSpeed.cachedValue)
+            if (realSpeed < currentSpeed.cachedValue)
             {
                 realSpeed = currentSpeed.cachedValue;
             }
@@ -47,11 +47,19 @@ public class BounceBall : MonoBehaviour
     }
 
     #region Physics Handler
-    public void Bounce(Vector2 impulse, float speedMod, float speedBoost=1, AttributeModifyType modifyType = AttributeModifyType.Add)
+    public void Bounce(Vector2 impulse, float speedMod, float speedBoost = 1, AttributeModifyType modifyType = AttributeModifyType.Add)
     {
         currentSpeed.ModifiValue(speedMod, modifyType);
         realSpeed = Mathf.Max(realSpeed, currentSpeed.cachedValue * boostMulti * speedBoost);
         m_rigid.velocity = impulse.normalized * realSpeed;
     }
     #endregion
+    public void ResetAtPos(Vector3 position)
+    {
+        transform.position = position;
+        m_rigid.position = position;
+        currentSpeed.ResetValue();
+        realSpeed = currentSpeed.cachedValue;
+        m_rigid.velocity = Vector3.zero;
+    }
 }

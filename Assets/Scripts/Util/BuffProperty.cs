@@ -33,6 +33,13 @@ public struct BuffProperty
         if (isInt)
             cachedValue = Mathf.RoundToInt(cachedValue);
     }
+    public void ResetValue()
+    {
+        bonus = 0;
+        riser = 0;
+        multiplier = 1;
+        RecalculateValue();
+    }
     //修改基础参数，例如全局加成
     public void OverrideBaseValue(float newValue)
     {
