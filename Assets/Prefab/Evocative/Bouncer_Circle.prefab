@@ -247,11 +247,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14bfd2c3136d3544e82ab49b37e0e18c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sfx_clickSound: group_click
-  hitbox: {fileID: 8771863912461656049}
-  isFrozen: 0
   spriteRenderer: {fileID: 8867766525590536297}
   blinkRender: {fileID: 7088108845889067849}
   bounceSize: 0.15
+  reflectAngle: {x: 90, y: 180}
   bounceSpeedBoost: 2
-  bounceSpeedMulti: 2

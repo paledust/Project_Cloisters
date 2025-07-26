@@ -1,13 +1,17 @@
 using UnityEngine;
 using DG.Tweening;
 
-public class Bouncer : Basic_Clickable
+public class Bouncer : MonoBehaviour
 {
     [Header("Feedback")]
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private SpriteRenderer blinkRender;
     [SerializeField] private float bounceSize = 1;
+
+    [Header("Bounce Settings")]
+    [SerializeField] private Vector2 reflectAngle = new Vector2(0, 90);
     [SerializeField] private float bounceSpeedBoost = 2;
+
 
     private bool colliding = false;
     private Rigidbody m_rigid;
@@ -21,8 +25,12 @@ public class Bouncer : Basic_Clickable
         if (!colliding)
         {
             colliding = true;
+            Vector3 normal = collision.GetContact(0).normal;
             Vector2 vel = m_rigid.velocity + collision.relativeVelocity;
-            vel = Vector2.Reflect(vel, collision.GetContact(0).normal).normalized;
+            vel = Vector2.Reflect(vel, normal).normalized;
+            float angle = Vector2.SignedAngle(normal, vel);
+            angle = Mathf.Sign(angle) * Mathf.Clamp(Mathf.Abs(angle), reflectAngle.x, reflectAngle.y);
+            vel = Quaternion.Euler(0, 0, angle) * normal;
 
             var bounceBall = collision.gameObject.GetComponent<BounceBall>();
             if (bounceBall != null)
