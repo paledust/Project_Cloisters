@@ -251,4 +251,4 @@ MonoBehaviour:
   blinkRender: {fileID: 7088108845889067849}
   bounceSize: 0.15
   reflectAngle: {x: 90, y: 180}
-  bounceSpeedBoost: 2
+  bounceSpeedBoost: 3

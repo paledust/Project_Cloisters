@@ -9,8 +9,9 @@ public class Bouncer : MonoBehaviour
     [SerializeField] private float bounceSize = 1;
 
     [Header("Bounce Settings")]
-    [SerializeField] private Vector2 reflectAngle = new Vector2(0, 90);
+    [SerializeField] private Vector2 reflectAngle = new Vector2(90, 180);
     [SerializeField] private float bounceSpeedBoost = 2;
+    [SerializeField] private float bounceSpeedBonus = 0;
 
 
     private bool colliding = false;
@@ -35,7 +36,7 @@ public class Bouncer : MonoBehaviour
             var bounceBall = collision.gameObject.GetComponent<BounceBall>();
             if (bounceBall != null)
             {
-                bounceBall.Bounce(vel, 0, bounceSpeedBoost);
+                bounceBall.Bounce(vel, bounceSpeedBonus, bounceSpeedBoost);
                 blinkRender.DOKill();
                 blinkRender.DOFade(1, 0.1f).OnComplete(() => blinkRender.DOFade(0, 0.05f));
                 spriteRenderer.transform.localScale = Vector3.one;

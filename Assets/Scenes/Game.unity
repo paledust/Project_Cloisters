@@ -5091,10 +5091,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1926802659}
     m_Modifications:
-    - target: {fileID: 7148061842109763, guid: e8a900563de8a324bbda13b905867415, type: 3}
-      propertyPath: bounceSpeedBoost
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 8771863912461656050, guid: e8a900563de8a324bbda13b905867415,
         type: 3}
       propertyPath: m_Name
@@ -65851,10 +65847,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 901307155}
     m_Modifications:
-    - target: {fileID: 7148061842109763, guid: e8a900563de8a324bbda13b905867415, type: 3}
-      propertyPath: bounceSpeedBoost
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 8771863912461656050, guid: e8a900563de8a324bbda13b905867415,
         type: 3}
       propertyPath: m_Name
@@ -102323,7 +102315,7 @@ PrefabInstance:
     - target: {fileID: 5059348748198126311, guid: f720dec7f89a67a4d8d4594c1796e2a1,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 14.57
+      value: 14.65
       objectReference: {fileID: 0}
     - target: {fileID: 5059348748198126311, guid: f720dec7f89a67a4d8d4594c1796e2a1,
         type: 3}
@@ -140570,10 +140562,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1926802659}
     m_Modifications:
-    - target: {fileID: 7148061842109763, guid: e8a900563de8a324bbda13b905867415, type: 3}
-      propertyPath: bounceSpeedBoost
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 8771863912461656050, guid: e8a900563de8a324bbda13b905867415,
         type: 3}
       propertyPath: m_Name
@@ -147259,10 +147247,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1926802659}
     m_Modifications:
-    - target: {fileID: 7148061842109763, guid: e8a900563de8a324bbda13b905867415, type: 3}
-      propertyPath: bounceSpeedBoost
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 8771863912461656050, guid: e8a900563de8a324bbda13b905867415,
         type: 3}
       propertyPath: m_Name
@@ -158913,21 +158897,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3427755475503716055, guid: 38478adbcd1989b44a2164bc60994f2f,
         type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2.9241
-      objectReference: {fileID: 0}
-    - target: {fileID: 3427755475503716055, guid: 38478adbcd1989b44a2164bc60994f2f,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2.9241
-      objectReference: {fileID: 0}
-    - target: {fileID: 3427755475503716055, guid: 38478adbcd1989b44a2164bc60994f2f,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2.9241
-      objectReference: {fileID: 0}
-    - target: {fileID: 3427755475503716055, guid: 38478adbcd1989b44a2164bc60994f2f,
-        type: 3}
       propertyPath: m_LocalPosition.x
       value: 10.02
       objectReference: {fileID: 0}
@@ -158975,11 +158944,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3427755475503716055, guid: 38478adbcd1989b44a2164bc60994f2f,
-        type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38478adbcd1989b44a2164bc60994f2f, type: 3}
@@ -159371,6 +159335,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7835286026554675349, guid: 669790e6223ceb84c946e3617b688641,
+        type: 3}
+      propertyPath: boostDeacc
+      value: 80
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 669790e6223ceb84c946e3617b688641, type: 3}
@@ -159849,10 +159818,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 901307155}
     m_Modifications:
-    - target: {fileID: 7148061842109763, guid: e8a900563de8a324bbda13b905867415, type: 3}
-      propertyPath: bounceSpeedBoost
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 8771863912461656050, guid: e8a900563de8a324bbda13b905867415,
         type: 3}
       propertyPath: m_Name
