@@ -72,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -2413806693520163455, guid: 92707ec67503ee549922cf3853869fc2,
     type: 3}
   m_Color: {r: 1, g: 0.59477013, b: 0.20188677, a: 0}
@@ -183,6 +183,7 @@ GameObject:
   - component: {fileID: 8771863912461656049}
   - component: {fileID: 1394414349588871871}
   - component: {fileID: 7148061842109763}
+  - component: {fileID: 6397932053835725981}
   m_Layer: 0
   m_Name: Bouncer_Circle
   m_TagString: Untagged
@@ -252,3 +253,15 @@ MonoBehaviour:
   bounceSize: 0.15
   reflectAngle: {x: 90, y: 180}
   bounceSpeedBoost: 3
+  bounceSpeedBonus: 0
+--- !u!210 &6397932053835725981
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8771863912461656050}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
