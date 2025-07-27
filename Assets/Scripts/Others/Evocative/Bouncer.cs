@@ -23,6 +23,11 @@ public class Bouncer : MonoBehaviour
     {
         m_rigid = GetComponent<Rigidbody>();
     }
+    void OnDestroy()
+    {
+        spriteRenderer.transform.DOKill();
+        blinkRender.DOKill();
+    }
 
     void OnCollisionEnter(Collision collision)
     {

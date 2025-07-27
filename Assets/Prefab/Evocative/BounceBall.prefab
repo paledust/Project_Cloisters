@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 7835286026554675350}
   - component: {fileID: 7835286026554675348}
   - component: {fileID: 7835286026554675349}
+  - component: {fileID: 1684321961}
   m_Layer: 0
   m_Name: BounceBall
   m_TagString: BounceBall
@@ -161,9 +162,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1d5f5e71aa6e5645ab44374186ca643, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  constraint: {fileID: 1684321961}
   maxSpeed: 100
   boostMulti: 1
-  boostDeacc: 50
+  boostDeacc: 80
   shrinkFactor: 0.5
   shrinkVelRange: {x: 0, y: 50}
   renderTrans: {fileID: 7835286026490501079}
+--- !u!1773428102 &1684321961
+ParentConstraint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7835286026554675344}
+  m_Enabled: 1
+  m_Weight: 1
+  m_TranslationAtRest: {x: -9.819977, y: -0.71, z: 0}
+  m_RotationAtRest: {x: 0, y: 0, z: 0}
+  m_TranslationOffsets:
+  - {x: 0, y: 0, z: 0}
+  m_RotationOffsets:
+  - {x: 0, y: 0, z: 0}
+  m_AffectTranslationX: 1
+  m_AffectTranslationY: 1
+  m_AffectTranslationZ: 1
+  m_AffectRotationX: 1
+  m_AffectRotationY: 1
+  m_AffectRotationZ: 1
+  m_IsContraintActive: 1
+  m_IsLocked: 1
+  m_Sources:
+  - sourceTransform: {fileID: 0}
+    weight: 1

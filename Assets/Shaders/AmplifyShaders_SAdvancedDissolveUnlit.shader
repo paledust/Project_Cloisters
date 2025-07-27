@@ -1379,12 +1379,12 @@ Node;AmplifyShaderEditor.GetLocalVarNode;309;-1392,-752;Inherit;False;307;mainTe
 Node;AmplifyShaderEditor.SmoothstepOpNode;49;-944,64;Inherit;True;3;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;1;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SmoothstepOpNode;42;-1072,-224;Inherit;False;3;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;1;False;1;FLOAT;0
 Node;AmplifyShaderEditor.RangedFloatNode;218;-6320,576;Inherit;False;Property;_BlinkSpeed;BlinkSpeed;31;0;Create;True;0;0;0;False;0;False;1;1;0;0;0;1;FLOAT;0
-Node;AmplifyShaderEditor.ColorNode;79;-1160.991,-936.9772;Inherit;False;Property;_FillColor;FillColor;4;1;[HDR];Create;True;0;0;0;False;0;False;0,0,0,1;0,0,0,0;True;True;0;6;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4;FLOAT3;5
 Node;AmplifyShaderEditor.SamplerNode;5;-1218.113,-753.4539;Inherit;True;Property;_test;test;0;0;Create;True;0;0;0;False;0;False;129;7a170cdb7cc88024cb628cfcdbb6705c;7a170cdb7cc88024cb628cfcdbb6705c;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;6;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4;FLOAT3;5
 Node;AmplifyShaderEditor.OneMinusNode;297;-818.042,871.6349;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.OneMinusNode;53;-688,64;Inherit;True;1;0;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SaturateNode;41;-896,-224;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.CommentaryNode;116;-1811.114,-1669.366;Inherit;False;1782.696;550.4119;Comment;12;169;108;109;117;107;106;114;113;112;111;110;105;NoisePattern;1,1,1,1;0;0
+Node;AmplifyShaderEditor.ColorNode;79;-1160.991,-936.9772;Inherit;False;Property;_FillColor;FillColor;4;1;[HDR];Create;True;0;0;0;False;0;False;0,0,0,1;0,0,0,0;True;True;0;6;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4;FLOAT3;5
 Node;AmplifyShaderEditor.SimpleTimeNode;217;-6144,576;Inherit;False;1;0;FLOAT;1;False;1;FLOAT;0
 Node;AmplifyShaderEditor.RangedFloatNode;223;-6096,416;Inherit;False;InstancedProperty;_RNDSeed;RNDSeed;28;1;[PerRendererData];Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;58;-476.1532,-34.67459;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
@@ -1597,4 +1597,4 @@ WireConnection;316;0;315;0
 WireConnection;316;1;122;0
 WireConnection;72;1;316;0
 ASEEND*/
-//CHKSM=B49F5C7F11080D0358EDBBC56CC2D4B13D13DD65
+//CHKSM=2F6889FEA06D2FF46F5425FA122828F92E3E1C8B

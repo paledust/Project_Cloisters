@@ -10,15 +10,22 @@ public class IC_Evocative : IC_Basic
     {
         EventHandler.E_OnBallDead += RespawnGame;
         EventHandler.E_OnCollect += OnCollect;
+        EventHandler.E_OnLaunchBall += OnLaunchBall;
+        RespawnGame();
     }
     protected override void OnInteractionEnd()
     {
         EventHandler.E_OnBallDead -= RespawnGame;
         EventHandler.E_OnCollect -= OnCollect;
+        EventHandler.E_OnLaunchBall -= OnLaunchBall;
     }
     public void RespawnGame()
     {
         bounceBall.ResetAtPos(restartPos.position);
+    }
+    void OnLaunchBall(Vector2 forceDir)
+    {
+        bounceBall.Launch(forceDir);
     }
     void OnCollect(Collectable collectable)
     {

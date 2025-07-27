@@ -1,7 +1,11 @@
 using UnityEngine;
+using UnityEngine.Animations;
 
 public class BounceBall : MonoBehaviour
 {
+    [Header("Lock")]
+    [SerializeField] private ParentConstraint constraint;
+
     [Header("Speed")]
     [SerializeField] private float maxSpeed = 100f;
 
@@ -22,7 +26,7 @@ public class BounceBall : MonoBehaviour
 
     void Awake()
     {
-        currentSpeed = new BuffProperty(10, maxSpeed);
+        currentSpeed = new BuffProperty(0, maxSpeed);
         m_rigid = GetComponent<Rigidbody>();
     }
     void FixedUpdate()
@@ -61,5 +65,13 @@ public class BounceBall : MonoBehaviour
         currentSpeed.ResetValue();
         realSpeed = currentSpeed.cachedValue;
         m_rigid.velocity = Vector3.zero;
+        m_rigid.isKinematic = true;
+        constraint.constraintActive = true;
+    }
+    public void Launch(Vector2 force)
+    {
+        constraint.constraintActive = false;
+        m_rigid.isKinematic = false;
+        Bounce(force, 10, 2, AttributeModifyType.Add);
     }
 }

@@ -6,14 +6,7 @@ public class Collectable : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer chargeSprite;
     private bool isCharged = false;
-    // void OnTriggerEnter(Collider other)
-    // {
-    //     var bounceBall = other.GetComponent<BounceBall>();
-    //     if (bounceBall != null)
-    //     {
-    //         EventHandler.Call_OnCollect(this);
-    //     }
-    // }
+
     void OnCollisionEnter(Collision other)
     {
         var bounceBall = other.collider.GetComponent<BounceBall>();
@@ -22,7 +15,7 @@ public class Collectable : MonoBehaviour
             if (!isCharged)
             {
                 isCharged = true;
-                chargeSprite.enabled = true;
+                chargeSprite.gameObject.SetActive(true);
             }
             else
             {

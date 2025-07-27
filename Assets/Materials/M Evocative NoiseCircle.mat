@@ -336,7 +336,7 @@ Material:
     - _DissolvePanSpeed: {r: 0.3, g: 0.5, b: 0, a: 0}
     - _EdgeColor: {r: 1, g: 0.78512925, b: 0.16862746, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _FillColor: {r: 0.9911022, g: 0.46207705, b: 0.046665095, a: 1}
+    - _FillColor: {r: 1, g: 0.47893995, b: 0.069811285, a: 1}
     - _FresenelDirOffset: {r: 0, g: 0.2, b: 0, a: 0}
     - _FresnelColor: {r: 2.072162, g: 0.7297614, b: 0.1531598, a: 1}
     - _GlowColor: {r: 1, g: 1, b: 1, a: 1}
