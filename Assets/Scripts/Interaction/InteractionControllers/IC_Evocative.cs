@@ -4,6 +4,7 @@ public class IC_Evocative : IC_Basic
 {
     [SerializeField] private Transform restartPos;
     [SerializeField] private BounceBall bounceBall;
+    [SerializeField] private BallLauncher ballLauncher;
     [SerializeField] private ParticleSystem bounceParticle;
 
     protected override void OnInteractionEnter()
@@ -22,10 +23,12 @@ public class IC_Evocative : IC_Basic
     public void RespawnGame()
     {
         bounceBall.ResetAtPos(restartPos.position);
+        ballLauncher.enabled = true;
     }
     void OnLaunchBall(Vector2 forceDir)
     {
         bounceBall.Launch(forceDir);
+        ballLauncher.enabled = false;
     }
     void OnCollect(Collectable collectable)
     {

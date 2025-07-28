@@ -403,6 +403,7 @@ MonoBehaviour:
       m_Action: Launch
       m_Flags: 0
     m_Flags: 0
+  holdSprite: {fileID: 1772919874512249634}
 --- !u!4 &4125004621881747533 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8771863912461656051, guid: e8a900563de8a324bbda13b905867415,

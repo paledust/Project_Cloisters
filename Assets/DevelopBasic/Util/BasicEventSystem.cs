@@ -51,5 +51,5 @@ public static class EventHandler
     public static void Call_OnBallDead() => E_OnBallDead?.Invoke();
     public static event Action<Vector2> E_OnLaunchBall;
     public static void Call_OnLaunchBall(Vector2 forceDir) => E_OnLaunchBall?.Invoke(forceDir);
-#endregion
+    #endregion
 }

@@ -6,13 +6,16 @@ using UnityEngine.InputSystem;
 public class BallLauncher : MonoBehaviour
 {
     [SerializeField] private InputAction launchAction;
+    [SerializeField] private SpriteRenderer holdSprite;
     void OnEnable()
     {
+        holdSprite.enabled = true;
         launchAction.Enable();
         launchAction.performed += OnLaunch;
     }
     void OnDisable()
     {
+        holdSprite.enabled = false;
         launchAction.performed -= OnLaunch;
         launchAction.Disable();
     }
