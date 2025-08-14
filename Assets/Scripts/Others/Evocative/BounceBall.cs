@@ -72,6 +72,6 @@ public class BounceBall : MonoBehaviour
     {
         constraint.constraintActive = false;
         m_rigid.isKinematic = false;
-        Bounce(force, 10, 2, AttributeModifyType.Add);
+        Bounce(force, force.magnitude, 2, AttributeModifyType.Add);
     }
 }

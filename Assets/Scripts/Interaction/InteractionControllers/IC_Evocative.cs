@@ -22,13 +22,14 @@ public class IC_Evocative : IC_Basic
     }
     public void RespawnGame()
     {
+        ballLauncher.ResetLauncher();
         bounceBall.ResetAtPos(restartPos.position);
-        ballLauncher.enabled = true;
     }
     void OnLaunchBall(Vector2 forceDir)
     {
-        bounceBall.Launch(forceDir);
-        ballLauncher.enabled = false;
+        Vector2 diff = ballLauncher.transform.position - bounceBall.transform.position;
+        if (Mathf.Abs(diff.y) <= 2 && Mathf.Abs(diff.x) <= 1f)
+            bounceBall.Launch(forceDir);
     }
     void OnCollect(Collectable collectable)
     {
