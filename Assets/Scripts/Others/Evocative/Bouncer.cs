@@ -15,8 +15,10 @@ public class Bouncer : MonoBehaviour
     [SerializeField] private float bounceSpeedBonus = 0;
 
     private bool colliding = false;
+    private bool canBounce = true;
     private Rigidbody m_rigid;
 
+    public bool m_colliding => colliding;
     public event Action<BounceBall> onBounce;
 
     void Awake()
@@ -29,10 +31,24 @@ public class Bouncer : MonoBehaviour
         spriteRenderer.transform.DOKill();
         blinkRender.DOKill();
     }
-
+    public void SwitchCanBounce(bool isBounce)
+    {
+        canBounce = isBounce;
+    }
+    public void PlayBounceFeedback(BounceBall bounceBall)
+    {
+        var rootTrans = spriteRenderer.transform;
+        var blinker = blinkRender;
+        blinker.DOKill();
+        blinker.DOFade(1, 0.1f).OnComplete(() => blinker.DOFade(0, 0.05f));
+        rootTrans.localScale = Vector3.one;
+        rootTrans.DOKill();
+        rootTrans.DOPunchScale(bounceSize * Vector3.one, 0.1f, 1, 2).SetEase(Ease.OutQuad);
+        onBounce?.Invoke(bounceBall);
+    }
     void OnCollisionEnter(Collision collision)
     {
-        if (!colliding)
+        if (!colliding && canBounce)
         {
             colliding = true;
             Vector3 normal = collision.GetContact(0).normal;
@@ -55,7 +71,7 @@ public class Bouncer : MonoBehaviour
                 rootTrans.localScale = Vector3.one;
                 rootTrans.DOKill();
                 rootTrans.DOPunchScale(bounceSize * Vector3.one, 0.1f, 1, 2).SetEase(Ease.OutQuad);
-                
+
                 onBounce?.Invoke(bounceBall);
             }
         }

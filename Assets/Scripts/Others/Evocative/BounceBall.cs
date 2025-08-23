@@ -66,13 +66,11 @@ public class BounceBall : MonoBehaviour
         currentSpeed.ResetValue();
         realSpeed = currentSpeed.cachedValue;
         m_rigid.velocity = Vector3.zero;
-        m_rigid.isKinematic = true;
         constraint.constraintActive = true;
     }
     public void Launch(Vector2 force)
     {
         constraint.constraintActive = false;
-        m_rigid.isKinematic = false;
         Bounce(force, force.magnitude, 2, AttributeModifyType.Add);
     }
 }

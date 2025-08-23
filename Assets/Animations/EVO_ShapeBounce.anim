@@ -84,9 +84,9 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: m_IsActive
+    attribute: m_Enabled
     path: BallCatcher
-    classID: 1
+    classID: 65
     script: {fileID: 0}
   m_PPtrCurves: []
   m_SampleRate: 60
@@ -207,9 +207,9 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: m_IsActive
+    attribute: m_Enabled
     path: BallCatcher
-    classID: 1
+    classID: 65
     script: {fileID: 0}
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
