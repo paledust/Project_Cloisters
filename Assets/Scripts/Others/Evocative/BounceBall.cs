@@ -18,7 +18,8 @@ public class BounceBall : MonoBehaviour
     [SerializeField] private Vector2 shrinkVelRange;
     [SerializeField] private Transform renderTrans;
 
-    public float vel => m_rigid.velocity.magnitude;
+    public float speed => m_rigid.velocity.magnitude;
+    public Vector2 vel => m_rigid.velocity;
 
     private BuffProperty currentSpeed;
     private Rigidbody m_rigid;

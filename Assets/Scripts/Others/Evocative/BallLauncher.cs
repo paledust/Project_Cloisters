@@ -29,20 +29,23 @@ public class BallLauncher : MonoBehaviour
 
         lastLaunchTime = Time.time;
         bounceAnimation.Play();
-
-        if (isfirstLaunch)
-        {
-            isfirstLaunch = false;
-            EventHandler.Call_OnLaunchBall(Vector2.left * 10);
-        }
-        else
-        {
-            EventHandler.Call_OnLaunchBall(Vector2.left * 1);
-        }
     }
     public void ResetLauncher()
     {
         isfirstLaunch = true;
         lastLaunchTime = Time.time;
+    }
+    void OnTriggerEnter(Collider other)
+    {
+        var ball = other.GetComponent<BounceBall>();
+        if (ball != null)
+        {
+            if (isfirstLaunch)
+            {
+                isfirstLaunch = false;
+                ball.Launch(Vector2.right * 10);
+            }
+            ball.Bounce(Vector2.right, 1, 1.5f);
+        }
     }
 }

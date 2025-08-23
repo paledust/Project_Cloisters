@@ -22,7 +22,7 @@ public class Bouncer_Goal : MonoBehaviour
     void Awake()
     {
         bouncer = GetComponent<Bouncer>();
-        bouncer.OnBounce(BounceHandle);
+        bouncer.onBounce += BounceHandle;
         currentRender = activeRenders[activeIndex];
     }
     void BounceHandle(BounceBall bounceBall)

@@ -17,7 +17,7 @@ public class Bouncer : MonoBehaviour
     private bool colliding = false;
     private Rigidbody m_rigid;
 
-    private Action<BounceBall> onBounce;
+    public event Action<BounceBall> onBounce;
 
     void Awake()
     {
@@ -25,6 +25,7 @@ public class Bouncer : MonoBehaviour
     }
     void OnDestroy()
     {
+        onBounce = null;
         spriteRenderer.transform.DOKill();
         blinkRender.DOKill();
     }
@@ -64,7 +65,6 @@ public class Bouncer : MonoBehaviour
         this.spriteRenderer = rootRender;
         this.blinkRender = blinkRender;
     }
-    public void OnBounce(Action<BounceBall> action) => onBounce = action;
     void OnCollisionExit(Collision collision)
     {
         if (colliding)
