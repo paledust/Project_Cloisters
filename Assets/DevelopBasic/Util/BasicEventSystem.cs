@@ -49,5 +49,7 @@ public static class EventHandler
     public static void Call_OnCollect(Collectable collectable) => E_OnCollect?.Invoke(collectable);
     public static event Action E_OnBallDead;
     public static void Call_OnBallDead() => E_OnBallDead?.Invoke();
+    public static event Action E_OnHitGoal;
+    public static void Call_OnHitGoal() => E_OnHitGoal?.Invoke();
     #endregion
 }

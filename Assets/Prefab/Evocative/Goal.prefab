@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 5004566570859983771}
   - component: {fileID: 3427755475503716052}
   - component: {fileID: 1611466068646411881}
+  - component: {fileID: 5079350425550156287}
   m_Layer: 3
   m_Name: Goal
   m_TagString: Untagged
@@ -177,8 +178,22 @@ MonoBehaviour:
   blinkRender: {fileID: 1550733921086647596}
   bounceSize: 0.2
   reflectAngle: {x: 90, y: 180}
-  bounceSpeedBoost: 4
+  bounceSpeedBoost: 3
   bounceSpeedBonus: 0
+--- !u!114 &5079350425550156287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3427755475503716054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd69b1abdc602d64888351f11ec042d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bouncer: {fileID: 1611466068646411881}
+  minhitStep: 0.2
 --- !u!1 &8218240389776748740
 GameObject:
   m_ObjectHideFlags: 0

@@ -250,7 +250,7 @@ MonoBehaviour:
   blinkRender: {fileID: 7088108845889067849}
   bounceSize: 0.15
   reflectAngle: {x: 90, y: 180}
-  bounceSpeedBoost: 3
+  bounceSpeedBoost: 2.5
   bounceSpeedBonus: 0
 --- !u!210 &6397932053835725981
 SortingGroup:
