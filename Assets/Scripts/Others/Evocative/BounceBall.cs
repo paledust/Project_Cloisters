@@ -19,6 +19,7 @@ public class BounceBall : MonoBehaviour
     [SerializeField] private Transform renderTrans;
 
     public float speed => m_rigid.velocity.magnitude;
+    public float consistentSpeed => currentSpeed.cachedValue;
     public Vector2 vel => m_rigid.velocity;
 
     private BuffProperty currentSpeed;

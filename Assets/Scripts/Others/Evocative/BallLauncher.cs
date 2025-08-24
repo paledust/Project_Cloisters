@@ -8,6 +8,9 @@ public class BallLauncher : MonoBehaviour
     [SerializeField] private InputAction launchAction;
     [SerializeField] private Animation bounceAnimation;
     [SerializeField] private Bouncer bouncer;
+    [SerializeField] private float launchSpeed = 10;
+    [SerializeField] private float boostSpeed = 3;
+    [SerializeField] private float maxSpeed = 13f;
     [SerializeField] private float coolDown = 0.15f;
 
     private bool isfirstLaunch;
@@ -46,9 +49,20 @@ public class BallLauncher : MonoBehaviour
             if (isfirstLaunch)
             {
                 isfirstLaunch = false;
-                ball.Launch(Vector2.right * 10);
+                ball.Launch(Vector2.right * launchSpeed);
             }
-            ball.Bounce(Vector2.right, 1, 4f);
+            else
+            {
+                if (ball.consistentSpeed < maxSpeed)
+                {
+                    ball.Bounce(Vector2.right, boostSpeed, 4f);
+                }
+                else
+                {
+                    ball.Bounce(Vector2.right, 0, 4f);
+                }
+            }
+
         }
     }
     void OnTriggerExit(Collider other)

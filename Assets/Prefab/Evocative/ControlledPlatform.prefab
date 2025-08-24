@@ -305,7 +305,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7148061842109763, guid: e8a900563de8a324bbda13b905867415, type: 3}
       propertyPath: bounceSpeedBoost
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7088108845889067849, guid: e8a900563de8a324bbda13b905867415,
         type: 3}
@@ -517,6 +517,9 @@ MonoBehaviour:
     m_Flags: 0
   bounceAnimation: {fileID: 3005821832652247283}
   bouncer: {fileID: 4655731381277360893}
+  launchSpeed: 10
+  boostSpeed: 5
+  maxSpeed: 15
   coolDown: 0.15
 --- !u!4 &4125004621881747533 stripped
 Transform:

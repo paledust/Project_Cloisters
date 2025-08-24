@@ -68,23 +68,10 @@ public class RotationSpring : MonoBehaviour
                 {
                     float force = (targetAngle - currentAngle) * Mathf.Deg2Rad * correctForce;
                     force = Mathf.Clamp(force, -2*correctForce, 2*correctForce);
-                    constForce.torque = Vector3.forward * (targetAngle - currentAngle) * Mathf.Deg2Rad * correctForce;
+                    constForce.torque = Vector3.forward * force;
                 }
                 break;
         }
-        // if (rigid.angularVelocity.z < minAngularSpeed)
-        // {
-        //     float currentAngle = rigid.rotation.eulerAngles.z;
-        //     if (currentAngle < 0)
-        //     {
-        //         currentAngle += 360;
-        //     }
-        //     constForce.torque = Vector3.forward * (targetAngle - currentAngle) * correctForce;
-        // }
-        // else
-        // {
-        //     constForce.torque = Vector3.zero;
-        // }
     }
 
     float GetTargetAngle()

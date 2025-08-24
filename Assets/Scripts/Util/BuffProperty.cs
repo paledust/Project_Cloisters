@@ -2,9 +2,9 @@ using UnityEngine;
 
 public enum AttributeModifyType
 {
-    Add = 0,
-    AddPercentage = 1,
-    Multiply = 2,
+    Add = 0, //v=v+value
+    AddPercentage = 1, //v=v*(1+value)
+    Multiply = 2, //v=v*value
 }
 //可修改的float数值
 public struct BuffProperty
