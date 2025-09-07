@@ -185,7 +185,7 @@ MonoBehaviour:
   checkAngle: 45
   correctForce: 20
   minAngularSpeed: 3
-  stopAngularSpeed: 0.1
+  stopAngularSpeed: 1
   collisionBoost: -1.1
   springState: 1
   targetAngle: 0

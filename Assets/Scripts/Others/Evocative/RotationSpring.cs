@@ -63,7 +63,8 @@ public class RotationSpring : MonoBehaviour
                 else
                 {
                     float force = (targetAngle - currentAngle) * Mathf.Deg2Rad * correctForce;
-                    force = Mathf.Clamp(force, -correctForce * correctForce, correctForce * correctForce);
+                    force = force * force * force;
+                    force = Mathf.Clamp(force, -2 * correctForce, 2 * correctForce);
                     constForce.torque = Vector3.forward * force;
                 }
                 break;
