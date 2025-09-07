@@ -52,12 +52,8 @@ public class RotationSpring : MonoBehaviour
                 }
                 break;
             case SpringState.Spring:
-                float currentAngle = rigid.rotation.eulerAngles.z;
-                if (currentAngle < 0)
-                {
-                    currentAngle += 360;
-                }
-                if (Mathf.Abs(currentAngle-targetAngle) < 0.1f && rigid.angularVelocity.magnitude < stopAngularSpeed)
+                float currentAngle = GetCurrentAngle();
+                if (Mathf.Abs(currentAngle - targetAngle) < 0.1f && rigid.angularVelocity.magnitude < stopAngularSpeed)
                 {
                     springState = SpringState.Locked;
                     rigid.angularVelocity = Vector3.zero;
@@ -67,13 +63,28 @@ public class RotationSpring : MonoBehaviour
                 else
                 {
                     float force = (targetAngle - currentAngle) * Mathf.Deg2Rad * correctForce;
-                    force = Mathf.Clamp(force, -2*correctForce, 2*correctForce);
+                    force = Mathf.Clamp(force, -correctForce * correctForce, correctForce * correctForce);
                     constForce.torque = Vector3.forward * force;
+                }
+                break;
+            case SpringState.Locked:
+                currentAngle = GetCurrentAngle();
+                if (Mathf.Abs(currentAngle - targetAngle) > 0.1f)
+                {
+                    springState = SpringState.Spring;
                 }
                 break;
         }
     }
-
+    float GetCurrentAngle()
+    {
+        float currentAngle = rigid.rotation.eulerAngles.z;
+        if (currentAngle < 0)
+        {
+            currentAngle += 360;
+        }
+        return currentAngle;
+    }
     float GetTargetAngle()
     {
         float idealAngle = angleArray[0];

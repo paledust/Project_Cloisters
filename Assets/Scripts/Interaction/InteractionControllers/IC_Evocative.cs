@@ -1,5 +1,6 @@
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class IC_Evocative : IC_Basic
 {
@@ -16,10 +17,20 @@ public class IC_Evocative : IC_Basic
     [SerializeField] private Color[] backgroundColors;
 
     [Header("Goal")]
+    [SerializeField] private bool isGoalVulnerable = false;
+    [SerializeField] private int requireHitToBreak = 4;
+    [SerializeField] private Bouncer_Goal goal;
     [SerializeField] private Collectable[] collectables;
-    [SerializeField] private GameObject finalText;
+    [SerializeField] private PlayableDirector finalPlayable;
+
+    [Header("Boucner Manager")]
+    [SerializeField] private Bouncer[] bouncers;
+
+    private int hitTime = 0;
     private int collectedCount = 0;
     private int backgroundIndex = 0;
+
+    private const string WALL_TAG = "BounceWall";
 
     protected override void OnInteractionEnter()
     {
@@ -28,6 +39,12 @@ public class IC_Evocative : IC_Basic
         EventHandler.E_OnHitGoal += OnHitGoal;
 
         RespawnGame();
+
+        bouncers = interactionAssetsGroup.GetComponentsInChildren<Bouncer>();
+        if (isGoalVulnerable)
+        {
+            goal.BecomeVulnerable();
+        }
     }
     protected override void OnInteractionEnd()
     {
@@ -47,6 +64,11 @@ public class IC_Evocative : IC_Basic
         bounceParticle.Play();
         Destroy(collectable.gameObject);
         collectedCount++;
+        if (collectedCount >= collectables.Length && !isGoalVulnerable)
+        {
+            isGoalVulnerable = true;
+            goal.BecomeVulnerable();
+        }
     }
     void OnHitGoal()
     {
@@ -55,10 +77,22 @@ public class IC_Evocative : IC_Basic
         Color backgroundColor = backgroundColors[backgroundIndex];
         backgroundRenderer.DOKill();
         backgroundRenderer.DOColor(backgroundColor, 0.1f);
-        if (collectedCount >= collectables.Length)
+        if (isGoalVulnerable)
         {
-            finalText.SetActive(true);
-            EventHandler.Call_OnEndInteraction(this);
+            hitTime++;
+            if (hitTime >= requireHitToBreak)
+            {
+                finalPlayable.Play();
+                bounceBall.BallFinal();
+
+                foreach (var bouncer in bouncers)
+                {
+                    if (bouncer != null && bouncer.tag != WALL_TAG)
+                        bouncer.GetComponent<Collider>().enabled = false;
+                }
+
+                EventHandler.Call_OnEndInteraction(this);
+            }
         }
     }
 }

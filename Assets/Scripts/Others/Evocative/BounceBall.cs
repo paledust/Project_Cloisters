@@ -16,7 +16,10 @@ public class BounceBall : MonoBehaviour
     [Header("Shrink")]
     [SerializeField] private float shrinkFactor = 0.2f;
     [SerializeField] private Vector2 shrinkVelRange;
-    [SerializeField] private Transform renderTrans;
+    [SerializeField] private SpriteRenderer ballRender;
+
+    [Header("Final")]
+    [SerializeField] private ParticleSystem p_final;
 
     public float speed => m_rigid.velocity.magnitude;
     public float consistentSpeed => currentSpeed.cachedValue;
@@ -47,9 +50,9 @@ public class BounceBall : MonoBehaviour
     {
         Vector2 vel = m_rigid.velocity;
         float angle = Mathf.Atan2(vel.y, vel.x);
-        renderTrans.rotation = Quaternion.Euler(0, 0, angle * Mathf.Rad2Deg);
+        ballRender.transform.rotation = Quaternion.Euler(0, 0, angle * Mathf.Rad2Deg);
         float shape = Mathf.Lerp(0, 1, Mathf.InverseLerp(shrinkVelRange.x, shrinkVelRange.y, m_rigid.velocity.magnitude)) * shrinkFactor;
-        renderTrans.localScale = new Vector3(1 + shape, 1 - shape, 1);
+        ballRender.transform.localScale = new Vector3(1 + shape, 1 - shape, 1);
     }
 
     #region Physics Handler
@@ -60,6 +63,16 @@ public class BounceBall : MonoBehaviour
         m_rigid.velocity = impulse.normalized * realSpeed;
     }
     #endregion
+
+    public void BallFinal()
+    {
+        this.enabled = false;
+        ballRender.transform.localScale = Vector3.one;
+        ballRender.sortingLayerName = "VFX";
+        ballRender.sortingOrder = 20;
+        p_final.Play();
+        m_rigid.drag = 5;
+    }
     public void ResetAtPos(Vector3 position)
     {
         transform.position = position;

@@ -9,7 +9,8 @@ public class Clickable_BurstBall : Basic_Clickable
     [SerializeField] private ParticleSystem p_star;
     [SerializeField] private float burstRadius = 1.5f;
     [SerializeField] private float bounceSpeed = 2f;
-    [SerializeField] private string ballTag = "BounceBall";
+
+    private const string BALL_TAG = "BounceBall";
 
     public override void OnClick(PlayerController player, Vector3 hitPos)
     {
@@ -19,7 +20,7 @@ public class Clickable_BurstBall : Basic_Clickable
         var collider = Physics.OverlapSphere(pos, burstRadius, 1 << Service.DefaultLayer);
         foreach (var go in collider)
         {
-            if (go.tag == ballTag)
+            if (go.tag == BALL_TAG)
             {
                 Vector2 diff = go.transform.position - pos;
                 float angle = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
