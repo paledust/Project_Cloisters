@@ -1,6 +1,8 @@
+using System.Collections;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.VFX;
 
 public class IC_Evocative : IC_Basic
 {
@@ -11,6 +13,7 @@ public class IC_Evocative : IC_Basic
 
     [Header("Hit Feedback")]
     [SerializeField] private ParticleSystem bounceParticle;
+    [SerializeField] private VisualEffect breakEffect;
 
     [Header("Background")]
     [SerializeField] private SpriteRenderer backgroundRenderer;
@@ -22,6 +25,10 @@ public class IC_Evocative : IC_Basic
     [SerializeField] private Bouncer_Goal goal;
     [SerializeField] private Collectable[] collectables;
     [SerializeField] private PlayableDirector finalPlayable;
+
+    [Header("Restart")]
+    [SerializeField] private ParticleSystem p_shaft;
+    [SerializeField] private Animation animation_light;
 
     [Header("Boucner Manager")]
     [SerializeField] private Bouncer[] bouncers;
@@ -55,13 +62,18 @@ public class IC_Evocative : IC_Basic
     }
     public void RespawnGame()
     {
-        ballLauncher.ResetLauncher();
-        bounceBall.ResetAtPos(restartPos.position);
+        bounceBall.gameObject.SetActive(false);
+        animation_light.Play();
+        p_shaft.Play();
+        StartCoroutine(coroutineRespawn());
     }
     void OnCollect(Collectable collectable)
     {
         bounceParticle.transform.position = collectable.transform.position;
         bounceParticle.Play();
+        breakEffect.transform.position = collectable.transform.position;
+        breakEffect.Play();
+
         Destroy(collectable.gameObject);
         collectedCount++;
         if (collectedCount >= collectables.Length && !isGoalVulnerable)
@@ -94,5 +106,12 @@ public class IC_Evocative : IC_Basic
                 EventHandler.Call_OnEndInteraction(this);
             }
         }
+    }
+    IEnumerator coroutineRespawn()
+    {
+        yield return new WaitForSeconds(1f);
+        bounceBall.gameObject.SetActive(true);
+        ballLauncher.ResetLauncher();
+        bounceBall.ResetAtPos(restartPos.position);
     }
 }
