@@ -27,7 +27,7 @@ public class IC_Evocative : IC_Basic
     [SerializeField] private PlayableDirector finalPlayable;
 
     [Header("Restart")]
-    [SerializeField] private ParticleSystem p_shaft;
+    [SerializeField] private VFX_FallIntoHole vfx_fall;
     [SerializeField] private Animation animation_light;
 
     [Header("Boucner Manager")]
@@ -64,7 +64,7 @@ public class IC_Evocative : IC_Basic
     {
         bounceBall.gameObject.SetActive(false);
         animation_light.Play();
-        p_shaft.Play();
+        vfx_fall.PlayFallVFX();
         StartCoroutine(coroutineRespawn());
     }
     void OnCollect(Collectable collectable)

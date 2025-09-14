@@ -21,6 +21,10 @@ public class BounceBall : MonoBehaviour
     [Header("Final")]
     [SerializeField] private ParticleSystem p_final;
 
+    [Header("Respawn")]
+    [SerializeField] private Animation m_respawnAnime;
+    [SerializeField] private ParticleSystem p_respawn;
+
     public float speed => m_rigid.velocity.magnitude;
     public float consistentSpeed => currentSpeed.cachedValue;
     public Vector2 vel => m_rigid.velocity;
@@ -81,6 +85,9 @@ public class BounceBall : MonoBehaviour
         realSpeed = currentSpeed.cachedValue;
         m_rigid.velocity = Vector3.zero;
         constraint.constraintActive = true;
+
+        p_respawn.Play();
+        m_respawnAnime.Play();
     }
     public void Launch(Vector2 force)
     {
