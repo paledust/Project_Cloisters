@@ -28,7 +28,7 @@ public class IC_Evocative : IC_Basic
 
     [Header("Restart")]
     [SerializeField] private VFX_FallIntoHole vfx_fall;
-    [SerializeField] private Animation animation_light;
+    [SerializeField] private Animation animation_fallIntoHole;
 
     [Header("Boucner Manager")]
     [SerializeField] private Bouncer[] bouncers;
@@ -41,11 +41,11 @@ public class IC_Evocative : IC_Basic
 
     protected override void OnInteractionEnter()
     {
-        EventHandler.E_OnBallDead += RespawnGame;
+        EventHandler.E_OnBallFall += OnBallFall;
         EventHandler.E_OnCollect += OnCollect;
         EventHandler.E_OnHitGoal += OnHitGoal;
 
-        RespawnGame();
+        BallRespawn();
 
         bouncers = interactionAssetsGroup.GetComponentsInChildren<Bouncer>();
         if (isGoalVulnerable)
@@ -55,17 +55,20 @@ public class IC_Evocative : IC_Basic
     }
     protected override void OnInteractionEnd()
     {
-        EventHandler.E_OnBallDead -= RespawnGame;
+        EventHandler.E_OnBallFall -= OnBallFall;
         EventHandler.E_OnCollect -= OnCollect;
         EventHandler.E_OnHitGoal -= OnHitGoal;
-
     }
-    public void RespawnGame()
+    public void BallRespawn()
     {
         bounceBall.gameObject.SetActive(false);
-        animation_light.Play();
-        vfx_fall.PlayFallVFX();
         StartCoroutine(coroutineRespawn());
+    }
+    void OnBallFall()
+    {
+        vfx_fall.PlayFallVFX();
+        animation_fallIntoHole.Play();
+        BallRespawn();
     }
     void OnCollect(Collectable collectable)
     {

@@ -7,7 +7,7 @@ public class DeadZone : MonoBehaviour
         var bounceBall = other.GetComponent<BounceBall>();
         if (bounceBall != null)
         {
-            EventHandler.Call_OnBallDead();
+            EventHandler.Call_OnBallFall();
         }
     }
 }

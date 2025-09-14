@@ -86,6 +86,7 @@ public class BounceBall : MonoBehaviour
         m_rigid.velocity = Vector3.zero;
         constraint.constraintActive = true;
 
+        //Ball Spawn Effect
         p_respawn.Play();
         m_respawnAnime.Play();
     }

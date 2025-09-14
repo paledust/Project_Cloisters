@@ -206,7 +206,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 0
   serializedVersion: 2
-  m_Size: {x: 0.75, y: 5, z: 1}
+  m_Size: {x: 0.75, y: 3.4, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8415697752197920237
 GameObject:
@@ -306,6 +306,11 @@ PrefabInstance:
     - target: {fileID: 7148061842109763, guid: e8a900563de8a324bbda13b905867415, type: 3}
       propertyPath: bounceSpeedBoost
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1327322377965279308, guid: e8a900563de8a324bbda13b905867415,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 7088108845889067849, guid: e8a900563de8a324bbda13b905867415,
         type: 3}
@@ -416,7 +421,7 @@ PrefabInstance:
     - target: {fileID: 8771863912461656051, guid: e8a900563de8a324bbda13b905867415,
         type: 3}
       propertyPath: m_ConstrainProportionsScale
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8867766525590536297, guid: e8a900563de8a324bbda13b905867415,
         type: 3}
@@ -459,7 +464,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.7, y: 4.8, z: 1}
+  m_Size: {x: 0.7, y: 3.4, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!111 &3005821832652247283
 Animation:
@@ -490,7 +495,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   verticalOnly: 1
-  heightLimit: 4
+  heightLimit: 4.8
 --- !u!114 &4363380082862023571
 MonoBehaviour:
   m_ObjectHideFlags: 0

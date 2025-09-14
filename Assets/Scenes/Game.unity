@@ -26943,7 +26943,7 @@ MonoBehaviour:
   - {fileID: 1391170060}
   finalPlayable: {fileID: 959170691}
   vfx_fall: {fileID: 1690370724}
-  animation_light: {fileID: 1348355254}
+  animation_fallIntoHole: {fileID: 1348355254}
   bouncers: []
 --- !u!1 &220424042
 GameObject:
@@ -148071,6 +148071,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7835286026554675345, guid: 669790e6223ceb84c946e3617b688641,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7835286026554675345, guid: 669790e6223ceb84c946e3617b688641,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7835286026554675345, guid: 669790e6223ceb84c946e3617b688641,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7835286026554675345, guid: 669790e6223ceb84c946e3617b688641,
         type: 3}
