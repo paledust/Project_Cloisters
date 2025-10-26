@@ -26,10 +26,6 @@ public class IC_Evocative : IC_Basic
     [SerializeField] private Collectable[] collectables;
     [SerializeField] private PlayableDirector finalPlayable;
 
-    [Header("Restart")]
-    [SerializeField] private VFX_FallIntoHole vfx_fall;
-    [SerializeField] private Animation animation_fallIntoHole;
-
     [Header("Boucner Manager")]
     [SerializeField] private Bouncer[] bouncers;
 
@@ -66,8 +62,6 @@ public class IC_Evocative : IC_Basic
     }
     void OnBallFall()
     {
-        vfx_fall.PlayFallVFX();
-        animation_fallIntoHole.Play();
         BallRespawn();
     }
     void OnCollect(Collectable collectable)

@@ -312,6 +312,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 0.7
       objectReference: {fileID: 0}
+    - target: {fileID: 1394414349588871871, guid: e8a900563de8a324bbda13b905867415,
+        type: 3}
+      propertyPath: m_Interpolate
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7088108845889067849, guid: e8a900563de8a324bbda13b905867415,
         type: 3}
       propertyPath: m_Sprite
@@ -494,8 +499,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f1f7261e443d244da5b3162387f4f0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  verticalOnly: 1
+  FollowX: 0
+  FollowY: 0
   heightLimit: 4.8
+  widthLimit: 8
+  widthOffset: 0
 --- !u!114 &4363380082862023571
 MonoBehaviour:
   m_ObjectHideFlags: 0
