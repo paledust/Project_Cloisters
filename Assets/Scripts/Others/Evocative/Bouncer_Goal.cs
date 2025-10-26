@@ -5,6 +5,7 @@ public class Bouncer_Goal : MonoBehaviour
 
     [SerializeField] private Bouncer bouncer;
     [SerializeField] private SpriteRenderer chargeSprite;
+    [SerializeField] private PerRendererGoalRender goalRender;
     [SerializeField] private float minhitStep = 0.2f;
     [SerializeField] private GameObject[] cracks;
 
@@ -22,6 +23,7 @@ public class Bouncer_Goal : MonoBehaviour
     }
     void BounceHandle(BounceBall bounceBall)
     {
+        goalRender.ImpulseRapidNoise(2f, 0.1f, 1f);
         if (Time.time - lastHitTime < minhitStep)
         {
             return;
