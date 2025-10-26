@@ -10,13 +10,14 @@ GameObject:
   m_Component:
   - component: {fileID: 6887927992236519959}
   - component: {fileID: 6304896508157496278}
+  - component: {fileID: 2793488089858092767}
   m_Layer: 0
   m_Name: crack_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6887927992236519959
 Transform:
   m_ObjectHideFlags: 0
@@ -26,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 306686236477973115}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.05003533, w: 0.99874747}
-  m_LocalPosition: {x: -0.396, y: 0.706, z: 0}
+  m_LocalPosition: {x: -0.427, y: 0.725, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -52,7 +53,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 6a34c2b4eb4c3f244b26a2f23094bfae, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -84,6 +85,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!111 &2793488089858092767
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 306686236477973115}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 526c475b41d116a4c9166d326f647cee, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 526c475b41d116a4c9166d326f647cee, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &480866603178438482
 GameObject:
   m_ObjectHideFlags: 0
@@ -399,13 +416,14 @@ GameObject:
   m_Component:
   - component: {fileID: 627671271267415931}
   - component: {fileID: 2910722263320396204}
+  - component: {fileID: 2893647013301010220}
   m_Layer: 0
   m_Name: crack_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &627671271267415931
 Transform:
   m_ObjectHideFlags: 0
@@ -441,7 +459,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 6a34c2b4eb4c3f244b26a2f23094bfae, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -473,6 +491,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!111 &2893647013301010220
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4242589821113917293}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 526c475b41d116a4c9166d326f647cee, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 526c475b41d116a4c9166d326f647cee, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &4871740660949933759
 GameObject:
   m_ObjectHideFlags: 0
@@ -483,13 +517,14 @@ GameObject:
   m_Component:
   - component: {fileID: 6990547927357966080}
   - component: {fileID: 8590067973288095664}
+  - component: {fileID: 491045690485358339}
   m_Layer: 0
   m_Name: crack_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6990547927357966080
 Transform:
   m_ObjectHideFlags: 0
@@ -525,7 +560,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 6a34c2b4eb4c3f244b26a2f23094bfae, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -557,6 +592,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!111 &491045690485358339
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4871740660949933759}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 526c475b41d116a4c9166d326f647cee, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 526c475b41d116a4c9166d326f647cee, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &6200327358009026580
 GameObject:
   m_ObjectHideFlags: 0
