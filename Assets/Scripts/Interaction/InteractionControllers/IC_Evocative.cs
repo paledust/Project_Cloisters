@@ -20,7 +20,7 @@ public class IC_Evocative : IC_Basic
     [SerializeField] private Color[] backgroundColors;
 
     [Header("Goal")]
-    [SerializeField] private bool isGoalVulnerable = false;
+    [SerializeField] private bool isGoalBreakable = false;
     [SerializeField] private int requireHitToBreak = 4;
     [SerializeField] private Bouncer_Goal goal;
     [SerializeField] private Collectable[] collectables;
@@ -44,7 +44,7 @@ public class IC_Evocative : IC_Basic
         BallRespawn();
 
         bouncers = interactionAssetsGroup.GetComponentsInChildren<Bouncer>();
-        if (isGoalVulnerable)
+        if (isGoalBreakable)
         {
             goal.BecomeVulnerable();
         }
@@ -73,10 +73,9 @@ public class IC_Evocative : IC_Basic
 
         Destroy(collectable.gameObject);
         collectedCount++;
-        if (collectedCount >= collectables.Length && !isGoalVulnerable)
+        if (collectedCount >= collectables.Length && !isGoalBreakable)
         {
-            isGoalVulnerable = true;
-            goal.BecomeVulnerable();
+            StartCoroutine(coroutineAugmented());
         }
     }
     void OnHitGoal()
@@ -86,7 +85,7 @@ public class IC_Evocative : IC_Basic
         Color backgroundColor = backgroundColors[backgroundIndex];
         backgroundRenderer.DOKill();
         backgroundRenderer.DOColor(backgroundColor, 0.1f);
-        if (isGoalVulnerable)
+        if (isGoalBreakable)
         {
             hitTime++;
             if (hitTime >= requireHitToBreak)
@@ -110,5 +109,12 @@ public class IC_Evocative : IC_Basic
         bounceBall.gameObject.SetActive(true);
         ballLauncher.ResetLauncher();
         bounceBall.ResetAtPos(restartPos.position);
+    }
+    IEnumerator coroutineAugmented()
+    {
+        isGoalBreakable = true;
+        yield return new WaitForSeconds(2f);
+        bounceBall.GlowUp();
+        goal.BecomeVulnerable();
     }
 }

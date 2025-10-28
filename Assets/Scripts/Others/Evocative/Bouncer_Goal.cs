@@ -21,6 +21,10 @@ public class Bouncer_Goal : MonoBehaviour
         bouncer.onBounce += BounceHandle;
         lastHitTime = Time.time;
     }
+    void OnDestroy()
+    {
+        bouncer.onBounce -= BounceHandle;
+    }
     void BounceHandle(BounceBall bounceBall)
     {
         goalRender.ImpulseRapidNoise(2f, 0.1f, 1f);

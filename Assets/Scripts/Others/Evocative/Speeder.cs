@@ -7,7 +7,6 @@ public class Speeder : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer speederRenderer;
     [SerializeField] private float force = 2f;
-    [SerializeField] private float drag = 10;
 
     private float initAlpha = 0;
     private Rigidbody targetBody;
@@ -22,7 +21,6 @@ public class Speeder : MonoBehaviour
         if (bounceBall != null)
         {
             targetBody = bounceBall.GetComponent<Rigidbody>();
-            targetBody.drag = drag;
             speederRenderer.DOKill();
             speederRenderer.DOFade(1, 0.05f);
         }
@@ -32,7 +30,6 @@ public class Speeder : MonoBehaviour
         var bounceBall = other.GetComponent<BounceBall>();
         if (bounceBall != null)
         {
-            targetBody.drag = 0;
             targetBody = null;
             speederRenderer.DOKill();
             speederRenderer.DOFade(initAlpha, 0.4f);

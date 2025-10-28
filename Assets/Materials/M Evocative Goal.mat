@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M Evocative RT_Circle
+  m_Name: M Evocative Goal
   m_Shader: {fileID: 4800000, guid: c6daa010189d9ed4c8866f1138deae0f, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -131,7 +131,7 @@ Material:
     - _DissolveLength: 0.1
     - _DissolveScale: 1
     - _DissolveSmoothness: 1
-    - _DissolveSoftness: 0.05
+    - _DissolveSoftness: 0.1
     - _DissolveStart: 0.49
     - _DissolveType: 1
     - _DistSmooth: 1

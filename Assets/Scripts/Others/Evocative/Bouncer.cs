@@ -50,20 +50,20 @@ public class Bouncer : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision)
     {
-        if (!colliding && canBounce)
+        var bounceBall = collision.gameObject.GetComponent<BounceBall>();
+        if (!colliding && bounceBall != null)
         {
             colliding = true;
-            Vector3 normal = collision.GetContact(0).normal;
-            Vector2 vel = m_rigid.velocity + collision.relativeVelocity;
-            vel = Vector2.Reflect(vel, normal).normalized;
-
-            float angle = Vector2.SignedAngle(normal, vel);
-            angle = Mathf.Sign(angle) * Mathf.Clamp(Mathf.Abs(angle), reflectAngle.x, reflectAngle.y);
-            vel = Quaternion.Euler(0, 0, angle) * normal;
-
-            var bounceBall = collision.gameObject.GetComponent<BounceBall>();
-            if (bounceBall != null)
+            if(canBounce)
             {
+                Vector3 normal = collision.GetContact(0).normal;
+                Vector2 vel = m_rigid.velocity + collision.relativeVelocity;
+                vel = Vector2.Reflect(vel, normal).normalized;
+
+                float angle = Vector2.SignedAngle(normal, vel);
+                angle = Mathf.Sign(angle) * Mathf.Clamp(Mathf.Abs(angle), reflectAngle.x, reflectAngle.y);
+                vel = Quaternion.Euler(0, 0, angle) * normal;
+
                 var rootTrans = spriteRenderer.transform;
                 var blinker = blinkRender;
                 bounceBall.Bounce(vel, bounceSpeedBonus, bounceSpeedBoost);

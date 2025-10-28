@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Animations;
+using UnityEngine.Rendering;
 
 public class BounceBall : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class BounceBall : MonoBehaviour
     [SerializeField] private float shrinkFactor = 0.2f;
     [SerializeField] private Vector2 shrinkVelRange;
     [SerializeField] private SpriteRenderer ballRender;
+    [SerializeField] private SortingGroup sortingGroup;
 
     [Header("Final")]
     [SerializeField] private ParticleSystem p_final;
@@ -25,17 +27,21 @@ public class BounceBall : MonoBehaviour
     [SerializeField] private Animation m_respawnAnime;
     [SerializeField] private ParticleSystem p_respawn;
 
-    public float speed => m_rigid.velocity.magnitude;
     public float consistentSpeed => currentSpeed.cachedValue;
-    public Vector2 vel => m_rigid.velocity;
 
     private BuffProperty currentSpeed;
     private Rigidbody m_rigid;
     private float realSpeed;
 
+    private const string ANIME_RESPAWN = "EVO_BallRespawn";
+    private const string ANIME_GLOW = "EVO_BallGlow";
+
+
     void Awake()
     {
         currentSpeed = new BuffProperty(0, maxSpeed);
+        m_respawnAnime[ANIME_RESPAWN].layer = 0;
+        m_respawnAnime[ANIME_GLOW].layer = 1;
         m_rigid = GetComponent<Rigidbody>();
     }
     void FixedUpdate()
@@ -72,8 +78,8 @@ public class BounceBall : MonoBehaviour
     {
         this.enabled = false;
         ballRender.transform.localScale = Vector3.one;
-        ballRender.sortingLayerName = "VFX";
-        ballRender.sortingOrder = 20;
+        sortingGroup.sortingLayerName = "VFX";
+        sortingGroup.sortingOrder = 20;
         p_final.Play();
         m_rigid.drag = 5;
     }
@@ -88,11 +94,15 @@ public class BounceBall : MonoBehaviour
 
         //Ball Spawn Effect
         p_respawn.Play();
-        m_respawnAnime.Play();
+        m_respawnAnime.Play(ANIME_RESPAWN);
     }
     public void Launch(Vector2 force)
     {
         constraint.constraintActive = false;
         Bounce(force, force.magnitude, 2, AttributeModifyType.Add);
+    }
+    public void GlowUp()
+    {
+        m_respawnAnime.Play(ANIME_GLOW);
     }
 }
