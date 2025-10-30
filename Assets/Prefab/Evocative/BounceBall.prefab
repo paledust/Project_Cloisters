@@ -5191,6 +5191,7 @@ MonoBehaviour:
   shrinkFactor: 0.5
   shrinkVelRange: {x: 0, y: 50}
   ballRender: {fileID: 7835286026490501076}
+  sortingGroup: {fileID: 6989843771810943892}
   p_final: {fileID: 9142075377453199328}
   m_respawnAnime: {fileID: 8696015384020656523}
   p_respawn: {fileID: 816989505}

@@ -15,7 +15,7 @@ public class Bouncer : MonoBehaviour
     [SerializeField] private float bounceSpeedBonus = 0;
 
     private bool colliding = false;
-    private bool canBounce = true;
+    [SerializeField, ShowOnly] private bool canBounce = true;
     private Vector3 initRootSize;
     private Rigidbody m_rigid;
 
@@ -37,7 +37,7 @@ public class Bouncer : MonoBehaviour
     {
         canBounce = isBounce;
     }
-    public void PlayBounceFeedback(BounceBall bounceBall)
+    public void PlayBounceFeedback()
     {
         var rootTrans = spriteRenderer.transform;
         var blinker = blinkRender;
@@ -46,7 +46,6 @@ public class Bouncer : MonoBehaviour
         rootTrans.localScale = initRootSize;
         rootTrans.DOKill();
         rootTrans.DOPunchScale(bounceSize * initRootSize, 0.1f, 1, 2).SetEase(Ease.OutQuad);
-        onBounce?.Invoke(bounceBall);
     }
     void OnCollisionEnter(Collision collision)
     {
@@ -64,16 +63,8 @@ public class Bouncer : MonoBehaviour
                 angle = Mathf.Sign(angle) * Mathf.Clamp(Mathf.Abs(angle), reflectAngle.x, reflectAngle.y);
                 vel = Quaternion.Euler(0, 0, angle) * normal;
 
-                var rootTrans = spriteRenderer.transform;
-                var blinker = blinkRender;
+                PlayBounceFeedback();
                 bounceBall.Bounce(vel, bounceSpeedBonus, bounceSpeedBoost);
-                blinker.DOKill();
-                blinker.DOFade(1, 0.1f).OnComplete(() => blinker.DOFade(0, 0.05f));
-
-                rootTrans.localScale = initRootSize;
-                rootTrans.DOKill();
-                rootTrans.DOPunchScale(bounceSize * initRootSize, 0.1f, 1, 2).SetEase(Ease.OutQuad);
-
                 onBounce?.Invoke(bounceBall);
             }
         }

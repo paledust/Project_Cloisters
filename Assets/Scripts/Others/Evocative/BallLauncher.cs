@@ -12,6 +12,7 @@ public class BallLauncher : MonoBehaviour
     [SerializeField] private float boostSpeed = 3;
     [SerializeField] private float maxSpeed = 13f;
     [SerializeField] private float coolDown = 0.15f;
+    [SerializeField] private ParticleSystem p_launch;
 
     private bool isfirstLaunch;
     private float lastLaunchTime;
@@ -39,13 +40,19 @@ public class BallLauncher : MonoBehaviour
         isfirstLaunch = true;
         lastLaunchTime = Time.time;
     }
+    public void AE_ResetCanBounce()
+    {
+        bouncer.SwitchCanBounce(true);
+    }
     void OnTriggerEnter(Collider other)
     {
         var ball = other.GetComponent<BounceBall>();
         if (ball != null && !bouncer.m_colliding)
         {
             bouncer.SwitchCanBounce(false);
-            bouncer.PlayBounceFeedback(ball);
+            bouncer.PlayBounceFeedback();
+            p_launch.transform.position = ball.transform.position;
+            p_launch.Play();
             if (isfirstLaunch)
             {
                 isfirstLaunch = false;
@@ -62,7 +69,6 @@ public class BallLauncher : MonoBehaviour
                     ball.Bounce(Vector2.right, 0, 4f);
                 }
             }
-
         }
     }
     void OnTriggerExit(Collider other)
