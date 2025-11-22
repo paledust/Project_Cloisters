@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8625005432872004537}
   - component: {fileID: 7921598983837291230}
-  - component: {fileID: 8434787458320495087}
+  - component: {fileID: 5085655890094561779}
   m_Layer: 0
   m_Name: Blink
   m_TagString: Untagged
@@ -116,7 +116,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8434787458320495087
+--- !u!114 &5085655890094561779
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0007fb39bafd164daa4675e24d95185, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bouncer: {fileID: 4655731381277360893}
+  bouncerBlink: {fileID: 2511631355390389495}
   blinkRender: {fileID: 7921598983837291230}
 --- !u!1 &6770920514082786409
 GameObject:
@@ -314,7 +314,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7148061842109763, guid: e8a900563de8a324bbda13b905867415, type: 3}
       propertyPath: bounceSpeedBoost
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1327322377965279308, guid: e8a900563de8a324bbda13b905867415,
         type: 3}
@@ -496,6 +496,12 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 7756731229284826610}
   m_SourcePrefab: {fileID: 100100000, guid: e8a900563de8a324bbda13b905867415, type: 3}
+--- !u!212 &2511631355390389495 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 7088108845889067849, guid: e8a900563de8a324bbda13b905867415,
+    type: 3}
+  m_PrefabInstance: {fileID: 4649155287218091966}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &4125004621881747532 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8771863912461656050, guid: e8a900563de8a324bbda13b905867415,
@@ -591,6 +597,7 @@ MonoBehaviour:
   boostSpeed: 5
   maxSpeed: 15
   coolDown: 0.15
+  p_launch: {fileID: 0}
 --- !u!114 &7756731229284826610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -603,7 +610,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e85dfba45155a2a4bb8b2ccbbbffb285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bouncer: {fileID: 4655731381277360893}
   p_hit: {fileID: 0}
 --- !u!4 &4125004621881747533 stripped
 Transform:

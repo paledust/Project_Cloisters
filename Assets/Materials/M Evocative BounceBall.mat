@@ -128,11 +128,11 @@ Material:
     - _DirectionalFade: 0
     - _DirectionalFadeSmooth: 1
     - _DissolveDirection: 0
-    - _DissolveLength: 0.1
+    - _DissolveLength: 0.05
     - _DissolveScale: 1
     - _DissolveSmoothness: 1
     - _DissolveSoftness: 0.1
-    - _DissolveStart: 0.49
+    - _DissolveStart: 0.45
     - _DissolveType: 0
     - _DistSmooth: 1
     - _DistStart: -0.02
@@ -181,7 +181,7 @@ Material:
     - _OutterRingRadius: 0.5
     - _OutterRingWidth: 0.025
     - _Parallax: 0.005
-    - _PatternScale: 0.5
+    - _PatternScale: 0.2
     - _QueueOffset: 0
     - _RNDSeed: 0
     - _RT_Distortion: -0.1

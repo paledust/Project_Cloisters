@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.Rendering;
@@ -18,6 +19,7 @@ public class BounceBall : MonoBehaviour
     [SerializeField] private float shrinkFactor = 0.2f;
     [SerializeField] private Vector2 shrinkVelRange;
     [SerializeField] private SpriteRenderer ballRender;
+    [SerializeField] private SpriteRenderer ballGlow;
     [SerializeField] private SortingGroup sortingGroup;
 
     [Header("Final")]
@@ -27,11 +29,16 @@ public class BounceBall : MonoBehaviour
     [SerializeField] private Animation m_respawnAnime;
     [SerializeField] private ParticleSystem p_respawn;
 
+    [Header("Charge")]
+    [SerializeField] private ParticleSystem p_trail;
+
     public float consistentSpeed => currentSpeed.cachedValue;
+    public bool m_isSuperCharge => isSuperCharge;
 
     private BuffProperty currentSpeed;
     private Rigidbody m_rigid;
     private float realSpeed;
+    private bool isSuperCharge;
 
     private const string ANIME_RESPAWN = "EVO_BallRespawn";
     private const string ANIME_GLOW = "EVO_BallGlow";
@@ -80,6 +87,7 @@ public class BounceBall : MonoBehaviour
         ballRender.transform.localScale = Vector3.one;
         sortingGroup.sortingLayerName = "VFX";
         sortingGroup.sortingOrder = 20;
+        ballGlow.gameObject.SetActive(false);
         p_final.Play();
         m_rigid.drag = 5;
     }
@@ -101,8 +109,11 @@ public class BounceBall : MonoBehaviour
         constraint.constraintActive = false;
         Bounce(force, force.magnitude, 2, AttributeModifyType.Add);
     }
-    public void GlowUp()
+    public void ChargeBounceBall()
     {
+        if(isSuperCharge) return;
+        isSuperCharge = true;
+        p_trail.gameObject.SetActive(true);
         m_respawnAnime.Play(ANIME_GLOW);
     }
 }

@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -16,6 +15,7 @@ public class BallLauncher : MonoBehaviour
 
     private bool isfirstLaunch;
     private float lastLaunchTime;
+    public Action<BounceBall> onLaunchBall;
 
     void OnEnable()
     {
@@ -51,8 +51,9 @@ public class BallLauncher : MonoBehaviour
         {
             bouncer.SwitchCanBounce(false);
             bouncer.PlayBounceFeedback();
-            p_launch.transform.position = ball.transform.position;
-            p_launch.Play();
+
+            onLaunchBall?.Invoke(ball);
+
             if (isfirstLaunch)
             {
                 isfirstLaunch = false;
@@ -68,6 +69,9 @@ public class BallLauncher : MonoBehaviour
                 {
                     ball.Bounce(Vector2.right, 0, 4f);
                 }
+                p_launch.transform.position = ball.transform.position;
+                p_launch.Play();
+                EventHandler.Call_OnBallHeavyBounce();
             }
         }
     }
