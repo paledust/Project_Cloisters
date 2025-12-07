@@ -1,4 +1,5 @@
 using System.Collections;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.Rendering;
@@ -85,11 +86,11 @@ public class BounceBall : MonoBehaviour
     {
         this.enabled = false;
         ballRender.transform.localScale = Vector3.one;
+        ballRender.transform.DOScale(2, 1.5f).SetEase(Ease.OutQuad);
         sortingGroup.sortingLayerName = "VFX";
         sortingGroup.sortingOrder = 20;
-        ballGlow.gameObject.SetActive(false);
         p_final.Play();
-        m_rigid.drag = 5;
+        m_rigid.drag = 3;
     }
     public void ResetAtPos(Vector3 position)
     {

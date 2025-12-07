@@ -23,6 +23,7 @@ public class IC_Evocative : IC_Basic
     [Header("Goal")]
     [SerializeField] private bool isGoalBreakable = false;
     [SerializeField] private Bouncer_Goal goal;
+    [SerializeField] private GameObject finalBoundry;
     [SerializeField] private PlayableDirector finalPlayable;
     [SerializeField] private PlatformCharge platformCharge;
 
@@ -109,6 +110,7 @@ public class IC_Evocative : IC_Basic
     }
     void OnGoalBreak()
     {
+        finalBoundry.SetActive(true);
         finalPlayable.Play();
         bounceBall.BallFinal();
 
