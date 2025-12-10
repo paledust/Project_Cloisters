@@ -92,6 +92,14 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _StackNoiseTex:
+        m_Texture: {fileID: 2800000, guid: 8035005feb8f6c44db61a3f886180b9c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TexStackUpNoise:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _texcoord:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -192,13 +200,24 @@ Material:
     - _RapidNoiseLength: 0.01
     - _RapidNoiseRadius: 0.38
     - _RapidNoiseScale: 0.3
-    - _RapidNoiseStrength: 0
+    - _RapidNoiseStrength: 0.03
     - _ReceiveShadows: 1
     - _ShimeringFreq: 5
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _StackNoiseMin: 1.22
+    - _StackNoiseScaleX: 0.5
+    - _StackNoiseScaleY: 2
+    - _StackNoiseSmooth: 1.18
+    - _StackNoiseStrength: 1.44
+    - _StackUpNoiseMin: 0.25
+    - _StackUpNoiseScale: 3
+    - _StackUpNoiseScaleX: 0.1
+    - _StackUpNoiseScaleY: 2
+    - _StackUpNoiseSmooth: 1
+    - _StackUpNoiseStrength: 1.62
     - _Surface: 0
     - _UseGlow: 0
     - _UseRectUV: 0
@@ -227,6 +246,8 @@ Material:
     - _RapidNoiseVelocity: {r: -3, g: 0.5, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _SpriteRect: {r: 1, g: 1, b: 1, a: 1}
+    - _StackNoiseVelocity: {r: -3, g: 0.05, b: 0, a: 0}
+    - _StackUpNoiseVelocity: {r: -2, g: 0.02, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &2543503748478213549
 MonoBehaviour:

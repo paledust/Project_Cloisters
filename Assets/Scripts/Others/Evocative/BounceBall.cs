@@ -20,7 +20,6 @@ public class BounceBall : MonoBehaviour
     [SerializeField] private float shrinkFactor = 0.2f;
     [SerializeField] private Vector2 shrinkVelRange;
     [SerializeField] private SpriteRenderer ballRender;
-    [SerializeField] private SpriteRenderer ballGlow;
     [SerializeField] private SortingGroup sortingGroup;
 
     [Header("Final")]
@@ -33,7 +32,6 @@ public class BounceBall : MonoBehaviour
     [Header("Charge")]
     [SerializeField] private ParticleSystem p_trail;
 
-    public float consistentSpeed => currentSpeed.cachedValue;
     public bool m_isSuperCharge => isSuperCharge;
 
     private BuffProperty currentSpeed;
@@ -105,10 +103,10 @@ public class BounceBall : MonoBehaviour
         p_respawn.Play();
         m_respawnAnime.Play(ANIME_RESPAWN);
     }
-    public void Launch(Vector2 force)
+    public void Launch(Vector2 force, float speedBoost)
     {
         constraint.constraintActive = false;
-        Bounce(force, force.magnitude, 2, AttributeModifyType.Add);
+        Bounce(force, force.magnitude, speedBoost, AttributeModifyType.Add);
     }
     public void ChargeBounceBall()
     {

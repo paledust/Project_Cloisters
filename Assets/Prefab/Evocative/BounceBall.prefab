@@ -10027,7 +10027,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   constraint: {fileID: 1684321961}
-  maxSpeed: 100
+  maxSpeed: 15
   boostMulti: 1
   boostDeacc: 80
   shrinkFactor: 0.5

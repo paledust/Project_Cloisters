@@ -11,6 +11,9 @@ public class Bouncer_Goal : MonoBehaviour
 
     [Header("VFX")]
     [SerializeField] private ParticleSystem p_break;
+    [SerializeField] private ParticleSystem p_emit_loop;
+    [SerializeField] private SpriteRenderer glow;
+    [SerializeField] private Color glowColor;
 
     private int criticalHitCount;
     private float lastHitTime = 0f;
@@ -19,14 +22,14 @@ public class Bouncer_Goal : MonoBehaviour
     {
         criticalHitCount = 0;
         bouncer = GetComponent<Bouncer>();
-        bouncer.onBounce += BounceHandle;
+        bouncer.onPreBounce += PreBounceHandle;
         lastHitTime = Time.time;
     }
     void OnDestroy()
     {
-        bouncer.onBounce -= BounceHandle;
+        bouncer.onPreBounce -= PreBounceHandle;
     }
-    void BounceHandle(BounceBall bounceBall)
+    void PreBounceHandle(BounceBall bounceBall)
     {
         goalRender.ImpulseRapidNoise(2f, 0.1f, 1f);
         if (Time.time - lastHitTime < minhitStep)
@@ -49,10 +52,28 @@ public class Bouncer_Goal : MonoBehaviour
             {
                 EventHandler.Call_OnGoalBreak();    
             }
+
+            if(!p_emit_loop.isPlaying)
+            {
+                p_emit_loop.Play();
+            }
+            var emission = p_emit_loop.emission;
+            emission.rateOverTimeMultiplier = Mathf.Lerp(7, 30, criticalHitCount/2f);
+
             criticalHitCount++;
+
+            glow.color = Color.Lerp(Color.black, glowColor, criticalHitCount/3f);
+            goalRender.StackUpNoise(criticalHitCount);
+
+            if(criticalHitCount > cracks.Length)
+            {
+                bouncer.SwitchCanBounce(false);
+                bouncer.SwitchOffCollider();
+                bounceBall.Bounce(-bounceBall.GetComponent<Rigidbody>().velocity, 0, 2f, AttributeModifyType.Add);
+            }
         }
 
-        EventHandler.Call_OnHitGoal();
+        EventHandler.Call_OnHitGoal(bounceBall.m_isSuperCharge);
     }
     public void BecomeVulnerable()
     {

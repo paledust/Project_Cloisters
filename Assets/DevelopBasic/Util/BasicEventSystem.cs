@@ -49,8 +49,8 @@ public static class EventHandler
     public static void Call_OnCollect(Collectable collectable) => E_OnCollect?.Invoke(collectable);
     public static event Action E_OnBallFall;
     public static void Call_OnBallFall() => E_OnBallFall?.Invoke();
-    public static event Action E_OnHitGoal;
-    public static void Call_OnHitGoal() => E_OnHitGoal?.Invoke();
+    public static event Action<bool> E_OnHitGoal;
+    public static void Call_OnHitGoal(bool isCritical) => E_OnHitGoal?.Invoke(isCritical);
     public static event Action E_OnGoalBreak;
     public static void Call_OnGoalBreak() => E_OnGoalBreak?.Invoke();
     public static event Action E_OnBallHeavyBounce;

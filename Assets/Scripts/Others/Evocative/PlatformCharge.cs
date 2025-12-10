@@ -13,6 +13,7 @@ public class PlatformCharge : MonoBehaviour
     }
     public void GlowOn()
     {
+        ballLauncher.SuperCharge();
         ballLauncher.onLaunchBall += ChargeBall;
         bouncer.onBounce += ChargeBall;
         glowEffect.SetActive(true);

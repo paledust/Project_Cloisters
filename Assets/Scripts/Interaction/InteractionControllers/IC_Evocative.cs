@@ -19,6 +19,7 @@ public class IC_Evocative : IC_Basic
     [Header("Background")]
     [SerializeField] private SpriteRenderer backgroundRenderer;
     [SerializeField] private Color[] backgroundColors;
+    [SerializeField] private Color[] finalColors;
 
     [Header("Goal")]
     [SerializeField] private bool isGoalBreakable = false;
@@ -35,6 +36,7 @@ public class IC_Evocative : IC_Basic
 
     private int collectedCount = 0;
     private int backgroundIndex = 0;
+    private int finalgroundIndex = 0;
     private CinemachineBasicMultiChannelPerlin perlineNoise;
     private CinemachineBrain brain;
     private Collectable[] collectables;
@@ -99,11 +101,21 @@ public class IC_Evocative : IC_Basic
             StartCoroutine(coroutineAugmented());
         }
     }
-    void OnHitGoal()
+    void OnHitGoal(bool isCriticalHit)
     {
-        backgroundIndex++;
-        backgroundIndex %= backgroundColors.Length;
-        Color backgroundColor = backgroundColors[backgroundIndex];
+        Color backgroundColor;
+        if (!isCriticalHit)
+        {
+            backgroundIndex++;
+            backgroundIndex %= backgroundColors.Length;
+            backgroundColor = backgroundColors[backgroundIndex];
+        }
+        else
+        {
+            finalgroundIndex ++;
+            finalgroundIndex %= finalColors.Length;
+            backgroundColor = finalColors[finalgroundIndex];
+        }
         backgroundRenderer.DOKill();
         backgroundRenderer.DOColor(backgroundColor, 0.1f);
         cameraShaker.Excute(coroutineShakeCam(0.2f, bounceBall.m_isSuperCharge?0.2f:0.01f));

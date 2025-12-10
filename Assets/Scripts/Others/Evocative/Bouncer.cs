@@ -18,13 +18,16 @@ public class Bouncer : MonoBehaviour
     [SerializeField, ShowOnly] private bool canBounce = true;
     private Vector3 initRootSize;
     private Rigidbody m_rigid;
+    private Collider m_collider;
 
     public bool m_colliding => colliding;
     public event Action<BounceBall> onBounce;
+    public event Action<BounceBall> onPreBounce;
 
     void Awake()
     {
         m_rigid = GetComponent<Rigidbody>();
+        m_collider = GetComponent<Collider>();
         initRootSize = spriteRenderer.transform.localScale;
     }
     void OnDestroy()
@@ -36,6 +39,11 @@ public class Bouncer : MonoBehaviour
     public void SwitchCanBounce(bool isBounce)
     {
         canBounce = isBounce;
+    }
+    public void SwitchOffCollider()
+    {
+        SwitchCanBounce(false);
+        m_collider.enabled = false;
     }
     public void PlayBounceFeedback()
     {
@@ -53,6 +61,8 @@ public class Bouncer : MonoBehaviour
         if (!colliding && bounceBall != null)
         {
             colliding = true;
+            onPreBounce?.Invoke(bounceBall);
+
             if(canBounce)
             {
                 Vector3 normal = collision.GetContact(0).normal;
@@ -73,6 +83,11 @@ public class Bouncer : MonoBehaviour
     {
         this.spriteRenderer = rootRender;
         this.blinkRender = blinkRender;
+    }
+    public void ChangeBounceParam(float newSpeedBonus, float newSpeedBoost)
+    {
+        bounceSpeedBonus = newSpeedBonus;
+        bounceSpeedBoost = newSpeedBoost;
     }
     void OnCollisionExit(Collision collision)
     {
