@@ -1554,8 +1554,7 @@ ParticleSystem:
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: -2413806693520163455, guid: 92707ec67503ee549922cf3853869fc2,
-        type: 3}
+    - sprite: {fileID: 21300000, guid: 9dc597ea6f3f1af42a130b97810a7efc, type: 3}
     flipU: 0
     flipV: 0
   VelocityModule:
@@ -6494,8 +6493,7 @@ ParticleSystem:
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: -2413806693520163455, guid: 92707ec67503ee549922cf3853869fc2,
-        type: 3}
+    - sprite: {fileID: 21300000, guid: 9dc597ea6f3f1af42a130b97810a7efc, type: 3}
     flipU: 0
     flipV: 0
   VelocityModule:
@@ -10033,7 +10031,6 @@ MonoBehaviour:
   shrinkFactor: 0.5
   shrinkVelRange: {x: 0, y: 50}
   ballRender: {fileID: 7835286026490501076}
-  ballGlow: {fileID: 2934450212234196770}
   sortingGroup: {fileID: 6989843771810943892}
   p_final: {fileID: 9142075377453199328}
   m_respawnAnime: {fileID: 8696015384020656523}
@@ -11640,8 +11637,7 @@ ParticleSystem:
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: -2413806693520163455, guid: 92707ec67503ee549922cf3853869fc2,
-        type: 3}
+    - sprite: {fileID: 21300000, guid: 9dc597ea6f3f1af42a130b97810a7efc, type: 3}
     flipU: 0
     flipV: 0
   VelocityModule:
@@ -16529,8 +16525,7 @@ ParticleSystem:
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: -2413806693520163455, guid: 92707ec67503ee549922cf3853869fc2,
-        type: 3}
+    - sprite: {fileID: 21300000, guid: 9dc597ea6f3f1af42a130b97810a7efc, type: 3}
     flipU: 0
     flipV: 0
   VelocityModule:

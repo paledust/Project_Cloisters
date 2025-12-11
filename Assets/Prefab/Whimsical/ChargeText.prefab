@@ -34,7 +34,6 @@ RectTransform:
   m_Children:
   - {fileID: 1202357852475570470}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -222,6 +221,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 8554373234669498875}
     m_Modifications:
     - target: {fileID: 604903855397411312, guid: e4373c655b2b8a14b865e1c6e099224e,
@@ -523,7 +523,7 @@ PrefabInstance:
         type: 3}
       propertyPath: UVModule.sprites.Array.data[0].sprite
       value: 
-      objectReference: {fileID: -2413806693520163455, guid: 92707ec67503ee549922cf3853869fc2,
+      objectReference: {fileID: 21300000, guid: 9dc597ea6f3f1af42a130b97810a7efc,
         type: 3}
     - target: {fileID: 604903855397411326, guid: e4373c655b2b8a14b865e1c6e099224e,
         type: 3}
@@ -706,6 +706,9 @@ PrefabInstance:
       value: 0.33333334
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4373c655b2b8a14b865e1c6e099224e, type: 3}
 --- !u!4 &1202357852475570470 stripped
 Transform:
