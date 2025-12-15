@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class IC_Cloisters : IC_Basic
 {
@@ -11,16 +12,19 @@ public class IC_Cloisters : IC_Basic
     [SerializeField] private float grawingSpeed = 1f;
     
     [Header("Totem")]
-    [SerializeField] private PerRendererCloistersDissolve constructDissolve;
-    [SerializeField] private PerRendererCloistersDissolve plantDissolve;
-    [SerializeField] private PerRendererCloistersDissolve textDissolve;
-    [SerializeField] private PerRendererCloistersDissolve sunDissolve;
+    [SerializeField] private PlayableDirector cloistersTimeline;
     [SerializeField, ShowOnly] private float progress;
 
-    private bool isDay = true;
+    private float duration;
     private bool isDissolveIn = false;
     private const string DISSOLVE_IN_BOOLEAN = "DissolveIn";
 
+    protected override void OnInteractionEnter()
+    {
+        base.OnInteractionEnter();
+        cloistersTimeline.Play();
+        duration = (float)cloistersTimeline.duration;
+    }
     protected void Update()
     {
         if(heroSphere.m_angularSpeed > threasholdRotatorSpeed)
@@ -40,10 +44,6 @@ public class IC_Cloisters : IC_Basic
                 shineDissolve.SetBool(DISSOLVE_IN_BOOLEAN, isDissolveIn);
             }
         }
-        if(isDay && progress >= switchAmount)
-        {
-            isDay = false;
-            //@to do: trigger day and night switch
-        }
+        cloistersTimeline.playableGraph.GetRootPlayable(0).SetTime(progress*duration);
     }
 }
