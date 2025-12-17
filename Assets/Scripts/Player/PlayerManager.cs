@@ -6,6 +6,7 @@ public class PlayerManager : Singleton<PlayerManager>
     private PlayerController currentPlayer;
     
     public bool m_canControl => !IsInTransition;
+    public bool m_isHovering => currentPlayer.m_hoveringInteractable!=null;
 
     void HideCursor()=>Cursor.visible = false;
     void ShowCursor()=>Cursor.visible = true;

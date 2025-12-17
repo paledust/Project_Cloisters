@@ -29,6 +29,12 @@ Shader "AmplifyShaders/Sprite_CloistersDissolve"
 		[PerRendererData]_NoiseUVOffset("NoiseUVOffset", Vector) = (0,0,0,0)
 		_DissolveDirection("DissolveDirection", Range( 0 , 360)) = 0
 		_NoiseStrength("NoiseStrength", Float) = 0
+		[HDR]_RadiusColor("RadiusColor", Color) = (1,1,1)
+		_RadiusNoiseX("RadiusNoiseX", Float) = 0
+		_RadiusNoiseY("RadiusNoiseY", Float) = 0
+		_RadiusMin("RadiusMin", Float) = 0
+		_RadiusSmooth("RadiusSmooth", Float) = 0
+		[Toggle(_RADIUSBLINK_ON)] _RadiusBlink("RadiusBlink", Float) = 0
 		[HideInInspector] _texcoord( "", 2D ) = "white" {}
 
 		[HideInInspector][NoScaleOffset] unity_Lightmaps("unity_Lightmaps", 2DArray) = "" {}
@@ -113,6 +119,7 @@ Shader "AmplifyShaders/Sprite_CloistersDissolve"
 			#include "Packages/com.unity.render-pipelines.universal/Shaders/2D/Include/SurfaceData2D.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Debug/Debugging2D.hlsl"
 
+			#pragma shader_feature_local _RADIUSBLINK_ON
 			#pragma shader_feature_local _EDGEBLEND_ALPHABLEND _EDGEBLEND_ADDITIVE
 			#pragma multi_compile_instancing
 			#pragma shader_feature_local _DISSOLVETYPE_RADIUS _DISSOLVETYPE_TEXBASED _DISSOLVETYPE_U_DIRECTION _DISSOLVETYPE_V_DIRECTION _DISSOLVETYPE_WORLD_DIRECTION
@@ -130,19 +137,24 @@ Shader "AmplifyShaders/Sprite_CloistersDissolve"
 				UNITY_DEFINE_INSTANCED_PROP(float, _EmissionScale)
 			UNITY_INSTANCING_BUFFER_END(AmplifyShadersSprite_CloistersDissolve)
 			CBUFFER_START( UnityPerMaterial )
-			float4 _FillColor;
-			float4 _EdgeColor;
 			float4 _MainTex_TexelSize;
+			float4 _EdgeColor;
+			float4 _FillColor;
+			float3 _RadiusColor;
 			float2 _DissolvePanSpeed;
+			float _RadiusNoiseX;
+			float _RadiusSmooth;
 			float _DissolveSoftness;
 			float _PatternScale;
+			float _EdgeValue;
 			float _NoiseStrength;
+			float _RadiusMin;
 			float _FlipX;
 			float _UseRectUV;
 			float _RadiusCenterX;
 			float _RadiusCenterY;
 			float _DissolveDirection;
-			float _EdgeValue;
+			float _RadiusNoiseY;
 			float _EdgeSoftness;
 			CBUFFER_END
 
@@ -176,7 +188,35 @@ Shader "AmplifyShaders/Sprite_CloistersDissolve"
 
 			float4 _RendererColor;
 
+			float3 mod2D289( float3 x ) { return x - floor( x * ( 1.0 / 289.0 ) ) * 289.0; }
+			float2 mod2D289( float2 x ) { return x - floor( x * ( 1.0 / 289.0 ) ) * 289.0; }
+			float3 permute( float3 x ) { return mod2D289( ( ( x * 34.0 ) + 1.0 ) * x ); }
+			float snoise( float2 v )
+			{
+				const float4 C = float4( 0.211324865405187, 0.366025403784439, -0.577350269189626, 0.024390243902439 );
+				float2 i = floor( v + dot( v, C.yy ) );
+				float2 x0 = v - i + dot( i, C.xx );
+				float2 i1;
+				i1 = ( x0.x > x0.y ) ? float2( 1.0, 0.0 ) : float2( 0.0, 1.0 );
+				float4 x12 = x0.xyxy + C.xxzz;
+				x12.xy -= i1;
+				i = mod2D289( i );
+				float3 p = permute( permute( i.y + float3( 0.0, i1.y, 1.0 ) ) + i.x + float3( 0.0, i1.x, 1.0 ) );
+				float3 m = max( 0.5 - float3( dot( x0, x0 ), dot( x12.xy, x12.xy ), dot( x12.zw, x12.zw ) ), 0.0 );
+				m = m * m;
+				m = m * m;
+				float3 x = 2.0 * frac( p * C.www ) - 1.0;
+				float3 h = abs( x ) - 0.5;
+				float3 ox = floor( x + 0.5 );
+				float3 a0 = x - ox;
+				m *= 1.79284291400159 - 0.85373472095314 * ( a0 * a0 + h * h );
+				float3 g;
+				g.x = a0.x * x0.x + h.x * x0.y;
+				g.yz = a0.yz * x12.xz + h.yz * x12.yw;
+				return 130.0 * dot( m, g );
+			}
 			
+
 			VertexOutput vert( VertexInput v  )
 			{
 				VertexOutput o = (VertexOutput)0;
@@ -219,6 +259,23 @@ Shader "AmplifyShaders/Sprite_CloistersDissolve"
 				UNITY_SETUP_INSTANCE_ID(IN);
 				UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(IN);
 
+				float3 color333 = IsGammaSpace() ? float3(0,0,0) : float3(0,0,0);
+				float2 appendResult317 = (float2(-1.0 , 0.0));
+				float2 texCoord312 = IN.texCoord0.xy * float2( 1,1 ) + float2( 0,0 );
+				float2 temp_output_34_0_g31 = ( texCoord312 - float2( 0.5,0.5 ) );
+				float2 break39_g31 = temp_output_34_0_g31;
+				float2 appendResult50_g31 = (float2(( 1.0 * ( length( temp_output_34_0_g31 ) * 2.0 ) ) , ( ( atan2( break39_g31.x , break39_g31.y ) * ( 1.0 / TWO_PI ) ) * 1.0 )));
+				float2 appendResult326 = (float2(_RadiusNoiseX , _RadiusNoiseY));
+				float2 panner314 = ( 1.0 * _Time.y * appendResult317 + ( appendResult50_g31 * appendResult326 ));
+				float simplePerlin2D311 = snoise( panner314*5.0 );
+				simplePerlin2D311 = simplePerlin2D311*0.5 + 0.5;
+				float smoothstepResult328 = smoothstep( _RadiusMin , ( _RadiusMin + _RadiusSmooth ) , simplePerlin2D311);
+				float3 radiusColor320 = ( _RadiusColor * smoothstepResult328 );
+				#ifdef _RADIUSBLINK_ON
+				float3 staticSwitch332 = radiusColor320;
+				#else
+				float3 staticSwitch332 = color333;
+				#endif
 				float4 _MainTex_ST_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifyShadersSprite_CloistersDissolve,_MainTex_ST);
 				float2 uv_MainTex = IN.texCoord0.xy * _MainTex_ST_Instance.xy + _MainTex_ST_Instance.zw;
 				float4 tex2DNode5 = tex2D( _MainTex, uv_MainTex );
@@ -285,7 +342,7 @@ Shader "AmplifyShaders/Sprite_CloistersDissolve"
 				#endif
 				float4 appendResult40 = (float4(staticSwitch92.rgb , ( tex2DNode5.a * temp_output_41_0 )));
 				float _EmissionScale_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifyShadersSprite_CloistersDissolve,_EmissionScale);
-				float4 appendResult122 = (float4(( (appendResult40).xyz * _EmissionScale_Instance ) , (appendResult40).w));
+				float4 appendResult122 = (float4(( staticSwitch332 + ( (appendResult40).xyz * _EmissionScale_Instance ) ) , (appendResult40).w));
 				
 				float4 Color = appendResult122;
 
@@ -374,6 +431,7 @@ Shader "AmplifyShaders/Sprite_CloistersDissolve"
 			#include "Packages/com.unity.render-pipelines.universal/Shaders/2D/Include/SurfaceData2D.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Debug/Debugging2D.hlsl"
 
+			#pragma shader_feature_local _RADIUSBLINK_ON
 			#pragma shader_feature_local _EDGEBLEND_ALPHABLEND _EDGEBLEND_ADDITIVE
 			#pragma multi_compile_instancing
 			#pragma shader_feature_local _DISSOLVETYPE_RADIUS _DISSOLVETYPE_TEXBASED _DISSOLVETYPE_U_DIRECTION _DISSOLVETYPE_V_DIRECTION _DISSOLVETYPE_WORLD_DIRECTION
@@ -391,19 +449,24 @@ Shader "AmplifyShaders/Sprite_CloistersDissolve"
 				UNITY_DEFINE_INSTANCED_PROP(float, _EmissionScale)
 			UNITY_INSTANCING_BUFFER_END(AmplifyShadersSprite_CloistersDissolve)
 			CBUFFER_START( UnityPerMaterial )
-			float4 _FillColor;
-			float4 _EdgeColor;
 			float4 _MainTex_TexelSize;
+			float4 _EdgeColor;
+			float4 _FillColor;
+			float3 _RadiusColor;
 			float2 _DissolvePanSpeed;
+			float _RadiusNoiseX;
+			float _RadiusSmooth;
 			float _DissolveSoftness;
 			float _PatternScale;
+			float _EdgeValue;
 			float _NoiseStrength;
+			float _RadiusMin;
 			float _FlipX;
 			float _UseRectUV;
 			float _RadiusCenterX;
 			float _RadiusCenterY;
 			float _DissolveDirection;
-			float _EdgeValue;
+			float _RadiusNoiseY;
 			float _EdgeSoftness;
 			CBUFFER_END
 
@@ -437,7 +500,35 @@ Shader "AmplifyShaders/Sprite_CloistersDissolve"
 
 			float4 _RendererColor;
 
+			float3 mod2D289( float3 x ) { return x - floor( x * ( 1.0 / 289.0 ) ) * 289.0; }
+			float2 mod2D289( float2 x ) { return x - floor( x * ( 1.0 / 289.0 ) ) * 289.0; }
+			float3 permute( float3 x ) { return mod2D289( ( ( x * 34.0 ) + 1.0 ) * x ); }
+			float snoise( float2 v )
+			{
+				const float4 C = float4( 0.211324865405187, 0.366025403784439, -0.577350269189626, 0.024390243902439 );
+				float2 i = floor( v + dot( v, C.yy ) );
+				float2 x0 = v - i + dot( i, C.xx );
+				float2 i1;
+				i1 = ( x0.x > x0.y ) ? float2( 1.0, 0.0 ) : float2( 0.0, 1.0 );
+				float4 x12 = x0.xyxy + C.xxzz;
+				x12.xy -= i1;
+				i = mod2D289( i );
+				float3 p = permute( permute( i.y + float3( 0.0, i1.y, 1.0 ) ) + i.x + float3( 0.0, i1.x, 1.0 ) );
+				float3 m = max( 0.5 - float3( dot( x0, x0 ), dot( x12.xy, x12.xy ), dot( x12.zw, x12.zw ) ), 0.0 );
+				m = m * m;
+				m = m * m;
+				float3 x = 2.0 * frac( p * C.www ) - 1.0;
+				float3 h = abs( x ) - 0.5;
+				float3 ox = floor( x + 0.5 );
+				float3 a0 = x - ox;
+				m *= 1.79284291400159 - 0.85373472095314 * ( a0 * a0 + h * h );
+				float3 g;
+				g.x = a0.x * x0.x + h.x * x0.y;
+				g.yz = a0.yz * x12.xz + h.yz * x12.yw;
+				return 130.0 * dot( m, g );
+			}
 			
+
 			VertexOutput vert( VertexInput v  )
 			{
 				VertexOutput o = (VertexOutput)0;
@@ -480,6 +571,23 @@ Shader "AmplifyShaders/Sprite_CloistersDissolve"
 				UNITY_SETUP_INSTANCE_ID(IN);
 				UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(IN);
 
+				float3 color333 = IsGammaSpace() ? float3(0,0,0) : float3(0,0,0);
+				float2 appendResult317 = (float2(-1.0 , 0.0));
+				float2 texCoord312 = IN.texCoord0.xy * float2( 1,1 ) + float2( 0,0 );
+				float2 temp_output_34_0_g31 = ( texCoord312 - float2( 0.5,0.5 ) );
+				float2 break39_g31 = temp_output_34_0_g31;
+				float2 appendResult50_g31 = (float2(( 1.0 * ( length( temp_output_34_0_g31 ) * 2.0 ) ) , ( ( atan2( break39_g31.x , break39_g31.y ) * ( 1.0 / TWO_PI ) ) * 1.0 )));
+				float2 appendResult326 = (float2(_RadiusNoiseX , _RadiusNoiseY));
+				float2 panner314 = ( 1.0 * _Time.y * appendResult317 + ( appendResult50_g31 * appendResult326 ));
+				float simplePerlin2D311 = snoise( panner314*5.0 );
+				simplePerlin2D311 = simplePerlin2D311*0.5 + 0.5;
+				float smoothstepResult328 = smoothstep( _RadiusMin , ( _RadiusMin + _RadiusSmooth ) , simplePerlin2D311);
+				float3 radiusColor320 = ( _RadiusColor * smoothstepResult328 );
+				#ifdef _RADIUSBLINK_ON
+				float3 staticSwitch332 = radiusColor320;
+				#else
+				float3 staticSwitch332 = color333;
+				#endif
 				float4 _MainTex_ST_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifyShadersSprite_CloistersDissolve,_MainTex_ST);
 				float2 uv_MainTex = IN.texCoord0.xy * _MainTex_ST_Instance.xy + _MainTex_ST_Instance.zw;
 				float4 tex2DNode5 = tex2D( _MainTex, uv_MainTex );
@@ -546,7 +654,7 @@ Shader "AmplifyShaders/Sprite_CloistersDissolve"
 				#endif
 				float4 appendResult40 = (float4(staticSwitch92.rgb , ( tex2DNode5.a * temp_output_41_0 )));
 				float _EmissionScale_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifyShadersSprite_CloistersDissolve,_EmissionScale);
-				float4 appendResult122 = (float4(( (appendResult40).xyz * _EmissionScale_Instance ) , (appendResult40).w));
+				float4 appendResult122 = (float4(( staticSwitch332 + ( (appendResult40).xyz * _EmissionScale_Instance ) ) , (appendResult40).w));
 				
 				float4 Color = appendResult122;
 
@@ -624,6 +732,7 @@ Shader "AmplifyShaders/Sprite_CloistersDissolve"
 			#include_with_pragmas "Packages/com.unity.render-pipelines.universal/ShaderLibrary/DOTS.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/ShaderPass.hlsl"
 
+			#pragma shader_feature_local _RADIUSBLINK_ON
 			#pragma shader_feature_local _EDGEBLEND_ALPHABLEND _EDGEBLEND_ADDITIVE
 			#pragma multi_compile_instancing
 			#pragma shader_feature_local _DISSOLVETYPE_RADIUS _DISSOLVETYPE_TEXBASED _DISSOLVETYPE_U_DIRECTION _DISSOLVETYPE_V_DIRECTION _DISSOLVETYPE_WORLD_DIRECTION
@@ -641,19 +750,24 @@ Shader "AmplifyShaders/Sprite_CloistersDissolve"
 				UNITY_DEFINE_INSTANCED_PROP(float, _EmissionScale)
 			UNITY_INSTANCING_BUFFER_END(AmplifyShadersSprite_CloistersDissolve)
 			CBUFFER_START( UnityPerMaterial )
-			float4 _FillColor;
-			float4 _EdgeColor;
 			float4 _MainTex_TexelSize;
+			float4 _EdgeColor;
+			float4 _FillColor;
+			float3 _RadiusColor;
 			float2 _DissolvePanSpeed;
+			float _RadiusNoiseX;
+			float _RadiusSmooth;
 			float _DissolveSoftness;
 			float _PatternScale;
+			float _EdgeValue;
 			float _NoiseStrength;
+			float _RadiusMin;
 			float _FlipX;
 			float _UseRectUV;
 			float _RadiusCenterX;
 			float _RadiusCenterY;
 			float _DissolveDirection;
-			float _EdgeValue;
+			float _RadiusNoiseY;
 			float _EdgeSoftness;
 			CBUFFER_END
 
@@ -678,7 +792,35 @@ Shader "AmplifyShaders/Sprite_CloistersDissolve"
             int _ObjectId;
             int _PassValue;
 
+			float3 mod2D289( float3 x ) { return x - floor( x * ( 1.0 / 289.0 ) ) * 289.0; }
+			float2 mod2D289( float2 x ) { return x - floor( x * ( 1.0 / 289.0 ) ) * 289.0; }
+			float3 permute( float3 x ) { return mod2D289( ( ( x * 34.0 ) + 1.0 ) * x ); }
+			float snoise( float2 v )
+			{
+				const float4 C = float4( 0.211324865405187, 0.366025403784439, -0.577350269189626, 0.024390243902439 );
+				float2 i = floor( v + dot( v, C.yy ) );
+				float2 x0 = v - i + dot( i, C.xx );
+				float2 i1;
+				i1 = ( x0.x > x0.y ) ? float2( 1.0, 0.0 ) : float2( 0.0, 1.0 );
+				float4 x12 = x0.xyxy + C.xxzz;
+				x12.xy -= i1;
+				i = mod2D289( i );
+				float3 p = permute( permute( i.y + float3( 0.0, i1.y, 1.0 ) ) + i.x + float3( 0.0, i1.x, 1.0 ) );
+				float3 m = max( 0.5 - float3( dot( x0, x0 ), dot( x12.xy, x12.xy ), dot( x12.zw, x12.zw ) ), 0.0 );
+				m = m * m;
+				m = m * m;
+				float3 x = 2.0 * frac( p * C.www ) - 1.0;
+				float3 h = abs( x ) - 0.5;
+				float3 ox = floor( x + 0.5 );
+				float3 a0 = x - ox;
+				m *= 1.79284291400159 - 0.85373472095314 * ( a0 * a0 + h * h );
+				float3 g;
+				g.x = a0.x * x0.x + h.x * x0.y;
+				g.yz = a0.yz * x12.xz + h.yz * x12.yw;
+				return 130.0 * dot( m, g );
+			}
 			
+
 			VertexOutput vert(VertexInput v )
 			{
 				VertexOutput o = (VertexOutput)0;
@@ -716,6 +858,23 @@ Shader "AmplifyShaders/Sprite_CloistersDissolve"
 
 			half4 frag(VertexOutput IN) : SV_TARGET
 			{
+				float3 color333 = IsGammaSpace() ? float3(0,0,0) : float3(0,0,0);
+				float2 appendResult317 = (float2(-1.0 , 0.0));
+				float2 texCoord312 = IN.ase_texcoord.xy * float2( 1,1 ) + float2( 0,0 );
+				float2 temp_output_34_0_g31 = ( texCoord312 - float2( 0.5,0.5 ) );
+				float2 break39_g31 = temp_output_34_0_g31;
+				float2 appendResult50_g31 = (float2(( 1.0 * ( length( temp_output_34_0_g31 ) * 2.0 ) ) , ( ( atan2( break39_g31.x , break39_g31.y ) * ( 1.0 / TWO_PI ) ) * 1.0 )));
+				float2 appendResult326 = (float2(_RadiusNoiseX , _RadiusNoiseY));
+				float2 panner314 = ( 1.0 * _Time.y * appendResult317 + ( appendResult50_g31 * appendResult326 ));
+				float simplePerlin2D311 = snoise( panner314*5.0 );
+				simplePerlin2D311 = simplePerlin2D311*0.5 + 0.5;
+				float smoothstepResult328 = smoothstep( _RadiusMin , ( _RadiusMin + _RadiusSmooth ) , simplePerlin2D311);
+				float3 radiusColor320 = ( _RadiusColor * smoothstepResult328 );
+				#ifdef _RADIUSBLINK_ON
+				float3 staticSwitch332 = radiusColor320;
+				#else
+				float3 staticSwitch332 = color333;
+				#endif
 				float4 _MainTex_ST_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifyShadersSprite_CloistersDissolve,_MainTex_ST);
 				float2 uv_MainTex = IN.ase_texcoord.xy * _MainTex_ST_Instance.xy + _MainTex_ST_Instance.zw;
 				float4 tex2DNode5 = tex2D( _MainTex, uv_MainTex );
@@ -782,7 +941,7 @@ Shader "AmplifyShaders/Sprite_CloistersDissolve"
 				#endif
 				float4 appendResult40 = (float4(staticSwitch92.rgb , ( tex2DNode5.a * temp_output_41_0 )));
 				float _EmissionScale_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifyShadersSprite_CloistersDissolve,_EmissionScale);
-				float4 appendResult122 = (float4(( (appendResult40).xyz * _EmissionScale_Instance ) , (appendResult40).w));
+				float4 appendResult122 = (float4(( staticSwitch332 + ( (appendResult40).xyz * _EmissionScale_Instance ) ) , (appendResult40).w));
 				
 				float4 Color = appendResult122;
 
@@ -840,6 +999,7 @@ Shader "AmplifyShaders/Sprite_CloistersDissolve"
 			#include_with_pragmas "Packages/com.unity.render-pipelines.universal/ShaderLibrary/DOTS.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/ShaderPass.hlsl"
 
+        	#pragma shader_feature_local _RADIUSBLINK_ON
         	#pragma shader_feature_local _EDGEBLEND_ALPHABLEND _EDGEBLEND_ADDITIVE
         	#pragma multi_compile_instancing
         	#pragma shader_feature_local _DISSOLVETYPE_RADIUS _DISSOLVETYPE_TEXBASED _DISSOLVETYPE_U_DIRECTION _DISSOLVETYPE_V_DIRECTION _DISSOLVETYPE_WORLD_DIRECTION
@@ -857,19 +1017,24 @@ Shader "AmplifyShaders/Sprite_CloistersDissolve"
 				UNITY_DEFINE_INSTANCED_PROP(float, _EmissionScale)
 			UNITY_INSTANCING_BUFFER_END(AmplifyShadersSprite_CloistersDissolve)
 			CBUFFER_START( UnityPerMaterial )
-			float4 _FillColor;
-			float4 _EdgeColor;
 			float4 _MainTex_TexelSize;
+			float4 _EdgeColor;
+			float4 _FillColor;
+			float3 _RadiusColor;
 			float2 _DissolvePanSpeed;
+			float _RadiusNoiseX;
+			float _RadiusSmooth;
 			float _DissolveSoftness;
 			float _PatternScale;
+			float _EdgeValue;
 			float _NoiseStrength;
+			float _RadiusMin;
 			float _FlipX;
 			float _UseRectUV;
 			float _RadiusCenterX;
 			float _RadiusCenterY;
 			float _DissolveDirection;
-			float _EdgeValue;
+			float _RadiusNoiseY;
 			float _EdgeSoftness;
 			CBUFFER_END
 
@@ -893,7 +1058,35 @@ Shader "AmplifyShaders/Sprite_CloistersDissolve"
 
             float4 _SelectionID;
 
+			float3 mod2D289( float3 x ) { return x - floor( x * ( 1.0 / 289.0 ) ) * 289.0; }
+			float2 mod2D289( float2 x ) { return x - floor( x * ( 1.0 / 289.0 ) ) * 289.0; }
+			float3 permute( float3 x ) { return mod2D289( ( ( x * 34.0 ) + 1.0 ) * x ); }
+			float snoise( float2 v )
+			{
+				const float4 C = float4( 0.211324865405187, 0.366025403784439, -0.577350269189626, 0.024390243902439 );
+				float2 i = floor( v + dot( v, C.yy ) );
+				float2 x0 = v - i + dot( i, C.xx );
+				float2 i1;
+				i1 = ( x0.x > x0.y ) ? float2( 1.0, 0.0 ) : float2( 0.0, 1.0 );
+				float4 x12 = x0.xyxy + C.xxzz;
+				x12.xy -= i1;
+				i = mod2D289( i );
+				float3 p = permute( permute( i.y + float3( 0.0, i1.y, 1.0 ) ) + i.x + float3( 0.0, i1.x, 1.0 ) );
+				float3 m = max( 0.5 - float3( dot( x0, x0 ), dot( x12.xy, x12.xy ), dot( x12.zw, x12.zw ) ), 0.0 );
+				m = m * m;
+				m = m * m;
+				float3 x = 2.0 * frac( p * C.www ) - 1.0;
+				float3 h = abs( x ) - 0.5;
+				float3 ox = floor( x + 0.5 );
+				float3 a0 = x - ox;
+				m *= 1.79284291400159 - 0.85373472095314 * ( a0 * a0 + h * h );
+				float3 g;
+				g.x = a0.x * x0.x + h.x * x0.y;
+				g.yz = a0.yz * x12.xz + h.yz * x12.yw;
+				return 130.0 * dot( m, g );
+			}
 			
+
 			VertexOutput vert(VertexInput v  )
 			{
 				VertexOutput o = (VertexOutput)0;
@@ -931,6 +1124,23 @@ Shader "AmplifyShaders/Sprite_CloistersDissolve"
 
 			half4 frag(VertexOutput IN ) : SV_TARGET
 			{
+				float3 color333 = IsGammaSpace() ? float3(0,0,0) : float3(0,0,0);
+				float2 appendResult317 = (float2(-1.0 , 0.0));
+				float2 texCoord312 = IN.ase_texcoord.xy * float2( 1,1 ) + float2( 0,0 );
+				float2 temp_output_34_0_g31 = ( texCoord312 - float2( 0.5,0.5 ) );
+				float2 break39_g31 = temp_output_34_0_g31;
+				float2 appendResult50_g31 = (float2(( 1.0 * ( length( temp_output_34_0_g31 ) * 2.0 ) ) , ( ( atan2( break39_g31.x , break39_g31.y ) * ( 1.0 / TWO_PI ) ) * 1.0 )));
+				float2 appendResult326 = (float2(_RadiusNoiseX , _RadiusNoiseY));
+				float2 panner314 = ( 1.0 * _Time.y * appendResult317 + ( appendResult50_g31 * appendResult326 ));
+				float simplePerlin2D311 = snoise( panner314*5.0 );
+				simplePerlin2D311 = simplePerlin2D311*0.5 + 0.5;
+				float smoothstepResult328 = smoothstep( _RadiusMin , ( _RadiusMin + _RadiusSmooth ) , simplePerlin2D311);
+				float3 radiusColor320 = ( _RadiusColor * smoothstepResult328 );
+				#ifdef _RADIUSBLINK_ON
+				float3 staticSwitch332 = radiusColor320;
+				#else
+				float3 staticSwitch332 = color333;
+				#endif
 				float4 _MainTex_ST_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifyShadersSprite_CloistersDissolve,_MainTex_ST);
 				float2 uv_MainTex = IN.ase_texcoord.xy * _MainTex_ST_Instance.xy + _MainTex_ST_Instance.zw;
 				float4 tex2DNode5 = tex2D( _MainTex, uv_MainTex );
@@ -997,7 +1207,7 @@ Shader "AmplifyShaders/Sprite_CloistersDissolve"
 				#endif
 				float4 appendResult40 = (float4(staticSwitch92.rgb , ( tex2DNode5.a * temp_output_41_0 )));
 				float _EmissionScale_Instance = UNITY_ACCESS_INSTANCED_PROP(AmplifyShadersSprite_CloistersDissolve,_EmissionScale);
-				float4 appendResult122 = (float4(( (appendResult40).xyz * _EmissionScale_Instance ) , (appendResult40).w));
+				float4 appendResult122 = (float4(( staticSwitch332 + ( (appendResult40).xyz * _EmissionScale_Instance ) ) , (appendResult40).w));
 				
 				float4 Color = appendResult122;
 				half4 outColor = _SelectionID;
@@ -1062,7 +1272,7 @@ Node;AmplifyShaderEditor.SamplerNode;101;-3136,-352;Inherit;True;Property;_Disso
 Node;AmplifyShaderEditor.SimpleAddOpNode;207;-7072,-832;Inherit;False;2;2;0;FLOAT2;0,0;False;1;FLOAT2;0,0;False;1;FLOAT2;0
 Node;AmplifyShaderEditor.TexturePropertyNode;81;-7648,-320;Inherit;True;Property;_NoiseTex;NoiseTex;5;0;Create;True;0;0;0;False;0;False;97a921d248636704ead1a9dcc3b43211;a2f128330bdd0984aabbc6d45c920f6e;False;white;Auto;Texture2D;-1;0;2;SAMPLER2D;0;SAMPLERSTATE;1
 Node;AmplifyShaderEditor.RangedFloatNode;26;-7648,336;Inherit;False;InstancedProperty;_DissolveLength;DissolveLength;13;0;Create;True;0;0;0;False;0;False;0.1;0.16;0;0;0;1;FLOAT;0
-Node;AmplifyShaderEditor.RangedFloatNode;25;-7648,240;Inherit;False;InstancedProperty;_DissolveRadius;DissolveRadius;12;0;Create;True;0;0;0;False;0;False;0.5;0.47;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;25;-7648,240;Inherit;False;InstancedProperty;_DissolveRadius;DissolveRadius;12;0;Create;True;0;0;0;False;0;False;0.5;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.RangedFloatNode;35;-7648,416;Inherit;False;Property;_PatternScale;PatternScale;8;0;Create;True;0;0;0;False;0;False;1;0.5;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.GetLocalVarNode;194;-3120,48;Inherit;False;143;uv;1;0;OBJECT;;False;1;FLOAT2;0
 Node;AmplifyShaderEditor.GetLocalVarNode;175;-3088,-80;Inherit;False;143;uv;1;0;OBJECT;;False;1;FLOAT2;0
@@ -1078,7 +1288,7 @@ Node;AmplifyShaderEditor.RegisterLocalVarNode;162;-7424,416;Inherit;False;patter
 Node;AmplifyShaderEditor.GetLocalVarNode;280;-2976,144;Inherit;False;279;worldLineDissolve;1;0;OBJECT;;False;1;FLOAT;0
 Node;AmplifyShaderEditor.StaticSwitch;93;-2416,-208;Inherit;False;Property;_DissolveType;DissolveType;9;0;Create;True;0;0;0;False;0;False;0;0;0;True;;KeywordEnum;5;Radius;TexBased;U_Direction;V_Direction;World_Direction;Create;True;True;All;9;1;FLOAT;0;False;0;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;4;FLOAT;0;False;5;FLOAT;0;False;6;FLOAT;0;False;7;FLOAT;0;False;8;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.RangedFloatNode;52;-1312,144;Inherit;False;Property;_EdgeSoftness;EdgeSoftness;16;0;Create;True;0;0;0;False;0;False;1;0.01;0;0;0;1;FLOAT;0
-Node;AmplifyShaderEditor.RangedFloatNode;51;-1280,80;Inherit;False;Property;_EdgeValue;EdgeValue;15;0;Create;True;0;0;0;False;0;False;0;0.66;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;51;-1280,80;Inherit;False;Property;_EdgeValue;EdgeValue;15;0;Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.GetLocalVarNode;278;-2352,-32;Inherit;False;208;worldUV;1;0;OBJECT;;False;1;FLOAT2;0
 Node;AmplifyShaderEditor.GetLocalVarNode;274;-2352,48;Inherit;False;166;noiseTex;1;0;OBJECT;;False;1;SAMPLER2D;0
 Node;AmplifyShaderEditor.GetLocalVarNode;275;-2352,128;Inherit;False;162;patternScale;1;0;OBJECT;;False;1;FLOAT;0
@@ -1087,31 +1297,52 @@ Node;AmplifyShaderEditor.GetLocalVarNode;277;-2384,288;Inherit;False;152;dissolv
 Node;AmplifyShaderEditor.RangedFloatNode;310;-2352,-288;Inherit;False;Property;_NoiseStrength;NoiseStrength;25;0;Create;True;0;0;0;False;0;False;0;1;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleAddOpNode;57;-1103.601,124.47;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.FunctionNode;273;-2016,-224;Inherit;False;SGradientDissolve;-1;;30;e27ad990a2429b34d8f406fd90200dba;1,26,0;7;29;FLOAT;1;False;24;FLOAT;0;False;22;FLOAT2;0,0;False;17;SAMPLER2D;;False;18;FLOAT;1;False;20;FLOAT;0.5;False;21;FLOAT;0.1;False;1;FLOAT;0
-Node;AmplifyShaderEditor.RangedFloatNode;43;-1328,-144;Inherit;False;Property;_DissolveSoftness;DissolveSoftness;7;0;Create;True;0;0;0;False;0;False;1;0.01;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;43;-1328,-144;Inherit;False;Property;_DissolveSoftness;DissolveSoftness;7;0;Create;True;0;0;0;False;0;False;1;0.5;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.SmoothstepOpNode;49;-944,64;Inherit;True;3;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;1;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SmoothstepOpNode;42;-1072,-224;Inherit;False;3;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;1;False;1;FLOAT;0
 Node;AmplifyShaderEditor.OneMinusNode;53;-688,64;Inherit;True;1;0;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SaturateNode;41;-800,-224;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.TextureCoordinatesNode;312;-3136,1104;Inherit;False;0;-1;2;3;2;SAMPLER2D;;False;0;FLOAT2;1,1;False;1;FLOAT2;0,0;False;5;FLOAT2;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.RangedFloatNode;324;-3008,1264;Inherit;False;Property;_RadiusNoiseX;RadiusNoiseX;27;0;Create;True;0;0;0;False;0;False;0;0.4;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;325;-3008,1344;Inherit;False;Property;_RadiusNoiseY;RadiusNoiseY;28;0;Create;True;0;0;0;False;0;False;0;1;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;58;-476.1532,-34.67459;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;316;-2640,1280;Inherit;False;Constant;_Float0;Float 0;25;0;Create;True;0;0;0;False;0;False;-1;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.FunctionNode;313;-2896,1104;Inherit;False;Polar Coordinates;-1;;31;7dab8e02884cf104ebefaa2e788e4162;0;4;1;FLOAT2;0,0;False;2;FLOAT2;0.5,0.5;False;3;FLOAT;1;False;4;FLOAT;1;False;3;FLOAT2;0;FLOAT;55;FLOAT;56
+Node;AmplifyShaderEditor.DynamicAppendNode;326;-2832,1296;Inherit;False;FLOAT2;4;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;1;FLOAT2;0
 Node;AmplifyShaderEditor.ColorNode;54;-453.5585,173.3972;Inherit;False;Property;_EdgeColor;EdgeColor;17;1;[HDR];Create;True;0;0;0;False;0;False;2.828427,2.029812,1.209014,1;1.543575,1.278763,0.8708094,1;True;True;0;6;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4;FLOAT3;5
 Node;AmplifyShaderEditor.SaturateNode;59;-332.6537,-34.4746;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.GetLocalVarNode;309;-1216,-480;Inherit;False;307;mainTex;1;0;OBJECT;;False;1;SAMPLER2D;0
+Node;AmplifyShaderEditor.DynamicAppendNode;317;-2496,1280;Inherit;False;FLOAT2;4;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;1;FLOAT2;0
+Node;AmplifyShaderEditor.SimpleMultiplyOpNode;327;-2601.011,1137.76;Inherit;False;2;2;0;FLOAT2;0,0;False;1;FLOAT2;0,0;False;1;FLOAT2;0
 Node;AmplifyShaderEditor.ColorNode;79;-976,-672;Inherit;False;Property;_FillColor;FillColor;4;1;[HDR];Create;True;0;0;0;False;0;False;0,0,0,1;0,0,0,1;True;True;0;6;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4;FLOAT3;5
 Node;AmplifyShaderEditor.SamplerNode;5;-1040,-480;Inherit;True;Property;_test;test;0;0;Create;True;0;0;0;False;0;False;129;7a170cdb7cc88024cb628cfcdbb6705c;7a170cdb7cc88024cb628cfcdbb6705c;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;6;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4;FLOAT3;5
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;204;-129.8849,-33.53051;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.PannerNode;314;-2320,1168;Inherit;False;3;0;FLOAT2;0,0;False;2;FLOAT2;0,0;False;1;FLOAT;1;False;1;FLOAT2;0
+Node;AmplifyShaderEditor.RangedFloatNode;329;-1904,1280;Inherit;False;Property;_RadiusMin;RadiusMin;29;0;Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;330;-1904,1376;Inherit;False;Property;_RadiusSmooth;RadiusSmooth;30;0;Create;True;0;0;0;False;0;False;0;1;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;55;-15.49266,145.7077;Inherit;True;2;2;0;FLOAT;0;False;1;COLOR;0,0,0,0;False;1;COLOR;0
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;78;-688,-592;Inherit;False;2;2;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;1;COLOR;0
 Node;AmplifyShaderEditor.SaturateNode;205;25.00806,-32.72052;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.NoiseGeneratorNode;311;-2128,1168;Inherit;True;Simplex2D;True;False;2;0;FLOAT2;0,0;False;1;FLOAT;5;False;1;FLOAT;0
+Node;AmplifyShaderEditor.SimpleAddOpNode;331;-1744,1312;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleAddOpNode;56;222.8557,-594.6979;Inherit;True;2;2;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;1;COLOR;0
 Node;AmplifyShaderEditor.LerpOp;91;228.918,-137.1306;Inherit;False;3;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;2;FLOAT;0;False;1;COLOR;0
+Node;AmplifyShaderEditor.ColorNode;318;-1824,960;Inherit;False;Property;_RadiusColor;RadiusColor;26;1;[HDR];Create;True;0;0;0;False;0;False;1,1,1,0;1.624505,1.364105,1.014549,1;True;False;0;6;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4;FLOAT3;5
+Node;AmplifyShaderEditor.SmoothstepOpNode;328;-1728,1168;Inherit;False;3;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;1;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;39;-385.3251,-235.6901;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.StaticSwitch;92;496,-592;Inherit;False;Property;_EdgeBlend;EdgeBlend;18;0;Create;True;0;0;0;False;0;False;0;0;0;True;;KeywordEnum;2;AlphaBlend;Additive;Create;True;True;All;9;1;COLOR;0,0,0,0;False;0;COLOR;0,0,0,0;False;2;COLOR;0,0,0,0;False;3;COLOR;0,0,0,0;False;4;COLOR;0,0,0,0;False;5;COLOR;0,0,0,0;False;6;COLOR;0,0,0,0;False;7;COLOR;0,0,0,0;False;8;COLOR;0,0,0,0;False;1;COLOR;0
+Node;AmplifyShaderEditor.SimpleMultiplyOpNode;319;-1568,1072;Inherit;False;2;2;0;FLOAT3;0,0,0;False;1;FLOAT;0;False;1;FLOAT3;0
 Node;AmplifyShaderEditor.DynamicAppendNode;40;896,-272;Inherit;False;FLOAT4;4;0;FLOAT3;1,0,0;False;1;FLOAT;1;False;2;FLOAT;1;False;3;FLOAT;0;False;1;FLOAT4;0
+Node;AmplifyShaderEditor.RegisterLocalVarNode;320;-1424,1072;Inherit;False;radiusColor;-1;True;1;0;FLOAT3;0,0,0;False;1;FLOAT3;0
 Node;AmplifyShaderEditor.ComponentMaskNode;120;1104,-368;Inherit;False;True;True;True;False;1;0;FLOAT4;0,0,0,0;False;1;FLOAT3;0
 Node;AmplifyShaderEditor.RangedFloatNode;203;1120,-288;Inherit;False;InstancedProperty;_EmissionScale;EmissionScale;20;0;Create;True;0;0;0;False;0;False;1;1;0;0;0;1;FLOAT;0
-Node;AmplifyShaderEditor.CommentaryNode;227;-6368,368;Inherit;False;1473.48;541.8779;Comment;10;224;215;220;222;221;214;219;223;217;218;Blink;1,1,1,1;0;0
+Node;AmplifyShaderEditor.GetLocalVarNode;321;1056,-512;Inherit;False;320;radiusColor;1;0;OBJECT;;False;1;FLOAT3;0
+Node;AmplifyShaderEditor.ColorNode;333;1024,-672;Inherit;False;Constant;_Color0;Color 0;31;0;Create;True;0;0;0;False;0;False;0,0,0,0;0,0,0,0;True;False;0;6;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4;FLOAT3;5
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;123;1296,-368;Inherit;False;2;2;0;FLOAT3;0,0,0;False;1;FLOAT;0;False;1;FLOAT3;0
+Node;AmplifyShaderEditor.StaticSwitch;332;1248,-592;Inherit;False;Property;_RadiusBlink;RadiusBlink;31;0;Create;True;0;0;0;False;0;False;0;0;0;True;;Toggle;2;Key0;Key1;Create;True;True;All;9;1;FLOAT3;0,0,0;False;0;FLOAT3;0,0,0;False;2;FLOAT3;0,0,0;False;3;FLOAT3;0,0,0;False;4;FLOAT3;0,0,0;False;5;FLOAT3;0,0,0;False;6;FLOAT3;0,0,0;False;7;FLOAT3;0,0,0;False;8;FLOAT3;0,0,0;False;1;FLOAT3;0
+Node;AmplifyShaderEditor.CommentaryNode;227;-6368,368;Inherit;False;1473.48;541.8779;Comment;10;224;215;220;222;221;214;219;223;217;218;Blink;1,1,1,1;0;0
 Node;AmplifyShaderEditor.ComponentMaskNode;121;1104,-160;Inherit;False;False;False;False;True;1;0;FLOAT4;0,0,0,0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.SimpleAddOpNode;322;1514.747,-411.4636;Inherit;False;2;2;0;FLOAT3;0,0,0;False;1;FLOAT3;0,0,0;False;1;FLOAT3;0
 Node;AmplifyShaderEditor.RangedFloatNode;218;-6320,576;Inherit;False;Property;_BlinkSpeed;BlinkSpeed;23;0;Create;True;0;0;0;False;0;False;1;1;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleTimeNode;217;-6144,576;Inherit;False;1;0;FLOAT;1;False;1;FLOAT;0
 Node;AmplifyShaderEditor.RangedFloatNode;223;-6096,416;Inherit;False;InstancedProperty;_RNDSeed;RNDSeed;22;1;[PerRendererData];Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0
@@ -1122,11 +1353,11 @@ Node;AmplifyShaderEditor.ScaleNode;222;-5520,768;Inherit;False;0.2;1;0;FLOAT;0;F
 Node;AmplifyShaderEditor.ScaleAndOffsetNode;220;-5600,480;Inherit;True;3;0;FLOAT;0;False;1;FLOAT;0.5;False;2;FLOAT;0.5;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleAddOpNode;215;-5296,624;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.RegisterLocalVarNode;224;-5152,624;Inherit;False;blink;-1;True;1;0;FLOAT;0;False;1;FLOAT;0
-Node;AmplifyShaderEditor.DynamicAppendNode;122;1456,-368;Inherit;False;FLOAT4;4;0;FLOAT3;0,0,0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;1;FLOAT4;0
+Node;AmplifyShaderEditor.DynamicAppendNode;122;1728,-368;Inherit;False;FLOAT4;4;0;FLOAT3;0,0,0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;1;FLOAT4;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;73;771.9996,-195.7002;Float;False;False;-1;2;AmplifyShaderEditor.MaterialInspector;0;14;New Amplify Shader;cf964e524c8e69742b1d21fbe2ebcc4a;True;Sprite Unlit Forward;0;1;Sprite Unlit Forward;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;True;0;True;12;all;0;False;True;2;5;False;;10;False;;3;1;False;;10;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;2;False;;True;3;False;;True;True;0;False;;0;False;;True;1;LightMode=UniversalForward;False;False;0;Hidden/InternalErrorShader;0;0;Standard;0;False;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;74;771.9996,-195.7002;Float;False;False;-1;2;AmplifyShaderEditor.MaterialInspector;0;14;New Amplify Shader;cf964e524c8e69742b1d21fbe2ebcc4a;True;SceneSelectionPass;0;2;SceneSelectionPass;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;True;0;True;12;all;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;1;LightMode=SceneSelectionPass;False;False;0;Hidden/InternalErrorShader;0;0;Standard;0;False;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;75;771.9996,-195.7002;Float;False;False;-1;2;AmplifyShaderEditor.MaterialInspector;0;14;New Amplify Shader;cf964e524c8e69742b1d21fbe2ebcc4a;True;ScenePickingPass;0;3;ScenePickingPass;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;True;0;True;12;all;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;1;LightMode=Picking;False;False;0;Hidden/InternalErrorShader;0;0;Standard;0;False;0
-Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;72;1632,-368;Float;False;True;-1;2;AmplifyShaderEditor.MaterialInspector;0;14;AmplifyShaders/Sprite_CloistersDissolve;cf964e524c8e69742b1d21fbe2ebcc4a;True;Sprite Unlit;0;0;Sprite Unlit;4;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;True;0;True;12;all;0;False;True;2;5;False;;10;False;;3;1;False;;10;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;2;False;;True;3;False;;True;True;0;False;;0;False;;True;1;LightMode=Universal2D;False;False;0;Hidden/InternalErrorShader;0;0;Standard;3;Vertex Position;1;0;Debug Display;0;0;External Alpha;0;0;0;4;True;True;True;True;False;;False;0
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;72;1904,-368;Float;False;True;-1;2;AmplifyShaderEditor.MaterialInspector;0;14;AmplifyShaders/Sprite_CloistersDissolve;cf964e524c8e69742b1d21fbe2ebcc4a;True;Sprite Unlit;0;0;Sprite Unlit;4;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;True;0;True;12;all;0;False;True;2;5;False;;10;False;;3;1;False;;10;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;2;False;;True;3;False;;True;True;0;False;;0;False;;True;1;LightMode=Universal2D;False;False;0;Hidden/InternalErrorShader;0;0;Standard;3;Vertex Position;1;0;Debug Display;0;0;External Alpha;0;0;0;4;True;True;True;True;False;;False;0
 WireConnection;307;0;129;0
 WireConnection;250;0;238;0
 WireConnection;249;0;250;0
@@ -1200,30 +1431,51 @@ WireConnection;53;0;49;0
 WireConnection;41;0;42;0
 WireConnection;58;0;41;0
 WireConnection;58;1;53;0
+WireConnection;313;1;312;0
+WireConnection;326;0;324;0
+WireConnection;326;1;325;0
 WireConnection;59;0;58;0
+WireConnection;317;0;316;0
+WireConnection;327;0;313;0
+WireConnection;327;1;326;0
 WireConnection;5;0;309;0
 WireConnection;204;0;59;0
 WireConnection;204;1;54;4
+WireConnection;314;0;327;0
+WireConnection;314;2;317;0
 WireConnection;55;0;59;0
 WireConnection;55;1;54;0
 WireConnection;78;0;79;0
 WireConnection;78;1;5;0
 WireConnection;205;0;204;0
+WireConnection;311;0;314;0
+WireConnection;331;0;329;0
+WireConnection;331;1;330;0
 WireConnection;56;0;78;0
 WireConnection;56;1;55;0
 WireConnection;91;0;78;0
 WireConnection;91;1;54;0
 WireConnection;91;2;205;0
+WireConnection;328;0;311;0
+WireConnection;328;1;329;0
+WireConnection;328;2;331;0
 WireConnection;39;0;5;4
 WireConnection;39;1;41;0
 WireConnection;92;1;91;0
 WireConnection;92;0;56;0
+WireConnection;319;0;318;0
+WireConnection;319;1;328;0
 WireConnection;40;0;92;0
 WireConnection;40;3;39;0
+WireConnection;320;0;319;0
 WireConnection;120;0;40;0
 WireConnection;123;0;120;0
 WireConnection;123;1;203;0
+WireConnection;332;1;333;0
+WireConnection;332;0;321;0
 WireConnection;121;0;40;0
+WireConnection;322;0;332;0
+WireConnection;322;1;123;0
 WireConnection;217;0;218;0
 WireConnection;219;0;223;0
 WireConnection;219;1;217;0
@@ -1234,8 +1486,8 @@ WireConnection;220;0;214;0
 WireConnection;215;0;220;0
 WireConnection;215;1;222;0
 WireConnection;224;0;215;0
-WireConnection;122;0;123;0
+WireConnection;122;0;322;0
 WireConnection;122;3;121;0
 WireConnection;72;1;122;0
 ASEEND*/
-//CHKSM=1DAFF1AFC2A61E3F267A1D8FB5E540B7090AC90A
+//CHKSM=C221E2C43FAAC77EF6C15DBEDFE9C89E22AD6EB9

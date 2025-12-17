@@ -492,6 +492,7 @@ MonoBehaviour:
   cursorState_SO: {fileID: 11400000, guid: f0d02c784f7022248876a055b7cb2be5, type: 2}
   useCustomCursor: 1
   customCursor: {fileID: 1201478103}
+  imgCursor: {fileID: 1940481443}
 --- !u!1 &1201478101
 GameObject:
   m_ObjectHideFlags: 0

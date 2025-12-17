@@ -1,6 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UI_Manager : Singleton<UI_Manager>
 {
@@ -8,12 +9,16 @@ public class UI_Manager : Singleton<UI_Manager>
 [Header("Custom Cursor")]
     [SerializeField] private bool useCustomCursor;
     [SerializeField] private CanvasGroup customCursor;
+[Header("Cursor Sprite")]
+    [SerializeField] private Image imgCursor;
 
     private CURSOR_STATE currentCursorState = CURSOR_STATE.DEFAULT;
     private CoroutineExcuter cursorChanger;
+
     protected override void Awake()
     {
         base.Awake();
+        imgCursor.color = Color.white;
 
         if(!useCustomCursor){
             var data = cursorState_SO.GetCursorStateData(currentCursorState);
@@ -33,6 +38,11 @@ public class UI_Manager : Singleton<UI_Manager>
         else{
             Cursor.visible = false;
         }      
+    }
+    public void ChangeCursorMono(bool isWhite)
+    {
+        imgCursor.DOKill();
+        imgCursor.DOColor(isWhite? Color.white : Color.black, 0.2f);
     }
     public void UpdateCursorPos(Vector2 scrPos){
         if(useCustomCursor){

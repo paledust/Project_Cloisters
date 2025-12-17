@@ -1,27 +1,18 @@
-using System;
-using System.Collections;
 using UnityEngine;
 
 public class PerRendererCloistersDissolve : PerRendererBehavior
 {
-[Header("Dissolve Control")]
-    [SerializeField] public bool autoHideWhenNotSense = true;
-    [SerializeField] private float hideRadius = 0;
-    [SerializeField] private float fullRadius = 1;
-    [SerializeField] private float fadeDuration;
-    [SerializeField] private AnimationCurve fadeOverrideCurve;
+    [SerializeField, ColorUsage(true, true)] private Color fillColor = Color.white;
 
 [Header("Material Control")]
+    public float dissolveRadius = 0;
     [SerializeField] private bool useRectUV = false;
-    [SerializeField] private float dissolveRadius = 0;
     [SerializeField] public float emissionScale = 1;
     [SerializeField] private Vector2 dissolveCenter = new Vector2(0.5f, 0.5f);
     
     public bool m_isListenableActivated{get{return gameObject.activeInHierarchy;}}
 
-    private bool isRevealed;
-    private CoroutineExcuter totemDissolver;
-
+    private const string FillColorName = "_FillColor";
     private const string SpriteRectName = "_SpriteRect";
     private const string DissolveRadiusName = "_DissolveRadius";
     private const string EmissionScaleName = "_EmissionScale";
@@ -32,7 +23,6 @@ public class PerRendererCloistersDissolve : PerRendererBehavior
     protected override void InitProperties()
     {
         base.InitProperties();
-        totemDissolver = new CoroutineExcuter(this);
 
         Vector4 rect;
         rect.x = (m_Renderer as SpriteRenderer).sprite.textureRect.xMin;
@@ -50,33 +40,6 @@ public class PerRendererCloistersDissolve : PerRendererBehavior
         mpb.SetFloat(RadiusCenterYName, dissolveCenter.y);
         mpb.SetFloat(DissolveRadiusName, dissolveRadius);
         mpb.SetFloat(EmissionScaleName, emissionScale);
-    }
-    public void RevealTotem(){
-        if(!isRevealed) isRevealed = true;
-        totemDissolver.Excute(coroutineDissolveInTotem(fadeDuration));
-    }
-    public void RevealTotem(float dissolveInTime){
-        if(!isRevealed) isRevealed = true;
-        totemDissolver.Excute(coroutineDissolveInTotem(dissolveInTime));
-    }
-    public void HideTotem(){
-        if(isRevealed) isRevealed = false;
-        totemDissolver.Excute(coroutineDissolveTotem(hideRadius, fadeDuration));
-    }
-    public void HideTotem(float duration){
-        if(isRevealed) isRevealed = false;
-        totemDissolver.Excute(coroutineDissolveTotem(hideRadius, duration));
-    }
-    IEnumerator coroutineDissolveInTotem(float duration){
-        dissolveRadius = hideRadius;
-        yield return coroutineDissolveTotem(fullRadius, duration);
-    }
-    IEnumerator coroutineDissolveTotem(float targetRadius, float duration){
-        bool useCurve = fadeOverrideCurve.keys.Length>=2;
-        float initRadius = dissolveRadius;
-        yield return new WaitForLoop(duration, (t)=>{
-            if(useCurve) dissolveRadius = Mathf.Lerp(initRadius, targetRadius, fadeOverrideCurve.Evaluate(t));
-            else dissolveRadius = Mathf.Lerp(initRadius, targetRadius, t);
-        });
+        mpb.SetColor(FillColorName, fillColor);
     }
 }
