@@ -39,7 +39,7 @@ public class UI_Manager : Singleton<UI_Manager>
             Cursor.visible = false;
         }      
     }
-    public void ChangeCursorMono(bool isWhite)
+    public void ChangeCursorColor(bool isWhite)
     {
         imgCursor.DOKill();
         imgCursor.DOColor(isWhite? Color.white : Color.black, 0.2f);

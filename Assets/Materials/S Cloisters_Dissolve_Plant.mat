@@ -134,7 +134,7 @@ Material:
     - _Dissolve: 0
     - _DissolveDirection: 0
     - _DissolveDistance: 0.45
-    - _DissolveLength: 0.16
+    - _DissolveLength: -0.16
     - _DissolveNoiseStrength: 0.1
     - _DissolveRadius: 0.47
     - _DissolveSmooth: 0.01
@@ -178,10 +178,13 @@ Material:
     - _QueueOffset: 0
     - _RNDSeed: 0
     - _RadialScale: 1
+    - _RadiusBlink: 0
     - _RadiusCenterX: 0.5
     - _RadiusCenterY: 0.5
+    - _RadiusMin: 0
     - _RadiusNoiseX: 0
     - _RadiusNoiseY: 0
+    - _RadiusSmooth: 0
     - _ReceiveShadows: 1
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0

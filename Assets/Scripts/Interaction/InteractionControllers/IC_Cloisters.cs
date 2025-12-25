@@ -9,7 +9,6 @@ public class IC_Cloisters : IC_Basic
     [Header("Main Feedback")]
     [SerializeField] private PerRendererCloistersDissolve shineDissolve;
     [SerializeField] private float threasholdRotatorSpeed;
-    [SerializeField] private float switchAmount = 0.5f;
     [SerializeField] private float grawingSpeed = 1f;
     
     [Header("Totem")]
@@ -17,29 +16,22 @@ public class IC_Cloisters : IC_Basic
     [SerializeField, ShowOnly] private float progress;
 
     private float duration;
-    private bool isHovering;
 
     protected override void OnInteractionEnter()
     {
         base.OnInteractionEnter();
+        this.enabled = true;
         cloistersTimeline.Play();
         duration = (float)cloistersTimeline.duration;
-
-        isHovering = true;
+        UI_Manager.Instance.ChangeCursorColor(false);
+    }
+    protected override void OnInteractionEnd()
+    {
+        base.OnInteractionEnd();
+        this.enabled = false;
     }
     protected void Update()
     {
-        if(isHovering && !PlayerManager.Instance.m_isHovering)
-        {
-            isHovering = false;
-            UI_Manager.Instance.ChangeCursorMono(false);
-        }
-        if(!isHovering && PlayerManager.Instance.m_isHovering)
-        {
-            isHovering = true;
-            UI_Manager.Instance.ChangeCursorMono(true);
-        }
-
         if(heroSphere.m_angularSpeed > threasholdRotatorSpeed)
         {
             progress += Time.deltaTime * grawingSpeed;

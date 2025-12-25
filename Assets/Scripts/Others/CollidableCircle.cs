@@ -161,7 +161,7 @@ public class CollidableCircle : MonoBehaviour
         m_collider.radius = 0;
         m_circle.EnableHitbox();
         yield return new WaitForLoop(duration, (t)=>{
-            m_collider.radius = Mathf.Lerp(0, 0.16f*scaleFactor, t);
+            m_collider.radius = Mathf.Lerp(0, 2.4f*scaleFactor, t);
         });
     }
     IEnumerator coroutineFloatingUp(float duration){

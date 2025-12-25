@@ -53,6 +53,16 @@ public class Clickable_CloisterSphere : Basic_Clickable
         playerController = null;
         sizeChanger.Excute(coroutineChangePlanetSize(1f, backTime));
     }
+    public override void OnHover(PlayerController player)
+    {
+        base.OnHover(player);
+        UI_Manager.Instance.ChangeCursorColor(true);
+    }
+    public override void OnExitHover()
+    {
+        base.OnExitHover();
+        UI_Manager.Instance.ChangeCursorColor(false);
+    }
     IEnumerator coroutineChangePlanetSize(float targetSize, float duration, EasingFunc.Easing.FunctionType easeType = EasingFunc.Easing.FunctionType.QuadEaseOut){
         var easeFunc = EasingFunc.Easing.GetFunctionWithTypeEnum(easeType);
         Vector3 initSize = rotateTrans.localScale;
