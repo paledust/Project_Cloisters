@@ -395,11 +395,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9116136308850967213, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
         type: 3}
-      propertyPath: m_Drag
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 9116136308850967213, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
-        type: 3}
       propertyPath: m_Mass
       value: 1
       objectReference: {fileID: 0}
@@ -498,8 +493,8 @@ MonoBehaviour:
   m_rigid: {fileID: 8964006862732702565}
   circleAnime: {fileID: 3675650337772343011}
   circleRoot: {fileID: 4527830689480472958}
-  noiseFreq: 7
-  noiseAmp: 0.2
+  noiseFreq: 11
+  noiseAmp: 6
   circleOpacity:
   - {fileID: 9107378040283928094}
   - {fileID: 5345266303561280828}

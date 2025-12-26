@@ -1,25 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SmallCircleSpawner : Basic_ObjectPool<CollidableCircle>
 {
+[Header("Spawn")]
     [SerializeField] private RectSelector rectSelector;
-    [SerializeField] private Vector2 spawnCycleRange;
-    [SerializeField] private Vector2Int spawnAmountRange;
 [Header("Spawn Settings")]
     [SerializeField] private Vector2 spawnSize;
+    [SerializeField] private SphereCollider heroCircleCollider;
 
     public static RectSelector m_rectSelector;
-    
-    private float currentCycle;
-    private float spanwTimer;
 
     protected override void Awake(){
         base.Awake();
         m_rectSelector = rectSelector;
-        currentCycle = spawnCycleRange.GetRndValueInVector2Range();
-        spanwTimer = Time.time-currentCycle;
     }
     protected override void PrepareTarget(CollidableCircle target)
     {
@@ -29,21 +22,28 @@ public class SmallCircleSpawner : Basic_ObjectPool<CollidableCircle>
         target.ResetMotion();
         target.ResetSize(spawnSize.GetRndValueInVector2Range());
         target.transform.position = rectSelector.GetPoint();
-    }
-    void Update(){
-        if(Time.time-spanwTimer>=currentCycle){
-            spanwTimer = Time.time;
-            currentCycle = spawnCycleRange.GetRndValueInVector2Range();
-            int amount = spawnAmountRange.GetRndValueInVector2Range();
-            for(int i=0;i<amount;i++){
-                var go = GetObjFromPool(x=>!x.gameObject.activeSelf);
-                if(go!=null) {
-                    go.gameObject.SetActive(true);
-                    go.FloatUp(Random.Range(4f, 5f));
-                }
+        if (heroCircleCollider != null)
+        {
+            Vector2 diff = target.transform.position - heroCircleCollider.transform.position;
+            float minDist = heroCircleCollider.radius + target.radius;
+            if(diff.sqrMagnitude < minDist * minDist)
+            {
+                // Inside hero circle, move outside
+                diff = diff.normalized * (minDist+2);
+                target.transform.position = (Vector2)heroCircleCollider.transform.position + diff;
             }
         }
-
+    }
+    public void SpawnAtPoint(Vector3 point)
+    {
+        var go = GetObjFromPool(x=>!x.gameObject.activeSelf);
+        if(go!=null) {
+            go.transform.position = point;
+            go.gameObject.SetActive(true);
+            go.FloatUp(Random.Range(4f, 5f));
+        }
+    }
+    void Update(){
         for(int i=0; i<pools.Count; i++){
             if(pools[i].Collidable && !pools[i].IsVisible)
             {

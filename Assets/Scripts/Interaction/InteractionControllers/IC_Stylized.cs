@@ -74,7 +74,7 @@ public class IC_Stylized : IC_Basic
         transitioning = true;
     }
     public void OnAllTextOut(){
-        EventHandler.Call_OnFlashInput();
+        EventHandler.Call_OnFlushInput();
         EventHandler.Call_OnEndInteraction(this);
         StartCoroutine(coroutineEnd());
     }

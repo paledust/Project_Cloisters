@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Clickable_Circle : Basic_Clickable
 {
@@ -110,6 +111,12 @@ public class Clickable_Circle : Basic_Clickable
         float factor = m_rigid.isKinematic?bounceFactor:collisionFactor;
         for(int i=0; i<circleWobbles.Length; i++){
             circleWobbles[i].WobbleCircle(Mathf.Clamp(strength * factor * boucneScale, bounceRange.x, bounceRange.y), bounceCurve, bounceDuration);
+        }
+        if(isControlling)
+        {
+            EventHandler.Call_OnFlushInput();
+            Vector3 force = Vector3.ClampMagnitude(collision.impulse * 5, 20);
+            m_rigid.AddForce(-force, ForceMode.VelocityChange);
         }
 
         var otherCircle = collision.gameObject.GetComponent<Clickable_Circle>();

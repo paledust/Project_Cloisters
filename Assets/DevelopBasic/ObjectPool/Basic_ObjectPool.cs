@@ -1,11 +1,11 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Basic_ObjectPool<T> : MonoBehaviour where T: MonoBehaviour
 {
     [SerializeField] protected GameObject poolPrefab;
+    [SerializeField] protected Transform spawnRoot;
     [SerializeField] protected int MaxAmount = 15;
 
     protected List<T> pools;
@@ -19,6 +19,8 @@ public class Basic_ObjectPool<T> : MonoBehaviour where T: MonoBehaviour
         CleanUp();
     }
     protected T GetObjFromPool(Predicate<T> condition){
+        if(pools==null)
+            pools = new List<T>();
         var pendingObj = pools.Find(x=>condition(x));
     //Find object from pool
         if(pendingObj!=null){
@@ -40,7 +42,7 @@ public class Basic_ObjectPool<T> : MonoBehaviour where T: MonoBehaviour
         }
     }
     protected T SpawnTarget(){
-        var target = Instantiate(poolPrefab, transform).GetComponent<T>();
+        var target = Instantiate(poolPrefab, spawnRoot?spawnRoot:transform).GetComponent<T>();
         PrepareTarget(target);
         return target;
     }

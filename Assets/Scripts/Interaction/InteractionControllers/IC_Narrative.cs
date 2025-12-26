@@ -15,6 +15,8 @@ public class IC_Narrative : IC_Basic
     [SerializeField] private NarrativeSpawner narrativeSpawner;
     [SerializeField] private ParticleSystem p_collideBurst;
     [SerializeField] private float effectiveCollisionStep = 3;
+[Header("Interaction Start")]
+    [SerializeField] private Transform spawnPointAtStart;
 [Header("End")]
     [SerializeField] private float transition = 10;
     [SerializeField] private float collisionStrength = 0.1f;
@@ -45,6 +47,7 @@ public class IC_Narrative : IC_Basic
         EventHandler.E_OnControlCircle += OnControlCircleHandler;
         EventHandler.E_OnClickableCircleCollide += OnGrownCircleCollide;
         lastCollisionTime = Time.time - effectiveCollisionStep;
+        circleSpawner.SpawnAtPoint(spawnPointAtStart.position);
     }
     protected override void OnInteractionEnd()
     {

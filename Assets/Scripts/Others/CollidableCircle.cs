@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CollidableCircle : MonoBehaviour
@@ -44,6 +43,7 @@ public class CollidableCircle : MonoBehaviour
     public bool Collidable{get{return m_collider.enabled;}}
     public bool CanGrow{get{return !m_circle.IsGrownCircle && !isGrowing && !isFloating;}}
     public bool IsVisible{get{return m_bigCircleRenderer.isVisible;}}
+    public float radius => m_collider.radius * transform.localScale.x;
 
     private CoroutineExcuter velChanger;
     private Vector3 targetPoint;

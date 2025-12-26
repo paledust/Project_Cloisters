@@ -27,7 +27,7 @@ public class ShapeConnectController : MonoBehaviour
     }
     void OnShapeConnect(ConnectTrigger main, ConnectTrigger other)
     {
-        EventHandler.Call_OnFlashInput();
+        EventHandler.Call_OnFlushInput();
 
         main.OnConnectionBuild();
         other.OnConnectionBuild();

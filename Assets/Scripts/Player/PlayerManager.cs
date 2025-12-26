@@ -16,7 +16,7 @@ public class PlayerManager : Singleton<PlayerManager>
         EventHandler.E_AfterLoadScene += FindPlayer;
         EventHandler.E_OnTransitionBegin += TransitionBeginHandler;
         EventHandler.E_OnTransitionEnd += TransitionEndHandler;
-        EventHandler.E_OnFlashInput += FlashInputHandler;
+        EventHandler.E_OnFlushInput += FlashInputHandler;
     }
     void Start(){
         FindPlayer();
@@ -32,7 +32,7 @@ public class PlayerManager : Singleton<PlayerManager>
         EventHandler.E_AfterLoadScene -= FindPlayer;
         EventHandler.E_OnTransitionBegin -= TransitionBeginHandler;
         EventHandler.E_OnTransitionEnd -= TransitionEndHandler;
-        EventHandler.E_OnFlashInput -= FlashInputHandler;
+        EventHandler.E_OnFlushInput -= FlashInputHandler;
     }
     void TransitionBeginHandler(){
         IsInTransition = true;

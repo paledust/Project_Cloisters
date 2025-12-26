@@ -26,7 +26,7 @@ public class CircleExplodeController : MonoBehaviour
     IEnumerator coroutineExplode(float duration){
         p_explode.Play(true);
         clickable_Planet.BreakSpring();
-        EventHandler.Call_OnFlashInput();
+        EventHandler.Call_OnFlushInput();
         stylizedController.ExplodeToDissolveTransition();
         float initRadius = expandCircle.circleRadius;
         float initNoiseMin = expandCircle.noiseMin;
