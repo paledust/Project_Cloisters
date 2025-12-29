@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -11,8 +10,7 @@ public class IC_Narrative : IC_Basic
         public Color transitionColor;
     }
     [SerializeField] private RippleParticleController rippleParticleController;
-    [SerializeField] private SmallCircleSpawner circleSpawner;
-    [SerializeField] private NarrativeSpawner narrativeSpawner;
+    [SerializeField] private NarrativeCircleSpawner circleSpawner;
     [SerializeField] private ParticleSystem p_collideBurst;
     [SerializeField] private float effectiveCollisionStep = 3;
 [Header("Interaction Start")]
@@ -24,64 +22,103 @@ public class IC_Narrative : IC_Basic
 [Header("Hero Circle Control")]
     [SerializeField] private HeroCircleTransistor[] heroCircleSprites;
 
-    private bool isEnding = false;
     private float lastCollisionTime;
-    private Clickable_Circle lastCircle;
 
     protected override void LoadAssets()
     {
         base.LoadAssets();
         rippleParticleController.enabled = true;
-        narrativeSpawner.enabled = true;
         circleSpawner.enabled = true;
     }
     protected override void UnloadAssets()
     {
         base.UnloadAssets();
         rippleParticleController.enabled = false;
-        narrativeSpawner.enabled = false;
     }
     protected override void OnInteractionEnter()
     {
         base.OnInteractionEnter();
-        EventHandler.E_OnControlCircle += OnControlCircleHandler;
-        EventHandler.E_OnClickableCircleCollide += OnGrownCircleCollide;
+        EventHandler.E_OnClickableCircleCollide += OnCircleCollide;
         lastCollisionTime = Time.time - effectiveCollisionStep;
-        circleSpawner.SpawnAtPoint(spawnPointAtStart.position);
+        circleSpawner.SpawnAtPoint(spawnPointAtStart.position, 5f, NarrativeCircleSpawner.SpawnStyle.FloatUp);
     }
     protected override void OnInteractionEnd()
     {
         base.OnInteractionEnd();
         circleSpawner.enabled = false;
-        EventHandler.E_OnControlCircle -= OnControlCircleHandler;
-        EventHandler.E_OnClickableCircleCollide -= OnGrownCircleCollide;
+        EventHandler.E_OnClickableCircleCollide -= OnCircleCollide;
     }
-    void OnControlCircleHandler(Clickable_Circle circle)=>lastCircle = circle;
-    void OnGrownCircleCollide(Clickable_Circle collidedCircle, Vector3 contact, Vector3 diff, float strength){
+    void OnCircleCollide(Clickable_Circle collidedCircle, Clickable_Circle controlledCircle, Collision collision){
+        float strength = collision.relativeVelocity.magnitude;
         if(strength >= collisionStrength){
-        //Play Collision Particle
-            p_collideBurst.transform.position = contact;
+            //Play Collision Particle
+            Vector3 diff = controlledCircle.transform.position - collidedCircle.transform.position;
+            p_collideBurst.transform.position = collision.contacts[0].point;
             p_collideBurst.transform.rotation = Quaternion.Euler(0,0,Vector3.SignedAngle(Vector3.right, diff, Vector3.forward));
             p_collideBurst.Play(true);
-        //Check if collision too frequent
-            if(Time.time - lastCollisionTime<=effectiveCollisionStep) return;
-
+            //Check if collision too frequent
+            if(Time.time - lastCollisionTime<=effectiveCollisionStep) 
+                return;
             lastCollisionTime = Time.time;
+            //Stop Input and bounce off the circle
+            EventHandler.Call_OnFlushInput();
+            Vector3 force = collision.impulse.normalized * 12;
+            controlledCircle.m_rigid.velocity = -force;
+            //bounce off the other cirlce
+            var collidableCircle = collidedCircle.GetComponent<CollidableCircle>();
+            if(collidableCircle!=null)
+            {
+                collidableCircle.OnCollideWithControlledCircle(controlledCircle, collision.contacts[0].point, strength);
+                if(collidableCircle.m_hasCollided)
+                    return;
+                //Spawn Circle
+                int spawnAmount = Random.Range(1, 3);
+                float spawnAngle = Mathf.Sign(Random.value) * Random.Range(10, 35f);
 
-            collidedCircle.TriggerCollideRipple();
-            StartCoroutine(CommonCoroutine.delayAction(()=>{
-                narrativeSpawner.PlaceText();
-                if(collidedCircle.enabled){
-                    if(!isEnding){
-                        isEnding = true;
-                        for(int i=0; i<heroCircleSprites.Length; i++){
-                            StartCoroutine(coroutineTransitionCircle(heroCircleSprites[i], transition));
+                switch(collidedCircle.m_circleType)
+                {
+                    case Clickable_Circle.CircleType.Controlled:
+                        return;
+                    case Clickable_Circle.CircleType.Normal:
+                        bool hasTarget = false;
+                        for(int i=0; i<spawnAmount; i++)
+                        {
+                            var circle = PopupCircleAtPosAndPushedAway(collidedCircle.transform.position-Quaternion.Euler(0,0,spawnAngle-spawnAngle*i)*diff.normalized*0.2f,
+                                collidedCircle.transform.position);
+                            if(!hasTarget && Random.value>0.5f)
+                            {
+                                circle.m_circle.ChangeCircleType(Clickable_Circle.CircleType.Target);
+                                hasTarget = true;
+                            }
                         }
-                        StartCoroutine(coroutineEndInteraction());   
-                    }
+                        break;
+                    case Clickable_Circle.CircleType.Target:
+                    //Precreate one circle that has text in there
+                        var narrativeCircle = PopupCircleAtPosAndPushedAway(collidedCircle.transform.position-Quaternion.Euler(0,0,spawnAngle)*diff.normalized*0.2f,
+                                                                            collidedCircle.transform.position);
+                        narrativeCircle.m_circle.ChangeCircleType(Clickable_Circle.CircleType.Narrative);
+                        narrativeCircle.ShowText();
+                                                                                            
+                        for(int i=1; i<spawnAmount; i++)
+                        {
+                            PopupCircleAtPosAndPushedAway(collidedCircle.transform.position-Quaternion.Euler(0,0,spawnAngle-spawnAngle*i)*diff.normalized*0.2f,
+                                collidedCircle.transform.position);
+                        }
+                        break;
+                    case Clickable_Circle.CircleType.Narrative:
+                        //No spawn
+                        return;
                 }
-            }, 0.5f));
+            }
+
         }
+    }
+    protected CollidableCircle PopupCircleAtPosAndPushedAway(Vector3 Pos, Vector3 sourcePos)
+    {
+        var circle = circleSpawner.SpawnAtPoint(Pos, Random.Range(0.8f, 1.2f), NarrativeCircleSpawner.SpawnStyle.PopUp);
+        Vector3 dir = (circle.transform.position - sourcePos).normalized;
+        circle.m_rigidbody.AddForce(dir * Random.Range(18, 24), ForceMode.VelocityChange);
+        return circle;
     }
     IEnumerator coroutineEndInteraction(){
         yield return new WaitForSeconds(transition);

@@ -33,10 +33,8 @@ public static class EventHandler
     public static void Call_OnTransitionBegin() => E_OnTransitionBegin?.Invoke();
     public static event Action E_OnTransitionEnd;
     public static void Call_OnTransitionEnd() => E_OnTransitionEnd?.Invoke();
-    public static event Action<Clickable_Circle> E_OnControlCircle;
-    public static void Call_OnControlCircle(Clickable_Circle circle) => E_OnControlCircle?.Invoke(circle);
-    public static event Action<Clickable_Circle, Vector3, Vector3, float> E_OnClickableCircleCollide;
-    public static void Call_OnClickableCircleCollide(Clickable_Circle collidedCircle, Vector3 contact, Vector3 diff, float strength) => E_OnClickableCircleCollide?.Invoke(collidedCircle, contact, diff, strength);
+    public static event Action<Clickable_Circle, Clickable_Circle, Collision> E_OnClickableCircleCollide;
+    public static void Call_OnClickableCircleCollide(Clickable_Circle collidedCircle, Clickable_Circle controlledCircle,Collision collision) => E_OnClickableCircleCollide?.Invoke(collidedCircle, controlledCircle, collision);
     public static event Action<ConnectTrigger, ConnectTrigger> E_OnShapeConnect;
     public static void Call_OnShapeConnect(ConnectTrigger main, ConnectTrigger other) => E_OnShapeConnect?.Invoke(main, other);
     public static event Action<CollectableText> E_OnCollectExperimentalText;

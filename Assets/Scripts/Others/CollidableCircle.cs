@@ -1,4 +1,6 @@
 using System.Collections;
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class CollidableCircle : MonoBehaviour
@@ -23,7 +25,6 @@ public class CollidableCircle : MonoBehaviour
     [SerializeField] private SpriteRenderer m_bigCircleRenderer;
     [SerializeField] private SphereCollider m_collider;
     [SerializeField] private Transform renderRoot;
-    [SerializeField] private Clickable_Circle m_circle;
     [SerializeField] private Rigidbody m_rigid;
     [SerializeField] private Animation circleAnime;
 [Header("Float")]
@@ -36,64 +37,77 @@ public class CollidableCircle : MonoBehaviour
     [SerializeField] private float otherGrowCollisionStrength = 0.01f;
 [Header("Reset Size")]
     [SerializeField] private ResizableTrans[] resetCircles;
+[Header("SpawnCircle")]
+    [SerializeField, ShowOnly] private bool hasCollided = false;
+    private List<CollidableCircle> connectedSpawnedCircles;
+[Header("Text")]
+    [SerializeField] private TextMeshPro txt;
 
     private bool isGrowing = false;
-    private bool isFloating = false;
-
-    public bool Collidable{get{return m_collider.enabled;}}
-    public bool CanGrow{get{return !m_circle.IsGrownCircle && !isGrowing && !isFloating;}}
-    public bool IsVisible{get{return m_bigCircleRenderer.isVisible;}}
-    public float radius => m_collider.radius * transform.localScale.x;
-
+    private bool isSpawning = false;
+    private Clickable_Circle circle;
     private CoroutineExcuter velChanger;
     private Vector3 targetPoint;
-    private const string GrowClassTwoClip = "CircleGrow_Class_2";
-    private const string GrowClassThreeClip = "CircleGrow_Class_3";
-    private const string CircleFloat = "CircleFloat";
 
+    public bool Collidable => m_collider.enabled;
+    public bool CanGrow => !circle.IsGrownCircle && !isGrowing && !isSpawning;
+    public bool IsVisible => m_bigCircleRenderer.isVisible;
+    public bool m_hasCollided => hasCollided;
+    public float radius => m_collider.radius * transform.localScale.x;
+    public Clickable_Circle m_circle => circle;
+    public Rigidbody m_rigidbody => m_rigid;
+
+    private const string GROW_TIER_TWO = "CircleGrow_Class_2";
+    private const string GROW_TIER_THREE = "CircleGrow_Class_3";
+    private const string FLOAT_ANIMATION = "CircleFloat";
+    private const string POPUP_ANIMATION = "CirclePopUp";
+    void Awake()
+    {
+        circle = GetComponent<Clickable_Circle>();
+    }
     void Start(){
         velChanger = new CoroutineExcuter(this);
     }
     void Update(){
         circleMotionControl.UpdateCircleMotion(m_rigid.velocity);
     }
-    void OnCollisionEnter(Collision other){
+    public void OnCollideWithControlledCircle(Clickable_Circle controlledCircle, Vector3 contact, float strength)
+    {
+        //产生小球
+        if(hasCollided)
+            return;
+        hasCollided = true;
         velChanger.Abort();
+        m_rigid.velocity = (m_rigid.position - contact).normalized * strength;
+        // if(controlledCircle.IsGrownCircle){
+        //     if(CanGrow){
+        //         isGrowing = true;
+        //         switch(m_circle.m_circleClass){
+        //             case 1:
+        //                 circleAnime.Play(GROW_TIER_TWO);
+        //                 break;
+        //             case 2:
+        //                 circleAnime.Play(GROW_TIER_THREE);
+        //                 break;
+        //         }
+        //     }
+        // }
+        m_rigid.drag = 6;
+        circle.TriggerCollideRipple();
 
-        var otherCircle = other.gameObject.GetComponent<Clickable_Circle>();
-
-        if(!otherCircle.enabled){
-            Vector3 separate = other.relativeVelocity;
-            separate.z = 0;
-            m_rigid.velocity = separate*(0.6f+m_circle.m_circleClass*0.1f);
-            other.rigidbody.velocity = -separate*(0.6f+m_circle.m_circleClass*0.1f);
-        }
-
-        if(otherCircle.IsGrownCircle){
-            float strength = otherCircle.enabled?other.rigidbody.velocity.magnitude:other.relativeVelocity.magnitude;
-            if(strength<(otherCircle.enabled?controlGrowCollisionStrength:otherGrowCollisionStrength)) {
-                StartCoroutine(CommonCoroutine.delayAction(()=>BeginVelocitySlerp(), 0.25f));
-                return;
-            }
-            if(CanGrow){
-                isGrowing = true;
-                switch(m_circle.m_circleClass){
-                    case 1:
-                        circleAnime.Play(GrowClassTwoClip);
-                        break;
-                    case 2:
-                        circleAnime.Play(GrowClassThreeClip);
-                        break;
-                }
-            }
-            else{
-                StartCoroutine(CommonCoroutine.delayAction(()=>BeginVelocitySlerp(), 0.25f));
-            }
-        }
-        else{
-            StartCoroutine(CommonCoroutine.delayAction(()=>BeginVelocitySlerp(), 0.25f));
-        }
+        //固定自身
+        StartCoroutine(coroutineCreateJointAtCurrentPos(1));
     }
+
+    #region Circle Spawning
+    public void ConnectSpawnedCircle(CollidableCircle[] spawnedCircles)
+    {
+        connectedSpawnedCircles.AddRange(spawnedCircles);
+        hasCollided = true;
+    }
+    #endregion
+
+    #region Circle Motion
     public void ResetSize(float size){
         renderRoot.transform.localScale = Vector3.one * size;
         m_collider.radius = 0.16f*size;
@@ -105,28 +119,37 @@ public class CollidableCircle : MonoBehaviour
         for(int i=0; i<circleOpacity.Length; i++)
             circleOpacity[i].opacity = 0;
 
-        isFloating = false;
+        isSpawning = false;
         isGrowing  = false;
-        m_circle.ResetWobble();
-        int currentClass = m_circle.m_circleClass;
+        circle.ResetWobble();
+        int currentClass = circle.m_circleClass;
         for(int i=0; i<resetCircles.Length; i++){
             resetCircles[i].ResetSize(currentClass);
         }
     }
     public void FloatUp(float duration){
-        isFloating = true;
+        isSpawning = true;
         StartCoroutine(coroutineFloatingUp(duration));
     }
+    public void PopUp(float duration)
+    {
+        isSpawning = true;
+        circleAnime[POPUP_ANIMATION].speed = circleAnime[POPUP_ANIMATION].length/duration;
+        circleAnime.Play(POPUP_ANIMATION);
+    }
+    #endregion
+
+    #region Animation Event
     public void AE_EnableHitbox(){
         float size = renderRoot.transform.localScale.x;
         StartCoroutine(coroutineGrowHitbox(2f, size));
     }
     public void AE_FloatDone(){
-        isFloating = false;
+        isSpawning = false;
     }
     public void AE_GrowingDone(){
         isGrowing = false;
-        int circleClass = m_circle.IncreaseCircleClass();
+        int circleClass = circle.IncreaseCircleClass();
 
         switch(circleClass){
             case 2:
@@ -143,8 +166,17 @@ public class CollidableCircle : MonoBehaviour
         }
         BeginVelocitySlerp();
     }
+    #endregion
+
+    #region Text
+    public void ShowText()
+    {
+        txt.gameObject.SetActive(true);
+    }
+    #endregion
+
     void BeginVelocitySlerp(){
-        Vector3 point = SmallCircleSpawner.m_rectSelector.GetPoint();
+        Vector3 point = NarrativeCircleSpawner.m_rectSelector.GetPoint();
         targetPoint = point;
         point.z = transform.position.z;
         velChanger.Excute(coroutineSlerpVelocity(point, 0.2f, Random.Range(0.05f, 0.08f), Random.Range(4f, 5f)));
@@ -159,7 +191,7 @@ public class CollidableCircle : MonoBehaviour
     }
     IEnumerator coroutineGrowHitbox(float duration, float scaleFactor){
         m_collider.radius = 0;
-        m_circle.EnableHitbox();
+        circle.EnableHitbox();
         yield return new WaitForLoop(duration, (t)=>{
             m_collider.radius = Mathf.Lerp(0, 2.4f*scaleFactor, t);
         });
@@ -167,8 +199,8 @@ public class CollidableCircle : MonoBehaviour
     IEnumerator coroutineFloatingUp(float duration){
         Vector3 circlePos = Vector3.zero;
         Vector2 seed = Random.insideUnitCircle;
-        circleAnime[CircleFloat].speed = circleAnime[CircleFloat].length/duration;
-        circleAnime.Play(CircleFloat);
+        circleAnime[FLOAT_ANIMATION].speed = circleAnime[FLOAT_ANIMATION].length/duration;
+        circleAnime.Play(FLOAT_ANIMATION);
         yield return new WaitForLoop(duration, (t)=>{
             circlePos.x = noiseAmp * (Mathf.PerlinNoise(t*noiseFreq, seed.x)*2-1) * EasingFunc.Easing.QuadEaseIn(1-t);
             circlePos.y = noiseAmp * (Mathf.PerlinNoise(t*noiseFreq, 0.12345f+seed.y)*2-1) * EasingFunc.Easing.QuadEaseIn(1-t);
@@ -176,6 +208,10 @@ public class CollidableCircle : MonoBehaviour
         });
 
         BeginVelocitySlerp();
+    }
+    IEnumerator coroutineCreateJointAtCurrentPos(float delay){
+        yield return new WaitForSeconds(delay);
+        PhysicDragManager.PinRigidToCurrentPos(m_rigid, 50, 2);
     }
     void OnDrawGizmos(){
         Gizmos.color = Color.green;

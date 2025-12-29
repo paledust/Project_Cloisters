@@ -1,10 +1,16 @@
 using System.Collections;
-using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class Clickable_Circle : Basic_Clickable
 {
+    public enum CircleType
+    {
+        Controlled, //Player Controlled Circle
+        Normal, //Normal Circle, spawn new Circles once collide.
+        Target, //Target Circle mostly same as Normal Circle, but the newly spanwed circles must contain a narrative circle.
+        Narrative, //Contain text, collide will spawn nothing.
+    }
     [System.Serializable]
     public class CircleWobble{
         public PerRendererWobbles perRendererWobbles;
@@ -35,7 +41,6 @@ public class Clickable_Circle : Basic_Clickable
         }
     }
 [Header("Circle Control")]
-    [SerializeField] private Rigidbody m_rigid;
     [SerializeField] private int circleClass = 3;
     [SerializeField] private float maxfollowSpeed = 10;
     [SerializeField] private float lerpSpeed = 5;
@@ -45,6 +50,7 @@ public class Clickable_Circle : Basic_Clickable
     [SerializeField] private ParticleSystem p_trail;
     [SerializeField] private ParticleSystem p_ripple;
 [Header("Collision")]
+    [SerializeField] private CircleType circleType;
     [SerializeField] private float bounceFactor;
     [SerializeField] private float collisionFactor;
     [SerializeField] private float boucneScale = 0.01f;
@@ -54,18 +60,27 @@ public class Clickable_Circle : Basic_Clickable
 [Header("Circle Animation Control")]
     [SerializeField] private CircleWobble[] circleWobbles;
     [SerializeField] private CircleMotionControl circleMotionControl;
+[Header("Circle Type VFX")]
+    [SerializeField] private SpriteRenderer spriteGlow;
 
     private float camDepth;
+    private Rigidbody rigid;
+    private SphereCollider sphereCollider;
     private Vector3 velocity;
 
-    public bool IsGrownCircle{get{return circleClass == 3;}}
-    public int m_circleClass{get{return circleClass;}}
+    public bool IsGrownCircle => circleClass == 3;
+    public int m_circleClass => circleClass;
+    public float radius => sphereCollider.radius * transform.localScale.x;
+    public Rigidbody m_rigid => rigid;
+    public CircleType m_circleType => circleType;
 
-    void Start(){
+    void Awake(){
+        rigid = GetComponent<Rigidbody>();
+        sphereCollider = GetComponent<SphereCollider>();
         camDepth = Camera.main.WorldToScreenPoint(transform.position).z;
     }
     void Update(){
-        velocity *= (1-speedDrag);
+        velocity *= 1-speedDrag;
         circleMotionControl.UpdateCircleMotion(velocity);
     }
     void FixedUpdate(){
@@ -79,7 +94,6 @@ public class Clickable_Circle : Basic_Clickable
         player.HoldInteractable(this);
         p_trail.Play(true);
         m_rigid.isKinematic = true;
-        EventHandler.Call_OnControlCircle(this);
     }
     public override void OnRelease(PlayerController player)
     {
@@ -106,22 +120,37 @@ public class Clickable_Circle : Basic_Clickable
         }        
     }
     public void TriggerCollideRipple()=>p_ripple.Play(true);
+    public void ChangeCircleType(CircleType newType){
+        circleType = newType;
+        if(circleType == CircleType.Target)
+        {
+            spriteGlow.DOFade(0.25f, 1f).SetEase(Ease.OutQuad);
+        }
+    }
     void OnCollisionEnter(Collision collision){
-        float strength = collision.rigidbody.velocity.magnitude;
+        float strength = collision.relativeVelocity.magnitude;
         float factor = m_rigid.isKinematic?bounceFactor:collisionFactor;
         for(int i=0; i<circleWobbles.Length; i++){
             circleWobbles[i].WobbleCircle(Mathf.Clamp(strength * factor * boucneScale, bounceRange.x, bounceRange.y), bounceCurve, bounceDuration);
         }
-        if(isControlling)
-        {
-            EventHandler.Call_OnFlushInput();
-            Vector3 force = Vector3.ClampMagnitude(collision.impulse * 5, 20);
-            m_rigid.AddForce(-force, ForceMode.VelocityChange);
-        }
 
-        var otherCircle = collision.gameObject.GetComponent<Clickable_Circle>();
-        if(otherCircle.IsGrownCircle && IsGrownCircle){
-            EventHandler.Call_OnClickableCircleCollide(otherCircle, collision.contacts[0].point, transform.position - collision.transform.position, strength);
+        var otherCircle = collision.gameObject.GetComponent<CollidableCircle>();
+        if(otherCircle != null)
+        {
+            EventHandler.Call_OnClickableCircleCollide(otherCircle.m_circle, this, collision);
         }
+        // if(isControlling && strength <= )
+        // {
+        //     EventHandler.Call_OnFlushInput();
+        //     Vector3 force = collision.impulse.normalized * 12;
+        //     m_rigid.velocity = -force;
+
+        //     var otherCircle = collision.gameObject.GetComponent<CollidableCircle>();
+        //     if(otherCircle != null)
+        //     {
+        //         otherCircle.OnCollideWithControlledCircle(this, collision.contacts[0].point, strength);
+        //     }
+        // }
+
     }
 }

@@ -30,7 +30,7 @@ public class Blur_URP_Pass : ScriptableRenderPass
     public override void OnCameraSetup(CommandBuffer cmd, ref RenderingData renderingData){
         material = CoreUtils.CreateEngineMaterial(Shader.Find("Hidden/Custom/Blur_URP"));
 
-        src = renderingData.cameraData.renderer.cameraColorTarget;
+        src = renderingData.cameraData.renderer.cameraColorTargetHandle;
         
         RenderTextureDescriptor descriptor = renderingData.cameraData.cameraTargetDescriptor;
         cmd.GetTemporaryRT(BlurRT_ID_V, descriptor.width>>1, descriptor.height>>1, 0, FilterMode.Bilinear, descriptor.colorFormat);

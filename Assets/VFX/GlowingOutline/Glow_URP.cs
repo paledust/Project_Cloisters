@@ -93,7 +93,7 @@ public class Glow_URP_Pass : ScriptableRenderPass
     //Glow Compose
         _composeMaterial = CoreUtils.CreateEngineMaterial(Shader.Find("Hidden/GlowComposite"));
 
-        src = renderingData.cameraData.renderer.cameraColorTarget;
+        src = renderingData.cameraData.renderer.cameraColorTargetHandle;
         
         RenderTextureDescriptor descriptor = renderingData.cameraData.cameraTargetDescriptor;
         cmd.GetTemporaryRT(screenTexID, descriptor, FilterMode.Bilinear);
