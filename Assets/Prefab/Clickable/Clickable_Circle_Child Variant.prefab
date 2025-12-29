@@ -482,17 +482,17 @@ PrefabInstance:
     - target: {fileID: 4337985783848230469, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.5
+      value: 0.35
       objectReference: {fileID: 0}
     - target: {fileID: 4337985783848230469, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.5
+      value: 0.35
       objectReference: {fileID: 0}
     - target: {fileID: 4337985783848230469, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.5
+      value: 0.35
       objectReference: {fileID: 0}
     - target: {fileID: 4337985783848230469, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
         type: 3}
@@ -543,6 +543,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4337985783848230469, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4337985783848230490, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
         type: 3}
@@ -750,7 +755,7 @@ MonoBehaviour:
   - circleTrans: {fileID: 4527830689181021050}
     classOneSize: 0
     classTwoSize: 0
-  hasSpawnedCircle: 0
+  hasCollided: 0
   txt: {fileID: 7740386476624176888}
 --- !u!4 &4527830689499131789 stripped
 Transform:

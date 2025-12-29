@@ -15,9 +15,6 @@ public class Basic_ObjectPool<T> : MonoBehaviour where T: MonoBehaviour
         pools = new List<T>();
         neededAmount = 0;
     }
-    void OnDestroy(){
-        CleanUp();
-    }
     protected T GetObjFromPool(Predicate<T> condition){
         if(pools==null)
             pools = new List<T>();

@@ -14,11 +14,14 @@ public class NarrativeCircleSpawner : Basic_ObjectPool<CollidableCircle>
     [SerializeField] private Vector2 spawnSize;
     [SerializeField] private SphereCollider heroCircleCollider;
 
+    private IC_Narrative narrativeController;
+
     public static RectSelector m_rectSelector;
 
     protected override void Awake(){
         base.Awake();
         m_rectSelector = rectSelector;
+        narrativeController = GetComponent<IC_Narrative>();
     }
     public CollidableCircle SpawnAtPoint(Vector3 point, float duration, SpawnStyle style)
     {
@@ -58,15 +61,7 @@ public class NarrativeCircleSpawner : Basic_ObjectPool<CollidableCircle>
                 target.transform.position = (Vector2)heroCircleCollider.transform.position + diff;
             }
         }
-    }
-    void Update(){
-        for(int i=0; i<pools.Count; i++){
-            if(pools[i].Collidable && !pools[i].IsVisible)
-            {
-                pools[i].gameObject.SetActive(false);
-                RecycleTarget(pools[i]);
-            }
-        }
+        target.OnCircleSpawned(narrativeController);
     }
     void OnDrawGizmosSelected(){
         rectSelector.DrawGizmo(new Color(0,1,0,0.25f));

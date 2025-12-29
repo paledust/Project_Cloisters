@@ -90,7 +90,6 @@ public class Clickable_Circle : Basic_Clickable
     public override void OnClick(PlayerController player, Vector3 hitPos)
     {
         base.OnClick(player, hitPos);
-
         player.HoldInteractable(this);
         p_trail.Play(true);
         m_rigid.isKinematic = true;
@@ -139,18 +138,5 @@ public class Clickable_Circle : Basic_Clickable
         {
             EventHandler.Call_OnClickableCircleCollide(otherCircle.m_circle, this, collision);
         }
-        // if(isControlling && strength <= )
-        // {
-        //     EventHandler.Call_OnFlushInput();
-        //     Vector3 force = collision.impulse.normalized * 12;
-        //     m_rigid.velocity = -force;
-
-        //     var otherCircle = collision.gameObject.GetComponent<CollidableCircle>();
-        //     if(otherCircle != null)
-        //     {
-        //         otherCircle.OnCollideWithControlledCircle(this, collision.contacts[0].point, strength);
-        //     }
-        // }
-
     }
 }

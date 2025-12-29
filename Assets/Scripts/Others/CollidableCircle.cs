@@ -39,19 +39,18 @@ public class CollidableCircle : MonoBehaviour
     [SerializeField] private ResizableTrans[] resetCircles;
 [Header("SpawnCircle")]
     [SerializeField, ShowOnly] private bool hasCollided = false;
-    private List<CollidableCircle> connectedSpawnedCircles;
 [Header("Text")]
     [SerializeField] private TextMeshPro txt;
 
     private bool isGrowing = false;
     private bool isSpawning = false;
+    private IC_Narrative narrativeController;
     private Clickable_Circle circle;
     private CoroutineExcuter velChanger;
     private Vector3 targetPoint;
 
     public bool Collidable => m_collider.enabled;
     public bool CanGrow => !circle.IsGrownCircle && !isGrowing && !isSpawning;
-    public bool IsVisible => m_bigCircleRenderer.isVisible;
     public bool m_hasCollided => hasCollided;
     public float radius => m_collider.radius * transform.localScale.x;
     public Clickable_Circle m_circle => circle;
@@ -74,24 +73,9 @@ public class CollidableCircle : MonoBehaviour
     public void OnCollideWithControlledCircle(Clickable_Circle controlledCircle, Vector3 contact, float strength)
     {
         //产生小球
-        if(hasCollided)
-            return;
         hasCollided = true;
         velChanger.Abort();
         m_rigid.velocity = (m_rigid.position - contact).normalized * strength;
-        // if(controlledCircle.IsGrownCircle){
-        //     if(CanGrow){
-        //         isGrowing = true;
-        //         switch(m_circle.m_circleClass){
-        //             case 1:
-        //                 circleAnime.Play(GROW_TIER_TWO);
-        //                 break;
-        //             case 2:
-        //                 circleAnime.Play(GROW_TIER_THREE);
-        //                 break;
-        //         }
-        //     }
-        // }
         m_rigid.drag = 6;
         circle.TriggerCollideRipple();
 
@@ -100,10 +84,9 @@ public class CollidableCircle : MonoBehaviour
     }
 
     #region Circle Spawning
-    public void ConnectSpawnedCircle(CollidableCircle[] spawnedCircles)
+    public void OnCircleSpawned(IC_Narrative narrativeController)
     {
-        connectedSpawnedCircles.AddRange(spawnedCircles);
-        hasCollided = true;
+        this.narrativeController = narrativeController;
     }
     #endregion
 
@@ -171,6 +154,7 @@ public class CollidableCircle : MonoBehaviour
     #region Text
     public void ShowText()
     {
+        txt.text = narrativeController.GetNextNarrativeChar().ToString();
         txt.gameObject.SetActive(true);
     }
     #endregion
