@@ -133,6 +133,8 @@ public class Clickable_Circle : Basic_Clickable
             circleWobbles[i].WobbleCircle(Mathf.Clamp(strength * factor * boucneScale, bounceRange.x, bounceRange.y), bounceCurve, bounceDuration);
         }
 
+        if(!this.isControlling)
+            return;
         var otherCircle = collision.gameObject.GetComponent<CollidableCircle>();
         if(otherCircle != null)
         {

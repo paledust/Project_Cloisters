@@ -144,10 +144,8 @@ public class CollidableCircle : MonoBehaviour
                 m_rigid.drag = 5;
                 // m_circle.enabled = true;
                 // m_circle.EnableRaycast();
-
                 break;
         }
-        BeginVelocitySlerp();
     }
     #endregion
 
@@ -159,20 +157,7 @@ public class CollidableCircle : MonoBehaviour
     }
     #endregion
 
-    void BeginVelocitySlerp(){
-        Vector3 point = NarrativeCircleSpawner.m_rectSelector.GetPoint();
-        targetPoint = point;
-        point.z = transform.position.z;
-        velChanger.Excute(coroutineSlerpVelocity(point, 0.2f, Random.Range(0.05f, 0.08f), Random.Range(4f, 5f)));
-    }
-    IEnumerator coroutineSlerpVelocity(Vector3 target, float velFactor, float maxMag, float duration){
-        Vector3 startVel = m_rigid.velocity;
-        Vector3 targetVel = Vector3.ClampMagnitude(velFactor*(target - m_rigid.position), maxMag);
-        yield return new WaitForLoop(duration, (t)=>{
-            m_rigid.velocity = Vector3.Slerp(startVel, targetVel, t);
-        });
-        BeginVelocitySlerp();
-    }
+
     IEnumerator coroutineGrowHitbox(float duration, float scaleFactor){
         m_collider.radius = 0;
         circle.EnableHitbox();
@@ -190,8 +175,6 @@ public class CollidableCircle : MonoBehaviour
             circlePos.y = noiseAmp * (Mathf.PerlinNoise(t*noiseFreq, 0.12345f+seed.y)*2-1) * EasingFunc.Easing.QuadEaseIn(1-t);
             circleRoot.localPosition = circlePos;
         });
-
-        BeginVelocitySlerp();
     }
     IEnumerator coroutineCreateJointAtCurrentPos(float delay){
         yield return new WaitForSeconds(delay);
