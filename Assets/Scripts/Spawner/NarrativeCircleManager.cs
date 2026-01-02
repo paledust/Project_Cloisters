@@ -26,6 +26,8 @@ public class NarrativeCircleManager : Basic_ObjectPool<CollidableCircle>
         {
             var circle = listCircles[i];
             Vector3 pos = circle.transform.position;
+            if(circle.isPined)
+                continue;
             if(circle.transform.position.x < rectSelector.MinX)
             {
                 pos.x += rectSelector.rectWidth;

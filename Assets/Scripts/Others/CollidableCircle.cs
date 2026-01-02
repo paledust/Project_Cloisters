@@ -53,6 +53,7 @@ public class CollidableCircle : MonoBehaviour
     public bool CanGrow => !circle.IsGrownCircle && !isGrowing && !isSpawning;
     public bool m_hasCollided => hasCollided;
     public float radius => m_collider.radius * transform.localScale.x;
+    public bool isPined{get; private set;} = false;
     public Clickable_Circle m_circle => circle;
     public Rigidbody m_rigidbody => m_rigid;
 
@@ -183,6 +184,7 @@ public class CollidableCircle : MonoBehaviour
         });
     }
     IEnumerator coroutineCreateJointAtCurrentPos(float delay){
+        isPined = true;
         yield return new WaitForSeconds(delay);
         PhysicDragManager.PinRigidToCurrentPos(m_rigid, 50, 2);
     }
