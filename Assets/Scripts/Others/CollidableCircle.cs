@@ -41,12 +41,12 @@ public class CollidableCircle : MonoBehaviour
     [SerializeField, ShowOnly] private bool hasCollided = false;
 [Header("Text")]
     [SerializeField] private TextMeshPro txt;
+    [SerializeField] private ParticleSystem p_hasText;
 
     private bool isGrowing = false;
     private bool isSpawning = false;
     private IC_Narrative narrativeController;
     private Clickable_Circle circle;
-    private CoroutineExcuter velChanger;
     private Vector3 targetPoint;
 
     public bool Collidable => m_collider.enabled;
@@ -65,22 +65,29 @@ public class CollidableCircle : MonoBehaviour
         circle = GetComponent<Clickable_Circle>();
     }
     void Start(){
-        velChanger = new CoroutineExcuter(this);
+        if(circle.m_circleType == Clickable_Circle.CircleType.Target)
+            p_hasText.Play();
     }
     void Update(){
         circleMotionControl.UpdateCircleMotion(m_rigid.velocity);
+    }
+    void OnDrawGizmos(){
+        Gizmos.color = Color.green;
+        Gizmos.DrawSphere(targetPoint, 0.01f);
+        DebugExtension.DrawArrow(m_rigid.position, m_rigid.velocity, Color.blue);
     }
     public void OnCollideWithControlledCircle(Clickable_Circle controlledCircle, Vector3 contact, float strength)
     {
         //产生小球
         hasCollided = true;
-        velChanger.Abort();
         m_rigid.velocity = (m_rigid.position - contact).normalized * strength;
         m_rigid.drag = 6;
         circle.TriggerCollideRipple();
 
         //固定自身
         StartCoroutine(coroutineCreateJointAtCurrentPos(1));
+        if(circle.m_circleType == Clickable_Circle.CircleType.Target)
+            p_hasText.Stop();
     }
 
     #region Circle Spawning
@@ -157,7 +164,6 @@ public class CollidableCircle : MonoBehaviour
     }
     #endregion
 
-
     IEnumerator coroutineGrowHitbox(float duration, float scaleFactor){
         m_collider.radius = 0;
         circle.EnableHitbox();
@@ -179,10 +185,5 @@ public class CollidableCircle : MonoBehaviour
     IEnumerator coroutineCreateJointAtCurrentPos(float delay){
         yield return new WaitForSeconds(delay);
         PhysicDragManager.PinRigidToCurrentPos(m_rigid, 50, 2);
-    }
-    void OnDrawGizmos(){
-        Gizmos.color = Color.green;
-        Gizmos.DrawSphere(targetPoint, 0.01f);
-        DebugExtension.DrawArrow(m_rigid.position, m_rigid.velocity, Color.blue);
     }
 }

@@ -10,11 +10,11 @@ public class IC_Narrative : IC_Basic
         public Color transitionColor;
     }
     [SerializeField] private RippleParticleController rippleParticleController;
-    [SerializeField] private NarrativeCircleSpawner circleSpawner;
+    [SerializeField] private NarrativeCircleManager circleSpawner;
     [SerializeField] private ParticleSystem p_collideBurst;
     [SerializeField] private float effectiveCollisionStep = 3;
 [Header("Interaction Start")]
-    [SerializeField] private Transform spawnPointAtStart;
+    [SerializeField] private Transform[] spawnPointAtStart;
     [SerializeField] private char[] narrativeChars;
 [Header("End")]
     [SerializeField] private float transition = 10;
@@ -22,6 +22,8 @@ public class IC_Narrative : IC_Basic
     [SerializeField] private PlayableDirector TL_End;
 [Header("Hero Circle Control")]
     [SerializeField] private HeroCircleTransistor[] heroCircleSprites;
+[Header("Connection")]
+    [SerializeField] private NarrativeConnectLineController connectLineController;
 
     private int narrativeCharIndex = 0;
     private float lastCollisionTime;
@@ -42,7 +44,10 @@ public class IC_Narrative : IC_Basic
         base.OnInteractionEnter();
         EventHandler.E_OnClickableCircleCollide += OnCircleCollide;
         lastCollisionTime = Time.time - effectiveCollisionStep;
-        circleSpawner.SpawnAtPoint(spawnPointAtStart.position, 5f, NarrativeCircleSpawner.SpawnStyle.FloatUp);
+        foreach(var spawnPoint in spawnPointAtStart)
+        {
+            circleSpawner.SpawnAtPoint(spawnPoint.position, Random.Range(3f, 4f), NarrativeCircleManager.SpawnStyle.FloatUp);
+        }
         narrativeCharIndex = 0;
         Service.Shuffle(ref narrativeChars);
     }
@@ -78,7 +83,7 @@ public class IC_Narrative : IC_Basic
                 //Spawn Circle
                 int spawnAmount = Random.Range(1, 3);
                 float spawnAngle = Mathf.Sign(Random.value) * Random.Range(10, 35f);
-
+                //Modify Circle type
                 switch(collidedCircle.m_circleType)
                 {
                     case Clickable_Circle.CircleType.Controlled:
@@ -113,13 +118,15 @@ public class IC_Narrative : IC_Basic
                         //No spawn
                         return;
                 }
+                //Create Connection Line
+                connectLineController.BuildConnectLine(controlledCircle, collidedCircle);
             }
 
         }
     }
     protected CollidableCircle PopupCircleAtPosAndPushedAway(Vector3 Pos, Vector3 sourcePos)
     {
-        var circle = circleSpawner.SpawnAtPoint(Pos, Random.Range(0.8f, 1.2f), NarrativeCircleSpawner.SpawnStyle.PopUp);
+        var circle = circleSpawner.SpawnAtPoint(Pos, Random.Range(0.8f, 1.2f), NarrativeCircleManager.SpawnStyle.PopUp);
         Vector3 dir = (circle.transform.position - sourcePos).normalized;
         circle.m_rigidbody.AddForce(dir * Random.Range(12, 16), ForceMode.VelocityChange);
         return circle;
