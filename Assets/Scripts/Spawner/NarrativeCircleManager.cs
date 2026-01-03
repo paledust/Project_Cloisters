@@ -89,7 +89,6 @@ public class NarrativeCircleManager : Basic_ObjectPool<CollidableCircle>
         target.ResetMotion();
         target.ResetSize(spawnSize.GetRndValueInVector2Range());
         target.m_circle.ChangeCircleType(Clickable_Circle.CircleType.Normal);
-        target.OnCircleSpawned(narrativeController);
     }
     void OnDrawGizmosSelected()
     {

@@ -44,7 +44,6 @@ public class CollidableCircle : MonoBehaviour
 
     private bool isGrowing = false;
     private bool isSpawning = false;
-    private IC_Narrative narrativeController;
     private Clickable_Circle circle;
     private Vector3 targetPoint;
 
@@ -56,6 +55,7 @@ public class CollidableCircle : MonoBehaviour
     public Clickable_Circle m_circle => circle;
     public Rigidbody m_rigidbody => m_rigid;
 
+    private const string EXPLODE_ANIMATION = "CircleExplode";
     private const string GROW_TIER_TWO = "CircleGrow_Class_2";
     private const string GROW_TIER_THREE = "CircleGrow_Class_3";
     private const string FLOAT_ANIMATION = "CircleFloat";
@@ -78,8 +78,12 @@ public class CollidableCircle : MonoBehaviour
     }
     public void OnCollideWithControlledCircle(Clickable_Circle controlledCircle, Vector3 contact, float strength)
     {
-        //产生小球
         hasCollided = true;
+        if(m_circle.m_circleType == Clickable_Circle.CircleType.Narrative)
+        {
+            circleAnime.Play(EXPLODE_ANIMATION);
+            return;
+        }
         m_rigid.velocity = (m_rigid.position - contact).normalized * strength;
         m_rigid.drag = 6;
         circle.TriggerCollideRipple();
@@ -89,13 +93,6 @@ public class CollidableCircle : MonoBehaviour
         if(circle.m_circleType == Clickable_Circle.CircleType.Target)
             p_hasText.Stop();
     }
-
-    #region Circle Spawning
-    public void OnCircleSpawned(IC_Narrative narrativeController)
-    {
-        this.narrativeController = narrativeController;
-    }
-    #endregion
 
     #region Circle Motion
     public void ResetSize(float size){
@@ -130,6 +127,10 @@ public class CollidableCircle : MonoBehaviour
     #endregion
 
     #region Animation Event
+    public void AE_OnExplode()
+    {
+        EventHandler.Call_OnNarrativeExplode(this);
+    }
     public void AE_EnableHitbox(){
         float size = renderRoot.transform.localScale.x;
         StartCoroutine(coroutineGrowHitbox(2f, size));
@@ -153,6 +154,10 @@ public class CollidableCircle : MonoBehaviour
                 // m_circle.EnableRaycast();
                 break;
         }
+    }
+    public void AE_ExplodeDone()
+    {
+        gameObject.SetActive(false);
     }
     #endregion
 

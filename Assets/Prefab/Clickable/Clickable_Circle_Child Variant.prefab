@@ -5545,6 +5545,7 @@ Animation:
   - {fileID: 7400000, guid: 28dfcb4a660959c499a8c124c2a82156, type: 2}
   - {fileID: 7400000, guid: a1b601f2da93691409773939b92f9d37, type: 2}
   - {fileID: 7400000, guid: 17a1dc8551e07ec42b59cb35ca84fc5b, type: 2}
+  - {fileID: 7400000, guid: ac01eeff1b775ba4e97c2a3eac599c50, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0

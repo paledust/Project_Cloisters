@@ -18,6 +18,7 @@ public class IC_Narrative : IC_Basic
     [SerializeField] private RippleParticleController rippleParticleController;
     [SerializeField] private NarrativeCircleManager circleSpawner;
     [SerializeField] private ParticleSystem p_collideBurst;
+    [SerializeField] private ParticleSystem p_explode;
     [SerializeField] private float effectiveCollisionStep = 3;
 [Header("Interaction Start")]
     [SerializeField] private Transform[] spawnPointAtStart;
@@ -49,6 +50,7 @@ public class IC_Narrative : IC_Basic
     {
         base.OnInteractionEnter();
         EventHandler.E_OnClickableCircleCollide += OnCircleCollide;
+        EventHandler.E_OnNarrativeExplode += OnNarrativeCircleExplode;
         lastCollisionTime = Time.time - effectiveCollisionStep;
         foreach(var spawnPoint in spawnPointAtStart)
         {
@@ -62,6 +64,12 @@ public class IC_Narrative : IC_Basic
         base.OnInteractionEnd();
         circleSpawner.enabled = false;
         EventHandler.E_OnClickableCircleCollide -= OnCircleCollide;
+        EventHandler.E_OnNarrativeExplode -= OnNarrativeCircleExplode;
+    }
+    void OnNarrativeCircleExplode(CollidableCircle circle)
+    {
+        p_explode.transform.position = circle.transform.position;
+        p_explode.Play();
     }
     void OnCircleCollide(Clickable_Circle collidedCircle, Clickable_Circle controlledCircle, Collision collision){
         float strength = collision.relativeVelocity.magnitude;
