@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -60,6 +61,9 @@ public class CollidableCircle : MonoBehaviour
     private const string GROW_TIER_THREE = "CircleGrow_Class_3";
     private const string FLOAT_ANIMATION = "CircleFloat";
     private const string POPUP_ANIMATION = "CirclePopUp";
+
+    private Action onCircleExplode;
+
     void Awake()
     {
         circle = GetComponent<Clickable_Circle>();
@@ -92,6 +96,10 @@ public class CollidableCircle : MonoBehaviour
         StartCoroutine(coroutineCreateJointAtCurrentPos(1));
         if(circle.m_circleType == Clickable_Circle.CircleType.Target)
             p_hasText.Stop();
+    }
+    public void ExplodeCircle()
+    {
+        circleAnime.Play(EXPLODE_ANIMATION);
     }
 
     #region Circle Motion
@@ -130,6 +138,7 @@ public class CollidableCircle : MonoBehaviour
     public void AE_OnExplode()
     {
         EventHandler.Call_OnNarrativeExplode(this);
+        onCircleExplode?.Invoke();
     }
     public void AE_EnableHitbox(){
         float size = renderRoot.transform.localScale.x;
@@ -167,6 +176,10 @@ public class CollidableCircle : MonoBehaviour
         txt.text = text.ToString();
         txt.gameObject.SetActive(true);
     }
+    public void OnExplode(Action onExplode)
+    {
+        this.onCircleExplode = onExplode;
+    }
     #endregion
 
     IEnumerator coroutineGrowHitbox(float duration, float scaleFactor){
@@ -178,7 +191,7 @@ public class CollidableCircle : MonoBehaviour
     }
     IEnumerator coroutineFloatingUp(float duration){
         Vector3 circlePos = Vector3.zero;
-        Vector2 seed = Random.insideUnitCircle;
+        Vector2 seed = UnityEngine.Random.insideUnitCircle;
         circleAnime[FLOAT_ANIMATION].speed = circleAnime[FLOAT_ANIMATION].length/duration;
         circleAnime.Play(FLOAT_ANIMATION);
         yield return new WaitForLoop(duration, (t)=>{

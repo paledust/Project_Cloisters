@@ -23,14 +23,14 @@ public class NarrativeRandomForceField : MonoBehaviour
         Vector3 force = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * noiseAmp * multi;
         rigid.AddForce(force, ForceMode.VelocityChange);
     }
-    void OnGUI()
-    {
-        Vector3 mouseScr = Mouse.current.position.ReadValue();
-        mouseScr.z = 35;
-        Vector2 pos = Camera.main.ScreenToWorldPoint(mouseScr);
-        float value = Mathf.PerlinNoise(pos.x * noiseScale + offset.x + phase.x, pos.y * noiseScale + offset.y + phase.y);
-        float angle = (value * 2 - 1) * Mathf.PI * 2;
-        angle = angle * Mathf.Rad2Deg;
-        GUI.Label(new Rect(10, 10, 300, 20), "Perlin Noise Value at Mouse: " + angle.ToString("F3"));
-    }
+    // void OnGUI()
+    // {
+    //     Vector3 mouseScr = Mouse.current.position.ReadValue();
+    //     mouseScr.z = 35;
+    //     Vector2 pos = Camera.main.ScreenToWorldPoint(mouseScr);
+    //     float value = Mathf.PerlinNoise(pos.x * noiseScale + offset.x + phase.x, pos.y * noiseScale + offset.y + phase.y);
+    //     float angle = (value * 2 - 1) * Mathf.PI * 2;
+    //     angle = angle * Mathf.Rad2Deg;
+    //     GUI.Label(new Rect(10, 10, 300, 20), "Perlin Noise Value at Mouse: " + angle.ToString("F3"));
+    // }
 }

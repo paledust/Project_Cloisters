@@ -16,12 +16,7 @@ public class NarrativeCircleManager : Basic_ObjectPool<CollidableCircle>
     [SerializeField] private NarrativeRandomForceField forceField;
 
     private List<CollidableCircle> listCircles = new List<CollidableCircle>();
-    private IC_Narrative narrativeController;
 
-    protected override void Awake(){
-        base.Awake();
-        narrativeController = GetComponent<IC_Narrative>();
-    }
     void LateUpdate()
     {
         for(int i = listCircles.Count - 1; i>=0; i--)
@@ -64,7 +59,7 @@ public class NarrativeCircleManager : Basic_ObjectPool<CollidableCircle>
     }
     public CollidableCircle SpawnAtPoint(Vector3 point, float duration, SpawnStyle style)
     {
-        var go = GetObjFromPool(x=>!x.gameObject.activeSelf);
+        var go = GetObjFromPool(x=>false);
         if(go!=null) {
             go.transform.position = point;
             go.gameObject.SetActive(true);
