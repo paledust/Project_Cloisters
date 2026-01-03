@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -158,9 +157,9 @@ public class CollidableCircle : MonoBehaviour
     #endregion
 
     #region Text
-    public void ShowText()
+    public void ShowText(char text)
     {
-        txt.text = narrativeController.GetNextNarrativeChar().ToString();
+        txt.text = text.ToString();
         txt.gameObject.SetActive(true);
     }
     #endregion

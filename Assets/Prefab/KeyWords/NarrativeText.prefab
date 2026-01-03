@@ -235,6 +235,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textFadeAnime: {fileID: 7836290420150740943}
+  texts:
+  - {fileID: 216077215514784495}
+  - {fileID: 216077216197602739}
+  - {fileID: 216077216939413514}
 --- !u!1 &216077216197602737
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,8 +12,10 @@ public class NarrativeCircleManager : Basic_ObjectPool<CollidableCircle>
     [SerializeField] private Vector2 spawnSize;
 [Header("Border Setting")]
     [SerializeField] private RectSelector rectSelector;
-    [SerializeField, ShowOnly] private List<CollidableCircle> listCircles = new List<CollidableCircle>();
+[Header("Force Field")]
+    [SerializeField] private NarrativeRandomForceField forceField;
 
+    private List<CollidableCircle> listCircles = new List<CollidableCircle>();
     private IC_Narrative narrativeController;
 
     protected override void Awake(){
@@ -25,9 +27,19 @@ public class NarrativeCircleManager : Basic_ObjectPool<CollidableCircle>
         for(int i = listCircles.Count - 1; i>=0; i--)
         {
             var circle = listCircles[i];
-            Vector3 pos = circle.transform.position;
             if(circle.isPined)
+            {
+                if(!circle.m_circle.isControlling)
+                {
+                    forceField.ApplyForce(circle.m_rigidbody, 5);
+                }
                 continue;
+            }
+            if(!circle.m_circle.isControlling)
+            {
+                forceField.ApplyForce(circle.m_rigidbody, 1);
+            }
+            Vector3 pos = circle.transform.position;
             if(circle.transform.position.x < rectSelector.MinX)
             {
                 pos.x += rectSelector.rectWidth;

@@ -1,13 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using UnityEditor;
 using UnityEngine;
 
 public class NarrativeText : MonoBehaviour
 {
     [SerializeField] private Animation textFadeAnime;
-    public void FadeInText(){
+    [SerializeField] private TextMeshPro[] texts;
+    public void FadeInText(string content){
+        foreach(var text in texts){
+            text.text = content;
+        }
         textFadeAnime.Play();
         StartCoroutine(CommonCoroutine.delayAction(()=>{
             gameObject.SetActive(false);

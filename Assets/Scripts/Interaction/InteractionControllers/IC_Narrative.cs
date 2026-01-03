@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -9,19 +10,24 @@ public class IC_Narrative : IC_Basic
         public SpriteRenderer heroCircleSprite;
         public Color transitionColor;
     }
+    [System.Serializable]
+    public struct NarrativeTextData{
+        public char content;
+        public NarrativeText textMesh;
+    }
     [SerializeField] private RippleParticleController rippleParticleController;
     [SerializeField] private NarrativeCircleManager circleSpawner;
     [SerializeField] private ParticleSystem p_collideBurst;
     [SerializeField] private float effectiveCollisionStep = 3;
 [Header("Interaction Start")]
     [SerializeField] private Transform[] spawnPointAtStart;
-    [SerializeField] private char[] narrativeChars;
+    [SerializeField] private NarrativeTextData[] narrativeTextDatas;
 [Header("End")]
     [SerializeField] private float transition = 10;
     [SerializeField] private float collisionStrength = 0.1f;
     [SerializeField] private PlayableDirector TL_End;
-[Header("Hero Circle Control")]
-    [SerializeField] private HeroCircleTransistor[] heroCircleSprites;
+[Header("Text Generate")]
+    [SerializeField] private Vector2Int TextAmount;
 [Header("Connection")]
     [SerializeField] private NarrativeConnectLineController connectLineController;
 
@@ -49,7 +55,7 @@ public class IC_Narrative : IC_Basic
             circleSpawner.SpawnAtPoint(spawnPoint.position, Random.Range(3f, 4f), NarrativeCircleManager.SpawnStyle.FloatUp);
         }
         narrativeCharIndex = 0;
-        Service.Shuffle(ref narrativeChars);
+        Service.Shuffle(ref narrativeTextDatas);
     }
     protected override void OnInteractionEnd()
     {
@@ -94,7 +100,7 @@ public class IC_Narrative : IC_Basic
                         {
                             var circle = PopupCircleAtPosAndPushedAway(collidedCircle.transform.position-Quaternion.Euler(0,0,spawnAngle-spawnAngle*i)*diff.normalized,
                                 collidedCircle.transform.position);
-                            if(!hasTarget && Random.value>0.5f)
+                            if(!hasTarget && Random.value>0.3f)
                             {
                                 circle.m_circle.ChangeCircleType(Clickable_Circle.CircleType.Target);
                                 hasTarget = true;
@@ -102,17 +108,22 @@ public class IC_Narrative : IC_Basic
                         }
                         break;
                     case Clickable_Circle.CircleType.Target:
+                    //Reroll the spawn amount
+                        spawnAmount = TextAmount.GetRndValueInVector2Range();
                     //Precreate one circle that has text in there
-                        var narrativeCircle = PopupCircleAtPosAndPushedAway(collidedCircle.transform.position-Quaternion.Euler(0,0,spawnAngle)*diff.normalized,
-                                                                            collidedCircle.transform.position);
-                        narrativeCircle.m_circle.ChangeCircleType(Clickable_Circle.CircleType.Narrative);
-                        narrativeCircle.ShowText();
-                                                                                            
-                        for(int i=1; i<spawnAmount; i++)
+                        for(int i=0; i<spawnAmount; i++)
                         {
-                            PopupCircleAtPosAndPushedAway(collidedCircle.transform.position-Quaternion.Euler(0,0,spawnAngle-spawnAngle*i)*diff.normalized,
-                                collidedCircle.transform.position);
+                            char textChar = GetNextNarrativeChar();
+                            if(textChar==' ')
+                                continue;
+                            var narrativeCircle = PopupCircleAtPosAndPushedAway(collidedCircle.transform.position-Quaternion.Euler(0,0,spawnAngle)*diff.normalized,
+                                                                                collidedCircle.transform.position);
+                            narrativeCircle.m_circle.ChangeCircleType(Clickable_Circle.CircleType.Narrative);
+                            narrativeCircle.ShowText(textChar);
                         }
+
+                        PopupCircleAtPosAndPushedAway(collidedCircle.transform.position-Quaternion.Euler(0,0,Random.Range(-spawnAngle, spawnAngle))*diff.normalized,
+                            collidedCircle.transform.position);
                         break;
                     case Clickable_Circle.CircleType.Narrative:
                         //No spawn
@@ -121,17 +132,28 @@ public class IC_Narrative : IC_Basic
                 //Create Connection Line
                 connectLineController.BuildConnectLine(controlledCircle, collidedCircle);
             }
-
         }
     }
     protected CollidableCircle PopupCircleAtPosAndPushedAway(Vector3 Pos, Vector3 sourcePos)
     {
         var circle = circleSpawner.SpawnAtPoint(Pos, Random.Range(0.8f, 1.2f), NarrativeCircleManager.SpawnStyle.PopUp);
         Vector3 dir = (circle.transform.position - sourcePos).normalized;
-        circle.m_rigidbody.AddForce(dir * Random.Range(12, 16), ForceMode.VelocityChange);
+        circle.m_rigidbody.AddForce(dir * Random.Range(12, 20), ForceMode.VelocityChange);
         return circle;
     }
-    public char GetNextNarrativeChar() => narrativeChars[narrativeCharIndex ++ % narrativeChars.Length];
+    public char GetNextNarrativeChar()
+    {
+        if(narrativeCharIndex>=narrativeTextDatas.Length)
+            return ' ';
+        else
+        {
+            var narrativeText = narrativeTextDatas[narrativeCharIndex];
+            narrativeText.textMesh.gameObject.SetActive(true);
+            narrativeText.textMesh.FadeInText(narrativeText.content.ToString());
+            narrativeCharIndex ++;
+            return narrativeText.content;
+        }
+    }
     IEnumerator coroutineEndInteraction(){
         yield return new WaitForSeconds(transition);
         EventHandler.Call_OnEndInteraction(this);
