@@ -1,5 +1,5 @@
 using System.Collections;
-using TMPro;
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -21,7 +21,7 @@ public class IC_Narrative : IC_Basic
         }
     }
     [SerializeField] private RippleParticleController rippleParticleController;
-    [SerializeField] private NarrativeCircleManager circleSpawner;
+    [SerializeField] private NarrativeCircleManager circleManager;
     [SerializeField] private ParticleSystem p_collideBurst;
     [SerializeField] private ParticleSystem p_explode;
     [SerializeField] private float effectiveCollisionStep = 3;
@@ -29,9 +29,11 @@ public class IC_Narrative : IC_Basic
     [SerializeField] private Transform[] spawnPointAtStart;
     [SerializeField] private NarrativeTextData[] narrativeTextDatas;
 [Header("End")]
-    [SerializeField] private float transition = 10;
     [SerializeField] private float collisionStrength = 0.1f;
+    [SerializeField] private NarrativeText finalNarrativeTextData;
     [SerializeField] private PlayableDirector TL_End;
+    [SerializeField] private Transform centerTrans;
+    [SerializeField] private CinemachineVirtualCamera vc_transist;
 [Header("Text Generate")]
     [SerializeField] private Vector2Int TextAmount;
 [Header("Connection")]
@@ -44,7 +46,7 @@ public class IC_Narrative : IC_Basic
     {
         base.LoadAssets();
         rippleParticleController.enabled = true;
-        circleSpawner.enabled = true;
+        circleManager.enabled = true;
     }
     protected override void UnloadAssets()
     {
@@ -59,7 +61,7 @@ public class IC_Narrative : IC_Basic
         lastCollisionTime = Time.time - effectiveCollisionStep;
         foreach(var spawnPoint in spawnPointAtStart)
         {
-            circleSpawner.SpawnAtPoint(spawnPoint.position, Random.Range(3f, 4f), NarrativeCircleManager.SpawnStyle.FloatUp);
+            circleManager.SpawnAtPoint(spawnPoint.position, Random.Range(3f, 4f), NarrativeCircleManager.SpawnStyle.FloatUp);
         }
         narrativeCharIndex = 0;
         Service.Shuffle(ref narrativeTextDatas);
@@ -67,14 +69,13 @@ public class IC_Narrative : IC_Basic
     protected override void OnInteractionEnd()
     {
         base.OnInteractionEnd();
-        circleSpawner.enabled = false;
+        circleManager.enabled = false;
         EventHandler.E_OnClickableCircleCollide -= OnCircleCollide;
         EventHandler.E_OnNarrativeExplode -= OnNarrativeCircleExplode;
     }
     void OnNarrativeCircleExplode(CollidableCircle circle)
     {
-        p_explode.transform.position = circle.transform.position;
-        p_explode.Play();
+        PlayExplodeParticleAtPos(circle.transform.position);
 
         var collider = Physics.OverlapSphere(circle.transform.position, 3f);
         foreach(var col in collider)
@@ -85,6 +86,14 @@ public class IC_Narrative : IC_Basic
                 narrativeCircle.ExplodeCircle();
             }
         }
+
+        if(narrativeCharIndex>=narrativeTextDatas.Length)
+            StartCoroutine(coroutineEndInteraction());
+    }
+    void PlayExplodeParticleAtPos(Vector3 position)
+    {
+        p_explode.transform.position = position;
+        p_explode.Play();
     }
     void OnCircleCollide(Clickable_Circle collidedCircle, Clickable_Circle controlledCircle, Collision collision){
         float strength = collision.relativeVelocity.magnitude;
@@ -110,6 +119,11 @@ public class IC_Narrative : IC_Basic
                 controlledCircle.m_rigid.velocity = -force;
                 collidableCircle.OnCollideWithControlledCircle(controlledCircle, collision.contacts[0].point, strength);
                 //Spawn Circle
+                //Don't spawn if no text needed
+                if(narrativeCharIndex >= narrativeTextDatas.Length)
+                {
+                    return;
+                }
                 int spawnAmount = Random.Range(1, 3);
                 float spawnAngle = Mathf.Sign(Random.value) * Random.Range(10, 35f);
                 //Modify Circle type
@@ -160,23 +174,10 @@ public class IC_Narrative : IC_Basic
     }
     protected CollidableCircle PopupCircleAtPosAndPushedAway(Vector3 Pos, Vector3 sourcePos)
     {
-        var circle = circleSpawner.SpawnAtPoint(Pos, Random.Range(0.8f, 1.2f), NarrativeCircleManager.SpawnStyle.PopUp);
+        var circle = circleManager.SpawnAtPoint(Pos, Random.Range(0.8f, 1.2f), NarrativeCircleManager.SpawnStyle.PopUp);
         Vector3 dir = (circle.transform.position - sourcePos).normalized;
         circle.m_rigidbody.AddForce(dir * Random.Range(12, 20), ForceMode.VelocityChange);
         return circle;
-    }
-    public char GetNextNarrativeChar()
-    {
-        if(narrativeCharIndex>=narrativeTextDatas.Length)
-            return ' ';
-        else
-        {
-            var narrativeText = narrativeTextDatas[narrativeCharIndex];
-            narrativeText.textMesh.gameObject.SetActive(true);
-            narrativeText.textMesh.FadeInText(narrativeText.content.ToString());
-            narrativeCharIndex ++;
-            return narrativeText.content;
-        }
     }
     public NarrativeTextData GetNextNarrativeTextData()
     {
@@ -190,17 +191,38 @@ public class IC_Narrative : IC_Basic
         }
     }
     IEnumerator coroutineEndInteraction(){
-        yield return new WaitForSeconds(transition);
         EventHandler.Call_OnEndInteraction(this);
+        //Fade In Text
+        finalNarrativeTextData.gameObject.SetActive(true);
+        finalNarrativeTextData.FadeInText("Narrative");
+
         yield return new WaitForSeconds(2f);
+        //Do Circle Sequence
+        var circles = circleManager.GetCircleInDistanceOrder(centerTrans.position);
+        //Set Up Transition Camera
+        vc_transist.m_Follow = circles[0].transform;
+        //Explode Circles
+        for(int i = circles.Length-1; i >= 1; i--)
+        {
+            if(!circles[i].gameObject.activeSelf)
+                continue;
+            PlayExplodeParticleAtPos(circles[i].transform.position);
+            circles[i].ExplodeCircle();
+            connectLineController.CheckConnectLine(circles[i].transform);
+            yield return new WaitForSeconds(Random.Range(0, 0.2f));
+        }
+        circles[0].m_circle.TransitionCircles(1);
+        
         TL_End.Play();
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         EventHandler.Call_OnInteractionUnreachable(this);
     }
-    IEnumerator coroutineTransitionCircle(HeroCircleTransistor circleTransistor, float duration){
-        Color initColor = circleTransistor.heroCircleSprite.color;
-        yield return new WaitForLoop(duration, (t)=>{
-            circleTransistor.heroCircleSprite.color = Color.Lerp(initColor, circleTransistor.transitionColor, EasingFunc.Easing.QuadEaseOut(t));
-        });
+
+#if UNITY_EDITOR
+    [ContextMenu("Test End")]
+    public void Debug_End()
+    {
+        StartCoroutine(coroutineEndInteraction());
     }
+#endif
 }

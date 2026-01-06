@@ -5422,6 +5422,15 @@ MonoBehaviour:
     WobbleFactor: 0.5
   circleMotionControl: {fileID: 7737823439299809085}
   spriteGlow: {fileID: 824113307220155470}
+  circleTransistors:
+  - heroCircleSprite: {fileID: 4337985783947377353}
+    transitionColor: {r: 0.8862745, g: 0.7647059, b: 0.56078434, a: 0.6392157}
+  - heroCircleSprite: {fileID: 4337985783366546284}
+    transitionColor: {r: 0.85490197, g: 0.7176471, b: 0.5921569, a: 1}
+  - heroCircleSprite: {fileID: 4337985783502979391}
+    transitionColor: {r: 0.8156863, g: 0.54901963, b: 0.32941177, a: 1}
+  - heroCircleSprite: {fileID: 4337985784200938163}
+    transitionColor: {r: 0.8156863, g: 0.54901963, b: 0.32941177, a: 1}
 --- !u!114 &7737823439299809085
 MonoBehaviour:
   m_ObjectHideFlags: 0

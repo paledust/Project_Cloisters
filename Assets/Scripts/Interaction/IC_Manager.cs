@@ -6,7 +6,7 @@ public class IC_Manager : MonoBehaviour
     [SerializeField] private IC_Basic[] interactionControllers;
 [Header("Debug Option")]
     [SerializeField] private int StartIndex = 0;
-    private int interactionIndex = 0;
+    [SerializeField, ShowOnly] private int interactionIndex = 0;
     private int loadedIC_Count = 0;
 
     void Awake(){

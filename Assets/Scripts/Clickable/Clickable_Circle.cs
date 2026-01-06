@@ -62,6 +62,8 @@ public class Clickable_Circle : Basic_Clickable
     [SerializeField] private CircleMotionControl circleMotionControl;
 [Header("Circle Type VFX")]
     [SerializeField] private SpriteRenderer spriteGlow;
+[Header("Circle Sprites")]
+    [SerializeField] private IC_Narrative.HeroCircleTransistor[] circleTransistors;
 
     private float camDepth;
     private Rigidbody rigid;
@@ -140,5 +142,18 @@ public class Clickable_Circle : Basic_Clickable
         {
             EventHandler.Call_OnClickableCircleCollide(otherCircle.m_circle, this, collision);
         }
+    }
+    public void TransitionCircles(float duration)
+    {
+        for(int i=0; i<circleTransistors.Length; i++)
+        {
+            StartCoroutine(coroutineTransitionCircle(circleTransistors[i], duration));
+        }
+    }
+    IEnumerator coroutineTransitionCircle(IC_Narrative.HeroCircleTransistor circleTransistor, float duration){
+        Color initColor = circleTransistor.heroCircleSprite.color;
+        yield return new WaitForLoop(duration, (t)=>{
+            circleTransistor.heroCircleSprite.color = Color.Lerp(initColor, circleTransistor.transitionColor, EasingFunc.Easing.QuadEaseOut(t));
+        });
     }
 }

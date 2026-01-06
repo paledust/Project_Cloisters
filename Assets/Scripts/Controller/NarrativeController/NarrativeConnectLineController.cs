@@ -14,4 +14,11 @@ public class NarrativeConnectLineController : MonoBehaviour
         
         connectLines.Add(line);
     }
+    public void CheckConnectLine(Transform transCircle)
+    {
+        foreach(var line in connectLines)
+        {
+            line.CheckConnectTrans(transCircle);
+        }
+    }
 }

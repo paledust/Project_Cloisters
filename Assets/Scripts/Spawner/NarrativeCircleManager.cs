@@ -11,7 +11,8 @@ public class NarrativeCircleManager : Basic_ObjectPool<CollidableCircle>
 [Header("Spawn Settings")]
     [SerializeField] private Vector2 spawnSize;
 [Header("Border Setting")]
-    [SerializeField] private RectSelector rectSelector;
+    [SerializeField] private NarrativeRect rectSelector;
+
 [Header("Force Field")]
     [SerializeField] private NarrativeRandomForceField forceField;
 
@@ -44,6 +45,8 @@ public class NarrativeCircleManager : Basic_ObjectPool<CollidableCircle>
                 pos.x -= rectSelector.rectWidth;
             }
 
+            //Boundry Detection
+            //Boundry Teleportation
             if(circle.transform.position.y < rectSelector.MinY)
             {
                 pos.y += rectSelector.rectHeight;
@@ -55,6 +58,15 @@ public class NarrativeCircleManager : Basic_ObjectPool<CollidableCircle>
 
             circle.transform.position = pos;
             circle.m_rigidbody.position = pos;
+
+            Vector3 crossBoundForce = rectSelector.GetCrossBoundForce(circle.m_rigidbody);
+            if(crossBoundForce!=Vector3.zero)
+            {
+                //Boundry Force Application
+                if(circle.m_circle.isControlling)
+                    continue;
+                circle.m_rigidbody.AddForce(crossBoundForce, ForceMode.VelocityChange);
+            }
         }
     }
     public CollidableCircle SpawnAtPoint(Vector3 point, float duration, SpawnStyle style)
@@ -84,6 +96,17 @@ public class NarrativeCircleManager : Basic_ObjectPool<CollidableCircle>
         target.ResetMotion();
         target.ResetSize(spawnSize.GetRndValueInVector2Range());
         target.m_circle.ChangeCircleType(Clickable_Circle.CircleType.Normal);
+    }
+    public CollidableCircle[] GetCircleInDistanceOrder(Vector3 position)
+    {
+        CollidableCircle[] circles = listCircles.ToArray();
+        System.Array.Sort(circles, (a, b) =>
+        {
+            float distA = Vector3.Distance(a.transform.position, position);
+            float distB = Vector3.Distance(b.transform.position, position);
+            return distA.CompareTo(distB);
+        });
+        return circles;
     }
     void OnDrawGizmosSelected()
     {

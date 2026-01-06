@@ -10,8 +10,5 @@ public class NarrativeText : MonoBehaviour
             text.text = content;
         }
         textFadeAnime.Play();
-        StartCoroutine(CommonCoroutine.delayAction(()=>{
-            gameObject.SetActive(false);
-        }, textFadeAnime.clip.length));
     }
 }
