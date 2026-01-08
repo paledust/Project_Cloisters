@@ -22,6 +22,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: P Ripple Soft
   m_Shader: {fileID: 4800000, guid: 4a208a112120d404cb64146130d3da45, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords:
   - _NORMALSPACE_WORLDSPACE
@@ -31,6 +33,7 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -64,6 +67,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _DissolveTex:
         m_Texture: {fileID: 2800000, guid: 2b7311c45ec18d14ca7aa0825cfcff7b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DistortTex:
+        m_Texture: {fileID: 2800000, guid: 5258764dd7274cb47bd6b840cf79dfb2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
@@ -131,6 +138,8 @@ Material:
     - _DissolveScale: 1.2
     - _DissolveSmoothness: 1
     - _DissolveStart: 1
+    - _DistortStrength: 0.01
+    - _DistortTile: 0.2
     - _DstBlend: 0
     - _EdgeMin: 0.8
     - _EdgeSmooth: 0.4

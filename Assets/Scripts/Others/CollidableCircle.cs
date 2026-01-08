@@ -32,9 +32,6 @@ public class CollidableCircle : MonoBehaviour
     [SerializeField] private float noiseFreq = 2f;
     [SerializeField] private float noiseAmp = 0.1f;
     [SerializeField] private PerRendererOpacity[] circleOpacity;
-[Header("Grow")]
-    [SerializeField] private float controlGrowCollisionStrength = 2;
-    [SerializeField] private float otherGrowCollisionStrength = 0.01f;
 [Header("Reset Size")]
     [SerializeField] private ResizableTrans[] resetCircles;
 [Header("SpawnCircle")]
