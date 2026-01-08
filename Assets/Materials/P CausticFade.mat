@@ -112,7 +112,7 @@ Material:
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
-    - _CausticTile: 0.25
+    - _CausticTile: 0.22
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _Cull: 2
@@ -133,7 +133,7 @@ Material:
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _SideCausticStrength: 0.4
-    - _SmallCausticTile: 0.15
+    - _SmallCausticTile: 0.11
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -144,10 +144,10 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _BrightColor: {r: 3.326848, g: 5.3943233, b: 18.798182, a: 1}
+    - _BrightColor: {r: 1.0604748, g: 1.7195085, b: 5.9921565, a: 1}
     - _CausticMovement: {r: 0.2, g: 0.2, b: 0.25, a: 0.15}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _DarkColor: {r: 0.13396227, g: 0.70370114, b: 1, a: 1}
+    - _DarkColor: {r: 0.070588246, g: 0.31290877, b: 0.53333336, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
