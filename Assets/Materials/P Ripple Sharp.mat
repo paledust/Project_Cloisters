@@ -138,7 +138,7 @@ Material:
     - _DissolveScale: 1.2
     - _DissolveSmoothness: 0.5
     - _DissolveStart: 1
-    - _DistortStrength: 0.01
+    - _DistortStrength: 0.02
     - _DistortTile: 0.2
     - _DstBlend: 0
     - _EdgeMin: 0.8

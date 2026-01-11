@@ -193,8 +193,8 @@ public class IC_Narrative : IC_Basic
     IEnumerator coroutineEndInteraction(){
         EventHandler.Call_OnEndInteraction(this);
         //Fade In Text
-        finalNarrativeTextData.gameObject.SetActive(true);
         finalNarrativeTextData.FadeInText("Narrative");
+        finalNarrativeTextData.gameObject.SetActive(true);
 
         yield return new WaitForSeconds(2f);
         //Do Circle Sequence
