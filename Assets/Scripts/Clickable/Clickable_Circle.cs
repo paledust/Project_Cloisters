@@ -49,6 +49,7 @@ public class Clickable_Circle : Basic_Clickable
 [Header("Particles")]
     [SerializeField] private ParticleSystem p_trail;
     [SerializeField] private ParticleSystem p_ripple;
+    [SerializeField] private ParticleSystem p_caustic;
 [Header("Collision")]
     [SerializeField] private CircleType circleType;
     [SerializeField] private float bounceFactor;
@@ -143,6 +144,7 @@ public class Clickable_Circle : Basic_Clickable
             EventHandler.Call_OnClickableCircleCollide(otherCircle.m_circle, this, collision);
         }
     }
+    public void OnHeavyCollide()=>p_caustic.Play(true);
     public void TransitionCircles(float duration)
     {
         for(int i=0; i<circleTransistors.Length; i++)

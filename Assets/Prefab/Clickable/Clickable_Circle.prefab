@@ -175,7 +175,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4337985782930849923}
   serializedVersion: 8
-  lengthInSec: 9
+  lengthInSec: 3
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -5322,6 +5322,7 @@ MonoBehaviour:
   speedDrag: 0.05
   p_trail: {fileID: 4337985782930849926}
   p_ripple: {fileID: 5037205659974870894}
+  p_caustic: {fileID: 0}
   circleType: 0
   bounceFactor: 0.3
   collisionFactor: 0.6

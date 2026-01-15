@@ -112,6 +112,9 @@ public class IC_Narrative : IC_Basic
                 p_collideBurst.transform.position = collision.contacts[0].point;
                 p_collideBurst.transform.rotation = Quaternion.Euler(0,0,Vector3.SignedAngle(Vector3.right, diff, Vector3.forward));
                 p_collideBurst.Play(true);
+
+                collidableCircle.m_circle.OnHeavyCollide();
+                controlledCircle.OnHeavyCollide();
                 lastCollisionTime = Time.time;
                 //Stop Input and bounce off the circle
                 EventHandler.Call_OnFlushInput();

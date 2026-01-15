@@ -99,6 +99,7 @@ public class NarrativeCircleManager : Basic_ObjectPool<CollidableCircle>
     }
     public CollidableCircle[] GetCircleInDistanceOrder(Vector3 position)
     {
+        listCircles.RemoveAll(x=>!x.gameObject.activeSelf);
         CollidableCircle[] circles = listCircles.ToArray();
         System.Array.Sort(circles, (a, b) =>
         {
