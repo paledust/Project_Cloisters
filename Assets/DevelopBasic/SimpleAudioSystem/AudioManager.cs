@@ -10,6 +10,7 @@ namespace SimpleAudioSystem{
         private enum AudioType{BGM, AMB, SFX}
         [SerializeField] private AudioInfo_SO audioInfo;
     [Header("Audio source")]
+        [SerializeField] private AudioSource sfx_trigger;
         [SerializeField] private AudioSource ambience_loop;
         [SerializeField] private AudioSource music_loop;
     [Header("Audio mixer")]
@@ -138,6 +139,8 @@ namespace SimpleAudioSystem{
                 Debug.LogAssertion($"No Clip found:{clip_name}");
             return clip;
         }
+        public AudioClip PlaySoundEffect(string clip_name, float volumeScale) => PlaySoundEffect(sfx_trigger, clip_name, volumeScale);
+        
         public AudioClip PlaySoundEffectLoop(AudioSource targetSource, string clip_name, float volumeScale, float transition = 1f){
             AudioClip clip = audioInfo.GetSFXClipByName(clip_name);
             targetSource.clip = clip;
