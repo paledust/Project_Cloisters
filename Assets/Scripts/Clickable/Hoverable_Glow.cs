@@ -19,7 +19,7 @@ public class Hoverable_Glow : MonoBehaviour
         targetClickable.onHover -= OnHover;
         targetClickable.onExitHover -= OnExitHover;
     }
-    public void OnHover()
+    public void OnHover(PlayerController player)
     {
         DOTween.Kill(this);
         DOTween.To(()=>glowObjectCmd.GlowColor, x=>glowObjectCmd.GlowColor = x, glowColor, 0.2f);

@@ -1,10 +1,10 @@
-using SimpleAudioSystem;
 using UnityEngine;
 
 public class Hoverable_PlaySFX : MonoBehaviour
 {
     [SerializeField] private string hoverSFX;
-    [SerializeField, Range(0, 1)] private float volume = 1f;
+    [SerializeField] private Vector2 volumeRange = new Vector2(0, 1);
+    [SerializeField] private float speedToVolume = 1f; 
     private Basic_Clickable self;
     // Start is called before the first frame update
     void Start()
@@ -16,8 +16,8 @@ public class Hoverable_PlaySFX : MonoBehaviour
     {
         self.onHover -= PlayHoverSFX;
     }
-    void PlayHoverSFX()
+    void PlayHoverSFX(PlayerController player)
     {
-        StylizedDrumController.Instance.QueueBeat(hoverSFX, volume);
+        StylizedDrumController.Instance.QueueBeat(hoverSFX, Mathf.Clamp(player.PointerDelta.magnitude * speedToVolume, volumeRange.x, volumeRange.y));
     }
 }
