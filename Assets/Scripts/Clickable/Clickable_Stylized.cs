@@ -17,13 +17,9 @@ public class Clickable_Stylized : Basic_Clickable
     public override void OnHover(PlayerController player)
     {
         base.OnHover(player);
-        AudioManager.Instance.PlaySoundEffect(hoverSFX, 1f);
+        StylizedDrumController.Instance.QueueBeat(hoverSFX, 1f);
         transform.DOKill();
         transform.localScale = originalScale;
         transform.DOPunchScale(Vector3.one * hoverScalePunch, 0.25f, 2);
-    }
-    public override void OnExitHover()
-    {
-        
     }
 }

@@ -9,6 +9,7 @@ public class IC_Stylized : IC_Basic
     [SerializeField] private CircleExpandingController circleExpandingController;
     [SerializeField] private CircleExplodeController circleExplodeController;
     [SerializeField] private CircleDissolveController circleDissolveController;
+    [SerializeField] private StylizedDrumController drumController;
     [SerializeField] private GeoFragmentController geoFragmentController;
     [SerializeField] private GeoTextController geoTextController;
     [SerializeField] private PlayableDirector tl_end;
@@ -30,11 +31,13 @@ public class IC_Stylized : IC_Basic
         circleDissolveController.enabled = false;
         geoFragmentController.enabled = false;
         geoTextController.enabled = false;
+        drumController.enabled = false;
     }
     protected override void OnInteractionEnter()
     {
         base.OnInteractionEnter();
         transitioning = false;
+        drumController.enabled = true;
         clickablePlanet.EnableHitbox();
         clickablePlanet.onClick += CompleteExpandToDissolve;
     }

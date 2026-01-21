@@ -2,16 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CommandManager<T> : MonoBehaviour where T:MonoBehaviour
+public abstract class CommandManager<T> where T:MonoBehaviour
 {
-    [SerializeField] protected T context;
+    protected T context;
     protected List<Command<T>> commandList;
-    void Awake(){
-        commandList = new List<Command<T>>();
-        if(commandList==null || commandList.Count == 0) this.enabled = false;
-    }
-    protected void Update()
+    protected bool isBusy = false;
+
+    public CommandManager(T context)
     {
+        this.context = context;
+        commandList = new List<Command<T>>();
+        isBusy = false;
+    }
+
+    public void UpdateCommand()
+    {
+        if(!isBusy)
+            return;
         for(int i=commandList.Count-1; i>=0; i--){
         //Note: The Command in the list might be swapped during Adding Command or Aborting Command.
         //Becareful not to Add Command while complete a command
@@ -41,12 +48,14 @@ public class CommandManager<T> : MonoBehaviour where T:MonoBehaviour
         }
         command.SetStatus(CommandStatus.Detached);
 
-        if(commandList.Count==0 || commandList == null) this.enabled = false;
+        if(commandList.Count==0 || commandList == null) 
+            isBusy = false;
     }
     public void AddCommand(Command<T> command){
         commandList.Add(command);
         command.SetStatus(CommandStatus.Pending);
 
-        if(!this.enabled) this.enabled = true;
+        if(!isBusy) 
+            isBusy = true;
     }
 }
