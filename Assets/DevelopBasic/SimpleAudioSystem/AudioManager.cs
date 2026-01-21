@@ -16,6 +16,7 @@ namespace SimpleAudioSystem{
     [Header("Audio mixer")]
         [SerializeField] private AudioMixer mainMixer;
         [SerializeField] private AudioMixerSnapshot[] mixerSnapShots;
+
         private bool ambience_crossfading = false;
         private bool music_crossfading = false;
 
@@ -30,6 +31,7 @@ namespace SimpleAudioSystem{
         {
             base.Awake();
         }
+
         #region Sound Play
         public void PlayMusic(string audio_name, float volume = 1){
             current_music_name = audio_name;
@@ -158,7 +160,7 @@ namespace SimpleAudioSystem{
             StartCoroutine(coroutineFadeInAndOutSFX(targetSource, clip, maxVolume, duration, fadeIn, fadeOut));
     #endregion
 
-    #region Helper function
+        #region Helper function
         public static void SwitchAudioListener(AudioListener from, AudioListener to){
             from.enabled = false;
             to.enabled = true;
@@ -182,6 +184,14 @@ namespace SimpleAudioSystem{
             musicFader.Excute(coroutineCrossFadeMusic(current_music_name, audio_name, targetVolume, startOver, transitionTime));           
         }
     #endregion
+        
+        #region PCM Time
+        public double GetAmbiencePCMTime()
+        {
+            return ambience_loop.timeSamples / (double)ambience_loop.clip.frequency;
+        }
+        #endregion
+
         IEnumerator coroutineFadeInAndOutSFX(AudioSource m_audio, string clip, float maxVolume, float duration, float fadeIn, float fadeOut){
             AudioSource tempAudio = Instantiate(m_audio);
             tempAudio.name = "_TempSFX";

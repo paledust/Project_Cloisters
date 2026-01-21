@@ -5,6 +5,7 @@ public class StylizedDrumController : Singleton<StylizedDrumController>
 {
     [SerializeField] private string ambKey;
     [SerializeField] private int BPM = 105;
+    [SerializeField] private int seg = 8;
     private StylizedDrumCommandManager stylizedDrumCommandManager;
 
     private double temple;
@@ -14,15 +15,15 @@ public class StylizedDrumController : Singleton<StylizedDrumController>
     {
         stylizedDrumCommandManager = new StylizedDrumCommandManager(this);
         AudioManager.Instance.PlayAmbience(ambKey, true, 1, false);
-        temple = BPM/60.0f * 8;
+        temple = 60.0f/(BPM * seg);
         beat = 0;
     }
     void Update()
     {
-        beat += temple * Time.deltaTime;
-        if (beat >= 1)
+        double pcmTime = AudioManager.Instance.GetAmbiencePCMTime();
+        if (Mathf.Abs((float)(pcmTime - beat)) >= temple)
         {
-            beat -= 1;
+            beat = pcmTime;
             stylizedDrumCommandManager.UpdateCommand();
         }
     }

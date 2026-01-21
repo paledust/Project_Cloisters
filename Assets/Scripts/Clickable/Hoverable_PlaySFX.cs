@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using SimpleAudioSystem;
 using UnityEngine;
 
@@ -20,6 +18,6 @@ public class Hoverable_PlaySFX : MonoBehaviour
     }
     void PlayHoverSFX()
     {
-        AudioManager.Instance.PlaySoundEffect(hoverSFX, volume);
+        StylizedDrumController.Instance.QueueBeat(hoverSFX, volume);
     }
 }
