@@ -16,14 +16,18 @@ MonoBehaviour:
   amb_info_list:
   - audio_name: amb_jazz_riff_105_muffle
     audio_clip: {fileID: 8300000, guid: 372563d6182903b4da9f8bc9d95dbf21, type: 3}
-  sfx_info_list: []
+  - audio_name: amb_jazz_riff_105
+    audio_clip: {fileID: 8300000, guid: e3a837595d0321b44aa25384c7e08617, type: 3}
+  sfx_info_list:
+  - audio_name: sfx_jazz_break
+    audio_clip: {fileID: 8300000, guid: 27095b74a1c688d4482456318f99de6f, type: 3}
   sfx_group_info_list:
   - audio_group_name: group_click
     audioClips:
     - {fileID: 8300000, guid: 2f7df720f993e324dba41bc4117ef4b7, type: 3}
+    - {fileID: 8300000, guid: ddbb4f1258d6e8a4b9ab9dadf3cfd439, type: 3}
     - {fileID: 8300000, guid: 35902380e169b824bbaef05f8d32b8dc, type: 3}
     - {fileID: 8300000, guid: 1e7172822a9a3e7449ed115df56dd577, type: 3}
-    - {fileID: 8300000, guid: ddbb4f1258d6e8a4b9ab9dadf3cfd439, type: 3}
   - audio_group_name: group_drum_bass
     audioClips:
     - {fileID: 8300000, guid: 22737bc34d4b295419649b2e4b7ea59e, type: 3}
@@ -46,8 +50,8 @@ MonoBehaviour:
     - {fileID: 8300000, guid: d8688c226fb45e74c8fce45a267cae42, type: 3}
   - audio_group_name: group_snare
     audioClips:
-    - {fileID: 8300000, guid: 453bd4f77dd69524eaa36b0f7548935a, type: 3}
     - {fileID: 8300000, guid: 5aa7ba78660575c409ec308286081198, type: 3}
+    - {fileID: 8300000, guid: 453bd4f77dd69524eaa36b0f7548935a, type: 3}
   - audio_group_name: group_cymbol
     audioClips:
     - {fileID: 8300000, guid: 3ad734a2eb877f84f93325ab44dda314, type: 3}

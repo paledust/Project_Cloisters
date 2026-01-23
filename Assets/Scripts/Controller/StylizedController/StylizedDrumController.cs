@@ -3,9 +3,10 @@ using UnityEngine;
 
 public class StylizedDrumController : Singleton<StylizedDrumController>
 {
-    [SerializeField] private string ambKey;
     [SerializeField] private int BPM = 105;
-    [SerializeField] private int seg = 8;
+    [SerializeField] private int seg = 4;
+    [SerializeField] private bool playBeats;
+
     private StylizedDrumCommandManager stylizedDrumCommandManager;
 
     private double temple;
@@ -14,7 +15,6 @@ public class StylizedDrumController : Singleton<StylizedDrumController>
     void Start()
     {
         stylizedDrumCommandManager = new StylizedDrumCommandManager(this);
-        AudioManager.Instance.PlayAmbience(ambKey, true, 1, false);
         temple = 60.0f/(BPM * seg);
         beat = 0;
     }
@@ -25,6 +25,8 @@ public class StylizedDrumController : Singleton<StylizedDrumController>
         {
             beat = pcmTime;
             stylizedDrumCommandManager.UpdateCommand();
+            if(playBeats)
+                AudioManager.Instance.PlaySoundEffect("group_click",1);
         }
     }
     public void PlayBeats(string sfxKey, float volume = 1)

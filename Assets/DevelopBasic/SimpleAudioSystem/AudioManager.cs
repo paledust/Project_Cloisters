@@ -188,7 +188,16 @@ namespace SimpleAudioSystem{
         #region PCM Time
         public double GetAmbiencePCMTime()
         {
+            if(ambience_loop.clip == null) 
+                return 0;
             return ambience_loop.timeSamples / (double)ambience_loop.clip.frequency;
+        }
+        #endregion
+
+        #region Volume Control
+        public void SetAmbienceVolume(float volume)
+        {
+            ambience_loop.volume = volume;
         }
         #endregion
 
@@ -238,7 +247,7 @@ namespace SimpleAudioSystem{
             }
 
             AudioSource tempAudio = new GameObject($"[_Temp_{targetSource.name}]").AddComponent<AudioSource>();
-            Destroy(tempAudio.gameObject, transitionTime); //Schedule an auto Destruction;
+            Destroy(tempAudio.gameObject, transitionTime+0.1f); //Schedule an auto Destruction;
 
             tempAudio.volume = 0;
             tempAudio.loop   = true;

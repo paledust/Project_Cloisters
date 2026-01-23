@@ -25,6 +25,8 @@ public static class EventHandler
     public static void Call_OnFlushInput() => E_OnFlushInput();
 
     #region Interaction Event
+    public static event Action<float> E_OnDrumKnocked;
+    public static void Call_OnDrumKnocked(float strength) => E_OnDrumKnocked?.Invoke(strength);
     public static event Action<CollidableCircle> E_OnNarrativeExplode;
     public static void Call_OnNarrativeExplode(CollidableCircle circle) => E_OnNarrativeExplode?.Invoke(circle);
     public static event Action<bool> E_OnChargeText;
