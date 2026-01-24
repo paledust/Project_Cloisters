@@ -4,30 +4,43 @@ using UnityEngine;
 public class StylizedDrumController : Singleton<StylizedDrumController>
 {
     [SerializeField] private int BPM = 105;
-    [SerializeField] private int seg = 4;
     [SerializeField] private bool playBeats;
+    [SerializeField] private int seg = 4;
+    [SerializeField] private int beatsGap = 3;
 
     private StylizedDrumCommandManager stylizedDrumCommandManager;
 
-    private double temple;
-    private double beat;
+    private double nextBeat;
+    private double beatGap;
+    private double lastpcmTime;
 
     void Start()
     {
         stylizedDrumCommandManager = new StylizedDrumCommandManager(this);
-        temple = 60.0f/(BPM * seg);
-        beat = 0;
+        beatGap = 60.0d/(0d+BPM * seg);
+        nextBeat = 0;
+        lastpcmTime = 0;
     }
     void Update()
     {
         double pcmTime = AudioManager.Instance.GetAmbiencePCMTime();
-        if (Mathf.Abs((float)(pcmTime - beat)) >= temple)
+        if(lastpcmTime > pcmTime)
         {
-            beat = pcmTime;
+            nextBeat = 0;
+        }
+        if (pcmTime >= nextBeat)
+        {
+            nextBeat += beatGap;
+            if(nextBeat > AudioManager.Instance.GetAmbienceLength())
+            {
+                nextBeat = 0;
+            }
             stylizedDrumCommandManager.UpdateCommand();
             if(playBeats)
                 AudioManager.Instance.PlaySoundEffect("group_click",1);
+            EventHandler.Call_OnDrumBeat();
         }
+        lastpcmTime = pcmTime;
     }
     public void PlayBeats(string sfxKey, float volume = 1)
     {

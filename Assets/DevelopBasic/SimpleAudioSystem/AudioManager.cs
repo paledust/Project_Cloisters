@@ -192,6 +192,13 @@ namespace SimpleAudioSystem{
                 return 0;
             return ambience_loop.timeSamples / (double)ambience_loop.clip.frequency;
         }
+        public double GetAmbienceLength()
+        {
+            if(ambience_loop.clip == null) 
+                return 0;
+            return ambience_loop.clip.length;
+        }
+
         #endregion
 
         #region Volume Control
