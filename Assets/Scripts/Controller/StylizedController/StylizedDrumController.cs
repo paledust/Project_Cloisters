@@ -6,7 +6,6 @@ public class StylizedDrumController : Singleton<StylizedDrumController>
     [SerializeField] private int BPM = 105;
     [SerializeField] private bool playBeats;
     [SerializeField] private int seg = 4;
-    [SerializeField] private int beatsGap = 3;
 
     private StylizedDrumCommandManager stylizedDrumCommandManager;
 

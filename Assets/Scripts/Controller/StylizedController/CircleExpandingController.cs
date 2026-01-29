@@ -1,35 +1,30 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CircleExpandingController : MonoBehaviour
 {
-    [SerializeField] private Clickable_ObjectRotator clickable_Planet;
     [SerializeField] private PerRendererExpand expandCircle;
     [SerializeField] private float controlAgility = 5;
     [SerializeField] private float controlFactor = 0.1f;
     [SerializeField] private float radiusFlickFreq = 15;
     [SerializeField] private float externalNoiseMoveFactor = 1;
-    [SerializeField] private Vector2 yawRange;
+    [SerializeField] private float expandCircleRadius = 1.2f;
     [SerializeField] private AnimationCurve shrinkCurve;
     [SerializeField] private AnimationCurve noiseCurve;
     [SerializeField] private AnimationCurve noiseMinCurve;
     [SerializeField] private AnimationCurve radiusCurve;
     [SerializeField] private AnimationCurve radiusFlickAmpCurve;
 
-    private float targetValue;
     private float controlValue;
-    private float offsetAngle;
     private Vector3 initScale;
 
     void Awake(){
-        offsetAngle = 0;
         initScale = expandCircle.transform.localScale;
     }
     public void ResetController(){
-        offsetAngle = clickable_Planet.m_accumulateYaw;
-        targetValue = controlValue = 0;
-
+        controlValue = 0;
         expandCircle.noiseMin = noiseMinCurve.Evaluate(0);
         expandCircle.circleRadius = radiusCurve.Evaluate(0);
         expandCircle.noiseStrength = noiseCurve.Evaluate(0);
@@ -39,9 +34,8 @@ public class CircleExpandingController : MonoBehaviour
         scale.y *= shrinkCurve.Evaluate(0);
         expandCircle.transform.localScale = scale;
     }
-    void Update()
+    public void UpdateExpand(float targetValue)
     {
-        targetValue = (-clickable_Planet.m_accumulateYaw+offsetAngle-yawRange.x)/(yawRange.y-yawRange.x);
         targetValue = Mathf.Clamp01(targetValue);
         controlValue = Mathf.Lerp(controlValue, targetValue, Time.deltaTime*controlAgility);
 
@@ -54,5 +48,21 @@ public class CircleExpandingController : MonoBehaviour
         Vector3 scale = initScale;
         scale.y *= shrinkCurve.Evaluate(controlValue);
         expandCircle.transform.localScale = scale;
+    }
+    public void ExpandCircleOut(Action OnExpandComplete)
+    {
+        StartCoroutine(coroutineStartCoroutine(OnExpandComplete));
+    }
+    IEnumerator coroutineStartCoroutine(Action onComplete)
+    {
+        float startRadius = expandCircle.circleRadius;
+        yield return new WaitForLoop(2f, (t) =>
+        {
+            float _t = EasingFunc.Easing.CircEaseOut(t);
+            expandCircle.circleRadius = Mathf.Lerp(startRadius, expandCircleRadius, _t);
+        });
+        expandCircle.circleRadius = expandCircleRadius;
+        onComplete?.Invoke();
+        yield return null;
     }
 }

@@ -21,6 +21,10 @@ MonoBehaviour:
   sfx_info_list:
   - audio_name: sfx_jazz_break
     audio_clip: {fileID: 8300000, guid: 27095b74a1c688d4482456318f99de6f, type: 3}
+  - audio_name: sfx_hat_multi
+    audio_clip: {fileID: 8300000, guid: 6ddfecf3061e23349a000f7bcc8ba795, type: 3}
+  - audio_name: sfx_cymbol_multi
+    audio_clip: {fileID: 8300000, guid: ea85933686b051c46ba96991d28e4909, type: 3}
   sfx_group_info_list:
   - audio_group_name: group_click
     audioClips:
@@ -56,3 +60,7 @@ MonoBehaviour:
     audioClips:
     - {fileID: 8300000, guid: 3ad734a2eb877f84f93325ab44dda314, type: 3}
     - {fileID: 8300000, guid: 63a85ee3bd3cc4843a486a7b9c8d1dc4, type: 3}
+  - audio_group_name: group_hat
+    audioClips:
+    - {fileID: 8300000, guid: 2b49ffb59c026434baf325cee8d7a9f1, type: 3}
+    - {fileID: 8300000, guid: ff87fbb7ace859545bbebf50ac1af01d, type: 3}

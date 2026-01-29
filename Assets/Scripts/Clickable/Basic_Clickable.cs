@@ -7,6 +7,7 @@ public abstract class Basic_Clickable : MonoBehaviour
     public string sfx_clickSound = "group_click";
     [SerializeField] protected Collider hitbox;
     [SerializeField] protected bool isFrozen = false; //If not available, player can still click on object but will show stop sign
+    [SerializeField] protected bool disableClick = false; //If true, player cannot click on object, but hover still works
     
     public bool m_isInteractable{get{return gameObject.activeInHierarchy && !isFrozen && hitbox.enabled;}}
     public Collider m_hitbox{get{return hitbox;}}
@@ -23,6 +24,7 @@ public abstract class Basic_Clickable : MonoBehaviour
     public virtual void OnHover(PlayerController player){onHover?.Invoke(player);}
     public virtual void OnExitHover(){onExitHover?.Invoke();}
     public virtual void OnClick(PlayerController player, Vector3 hitPos){
+        if(disableClick) return;
         isControlling = true;
         onClick?.Invoke();
     }
@@ -37,6 +39,8 @@ public abstract class Basic_Clickable : MonoBehaviour
 #endregion
 
 #region Interaction Activation
+    public void DisableClicking()=>disableClick = true;
+    public void EnableClicking()=>disableClick = false;
     public void FreezeInteraction(){
         if(m_isInteractable) OnBecomeUninteractable();
         isFrozen = true;

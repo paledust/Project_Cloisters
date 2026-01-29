@@ -25,6 +25,8 @@ public static class EventHandler
     public static void Call_OnFlushInput() => E_OnFlushInput();
 
     #region Interaction Event
+    public static event Action E_OnBassChargeBeat;
+    public static void Call_OnBassChargeBeat() => E_OnBassChargeBeat?.Invoke();
     public static event Action E_OnDrumBeat;
     public static void Call_OnDrumBeat() => E_OnDrumBeat?.Invoke();
     public static event Action<float> E_OnDrumKnocked;

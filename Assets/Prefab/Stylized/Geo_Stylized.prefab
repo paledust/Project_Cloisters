@@ -119,6 +119,16 @@ MonoBehaviour:
   sfx_clickSound: group_click
   hitbox: {fileID: 2349499553578161640}
   isFrozen: 0
+  disableClick: 0
   hoverSFX: group_click
+  punchTrans: {fileID: 3380004798844544746}
   hoverScalePunch: 0.25
   hoverScaleDuration: 0.2
+  volumeRange: {x: 0, y: 1}
+  speedToVolume: 1
+--- !u!4 &3380004798844544746 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6644229730941844977, guid: 40299887124e1fe478b716dc1c0cbc31,
+    type: 3}
+  m_PrefabInstance: {fileID: 8276837420505111323}
+  m_PrefabAsset: {fileID: 0}

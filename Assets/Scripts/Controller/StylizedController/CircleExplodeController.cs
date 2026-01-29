@@ -34,17 +34,22 @@ public class CircleExplodeController : MonoBehaviour
             AudioManager.Instance.SetAmbienceVolume(Mathf.Lerp(ambFade.x, ambFade.y, EasingFunc.Easing.QuadEaseIn(expandCircle.circleRadius/explodeRadius)));
         }
         if(expandCircle.circleRadius>=explodeRadius && !exploded){
-            exploded = true;
-            expandController.enabled = false;
-            AudioManager.Instance.PlayAmbience(ambMuffleKey, false, 2f, 1f);
-            StartCoroutine(coroutineExplode(1f));
-            StylizedDrumController.Instance.QueueBeat(explodeSFX, 1);
+            Explode();
         }
+    }
+    public void Explode()
+    {
+        exploded = true;
+        expandController.enabled = false;
+        AudioManager.Instance.PlayAmbience(ambMuffleKey, false, 2f, 1f);
+        StartCoroutine(coroutineExplode(1f));
+        StylizedDrumController.Instance.QueueBeat(explodeSFX, 1);
     }
     IEnumerator coroutineExplode(float duration){
         p_explode.Play(true);
         clickable_Planet.BreakSpring();
         clickable_Planet.enabled = false;
+        clickable_Planet.DisableClicking();
         hoverable_drum.enabled = true;
         EventHandler.Call_OnFlushInput();
         stylizedController.ExplodeToDissolveTransition();
@@ -57,6 +62,6 @@ public class CircleExplodeController : MonoBehaviour
             expandCircle.noiseMin = Mathf.Lerp(initNoiseMin, 0f, _t);
             expandCircle.noiseStrength = Mathf.Lerp(initNoise, targetNoise, _t);
         });
-        // stylizedController.StartDissovle();
+        stylizedController.StartExtending();
     }
 }

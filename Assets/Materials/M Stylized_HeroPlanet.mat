@@ -118,6 +118,9 @@ Material:
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
+    - _EmissionBias: 0.18
+    - _EmissionSmooth: 3
+    - _EmissionStart: -0.25
     - _EnvironmentReflections: 1
     - _FadeLength: 1
     - _FadeStart: -100
@@ -152,8 +155,9 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 1, g: 0.728628, b: 0.56037736, a: 1}
+    - _Color: {r: 1, g: 0.6059468, b: 0.36037737, a: 1}
     - _Direction: {r: 0.4, g: 0.7, b: -0.6, a: 0}
+    - _Emission: {r: 3.5648856, g: 2.9296527, b: 1.5268471, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FresenelDirOffset: {r: 0, g: 0.2, b: 0, a: 0}
     - _FresnelColor: {r: 2.072162, g: 0.7297614, b: 0.1531598, a: 1}

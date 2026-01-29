@@ -13,10 +13,29 @@ public class Clickable_Stylized : Basic_Clickable
     [SerializeField] private float speedToVolume = 1f; 
 
     private Vector3 originalScale;
+    private bool secondBeat = false;
+    private bool isHovering = false;
+    private float beatTimer = 0f;
+    private const double BEAT_TEMPLE = 60/420;
 
     void OnEnable()
     {
         originalScale = transform.localScale;    
+    }
+    void Update()
+    {
+        if(isHovering && !secondBeat)
+        {
+            beatTimer += Time.deltaTime;
+            if(beatTimer >= BEAT_TEMPLE)
+            {
+                // StylizedDrumController.Instance.QueueBeat(hoverSFX, volumeRange.y);
+                // EventHandler.Call_OnDrumKnocked(volumeRange.y);
+                AudioManager.Instance.PlaySoundEffect(sfx_clickSound, 0.5f);
+                ShakeDrum(1);
+                secondBeat = true;
+            }
+        }
     }
     public override void OnHover(PlayerController player)
     {
@@ -26,6 +45,23 @@ public class Clickable_Stylized : Basic_Clickable
         StylizedDrumController.Instance.QueueBeat(hoverSFX, Mathf.Clamp(strength, volumeRange.x, volumeRange.y));
         EventHandler.Call_OnDrumKnocked(strength);
 
+        ShakeDrum(strength);
+        isHovering = true;
+        secondBeat = false;
+        beatTimer = 0f;
+    }
+    public override void OnExitHover()
+    {
+        base.OnExitHover();
+        isHovering = false;
+    }
+    public override void OnClick(PlayerController player, Vector3 hitPos)
+    {
+        base.OnClick(player, hitPos);
+        ShakeDrum(1);
+    }
+    void ShakeDrum(float strength)
+    {
         transform.DOKill();
         transform.localScale = originalScale;
         transform.DOPunchScale(Vector3.one * hoverScalePunch * Mathf.Clamp01(strength), hoverScaleDuration, 2);
