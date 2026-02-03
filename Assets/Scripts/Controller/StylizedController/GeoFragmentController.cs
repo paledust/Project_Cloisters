@@ -33,30 +33,24 @@ public class GeoFragmentController : MonoBehaviour
     [SerializeField] private Vector2 expandPosRatioRND;
     [SerializeField] private float finalExpandFactor = 1.5f;
     [SerializeField] private CurveData geoSizeCurve; 
+    [SerializeField] private float expandSize = 1.2f;
 [Header("Dissolve")]
     [SerializeField] private Vector2 RayTrailRadiusRange;
     [SerializeField] private float dissolveRadius;
 
     private float controlFactor = 0;
-    private int[] geoIndexShuffles;
     [SerializeField, ShowOnly] private GameObject[] controllingGeos;
     private Vector3[] geoPoses;
-    private Vector3[] geoScales;
     private int geoGroupIndex = 0;
     private int geoIndexOffset = 0;
     
     void Start(){
-        geoIndexShuffles = new int[geoFrags.Length];
-        for(int i=0; i<geoIndexShuffles.Length; i++){
-            geoIndexShuffles[i] = i;
-        }
     //Reposition geos to center of the sphere
         geoPoses = new Vector3[geoFrags.Length];
-        geoScales = new Vector3[geoFrags.Length];
         for(int i=0; i<geoPoses.Length; i++){
             geoPoses[i] = Quaternion.Euler(0, 0, Random.Range(-expandPosAngleRND, expandPosAngleRND)+360*i/geoPoses.Length) * Vector2.right * expandPosRatioRND.GetRndValueInVector2Range();
-            geoScales[i] = geoFrags[i].transform.localScale;
         }
+        Service.Shuffle(ref geoPoses);
 
         foreach(var geoGroup in geoFragGroups){
             foreach(var geo in geoGroup.geos){
@@ -70,9 +64,8 @@ public class GeoFragmentController : MonoBehaviour
         controlFactor = Mathf.Lerp(controlFactor, expandFactor, Time.deltaTime*5);
     //Rotate Geo and expand along the shape
         for(int i=0; i<controllingGeos.Length; i++){
-            int transIndex = geoIndexShuffles[i + geoIndexOffset];
-            controllingGeos[i].transform.localPosition = geoPoses[transIndex] * Mathf.Lerp(expandRadiusRange.x, expandRadiusRange.y, controlFactor);
-            controllingGeos[i].transform.localScale = geoScales[transIndex] * geoSizeCurve.Evaluate(controlFactor);
+            controllingGeos[i].transform.localPosition = geoPoses[i+geoIndexOffset] * Mathf.Lerp(expandRadiusRange.x, expandRadiusRange.y, controlFactor);
+            controllingGeos[i].transform.localScale = Vector3.one * expandSize * geoSizeCurve.Evaluate(controlFactor);
         }
     }
     void PrepareNextGeo(){
@@ -84,9 +77,8 @@ public class GeoFragmentController : MonoBehaviour
         controlFactor = 0;
         for(int i=0; i<controllingGeos.Length; i++){
             controllingGeos[i].SetActive(true);
-            int transIndex = geoIndexShuffles[i + geoIndexOffset];
-            controllingGeos[i].transform.localPosition = geoPoses[transIndex] * expandRadiusRange.x;
-            controllingGeos[i].transform.localScale = geoScales[transIndex] * geoSizeCurve.Evaluate(0);
+            controllingGeos[i].transform.localPosition = geoPoses[i+geoIndexOffset] * expandRadiusRange.x;
+            controllingGeos[i].transform.localScale = Vector3.one * expandSize * geoSizeCurve.Evaluate(0);
         }
     }
     public void ExplodeGeo(){

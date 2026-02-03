@@ -33,7 +33,8 @@ public class CircleExplodeController : MonoBehaviour
         {
             AudioManager.Instance.SetAmbienceVolume(Mathf.Lerp(ambFade.x, ambFade.y, EasingFunc.Easing.QuadEaseIn(expandCircle.circleRadius/explodeRadius)));
         }
-        if(expandCircle.circleRadius>=explodeRadius && !exploded){
+        if(expandCircle.circleRadius>=explodeRadius && !exploded)
+        {
             Explode();
         }
     }
