@@ -1,0 +1,172 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &1845090555467663131
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1821683928448215375, guid: 8bb6e3f5fd951d740a8e34bd850fc193,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -5495902117074765545, guid: 97d95fbe4bbf24449ad2eb5894a008c7,
+        type: 3}
+    - target: {fileID: 2982096577713389829, guid: 8bb6e3f5fd951d740a8e34bd850fc193,
+        type: 3}
+      propertyPath: Tint.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2982096577713389829, guid: 8bb6e3f5fd951d740a8e34bd850fc193,
+        type: 3}
+      propertyPath: Tint.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2982096577713389829, guid: 8bb6e3f5fd951d740a8e34bd850fc193,
+        type: 3}
+      propertyPath: ShadeMin
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2982096577713389829, guid: 8bb6e3f5fd951d740a8e34bd850fc193,
+        type: 3}
+      propertyPath: DarkColor.g
+      value: 0.11270936
+      objectReference: {fileID: 0}
+    - target: {fileID: 2982096577713389829, guid: 8bb6e3f5fd951d740a8e34bd850fc193,
+        type: 3}
+      propertyPath: DarkColor.r
+      value: 0.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 2982096577713389829, guid: 8bb6e3f5fd951d740a8e34bd850fc193,
+        type: 3}
+      propertyPath: ShadeSmooth
+      value: 0.49
+      objectReference: {fileID: 0}
+    - target: {fileID: 2982096577713389829, guid: 8bb6e3f5fd951d740a8e34bd850fc193,
+        type: 3}
+      propertyPath: BrightColor.g
+      value: 0.2627451
+      objectReference: {fileID: 0}
+    - target: {fileID: 2982096577713389829, guid: 8bb6e3f5fd951d740a8e34bd850fc193,
+        type: 3}
+      propertyPath: BrightColor.r
+      value: 0.99215686
+      objectReference: {fileID: 0}
+    - target: {fileID: 2982096578671931980, guid: 8bb6e3f5fd951d740a8e34bd850fc193,
+        type: 3}
+      propertyPath: m_Name
+      value: Geo_Stylized_tri_1 Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 2982096578671931980, guid: 8bb6e3f5fd951d740a8e34bd850fc193,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2982096578671931983, guid: 8bb6e3f5fd951d740a8e34bd850fc193,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2982096578671931983, guid: 8bb6e3f5fd951d740a8e34bd850fc193,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2982096578671931983, guid: 8bb6e3f5fd951d740a8e34bd850fc193,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2982096578671931983, guid: 8bb6e3f5fd951d740a8e34bd850fc193,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2982096578671931983, guid: 8bb6e3f5fd951d740a8e34bd850fc193,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.381
+      objectReference: {fileID: 0}
+    - target: {fileID: 2982096578671931983, guid: 8bb6e3f5fd951d740a8e34bd850fc193,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.09500003
+      objectReference: {fileID: 0}
+    - target: {fileID: 2982096578671931983, guid: 8bb6e3f5fd951d740a8e34bd850fc193,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2982096578671931983, guid: 8bb6e3f5fd951d740a8e34bd850fc193,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.34058037
+      objectReference: {fileID: 0}
+    - target: {fileID: 2982096578671931983, guid: 8bb6e3f5fd951d740a8e34bd850fc193,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.90001875
+      objectReference: {fileID: 0}
+    - target: {fileID: 2982096578671931983, guid: 8bb6e3f5fd951d740a8e34bd850fc193,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.096258394
+      objectReference: {fileID: 0}
+    - target: {fileID: 2982096578671931983, guid: 8bb6e3f5fd951d740a8e34bd850fc193,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.25437295
+      objectReference: {fileID: 0}
+    - target: {fileID: 2982096578671931983, guid: 8bb6e3f5fd951d740a8e34bd850fc193,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2982096578671931983, guid: 8bb6e3f5fd951d740a8e34bd850fc193,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2982096578671931983, guid: 8bb6e3f5fd951d740a8e34bd850fc193,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2982096578671931983, guid: 8bb6e3f5fd951d740a8e34bd850fc193,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5424239467753454169, guid: 8bb6e3f5fd951d740a8e34bd850fc193,
+        type: 3}
+      propertyPath: hoverSFX
+      value: group_cymbol
+      objectReference: {fileID: 0}
+    - target: {fileID: 5424239467753454169, guid: 8bb6e3f5fd951d740a8e34bd850fc193,
+        type: 3}
+      propertyPath: speedToVolume
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 5424239467753454169, guid: 8bb6e3f5fd951d740a8e34bd850fc193,
+        type: 3}
+      propertyPath: volumeRange.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5424239467753454169, guid: 8bb6e3f5fd951d740a8e34bd850fc193,
+        type: 3}
+      propertyPath: sfx_clickSound
+      value: sfx_cymbol_multi
+      objectReference: {fileID: 0}
+    - target: {fileID: 6395048226699834327, guid: 8bb6e3f5fd951d740a8e34bd850fc193,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -5495902117074765545, guid: 97d95fbe4bbf24449ad2eb5894a008c7,
+        type: 3}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8bb6e3f5fd951d740a8e34bd850fc193, type: 3}

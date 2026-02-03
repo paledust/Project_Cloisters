@@ -39,7 +39,7 @@ public class Hoverable_DrumInteraction : MonoBehaviour
 
     [Header("Drum Charge View")]
     [SerializeField] private SpriteRenderer glowSprite;
-    [SerializeField] private ParticleSystem glowParticle;
+    [SerializeField] private ParticleSystem rippleParticle;
     [SerializeField] private PerRendererColor heroColor;
     [SerializeField] private Transform heroSpehreRenderTrans;
     [SerializeField] private Color chargeHeroColor;
@@ -138,16 +138,16 @@ public class Hoverable_DrumInteraction : MonoBehaviour
         ShakeDrum(strength * harmScale, harmVibration, hoverScaleDuration);
         accumulatePower += beatPowerAdd * strength;
         accumulatePower = Mathf.Min(1.5f, accumulatePower);
+        if(drumState == DrumState.MaxCharged)
+        {
+            rippleParticle.Emit(1);
+        }
     }
     void StaticDrum()
     {
         beatCounter++;
         if(beatCounter % beatGap != 0) return;
         ShakeDrum(staticScalePunch, staticScaleVibration, staticScaleDuration);
-        if(drumState == DrumState.MaxCharged)
-        {
-            glowParticle.Emit(1);
-        }
     }
     void ShakeDrum(float strength, int vibration, float duration)
     {

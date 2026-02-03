@@ -23,13 +23,6 @@ public class Hoverable_ContinuousBeat : MonoBehaviour
         clickableStylized.onHover -= OnHover;
         clickableStylized.onExitHover -= OnExitHover;
     }
-    void Update()
-    {
-        if(hovering)
-        {
-            
-        }
-    }
     void OnHover(PlayerController player)
     {
         hovering = true;
@@ -38,5 +31,6 @@ public class Hoverable_ContinuousBeat : MonoBehaviour
     void OnExitHover()
     {
         hovering = false;
+        StylizedDrumController.Instance.QueueContinuousBeat(hoverLoopingSFX, 0f, audioSource);
     }
 }

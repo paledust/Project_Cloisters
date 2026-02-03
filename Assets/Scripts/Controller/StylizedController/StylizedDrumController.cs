@@ -47,7 +47,7 @@ public class StylizedDrumController : Singleton<StylizedDrumController>
     }
     public void PlayContinuousBeat(string sfxKey, float volume = 1, AudioSource audioSource = null)
     {
-        AudioManager.Instance.PlaySoundEffectLoop(audioSource, sfxKey, volume);
+        AudioManager.Instance.PlaySoundEffectLoop(audioSource, sfxKey, volume, 0.2f);
     }
     public PlayBeatCommand QueueBeat(string sfxKey, float volume = 1)
     {
