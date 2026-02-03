@@ -45,9 +45,31 @@ public class StylizedDrumController : Singleton<StylizedDrumController>
     {
         AudioManager.Instance.PlaySoundEffect(sfxKey, volume);
     }
-    public void QueueBeat(string sfxKey, float volume = 1)
+    public void PlayContinuousBeat(string sfxKey, float volume = 1, AudioSource audioSource = null)
+    {
+        AudioManager.Instance.PlaySoundEffectLoop(audioSource, sfxKey, volume);
+    }
+    public PlayBeatCommand QueueBeat(string sfxKey, float volume = 1)
     {
         var playBeatCommand = new PlayBeatCommand(sfxKey, volume);
         stylizedDrumCommandManager.AddCommand(playBeatCommand);
+        return playBeatCommand;
+    }
+    public PlayBeatCommand QueueBeat(string sfxKey, float volume, PlayBeatCommand drumCommand)
+    {
+        if(drumCommand.IsDetached)
+            return QueueBeat(sfxKey, volume);
+        else
+        {
+            var playBeatCommand = new PlayBeatCommand(sfxKey, volume);
+            drumCommand.QueueCommand(playBeatCommand);
+            return playBeatCommand;
+        }
+    }
+    public ContinuousBeat QueueContinuousBeat(string sfxKey, float volume, AudioSource audioSource)
+    {
+        var continuousBeat = new ContinuousBeat(sfxKey, volume, audioSource);
+        stylizedDrumCommandManager.AddCommand(continuousBeat);
+        return continuousBeat;
     }
 }

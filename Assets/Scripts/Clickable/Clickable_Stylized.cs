@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Clickable_Stylized : Basic_Clickable
 {
+    [SerializeField] private bool doubleTap = true;
     [SerializeField] private string hoverSFX;
     [Header("Scale Animation")]
     [SerializeField] private float hoverScalePunch = 1.1f;
@@ -12,11 +13,13 @@ public class Clickable_Stylized : Basic_Clickable
     [SerializeField] private Vector2 volumeRange = new Vector2(0, 1);
     [SerializeField] private float speedToVolume = 1f; 
 
+    private PlayBeatCommand playBeatCommand;
     private Vector3 originalScale;
     private bool secondBeat = false;
     private bool isHovering = false;
     private float beatTimer = 0f;
-    private const double BEAT_TEMPLE = 60/420;
+    
+    private const double BEAT_TEMPLE = 60f/420f;
 
     void OnEnable()
     {
@@ -24,14 +27,13 @@ public class Clickable_Stylized : Basic_Clickable
     }
     void Update()
     {
+        if(!doubleTap) return;
         if(isHovering && !secondBeat)
         {
             beatTimer += Time.deltaTime;
             if(beatTimer >= BEAT_TEMPLE)
             {
-                // StylizedDrumController.Instance.QueueBeat(hoverSFX, volumeRange.y);
-                // EventHandler.Call_OnDrumKnocked(volumeRange.y);
-                AudioManager.Instance.PlaySoundEffect(sfx_clickSound, 0.5f);
+                StylizedDrumController.Instance.QueueBeat(sfx_clickSound, 0.5f, playBeatCommand);
                 ShakeDrum(1);
                 secondBeat = true;
             }
@@ -42,7 +44,7 @@ public class Clickable_Stylized : Basic_Clickable
         base.OnHover(player);
         
         float strength = player.PointerDelta.magnitude * speedToVolume;
-        StylizedDrumController.Instance.QueueBeat(hoverSFX, Mathf.Clamp(strength, volumeRange.x, volumeRange.y));
+        playBeatCommand = StylizedDrumController.Instance.QueueBeat(hoverSFX, Mathf.Clamp(strength, volumeRange.x, volumeRange.y));
         EventHandler.Call_OnDrumKnocked(strength);
 
         ShakeDrum(strength);

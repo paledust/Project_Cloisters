@@ -22,3 +22,20 @@ public class PlayBeatCommand : DrumCommand
         SetStatus(CommandStatus.Success);
     }
 }
+public class ContinuousBeat : DrumCommand
+{
+    private string sfxKey;
+    private float volume;
+    private AudioSource audioSource;
+    public ContinuousBeat(string sfxKey, float volume, AudioSource audioSource)
+    {
+        this.sfxKey = sfxKey;
+        this.volume = volume;
+        this.audioSource = audioSource;
+    }
+    internal override void CommandUpdate(StylizedDrumController context)
+    {
+        context.PlayContinuousBeat(sfxKey, volume, audioSource);
+        SetStatus(CommandStatus.Success);
+    }
+}

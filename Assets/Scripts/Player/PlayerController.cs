@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        mainCam = Camera.main;    
+        mainCam = Camera.main;
     }
 
     // Update is called once per frame
@@ -106,6 +106,7 @@ public class PlayerController : MonoBehaviour
 
 #region Player Input
     void OnPointerMove(InputValue value){
+        Debug.Log("Pointer Move");
         PointerDelta = value.Get<Vector2>();
     }
     void OnPointerPos(InputValue value){
@@ -116,7 +117,7 @@ public class PlayerController : MonoBehaviour
         if(value.isPressed){
             if(m_holdingInteractable != null) return;
             if(m_hoveringInteractable == null) return;
-
+            
             InteractWithClickable();
         }
         else{

@@ -44,7 +44,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6611199323516168535, guid: 40299887124e1fe478b716dc1c0cbc31,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2349499553578161640}
+      addedObject: {fileID: 6395048226699834327}
     - targetCorrespondingSourceObject: {fileID: 6611199323516168535, guid: 40299887124e1fe478b716dc1c0cbc31,
         type: 3}
       insertIndex: -1
@@ -83,8 +83,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!135 &2349499553578161640
-SphereCollider:
+--- !u!64 &6395048226699834327
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -101,9 +101,10 @@ SphereCollider:
   m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.08
-  m_Center: {x: 0, y: 0, z: 0}
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2534964839176971238, guid: c79e533b1b5416c4180638a8207c72d5, type: 3}
 --- !u!114 &5424239467753454169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,18 +118,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sfx_clickSound: group_click
-  hitbox: {fileID: 2349499553578161640}
+  hitbox: {fileID: 6395048226699834327}
   isFrozen: 0
   disableClick: 0
   hoverSFX: group_click
-  punchTrans: {fileID: 3380004798844544746}
   hoverScalePunch: 0.25
   hoverScaleDuration: 0.2
   volumeRange: {x: 0, y: 1}
   speedToVolume: 1
---- !u!4 &3380004798844544746 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6644229730941844977, guid: 40299887124e1fe478b716dc1c0cbc31,
-    type: 3}
-  m_PrefabInstance: {fileID: 8276837420505111323}
-  m_PrefabAsset: {fileID: 0}
