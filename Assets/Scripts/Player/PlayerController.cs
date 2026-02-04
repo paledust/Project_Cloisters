@@ -106,7 +106,6 @@ public class PlayerController : MonoBehaviour
 
 #region Player Input
     void OnPointerMove(InputValue value){
-        Debug.Log("Pointer Move");
         PointerDelta = value.Get<Vector2>();
     }
     void OnPointerPos(InputValue value){

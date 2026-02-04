@@ -97,7 +97,7 @@ public class Hoverable_DrumInteraction : MonoBehaviour
                         DOTween.Kill(heroColor);
                         DOTween.To(()=> heroColor.tint, x=> heroColor.tint = x, chargeHeroColor, 0.3f).SetId(heroColor);
                         heroSpehreRenderTrans.DOKill();
-                        heroSpehreRenderTrans.DOScale(Vector3.one*1.2f, 0.3f).SetEase(Ease.OutBack);
+                        heroSpehreRenderTrans.DOScale(Vector3.one*1.5f, 0.3f).SetEase(Ease.OutBack);
                     }
                 }
                 else

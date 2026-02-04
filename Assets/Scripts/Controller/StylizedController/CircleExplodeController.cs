@@ -1,4 +1,5 @@
 using System.Collections;
+using DG.Tweening;
 using SimpleAudioSystem;
 using UnityEngine;
 
@@ -45,7 +46,12 @@ public class CircleExplodeController : MonoBehaviour
         AudioManager.Instance.PlayAmbience(ambMuffleKey, false, 2f, 1f);
         StartCoroutine(coroutineExplode(1f));
         StylizedDrumController.Instance.QueueBeat(explodeSFX, 1);
+        clickable_Planet.transform.DOScale(Vector3.one * 0.5f, 0.5f).SetEase(Ease.InBack).OnComplete(() =>
+        {
+            clickable_Planet.transform.DOScale(Vector3.one*0.25f, 1).SetEase(Ease.InOutQuad);
+        });
     }
+
     IEnumerator coroutineExplode(float duration){
         p_explode.Play(true);
         clickable_Planet.BreakSpring();

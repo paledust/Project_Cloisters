@@ -1,4 +1,3 @@
-using SimpleAudioSystem;
 using UnityEngine;
 
 public class Hoverable_ContinuousBeat : MonoBehaviour

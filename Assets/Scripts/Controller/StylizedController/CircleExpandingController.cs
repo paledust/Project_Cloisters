@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CircleExpandingController : MonoBehaviour
@@ -11,6 +10,8 @@ public class CircleExpandingController : MonoBehaviour
     [SerializeField] private float radiusFlickFreq = 15;
     [SerializeField] private float externalNoiseMoveFactor = 1;
     [SerializeField] private float expandCircleRadius = 1.2f;
+
+    [Header("Animation Curves")]
     [SerializeField] private AnimationCurve shrinkCurve;
     [SerializeField] private AnimationCurve noiseCurve;
     [SerializeField] private AnimationCurve noiseMinCurve;
@@ -20,10 +21,12 @@ public class CircleExpandingController : MonoBehaviour
     private float controlValue;
     private Vector3 initScale;
 
-    void Awake(){
+    void Awake()
+    {
         initScale = expandCircle.transform.localScale;
     }
-    public void ResetController(){
+    public void ResetController()
+    {
         controlValue = 0;
         expandCircle.noiseMin = noiseMinCurve.Evaluate(0);
         expandCircle.circleRadius = radiusCurve.Evaluate(0);
@@ -51,9 +54,9 @@ public class CircleExpandingController : MonoBehaviour
     }
     public void ExpandCircleOut(Action OnExpandComplete)
     {
-        StartCoroutine(coroutineStartCoroutine(OnExpandComplete));
+        StartCoroutine(coroutineExpand(OnExpandComplete));
     }
-    IEnumerator coroutineStartCoroutine(Action onComplete)
+    IEnumerator coroutineExpand(Action onComplete)
     {
         float startRadius = expandCircle.circleRadius;
         yield return new WaitForLoop(2f, (t) =>

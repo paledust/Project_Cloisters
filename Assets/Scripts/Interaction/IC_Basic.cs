@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [AddComponentMenu("InteractionController")]
@@ -12,6 +13,9 @@ public abstract class IC_Basic : MonoBehaviour
     public bool m_isDone{get; private set;} = false;
     public bool m_isPlaying{get; private set;} = false;
 
+    public Action OnEnterInteraction;
+    public Action OnExitInteraction;
+
 //This might be an async function
     public void PreloadInteraction(){
         if(interactionAssetsGroup!=null) interactionAssetsGroup.SetActive(true);
@@ -20,9 +24,11 @@ public abstract class IC_Basic : MonoBehaviour
     public void EnterInteraction(){
         m_isPlaying = true;
         OnInteractionEnter();
+        OnEnterInteraction?.Invoke();
     }
     public void ExitInteraction(){
         OnInteractionEnd();
+        OnExitInteraction?.Invoke();
         m_isDone = true;
         m_isPlaying = false;
     }
