@@ -167,7 +167,7 @@ PrefabInstance:
     - target: {fileID: 5424239467753454169, guid: 8bb6e3f5fd951d740a8e34bd850fc193,
         type: 3}
       propertyPath: sfx_clickSound
-      value: sfx_hat_multi
+      value: group_hat
       objectReference: {fileID: 0}
     - target: {fileID: 6395048226699834327, guid: 8bb6e3f5fd951d740a8e34bd850fc193,
         type: 3}

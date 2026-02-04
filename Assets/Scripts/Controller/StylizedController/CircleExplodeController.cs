@@ -17,7 +17,6 @@ public class CircleExplodeController : MonoBehaviour
 
     [Header("Audio")]
     [SerializeField] private string explodeSFX;
-    [SerializeField] private string ambMuffleKey;
     [SerializeField] private string ambKey;
     [SerializeField] private Vector2 ambFade = Vector2.one;
 
@@ -43,12 +42,11 @@ public class CircleExplodeController : MonoBehaviour
     {
         exploded = true;
         expandController.enabled = false;
-        AudioManager.Instance.PlayAmbience(ambMuffleKey, false, 2f, 1f);
         StartCoroutine(coroutineExplode(1f));
         StylizedDrumController.Instance.QueueBeat(explodeSFX, 1);
-        clickable_Planet.transform.DOScale(Vector3.one * 0.5f, 0.5f).SetEase(Ease.InBack).OnComplete(() =>
+        clickable_Planet.transform.DOScale(Vector3.one * 0.375f, 0.1f).SetEase(Ease.OutQuad).OnComplete(() =>
         {
-            clickable_Planet.transform.DOScale(Vector3.one*0.25f, 1).SetEase(Ease.InOutQuad);
+            clickable_Planet.transform.DOScale(Vector3.one*0.3f, 0.3f).SetEase(Ease.InOutQuad);
         });
     }
 
@@ -60,6 +58,9 @@ public class CircleExplodeController : MonoBehaviour
         hoverable_drum.enabled = true;
         EventHandler.Call_OnFlushInput();
         stylizedController.ExplodeToDissolveTransition();
+        yield return new WaitForSeconds(0.2f);
+        AudioManager.Instance.FadeAmbience(0.026f, 2f);
+
         float initRadius = expandCircle.circleRadius;
         float initNoiseMin = expandCircle.noiseMin;
         float initNoise = expandCircle.noiseStrength;

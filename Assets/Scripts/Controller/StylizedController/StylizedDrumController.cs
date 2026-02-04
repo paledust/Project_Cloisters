@@ -12,6 +12,7 @@ public class StylizedDrumController : Singleton<StylizedDrumController>
     private double nextBeat;
     private double beatGap;
     private double lastpcmTime;
+    private
 
     void Start()
     {
@@ -36,7 +37,7 @@ public class StylizedDrumController : Singleton<StylizedDrumController>
             }
             stylizedDrumCommandManager.UpdateCommand();
             if(playBeats)
-                AudioManager.Instance.PlaySoundEffect("group_click",1);
+                AudioManager.Instance.PlaySoundEffect("group_click", 1);
             EventHandler.Call_OnDrumBeat();
         }
         lastpcmTime = pcmTime;

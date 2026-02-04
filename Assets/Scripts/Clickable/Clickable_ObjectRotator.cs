@@ -21,6 +21,8 @@ public class Clickable_ObjectRotator : Basic_Clickable
 [Header("Spring")]
     [SerializeField] private bool useSpring = false;
     [SerializeField] private float springFactor = 2f;
+[Header("Scale")]
+    [SerializeField] private Vector2 scaleRange = new Vector2(0.25f, .3f);
 
     public float m_angularSpeed{get; private set;}
     public float m_accumulateYaw{get; private set;}

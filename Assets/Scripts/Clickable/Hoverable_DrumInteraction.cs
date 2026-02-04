@@ -1,4 +1,5 @@
 using DG.Tweening;
+using SimpleAudioSystem;
 using UnityEngine;
 
 public class Hoverable_DrumInteraction : MonoBehaviour
@@ -10,7 +11,6 @@ public class Hoverable_DrumInteraction : MonoBehaviour
         MaxCharged,
     }
     [SerializeField] private string hoverSFX;
-    [SerializeField] private string breakSFX;
 
     [Header("Scale Animation")]
     [SerializeField] private float hoverScalePunch = 1.1f;
@@ -41,10 +41,15 @@ public class Hoverable_DrumInteraction : MonoBehaviour
     [SerializeField] private SpriteRenderer glowSprite;
     [SerializeField] private ParticleSystem rippleParticle;
     [SerializeField] private PerRendererColor heroColor;
-    [SerializeField] private Transform heroSpehreRenderTrans;
+    [SerializeField] private Transform heroSphereRoot;
+    [SerializeField] private Transform heroSphereRenderTrans;
     [SerializeField] private Color chargeHeroColor;
     [SerializeField] private Color normalHeroColor;
     [SerializeField] private float glowMaxAlpha = 0.5f;
+    [Header("Audio")]
+    [SerializeField] private int prepBeat = 25;
+    [SerializeField] private string sfxCharge;
+    [SerializeField] private AudioSource m_audio;
     private Color chargeColor;
 
     private Basic_Clickable self;
@@ -54,12 +59,16 @@ public class Hoverable_DrumInteraction : MonoBehaviour
     private int beatCounter = 0;
 
     public float m_accumulatePower => accumulatePower;
-
+    
+    void Awake()
+    {
+        EventHandler.E_OnDrumBeat += BeatCounting;
+    }
     // Start is called before the first frame update
     void Start()
     {
         self = GetComponent<Basic_Clickable>();
-        originalScale = transform.localScale;
+        originalScale = heroSphereRenderTrans.localScale;
         self.onHover += KnockBassDrum;
         EventHandler.E_OnDrumKnocked += HarmDrum;
         EventHandler.E_OnDrumBeat += StaticDrum;
@@ -90,15 +99,15 @@ public class Hoverable_DrumInteraction : MonoBehaviour
                 if(accumulatePower >= 1)
                 {
                     chargeTimer += Time.deltaTime;
-                    if(chargeTimer >= beatMaxThreasholdTime)
-                    {
-                        drumState = DrumState.MaxCharged;
-                        chargeTimer = 0;
-                        DOTween.Kill(heroColor);
-                        DOTween.To(()=> heroColor.tint, x=> heroColor.tint = x, chargeHeroColor, 0.3f).SetId(heroColor);
-                        heroSpehreRenderTrans.DOKill();
-                        heroSpehreRenderTrans.DOScale(Vector3.one*1.5f, 0.3f).SetEase(Ease.OutBack);
-                    }
+                    // if(chargeTimer >= beatMaxThreasholdTime)
+                    // {
+                    //     drumState = DrumState.MaxCharged;
+                    //     chargeTimer = 0;
+                    //     DOTween.Kill(heroColor);
+                    //     DOTween.To(()=> heroColor.tint, x=> heroColor.tint = x, chargeHeroColor, 0.3f).SetId(heroColor);
+                    //     heroSphereRoot.DOKill();
+                    //     heroSphereRoot.DOScale(Vector3.one*1.5f, 0.3f).SetEase(Ease.OutBack);
+                    // }
                 }
                 else
                 {
@@ -116,8 +125,8 @@ public class Hoverable_DrumInteraction : MonoBehaviour
                         chargeTimer = 0;
                         DOTween.Kill(heroColor);
                         DOTween.To(()=> heroColor.tint, x=> heroColor.tint = x, normalHeroColor, 1f).SetId(heroColor);
-                        heroSpehreRenderTrans.DOKill();
-                        heroSpehreRenderTrans.DOScale(Vector3.one, 1f).SetEase(Ease.OutQuad);
+                        heroSphereRoot.DOKill();
+                        heroSphereRoot.DOScale(Vector3.one, 1f).SetEase(Ease.OutQuad);
                     }
                 }
                 else
@@ -133,6 +142,29 @@ public class Hoverable_DrumInteraction : MonoBehaviour
         EventHandler.E_OnDrumKnocked -= HarmDrum;
         EventHandler.E_OnDrumBeat -= StaticDrum;
     }
+    void BeatCounting()
+    {
+        beatCounter++;
+        if(beatCounter >= 32)
+        {
+            beatCounter = 0;
+            if(drumState == DrumState.MaxBeating)
+            {
+                if(chargeTimer >= beatMaxThreasholdTime)
+                {
+                    drumState = DrumState.MaxCharged;
+                    chargeTimer = 0;
+                    DOTween.Kill(heroColor);
+                    DOTween.To(()=> heroColor.tint, x=> heroColor.tint = x, chargeHeroColor, 0.3f).SetId(heroColor);
+
+                    heroSphereRoot.DOKill();
+                    heroSphereRoot.DOScale(Vector3.one*1.5f, 0.3f).SetEase(Ease.OutBack);
+
+                    AudioManager.Instance.PlaySoundEffect(m_audio, sfxCharge, 1f);
+                }
+            }
+        }
+    }
     void HarmDrum(float strength)
     {
         ShakeDrum(strength * harmScale, harmVibration, hoverScaleDuration);
@@ -145,16 +177,15 @@ public class Hoverable_DrumInteraction : MonoBehaviour
     }
     void StaticDrum()
     {
-        beatCounter++;
         if(beatCounter % beatGap != 0) return;
         ShakeDrum(staticScalePunch, staticScaleVibration, staticScaleDuration);
     }
     void ShakeDrum(float strength, int vibration, float duration)
     {
         strength = Mathf.Clamp01(strength);
-        transform.DOKill();
-        transform.localScale = originalScale;
-        transform.DOPunchScale(Vector3.one * hoverScalePunch * strength, duration, vibration, 4);
+        heroSphereRenderTrans.DOKill();
+        heroSphereRenderTrans.localScale = originalScale;
+        heroSphereRenderTrans.DOPunchScale(Vector3.one * hoverScalePunch * strength, duration, vibration, 4);
     }
     void KnockBassDrum(PlayerController player)
     {

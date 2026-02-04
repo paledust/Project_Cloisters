@@ -18,6 +18,11 @@ public class CircleExpandingController : MonoBehaviour
     [SerializeField] private AnimationCurve radiusCurve;
     [SerializeField] private AnimationCurve radiusFlickAmpCurve;
 
+    [Header("Sphere Scale")]
+    [SerializeField] private Transform sphereTrans;
+    [SerializeField] private float startSphereScale = 0.25f;
+    [SerializeField] private float finalScale = 0.3f;
+
     private float controlValue;
     private Vector3 initScale;
 
@@ -51,6 +56,8 @@ public class CircleExpandingController : MonoBehaviour
         Vector3 scale = initScale;
         scale.y *= shrinkCurve.Evaluate(controlValue);
         expandCircle.transform.localScale = scale;
+
+        sphereTrans.localScale = Vector3.one * Mathf.Lerp(startSphereScale, finalScale, targetValue);
     }
     public void ExpandCircleOut(Action OnExpandComplete)
     {

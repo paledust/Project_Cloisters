@@ -57,7 +57,7 @@ PrefabInstance:
     - target: {fileID: 2982096578671931980, guid: 8bb6e3f5fd951d740a8e34bd850fc193,
         type: 3}
       propertyPath: m_Name
-      value: Geo_Stylized_tri_1 Variant
+      value: Geo_Stylized_tri
       objectReference: {fileID: 0}
     - target: {fileID: 2982096578671931980, guid: 8bb6e3f5fd951d740a8e34bd850fc193,
         type: 3}
@@ -157,7 +157,7 @@ PrefabInstance:
     - target: {fileID: 5424239467753454169, guid: 8bb6e3f5fd951d740a8e34bd850fc193,
         type: 3}
       propertyPath: sfx_clickSound
-      value: sfx_cymbol_multi
+      value: group_cymbol
       objectReference: {fileID: 0}
     - target: {fileID: 6395048226699834327, guid: 8bb6e3f5fd951d740a8e34bd850fc193,
         type: 3}

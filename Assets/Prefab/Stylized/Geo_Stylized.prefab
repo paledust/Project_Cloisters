@@ -44,11 +44,11 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6611199323516168535, guid: 40299887124e1fe478b716dc1c0cbc31,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6395048226699834327}
+      addedObject: {fileID: 5424239467753454169}
     - targetCorrespondingSourceObject: {fileID: 6611199323516168535, guid: 40299887124e1fe478b716dc1c0cbc31,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5424239467753454169}
+      addedObject: {fileID: 4331690724906713858}
   m_SourcePrefab: {fileID: 100100000, guid: 40299887124e1fe478b716dc1c0cbc31, type: 3}
 --- !u!1 &2982096578671931980 stripped
 GameObject:
@@ -83,8 +83,30 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &6395048226699834327
-MeshCollider:
+--- !u!114 &5424239467753454169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2982096578671931980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78f1b69d6f4a8ef419031f11742e95f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sfx_clickSound: group_click
+  hitbox: {fileID: 4331690724906713858}
+  isFrozen: 0
+  disableClick: 0
+  doubleTap: 1
+  hoverSFX: group_click
+  hoverScalePunch: 0.25
+  hoverScaleDuration: 0.2
+  volumeRange: {x: 0, y: 1}
+  speedToVolume: 1
+--- !u!135 &4331690724906713858
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -101,28 +123,6 @@ MeshCollider:
   m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 2534964839176971238, guid: c79e533b1b5416c4180638a8207c72d5, type: 3}
---- !u!114 &5424239467753454169
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2982096578671931980}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78f1b69d6f4a8ef419031f11742e95f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sfx_clickSound: group_click
-  hitbox: {fileID: 6395048226699834327}
-  isFrozen: 0
-  disableClick: 0
-  hoverSFX: group_click
-  hoverScalePunch: 0.25
-  hoverScaleDuration: 0.2
-  volumeRange: {x: 0, y: 1}
-  speedToVolume: 1
+  serializedVersion: 3
+  m_Radius: 0.1
+  m_Center: {x: 0, y: 0, z: 0}
