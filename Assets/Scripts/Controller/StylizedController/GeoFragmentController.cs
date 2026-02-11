@@ -1,4 +1,6 @@
 using System.Collections;
+using System.Linq;
+using DG.Tweening;
 using UnityEngine;
 
 public class GeoFragmentController : MonoBehaviour
@@ -22,7 +24,6 @@ public class GeoFragmentController : MonoBehaviour
     {
         public Clickable_Stylized[] geos;
     }
-    [SerializeField] private Clickable_ObjectRotator clickablePlanet;
     [SerializeField] private Transform center;
 [Header("Controlling Geos")]
     [SerializeField] private GeoFragGroup[] geoFragGroups;
@@ -32,16 +33,14 @@ public class GeoFragmentController : MonoBehaviour
     [SerializeField] private Vector2 expandPosRatioRND;
     [SerializeField] private float finalExpandFactor = 1.5f;
     [SerializeField] private CurveData geoSizeCurve; 
-    [SerializeField] private float expandSize = 1.2f;
 [Header("Dissolve")]
     [SerializeField] private Vector2 RayTrailRadiusRange;
-    [SerializeField] private float dissolveRadius;
 
-    private float controlFactor = 0;
-    [SerializeField, ShowOnly] private Clickable_Stylized[] controllingGeos;
-    private Vector3[] geoPoses;
     private int geoGroupIndex = 0;
     private int geoIndexOffset = 0;
+    private float controlFactor = 0;
+    private Vector3[] geoPoses;
+    private Clickable_Stylized[] controllingGeos;
     
     void Start(){
         int count = 0;
@@ -72,7 +71,7 @@ public class GeoFragmentController : MonoBehaviour
     //Rotate Geo and expand along the shape
         for(int i=0; i<controllingGeos.Length; i++){
             controllingGeos[i].transform.localPosition = geoPoses[i+geoIndexOffset] * Mathf.Lerp(expandRadiusRange.x, expandRadiusRange.y, controlFactor);
-            controllingGeos[i].transform.localScale = Vector3.one * expandSize * geoSizeCurve.Evaluate(controlFactor);
+            controllingGeos[i].transform.localScale = Vector3.one * geoSizeCurve.Evaluate(controlFactor);
         }
     }
     void PrepareNextGeo(){
@@ -85,23 +84,28 @@ public class GeoFragmentController : MonoBehaviour
         for(int i=0; i<controllingGeos.Length; i++){
             controllingGeos[i].gameObject.SetActive(true);
             controllingGeos[i].transform.localPosition = geoPoses[i+geoIndexOffset] * expandRadiusRange.x;
-            controllingGeos[i].transform.localScale = Vector3.one * expandSize * geoSizeCurve.Evaluate(0);
+            controllingGeos[i].transform.localScale = Vector3.one * geoSizeCurve.Evaluate(0);
         }
     }
     public void ExplodeGeo(){
-        Clickable_Stylized[] explodeGroup = new Clickable_Stylized[controllingGeos.Length];
+        var explodeGeos = new Clickable_Stylized[controllingGeos.Length];
         for(int i=0; i<controllingGeos.Length; i++){
-            explodeGroup[i] = controllingGeos[i];
+            explodeGeos[i] = controllingGeos[i];
         }
         controllingGeos = null;
-        StartCoroutine(coroutineExplodeToDissolve(explodeGroup, 1f, finalExpandFactor));
+        StartCoroutine(coroutineExplodeToDissolve(explodeGeos, 1f, finalExpandFactor));
     }
 
     IEnumerator coroutineExplodeToDissolve(Clickable_Stylized[] selectGeos, float duration, float finalFactor = 1.5f){
         Vector3[] originPoses = new Vector3[selectGeos.Length];
         for(int i=0; i<selectGeos.Length; i++){
-            originPoses[i] = selectGeos[i].transform.localPosition;
-            selectGeos[i].EnableHitbox();
+            var geo = selectGeos[i];
+            originPoses[i] = geo.transform.localPosition;
+            geo.transform.DOScale(Vector3.one * 1.2f, Random.Range(0.15f, 0.25f)).SetEase(Ease.OutBack).OnComplete(() =>
+            {
+                geo.enabled = true;
+                geo.EnableHitbox();
+            });
         }
         yield return new WaitForLoop(duration, (t)=>{
             for(int i=0; i<selectGeos.Length; i++){

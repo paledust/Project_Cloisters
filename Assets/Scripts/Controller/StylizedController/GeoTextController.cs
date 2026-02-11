@@ -83,7 +83,11 @@ public class GeoTextController : MonoBehaviour
 
             shiftDataList.Push(shiftData);
         });
-        textTrans.DOScale(Vector3.one*50, flyTime).SetEase(scaleCurve);
+        textTrans.DOScale(Vector3.one*50, flyTime).SetEase(scaleCurve).OnComplete(() =>
+        {
+            textTrans.GetComponent<Clickable_Stylized>().enabled = true;
+            textTrans.GetComponent<Clickable_Stylized>().EnableHitbox();
+        });
         textTrans.DORotateQuaternion(Quaternion.Euler(Random.Range(-20,20), Random.Range(-20,20), Random.Range(-80,80)+360)*textTrans.rotation, flyTime).SetEase(flyCurve);
         textIndex ++;
 

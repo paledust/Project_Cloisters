@@ -1,4 +1,3 @@
-using SimpleAudioSystem;
 using DG.Tweening;
 using UnityEngine;
 
@@ -67,6 +66,6 @@ public class Clickable_Stylized : Basic_Clickable
         transform.DOKill();
         transform.localScale = originalScale;
         transform.DOPunchScale(Vector3.one * hoverScalePunch * Mathf.Clamp01(strength), hoverScaleDuration, 2);
-        transform.DOShakeRotation(hoverScaleDuration * Mathf.Clamp01(strength), Random.Range(10f,20f), 90, 90, true, ShakeRandomnessMode.Harmonic);
+        transform.DOShakeRotation(hoverScaleDuration, Random.Range(10f,20f), 90, 90, true, ShakeRandomnessMode.Harmonic);
     }
 }

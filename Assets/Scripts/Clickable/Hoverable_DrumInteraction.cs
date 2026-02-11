@@ -99,15 +99,6 @@ public class Hoverable_DrumInteraction : MonoBehaviour
                 if(accumulatePower >= 1)
                 {
                     chargeTimer += Time.deltaTime;
-                    // if(chargeTimer >= beatMaxThreasholdTime)
-                    // {
-                    //     drumState = DrumState.MaxCharged;
-                    //     chargeTimer = 0;
-                    //     DOTween.Kill(heroColor);
-                    //     DOTween.To(()=> heroColor.tint, x=> heroColor.tint = x, chargeHeroColor, 0.3f).SetId(heroColor);
-                    //     heroSphereRoot.DOKill();
-                    //     heroSphereRoot.DOScale(Vector3.one*1.5f, 0.3f).SetEase(Ease.OutBack);
-                    // }
                 }
                 else
                 {
@@ -145,7 +136,7 @@ public class Hoverable_DrumInteraction : MonoBehaviour
     void BeatCounting()
     {
         beatCounter++;
-        if(beatCounter >= 32)
+        if(beatCounter >= prepBeat)
         {
             beatCounter = 0;
             if(drumState == DrumState.MaxBeating)
@@ -167,7 +158,7 @@ public class Hoverable_DrumInteraction : MonoBehaviour
     }
     void HarmDrum(float strength)
     {
-        ShakeDrum(strength * harmScale, harmVibration, hoverScaleDuration);
+        ShakeDrum(harmScale, harmVibration, hoverScaleDuration);
         accumulatePower += beatPowerAdd * strength;
         accumulatePower = Mathf.Min(1.5f, accumulatePower);
         if(drumState == DrumState.MaxCharged)
@@ -193,8 +184,13 @@ public class Hoverable_DrumInteraction : MonoBehaviour
         if(drumState == DrumState.MaxCharged)
         {
             EventHandler.Call_OnBassChargeBeat();
-            accumulatePower = 0;
-            ShakeDrum(player.PointerDelta.magnitude * speedToVolume, 90, hoverScaleDuration);
+            drumState = DrumState.Beating;
+            chargeTimer = 0;
+            DOTween.Kill(heroColor);
+            DOTween.To(()=> heroColor.tint, x=> heroColor.tint = x, normalHeroColor, 1f).SetId(heroColor);
+            heroSphereRoot.DOKill();
+            heroSphereRoot.DOScale(Vector3.one, 1f).SetEase(Ease.OutQuad);
+            ShakeDrum(player.PointerDelta.magnitude * speedToVolume, 5, hoverScaleDuration);
         }
         else
         {

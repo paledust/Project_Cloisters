@@ -145,17 +145,17 @@ PrefabInstance:
     - target: {fileID: 4167929499371950568, guid: 75e2a487e01f5ac4482f92663c5d3040,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.3
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 4167929499371950568, guid: 75e2a487e01f5ac4482f92663c5d3040,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.3
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 4167929499371950568, guid: 75e2a487e01f5ac4482f92663c5d3040,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.3
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 4167929499371950568, guid: 75e2a487e01f5ac4482f92663c5d3040,
         type: 3}
@@ -201,6 +201,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167929499371950568, guid: 75e2a487e01f5ac4482f92663c5d3040,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4167929499371950569, guid: 75e2a487e01f5ac4482f92663c5d3040,
         type: 3}
@@ -257,6 +262,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 3244290838477821917}
+    - targetCorrespondingSourceObject: {fileID: 4167929499371950569, guid: 75e2a487e01f5ac4482f92663c5d3040,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6699196372092923900}
   m_SourcePrefab: {fileID: 100100000, guid: 75e2a487e01f5ac4482f92663c5d3040, type: 3}
 --- !u!4 &1588106934456023208 stripped
 Transform:
@@ -283,17 +292,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hoverSFX: group_drum_bass
-  breakSFX: group_drum_bass
-  hoverScalePunch: 0.2
-  hoverScaleDuration: 0.125
+  hoverScalePunch: 0.25
+  hoverScaleDuration: 0.25
   beatGap: 4
-  staticScalePunch: 0.5
+  staticScalePunch: 0.2
   staticScaleDuration: 0.2
   staticScaleVibration: 5
   volumeRange: {x: 0.2, y: 1.5}
   speedToVolume: 0.05
-  harmScale: 0.5
-  harmVibration: 10
+  harmScale: 0.15
+  harmVibration: 25
   drumState: 0
   beatPowerAdd: 0.1
   beatDrainSpeed: 0.35
@@ -307,3 +315,102 @@ MonoBehaviour:
   chargeHeroColor: {r: 1, g: 1, b: 1, a: 1}
   normalHeroColor: {r: 1, g: 0.7294118, b: 0.56078434, a: 1}
   glowMaxAlpha: 1
+  prepBeat: 16
+  sfxCharge: sfx_jazz_fill
+  m_audio: {fileID: 6699196372092923900}
+--- !u!82 &6699196372092923900
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1588106935190224790}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 0.5
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
