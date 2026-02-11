@@ -167,7 +167,7 @@ namespace SimpleAudioSystem{
         }
         public void FadeAmbience(float targetVolume, float transitionTime, bool StopOnFadeOut = false)=>FadeAudio(ambience_loop, targetVolume, transitionTime, StopOnFadeOut);
         public void FadeMusic(float targetVolume, float transitionTime, bool StopOnFadeOut = false)=>FadeAudio(music_loop, targetVolume, transitionTime, StopOnFadeOut);
-        public void FadeAudio(AudioSource m_audio, float targetVolume, float transitionTime, bool StopOnFadeOut = false){
+        void FadeAudio(AudioSource m_audio, float targetVolume, float transitionTime, bool StopOnFadeOut = false){
             if(transitionTime<=0)
             {
                 m_audio.volume = targetVolume;

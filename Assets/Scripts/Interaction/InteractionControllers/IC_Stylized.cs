@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using SimpleAudioSystem;
 using UnityEngine;
 using UnityEngine.Playables;
@@ -107,7 +106,10 @@ public class IC_Stylized : IC_Basic
                     circleExpandingController.UpdateExpand(Mathf.Min(maxDrumKnockRadius, introExpandFactor));
                 break;
         }
-        AudioManager.Instance.FadeAmbience(Mathf.Lerp(ambFade.x, ambFade.y, EasingFunc.Easing.QuadEaseIn(introExpandFactor)), 0);
+        if(!m_isDone)
+        {
+            AudioManager.Instance.FadeAmbience(Mathf.Lerp(ambFade.x, ambFade.y, EasingFunc.Easing.QuadEaseIn(introExpandFactor)), 0);
+        }
         geoFragmentController.UpdateExpand(geoExpandFactor);
     }
 
@@ -136,8 +138,10 @@ public class IC_Stylized : IC_Basic
             }
             textShowIndex++;
         }
+
         if(textShowIndex < textShowOrder.Length)
         {
+            StartCoroutine(coroutineFadeAmbToInitVolume(0.2f));
             geoFragmentController.PopGeos();
         }
         else
@@ -170,8 +174,14 @@ public class IC_Stylized : IC_Basic
         circleExpandingController.enabled = true;
         circleExplodeController.enabled = true;
     }
+    IEnumerator coroutineFadeAmbToInitVolume(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        AudioManager.Instance.FadeAmbience(ambFade.x, 2f);
+    }
     IEnumerator coroutineEnd(){
         yield return new WaitForSeconds(1.2f);
+        AudioManager.Instance.FadeAmbience(finalAmbVolume, 0.25f);
         geoTextController.PutTextTogether();
         yield return new WaitForSeconds(3f);
         tl_end.Play();

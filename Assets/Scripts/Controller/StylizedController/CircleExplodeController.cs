@@ -17,17 +17,12 @@ public class CircleExplodeController : MonoBehaviour
 
     [Header("Audio")]
     [SerializeField] private string explodeSFX;
-    [SerializeField] private Vector2 ambFade = Vector2.one;
 
     private bool exploded = false;
 
     public void ResetController()=>exploded = false;
     void Update()
     {
-        if(!exploded)
-        {
-            AudioManager.Instance.FadeAmbience(Mathf.Lerp(ambFade.x, ambFade.y, EasingFunc.Easing.QuadEaseIn(expandCircle.circleRadius/explodeRadius)), 0);
-        }
         if(expandCircle.circleRadius>=explodeRadius && !exploded)
         {
             Explode();
@@ -53,8 +48,6 @@ public class CircleExplodeController : MonoBehaviour
         hoverable_drum.enabled = true;
         EventHandler.Call_OnFlushInput();
         stylizedController.StylizedExplode();
-        yield return new WaitForSeconds(0.2f);
-        AudioManager.Instance.FadeAmbience(0.026f, 2f);
 
         float initRadius = expandCircle.circleRadius;
         float initNoiseMin = expandCircle.noiseMin;
