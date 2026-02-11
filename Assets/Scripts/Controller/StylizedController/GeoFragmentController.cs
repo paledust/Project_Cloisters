@@ -87,7 +87,7 @@ public class GeoFragmentController : MonoBehaviour
             controllingGeos[i].transform.localScale = Vector3.one * geoSizeCurve.Evaluate(0);
         }
     }
-    public void ExplodeGeo(){
+    public void PopGeos(){
         var explodeGeos = new Clickable_Stylized[controllingGeos.Length];
         for(int i=0; i<controllingGeos.Length; i++){
             explodeGeos[i] = controllingGeos[i];

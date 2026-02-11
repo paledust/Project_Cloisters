@@ -56,7 +56,7 @@ public class GeoTextController : MonoBehaviour
             shiftText.UpdateShiftTrans(planetCenter.position, shiftFactor);
         }
     }
-    public void ShowText(){
+    public void PopText(){
         if(textIndex>=textObjs.Length) return;
 
         StartCoroutine(coroutineLerpShiftFactor(explodeShift, 1f));

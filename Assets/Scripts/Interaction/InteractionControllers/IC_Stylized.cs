@@ -7,10 +7,11 @@ public class IC_Stylized : IC_Basic
 {
     public enum StylizedState
     {
+        //Drag to expand the circle
         IntroExpand,
+        //Prepare to the next drum expand
         Extending,
         DrumExpand,
-        End
     }
     [SerializeField, ShowOnly] private StylizedState stylizedState;
 
@@ -23,7 +24,6 @@ public class IC_Stylized : IC_Basic
     [SerializeField] private GeoTextController geoTextController;
     [SerializeField] private PlayableDirector tl_end;
 
-
     [Header("Giant Drum")]
     [SerializeField] private Hoverable_DrumInteraction giantDrum;
 
@@ -34,6 +34,10 @@ public class IC_Stylized : IC_Basic
     [Header("Drum Explode")]
     [SerializeField] private float maxDrumKnockRadius = 0.8f;
 
+    [Header("Text Order")]
+    [SerializeField] private int[] textShowOrder;
+
+    private int textShowIndex = 0;
     private float introOffsetPlanetAngle;
     private bool isExtending = false;
     private bool transitioning = false;
@@ -111,6 +115,21 @@ public class IC_Stylized : IC_Basic
         isExtending = false;
         StartExpanding();
     }
+    public void StylizedExplode(){
+        if(stylizedState == StylizedState.DrumExpand)
+        {
+            int count = textShowOrder[textShowIndex];
+            for(int i=0; i<count; i++){
+                geoTextController.PopText();
+            }
+            textShowIndex++;
+        }
+        if(textShowIndex < textShowOrder.Length)
+        {
+            geoFragmentController.PopGeos();
+        }
+        transitioning = true;
+    }
     #endregion
 
     void BassChargeBeatHandler()
@@ -132,17 +151,7 @@ public class IC_Stylized : IC_Basic
         circleExpandingController.enabled = true;
         circleExplodeController.enabled = true;
     }
-    public void ExplodeToDissolveTransition(){
-        if(stylizedState == StylizedState.DrumExpand)
-        {
-            int count = Random.Range(2, 4);
-            for(int i=0; i<count; i++){
-                geoTextController.ShowText();
-            }
-        }
-        geoFragmentController.ExplodeGeo();
-        transitioning = true;
-    }
+
     public void OnAllTextOut(){
         EventHandler.Call_OnFlushInput();
         EventHandler.Call_OnEndInteraction(this);

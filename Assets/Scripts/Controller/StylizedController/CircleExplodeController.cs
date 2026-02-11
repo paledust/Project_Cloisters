@@ -57,7 +57,7 @@ public class CircleExplodeController : MonoBehaviour
         clickable_Planet.DisableClicking();
         hoverable_drum.enabled = true;
         EventHandler.Call_OnFlushInput();
-        stylizedController.ExplodeToDissolveTransition();
+        stylizedController.StylizedExplode();
         yield return new WaitForSeconds(0.2f);
         AudioManager.Instance.FadeAmbience(0.026f, 2f);
 
