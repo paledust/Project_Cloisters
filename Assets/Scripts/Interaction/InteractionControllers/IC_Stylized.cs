@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using SimpleAudioSystem;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -7,15 +8,16 @@ public class IC_Stylized : IC_Basic
 {
     public enum StylizedState
     {
-        //Drag to expand the circle
-        IntroExpand,
+        //Drag circle to explode
+        Intro,
+        //Knock circle to explode
+        Drum,
         //Prepare to the next drum expand
         Extending,
-        DrumExpand,
     }
     [SerializeField, ShowOnly] private StylizedState stylizedState;
 
-    [Header("Circle Expand")]
+    [Header("Script Control")]
     [SerializeField] private Clickable_ObjectRotator clickablePlanet;
     [SerializeField] private CircleExpandingController circleExpandingController;
     [SerializeField] private CircleExplodeController circleExplodeController;
@@ -36,6 +38,11 @@ public class IC_Stylized : IC_Basic
 
     [Header("Text Order")]
     [SerializeField] private int[] textShowOrder;
+
+    [Header("Audio")]
+    [SerializeField] private string ambKey;
+    [SerializeField] private Vector2 ambFade = Vector2.one;
+    [SerializeField] private float finalAmbVolume = 0.2f;
 
     private int textShowIndex = 0;
     private float introOffsetPlanetAngle;
@@ -64,16 +71,20 @@ public class IC_Stylized : IC_Basic
         base.OnInteractionEnter();
         this.enabled = true;
         transitioning = false;
-        stylizedState = StylizedState.IntroExpand;
+        stylizedState = StylizedState.Intro;
         drumController.enabled = true;
         clickablePlanet.EnableHitbox();
+
         EventHandler.E_OnDrumKnocked += DrumKnockedHandler;
         EventHandler.E_OnBassChargeBeat += BassChargeBeatHandler;
+
+        AudioManager.Instance.PlayAmbience(ambKey, true, 0.2f, false);
     }
     protected override void OnInteractionEnd()
     {
         base.OnInteractionEnd();
         clickablePlanet.DisableHitbox();
+
         EventHandler.E_OnDrumKnocked -= DrumKnockedHandler;
         EventHandler.E_OnBassChargeBeat -= BassChargeBeatHandler;
     }
@@ -83,19 +94,20 @@ public class IC_Stylized : IC_Basic
         float geoExpandFactor = 0;
         switch(stylizedState)
         {
-            case StylizedState.IntroExpand:
+            case StylizedState.Intro:
                 introExpandFactor = (-clickablePlanet.m_accumulateYaw+introOffsetPlanetAngle)/expandRange;
                 geoExpandFactor = introExpandFactor;
                 if(!isExtending && circleExpandingController.enabled)
                     circleExpandingController.UpdateExpand(introExpandFactor);
                 break;
-            case StylizedState.DrumExpand:
+            case StylizedState.Drum:
                 introExpandFactor = giantDrum.m_accumulatePower;
                 geoExpandFactor = introExpandFactor*geoExpandDrumFactor;
                 if(circleExpandingController.enabled)
                     circleExpandingController.UpdateExpand(Mathf.Min(maxDrumKnockRadius, introExpandFactor));
                 break;
         }
+        AudioManager.Instance.FadeAmbience(Mathf.Lerp(ambFade.x, ambFade.y, EasingFunc.Easing.QuadEaseIn(introExpandFactor)), 0);
         geoFragmentController.UpdateExpand(geoExpandFactor);
     }
 
@@ -111,12 +123,12 @@ public class IC_Stylized : IC_Basic
             circleExpandingController.enabled = false;
             circleExplodeController.enabled = false;
         }
-        stylizedState = StylizedState.DrumExpand;
+        stylizedState = StylizedState.Drum;
         isExtending = false;
         StartExpanding();
     }
     public void StylizedExplode(){
-        if(stylizedState == StylizedState.DrumExpand)
+        if(stylizedState == StylizedState.Drum)
         {
             int count = textShowOrder[textShowIndex];
             for(int i=0; i<count; i++){
@@ -127,6 +139,13 @@ public class IC_Stylized : IC_Basic
         if(textShowIndex < textShowOrder.Length)
         {
             geoFragmentController.PopGeos();
+        }
+        else
+        {
+            //all text pop out, start ending sequence
+            EventHandler.Call_OnFlushInput();
+            EventHandler.Call_OnEndInteraction(this);
+            StartCoroutine(coroutineEnd());
         }
         transitioning = true;
     }
@@ -150,12 +169,6 @@ public class IC_Stylized : IC_Basic
 
         circleExpandingController.enabled = true;
         circleExplodeController.enabled = true;
-    }
-
-    public void OnAllTextOut(){
-        EventHandler.Call_OnFlushInput();
-        EventHandler.Call_OnEndInteraction(this);
-        StartCoroutine(coroutineEnd());
     }
     IEnumerator coroutineEnd(){
         yield return new WaitForSeconds(1.2f);

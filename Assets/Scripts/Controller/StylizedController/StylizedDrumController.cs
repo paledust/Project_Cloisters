@@ -67,10 +67,4 @@ public class StylizedDrumController : Singleton<StylizedDrumController>
             return playBeatCommand;
         }
     }
-    public ContinuousBeat QueueContinuousBeat(string sfxKey, float volume, AudioSource audioSource)
-    {
-        var continuousBeat = new ContinuousBeat(sfxKey, volume, audioSource);
-        stylizedDrumCommandManager.AddCommand(continuousBeat);
-        return continuousBeat;
-    }
 }

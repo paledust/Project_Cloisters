@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
@@ -7,7 +6,6 @@ using UnityEngine;
 public class GeoTextController : MonoBehaviour
 {
 [Header("Text Fly")]
-    [SerializeField] private IC_Stylized ic_stylized;
     [SerializeField] private Transform planetCenter;
     [SerializeField] private GameObject[] textObjs;
     [SerializeField] private Transform[] finalTrans;
@@ -93,7 +91,6 @@ public class GeoTextController : MonoBehaviour
 
         if(textIndex>=textObjs.Length){
             shiftDataList.Clear();
-            ic_stylized.OnAllTextOut();
         }
     }
     public void PutTextTogether(){

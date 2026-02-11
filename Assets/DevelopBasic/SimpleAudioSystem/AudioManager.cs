@@ -168,6 +168,11 @@ namespace SimpleAudioSystem{
         public void FadeAmbience(float targetVolume, float transitionTime, bool StopOnFadeOut = false)=>FadeAudio(ambience_loop, targetVolume, transitionTime, StopOnFadeOut);
         public void FadeMusic(float targetVolume, float transitionTime, bool StopOnFadeOut = false)=>FadeAudio(music_loop, targetVolume, transitionTime, StopOnFadeOut);
         public void FadeAudio(AudioSource m_audio, float targetVolume, float transitionTime, bool StopOnFadeOut = false){
+            if(transitionTime<=0)
+            {
+                m_audio.volume = targetVolume;
+                return;
+            }
             StartCoroutine(coroutineFadeAudio(m_audio, targetVolume, transitionTime, StopOnFadeOut));
         }
         public void ChangeMasterVolume(float targetVolume){
@@ -199,13 +204,6 @@ namespace SimpleAudioSystem{
             return ambience_loop.clip.length;
         }
 
-        #endregion
-
-        #region Volume Control
-        public void SetAmbienceVolume(float volume)
-        {
-            ambience_loop.volume = volume;
-        }
         #endregion
 
         IEnumerator coroutineFadeInAndOutSFX(AudioSource m_audio, string clip, float maxVolume, float duration, float fadeIn, float fadeOut){

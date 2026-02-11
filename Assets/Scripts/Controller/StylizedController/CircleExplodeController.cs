@@ -17,21 +17,16 @@ public class CircleExplodeController : MonoBehaviour
 
     [Header("Audio")]
     [SerializeField] private string explodeSFX;
-    [SerializeField] private string ambKey;
     [SerializeField] private Vector2 ambFade = Vector2.one;
 
     private bool exploded = false;
 
     public void ResetController()=>exploded = false;
-    void Start()
-    {
-        AudioManager.Instance.PlayAmbience(ambKey, true, 0.2f, false);
-    }
     void Update()
     {
         if(!exploded)
         {
-            AudioManager.Instance.SetAmbienceVolume(Mathf.Lerp(ambFade.x, ambFade.y, EasingFunc.Easing.QuadEaseIn(expandCircle.circleRadius/explodeRadius)));
+            AudioManager.Instance.FadeAmbience(Mathf.Lerp(ambFade.x, ambFade.y, EasingFunc.Easing.QuadEaseIn(expandCircle.circleRadius/explodeRadius)), 0);
         }
         if(expandCircle.circleRadius>=explodeRadius && !exploded)
         {

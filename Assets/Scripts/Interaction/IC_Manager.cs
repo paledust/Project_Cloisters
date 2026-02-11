@@ -21,17 +21,13 @@ public class IC_Manager : MonoBehaviour
         EventHandler.E_OnEndInteraction         -= EndInteraction;
         EventHandler.E_OnInteractionUnreachable -= CleanUpInteraction; 
     }
-    void OnEnable()
+    void Start()
     {
     #if UNITY_EDITOR
         StartAtInteraction(StartIndex);
     #else
         StartAtInteraction(0);
     #endif
-    }
-    void OnDisable()
-    {
-        QuitAtInteraction(interactionIndex);
     }
 
 #if UNITY_EDITOR
@@ -79,11 +75,6 @@ public class IC_Manager : MonoBehaviour
         interactionControllers[startIndex].PreloadInteraction();
         interactionControllers[startIndex].EnterInteraction();
         loadedIC_Count ++;
-    }
-    public void QuitAtInteraction(int quitIndex)
-    {
-        interactionControllers[quitIndex].ExitInteraction();
-        loadedIC_Count = 0;
     }
     public void CleanUpAllInteractions()
     {
