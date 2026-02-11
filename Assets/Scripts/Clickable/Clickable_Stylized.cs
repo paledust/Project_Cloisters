@@ -1,13 +1,18 @@
+using System;
 using DG.Tweening;
 using UnityEngine;
+
+using Random = UnityEngine.Random;
 
 public class Clickable_Stylized : Basic_Clickable
 {
     [SerializeField] private bool doubleTap = true;
     [SerializeField] private string hoverSFX;
+
     [Header("Scale Animation")]
     [SerializeField] private float hoverScalePunch = 1.1f;
     [SerializeField] private float hoverScaleDuration = 0.25f;
+
     [Header("Volume Settings")]
     [SerializeField] private Vector2 volumeRange = new Vector2(0, 1);
     [SerializeField] private float speedToVolume = 1f; 
@@ -18,11 +23,15 @@ public class Clickable_Stylized : Basic_Clickable
     private bool isHovering = false;
     private float beatTimer = 0f;
     
+    public Action OnDrumBeat;
+    public Action OnDrumEnable;
+    
     private const double BEAT_TEMPLE = 60f/420f;
 
     void OnEnable()
     {
-        originalScale = transform.localScale;    
+        originalScale = transform.localScale;
+        OnDrumEnable?.Invoke();
     }
     void Update()
     {
@@ -67,5 +76,6 @@ public class Clickable_Stylized : Basic_Clickable
         transform.localScale = originalScale;
         transform.DOPunchScale(Vector3.one * hoverScalePunch * Mathf.Clamp01(strength), hoverScaleDuration, 2);
         transform.DOShakeRotation(hoverScaleDuration, Random.Range(10f,20f), 90, 90, true, ShakeRandomnessMode.Harmonic);
+        OnDrumBeat?.Invoke();
     }
 }

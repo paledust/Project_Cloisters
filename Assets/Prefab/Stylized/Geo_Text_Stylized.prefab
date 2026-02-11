@@ -157,7 +157,7 @@ MonoBehaviour:
   disableClick: 0
   doubleTap: 1
   hoverSFX: group_snare
-  hoverScalePunch: 1.1
+  hoverScalePunch: 5
   hoverScaleDuration: 0.25
   volumeRange: {x: 0, y: 1}
   speedToVolume: 1

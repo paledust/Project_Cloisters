@@ -190,7 +190,7 @@ public class Hoverable_DrumInteraction : MonoBehaviour
             DOTween.To(()=> heroColor.tint, x=> heroColor.tint = x, normalHeroColor, 1f).SetId(heroColor);
             heroSphereRoot.DOKill();
             heroSphereRoot.DOScale(Vector3.one, 1f).SetEase(Ease.OutQuad);
-            ShakeDrum(player.PointerDelta.magnitude * speedToVolume, 5, hoverScaleDuration);
+            ShakeDrum(speedToVolume, 10, hoverScaleDuration*0.5f);
         }
         else
         {

@@ -9,6 +9,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: M Geo
   m_Shader: {fileID: 4800000, guid: 43e53d6e91347c949b66fd362ca90b8b, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -17,6 +19,7 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -127,7 +130,7 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BrightColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 4.9245777, g: 4.9245777, b: 4.9245777, a: 1}
+    - _Color: {r: 1.319508, g: 1.319508, b: 1.319508, a: 1}
     - _DarkColor: {r: 0, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _ReflectionColor: {r: 0.24528301, g: 0.24528301, b: 0.24528301, a: 1}

@@ -26,7 +26,7 @@ PrefabInstance:
     - target: {fileID: 2982096578671931980, guid: 8bb6e3f5fd951d740a8e34bd850fc193,
         type: 3}
       propertyPath: m_Name
-      value: Geo_Stylized_cir_1 Variant
+      value: Geo_Stylized_cir
       objectReference: {fileID: 0}
     - target: {fileID: 2982096578671931980, guid: 8bb6e3f5fd951d740a8e34bd850fc193,
         type: 3}
@@ -127,6 +127,21 @@ PrefabInstance:
         type: 3}
       propertyPath: sfx_clickSound
       value: group_hitom
+      objectReference: {fileID: 0}
+    - target: {fileID: 6000846098990624206, guid: 8bb6e3f5fd951d740a8e34bd850fc193,
+        type: 3}
+      propertyPath: beatGlowColor.b
+      value: 1.292426
+      objectReference: {fileID: 0}
+    - target: {fileID: 6000846098990624206, guid: 8bb6e3f5fd951d740a8e34bd850fc193,
+        type: 3}
+      propertyPath: beatGlowColor.g
+      value: 1.292426
+      objectReference: {fileID: 0}
+    - target: {fileID: 6000846098990624206, guid: 8bb6e3f5fd951d740a8e34bd850fc193,
+        type: 3}
+      propertyPath: beatGlowColor.r
+      value: 1.4980392
       objectReference: {fileID: 0}
     - target: {fileID: 6395048226699834327, guid: 8bb6e3f5fd951d740a8e34bd850fc193,
         type: 3}
