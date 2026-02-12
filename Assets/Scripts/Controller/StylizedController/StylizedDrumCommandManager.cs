@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class StylizedDrumCommandManager : CommandManager<StylizedDrumController>
@@ -11,14 +12,17 @@ public class PlayBeatCommand : DrumCommand
 {
     private string sfxKey;
     private float volume;
-    public PlayBeatCommand(string sfxKey, float volume=1f)
+    private Action onBeatPlayed;
+    public PlayBeatCommand(string sfxKey, float volume=1f, Action onBeatPlayed = null)
     {
         this.sfxKey = sfxKey;
         this.volume = volume;
+        this.onBeatPlayed = onBeatPlayed;
     }
     internal override void CommandUpdate(StylizedDrumController context)
     {
         context.PlayBeats(sfxKey, volume);
+        onBeatPlayed?.Invoke();
         SetStatus(CommandStatus.Success);
     }
 }

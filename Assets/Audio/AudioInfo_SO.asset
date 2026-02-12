@@ -27,6 +27,8 @@ MonoBehaviour:
     audio_clip: {fileID: 8300000, guid: 303f718bd69e38d489787950cc9f9689, type: 3}
   - audio_name: sfx_jazz_fill
     audio_clip: {fileID: 8300000, guid: 9079eeb5f14196e4389452fc2cd3d023, type: 3}
+  - audio_name: sfx_jazz_end
+    audio_clip: {fileID: 8300000, guid: 612e4a653344b4c4bae0f0b4882d9c3b, type: 3}
   sfx_group_info_list:
   - audio_group_name: group_click
     audioClips:
@@ -36,14 +38,14 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 2f7df720f993e324dba41bc4117ef4b7, type: 3}
   - audio_group_name: group_drum_bass
     audioClips:
+    - {fileID: 8300000, guid: 22737bc34d4b295419649b2e4b7ea59e, type: 3}
     - {fileID: 8300000, guid: 97a0f7196c6ab3948bb4bb491c019900, type: 3}
     - {fileID: 8300000, guid: 340c529a693b1b545a87eac636c95a70, type: 3}
-    - {fileID: 8300000, guid: 22737bc34d4b295419649b2e4b7ea59e, type: 3}
   - audio_group_name: group_hitom
     audioClips:
     - {fileID: 8300000, guid: 779632495cd52524ca0ac0e639c5291e, type: 3}
-    - {fileID: 8300000, guid: ce53ee38ba0f9ff42b52152bbd6e457c, type: 3}
     - {fileID: 8300000, guid: e7f867465550dfb4e889540a82d4ee18, type: 3}
+    - {fileID: 8300000, guid: ce53ee38ba0f9ff42b52152bbd6e457c, type: 3}
   - audio_group_name: group_lowtom
     audioClips:
     - {fileID: 8300000, guid: 5b96e8443fe2518478eca85e8f7ea423, type: 3}
@@ -51,8 +53,8 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 1acc3905be4de1f44bb76903ec10b77f, type: 3}
   - audio_group_name: group_midtom
     audioClips:
-    - {fileID: 8300000, guid: 396d4bf0c8db4b3448264b69471e8ead, type: 3}
     - {fileID: 8300000, guid: eea2040b569453e4e871216c2a84396e, type: 3}
+    - {fileID: 8300000, guid: 396d4bf0c8db4b3448264b69471e8ead, type: 3}
     - {fileID: 8300000, guid: d8688c226fb45e74c8fce45a267cae42, type: 3}
   - audio_group_name: group_snare
     audioClips:
@@ -60,8 +62,8 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 5aa7ba78660575c409ec308286081198, type: 3}
   - audio_group_name: group_cymbol
     audioClips:
-    - {fileID: 8300000, guid: 63a85ee3bd3cc4843a486a7b9c8d1dc4, type: 3}
     - {fileID: 8300000, guid: 3ad734a2eb877f84f93325ab44dda314, type: 3}
+    - {fileID: 8300000, guid: 63a85ee3bd3cc4843a486a7b9c8d1dc4, type: 3}
   - audio_group_name: group_hat
     audioClips:
     - {fileID: 8300000, guid: 2b49ffb59c026434baf325cee8d7a9f1, type: 3}

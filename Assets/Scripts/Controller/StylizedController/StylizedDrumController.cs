@@ -1,3 +1,4 @@
+using System;
 using SimpleAudioSystem;
 using UnityEngine;
 
@@ -50,9 +51,9 @@ public class StylizedDrumController : Singleton<StylizedDrumController>
     {
         AudioManager.Instance.PlaySoundEffectLoop(audioSource, sfxKey, volume, 0.2f);
     }
-    public PlayBeatCommand QueueBeat(string sfxKey, float volume = 1)
+    public PlayBeatCommand QueueBeat(string sfxKey, float volume = 1, Action beatCallback = null)
     {
-        var playBeatCommand = new PlayBeatCommand(sfxKey, volume);
+        var playBeatCommand = new PlayBeatCommand(sfxKey, volume, beatCallback);
         stylizedDrumCommandManager.AddCommand(playBeatCommand);
         return playBeatCommand;
     }

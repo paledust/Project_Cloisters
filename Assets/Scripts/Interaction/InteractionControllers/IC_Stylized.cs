@@ -40,6 +40,7 @@ public class IC_Stylized : IC_Basic
 
     [Header("Audio")]
     [SerializeField] private string ambKey;
+    [SerializeField] private string sfxEnd;
     [SerializeField] private Vector2 ambFade = Vector2.one;
     [SerializeField] private float finalAmbVolume = 0.2f;
 
@@ -180,10 +181,14 @@ public class IC_Stylized : IC_Basic
         AudioManager.Instance.FadeAmbience(ambFade.x, 2f);
     }
     IEnumerator coroutineEnd(){
+        AudioManager.Instance.FadeAmbience(finalAmbVolume, 1f);
         yield return new WaitForSeconds(1.2f);
-        AudioManager.Instance.FadeAmbience(finalAmbVolume, 0.25f);
-        geoTextController.PutTextTogether();
-        yield return new WaitForSeconds(3f);
+        drumController.QueueBeat(sfxEnd, 1f, geoTextController.PutTextTogether);
+        yield return new WaitForSeconds(1.2f);
+        geoTextController.PunchTextTogether();
+        circleExplodeController.ExplodeFinal();
+        yield return new WaitForSeconds(1.8f);
+        AudioManager.Instance.FadeAmbience(0, 2f, true);
         tl_end.Play();
         yield return new WaitForSeconds(3.5f);
         EventHandler.Call_OnInteractionUnreachable(this);

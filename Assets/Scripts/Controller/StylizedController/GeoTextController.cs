@@ -7,7 +7,7 @@ public class GeoTextController : MonoBehaviour
 {
 [Header("Text Fly")]
     [SerializeField] private Transform planetCenter;
-    [SerializeField] private GameObject[] textObjs;
+    [SerializeField] private GeoText[] textObjs;
     [SerializeField] private Transform[] finalTrans;
     [SerializeField] private AnimationCurve flyCurve;
     [SerializeField] private AnimationCurve scaleCurve;
@@ -99,11 +99,19 @@ public class GeoTextController : MonoBehaviour
 
         for(int i=0; i<textObjs.Length; i++){
             int index = dirIndex[i];
+            float duration = Random.Range(1f, 1.2f);
             textObjs[index].transform.DOKill();
-            textObjs[index].transform.DOMove(finalTrans[index].position,Random.Range(1f,1.2f)).SetEase(finalizeCurve).SetDelay(delay, false);
-            textObjs[index].transform.DORotateQuaternion(finalTrans[index].rotation, Random.Range(1f,1.2f)).SetEase(finalizeCurve).SetDelay(delay, false);
-            delay += Random.Range(0.0f, 0.15f);
+            textObjs[index].transform.DOMove(finalTrans[index].position, duration).SetEase(finalizeCurve).SetDelay(delay, false);
+            textObjs[index].transform.DORotateQuaternion(finalTrans[index].rotation, duration).SetEase(finalizeCurve).SetDelay(delay, false);
+            delay += Random.Range(0f, 0.05f);
         }
+    }
+    public void PunchTextTogether()
+    {
+        for(int i=0; i<textObjs.Length; i++){
+            int index = dirIndex[i];
+            textObjs[index].PunchRender(0.4f, Random.Range(0.4f, 0.5f), 2);
+        } 
     }
     IEnumerator coroutineLerpShiftFactor(float targetValue, float duration){
         shiftExploding = true;

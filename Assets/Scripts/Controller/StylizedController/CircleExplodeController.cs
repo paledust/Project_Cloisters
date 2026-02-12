@@ -39,6 +39,10 @@ public class CircleExplodeController : MonoBehaviour
             clickable_Planet.transform.DOScale(Vector3.one*0.3f, 0.3f).SetEase(Ease.InOutQuad);
         });
     }
+    public void ExplodeFinal()
+    {
+        p_explode.Play(true);
+    }
 
     IEnumerator coroutineExplode(float duration){
         p_explode.Play(true);
