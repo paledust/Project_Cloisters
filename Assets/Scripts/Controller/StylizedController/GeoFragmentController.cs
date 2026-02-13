@@ -101,11 +101,7 @@ public class GeoFragmentController : MonoBehaviour
         for(int i=0; i<selectGeos.Length; i++){
             var geo = selectGeos[i];
             originPoses[i] = geo.transform.localPosition;
-            geo.transform.DOScale(Vector3.one * 1.2f, Random.Range(0.15f, 0.25f)).SetEase(Ease.OutBack).OnComplete(() =>
-            {
-                geo.enabled = true;
-                geo.EnableHitbox();
-            });
+            geo.PopGeo();
         }
         yield return new WaitForLoop(duration, (t)=>{
             for(int i=0; i<selectGeos.Length; i++){

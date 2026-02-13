@@ -12,6 +12,7 @@ public class Clickable_Stylized : Basic_Clickable
     [Header("Scale Animation")]
     [SerializeField] private float hoverScalePunch = 1.1f;
     [SerializeField] private float hoverScaleDuration = 0.25f;
+    [SerializeField] private bool initScaleOnAwake = false;
 
     [Header("Volume Settings")]
     [SerializeField] private Vector2 volumeRange = new Vector2(0, 1);
@@ -28,9 +29,15 @@ public class Clickable_Stylized : Basic_Clickable
     
     private const double BEAT_TEMPLE = 60f/420f;
 
+    void Awake()
+    {
+        if(initScaleOnAwake)
+            originalScale = transform.localScale;
+    }
     void OnEnable()
     {
-        originalScale = transform.localScale;
+        if(!initScaleOnAwake)
+            originalScale = transform.localScale;
         OnDrumEnable?.Invoke();
     }
     void Update()
@@ -69,6 +76,14 @@ public class Clickable_Stylized : Basic_Clickable
     {
         base.OnClick(player, hitPos);
         ShakeDrum(1);
+    }
+    public void PopGeo()
+    {
+        transform.DOScale(originalScale, Random.Range(0.15f, 0.25f)).SetEase(Ease.OutBack).OnComplete(() =>
+        {
+            this.enabled = true;
+            EnableHitbox();
+        });
     }
     void ShakeDrum(float strength)
     {

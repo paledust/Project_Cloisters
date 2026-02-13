@@ -337,7 +337,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15c38f6fa1940124db1ab7f6fe7268d1, type: 3}
   m_Name: Signal Emitter
   m_EditorClassIdentifier: 
-  m_Time: 0.23333333333333334
+  m_Time: 1.1
   m_Retroactive: 0
   m_EmitOnce: 0
   m_Asset: {fileID: 11400000, guid: 661e9719e91558c4c88f03ba503f43e2, type: 2}
@@ -384,7 +384,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Recorded (4)
+  m_Name: FadeInWhimsical
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -613,10 +613,10 @@ MonoBehaviour:
   m_Children: []
   m_Clips:
   - m_Version: 1
-    m_Start: 0.23333333333333334
+    m_Start: 1.2333333333333336
     m_ClipIn: 0
     m_Asset: {fileID: -4433775245640141797}
-    m_Duration: 2.8833333333333337
+    m_Duration: 1.883333333333333
     m_TimeScale: 1
     m_ParentTrack: {fileID: -2247234032941263854}
     m_EaseInDuration: 0
@@ -1342,7 +1342,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c177094487706344eabf25549f41e5f4, type: 3}
   m_Name: NextMiniGame Marker
   m_EditorClassIdentifier: 
-  m_Time: 2.6166666666666667
+  m_Time: 2.6666666666666665
   retroactive: 0
   emitOnce: 1
 --- !u!114 &8485866814505770947
