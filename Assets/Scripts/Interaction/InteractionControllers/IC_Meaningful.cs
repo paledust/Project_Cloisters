@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class IC_Meaningful : IC_Basic
 {
@@ -13,6 +14,9 @@ public class IC_Meaningful : IC_Basic
     }
     [SerializeField] private Clickable_ObjectRotator clickable_Mirror;
     [SerializeField] private List<TextShownData> textShownDatas;
+
+    [Header("Ending")]
+    [SerializeField] private PlayableDirector director;
 
     protected override void OnInteractionEnter()
     {
@@ -52,9 +56,16 @@ public class IC_Meaningful : IC_Basic
             .OnComplete(()=>{
                 if(textShownDatas.Count == 0)
                 {
+                    EventHandler.Call_OnFlushInput();
+                    StartCoroutine(coroutineEnding());
                 }
             });
             count ++;
         }
+    }
+    IEnumerator coroutineEnding()
+    {
+        yield return new WaitForSeconds(1f);
+        director.Play();
     }
 }
