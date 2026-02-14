@@ -8,7 +8,7 @@ public class MirrorTextCatcher : MonoBehaviour
     [SerializeField] private float castRadius;
     [SerializeField] private float showTextDistance = 1;
     [SerializeField] private LayerMask layerMask;
-    [SerializeField] private MirrorTextShowConstroller mirrorTextShowConstroller;
+    [SerializeField] private MirrorTextShowController mirrorTextShowConstroller;
 
     private MirrorText currentText;
     private Ray ray;

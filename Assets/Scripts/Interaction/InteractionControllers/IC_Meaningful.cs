@@ -20,6 +20,8 @@ public class IC_Meaningful : IC_Basic
     [SerializeField] private ParticleSystem diamondFoundEffect;
 
     [Header("Ending")]
+    [SerializeField] private Transform finalMirrorTrans;
+    [SerializeField] private Transform mirrorRenderTrans;
     [SerializeField] private PlayableDirector director;
 
     protected override void OnInteractionEnter()
@@ -70,6 +72,17 @@ public class IC_Meaningful : IC_Basic
     }
     void MirrorDiamondFoundHandler()
     {
+        Quaternion finalRot;
+        mirrorRenderTrans.SetParent(null);
+        if(Vector3.Dot(finalMirrorTrans.up, mirrorRenderTrans.up) < 0)
+        {
+            finalRot = finalMirrorTrans.rotation * Quaternion.Euler(0,0,180);
+        }
+        else
+            finalRot = finalMirrorTrans.rotation;
+            
+        mirrorRenderTrans.DORotateQuaternion(finalRot, 1f).SetEase(Ease.InOutQuad);
+
         diamondFoundEffect.Play();
         EventHandler.Call_OnFlushInput();
         EventHandler.Call_OnEndInteraction(this);

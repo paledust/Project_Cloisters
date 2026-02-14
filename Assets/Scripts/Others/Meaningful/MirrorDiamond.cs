@@ -5,6 +5,7 @@ using UnityEngine;
 public class MirrorDiamond : MonoBehaviour
 {
     [SerializeField] private float focusDuration = 1f;
+    [SerializeField] private ParticleSystem rippleEffect;
 
     private bool isFocused = false;
     private float focusTimer = 0f;
@@ -49,5 +50,12 @@ public class MirrorDiamond : MonoBehaviour
         animator_diamond.SetBool(FOCUS_BOOL, false);
         focusTimer = 0f;
         isFocused = false;
+    }
+    public void AE_Ripple()
+    {
+        if (rippleEffect != null)
+        {
+            rippleEffect.Emit(1);
+        }
     }
 }

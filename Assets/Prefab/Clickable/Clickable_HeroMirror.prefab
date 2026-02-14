@@ -232,7 +232,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 1
-  castRadius: 0.15
+  castRadius: 0.015
 --- !u!1001 &8347407509945114467
 PrefabInstance:
   m_ObjectHideFlags: 0

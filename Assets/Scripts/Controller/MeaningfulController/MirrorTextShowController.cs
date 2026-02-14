@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using DG.Tweening;
 
-public class MirrorTextShowConstroller : MonoBehaviour
+public class MirrorTextShowController : MonoBehaviour
 {
     [SerializeField] private TextMeshPro tmp;
     private bool isFocusingText = false;
