@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1603018881477947607}
+  serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8384941206551509128}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1520769983141112898
 BoxCollider:
@@ -41,9 +41,17 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1603018881477947607}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 1
+  m_ProvidesContacts: 0
   m_Enabled: 0
-  serializedVersion: 2
+  serializedVersion: 3
   m_Size: {x: 1.2457384, y: 1.2457383, z: 0.14330134}
   m_Center: {x: 0, y: 0, z: 0.00000023841858}
 --- !u!114 &5897721432112148927
@@ -61,6 +69,7 @@ MonoBehaviour:
   sfx_clickSound: group_click
   hitbox: {fileID: 1520769983141112898}
   isFrozen: 0
+  disableClick: 0
   pitchRotationTrans: {fileID: 2381693302797345780}
   yawRotationTrans: {fileID: 4626785206901275300}
   dragStrength: 5
@@ -68,10 +77,14 @@ MonoBehaviour:
   maxAngularSpeed: 500
   verticalAccumulate: 1
   maxVerticalAngle: 40
+  resizeFactor: 1.02
+  resizeTime: 0.4
+  backTime: 0.5
   controllingAngularLerp: 10
   releaseAngularLerp: 1
   useSpring: 0
   springFactor: 2
+  scaleRange: {x: 0.25, y: 0.3}
 --- !u!1 &2831809787211009464
 GameObject:
   m_ObjectHideFlags: 0
@@ -95,6 +108,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2831809787211009464}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -102,7 +116,6 @@ Transform:
   m_Children:
   - {fileID: 2381693302797345780}
   m_Father: {fileID: 8347407509909487194}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5677823497526097544
 GameObject:
@@ -127,6 +140,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5677823497526097544}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -134,7 +148,6 @@ Transform:
   m_Children:
   - {fileID: 8384941206551509128}
   m_Father: {fileID: 4626785206901275300}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8347407509909487173
 GameObject:
@@ -147,6 +160,7 @@ GameObject:
   - component: {fileID: 8347407509909487194}
   - component: {fileID: 6917014520607232297}
   - component: {fileID: 205437484449596921}
+  - component: {fileID: 8365311063198869973}
   m_Layer: 3
   m_Name: Clickable_HeroMirror
   m_TagString: Untagged
@@ -161,6 +175,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8347407509909487173}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.016, y: 0.576, z: 3.416}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -168,7 +183,6 @@ Transform:
   m_Children:
   - {fileID: 4626785206901275300}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6917014520607232297
 MonoBehaviour:
@@ -202,11 +216,29 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   mirrorTextShowConstroller: {fileID: 0}
+--- !u!114 &8365311063198869973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8347407509909487173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 561b125565c19be43917ed9da0d524c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rootTrans: {fileID: 8440476972217594787}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  castRadius: 0.15
 --- !u!1001 &8347407509945114467
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 2381693302797345780}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: cc02833a295d8c440a8257e2d0116c45,
@@ -335,6 +367,21 @@ PrefabInstance:
       value: Mirror Renderers
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: cc02833a295d8c440a8257e2d0116c45,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7689956643521563650}
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: -3111565609762313623, guid: cc02833a295d8c440a8257e2d0116c45,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1424729146846037812}
+    - targetCorrespondingSourceObject: {fileID: 8093904995948005384, guid: cc02833a295d8c440a8257e2d0116c45,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 672787813688034798}
   m_SourcePrefab: {fileID: 100100000, guid: cc02833a295d8c440a8257e2d0116c45, type: 3}
 --- !u!1 &253504854755465067 stripped
 GameObject:

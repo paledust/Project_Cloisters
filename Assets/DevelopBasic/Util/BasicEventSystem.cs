@@ -37,6 +37,8 @@ public static class EventHandler
     public static void Call_OnChargeText(bool isCharge) => E_OnChargeText?.Invoke(isCharge);
     public static event Action<MirrorText> E_OnMirrorText;
     public static void Call_OnMirrorText(MirrorText c) => E_OnMirrorText?.Invoke(c);
+    public static event Action E_OnMirrorDiamondFound;
+    public static void Call_OnMirrorDiamondFound() => E_OnMirrorDiamondFound?.Invoke();
     public static event Action E_OnTransitionBegin;
     public static void Call_OnTransitionBegin() => E_OnTransitionBegin?.Invoke();
     public static event Action E_OnTransitionEnd;

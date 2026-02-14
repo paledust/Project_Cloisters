@@ -15,6 +15,9 @@ public class IC_Meaningful : IC_Basic
     [SerializeField] private Clickable_ObjectRotator clickable_Mirror;
     [SerializeField] private List<TextShownData> textShownDatas;
 
+    [Header("Diamond")]
+    [SerializeField] private MirrorDiamond mirrorDiamond;
+
     [Header("Ending")]
     [SerializeField] private PlayableDirector director;
 
@@ -22,12 +25,14 @@ public class IC_Meaningful : IC_Basic
     {
         base.OnInteractionEnter();
         EventHandler.E_OnMirrorText += ShowText;
+        EventHandler.E_OnMirrorDiamondFound += MirrorDiamondFoundHandler;
         clickable_Mirror.EnableHitbox();
     }
     protected override void OnInteractionEnd()
     {
         base.OnInteractionEnd();
         EventHandler.E_OnMirrorText -= ShowText;
+        EventHandler.E_OnMirrorDiamondFound -= MirrorDiamondFoundHandler;
         clickable_Mirror.DisableHitbox();
     }
     void ShowText(MirrorText mirrorText)
@@ -56,15 +61,20 @@ public class IC_Meaningful : IC_Basic
             .OnComplete(()=>{
                 if(textShownDatas.Count == 0)
                 {
-                    EventHandler.Call_OnFlushInput();
-                    StartCoroutine(coroutineEnding());
+                    mirrorDiamond.ActivateDiamond();
                 }
             });
             count ++;
         }
     }
+    void MirrorDiamondFoundHandler()
+    {
+        StartCoroutine(coroutineEnding());
+    }
     IEnumerator coroutineEnding()
     {
+        EventHandler.Call_OnFlushInput();
+        EventHandler.Call_OnEndInteraction(this);
         yield return new WaitForSeconds(1f);
         director.Play();
     }
