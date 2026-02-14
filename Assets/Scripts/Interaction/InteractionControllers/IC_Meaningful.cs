@@ -17,6 +17,7 @@ public class IC_Meaningful : IC_Basic
 
     [Header("Diamond")]
     [SerializeField] private MirrorDiamond mirrorDiamond;
+    [SerializeField] private ParticleSystem diamondFoundEffect;
 
     [Header("Ending")]
     [SerializeField] private PlayableDirector director;
@@ -69,12 +70,13 @@ public class IC_Meaningful : IC_Basic
     }
     void MirrorDiamondFoundHandler()
     {
+        diamondFoundEffect.Play();
+        EventHandler.Call_OnFlushInput();
+        EventHandler.Call_OnEndInteraction(this);
         StartCoroutine(coroutineEnding());
     }
     IEnumerator coroutineEnding()
     {
-        EventHandler.Call_OnFlushInput();
-        EventHandler.Call_OnEndInteraction(this);
         yield return new WaitForSeconds(1f);
         director.Play();
     }
