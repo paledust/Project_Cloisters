@@ -303,6 +303,7 @@ MonoBehaviour:
   harmScale: 0.15
   harmVibration: 25
   drumState: 0
+  beatOvershoot: 0.2
   beatPowerAdd: 0.1
   beatDrainSpeed: 0.35
   beatMaxThreasholdTime: 1
@@ -315,9 +316,10 @@ MonoBehaviour:
   chargeHeroColor: {r: 1, g: 1, b: 1, a: 1}
   normalHeroColor: {r: 1, g: 0.7294118, b: 0.56078434, a: 1}
   glowMaxAlpha: 1
-  prepBeat: 16
+  prepBeat: 4
   sfxCharge: sfx_jazz_fill
   m_audio: {fileID: 6699196372092923900}
+  accumulatePower: 0
 --- !u!82 &6699196372092923900
 AudioSource:
   m_ObjectHideFlags: 0

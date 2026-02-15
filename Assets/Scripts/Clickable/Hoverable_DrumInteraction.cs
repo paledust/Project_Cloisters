@@ -32,6 +32,7 @@ public class Hoverable_DrumInteraction : MonoBehaviour
 
     [Header("Drum Charge")]
     [SerializeField] private DrumState drumState;
+    [SerializeField] private float beatOvershoot = 0.5f;
     [SerializeField] private float beatPowerAdd = 0;
     [SerializeField] private float beatDrainSpeed = 1;
     [SerializeField] private float beatMaxThreasholdTime = 2;
@@ -54,7 +55,7 @@ public class Hoverable_DrumInteraction : MonoBehaviour
 
     private Basic_Clickable self;
     private Vector3 originalScale;
-    private float accumulatePower = 0;
+    [SerializeField, ShowOnly] private float accumulatePower = 0;
     private float chargeTimer = 0;
     private int beatCounter = 0;
 
@@ -81,7 +82,7 @@ public class Hoverable_DrumInteraction : MonoBehaviour
         if(accumulatePower>0)
         {
             accumulatePower -= beatDrainSpeed * Time.deltaTime;
-            accumulatePower = Mathf.Clamp(accumulatePower, 0, 1.5f);
+            accumulatePower = Mathf.Clamp(accumulatePower, 0, 1f + beatOvershoot);
         }
         Color targetColor = glowSprite.color;
         targetColor.a = Mathf.Clamp01(accumulatePower) * glowMaxAlpha;
@@ -186,6 +187,7 @@ public class Hoverable_DrumInteraction : MonoBehaviour
             EventHandler.Call_OnBassChargeBeat();
             drumState = DrumState.Beating;
             chargeTimer = 0;
+            accumulatePower = 0;
             DOTween.Kill(heroColor);
             DOTween.To(()=> heroColor.tint, x=> heroColor.tint = x, normalHeroColor, 1f).SetId(heroColor);
             heroSphereRoot.DOKill();
