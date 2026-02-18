@@ -48,8 +48,7 @@ public class RangeDetection : MonoBehaviour
     public void RangeAppear(float scale)
     {
         m_collider.enabled = false;
-        transform.localScale = Vector3.zero;
-        transform.DOScale(scale, 0.4f).SetEase(Ease.OutBack, 2).OnComplete(()=>
+        transform.DOPunchScale(Vector3.one * scale, 0.25f).OnComplete(()=>
             m_collider.enabled = true
         );
     }

@@ -48,7 +48,7 @@ public class IC_Experimental : IC_Basic
         stageIndex = 0;
         textIndex = 0;
 
-        rangeDetection.RangeAppear(0.8f);
+        rangeDetection.RangeAppear(0.01f);
         rangeDetection.InitRangeDetect(activeBodies.Count);
 
         EventHandler.E_OnCollectExperimentalText += OnCollectionText;

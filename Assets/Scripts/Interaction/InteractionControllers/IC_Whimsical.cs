@@ -30,7 +30,7 @@ public class IC_Whimsical : IC_Basic
     }
     IEnumerator coroutineEnd()
     {
-        crystal.FadeIdleAngularSpeed(100, 5f);
+        crystal.FadeIdleAngularSpeed(150, 4f);
         yield return new WaitForSeconds(3f);
         textController.PopoutAllText();
         yield return new WaitForSeconds(1f);
