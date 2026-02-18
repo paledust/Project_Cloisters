@@ -9,6 +9,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: M Meaningful_MirrorReflectTransition
   m_Shader: {fileID: 4800000, guid: 37a2d630660d05748a8b1017ec5ed101, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _RECEIVE_SHADOWS_OFF
   m_InvalidKeywords:
@@ -19,6 +21,7 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -141,6 +144,7 @@ Material:
     - _NormalPanSpeed: 1
     - _NormalScale: 0
     - _OcclusionStrength: 1
+    - _Opacity: 1
     - _OverAllOpacity: 0.8
     - _Parallax: 0.02
     - _QueueControl: 0

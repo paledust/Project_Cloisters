@@ -96,6 +96,16 @@ public class Clickable_ObjectRotator : Basic_Clickable
         useSpring = true;
         zeroSpringAngle = m_accumulateYaw;
     }
+    public void FadeIdleAngularSpeed(float targetIdleSpeed, float duration){
+        StartCoroutine(coroutineFadeIdleAngularSpeed(targetIdleSpeed, duration));
+    }
+    IEnumerator coroutineFadeIdleAngularSpeed(float targetIdleSpeed, float duration){
+        float initIdleSpeed = idleAngularSpeed;
+        yield return new WaitForLoop(duration, (t)=>{
+            idleAngularSpeed = Mathf.Lerp(initIdleSpeed, targetIdleSpeed, t);
+        });
+        idleAngularSpeed = targetIdleSpeed;
+    }
     IEnumerator coroutineChangePlanetSize(float targetSize, float duration, EasingFunc.Easing.FunctionType easeType = EasingFunc.Easing.FunctionType.QuadEaseOut){
         var easeFunc = EasingFunc.Easing.GetFunctionWithTypeEnum(easeType);
         Vector3 initSize = pitchRotationTrans.localScale;

@@ -1,11 +1,13 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class IC_Whimsical : IC_Basic
 {
+    [SerializeField] private Clickable_ObjectRotator crystal;
     [SerializeField] private WhimsicalTextController textController;
-    [SerializeField] int count = 0;
+    [SerializeField] private int count = 0;
+    [SerializeField] private PlayableDirector endDirector;
     protected override void OnInteractionEnter()
     {
         base.OnInteractionEnter();
@@ -23,6 +25,17 @@ public class IC_Whimsical : IC_Basic
         {
             textController.CompleteCharge();
             EventHandler.Call_OnEndInteraction(this);
+            StartCoroutine(coroutineEnd());
         }
+    }
+    IEnumerator coroutineEnd()
+    {
+        crystal.FadeIdleAngularSpeed(100, 5f);
+        yield return new WaitForSeconds(3f);
+        textController.PopoutAllText();
+        yield return new WaitForSeconds(1f);
+        endDirector.Play();
+        yield return new WaitForSeconds(2f);
+        EventHandler.Call_OnInteractionUnreachable(this);
     }
 }

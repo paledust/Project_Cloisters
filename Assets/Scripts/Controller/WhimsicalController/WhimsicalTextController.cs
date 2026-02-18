@@ -53,4 +53,11 @@ public class WhimsicalTextController : MonoBehaviour
         }
         totalChargeValue = MAX_CHARGE;
     }
+    public void PopoutAllText()
+    {
+        foreach(var text in chargeTexts)
+        {
+            text.PopoutText(Random.Range(0, 1f));
+        }
+    }
 }

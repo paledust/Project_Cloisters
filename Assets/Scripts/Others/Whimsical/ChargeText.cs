@@ -98,6 +98,13 @@ public class ChargeText : MonoBehaviour
             }   
         }
     }
+    public void PopoutText(float delay)
+    {
+        tmp.DOFade(0, 0.15f).SetDelay(delay).OnStart(() =>
+        {
+            p_fireburst.Play();
+        });
+    }
     IEnumerator coroutineFadeText(float duration, AnimationCurve curve)
     {
         yield return new WaitForLoop(duration, (t)=>{
