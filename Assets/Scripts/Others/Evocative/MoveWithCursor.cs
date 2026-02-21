@@ -9,6 +9,8 @@ public class MoveWithCursor : MonoBehaviour
     [SerializeField] private float heightLimit = 4;
     [SerializeField] private float widthLimit = 8;
     [SerializeField] private float widthOffset = 0;
+    [SerializeField] private float lerpSpeed = 50;
+    [SerializeField, Range(0, 1), ShowOnly] private float controlValue = 0;
     private float depth = 32;
     private Rigidbody m_rigid;
     void Awake()
@@ -29,6 +31,16 @@ public class MoveWithCursor : MonoBehaviour
             worldPos.x = Mathf.Clamp(worldPos.x, -widthLimit+widthOffset, widthLimit+widthOffset);
             worldPos.y = m_rigid.position.y;
         }
-        m_rigid.MovePosition(worldPos);
+        m_rigid.MovePosition(Vector3.Lerp(m_rigid.position, worldPos, lerpSpeed * controlValue * Time.fixedDeltaTime));
+    }
+    public void StartControl(float duration)
+    {
+        StartCoroutine(coroutineStartControl(duration));
+    }
+    IEnumerator coroutineStartControl(float duration)
+    {
+        yield return new WaitForLoop(duration, (t)=>{
+            controlValue = t;
+        });
     }
 }

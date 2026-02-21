@@ -28,6 +28,9 @@ public class IC_Narrative : IC_Basic
 [Header("Interaction Start")]
     [SerializeField] private Transform[] spawnPointAtStart;
     [SerializeField] private NarrativeTextData[] narrativeTextDatas;
+    [SerializeField] private CameraPanWithPointer cameraPanController;
+    [SerializeField] private NarrativeCircleManager narrativeCircleManager;
+    [SerializeField] private NarrativeRandomForceField randomForceField;
 [Header("End")]
     [SerializeField] private float collisionStrength = 0.1f;
     [SerializeField] private NarrativeText finalNarrativeTextData;
@@ -52,6 +55,9 @@ public class IC_Narrative : IC_Basic
     {
         base.UnloadAssets();
         rippleParticleController.enabled = false;
+        cameraPanController.enabled = false;
+        circleManager.enabled = false;
+        randomForceField.enabled = false;
     }
     protected override void OnInteractionEnter()
     {
@@ -65,11 +71,13 @@ public class IC_Narrative : IC_Basic
         }
         narrativeCharIndex = 0;
         Service.Shuffle(ref narrativeTextDatas);
+        circleManager.enabled = true;
+        cameraPanController.enabled = true;
+        randomForceField.enabled = true;
     }
     protected override void OnInteractionEnd()
     {
         base.OnInteractionEnd();
-        circleManager.enabled = false;
         EventHandler.E_OnClickableCircleCollide -= OnCircleCollide;
         EventHandler.E_OnNarrativeExplode -= OnNarrativeCircleExplode;
     }

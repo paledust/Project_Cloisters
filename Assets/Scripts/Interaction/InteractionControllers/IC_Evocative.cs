@@ -34,6 +34,10 @@ public class IC_Evocative : IC_Basic
     [Header("Camera")]
     [SerializeField] private CinemachineVirtualCamera vc_cam;
 
+    [Header("Control")]
+    [SerializeField] private MoveWithCursor[] moveWithCursor;
+    [SerializeField] private float startSpeedDuration = 1f;
+
     private int collectedCount = 0;
     private int backgroundIndex = 0;
     private int finalgroundIndex = 0;
@@ -64,6 +68,11 @@ public class IC_Evocative : IC_Basic
             goal.BecomeVulnerable();
         
         collectables = interactionAssetsGroup.GetComponentsInChildren<Collectable>(false);
+        
+        foreach(var move in moveWithCursor)
+        {
+            move.StartControl(startSpeedDuration);
+        }
     }
     protected override void OnInteractionEnd()
     {

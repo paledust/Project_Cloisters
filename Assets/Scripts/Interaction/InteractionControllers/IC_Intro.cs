@@ -62,7 +62,7 @@ public class IC_Intro : IC_Basic
         Vector3 startVel = startVelocity;
         Vector3 endVel   = (finalPos-startPos)*0.01f;
         Vector3 dynamicPos = startPos;
-        yield return new WaitForLoop(0.5f, (t)=>{
+        yield return new WaitForLoop(1f, (t)=>{
             dynamicPos = dynamicPos + Vector3.Slerp(startVel, endVel, t)*Time.deltaTime;
             Vector3 staticPos  = Vector3.Lerp(startPos, finalPos, EasingFunc.Easing.SmoothInOut(t));
             surroundPlanet.position = Vector3.Lerp(dynamicPos, staticPos, EasingFunc.Easing.SmoothInOut(t));

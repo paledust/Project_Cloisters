@@ -9,11 +9,10 @@ public class RotateAroundController : MonoBehaviour
     [SerializeField] private float controlAgility = 5;
 [Header("Speed Remapping")]
     [SerializeField] private float speedScale;
-    [SerializeField] private float speedOffset;
 
     void Update()
     {
-        rotateAround.angularSpeed = Mathf.Lerp(rotateAround.angularSpeed, clickable_Planet.m_angularSpeed*speedScale - (clickable_Planet.m_isControlling?0:speedOffset), Time.deltaTime * controlAgility);
+        rotateAround.angularSpeed = Mathf.Lerp(rotateAround.angularSpeed, clickable_Planet.m_angularSpeed*speedScale, Time.deltaTime * controlAgility);
 
         Vector3 euler = rotateAround.m_target.eulerAngles;
         if(euler.x > 180) euler.x -= 360;

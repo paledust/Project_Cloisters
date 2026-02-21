@@ -66,7 +66,7 @@ public class Clickable_Circle : Basic_Clickable
 [Header("Circle Sprites")]
     [SerializeField] private IC_Narrative.HeroCircleTransistor[] circleTransistors;
 
-    private float camDepth;
+    private const float CAM_DEPTH = 35;
     private Rigidbody rigid;
     private SphereCollider sphereCollider;
     private Vector3 velocity;
@@ -80,7 +80,6 @@ public class Clickable_Circle : Basic_Clickable
     void Awake(){
         rigid = GetComponent<Rigidbody>();
         sphereCollider = GetComponent<SphereCollider>();
-        camDepth = Camera.main.WorldToScreenPoint(transform.position).z;
     }
     void Update(){
         velocity *= 1-speedDrag;
@@ -106,7 +105,7 @@ public class Clickable_Circle : Basic_Clickable
 
     public override void ControllingUpdate(PlayerController player)
     {
-        Vector3 cursorPoint = player.GetCursorWorldPoint(camDepth);
+        Vector3 cursorPoint = player.GetCursorWorldPoint(CAM_DEPTH);
         Vector3 diff = cursorPoint - transform.position;
         diff = Vector3.ClampMagnitude(diff*followFactor, maxfollowSpeed);
 

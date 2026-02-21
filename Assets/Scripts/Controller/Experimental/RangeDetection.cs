@@ -11,7 +11,8 @@ public class RangeDetection : MonoBehaviour
     [SerializeField] private Color defaultColor;
     [SerializeField] private bool isRange;
 [Header("Animation")]
-    [SerializeField] private Animation anime;
+    [SerializeField] private Animator shapeAnimator;
+    
     private List<ConnectBody> bodyHash;
     private Collider2D m_collider;
     private bool isPunching;
@@ -19,6 +20,7 @@ public class RangeDetection : MonoBehaviour
     private int totalBodyCount;
     private float testTimer = 0;
     public int BodyCount => bodyHash.Count;
+    private const string SHAPE_CHANGE_ANIM = "ShapeChange";
 
 
     void Awake() => m_collider = GetComponent<Collider2D>();
@@ -43,7 +45,7 @@ public class RangeDetection : MonoBehaviour
     public void EnlargeDetection()
     {
         hasEnlarged = true;
-        anime.Play();
+        shapeAnimator.Play(SHAPE_CHANGE_ANIM);
     }
     public void RangeAppear(float scale)
     {

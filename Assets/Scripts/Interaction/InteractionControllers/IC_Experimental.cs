@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.Playables;
 
 public struct TextPopParam
 {
@@ -30,6 +31,9 @@ public class IC_Experimental : IC_Basic
     [SerializeField] private ParticleSystem p_collectText;
     [SerializeField] private CollectableText[] popTexts;
     [SerializeField] private List<CollectableText> completedTexts;
+
+[Header("End")]
+    [SerializeField] private PlayableDirector endDirector;
 
     private int shapeFront;
     private int stageIndex = 0;
@@ -180,8 +184,8 @@ public class IC_Experimental : IC_Basic
 
         if(stageIndex == stages.Length)
         {
-            EventHandler.Call_OnTransitionEnd();
             EventHandler.Call_OnEndInteraction(this);
+            StartCoroutine(coroutineEnd());
         }
         else
         {
@@ -189,9 +193,24 @@ public class IC_Experimental : IC_Basic
                 rangeDetection.EnlargeDetection();
 
             rangeDetection.InitRangeDetect(activeBodies.Count);
-
             EventHandler.Call_OnTransitionEnd();
         }
+    }
+    [ContextMenu("Debug End Test")]
+    public void Debug_EndTest()
+    {
+        StartCoroutine(coroutineEnd());
+    }
+    IEnumerator coroutineEnd()
+    {
+        foreach(var shape in activeBodies)
+        {
+            shape.m_rigid.DOMove(shape.transform.localPosition.normalized*20+shape.m_rigid.position, Random.Range(0.5f,1f)).SetEase(Ease.InQuad).SetDelay(Random.Range(0, 0.5f));
+        }
+        yield return new WaitForSeconds(1f);
+        endDirector.Play();
+        yield return new WaitForSeconds(1f);
+        EventHandler.Call_OnInteractionUnreachable(this);
     }
     IEnumerator coroutineThrowShape(Rigidbody m_rigid, Vector3 maxForce, float maxTorque, float duration, float daccDuration)
     {
