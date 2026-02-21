@@ -1,30 +1,21 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ShapeReturn : MonoBehaviour
 {
-    [SerializeField] private Vector2 shapeValidRectSize;
-    private Rect shapeValidRect;
-    private ConnectBody[] allBodies;
-
-    public void Init(ConnectBody[] connectBodies)
+    [SerializeField] private Vector2 force;
+    
+    void OnTriggerStay(Collider collider)
     {
-        shapeValidRect = new Rect(-shapeValidRectSize / 2, shapeValidRectSize);
-        allBodies = connectBodies;
-    }
-    void Update()
-    {
-        foreach (var body in allBodies)
+        var rigid = collider.attachedRigidbody;
+        if (rigid != null)
         {
-            if(!body.gameObject.activeSelf)
-                continue;
-            
-            Vector3 pos = body.transform.localPosition;
-            if(shapeValidRect.Contains(pos))
-            {
-                
-            }
+            rigid.AddForce(transform.rotation * force, ForceMode.Acceleration);
         }
+    }
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.matrix = transform.localToWorldMatrix;
+        DebugExtension.DrawArrow(Vector3.zero, force, Color.blue);
     }
 }

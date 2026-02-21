@@ -1,9 +1,13 @@
+using System.Collections;
 using UnityEngine;
 
 [AddComponentMenu("InteractionController_Manager")]
 public class IC_Manager : MonoBehaviour
 {
     [SerializeField] private IC_Basic[] interactionControllers;
+[Header("Game End")]
+    [SerializeField] private string endSceneName;
+    [SerializeField] private float endDelay = 3f;
 [Header("Debug Option")]
     [SerializeField] private int StartIndex = 0;
     [SerializeField, ShowOnly] private int interactionIndex = 0;
@@ -42,7 +46,9 @@ public class IC_Manager : MonoBehaviour
         if(interactionIndex >= interactionControllers.Length){
             interactionIndex --;
             Debug.LogWarning("No Interaction");
-        //To Do: End Game.
+            if(interactionIndex >= interactionControllers.Length-1){
+                StartCoroutine(CommonCoroutine.delayAction(()=>GameManager.Instance.SwitchingScene(endSceneName), endDelay));
+            }
             return;
         }
     //Make sure to load interaction before enter

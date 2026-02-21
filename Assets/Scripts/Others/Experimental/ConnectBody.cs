@@ -14,11 +14,13 @@ public class ConnectBody : MonoBehaviour
     public HashSet<ConnectBody> connectBodies = new HashSet<ConnectBody>();
     private Clickable_Moveable clickable_Moveable;
 
-    public Rigidbody m_rigid{get; private set;}
     public bool m_isSpherical=>isSpherical;
-    public float m_sphereRadius=>isSpherical?sphereRadius:0;
     private bool hasIdealConnection => occupiedTrigger != null;
+    public float m_sphereRadius=>isSpherical?sphereRadius:0;
     private Quaternion offsetRotToOther;
+
+    public Rigidbody m_rigid{get; private set;}
+    public Clickable_Moveable m_clickable => clickable_Moveable;
 
     void Awake()
     {

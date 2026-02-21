@@ -16,9 +16,6 @@ public class IC_Experimental : IC_Basic
     [SerializeField] private Color blinkColor1;
     [SerializeField] private Color blinkColor2;
 
-[Header("Shape Return")]
-    [SerializeField] private ShapeReturn shapeReturn;
-
 [Header("Constraints")]
     [SerializeField] private RangeDetection rangeDetection;
     [SerializeField] private int enlargeStage = 2;
@@ -57,8 +54,6 @@ public class IC_Experimental : IC_Basic
 
         rangeDetection.RangeAppear(0.01f);
         rangeDetection.InitRangeDetect(activeBodies.Count);
-
-        shapeReturn.Init(connectBodies);
 
         EventHandler.E_OnCollectExperimentalText += OnCollectionText;
         EventHandler.E_OnBuildConnectionBreaker += OnBuildConnectionBreaker;

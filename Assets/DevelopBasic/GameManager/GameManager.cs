@@ -41,6 +41,7 @@ public class GameManager : Singleton<GameManager>
         debugActions["restart"].performed += Debug_RestartLevel;
         debugActions["save"].performed += Debug_Save;
         debugActions["load"].performed += Debug_Load;
+        debugActions["quit"].performed += Debug_EndGame;
 
         if(isTesting) debugActions.Enable();
     #endif
@@ -70,6 +71,7 @@ public class GameManager : Singleton<GameManager>
         debugActions["restart"].performed -= Debug_RestartLevel;
         debugActions["save"].performed -= Debug_Save;
         debugActions["load"].performed -= Debug_Load;
+        debugActions["quit"].performed -= Debug_EndGame;
 
         if(debugActions.enabled)debugActions.Disable();
     #endif
@@ -207,7 +209,6 @@ public class GameManager : Singleton<GameManager>
     void Debug_EndGame(InputAction.CallbackContext callback)=>EndGame();
     void Debug_RestartLevel(InputAction.CallbackContext callback){
         if(callback.ReadValueAsButton()){
-            Debug.Log("Test Restart Level");
             RestartLevel();
         }
     }

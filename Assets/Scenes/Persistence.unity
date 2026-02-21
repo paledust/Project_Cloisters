@@ -614,6 +614,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4759861360168245595, guid: 12e0e346df9c8f049906162f53c5e766,
         type: 3}
+      propertyPath: isDemo
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4759861360168245595, guid: 12e0e346df9c8f049906162f53c5e766,
+        type: 3}
       propertyPath: InitScene
       value: Game
       objectReference: {fileID: 0}
@@ -631,6 +636,131 @@ PrefabInstance:
         type: 3}
       propertyPath: loadInitSceneFromGameManager
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4759861360168245595, guid: 12e0e346df9c8f049906162f53c5e766,
+        type: 3}
+      propertyPath: debugActions.m_Actions.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4759861360168245595, guid: 12e0e346df9c8f049906162f53c5e766,
+        type: 3}
+      propertyPath: debugActions.m_Bindings.Array.size
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4759861360168245595, guid: 12e0e346df9c8f049906162f53c5e766,
+        type: 3}
+      propertyPath: debugActions.m_Actions.Array.data[4].m_Id
+      value: 48da3fbc-5594-4630-ad29-26883c48625c
+      objectReference: {fileID: 0}
+    - target: {fileID: 4759861360168245595, guid: 12e0e346df9c8f049906162f53c5e766,
+        type: 3}
+      propertyPath: debugActions.m_Bindings.Array.data[8].m_Id
+      value: 7c9bf5f8-890f-4aeb-9619-aef2453f0b2f
+      objectReference: {fileID: 0}
+    - target: {fileID: 4759861360168245595, guid: 12e0e346df9c8f049906162f53c5e766,
+        type: 3}
+      propertyPath: debugActions.m_Bindings.Array.data[9].m_Id
+      value: 5aa6d17e-32bc-4ceb-9db1-dea97724069f
+      objectReference: {fileID: 0}
+    - target: {fileID: 4759861360168245595, guid: 12e0e346df9c8f049906162f53c5e766,
+        type: 3}
+      propertyPath: debugActions.m_Actions.Array.data[4].m_Name
+      value: quit
+      objectReference: {fileID: 0}
+    - target: {fileID: 4759861360168245595, guid: 12e0e346df9c8f049906162f53c5e766,
+        type: 3}
+      propertyPath: debugActions.m_Actions.Array.data[4].m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4759861360168245595, guid: 12e0e346df9c8f049906162f53c5e766,
+        type: 3}
+      propertyPath: debugActions.m_Bindings.Array.data[10].m_Id
+      value: 25636c4a-f010-420b-9934-ee2486fb58f7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4759861360168245595, guid: 12e0e346df9c8f049906162f53c5e766,
+        type: 3}
+      propertyPath: debugActions.m_Bindings.Array.data[11].m_Id
+      value: 25636c4a-f010-420b-9934-ee2486fb58f7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4759861360168245595, guid: 12e0e346df9c8f049906162f53c5e766,
+        type: 3}
+      propertyPath: debugActions.m_Bindings.Array.data[8].m_Name
+      value: Keyboard
+      objectReference: {fileID: 0}
+    - target: {fileID: 4759861360168245595, guid: 12e0e346df9c8f049906162f53c5e766,
+        type: 3}
+      propertyPath: debugActions.m_Bindings.Array.data[8].m_Path
+      value: OneModifier
+      objectReference: {fileID: 0}
+    - target: {fileID: 4759861360168245595, guid: 12e0e346df9c8f049906162f53c5e766,
+        type: 3}
+      propertyPath: debugActions.m_Bindings.Array.data[9].m_Name
+      value: modifier
+      objectReference: {fileID: 0}
+    - target: {fileID: 4759861360168245595, guid: 12e0e346df9c8f049906162f53c5e766,
+        type: 3}
+      propertyPath: debugActions.m_Bindings.Array.data[9].m_Path
+      value: <Keyboard>/shift
+      objectReference: {fileID: 0}
+    - target: {fileID: 4759861360168245595, guid: 12e0e346df9c8f049906162f53c5e766,
+        type: 3}
+      propertyPath: debugActions.m_Bindings.Array.data[10].m_Name
+      value: binding
+      objectReference: {fileID: 0}
+    - target: {fileID: 4759861360168245595, guid: 12e0e346df9c8f049906162f53c5e766,
+        type: 3}
+      propertyPath: debugActions.m_Bindings.Array.data[10].m_Path
+      value: <Keyboard>/q
+      objectReference: {fileID: 0}
+    - target: {fileID: 4759861360168245595, guid: 12e0e346df9c8f049906162f53c5e766,
+        type: 3}
+      propertyPath: debugActions.m_Bindings.Array.data[11].m_Name
+      value: binding
+      objectReference: {fileID: 0}
+    - target: {fileID: 4759861360168245595, guid: 12e0e346df9c8f049906162f53c5e766,
+        type: 3}
+      propertyPath: debugActions.m_Bindings.Array.data[8].m_Flags
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4759861360168245595, guid: 12e0e346df9c8f049906162f53c5e766,
+        type: 3}
+      propertyPath: debugActions.m_Bindings.Array.data[9].m_Flags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4759861360168245595, guid: 12e0e346df9c8f049906162f53c5e766,
+        type: 3}
+      propertyPath: debugActions.m_Bindings.Array.data[10].m_Flags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4759861360168245595, guid: 12e0e346df9c8f049906162f53c5e766,
+        type: 3}
+      propertyPath: debugActions.m_Bindings.Array.data[11].m_Flags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4759861360168245595, guid: 12e0e346df9c8f049906162f53c5e766,
+        type: 3}
+      propertyPath: debugActions.m_Bindings.Array.data[8].m_Action
+      value: quit
+      objectReference: {fileID: 0}
+    - target: {fileID: 4759861360168245595, guid: 12e0e346df9c8f049906162f53c5e766,
+        type: 3}
+      propertyPath: debugActions.m_Bindings.Array.data[9].m_Action
+      value: quit
+      objectReference: {fileID: 0}
+    - target: {fileID: 4759861360168245595, guid: 12e0e346df9c8f049906162f53c5e766,
+        type: 3}
+      propertyPath: debugActions.m_Bindings.Array.data[10].m_Action
+      value: quit
+      objectReference: {fileID: 0}
+    - target: {fileID: 4759861360168245595, guid: 12e0e346df9c8f049906162f53c5e766,
+        type: 3}
+      propertyPath: debugActions.m_Bindings.Array.data[11].m_Action
+      value: quit
+      objectReference: {fileID: 0}
+    - target: {fileID: 4759861360168245595, guid: 12e0e346df9c8f049906162f53c5e766,
+        type: 3}
+      propertyPath: debugActions.m_Actions.Array.data[4].m_ExpectedControlType
+      value: Button
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
