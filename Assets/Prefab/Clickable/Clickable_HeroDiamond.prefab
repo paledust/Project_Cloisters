@@ -26,6 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6235808070560946393}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 20.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -33,7 +34,6 @@ Transform:
   m_Children:
   - {fileID: 6235808070743501218}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6235808070560946395
 MonoBehaviour:
@@ -50,9 +50,10 @@ MonoBehaviour:
   sfx_clickSound: group_click
   hitbox: {fileID: 6235808070560946212}
   isFrozen: 0
+  disableClick: 0
   pitchRotationTrans: {fileID: 6235808070560946394}
   yawRotationTrans: {fileID: 6235808070743501218}
-  dragStrength: 2
+  dragStrength: 10
   idleAngularSpeed: 5
   maxAngularSpeed: 800
   verticalAccumulate: 0
@@ -64,6 +65,7 @@ MonoBehaviour:
   releaseAngularLerp: 1
   useSpring: 0
   springFactor: 2
+  scaleRange: {x: 0.25, y: 0.3}
 --- !u!114 &6235808070560946213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87,9 +89,17 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6235808070560946393}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6235808070743501217
@@ -115,6 +125,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6235808070743501217}
+  serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -122,13 +133,13 @@ Transform:
   m_Children:
   - {fileID: 5836862049599542814}
   m_Father: {fileID: 6235808070560946394}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!1001 &6235808069732512245
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 6235808070743501218}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: ea3c364094ffefc4f97514ee1f8f5555,
@@ -217,6 +228,13 @@ PrefabInstance:
       value: mesh_hero_whimsical
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ea3c364094ffefc4f97514ee1f8f5555,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6235808071061853552}
   m_SourcePrefab: {fileID: 100100000, guid: ea3c364094ffefc4f97514ee1f8f5555, type: 3}
 --- !u!4 &5836862049599542814 stripped
 Transform:

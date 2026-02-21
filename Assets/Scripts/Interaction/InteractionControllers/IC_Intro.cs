@@ -29,6 +29,7 @@ public class IC_Intro : IC_Basic
         camController.enabled = true;
         rotateController.enabled = true;
         clickable_redPlanet.EnableHitbox();
+        UI_Manager.Instance.ChangeCursorColor(true);
     }
     protected override void OnInteractionEnd()
     {

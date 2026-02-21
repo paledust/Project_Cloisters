@@ -109,8 +109,11 @@ public class NarrativeCircleManager : Basic_ObjectPool<CollidableCircle>
         });
         return circles;
     }
+
+# if UNITY_EDITOR
     void OnDrawGizmosSelected()
     {
         rectSelector.DrawGizmo(new Color(0,1,0,0.25f));
     }
+#endif
 }
