@@ -30,6 +30,15 @@ public class UI_Manager : Singleton<UI_Manager>
             Cursor.visible = false;
             UpdateCursorState(currentCursorState);
         }
+
+        EventHandler.E_OnTransitionBegin += TransitionBeginHandler;
+        EventHandler.E_OnTransitionEnd += TransitionEndHandler;
+    }
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+        EventHandler.E_OnTransitionBegin -= TransitionBeginHandler;
+        EventHandler.E_OnTransitionEnd -= TransitionEndHandler;
     }
     void Update(){
         if(!useCustomCursor){
@@ -91,6 +100,16 @@ public class UI_Manager : Singleton<UI_Manager>
                     break;
             }
             currentCursorState = newState;
+        }
+    }
+    void TransitionBeginHandler(){
+        if(useCustomCursor){
+            cursorChanger.Excute(coroutineChangeCursor(0f, 1f, 0.5f));
+        }
+    }
+    void TransitionEndHandler(){
+        if(useCustomCursor){
+            cursorChanger.Excute(coroutineChangeCursor(0.5f, 1f, 0.5f));
         }
     }
     IEnumerator coroutineChangeCursor(float alpha, float size, float duration){
