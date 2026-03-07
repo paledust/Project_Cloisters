@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5711857569368568660}
   - component: {fileID: 1829140016923808361}
   - component: {fileID: 1323091224620604729}
+  - component: {fileID: 5322645488706585729}
   m_Layer: 0
   m_Name: mesh_crystal
   m_TagString: Untagged
@@ -83,6 +84,25 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &5322645488706585729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 250477687858333882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1448c7f0ca9703344a8185b88610edb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floatFreq: 0.5
+  floatHeight: 0.1
+  floatOffset: 0.025
+  floatPhase: 0
+  ControlFactor: 1
+  noiseScale: 0.5
+  noiseFreq: 1
 --- !u!1 &882637585606262283
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,6 +199,7 @@ GameObject:
   - component: {fileID: 449304128854292443}
   - component: {fileID: 8939477281556912884}
   - component: {fileID: 1630959926224391564}
+  - component: {fileID: 87022129037143106}
   m_Layer: 3
   m_Name: Clickable_SubCrystal
   m_TagString: Untagged
@@ -247,10 +268,29 @@ MonoBehaviour:
   crystalTrans: {fileID: 5711857569368568660}
   selfRotateSpeed: -10
   blinkParticle: {fileID: 3218291641164770548}
+  particleExpandForce: 10
   particleAngleScale: 0.25
   particleFollowSpeed: 2
   xPosToRotation: -80
   spotterRender: {fileID: 3206506852181161756}
+--- !u!114 &87022129037143106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3799233664355523238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 203ef0058c652714b8efdaad445409ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crystalTrans: {fileID: 5711857569368568660}
+  selfRotateSpeed: -10
+  xPosToRotation: -80
+  blinkParticle: {fileID: 3218291641164770548}
+  particleAngleScale: 0.25
+  particleFollowSpeed: 2
 --- !u!1 &6571401866144060607
 GameObject:
   m_ObjectHideFlags: 0
