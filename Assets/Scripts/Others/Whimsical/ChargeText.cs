@@ -10,18 +10,16 @@ public class ChargeText : MonoBehaviour
     [SerializeField] private float chargeDim = 0.5f;
     [SerializeField] private float blinkFreq;
     [SerializeField] private float fadeInTime = 0.35f;
-    [SerializeField] private float fadeOutTime;
     [SerializeField] private ParticleSystem p_fireburst;
+
 [Header("Fully Charge")]
     [SerializeField] private PerRendererColor perRendererColor;
     [SerializeField, ColorUsage(true, true)] private Color blinkColor;
     [SerializeField, ColorUsage(true, true)] private Color birghtColor;
-    public float phase;
 
     private float seed;
     private bool charged = false;
     private bool fullyCharged = false;
-    private bool isCharging = false;
 
     void Awake()
     {
@@ -76,27 +74,19 @@ public class ChargeText : MonoBehaviour
     }
     public void GetCharge(in float totalCharge)
     {
-        chargeValue = totalCharge-phase;
+        chargeValue = totalCharge;
         chargeValue = Mathf.Clamp01(chargeValue);
-        if(chargeValue>0)
-        {
-            if(!isCharging)
-            {
-                isCharging = true;
-                tmp.DOKill();
-                tmp.DOFade(1, fadeInTime);
-                p_fireburst.Play();
-            }
-        }
-        else
-        {
-            if(isCharging)
-            {
-                isCharging = false;
-                tmp.DOKill();
-                tmp.DOFade(0, fadeInTime);
-            }   
-        }
+    }
+    public void OnCharged()
+    {
+        tmp.DOKill();
+        tmp.DOFade(1, fadeInTime);
+        p_fireburst.Play();
+    }
+    public void OnNotCharged()
+    {
+        tmp.DOKill();
+        tmp.DOFade(0, fadeInTime);
     }
     public void PopoutText(float delay)
     {

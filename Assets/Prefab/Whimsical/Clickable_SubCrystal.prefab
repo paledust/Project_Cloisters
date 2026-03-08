@@ -200,6 +200,7 @@ GameObject:
   - component: {fileID: 8939477281556912884}
   - component: {fileID: 1630959926224391564}
   - component: {fileID: 87022129037143106}
+  - component: {fileID: 1709645491460985981}
   m_Layer: 3
   m_Name: Clickable_SubCrystal
   m_TagString: Untagged
@@ -265,13 +266,8 @@ MonoBehaviour:
   disableClick: 0
   depth: 16
   lerpSpeed: 10
-  crystalTrans: {fileID: 5711857569368568660}
-  selfRotateSpeed: -10
   blinkParticle: {fileID: 3218291641164770548}
   particleExpandForce: 10
-  particleAngleScale: 0.25
-  particleFollowSpeed: 2
-  xPosToRotation: -80
   spotterRender: {fileID: 3206506852181161756}
 --- !u!114 &87022129037143106
 MonoBehaviour:
@@ -291,6 +287,21 @@ MonoBehaviour:
   blinkParticle: {fileID: 3218291641164770548}
   particleAngleScale: 0.25
   particleFollowSpeed: 2
+--- !u!114 &1709645491460985981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3799233664355523238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1134387b21dd6ad4fb8617b294e5dccd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spotLayer:
+    serializedVersion: 2
+    m_Bits: 2
 --- !u!1 &6571401866144060607
 GameObject:
   m_ObjectHideFlags: 0

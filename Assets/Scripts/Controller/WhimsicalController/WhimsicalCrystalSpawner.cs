@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using UnityEngine;
 
@@ -22,8 +24,13 @@ public class WhimsicalCrystalSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        spawnTimer = 0;    
-        Service.Shuffle(ref spawnPoints);
+        spawnTimer = 0;
+        var firstPoint = spawnPoints[0];
+        var spawnPointList = new List<Transform>(spawnPoints);
+        spawnPointList.RemoveAt(0);
+        Service.Shuffle(ref spawnPointList);
+        spawnPointList.Insert(0, firstPoint);
+        spawnPoints = spawnPointList.ToArray(); 
     }
 
     // Update is called once per frame
