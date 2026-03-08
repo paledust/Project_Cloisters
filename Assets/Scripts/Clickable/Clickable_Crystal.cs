@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using DG.Tweening;
 using UnityEngine;
+using DG.Tweening;
 
 public class Clickable_Crystal : Basic_Clickable
 {

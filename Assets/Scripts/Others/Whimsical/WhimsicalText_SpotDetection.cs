@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class WhimsicalText_SpotDetection : MonoBehaviour
@@ -5,8 +6,10 @@ public class WhimsicalText_SpotDetection : MonoBehaviour
     [SerializeField] private ChargeText parentText;
     [SerializeField] private float chargeSpeed = 0.1f;
     [SerializeField] private float dropSpeed = 0.5f;
+
+    [Header("Additional text lighten")]
+    [SerializeField] private ChargeText[] additionalChargedTexts;
     private float chargeProgress = 0;
-    private bool charged = false;
     private WhimsicalTextSpoter whimsicalTextSpoter;
 
     public void OnDetected(WhimsicalTextSpoter whimsicalTextSpoter)
@@ -21,20 +24,25 @@ public class WhimsicalText_SpotDetection : MonoBehaviour
 
         if(chargeProgress >= 1)
         {
-            if(!charged)
-            {
-                this.charged = true;
-                this.enabled = false;
-                parentText.FullyCharged();
-                whimsicalTextSpoter.OnConsumed();
-                EventHandler.Call_OnChargeText(true);
+            this.enabled = false;
+            whimsicalTextSpoter.OnConsumed();
+            GetComponent<Collider>().enabled = false;
+            StartCoroutine(coroutineChargeNearbyText());
 
-                return;
-            }
+            return;
         }
     }
     public void OnNotDetected()
     {
         whimsicalTextSpoter = null;
+    }
+    IEnumerator coroutineChargeNearbyText()
+    {
+        foreach(var text in additionalChargedTexts)
+        {
+            yield return new WaitForSeconds(Random.Range(0.1f, 0.3f));
+            text.GetCharge(1);
+        }
+        Destroy(gameObject);
     }
 }

@@ -44,10 +44,12 @@ public class WhimsicalCrystalSpawner : MonoBehaviour
                 spawnTimer = 0;
                 var crystal = Instantiate(prefabCrystal, heroDiamond.transform.position, Quaternion.identity, crystalParent).GetComponent<Clickable_Crystal>();
                 crystal.enabled = false;
+                crystal.DisableHitbox();
                 Vector3 taretPos = spawnPoints[spawnCount].position + (Vector3)Random.insideUnitCircle * 0.5f;
-                crystal.transform.DOMove(taretPos, spanwDuration + Random.Range(-0.4f, 0.4f)).SetEase(easeCurve).OnComplete(() =>
+                crystal.transform.DOMove(taretPos, spanwDuration + Random.Range(0, 0.4f)).SetEase(easeCurve).OnComplete(() =>
                 {
                     crystal.enabled = true;
+                    crystal.EnableHitbox();
                 });
 
                 spawnCount++;

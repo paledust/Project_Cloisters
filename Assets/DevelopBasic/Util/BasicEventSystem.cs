@@ -33,8 +33,8 @@ public static class EventHandler
     public static void Call_OnDrumKnocked(float strength) => E_OnDrumKnocked?.Invoke(strength);
     public static event Action<CollidableCircle> E_OnNarrativeExplode;
     public static void Call_OnNarrativeExplode(CollidableCircle circle) => E_OnNarrativeExplode?.Invoke(circle);
-    public static event Action<bool> E_OnChargeText;
-    public static void Call_OnChargeText(bool isCharge) => E_OnChargeText?.Invoke(isCharge);
+    public static event Action E_OnChargeText;
+    public static void Call_OnChargeText() => E_OnChargeText?.Invoke();
     public static event Action<MirrorText> E_OnMirrorText;
     public static void Call_OnMirrorText(MirrorText c) => E_OnMirrorText?.Invoke(c);
     public static event Action E_OnMirrorDiamondFound;

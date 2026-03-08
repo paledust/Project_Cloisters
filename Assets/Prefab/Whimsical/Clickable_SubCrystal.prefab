@@ -96,8 +96,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1448c7f0ca9703344a8185b88610edb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  floatFreq: 0.5
-  floatHeight: 0.1
+  floatFreq: 0.35
+  floatHeight: 0.04
   floatOffset: 0.025
   floatPhase: 0
   ControlFactor: 1
@@ -201,6 +201,7 @@ GameObject:
   - component: {fileID: 1630959926224391564}
   - component: {fileID: 87022129037143106}
   - component: {fileID: 1709645491460985981}
+  - component: {fileID: 532598035818102936}
   m_Layer: 3
   m_Name: Clickable_SubCrystal
   m_TagString: Untagged
@@ -303,6 +304,22 @@ MonoBehaviour:
   spotLayer:
     serializedVersion: 2
     m_Bits: 2
+--- !u!111 &532598035818102936
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3799233664355523238}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 47dde58a8e129f94a9b7212ab2cac3b8, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 47dde58a8e129f94a9b7212ab2cac3b8, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &6571401866144060607
 GameObject:
   m_ObjectHideFlags: 0
@@ -1054,7 +1071,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 1
+      value: 0.5
       mode: 0
       spread: 0
       speed:
@@ -1282,8 +1299,8 @@ ParticleSystem:
       time: 0
       countCurve:
         serializedVersion: 2
-        minMaxState: 3
-        scalar: 2
+        minMaxState: 0
+        scalar: 1
         minScalar: 1
         maxCurve:
           serializedVersion: 2

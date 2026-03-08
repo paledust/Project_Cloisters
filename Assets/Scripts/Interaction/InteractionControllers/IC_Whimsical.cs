@@ -18,18 +18,19 @@ public class IC_Whimsical : IC_Basic
         base.OnInteractionEnd();
         EventHandler.E_OnChargeText -= CountText;
     }
-    void CountText(bool isCharged)
+    void CountText()
     {
-        count += isCharged?1:-1;
+        count ++;
         if(count >= textController.TotalTextCount)
         {
-            textController.CompleteCharge();
             EventHandler.Call_OnEndInteraction(this);
             StartCoroutine(coroutineEnd());
         }
     }
     IEnumerator coroutineEnd()
     {
+        yield return new WaitForSeconds(0.5f);
+        textController.CompleteCharge();
         crystal.FadeIdleAngularSpeed(150, 4f);
         yield return new WaitForSeconds(3f);
         textController.PopoutAllText();
