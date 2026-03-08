@@ -71,6 +71,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentText: {fileID: 3399247669732470381}
+  chargeSpeed: 0.75
+  dropSpeed: 2
 --- !u!1 &8554373234669498874
 GameObject:
   m_ObjectHideFlags: 0
@@ -268,7 +270,6 @@ MonoBehaviour:
   perRendererColor: {fileID: 509792960820809809}
   blinkColor: {r: 2, g: 2, b: 2, a: 1}
   birghtColor: {r: 2.9960785, g: 2.9960785, b: 2.9960785, a: 1}
-  phase: 0.35
 --- !u!114 &509792960820809809
 MonoBehaviour:
   m_ObjectHideFlags: 0

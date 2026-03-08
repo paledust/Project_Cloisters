@@ -1,5 +1,6 @@
 using System.Collections;
 using DG.Tweening;
+using EasingFunc;
 using TMPro;
 using UnityEngine;
 
@@ -19,7 +20,6 @@ public class ChargeText : MonoBehaviour
 
     private float seed;
     private bool charged = false;
-    private bool fullyCharged = false;
 
     void Awake()
     {
@@ -29,28 +29,6 @@ public class ChargeText : MonoBehaviour
     }
     void Update()
     {
-        if(fullyCharged)
-        {
-            this.enabled = false;
-            return;
-        }
-
-        if(chargeValue>=1)
-        {
-            if(!charged)
-            {
-                charged = true;
-                EventHandler.Call_OnChargeText(true);
-            }
-        }
-        else
-        {
-            if(charged)
-            {
-                charged = false;
-                EventHandler.Call_OnChargeText(false);
-            }
-        }
     //Blink Text
         if(chargeValue > 0)
         {
@@ -65,29 +43,28 @@ public class ChargeText : MonoBehaviour
             perRendererColor.hdrTint = Color.black;
         }
     }
-    public void StayCharged(float duration, AnimationCurve brightCurve)
+    public void BlinkText(float duration, AnimationCurve brightCurve)
     {
-        fullyCharged = true;
         tmp.DOKill();
         tmp.DOFade(1, duration);
         StartCoroutine(coroutineFadeText(duration, brightCurve));
     }
-    public void GetCharge(in float totalCharge)
+    public void GetCharge(in float newCharge)
     {
-        chargeValue = totalCharge;
+        chargeValue = newCharge;
         chargeValue = Mathf.Clamp01(chargeValue);
+        tmp.alpha = Mathf.Lerp(0.2f, 0.7f, chargeValue);
+        transform.localScale = Vector3.one * Mathf.Lerp(0.8f, 0.9f, Easing.QuadEaseOut(chargeValue));
     }
-    public void OnCharged()
+    public void FullyCharged()
     {
-        tmp.DOKill();
-        tmp.DOFade(1, fadeInTime);
+        this.charged = true;
+        this.enabled = false;
         p_fireburst.Play();
+        transform.DOScale(Vector3.one, 0.25f).SetEase(Ease.OutBack, 4);
+        EventHandler.Call_OnChargeText(true);
     }
-    public void OnNotCharged()
-    {
-        tmp.DOKill();
-        tmp.DOFade(0, fadeInTime);
-    }
+
     public void PopoutText(float delay)
     {
         tmp.DOFade(0, 0.15f).SetDelay(delay).OnStart(() =>

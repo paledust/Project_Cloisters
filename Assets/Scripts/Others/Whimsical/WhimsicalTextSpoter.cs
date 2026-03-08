@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WhimsicalTextSpoter : MonoBehaviour
@@ -7,7 +5,10 @@ public class WhimsicalTextSpoter : MonoBehaviour
     [SerializeField] private LayerMask spotLayer;
     private WhimsicalText_SpotDetection currentSpot;
 
-    // Update is called once per frame
+    void OnDisable()
+    {
+        ClearCurrentSpot();
+    }
     void Update()
     {
         var ray = new Ray(transform.position, -transform.forward);
@@ -24,7 +25,7 @@ public class WhimsicalTextSpoter : MonoBehaviour
                 else
                 {
                     currentSpot = spot;
-                    currentSpot.OnDetected();
+                    currentSpot.OnDetected(this);
                 }
             }
             else
@@ -44,5 +45,10 @@ public class WhimsicalTextSpoter : MonoBehaviour
             currentSpot.OnNotDetected();
             currentSpot = null;
         }
+    }
+    public void OnConsumed()
+    {
+        ClearCurrentSpot();
+        Destroy(gameObject);
     }
 }
