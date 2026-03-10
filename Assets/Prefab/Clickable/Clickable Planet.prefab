@@ -25,6 +25,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4167929499371950569}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.12, z: -3.72}
   m_LocalScale: {x: 5, y: 5, z: 5}
@@ -32,7 +33,6 @@ Transform:
   m_Children:
   - {fileID: 7673807578959812770}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!135 &4167929499371950567
 SphereCollider:
@@ -42,9 +42,17 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4167929499371950569}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 1
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5880977012390747775
@@ -59,19 +67,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 463e65a3907c06f4c807d1ee79397067, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sfx_clickSound: group_click
+  sfx_clickSound: 
   hitbox: {fileID: 4167929499371950567}
   isFrozen: 0
+  disableClick: 0
   pitchRotationTrans: {fileID: 7673807578959812770}
   yawRotationTrans: {fileID: 4167929500767803095}
   dragStrength: 50
   idleAngularSpeed: 40
   maxAngularSpeed: 1000
+  verticalAccumulate: 0
   maxVerticalAngle: 20
+  resizeFactor: 1.02
+  resizeTime: 0.4
+  backTime: 0.5
   controllingAngularLerp: 7
   releaseAngularLerp: 0.6
   useSpring: 0
   springFactor: 2
+  scaleRange: {x: 0.25, y: 0.3}
 --- !u!1 &4167929500767803096
 GameObject:
   m_ObjectHideFlags: 0
@@ -98,13 +112,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4167929500767803096}
+  serializedVersion: 2
   m_LocalRotation: {x: -0.70710677, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7673807578959812770}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!33 &4167929500767803092
 MeshFilter:
@@ -164,9 +178,17 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4167929500767803096}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 1
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8376150266802331728
@@ -192,6 +214,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8376150266802331728}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -199,5 +222,4 @@ Transform:
   m_Children:
   - {fileID: 4167929500767803095}
   m_Father: {fileID: 4167929499371950568}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

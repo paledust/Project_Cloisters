@@ -134,6 +134,8 @@ namespace SimpleAudioSystem{
             }
         }
         public AudioClip PlaySoundEffect(AudioSource targetSource, string clip_name, float volumeScale){
+            if(string.IsNullOrEmpty(clip_name)) 
+                return null;
             AudioClip clip = audioInfo.GetSFXClipByName(clip_name);
             if(clip!=null)
                 targetSource.PlayOneShot(clip, volumeScale);

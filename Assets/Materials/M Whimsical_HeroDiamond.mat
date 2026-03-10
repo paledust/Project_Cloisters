@@ -22,6 +22,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: M Whimsical_HeroDiamond
   m_Shader: {fileID: 4800000, guid: b51f4e1496a04204abb46450cc0927e4, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _RECEIVE_SHADOWS_OFF
   m_InvalidKeywords:
@@ -32,6 +34,7 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -167,7 +170,7 @@ Material:
     - _NormalSpace: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
-    - _PhaseOffset: 0
+    - _PhaseOffset: 1.56
     - _Power: 550
     - _QueueControl: 0
     - _QueueOffset: 0
@@ -175,7 +178,7 @@ Material:
     - _RampNoise: 0.5
     - _RampNoiseStrength: -1.06
     - _RampOffset: -2.18
-    - _RampScale: 4
+    - _RampScale: 2
     - _RampShimmer: 0.25
     - _RampSmooth: 0.5
     - _ReceiveShadows: 0
@@ -199,7 +202,7 @@ Material:
     - _SpecPower: 100
     - _SpecularHighlights: 1
     - _SpecularOffset: 3
-    - _SpecularOffsetScale: 4
+    - _SpecularOffsetScale: 3
     - _SrcBlend: 1
     - _StrapOffset: 0.38
     - _StrapSmooth: 0.02

@@ -5312,9 +5312,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e57199abd75dcd24daae47092d7821d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sfx_clickSound: group_click
+  sfx_clickSound: 
   hitbox: {fileID: 4337985783848230490}
   isFrozen: 0
+  disableClick: 0
   circleClass: 1
   maxfollowSpeed: 16
   lerpSpeed: 20

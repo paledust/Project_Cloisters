@@ -66,7 +66,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 463e65a3907c06f4c807d1ee79397067, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sfx_clickSound: group_click
+  sfx_clickSound: 
   hitbox: {fileID: 1520769983141112898}
   isFrozen: 0
   disableClick: 0
