@@ -17,14 +17,13 @@ public class ConnectTrigger : MonoBehaviour
     [SerializeField] private Basic_Clickable selfClickable;
     [SerializeField] private SpriteRenderer alignMask;
     private Collider m_collider;
-    private ConnectTrigger catchingTrigger;
-    private List<ConnectTrigger> pendingTriggers;
+    private ConnectTrigger pendingTrigger;
 
     public bool m_isLocked => connectTriggerState == ConnectTriggerState.Locking;
+    public bool m_isSunk => isSunk;
     public Vector3 normal => transform.up.normalized;
     public ConnectBody m_connectBody{get; private set;}
 
-    private const float MIN_CONNECT_DOT = 0.925f;
     private const float MAX_BREAK_DOT = 0.85f;
     private const float MAX_BREAK_DIST = 1.2f;
 
@@ -36,7 +35,6 @@ public class ConnectTrigger : MonoBehaviour
     {
         m_collider = GetComponent<Collider>();
         m_connectBody = selfClickable.GetComponent<ConnectBody>();
-        pendingTriggers = new List<ConnectTrigger>();
     }
     public ConnectTrigger UpdateTriggerDetection(out float idealDot)
     {
@@ -44,76 +42,38 @@ public class ConnectTrigger : MonoBehaviour
         switch(connectTriggerState)
         {
             case ConnectTriggerState.Pending:
-                if(pendingTriggers.Count>0)
+                if(pendingTrigger!=null)
                 {
                     ChangeState(ConnectTriggerState.Detecting);
                     return null;
                 }
                 return null;
             case ConnectTriggerState.Detecting:
-                //Check the best target
-                if(pendingTriggers.Count==0)
+                if(pendingTrigger == null)
                 {
                     ChangeState(ConnectTriggerState.Pending);
                     return null;
                 }
-                int bestIndex = -1;
-                for(int i=pendingTriggers.Count-1; i>=0; i--)
-                {
-                    float dot; 
-                    if(spherical||pendingTriggers[i].spherical)
-                        dot = 1;
-                    else
-                        dot = Vector2.Dot(normal, -pendingTriggers[i].normal);
-                    if(dot>=MIN_CONNECT_DOT && dot>idealDot)
-                    {
-                        idealDot = dot;
-                        bestIndex = pendingTriggers.Count - 1;
-                    }
-                }
-                if(bestIndex>=0)
-                {
-                    return pendingTriggers[bestIndex];
-                }
-                return null;
+
+                idealDot = Vector2.Dot(pendingTrigger.normal, -normal);
+                return pendingTrigger;
             case ConnectTriggerState.Catching:
-                if(!pendingTriggers.Contains(catchingTrigger)) return null;
+                if(pendingTrigger == null)
+                {
+                    ChangeState(ConnectTriggerState.Pending);
+                    return null;
+                }
+
                 Vector2 balanceDir;
-                if(spherical)
-                {
-                    if(catchingTrigger.spherical)
-                        balanceDir = (transform.position - catchingTrigger.transform.position).normalized;
-                    else
-                        balanceDir = catchingTrigger.normal;
-                }
-                else
-                {
-                    if(catchingTrigger.spherical)
-                        balanceDir = -normal;
-                    else
-                        balanceDir = (catchingTrigger.normal - normal).normalized;
-                }
-
-                if(spherical || catchingTrigger.spherical) 
-                    idealDot = 1;
-                else
-                    idealDot = Vector2.Dot(normal, -catchingTrigger.normal);
-
+                balanceDir = (pendingTrigger.normal - normal).normalized;
+                idealDot = Vector2.Dot(normal, -pendingTrigger.normal);
                 float dist; 
-
-                Vector2 diff = transform.position-catchingTrigger.transform.position;
+                Vector2 diff = transform.position-pendingTrigger.transform.position;
                 dist = Vector2.Dot(balanceDir, diff);
-                if(spherical)
-                {
-                    dist -= m_connectBody.m_sphereRadius;
-                }
-                if(catchingTrigger.spherical)
-                {
-                    dist -= catchingTrigger.m_connectBody.m_sphereRadius;
-                }
+
                 if(idealDot>=MAX_BREAK_DOT && Mathf.Abs(dist)<=MAX_BREAK_DIST)
                 {
-                    return catchingTrigger;
+                    return pendingTrigger;
                 }
                 return null;
             default:
@@ -129,10 +89,8 @@ public class ConnectTrigger : MonoBehaviour
         var otherTrigger = other.GetComponent<ConnectTrigger>();
         if(otherTrigger!=null && otherTrigger.m_connectBody!=m_connectBody)
         {
-            if(!pendingTriggers.Contains(otherTrigger))
-            {
-                pendingTriggers.Add(otherTrigger);
-            }
+            if(this.isSunk != otherTrigger.isSunk)
+                pendingTrigger = otherTrigger;
         }
     }
     void OnTriggerExit(Collider other)
@@ -140,9 +98,10 @@ public class ConnectTrigger : MonoBehaviour
         var otherTrigger = other.GetComponent<ConnectTrigger>();
         if(otherTrigger != null)
         {
-            if(pendingTriggers.Contains(otherTrigger))
+            if(pendingTrigger == otherTrigger)
             {
-                pendingTriggers.Remove(otherTrigger);
+                pendingTrigger.FadeMask(0f);
+                pendingTrigger = null;
             }
         }
     }
@@ -151,8 +110,7 @@ public class ConnectTrigger : MonoBehaviour
         if(!m_isLocked)
         {
             m_collider.enabled = false;
-            catchingTrigger = null;
-            pendingTriggers.Clear();
+            pendingTrigger = null;
             m_collider.enabled = true;
         }
     }
@@ -169,7 +127,6 @@ public class ConnectTrigger : MonoBehaviour
     }
     public void OnConnectionCatch(ConnectTrigger alignTrigger)
     {
-        catchingTrigger = alignTrigger;
         alignTrigger.FadeMask(1f);
         FadeMask(1f);
         ChangeState(ConnectTriggerState.Catching);
@@ -177,11 +134,9 @@ public class ConnectTrigger : MonoBehaviour
     public void OnLostConnectionCatching()
     {
         FadeMask(0f);
-        catchingTrigger.FadeMask(0f);
-        catchingTrigger = null;
         ChangeState(ConnectTriggerState.Pending);
     }
-    public void FadeMask(float alpha)
+    void FadeMask(float alpha)
     {
         alignMask.DOKill();
         alignMask.DOFade(alpha, 0.2f);
@@ -204,6 +159,6 @@ public class ConnectTrigger : MonoBehaviour
                 break;
         }
         
-        Gizmos.DrawSphere(transform.position, 0.05f);
+        Gizmos.DrawSphere(transform.position, 0.1f);
     }
 }

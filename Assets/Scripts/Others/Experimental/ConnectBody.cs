@@ -9,13 +9,13 @@ public class ConnectBody : MonoBehaviour
     [Header("Vertices")]
     [SerializeField] private Transform[] points;
     private ConnectTrigger[] connectTriggers;
-    private ConnectTrigger pendingTrigger; //the ideal connected trigger
-    private ConnectTrigger occupiedTrigger; //the trigger attached that connected to ideal trigger
+    [SerializeField] private ConnectTrigger idealPendingTrigger; //the ideal connected trigger
+    [SerializeField] private ConnectTrigger idealSelfTrigger; //the trigger attached that connected to ideal trigger
     public HashSet<ConnectBody> connectBodies = new HashSet<ConnectBody>();
     private Clickable_Moveable clickable_Moveable;
 
     public bool m_isSpherical=>isSpherical;
-    private bool hasIdealConnection => occupiedTrigger != null;
+    private bool hasIdealConnection => idealSelfTrigger != null;
     public float m_sphereRadius=>isSpherical?sphereRadius:0;
     private Quaternion offsetRotToOther;
 
@@ -45,26 +45,33 @@ public class ConnectBody : MonoBehaviour
             {
                 float bestDot;
                 bestDot = 0;
+                ConnectTrigger bestTrigger = null, bestOtherTrigger = null;
                 foreach (ConnectTrigger connectTrigger in connectTriggers)
                 {
                     ConnectTrigger otherTrigger = connectTrigger.UpdateTriggerDetection(out float dot);
+
                     if (dot > bestDot)
                     {
                         bestDot = dot;
-                        SwapConnection(connectTrigger, otherTrigger);
+                        bestTrigger = connectTrigger;
+                        bestOtherTrigger = otherTrigger;
                     }
                 }
                 if (bestDot == 0)
                 {
                     SwapConnection(null, null);
                 }
+                else
+                {
+                    SwapConnection(bestTrigger, bestOtherTrigger);
+                }
             }
             else
             {
-                ConnectTrigger otherTrigger = occupiedTrigger.UpdateTriggerDetection(out float dot);
+                ConnectTrigger otherTrigger = idealSelfTrigger.UpdateTriggerDetection(out float dot);
                 if (otherTrigger == null)
                 {
-                    occupiedTrigger.OnLostConnectionCatching();
+                    idealSelfTrigger.OnLostConnectionCatching();
                     SwapConnection(null, null);
                 }
             }
@@ -77,27 +84,27 @@ public class ConnectBody : MonoBehaviour
             if(!m_isSpherical)
             {
                 Quaternion targetRot;
-                if(pendingTrigger.m_connectBody.m_isSpherical)
+                if(idealPendingTrigger.m_connectBody.m_isSpherical)
                 {
-                    float angle = Vector2.SignedAngle(occupiedTrigger.normal, pendingTrigger.transform.position - transform.position);
+                    float angle = Vector2.SignedAngle(idealSelfTrigger.normal, idealPendingTrigger.transform.position - transform.position);
                     targetRot = Quaternion.Euler(0,0,angle) * m_rigid.rotation;
                 }
                 else
                 {
-                    targetRot = offsetRotToOther * pendingTrigger.m_connectBody.m_rigid.rotation;
+                    targetRot = offsetRotToOther * idealPendingTrigger.m_connectBody.m_rigid.rotation;
                 }
-                Quaternion idealRot = Quaternion.Lerp(m_rigid.rotation, targetRot, Time.fixedDeltaTime * (pendingTrigger.m_connectBody.m_isSpherical?10:5));
+                Quaternion idealRot = Quaternion.Lerp(m_rigid.rotation, targetRot, Time.fixedDeltaTime * (idealPendingTrigger.m_connectBody.m_isSpherical?10:5));
                 m_rigid.MoveRotation(idealRot);
             }
         }
     }
     void OnReleaseBody()
     {
-        if(pendingTrigger!=null && occupiedTrigger!=null)
+        if(idealPendingTrigger!=null && idealSelfTrigger!=null)
         {
-            if(!IsConnectedToBody(pendingTrigger.m_connectBody))
+            if(!IsConnectedToBody(idealPendingTrigger.m_connectBody))
             {
-                EventHandler.Call_OnShapeConnect(occupiedTrigger, pendingTrigger);
+                EventHandler.Call_OnShapeConnect(idealSelfTrigger, idealPendingTrigger);
             }
             SwapConnection(null, null);
         }
@@ -111,26 +118,26 @@ public class ConnectBody : MonoBehaviour
     }
     void SwapConnection(ConnectTrigger selfTrigger, ConnectTrigger otherTrigger)
     {
-        pendingTrigger = otherTrigger;
-        occupiedTrigger = selfTrigger;
+        idealPendingTrigger = otherTrigger;
+        idealSelfTrigger = selfTrigger;
     //if Catch any good trigger, align the control
         if(hasIdealConnection)
         {
-            occupiedTrigger.OnConnectionCatch(pendingTrigger);
+            idealSelfTrigger.OnConnectionCatch(idealPendingTrigger);
         //Find the align rotation
             if(!m_isSpherical)
             {
                 float rotation;
                 if(!otherTrigger.m_connectBody.m_isSpherical) 
                 {
-                    rotation = Vector2.SignedAngle(occupiedTrigger.normal, -pendingTrigger.normal);
+                    rotation = Vector2.SignedAngle(idealSelfTrigger.normal, -idealPendingTrigger.normal);
                     Quaternion idealRot = Quaternion.Euler(0,0,rotation) * m_rigid.rotation;
-                    Quaternion otherBodyRot = pendingTrigger.m_connectBody.m_rigid.rotation;
+                    Quaternion otherBodyRot = idealPendingTrigger.m_connectBody.m_rigid.rotation;
                     offsetRotToOther = idealRot * Quaternion.Inverse(otherBodyRot);
                 }
                 else
                 {
-                    rotation = Vector2.SignedAngle(occupiedTrigger.normal, otherTrigger.transform.position - transform.position);
+                    rotation = Vector2.SignedAngle(idealSelfTrigger.normal, otherTrigger.transform.position - transform.position);
                     Quaternion idealRot = Quaternion.Euler(0,0,rotation) * m_rigid.rotation;
                     offsetRotToOther = idealRot;
                 }

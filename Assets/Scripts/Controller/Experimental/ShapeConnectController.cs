@@ -45,7 +45,7 @@ public class ShapeConnectController : MonoBehaviour
         else
             face = (main.transform.position - other.transform.position).normalized;
 
-        float angle = Vector2.SignedAngle(main.transform.up, face);
+        float angle = Vector2.SignedAngle(main.normal, face);
     
         Vector3 mid = main.transform.position + other.transform.position;
         if(!mainBody.m_isSpherical && !otherBody.m_isSpherical)
@@ -60,7 +60,7 @@ public class ShapeConnectController : MonoBehaviour
         }
 
         Vector3 offset = mid-(main.transform.position-face*mainBody.m_sphereRadius);
-        offset = face*Vector3.Dot(offset, face);
+        // offset = face*Vector3.Dot(offset, face);
 
     //Connect ConnectBody To Each Body
         mainBody.BuildConnection(otherBody);
@@ -69,15 +69,21 @@ public class ShapeConnectController : MonoBehaviour
         main.m_connectBody.m_rigid.detectCollisions = false;
         other.m_connectBody.m_rigid.detectCollisions = false;
         
+        Vector3 targetPos = mainBody.transform.position + offset;
+        Vector3 otherTargetPos = otherBody.transform.position - offset;
+        
         var seq = DOTween.Sequence();
-        seq.Append(mainBody.transform.DOMove(mainBody.transform.position + offset, connectDuration*0.5f).SetEase(Ease.InQuad))
-        .Join(otherBody.transform.DOMove(otherBody.transform.position - offset, connectDuration*0.5f).SetEase(Ease.InQuad));
+        seq.Append(mainBody.transform.DOMove(mainBody.transform.position + offset - face*0.4f, connectDuration*0.25f).SetEase(Ease.OutCirc))
+        .Join(otherBody.transform.DOMove(otherBody.transform.position - offset + face*0.4f, connectDuration*0.25f).SetEase(Ease.OutCirc));
 
         if(!mainBody.m_isSpherical && !otherBody.m_isSpherical)
         {
-            seq.Join(mainBody.transform.DORotateQuaternion(mainBody.transform.rotation *  Quaternion.Euler(0,0,angle), connectDuration*0.5f).SetEase(Ease.InQuad))
-            .Join(otherBody.transform.DORotateQuaternion(otherBody.transform.rotation * Quaternion.Euler(0,0,-angle), connectDuration*0.5f).SetEase(Ease.InQuad));
+            seq.Join(mainBody.transform.DORotateQuaternion(mainBody.transform.rotation *  Quaternion.Euler(0,0,angle), connectDuration*0.5f).SetEase(Ease.OutCirc))
+            .Join(otherBody.transform.DORotateQuaternion(otherBody.transform.rotation * Quaternion.Euler(0,0,-angle), connectDuration*0.5f).SetEase(Ease.OutCirc));
         }
+
+        seq.Append(mainBody.transform.DOMove(targetPos, connectDuration*0.25f).SetEase(Ease.InCirc))
+        .Join(otherBody.transform.DOMove(otherTargetPos, connectDuration*0.25f).SetEase(Ease.InCirc));
 
         seq.OnComplete(()=>
         {
@@ -86,8 +92,8 @@ public class ShapeConnectController : MonoBehaviour
             p_collision.Play(true);
         //Seporate and create Joint
             var newSeq = DOTween.Sequence();
-            newSeq.Append(mainBody.transform.DOMove(mainBody.transform.position - offset.normalized * intersection, connectDuration*0.5f)).SetEase(Ease.OutQuad)
-            .Join(otherBody.transform.DOMove(otherBody.transform.position + offset.normalized * intersection, connectDuration*0.5f)).SetEase(Ease.OutQuad)
+            newSeq.Append(mainBody.transform.DOMove(mainBody.transform.position - face.normalized * intersection, connectDuration*0.5f)).SetEase(Ease.OutQuad)
+            .Join(otherBody.transform.DOMove(otherBody.transform.position + face.normalized * intersection, connectDuration*0.5f)).SetEase(Ease.OutQuad)
             .Join(mainBody.transform.DORotateQuaternion(mainBody.transform.rotation, connectDuration*0.5f).SetEase(Ease.OutQuad))
             .Join(otherBody.transform.DORotateQuaternion(otherBody.transform.rotation, connectDuration*0.5f).SetEase(Ease.OutQuad));
 
@@ -109,7 +115,7 @@ public class ShapeConnectController : MonoBehaviour
                 {
                     breakerRot = Quaternion.Euler(0,0,-Vector2.SignedAngle(main.transform.position - other.transform.position, Vector2.up));
                 }
-                    
+                
                 var jointBreaker = Instantiate(connectionBreakerPrefab, mid, breakerRot).GetComponent<Clickable_ConnectionBreaker>();
                 jointBreaker.transform.position = mid;
                 jointBreaker.transform.rotation = breakerRot;
