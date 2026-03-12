@@ -12,6 +12,7 @@ public class ConnectTrigger : MonoBehaviour
         Locking, //Connected to target
     }
     [SerializeField] private bool spherical = false;
+    [SerializeField] private bool isSunk = false;
     [SerializeField] private ConnectTriggerState connectTriggerState = ConnectTriggerState.Pending;
     [SerializeField] private Basic_Clickable selfClickable;
     [SerializeField] private SpriteRenderer alignMask;
@@ -187,11 +188,10 @@ public class ConnectTrigger : MonoBehaviour
     }
     void OnDrawGizmos()
     {
-        Gizmos.matrix = transform.localToWorldMatrix;
         switch(connectTriggerState)
         {
             case ConnectTriggerState.Pending:
-                Gizmos.color = Color.green;
+                Gizmos.color = isSunk?Color.black:Color.white;
                 break;
             case ConnectTriggerState.Detecting:
                 Gizmos.color = Color.yellow;
@@ -204,6 +204,6 @@ public class ConnectTrigger : MonoBehaviour
                 break;
         }
         
-        Gizmos.DrawSphere(Vector3.zero, 0.2f);
+        Gizmos.DrawSphere(transform.position, 0.05f);
     }
 }
