@@ -85,11 +85,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: connector_3
       objectReference: {fileID: 0}
-    - target: {fileID: 6050757265872475825, guid: abc5721381781344792a15e38b5d268d,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.15
-      objectReference: {fileID: 0}
     - target: {fileID: 8872291506766342016, guid: abc5721381781344792a15e38b5d268d,
         type: 3}
       propertyPath: m_RootOrder
@@ -173,11 +168,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: connector_0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6050757265872475825, guid: abc5721381781344792a15e38b5d268d,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.12
       objectReference: {fileID: 0}
     - target: {fileID: 8872291506766342016, guid: abc5721381781344792a15e38b5d268d,
         type: 3}
@@ -268,11 +258,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: connector_2
       objectReference: {fileID: 0}
-    - target: {fileID: 6050757265872475825, guid: abc5721381781344792a15e38b5d268d,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.15
-      objectReference: {fileID: 0}
     - target: {fileID: 8872291506766342016, guid: abc5721381781344792a15e38b5d268d,
         type: 3}
       propertyPath: m_RootOrder
@@ -356,11 +341,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: connector_1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6050757265872475825, guid: abc5721381781344792a15e38b5d268d,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 8872291506766342016, guid: abc5721381781344792a15e38b5d268d,
         type: 3}
@@ -1628,10 +1608,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1033347627306513477, guid: e843106840614744cae4702badee9286,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4428266363654268813}
-    - targetCorrespondingSourceObject: {fileID: 1033347627306513477, guid: e843106840614744cae4702badee9286,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 4107306377214912446}
     - targetCorrespondingSourceObject: {fileID: 1033347627306513477, guid: e843106840614744cae4702badee9286,
         type: 3}
@@ -1641,6 +1617,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 7053510990832670060}
+    - targetCorrespondingSourceObject: {fileID: 1033347627306513477, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4428266363654268813}
     - targetCorrespondingSourceObject: {fileID: 3376883102595898164, guid: e843106840614744cae4702badee9286,
         type: 3}
       insertIndex: -1
@@ -1716,11 +1696,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: connector_4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6050757265872475825, guid: abc5721381781344792a15e38b5d268d,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.12
       objectReference: {fileID: 0}
     - target: {fileID: 8872291506766342016, guid: abc5721381781344792a15e38b5d268d,
         type: 3}

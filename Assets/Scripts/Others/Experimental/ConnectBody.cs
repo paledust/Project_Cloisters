@@ -6,7 +6,7 @@ public class ConnectBody : MonoBehaviour
     [SerializeField] private float sphereRadius;
     [SerializeField] private bool isSpherical = false;
     [SerializeField] private ShapeColorChanger shapeColorChanger;
-[Header("Vertices")]
+    [Header("Vertices")]
     [SerializeField] private Transform[] points;
     private ConnectTrigger[] connectTriggers;
     private ConnectTrigger pendingTrigger; //the ideal connected trigger
