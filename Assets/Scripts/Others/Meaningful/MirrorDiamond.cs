@@ -11,6 +11,7 @@ public class MirrorDiamond : MonoBehaviour
     private float focusTimer = 0f;
     private Animator animator_diamond;
     private Collider hitbox;
+    private MeshRenderer meshRenderer;
 
     private const string ACTIVATE_TRIGGER = "activate";
     private const string FOUND_TRIGGER = "found";
@@ -18,12 +19,14 @@ public class MirrorDiamond : MonoBehaviour
 
     void Awake()
     {
+        meshRenderer = GetComponent<MeshRenderer>();
         animator_diamond = GetComponent<Animator>();
         hitbox = GetComponent<Collider>();
         hitbox.enabled = false;
     }
     public void ActivateDiamond()
     {
+        meshRenderer.enabled = true;
         animator_diamond.SetTrigger(ACTIVATE_TRIGGER);
         hitbox.enabled = true;
     }

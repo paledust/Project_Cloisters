@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  version: 5
+  version: 7
 --- !u!21 &2100000
 Material:
   serializedVersion: 8
@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: M Meaningful_HeroDiamond
-  m_Shader: {fileID: 4800000, guid: b51f4e1496a04204abb46450cc0927e4, type: 3}
+  m_Shader: {fileID: 4800000, guid: e5ceb5d0c7f6cda4e8cac86920722533, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
@@ -75,8 +75,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 184854303c9362c43b86499202498085, type: 3}
-        m_Scale: {x: 1, y: 0.1}
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
@@ -122,6 +122,7 @@ Material:
     m_Floats:
     - _AlphaClip: 0
     - _AlphaCutoff: 0.5
+    - _AlphaToMask: 0
     - _AnisopicLevel: 0
     - _AnisopicSmooth: 0
     - _AnisotropyLevel: 0.445
@@ -132,6 +133,7 @@ Material:
     - _BTPower: 100
     - _BiTangent: 0.32
     - _Blend: 0
+    - _BlendOp: 0
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
@@ -139,7 +141,8 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _DstBlend: 0
+    - _DstBlend: 10
+    - _DstBlendAlpha: 10
     - _EdgeNoise: 0.5
     - _EnvironmentReflections: 1
     - _FadeLength: 1
@@ -187,6 +190,7 @@ Material:
     - _ReflectionStrength: 0
     - _ReflectionTransition: 0
     - _ReflectionTransitionSmooth: 0.2
+    - _SampleGI: 0
     - _ShadeMin: 0
     - _ShadeSmooth: 1
     - _Shear: 0
@@ -203,10 +207,11 @@ Material:
     - _SpecularHighlights: 1
     - _SpecularOffset: 3
     - _SpecularOffsetScale: 4
-    - _SrcBlend: 1
+    - _SrcBlend: 5
+    - _SrcBlendAlpha: 1
     - _StrapOffset: 0.38
     - _StrapSmooth: 0.02
-    - _Surface: 0
+    - _Surface: 1
     - _TPower: 100
     - _Tangent: -0.08
     - _Tile: 500
@@ -214,14 +219,14 @@ Material:
     - _VNoiseOnFresnel: 0.42
     - _VNoiseOnRamp: 0.38
     - _WorkflowMode: 1
-    - _ZWrite: 1
+    - _ZWrite: 0
     - _phase: 0
     - _shimmerStrength: 0.5
     m_Colors:
     - _AnistrophyStrength: {r: 0, g: 0.35, b: 2.5, a: 0}
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _BaseColor: {r: 0.4584905, g: 0.78204775, b: 1, a: 1}
     - _BrightColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 0.42040703, g: 0.6847035, b: 0.949, a: 1}
+    - _Color: {r: 0.17715193, g: 0.42488796, b: 0.6754716, a: 1}
     - _Color1: {r: 1, g: 0.48490554, b: 0.65060025, a: 1}
     - _Color2: {r: 1, g: 0.23921567, b: 0.47058836, a: 1}
     - _Color3: {r: 1, g: 0.67358494, b: 0.7728555, a: 1}
@@ -231,7 +236,7 @@ Material:
     - _ColorEdge2: {r: 1, g: 0.92156863, b: 0, a: 1}
     - _DarkColor: {r: 1, g: 1, b: 1, a: 1}
     - _Direction: {r: 0.4, g: 0.7, b: -0.6, a: 0}
-    - _EdgeColor: {r: 0.6773585, g: 1, b: 0.8974206, a: 1}
+    - _EdgeColor: {r: 0.7075472, g: 1, b: 0.9072711, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FresenelDirOffset: {r: 0, g: 0.2, b: 0, a: 0}
     - _FresnelColor: {r: 2.072162, g: 0.7297614, b: 0.1531598, a: 1}
