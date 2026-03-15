@@ -21,7 +21,6 @@ public class ShapeColorChanger : MonoBehaviour
     }
     public void ChangeToActivateColor()
     {
-        spriteRenderer.transform.DOPunchScale(0.05f * Vector3.one, 0.2f);
         DOTween.To(()=>perRendererExpShape.emissive, x => perRendererExpShape.emissive = x, 3, 0.2f);
     }
     public void ChangeToInActivateColor()

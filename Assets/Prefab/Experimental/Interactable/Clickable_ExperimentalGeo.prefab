@@ -420,6 +420,8 @@ MonoBehaviour:
   isSpherical: 0
   shapeColorChanger: {fileID: 3983345643960549431}
   points: []
+  idealPendingTrigger: {fileID: 0}
+  idealSelfTrigger: {fileID: 0}
 --- !u!114 &3983345643960549431
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -35,6 +35,9 @@ public class ConnectTrigger : MonoBehaviour
     {
         m_collider = GetComponent<Collider>();
         m_connectBody = selfClickable.GetComponent<ConnectBody>();
+        Color defaultColor = alignMask.color;
+        defaultColor.a = 0;
+        alignMask.color = defaultColor;
     }
     public ConnectTrigger UpdateTriggerDetection(out float idealDot)
     {
@@ -117,12 +120,12 @@ public class ConnectTrigger : MonoBehaviour
     public void OnConnectionBuild()
     {
         ChangeState(ConnectTriggerState.Locking);
+        FadeMask(0, 0.5f);
         m_collider.enabled = false;
     }
     public void OnConnectionBreak()
     {
         m_collider.enabled = true;
-        FadeMask(0f);
         ChangeState(ConnectTriggerState.Pending);
     }
     public void OnConnectionCatch(ConnectTrigger alignTrigger)
@@ -136,10 +139,10 @@ public class ConnectTrigger : MonoBehaviour
         FadeMask(0f);
         ChangeState(ConnectTriggerState.Pending);
     }
-    void FadeMask(float alpha)
+    void FadeMask(float alpha, float delay = 0f)
     {
         alignMask.DOKill();
-        alignMask.DOFade(alpha, 0.2f);
+        alignMask.DOFade(alpha, 0.2f).SetDelay(delay);
     }
     void OnDrawGizmos()
     {

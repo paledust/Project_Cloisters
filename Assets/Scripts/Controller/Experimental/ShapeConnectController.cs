@@ -60,14 +60,13 @@ public class ShapeConnectController : MonoBehaviour
         }
 
         Vector3 offset = mid-(main.transform.position-face*mainBody.m_sphereRadius);
-        // offset = face*Vector3.Dot(offset, face);
 
     //Connect ConnectBody To Each Body
         mainBody.BuildConnection(otherBody);
         otherBody.BuildConnection(main.m_connectBody);
 
-        main.m_connectBody.m_rigid.detectCollisions = false;
-        other.m_connectBody.m_rigid.detectCollisions = false;
+        main.m_connectBody.m_rigid.isKinematic = true;
+        other.m_connectBody.m_rigid.isKinematic = true;
         
         Vector3 targetPos = mainBody.transform.position + offset;
         Vector3 otherTargetPos = otherBody.transform.position - offset;
@@ -98,6 +97,8 @@ public class ShapeConnectController : MonoBehaviour
             .Join(otherBody.transform.DORotateQuaternion(otherBody.transform.rotation, connectDuration*0.5f).SetEase(Ease.OutQuad));
 
             newSeq.OnComplete(()=>{
+                main.m_connectBody.m_rigid.isKinematic = false;
+                other.m_connectBody.m_rigid.isKinematic = false;
             //Create Joint
                 var joint =mainBody.m_rigid.gameObject.AddComponent<FixedJoint>();
                 joint.connectedBody = otherBody.m_rigid;

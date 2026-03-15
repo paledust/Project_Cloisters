@@ -118,7 +118,7 @@ Material:
     - _EdgeBlend: 0
     - _EdgeSoftness: 1
     - _EdgeValue: 0
-    - _EmissionScale: 1
+    - _EmissionScale: 25
     - _EnvironmentReflections: 1
     - _FillColorMode: 0
     - _FlipX: 0
