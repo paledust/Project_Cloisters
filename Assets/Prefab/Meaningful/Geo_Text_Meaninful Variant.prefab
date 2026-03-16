@@ -185,7 +185,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 3
+  m_Radius: 2
   m_Center: {x: 0.000050122264, y: -0.0881266, z: -0.000000003939566}
 --- !u!114 &540870252
 MonoBehaviour:
@@ -202,8 +202,8 @@ MonoBehaviour:
   foundColor: {r: 2, g: 2, b: 2, a: 1}
   textChar: 77
   fontColor: {fileID: 5025343742690784402}
-  focusRadius: 0.075
-  searchRadius: 0.5
+  focusRadius: 0.05
+  searchRadius: 0.2
   hitbox: {fileID: 540870251}
   mirrorCenter: {fileID: 0}
   p_spot: {fileID: 7886261199359404156}
