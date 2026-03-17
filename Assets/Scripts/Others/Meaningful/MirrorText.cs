@@ -37,7 +37,7 @@ public class MirrorText : MonoBehaviour
         fontColor.Tint = mirrorText.fontColor.Tint;
         DOTween.To(()=>fontColor.Tint, x=>fontColor.Tint = x, Color.white, 2f);
     }
-    public bool TryFocusMirrorText(Vector3 hitPoint)
+    public bool TryFocusMirrorText(Vector3 hitPoint, float timeScale = 1)
     {
         Vector3 diff = hitPoint - transform.position;
         Vector3 mirrorDir = (mirrorCenter.position - transform.position).normalized;
@@ -51,11 +51,11 @@ public class MirrorText : MonoBehaviour
             {
                 isFocus = true;
                 transform.DOKill();
-                transform.DOScale(0.18f, 1f)
+                transform.DOScale(0.18f, 1f * timeScale)
                 .SetEase(Ease.InQuad);
 
                 DOTween.Kill(this);
-                DOTween.To(()=>fontColor.Tint, x=>fontColor.Tint = x, foundColor, 1f)
+                DOTween.To(()=>fontColor.Tint, x=>fontColor.Tint = x, foundColor, 1f*timeScale)
                 .SetEase(Ease.InQuad)
                 .SetId(this)
                 .OnComplete(()=>{
@@ -78,10 +78,10 @@ public class MirrorText : MonoBehaviour
                     fontColor.gameObject.layer = LayerMask.NameToLayer("NoReflex");
 
                     transform.DOKill();
-                    transform.DOScale(0.27f*0.25f, 0.5f)
-                    .SetEase(Ease.OutBack, 2.5f).OnComplete(()=>{
+                    transform.DOScale(0.27f*0.25f, 0.5f * timeScale)
+                    .SetEase(Ease.OutBack, 2.5f * timeScale).OnComplete(()=>{
                         EventHandler.Call_OnMirrorText(this);
-                        DOTween.To(()=>fontColor.Tint, x=>fontColor.Tint = x, Color.white, 2f);
+                        DOTween.To(()=>fontColor.Tint, x=>fontColor.Tint = x, Color.white, 2f * timeScale);
                     });
                 });
             }

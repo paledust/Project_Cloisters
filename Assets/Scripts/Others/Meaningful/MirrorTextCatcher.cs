@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MirrorTextCatcher : MonoBehaviour
@@ -11,12 +9,18 @@ public class MirrorTextCatcher : MonoBehaviour
     [SerializeField] private MirrorTextShowController mirrorTextShowConstroller;
 
     private MirrorText currentText;
-    private Ray ray;
     private Camera mainCam;
+    private Ray ray;
+    [SerializeField, ShowOnly] private float mirrorTimeScale = 1f;
 
     void Start()
     {
         mainCam = Camera.main;
+        EventHandler.E_OnMirrorText += OnTextFound;
+    }
+    void OnDestroy()
+    {
+        EventHandler.E_OnMirrorText -= OnTextFound;
     }
     void Update()
     {
@@ -47,24 +51,31 @@ public class MirrorTextCatcher : MonoBehaviour
         {
             TryClearCurrentText();
         }
+
+        if(mirrorTimeScale < 1f)
+        {
+            mirrorTimeScale += Time.deltaTime*0.25f;
+            if(mirrorTimeScale > 1f)
+                mirrorTimeScale = 1f;
+        }
         
         if(currentText!=null)
         {
             Vector3 dir = GetReflectDir(rootTrans.position-currentText.transform.position);
             Vector3 up  = GetReflectDir(currentText.transform.up);
 
-            if(currentText.TryFocusMirrorText(hit.point))
-            {
+            if(currentText.TryFocusMirrorText(hit.point, mirrorTimeScale))
                 mirrorTextShowConstroller.FocusText();
-            }
             else
-            {
                 mirrorTextShowConstroller.UnfocusText();
-            }
             
             mirrorTextShowConstroller.TintText(currentText.m_focusFactor);
             mirrorTextShowConstroller.PlaceText(rootTrans.position + dir * showTextDistance, Quaternion.LookRotation(-GetReflectDir(currentText.transform.forward), up));
         }
+    }
+    void OnTextFound(MirrorText mirrorText)
+    {
+        mirrorTimeScale = 0.25f;
     }
     void TryClearCurrentText()
     {
