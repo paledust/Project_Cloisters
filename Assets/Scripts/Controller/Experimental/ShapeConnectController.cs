@@ -36,30 +36,16 @@ public class ShapeConnectController : MonoBehaviour
         var otherBody = other.m_connectBody;
     //Move Both rigid to a propery location
         Vector3 face;
-        if(!mainBody.m_isSpherical && !otherBody.m_isSpherical)
-            face = (main.normal - other.normal).normalized;
-        else if(!mainBody.m_isSpherical)
-            face = -main.normal;
-        else if(!otherBody.m_isSpherical)
-            face = other.normal;
-        else
-            face = (main.transform.position - other.transform.position).normalized;
-
+        face = (main.normal - other.normal).normalized;
         float angle = Vector2.SignedAngle(main.normal, face);
     
         Vector3 mid = main.transform.position + other.transform.position;
-        if(!mainBody.m_isSpherical && !otherBody.m_isSpherical)
-            mid = mid * 0.5f;
-        else 
-        {
-            if(mainBody.m_isSpherical)
-                mid = mid - face*mainBody.m_sphereRadius; 
-            if(otherBody.m_isSpherical)
-                mid = mid + face*otherBody.m_sphereRadius;
-            mid = mid * 0.5f;
-        }
+        mid = mid * 0.5f;
 
-        Vector3 offset = mid-(main.transform.position-face*mainBody.m_sphereRadius);
+        Vector3 offset = mainBody.transform.position - main.transform.position;
+        offset = Quaternion.Euler(0,0,angle) * offset;
+        Vector3 otherOffset = otherBody.transform.position - other.transform.position;
+        otherOffset = Quaternion.Euler(0,0,-angle) * otherOffset;
 
     //Connect ConnectBody To Each Body
         mainBody.BuildConnection(otherBody);
@@ -68,69 +54,55 @@ public class ShapeConnectController : MonoBehaviour
         main.m_connectBody.m_rigid.isKinematic = true;
         other.m_connectBody.m_rigid.isKinematic = true;
         
-        Vector3 targetPos = mainBody.transform.position + offset;
-        Vector3 otherTargetPos = otherBody.transform.position - offset;
-        
+        Vector3 targetPos = mid + offset - face * intersection;
+        Vector3 otherTargetPos = mid + otherOffset + face * intersection;
+    
+    //Separate and Rotate to face each other
         var seq = DOTween.Sequence();
-        seq.Append(mainBody.transform.DOMove(mainBody.transform.position + offset - face*0.4f, connectDuration*0.25f).SetEase(Ease.OutCirc))
-        .Join(otherBody.transform.DOMove(otherBody.transform.position - offset + face*0.4f, connectDuration*0.25f).SetEase(Ease.OutCirc));
-
-        if(!mainBody.m_isSpherical && !otherBody.m_isSpherical)
-        {
-            seq.Join(mainBody.transform.DORotateQuaternion(mainBody.transform.rotation *  Quaternion.Euler(0,0,angle), connectDuration*0.5f).SetEase(Ease.OutCirc))
-            .Join(otherBody.transform.DORotateQuaternion(otherBody.transform.rotation * Quaternion.Euler(0,0,-angle), connectDuration*0.5f).SetEase(Ease.OutCirc));
-        }
-
+        seq.Append(mainBody.transform.DOMove(mid - face*0.4f + offset, connectDuration*0.25f).SetEase(Ease.OutCirc))
+        .Join(mainBody.transform.DORotateQuaternion(mainBody.transform.rotation *  Quaternion.Euler(0,0,angle), connectDuration*0.5f).SetEase(Ease.OutCirc))
+        .Join(otherBody.transform.DOMove(mid + face*0.4f + otherOffset, connectDuration*0.25f).SetEase(Ease.OutCirc))
+        .Join(otherBody.transform.DORotateQuaternion(otherBody.transform.rotation * Quaternion.Euler(0,0,-angle), connectDuration*0.5f).SetEase(Ease.OutCirc));
+    //Combine Together
         seq.Append(mainBody.transform.DOMove(targetPos, connectDuration*0.25f).SetEase(Ease.InCirc))
-        .Join(otherBody.transform.DOMove(otherTargetPos, connectDuration*0.25f).SetEase(Ease.InCirc));
-
-        seq.OnComplete(()=>
+        .Join(otherBody.transform.DOMove(otherTargetPos, connectDuration*0.25f).SetEase(Ease.InCirc))
+        .OnComplete(()=>
         {
         //Play Particles
             p_collision.transform.position = main.transform.position;
             p_collision.Play(true);
         //Seporate and create Joint
-            var newSeq = DOTween.Sequence();
-            newSeq.Append(mainBody.transform.DOMove(mainBody.transform.position - face.normalized * intersection, connectDuration*0.5f)).SetEase(Ease.OutQuad)
-            .Join(otherBody.transform.DOMove(otherBody.transform.position + face.normalized * intersection, connectDuration*0.5f)).SetEase(Ease.OutQuad)
-            .Join(mainBody.transform.DORotateQuaternion(mainBody.transform.rotation, connectDuration*0.5f).SetEase(Ease.OutQuad))
-            .Join(otherBody.transform.DORotateQuaternion(otherBody.transform.rotation, connectDuration*0.5f).SetEase(Ease.OutQuad));
+            mainBody.transform.position = targetPos;
+            otherBody.transform.position = otherTargetPos;
+            mainBody.m_rigid.position = targetPos;
+            otherBody.m_rigid.position = otherTargetPos;
+        //Create Joint
+            var joint = mainBody.m_rigid.gameObject.AddComponent<FixedJoint>();
+            joint.connectedBody = otherBody.m_rigid;
+        //Create JointBreaker
+            Quaternion breakerRot;
+            if(!mainBody.m_isSpherical)
+                breakerRot = main.transform.rotation;
+            else if(!otherBody.m_isSpherical)
+                breakerRot = other.transform.rotation;
+            else
+                breakerRot = Quaternion.Euler(0,0,-Vector2.SignedAngle(main.transform.position - other.transform.position, Vector2.up));
+            
+            var jointBreaker = Instantiate(connectionBreakerPrefab, mid, breakerRot).GetComponent<Clickable_ConnectionBreaker>();
+            jointBreaker.transform.position = mid;
+            jointBreaker.transform.rotation = breakerRot;
+            Vector3 scale = main.transform.localScale;
+            scale.y = 1f;
+            scale.z = 3f;
+            jointBreaker.transform.localScale = scale;
+            jointBreaker.transform.parent = mainBody.transform;
+            jointBreaker.InitConnection(joint, main, other);
+            main.m_connectBody.m_rigid.detectCollisions = true;
+            other.m_connectBody.m_rigid.detectCollisions = true;
+            main.m_connectBody.m_rigid.isKinematic = false;
+            other.m_connectBody.m_rigid.isKinematic = false;
 
-            newSeq.OnComplete(()=>{
-                main.m_connectBody.m_rigid.isKinematic = false;
-                other.m_connectBody.m_rigid.isKinematic = false;
-            //Create Joint
-                var joint =mainBody.m_rigid.gameObject.AddComponent<FixedJoint>();
-                joint.connectedBody = otherBody.m_rigid;
-            //Create JointBreaker
-                Quaternion breakerRot;
-                if(!mainBody.m_isSpherical)
-                {
-                    breakerRot = main.transform.rotation;
-                }
-                else if(!otherBody.m_isSpherical)
-                {
-                    breakerRot = other.transform.rotation;
-                }
-                else
-                {
-                    breakerRot = Quaternion.Euler(0,0,-Vector2.SignedAngle(main.transform.position - other.transform.position, Vector2.up));
-                }
-                
-                var jointBreaker = Instantiate(connectionBreakerPrefab, mid, breakerRot).GetComponent<Clickable_ConnectionBreaker>();
-                jointBreaker.transform.position = mid;
-                jointBreaker.transform.rotation = breakerRot;
-                Vector3 scale = main.transform.localScale;
-                scale.y = 1f;
-                scale.z = 3f;
-                jointBreaker.transform.localScale = scale;
-                jointBreaker.transform.parent = mainBody.transform;
-                jointBreaker.InitConnection(joint, main, other);
-
-                main.m_connectBody.m_rigid.detectCollisions = true;
-                other.m_connectBody.m_rigid.detectCollisions = true;
-                EventHandler.Call_OnBuildConnectionBreaker(jointBreaker);
-            });
+            EventHandler.Call_OnBuildConnectionBreaker(jointBreaker);
         });
     }
 }
