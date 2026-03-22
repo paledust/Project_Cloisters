@@ -22,6 +22,13 @@ public class NarrativeCircleManager : Basic_ObjectPool<CollidableCircle>
     {
         for(int i = listCircles.Count - 1; i>=0; i--)
         {
+            if(listCircles[i] == null)
+            {
+                listCircles.RemoveAt(i);
+            }
+        }
+        for(int i = listCircles.Count - 1; i>=0; i--)
+        {
             var circle = listCircles[i];
             if(circle.isPined)
             {

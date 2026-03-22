@@ -6,27 +6,28 @@ public class NarrativeConnectLine : MonoBehaviour
 {
     private LineRenderer lineRenderer;
     private Vector3[] pos;
-    private Transform headTrans;
-    private Transform tailTrans;
+    private NarrativeCircleNode headNode;
+    private NarrativeCircleNode tailNode;
     private float headOffset;
     private float tailOffset;
     private bool isDisappearing = false;
+    public bool IsDisappearing => isDisappearing;
 
-    public void InitLine(Transform fromTrans, Transform toTrans, float headOffset, float tailOffset, int seg = 3)
+    public void InitLine(NarrativeCircleNode fromNode, NarrativeCircleNode toNode, float headOffset, float tailOffset, int seg = 3)
     {
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.positionCount = seg;
-        headTrans = fromTrans;
-        tailTrans = toTrans;
+        headNode = fromNode;
+        tailNode = toNode;
         pos = new Vector3[seg];
         this.headOffset = headOffset;
         this.tailOffset = tailOffset;
 
-        UpdateLine(headTrans.position, tailTrans.position);
+        UpdateLine(headNode.m_position, tailNode.m_position);
     }
     void LateUpdate()
     {
-        UpdateLine(headTrans.position, tailTrans.position);
+        UpdateLine(headNode.m_position, tailNode.m_position);
     }
     void UpdateLine(Vector3 headPos, Vector3 tailPos)
     {
@@ -38,21 +39,28 @@ public class NarrativeConnectLine : MonoBehaviour
         }
         lineRenderer.SetPositions(pos);
     }
-    public void CheckConnectTrans(Transform targetTrans)
+    public void BreakLine()
     {
-        if(isDisappearing)
-            return;
-        if(targetTrans == headTrans || targetTrans == tailTrans)
+        isDisappearing = true;
+        StartCoroutine(coroutineDisappear());
+    }
+    public NarrativeCircleNode GetAnotherNode(NarrativeCircleNode node)
+    {
+        if(node == headNode)
         {
-            isDisappearing = true;
-            StartCoroutine(coroutineDisappear());
+            return tailNode;
         }
+        else if(node == tailNode)
+        {
+            return headNode;
+        }
+        return null;
     }
     IEnumerator coroutineDisappear()
     {
         this.enabled = false;
-        Vector3 initHeadPos = headTrans.position;
-        Vector3 initTailPos = tailTrans.position;
+        Vector3 initHeadPos = headNode.m_position;
+        Vector3 initTailPos = tailNode.m_position;
         Vector3 midPos = (initHeadPos + initTailPos) * 0.5f;
         yield return new WaitForLoop(0.25f, (t) =>
         {

@@ -6,30 +6,59 @@ public class NarrativeConnectLineController : MonoBehaviour
     [SerializeField] private GameObject connectLinePrefab;
     [SerializeField] private Transform connectRoot;
 
-    private List<NarrativeConnectLine> connectLines = new List<NarrativeConnectLine>();
-    private HashSet<NarrativeCircleNode> connectedNodeGraph = new HashSet<NarrativeCircleNode>();
+    private Dictionary<NarrativeCircleNode, HashSet<NarrativeConnectLine>> nodeGraph = new Dictionary<NarrativeCircleNode, HashSet<NarrativeConnectLine>>();
 
+    void Awake()
+    {
+        EventHandler.E_OnNarrativeNodeBreak += NodeBreakHandler;
+    }
+    void OnDestroy()
+    {
+        EventHandler.E_OnNarrativeNodeBreak -= NodeBreakHandler;
+    }
+    void NodeBreakHandler(NarrativeCircleNode node)
+    {
+        BreakLineForNode(node);
+    }
     public void BuildConnectLine(NarrativeCircleNode fromCircle, NarrativeCircleNode toCircle)
     {
         GameObject lineObj = Instantiate(connectLinePrefab, connectRoot);
         NarrativeConnectLine line = lineObj.GetComponent<NarrativeConnectLine>();
-        line.InitLine(fromCircle.transform, toCircle.transform, fromCircle.m_radius, toCircle.m_radius, 3);
+        line.InitLine(fromCircle, toCircle, fromCircle.m_radius, toCircle.m_radius, 3);
         
-        connectLines.Add(line);
-        connectedNodeGraph.Add(fromCircle);
-        connectedNodeGraph.Add(toCircle);
-        fromCircle.ConnectNode(toCircle);
-        toCircle.ConnectNode(fromCircle);
+        //Build Graph
+        FormConnection(toCircle, fromCircle, line);
+        FormConnection(fromCircle, toCircle , line);
     }
-    public void BreakConnectedLine(NarrativeCircleNode node)
+    public void BreakLineForNode(NarrativeCircleNode circle)
     {
-        node.BreakAllConnectedNode();
-    }
-    public void CheckConnectLine(Transform transCircle)
-    {
-        foreach(var line in connectLines)
+        Debug.LogWarning("????");
+        if(!nodeGraph.ContainsKey(circle))
         {
-            line.CheckConnectTrans(transCircle);
+            return;
+        }
+        //Break Lines connected to this Node.
+        var lines = nodeGraph[circle];
+        foreach(var line in lines)
+        {
+            if(line.IsDisappearing)
+                continue;
+            var anotherNode = line.GetAnotherNode(circle);
+            nodeGraph[anotherNode].Remove(line);
+            line.BreakLine();
+        }
+        nodeGraph.Remove(circle);
+    }
+    void FormConnection(NarrativeCircleNode fromCircle, NarrativeCircleNode toCircle, NarrativeConnectLine line)
+    {
+        //Build Graph, Add Line into Graph.
+        if(nodeGraph.ContainsKey(fromCircle))
+        {
+            nodeGraph[fromCircle].Add(line);
+        }
+        else
+        {
+            nodeGraph[fromCircle] = new HashSet<NarrativeConnectLine>() { line };
         }
     }
 }

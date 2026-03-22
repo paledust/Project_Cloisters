@@ -161,7 +161,7 @@ public class CollidableCircle : MonoBehaviour
     }
     public void AE_ExplodeDone()
     {
-        gameObject.SetActive(false);
+        Destroy(gameObject);
     }
     #endregion
 

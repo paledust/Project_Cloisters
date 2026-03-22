@@ -219,7 +219,7 @@ public class IC_Narrative : IC_Basic
                 continue;
             PlayExplodeParticleAtPos(circles[i].transform.position);
             circles[i].ExplodeCircle();
-            connectLineController.CheckConnectLine(circles[i].transform);
+            connectLineController.BreakLineForNode(circles[i].GetComponent<NarrativeCircleNode>());
             yield return new WaitForSeconds(Random.Range(0, 0.2f));
         }
         circles[0].m_circle.TransitionCircles(1);
