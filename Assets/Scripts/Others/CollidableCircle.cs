@@ -84,11 +84,9 @@ public class CollidableCircle : MonoBehaviour
             return;
         }
         m_rigid.velocity = (m_rigid.position - contact).normalized * strength;
-        m_rigid.drag = 6;
         circle.TriggerCollideRipple();
 
         //固定自身
-        StartCoroutine(coroutineCreateJointAtCurrentPos(1));
         if(circle.m_circleType == Clickable_Circle.CircleType.Target)
             p_hasText.Stop();
     }
@@ -142,23 +140,6 @@ public class CollidableCircle : MonoBehaviour
     public void AE_FloatDone(){
         isSpawning = false;
     }
-    public void AE_GrowingDone(){
-        isGrowing = false;
-        int circleClass = circle.IncreaseCircleClass();
-
-        switch(circleClass){
-            case 2:
-                m_rigid.mass = 3;
-                m_rigid.drag = 3.5f;
-                break;
-            case 3:
-                m_rigid.mass = 8;
-                m_rigid.drag = 5;
-                // m_circle.enabled = true;
-                // m_circle.EnableRaycast();
-                break;
-        }
-    }
     public void AE_ExplodeDone()
     {
         Destroy(gameObject);
@@ -194,10 +175,5 @@ public class CollidableCircle : MonoBehaviour
             circlePos.y = noiseAmp * (Mathf.PerlinNoise(t*noiseFreq, 0.12345f+seed.y)*2-1) * EasingFunc.Easing.QuadEaseIn(1-t);
             circleRoot.localPosition = circlePos;
         });
-    }
-    IEnumerator coroutineCreateJointAtCurrentPos(float delay){
-        isPined = true;
-        yield return new WaitForSeconds(delay);
-        PhysicDragManager.PinRigidToCurrentPos(m_rigid, 50, 2);
     }
 }

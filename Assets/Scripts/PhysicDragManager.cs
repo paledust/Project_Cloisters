@@ -77,4 +77,30 @@ public class PhysicDragManager : Singleton<PhysicDragManager>
         };
         return _dragger;
     }
+    public static Joint GetNewBodyConnector(Rigidbody fromBody, Rigidbody toBody, float springStrength, float damper)
+    {
+        var joint = fromBody.gameObject.AddComponent<ConfigurableJoint>();
+        joint.axis = Vector3.forward;
+        joint.autoConfigureConnectedAnchor = false;
+        joint.anchor = Vector3.zero;
+        joint.connectedBody = toBody;
+        joint.connectedAnchor = Vector3.zero;
+        joint.axis = Vector3.forward;
+        joint.secondaryAxis = Vector3.up;
+        joint.xMotion = ConfigurableJointMotion.Limited;
+        joint.yMotion = ConfigurableJointMotion.Limited;
+        joint.zMotion = ConfigurableJointMotion.Limited;
+        joint.linearLimit = new SoftJointLimit()
+        {
+            limit = (fromBody.position - toBody.position).magnitude,
+        };
+        joint.linearLimitSpring = new SoftJointLimitSpring()
+        {
+            spring = springStrength,
+            damper = damper
+        };
+        joint.enableCollision = true;
+
+        return joint;
+    }
 }

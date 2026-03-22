@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class NarrativeCircleNode : MonoBehaviour
@@ -12,7 +13,6 @@ public class NarrativeCircleNode : MonoBehaviour
     }
     void OnDestroy()
     {
-        Debug.LogWarning("On Destroyed");
         EventHandler.Call_OnNarrativeNodeBreak(this);
     }
 }

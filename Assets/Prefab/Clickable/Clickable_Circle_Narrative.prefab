@@ -15048,7 +15048,7 @@ PrefabInstance:
     - target: {fileID: 4337985783848230491, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
         type: 3}
       propertyPath: lerpSpeed
-      value: 7
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4337985783848230491, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
         type: 3}
@@ -15079,6 +15079,11 @@ PrefabInstance:
         type: 3}
       propertyPath: maxfollowSpeed
       value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 4337985783848230491, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
+        type: 3}
+      propertyPath: circleTransistors.Array.size
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4337985784200938162, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
         type: 3}
@@ -15122,6 +15127,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7737823439299809085, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
         type: 3}
+      propertyPath: circleMotions.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7737823439299809085, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
+        type: 3}
       propertyPath: circleMotions.Array.data[1].controlFactor
       value: 0.2
       objectReference: {fileID: 0}
@@ -15143,7 +15153,7 @@ PrefabInstance:
     - target: {fileID: 9116136308850967213, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
         type: 3}
       propertyPath: m_Drag
-      value: 2.5
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -15182,24 +15192,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: -6295686749355873733}
   m_SourcePrefab: {fileID: 100100000, guid: c221e6f97fdc78f4db73057f2ae9b5b3, type: 3}
---- !u!114 &3177708216321764037 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3385851339311422221, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
-    type: 3}
-  m_PrefabInstance: {fileID: 208723676672225736}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04234217817ba70478bd410e4aed5ca4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &4527830689181021050 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4337985784200938162, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
-    type: 3}
-  m_PrefabInstance: {fileID: 208723676672225736}
-  m_PrefabAsset: {fileID: 0}
 --- !u!212 &4527830689330121473 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 4337985783947377353, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
@@ -15229,8 +15221,6 @@ Animation:
   serializedVersion: 3
   m_Animation: {fileID: 0}
   m_Animations:
-  - {fileID: 7400000, guid: 4f0556b6c3caeaa4184e7221008b0881, type: 2}
-  - {fileID: 7400000, guid: 28dfcb4a660959c499a8c124c2a82156, type: 2}
   - {fileID: 7400000, guid: a1b601f2da93691409773939b92f9d37, type: 2}
   - {fileID: 7400000, guid: 17a1dc8551e07ec42b59cb35ca84fc5b, type: 2}
   - {fileID: 7400000, guid: ac01eeff1b775ba4e97c2a3eac599c50, type: 2}
@@ -15262,8 +15252,6 @@ MonoBehaviour:
   circleOpacity:
   - {fileID: 9107378040283928094}
   - {fileID: 5345266303561280828}
-  - {fileID: 4955151163406364964}
-  - {fileID: 3177708216321764037}
   resetCircles:
   - circleTrans: {fileID: 4527830689499131789}
     classOneSize: 0.5
@@ -15271,12 +15259,6 @@ MonoBehaviour:
   - circleTrans: {fileID: 4527830689957216935}
     classOneSize: 1.35801
     classTwoSize: 1.35801
-  - circleTrans: {fileID: 4527830689824977142}
-    classOneSize: 0
-    classTwoSize: 1.6092
-  - circleTrans: {fileID: 4527830689181021050}
-    classOneSize: 0
-    classTwoSize: 0
   hasCollided: 0
   txt: {fileID: 7740386476624176888}
   p_hasText: {fileID: 287723696563934487}
@@ -15304,30 +15286,12 @@ SphereCollider:
     type: 3}
   m_PrefabInstance: {fileID: 208723676672225736}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &4527830689824977142 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4337985783502979390, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
-    type: 3}
-  m_PrefabInstance: {fileID: 208723676672225736}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4527830689957216935 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4337985783366546287, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
     type: 3}
   m_PrefabInstance: {fileID: 208723676672225736}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4955151163406364964 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5053516696802935020, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
-    type: 3}
-  m_PrefabInstance: {fileID: 208723676672225736}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04234217817ba70478bd410e4aed5ca4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &5345266303561280828 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5245491189957811444, guid: c221e6f97fdc78f4db73057f2ae9b5b3,

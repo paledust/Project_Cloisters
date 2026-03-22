@@ -8,6 +8,7 @@ public class NarrativeConnectLine : MonoBehaviour
     private Vector3[] pos;
     private NarrativeCircleNode headNode;
     private NarrativeCircleNode tailNode;
+    private Joint joint;
     private float headOffset;
     private float tailOffset;
     private bool isDisappearing = false;
@@ -17,6 +18,8 @@ public class NarrativeConnectLine : MonoBehaviour
     {
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.positionCount = seg;
+        StartCoroutine(coroutineFormJoint(1f, fromNode.GetComponent<Rigidbody>(), toNode.GetComponent<Rigidbody>()));
+
         headNode = fromNode;
         tailNode = toNode;
         pos = new Vector3[seg];
@@ -71,5 +74,14 @@ public class NarrativeConnectLine : MonoBehaviour
         UpdateLine(midPos, midPos);
         yield return null;
         gameObject.SetActive(false);
+    }
+    IEnumerator coroutineFormJoint(float delay, Rigidbody fromNode, Rigidbody toNode)
+    {
+        yield return new WaitForSeconds(delay);
+        if(fromNode == null || toNode == null)
+        {
+            yield break;
+        }
+        joint = PhysicDragManager.GetNewBodyConnector(fromNode.GetComponent<Rigidbody>(), toNode.GetComponent<Rigidbody>(), 10f, 2f);
     }
 }

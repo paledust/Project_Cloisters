@@ -6,7 +6,8 @@ public class NarrativeConnectLineController : MonoBehaviour
     [SerializeField] private GameObject connectLinePrefab;
     [SerializeField] private Transform connectRoot;
 
-    private Dictionary<NarrativeCircleNode, HashSet<NarrativeConnectLine>> nodeGraph = new Dictionary<NarrativeCircleNode, HashSet<NarrativeConnectLine>>();
+    private Dictionary<NarrativeCircleNode, HashSet<NarrativeConnectLine>> nodeConnectionGraph = new Dictionary<NarrativeCircleNode, HashSet<NarrativeConnectLine>>();
+    private Dictionary<NarrativeCircleNode, HashSet<NarrativeCircleNode>> nodeGraph = new Dictionary<NarrativeCircleNode, HashSet<NarrativeCircleNode>>();
 
     void Awake()
     {
@@ -22,42 +23,56 @@ public class NarrativeConnectLineController : MonoBehaviour
     }
     public void BuildConnectLine(NarrativeCircleNode fromCircle, NarrativeCircleNode toCircle)
     {
+        if(nodeGraph.ContainsKey(fromCircle) && nodeGraph[fromCircle].Contains(toCircle))
+        {
+            Debug.LogWarning("Already Connected");
+            return;
+        }
+
         GameObject lineObj = Instantiate(connectLinePrefab, connectRoot);
         NarrativeConnectLine line = lineObj.GetComponent<NarrativeConnectLine>();
         line.InitLine(fromCircle, toCircle, fromCircle.m_radius, toCircle.m_radius, 3);
         
         //Build Graph
-        FormConnection(toCircle, fromCircle, line);
-        FormConnection(fromCircle, toCircle , line);
+        AddNodeToGraph(fromCircle, toCircle, line);
+        AddNodeToGraph(toCircle, fromCircle, line);
     }
     public void BreakLineForNode(NarrativeCircleNode circle)
     {
-        if(!nodeGraph.ContainsKey(circle))
+        if(!nodeConnectionGraph.ContainsKey(circle))
         {
             return;
         }
         //Break Lines connected to this Node.
-        var lines = nodeGraph[circle];
+        var lines = nodeConnectionGraph[circle];
         foreach(var line in lines)
         {
             if(line.IsDisappearing)
                 continue;
             var anotherNode = line.GetAnotherNode(circle);
-            nodeGraph[anotherNode].Remove(line);
+            nodeConnectionGraph[anotherNode].Remove(line);
             line.BreakLine();
         }
-        nodeGraph.Remove(circle);
+        nodeConnectionGraph.Remove(circle);
     }
-    void FormConnection(NarrativeCircleNode fromCircle, NarrativeCircleNode toCircle, NarrativeConnectLine line)
+    public void AddNodeToGraph(NarrativeCircleNode fromNode, NarrativeCircleNode toNode, NarrativeConnectLine line)
     {
-        //Build Graph, Add Line into Graph.
-        if(nodeGraph.ContainsKey(fromCircle))
+        if(nodeGraph.ContainsKey(fromNode))
         {
-            nodeGraph[fromCircle].Add(line);
+            nodeGraph[fromNode].Add(toNode);
         }
         else
         {
-            nodeGraph[fromCircle] = new HashSet<NarrativeConnectLine>() { line };
+            nodeGraph[fromNode] = new HashSet<NarrativeCircleNode>() { toNode };
+        }
+
+        if(nodeConnectionGraph.ContainsKey(fromNode))
+        {
+            nodeConnectionGraph[fromNode].Add(line);
+        }
+        else
+        {
+            nodeConnectionGraph[fromNode] = new HashSet<NarrativeConnectLine>() { line };
         }
     }
 }
