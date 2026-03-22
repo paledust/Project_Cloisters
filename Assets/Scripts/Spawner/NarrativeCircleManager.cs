@@ -35,37 +35,16 @@ public class NarrativeCircleManager : Basic_ObjectPool<CollidableCircle>
             {
                 forceField.ApplyForce(circle.m_rigidbody, 1);
             }
-            Vector3 pos = circle.transform.position;
-            if(circle.transform.position.x < rectSelector.MinX)
-            {
-                pos.x += rectSelector.rectWidth;
-            }
-            else if(circle.transform.position.x > rectSelector.MaxX)
-            {
-                pos.x -= rectSelector.rectWidth;
-            }
 
             //Boundry Detection
             //Boundry Teleportation
-            if(circle.transform.position.y < rectSelector.MinY)
+            Vector3 pos = circle.transform.position;
+            if(pos.x < rectSelector.MinX ||
+               pos.x > rectSelector.MaxX ||
+               pos.y < rectSelector.MinY ||
+               pos.y > rectSelector.MaxY)
             {
-                pos.y += rectSelector.rectHeight;
-            }
-            else if(circle.transform.position.y > rectSelector.MaxY)
-            {
-                pos.y -= rectSelector.rectHeight;
-            }
-
-            circle.transform.position = pos;
-            circle.m_rigidbody.position = pos;
-
-            Vector3 crossBoundForce = rectSelector.GetCrossBoundForce(circle.m_rigidbody);
-            if(crossBoundForce!=Vector3.zero)
-            {
-                //Boundry Force Application
-                if(circle.m_circle.isControlling)
-                    continue;
-                circle.m_rigidbody.AddForce(crossBoundForce, ForceMode.VelocityChange);
+                circle.ExplodeCircle();
             }
         }
     }

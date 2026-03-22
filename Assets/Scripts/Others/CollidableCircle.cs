@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CollidableCircle : MonoBehaviour
 {
-    [System.Serializable]
+    [Serializable]
     public struct ResizableTrans{
         public Transform circleTrans;
         public float classOneSize;
@@ -54,8 +54,6 @@ public class CollidableCircle : MonoBehaviour
     public Rigidbody m_rigidbody => m_rigid;
 
     private const string EXPLODE_ANIMATION = "CircleExplode";
-    private const string GROW_TIER_TWO = "CircleGrow_Class_2";
-    private const string GROW_TIER_THREE = "CircleGrow_Class_3";
     private const string FLOAT_ANIMATION = "CircleFloat";
     private const string POPUP_ANIMATION = "CirclePopUp";
 

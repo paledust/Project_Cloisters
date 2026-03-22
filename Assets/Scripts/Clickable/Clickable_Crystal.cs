@@ -14,10 +14,12 @@ public class Clickable_Crystal : Basic_Clickable
     [SerializeField] private SpriteRenderer spotterRender;
     [SerializeField] private WhimsicalTextSpoter whimsicalTextSpoter;
 
+    private Animator crystalAnimator;
     private Vector3 targetPos;
 
     void Awake()
     {
+        crystalAnimator = GetComponent<Animator>();
         spotterRender.transform.localScale = Vector3.zero;
         spotterRender.color = new Color(1, 1, 1, 0);
     }
@@ -48,6 +50,7 @@ public class Clickable_Crystal : Basic_Clickable
             particles[i].velocity = particles[i].position * particleExpandForce;
         }
         blinkParticle.SetParticles(particles, count);
+        crystalAnimator.SetBool("controlling", true);
     }
     public override void OnRelease(PlayerController player)
     {
@@ -59,6 +62,7 @@ public class Clickable_Crystal : Basic_Clickable
         spotterRender.DOKill();
         spotterRender.transform.DOScale(0, 0.5f).SetEase(Ease.OutBack);
         spotterRender.DOFade(0, 0.25f);
+        crystalAnimator.SetBool("controlling", false);
     }
     public override void ControllingUpdate(PlayerController player)
     {

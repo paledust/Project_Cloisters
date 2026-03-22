@@ -68,6 +68,7 @@ public class Clickable_Circle : Basic_Clickable
 
     private const float CAM_DEPTH = 35;
     private Rigidbody rigid;
+    private NarrativeCircleNode narrativeCircleNode;
     private SphereCollider sphereCollider;
     private Vector3 velocity;
 
@@ -80,6 +81,8 @@ public class Clickable_Circle : Basic_Clickable
     void Awake(){
         rigid = GetComponent<Rigidbody>();
         sphereCollider = GetComponent<SphereCollider>();
+        narrativeCircleNode = GetComponent<NarrativeCircleNode>();
+        narrativeCircleNode.InitNode(radius);
     }
     void Update(){
         velocity *= 1-speedDrag;
@@ -120,6 +123,7 @@ public class Clickable_Circle : Basic_Clickable
             circleWobbles[i].ResetWobble();
         }        
     }
+    public NarrativeCircleNode GetNarrativeCircleNode()=>narrativeCircleNode;
     public void TriggerCollideRipple()=>p_ripple.Play(true);
     public void ChangeCircleType(CircleType newType){
         circleType = newType;

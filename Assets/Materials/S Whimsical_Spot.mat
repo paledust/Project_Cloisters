@@ -12,11 +12,12 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - _DISSOLVETYPE_RADIUS
   - _EDGEBLEND_ADDITIVE
   - _FILLCOLORMODE_MULTIPLY
+  - _USEGLOW_ON
   - _USE_BLINK_ON
   m_InvalidKeywords:
+  - _DISSOLVETYPE_RADIUS
   - _INVERSENOISE_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -84,6 +85,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _ShimmerTex:
+        m_Texture: {fileID: 2800000, guid: 2b7311c45ec18d14ca7aa0825cfcff7b, type: 3}
+        m_Scale: {x: 1.2, y: 1.2}
+        m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -118,7 +123,7 @@ Material:
     - _AlphaCutoff: 0.5
     - _Blend: 0
     - _BlinkMax: 0.4
-    - _BlinkMin: 0.36
+    - _BlinkMin: 0.37
     - _BlinkSpeed: 40
     - _BumpScale: 1
     - _Circle: 0
@@ -154,11 +159,11 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Glow: 39.79
-    - _GlowPatternScale: 0.58
+    - _GlowPatternScale: 0.25
     - _GlowSmooth: 0.1
-    - _GlowSoftness: 0.89
+    - _GlowSoftness: 7
     - _GlowStrength: 0.5
-    - _GlowValue: -0.37
+    - _GlowValue: 0.5
     - _HurScale: 1
     - _HurlMin: 0
     - _HurlStrength: -0.13
@@ -182,6 +187,7 @@ Material:
     - _RadiusCenterX: 0.5
     - _RadiusCenterY: 0.5
     - _ReceiveShadows: 1
+    - _ShimerStrength: -0.5
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -190,7 +196,7 @@ Material:
     - _StencilID: 0
     - _StencilOp: 3
     - _Surface: 0
-    - _UseGlow: 0
+    - _UseGlow: 1
     - _UseRectUV: 0
     - _Use_Blink: 1
     - _VoronoidSpeed: 0.75
@@ -217,8 +223,8 @@ Material:
     - _DissolvePanSpeed: {r: 0.2, g: 0.25, b: 0, a: 0}
     - _EdgeColor: {r: 11.984314, g: 2.5886114, b: 3.3425608, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _FillColor: {r: 0.22303301, g: 0.4252843, b: 0.6754716, a: 1}
-    - _GlowColor: {r: 1, g: 1, b: 1, a: 1}
+    - _FillColor: {r: 1, g: 0.7037023, b: 0.4509434, a: 0.47058824}
+    - _GlowColor: {r: 1.9766744, g: 1.2536559, b: 0.6623412, a: 1}
     - _NoisePan: {r: -0.2, g: 0.005, b: 0.1, a: 0.1}
     - _NoiseSpeed1: {r: 1, g: 1, b: 0, a: 0}
     - _NoiseUVOffset: {r: 0, g: 0, b: 0, a: 0}

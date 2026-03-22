@@ -179,7 +179,7 @@ public class IC_Narrative : IC_Basic
                         return;
                 }
                 //Create Connection Line
-                connectLineController.BuildConnectLine(controlledCircle, collidedCircle);
+                connectLineController.BuildConnectLine(controlledCircle.GetNarrativeCircleNode(), collidedCircle.GetNarrativeCircleNode());
             }
         }
     }

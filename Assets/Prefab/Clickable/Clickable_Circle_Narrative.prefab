@@ -15047,6 +15047,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4337985783848230491, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
         type: 3}
+      propertyPath: lerpSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4337985783848230491, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
+        type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
@@ -15064,6 +15069,16 @@ PrefabInstance:
         type: 3}
       propertyPath: circleClass
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4337985783848230491, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
+        type: 3}
+      propertyPath: followFactor
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4337985783848230491, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
+        type: 3}
+      propertyPath: maxfollowSpeed
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 4337985784200938162, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
         type: 3}
@@ -15162,6 +15177,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 329577702414611237}
+    - targetCorrespondingSourceObject: {fileID: 4337985783848230468, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -6295686749355873733}
   m_SourcePrefab: {fileID: 100100000, guid: c221e6f97fdc78f4db73057f2ae9b5b3, type: 3}
 --- !u!114 &3177708216321764037 stripped
 MonoBehaviour:
@@ -15261,6 +15280,18 @@ MonoBehaviour:
   hasCollided: 0
   txt: {fileID: 7740386476624176888}
   p_hasText: {fileID: 287723696563934487}
+--- !u!114 &-6295686749355873733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4527830689499131788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4414cbd844bdb0f499cd80524ce0d6de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &4527830689499131789 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4337985783848230469, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
