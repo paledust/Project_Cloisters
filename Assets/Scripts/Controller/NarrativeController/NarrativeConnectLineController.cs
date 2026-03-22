@@ -32,7 +32,6 @@ public class NarrativeConnectLineController : MonoBehaviour
     }
     public void BreakLineForNode(NarrativeCircleNode circle)
     {
-        Debug.LogWarning("????");
         if(!nodeGraph.ContainsKey(circle))
         {
             return;

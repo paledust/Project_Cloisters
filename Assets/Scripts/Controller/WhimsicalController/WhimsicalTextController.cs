@@ -5,8 +5,6 @@ public class WhimsicalTextController : MonoBehaviour
     [SerializeField] private ChargeText[] chargeTexts;
     [SerializeField] private AnimationCurve fullyChargeCurve;
 
-    [SerializeField, ShowOnly] private float totalChargeValue = 0;
-
     public int TotalTextCount => chargeTexts.Length;
 
     void Start()

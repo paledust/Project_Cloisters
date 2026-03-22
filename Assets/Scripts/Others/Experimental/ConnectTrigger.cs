@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
@@ -11,7 +10,6 @@ public class ConnectTrigger : MonoBehaviour
         Catching, //Found the best target, and keep focusing 
         Locking, //Connected to target
     }
-    [SerializeField] private bool spherical = false;
     [SerializeField] private bool isSunk = false;
     [SerializeField] private ConnectTriggerState connectTriggerState = ConnectTriggerState.Pending;
     [SerializeField] private Basic_Clickable selfClickable;
