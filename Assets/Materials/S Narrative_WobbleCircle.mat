@@ -69,6 +69,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: 2b7311c45ec18d14ca7aa0825cfcff7b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _DistortTex:
+        m_Texture: {fileID: 2800000, guid: 201ebc1b7bdae184384a7832e8bc52e5, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -135,6 +139,7 @@ Material:
     - _DissolveSmoothness: 0.5
     - _DissolveStart: 0.5
     - _Distort: 0.82
+    - _DistortScale: 0.1
     - _DstBlend: 0
     - _EdgeMin: 0.82
     - _EdgeSmooth: 0.42
@@ -177,9 +182,10 @@ Material:
     - _VNoiseOnFresnel: 0.3
     - _VNoiseOnRamp: 0.3
     - _WobbleAngle: 0
-    - _WobbleStrength: 0
+    - _WobbleStrength: 0.76
     - _WorkflowMode: 1
     - _ZWrite: 1
+    - _distortStrength: 0.02
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 0.84176856, g: 0.78679246, b: 1, a: 1}

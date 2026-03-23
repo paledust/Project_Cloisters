@@ -6,7 +6,6 @@ ShaderImporter:
   - _MainTex: {fileID: 2800000, guid: 92603860724534f40ad316e7f19ee332, type: 3}
   - _DetailNoiseMap: {fileID: 2800000, guid: 2b7311c45ec18d14ca7aa0825cfcff7b, type: 3}
   nonModifiableTextures: []
-  preprocessorOverride: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

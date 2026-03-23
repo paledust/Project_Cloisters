@@ -83,7 +83,7 @@ public class CollidableCircle : MonoBehaviour
             circleAnime.Play(EXPLODE_ANIMATION);
             return;
         }
-        m_rigid.velocity = (m_rigid.position - contact).normalized * strength;
+        // m_rigid.velocity = (m_rigid.position - contact).normalized * strength;
         circle.TriggerCollideRipple();
 
         //固定自身

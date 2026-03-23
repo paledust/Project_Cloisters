@@ -1,4 +1,4 @@
-// Made with Amplify Shader Editor v1.9.7.1
+// Made with Amplify Shader Editor v1.9.8.1
 // Available at the Unity Asset Store - http://u3d.as/y3X 
 Shader "AmplifyShaders/Particle/WobbleDissolve"
 {
@@ -22,6 +22,9 @@ Shader "AmplifyShaders/Particle/WobbleDissolve"
 		_DetailNoiseScale("DetailNoiseScale", Float) = 1
 		_DetailStrength("DetailStrength", Float) = 1
 		_WobbleStrength("WobbleStrength", Float) = 0.2
+		_DistortTex("DistortTex", 2D) = "gray" {}
+		_DistortScale("DistortScale", Float) = 1
+		_distortStrength("distortStrength", Float) = 0
 
 		[HideInInspector][NoScaleOffset] unity_Lightmaps("unity_Lightmaps", 2DArray) = "" {}
         [HideInInspector][NoScaleOffset] unity_LightmapsInd("unity_LightmapsInd", 2DArray) = "" {}
@@ -63,8 +66,8 @@ Shader "AmplifyShaders/Particle/WobbleDissolve"
 
 			HLSLPROGRAM
 
-			#define ASE_VERSION 19701
-			#define ASE_SRP_VERSION 120112
+			#define ASE_VERSION 19801
+			#define ASE_SRP_VERSION 140011
 
 
 			#pragma vertex vert
@@ -86,7 +89,19 @@ Shader "AmplifyShaders/Particle/WobbleDissolve"
 			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Texture.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
+			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Input.hlsl"
 			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/TextureStack.hlsl"
+
+			
+            #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/FoveatedRendering.hlsl"
+           
+
+			
+            #if ASE_SRP_VERSION >=140009
+			#include_with_pragmas "Packages/com.unity.render-pipelines.core/ShaderLibrary/FoveatedRenderingKeywords.hlsl"
+			#endif
+		
+
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ShaderGraphFunctions.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/ShaderPass.hlsl"
 
@@ -96,9 +111,12 @@ Shader "AmplifyShaders/Particle/WobbleDissolve"
 			
 
 			sampler2D _MainTex;
+			sampler2D _DistortTex;
 			sampler2D _DetailNoiseMap;
 			CBUFFER_START( UnityPerMaterial )
 			float _WobbleStrength;
+			float _DistortScale;
+			float _distortStrength;
 			float _EmissionTint;
 			float _UseTextureColor;
 			float _RampMin;
@@ -187,8 +205,8 @@ Shader "AmplifyShaders/Particle/WobbleDissolve"
 				float3 appendResult173 = (float3(break174.x , break174.y , 0.0));
 				float3 vertexOffset175 = appendResult173;
 				
-				float3 ase_worldPos = TransformObjectToWorld( (v.positionOS).xyz );
-				o.ase_texcoord3.xyz = ase_worldPos;
+				float3 ase_positionWS = TransformObjectToWorld( ( v.positionOS ).xyz );
+				o.ase_texcoord3.xyz = ase_positionWS;
 				
 				
 				//setting value to unused interpolator channels and avoid initialization warnings
@@ -221,13 +239,17 @@ Shader "AmplifyShaders/Particle/WobbleDissolve"
 				UNITY_SETUP_INSTANCE_ID(IN);
 				UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(IN);
 
-				float2 texCoord152 = IN.texCoord0.xy * float2( 1,1 ) + float2( 0,0 );
-				float4 tex2DNode2 = tex2D( _MainTex, texCoord152 );
+				float2 texCoord184 = IN.texCoord0.xy * float2( 1,1 ) + float2( 0,0 );
+				float3 ase_positionWS = IN.ase_texcoord3.xyz;
+				float2 appendResult94 = (float2(ase_positionWS.x , ase_positionWS.y));
+				float2 panner186 = ( 1.0 * _Time.y * float2( 0.1,0.1 ) + ( appendResult94 * _DistortScale ));
+				float4 tex2DNode178 = tex2D( _DistortTex, panner186 );
+				float2 appendResult180 = (float2(tex2DNode178.r , tex2DNode178.g));
+				float2 distortUV183 = ( texCoord184 + ( (appendResult180*2.0 + -1.0) * _distortStrength ) );
+				float4 tex2DNode2 = tex2D( _MainTex, distortUV183 );
 				float3 lerpResult133 = lerp( float3( 1,1,1 ) , ( (tex2DNode2).rgb * _EmissionTint ) , _UseTextureColor);
 				float smoothstepResult129 = smoothstep( _RampMin , ( _RampMin + _RampSmooth ) , tex2DNode2.r);
 				float smoothstepResult135 = smoothstep( _EdgeMin , ( _EdgeMin + _EdgeSmooth ) , tex2DNode2.r);
-				float3 ase_worldPos = IN.ase_texcoord3.xyz;
-				float2 appendResult94 = (float2(ase_worldPos.x , ase_worldPos.y));
 				float detail107 = ( tex2D( _DetailNoiseMap, ( appendResult94 * _DetailNoiseScale ) ).r * _DetailStrength );
 				float simplePerlin2D97 = snoise( ( IN.texCoord0.xy * _DissolveScale ) );
 				simplePerlin2D97 = simplePerlin2D97*0.5 + 0.5;
@@ -280,8 +302,8 @@ Shader "AmplifyShaders/Particle/WobbleDissolve"
 
 			HLSLPROGRAM
 
-			#define ASE_VERSION 19701
-			#define ASE_SRP_VERSION 120112
+			#define ASE_VERSION 19801
+			#define ASE_SRP_VERSION 140011
 
 
 			#pragma vertex vert
@@ -303,7 +325,19 @@ Shader "AmplifyShaders/Particle/WobbleDissolve"
 			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Texture.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
+			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Input.hlsl"
 			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/TextureStack.hlsl"
+
+			
+            #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/FoveatedRendering.hlsl"
+           
+
+			
+            #if ASE_SRP_VERSION >=140009
+			#include_with_pragmas "Packages/com.unity.render-pipelines.core/ShaderLibrary/FoveatedRenderingKeywords.hlsl"
+			#endif
+		
+
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ShaderGraphFunctions.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/ShaderPass.hlsl"
 
@@ -313,9 +347,12 @@ Shader "AmplifyShaders/Particle/WobbleDissolve"
 			
 
 			sampler2D _MainTex;
+			sampler2D _DistortTex;
 			sampler2D _DetailNoiseMap;
 			CBUFFER_START( UnityPerMaterial )
 			float _WobbleStrength;
+			float _DistortScale;
+			float _distortStrength;
 			float _EmissionTint;
 			float _UseTextureColor;
 			float _RampMin;
@@ -403,8 +440,8 @@ Shader "AmplifyShaders/Particle/WobbleDissolve"
 				float3 appendResult173 = (float3(break174.x , break174.y , 0.0));
 				float3 vertexOffset175 = appendResult173;
 				
-				float3 ase_worldPos = TransformObjectToWorld( (v.positionOS).xyz );
-				o.ase_texcoord3.xyz = ase_worldPos;
+				float3 ase_positionWS = TransformObjectToWorld( ( v.positionOS ).xyz );
+				o.ase_texcoord3.xyz = ase_positionWS;
 				
 				
 				//setting value to unused interpolator channels and avoid initialization warnings
@@ -438,13 +475,17 @@ Shader "AmplifyShaders/Particle/WobbleDissolve"
 				UNITY_SETUP_INSTANCE_ID(IN);
 				UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(IN);
 
-				float2 texCoord152 = IN.texCoord0.xy * float2( 1,1 ) + float2( 0,0 );
-				float4 tex2DNode2 = tex2D( _MainTex, texCoord152 );
+				float2 texCoord184 = IN.texCoord0.xy * float2( 1,1 ) + float2( 0,0 );
+				float3 ase_positionWS = IN.ase_texcoord3.xyz;
+				float2 appendResult94 = (float2(ase_positionWS.x , ase_positionWS.y));
+				float2 panner186 = ( 1.0 * _Time.y * float2( 0.1,0.1 ) + ( appendResult94 * _DistortScale ));
+				float4 tex2DNode178 = tex2D( _DistortTex, panner186 );
+				float2 appendResult180 = (float2(tex2DNode178.r , tex2DNode178.g));
+				float2 distortUV183 = ( texCoord184 + ( (appendResult180*2.0 + -1.0) * _distortStrength ) );
+				float4 tex2DNode2 = tex2D( _MainTex, distortUV183 );
 				float3 lerpResult133 = lerp( float3( 1,1,1 ) , ( (tex2DNode2).rgb * _EmissionTint ) , _UseTextureColor);
 				float smoothstepResult129 = smoothstep( _RampMin , ( _RampMin + _RampSmooth ) , tex2DNode2.r);
 				float smoothstepResult135 = smoothstep( _EdgeMin , ( _EdgeMin + _EdgeSmooth ) , tex2DNode2.r);
-				float3 ase_worldPos = IN.ase_texcoord3.xyz;
-				float2 appendResult94 = (float2(ase_worldPos.x , ase_worldPos.y));
 				float detail107 = ( tex2D( _DetailNoiseMap, ( appendResult94 * _DetailNoiseScale ) ).r * _DetailStrength );
 				float simplePerlin2D97 = snoise( ( IN.texCoord0.xy * _DissolveScale ) );
 				simplePerlin2D97 = simplePerlin2D97*0.5 + 0.5;
@@ -492,8 +533,8 @@ Shader "AmplifyShaders/Particle/WobbleDissolve"
 
             HLSLPROGRAM
 
-			#define ASE_VERSION 19701
-			#define ASE_SRP_VERSION 120112
+			#define ASE_VERSION 19801
+			#define ASE_SRP_VERSION 140011
 
 
 			#pragma vertex vert
@@ -511,16 +552,32 @@ Shader "AmplifyShaders/Particle/WobbleDissolve"
 			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Texture.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
+			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Input.hlsl"
 			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/TextureStack.hlsl"
+
+			
+            #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/FoveatedRendering.hlsl"
+           
+
+			
+            #if ASE_SRP_VERSION >=140009
+			#include_with_pragmas "Packages/com.unity.render-pipelines.core/ShaderLibrary/FoveatedRenderingKeywords.hlsl"
+			#endif
+		
+
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ShaderGraphFunctions.hlsl"
+			#include_with_pragmas "Packages/com.unity.render-pipelines.universal/ShaderLibrary/DOTS.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/ShaderPass.hlsl"
 
 			
 
 			sampler2D _MainTex;
+			sampler2D _DistortTex;
 			sampler2D _DetailNoiseMap;
 			CBUFFER_START( UnityPerMaterial )
 			float _WobbleStrength;
+			float _DistortScale;
+			float _distortStrength;
 			float _EmissionTint;
 			float _UseTextureColor;
 			float _RampMin;
@@ -600,8 +657,8 @@ Shader "AmplifyShaders/Particle/WobbleDissolve"
 				float3 appendResult173 = (float3(break174.x , break174.y , 0.0));
 				float3 vertexOffset175 = appendResult173;
 				
-				float3 ase_worldPos = TransformObjectToWorld( (v.positionOS).xyz );
-				o.ase_texcoord1.xyz = ase_worldPos;
+				float3 ase_positionWS = TransformObjectToWorld( ( v.positionOS ).xyz );
+				o.ase_texcoord1.xyz = ase_positionWS;
 				
 				o.ase_texcoord.xy = v.ase_texcoord.xy;
 				
@@ -629,13 +686,17 @@ Shader "AmplifyShaders/Particle/WobbleDissolve"
 
 			half4 frag(VertexOutput IN) : SV_TARGET
 			{
-				float2 texCoord152 = IN.ase_texcoord.xy * float2( 1,1 ) + float2( 0,0 );
-				float4 tex2DNode2 = tex2D( _MainTex, texCoord152 );
+				float2 texCoord184 = IN.ase_texcoord.xy * float2( 1,1 ) + float2( 0,0 );
+				float3 ase_positionWS = IN.ase_texcoord1.xyz;
+				float2 appendResult94 = (float2(ase_positionWS.x , ase_positionWS.y));
+				float2 panner186 = ( 1.0 * _Time.y * float2( 0.1,0.1 ) + ( appendResult94 * _DistortScale ));
+				float4 tex2DNode178 = tex2D( _DistortTex, panner186 );
+				float2 appendResult180 = (float2(tex2DNode178.r , tex2DNode178.g));
+				float2 distortUV183 = ( texCoord184 + ( (appendResult180*2.0 + -1.0) * _distortStrength ) );
+				float4 tex2DNode2 = tex2D( _MainTex, distortUV183 );
 				float3 lerpResult133 = lerp( float3( 1,1,1 ) , ( (tex2DNode2).rgb * _EmissionTint ) , _UseTextureColor);
 				float smoothstepResult129 = smoothstep( _RampMin , ( _RampMin + _RampSmooth ) , tex2DNode2.r);
 				float smoothstepResult135 = smoothstep( _EdgeMin , ( _EdgeMin + _EdgeSmooth ) , tex2DNode2.r);
-				float3 ase_worldPos = IN.ase_texcoord1.xyz;
-				float2 appendResult94 = (float2(ase_worldPos.x , ase_worldPos.y));
 				float detail107 = ( tex2D( _DetailNoiseMap, ( appendResult94 * _DetailNoiseScale ) ).r * _DetailStrength );
 				float simplePerlin2D97 = snoise( ( IN.ase_texcoord.xy * _DissolveScale ) );
 				simplePerlin2D97 = simplePerlin2D97*0.5 + 0.5;
@@ -663,8 +724,8 @@ Shader "AmplifyShaders/Particle/WobbleDissolve"
 
             HLSLPROGRAM
 
-			#define ASE_VERSION 19701
-			#define ASE_SRP_VERSION 120112
+			#define ASE_VERSION 19801
+			#define ASE_SRP_VERSION 140011
 
 
 			#pragma vertex vert
@@ -682,16 +743,32 @@ Shader "AmplifyShaders/Particle/WobbleDissolve"
 			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Texture.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
+			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Input.hlsl"
 			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/TextureStack.hlsl"
+
+			
+            #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/FoveatedRendering.hlsl"
+           
+
+			
+            #if ASE_SRP_VERSION >=140009
+			#include_with_pragmas "Packages/com.unity.render-pipelines.core/ShaderLibrary/FoveatedRenderingKeywords.hlsl"
+			#endif
+		
+
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ShaderGraphFunctions.hlsl"
+			#include_with_pragmas "Packages/com.unity.render-pipelines.universal/ShaderLibrary/DOTS.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/ShaderPass.hlsl"
 
         	
 
 			sampler2D _MainTex;
+			sampler2D _DistortTex;
 			sampler2D _DetailNoiseMap;
 			CBUFFER_START( UnityPerMaterial )
 			float _WobbleStrength;
+			float _DistortScale;
+			float _distortStrength;
 			float _EmissionTint;
 			float _UseTextureColor;
 			float _RampMin;
@@ -770,8 +847,8 @@ Shader "AmplifyShaders/Particle/WobbleDissolve"
 				float3 appendResult173 = (float3(break174.x , break174.y , 0.0));
 				float3 vertexOffset175 = appendResult173;
 				
-				float3 ase_worldPos = TransformObjectToWorld( (v.positionOS).xyz );
-				o.ase_texcoord1.xyz = ase_worldPos;
+				float3 ase_positionWS = TransformObjectToWorld( ( v.positionOS ).xyz );
+				o.ase_texcoord1.xyz = ase_positionWS;
 				
 				o.ase_texcoord.xy = v.ase_texcoord.xy;
 				
@@ -799,13 +876,17 @@ Shader "AmplifyShaders/Particle/WobbleDissolve"
 
 			half4 frag(VertexOutput IN ) : SV_TARGET
 			{
-				float2 texCoord152 = IN.ase_texcoord.xy * float2( 1,1 ) + float2( 0,0 );
-				float4 tex2DNode2 = tex2D( _MainTex, texCoord152 );
+				float2 texCoord184 = IN.ase_texcoord.xy * float2( 1,1 ) + float2( 0,0 );
+				float3 ase_positionWS = IN.ase_texcoord1.xyz;
+				float2 appendResult94 = (float2(ase_positionWS.x , ase_positionWS.y));
+				float2 panner186 = ( 1.0 * _Time.y * float2( 0.1,0.1 ) + ( appendResult94 * _DistortScale ));
+				float4 tex2DNode178 = tex2D( _DistortTex, panner186 );
+				float2 appendResult180 = (float2(tex2DNode178.r , tex2DNode178.g));
+				float2 distortUV183 = ( texCoord184 + ( (appendResult180*2.0 + -1.0) * _distortStrength ) );
+				float4 tex2DNode2 = tex2D( _MainTex, distortUV183 );
 				float3 lerpResult133 = lerp( float3( 1,1,1 ) , ( (tex2DNode2).rgb * _EmissionTint ) , _UseTextureColor);
 				float smoothstepResult129 = smoothstep( _RampMin , ( _RampMin + _RampSmooth ) , tex2DNode2.r);
 				float smoothstepResult135 = smoothstep( _EdgeMin , ( _EdgeMin + _EdgeSmooth ) , tex2DNode2.r);
-				float3 ase_worldPos = IN.ase_texcoord1.xyz;
-				float2 appendResult94 = (float2(ase_worldPos.x , ase_worldPos.y));
 				float detail107 = ( tex2D( _DetailNoiseMap, ( appendResult94 * _DetailNoiseScale ) ).r * _DetailStrength );
 				float simplePerlin2D97 = snoise( ( IN.ase_texcoord.xy * _DissolveScale ) );
 				simplePerlin2D97 = simplePerlin2D97*0.5 + 0.5;
@@ -828,16 +909,27 @@ Shader "AmplifyShaders/Particle/WobbleDissolve"
 	Fallback Off
 }
 /*ASEBEGIN
-Version=19701
-Node;AmplifyShaderEditor.WorldPosInputsNode;93;-2576,176;Inherit;False;0;4;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3
+Version=19801
+Node;AmplifyShaderEditor.WorldPosInputsNode;93;-2928,288;Inherit;False;0;4;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3
+Node;AmplifyShaderEditor.DynamicAppendNode;94;-2752,288;Inherit;False;FLOAT2;4;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;1;FLOAT2;0
+Node;AmplifyShaderEditor.RangedFloatNode;179;-2512,944;Inherit;False;Property;_DistortScale;DistortScale;17;0;Create;True;0;0;0;False;0;False;1;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.SimpleMultiplyOpNode;177;-2480,832;Inherit;False;2;2;0;FLOAT2;0,0;False;1;FLOAT;0;False;1;FLOAT2;0
+Node;AmplifyShaderEditor.PannerNode;186;-2304,832;Inherit;False;3;0;FLOAT2;0,0;False;2;FLOAT2;0.1,0.1;False;1;FLOAT;1;False;1;FLOAT2;0
+Node;AmplifyShaderEditor.SamplerNode;178;-2080,832;Inherit;True;Property;_DistortTex;DistortTex;16;0;Create;True;0;0;0;False;0;False;-1;None;None;True;0;False;gray;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;6;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4;FLOAT3;5
+Node;AmplifyShaderEditor.DynamicAppendNode;180;-1792,832;Inherit;False;FLOAT2;4;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;1;FLOAT2;0
+Node;AmplifyShaderEditor.RangedFloatNode;182;-1376,944;Inherit;False;Property;_distortStrength;distortStrength;18;0;Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.ScaleAndOffsetNode;188;-1632,832;Inherit;False;3;0;FLOAT2;0,0;False;1;FLOAT;2;False;2;FLOAT;-1;False;1;FLOAT2;0
+Node;AmplifyShaderEditor.SimpleMultiplyOpNode;181;-1200,880;Inherit;False;2;2;0;FLOAT2;0,0;False;1;FLOAT;0;False;1;FLOAT2;0
+Node;AmplifyShaderEditor.TextureCoordinatesNode;184;-1184,752;Inherit;False;0;-1;2;3;2;SAMPLER2D;;False;0;FLOAT2;1,1;False;1;FLOAT2;0,0;False;5;FLOAT2;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.SimpleAddOpNode;185;-928,800;Inherit;False;2;2;0;FLOAT2;0,0;False;1;FLOAT2;0,0;False;1;FLOAT2;0
 Node;AmplifyShaderEditor.RangedFloatNode;102;-2416,352;Inherit;False;Property;_DetailNoiseScale;DetailNoiseScale;13;0;Create;True;0;0;0;False;0;False;1;0;0;0;0;1;FLOAT;0
-Node;AmplifyShaderEditor.DynamicAppendNode;94;-2400,176;Inherit;False;FLOAT2;4;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;1;FLOAT2;0
+Node;AmplifyShaderEditor.RegisterLocalVarNode;183;-800,800;Inherit;False;distortUV;-1;True;1;0;FLOAT2;0,0;False;1;FLOAT2;0
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;101;-2192,288;Inherit;False;2;2;0;FLOAT2;0,0;False;1;FLOAT;0;False;1;FLOAT2;0
 Node;AmplifyShaderEditor.RangedFloatNode;137;-1408,-128;Inherit;False;Property;_EdgeSmooth;EdgeSmooth;7;0;Create;True;0;0;0;False;0;False;0.1;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.RangedFloatNode;136;-1408,-240;Inherit;False;Property;_EdgeMin;EdgeMin;6;0;Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.RangedFloatNode;96;-3264,-160;Inherit;False;Property;_DissolveScale;DissolveScale;11;0;Create;True;0;0;0;False;0;False;1;1;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.TexCoordVertexDataNode;157;-3296,-288;Inherit;False;0;2;0;5;FLOAT2;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
-Node;AmplifyShaderEditor.TextureCoordinatesNode;152;-1616,-768;Inherit;False;0;-1;2;3;2;SAMPLER2D;;False;0;FLOAT2;1,1;False;1;FLOAT2;0,0;False;5;FLOAT2;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.GetLocalVarNode;187;-1900.901,-663.6636;Inherit;False;183;distortUV;1;0;OBJECT;;False;1;FLOAT2;0
 Node;AmplifyShaderEditor.SamplerNode;98;-2048,288;Inherit;True;Property;_DetailNoiseMap;DetailNoiseMap;12;0;Create;True;0;0;0;False;0;False;-1;2b7311c45ec18d14ca7aa0825cfcff7b;2b7311c45ec18d14ca7aa0825cfcff7b;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;6;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4;FLOAT3;5
 Node;AmplifyShaderEditor.RangedFloatNode;121;-1964.269,588.7639;Inherit;False;Property;_DetailStrength;DetailStrength;14;0;Create;True;0;0;0;False;0;False;1;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.RangedFloatNode;130;-1296,-528;Inherit;False;Property;_RampMin;RampMin;4;0;Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0
@@ -884,12 +976,25 @@ Node;AmplifyShaderEditor.RegisterLocalVarNode;175;768,1280;Inherit;False;vertexO
 Node;AmplifyShaderEditor.LerpOp;133;-320,-864;Inherit;False;3;0;FLOAT3;1,1,1;False;1;FLOAT3;0,0,0;False;2;FLOAT;0;False;1;FLOAT3;0
 Node;AmplifyShaderEditor.DynamicAppendNode;69;1008,-960;Inherit;False;FLOAT4;4;0;FLOAT3;0,0,0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;1;FLOAT4;0
 Node;AmplifyShaderEditor.GetLocalVarNode;176;976,-848;Inherit;False;175;vertexOffset;1;0;OBJECT;;False;1;FLOAT3;0
+Node;AmplifyShaderEditor.TextureCoordinatesNode;152;-1872,-800;Inherit;False;0;-1;2;3;2;SAMPLER2D;;False;0;FLOAT2;1,1;False;1;FLOAT2;0,0;False;5;FLOAT2;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;114;1328,-784;Float;False;False;-1;2;UnityEditor.ShaderGraph.GenericShaderGraphMaterialGUI;0;1;New Amplify Shader;cf964e524c8e69742b1d21fbe2ebcc4a;True;Sprite Unlit Forward;0;1;Sprite Unlit Forward;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;True;0;True;12;all;0;False;True;2;5;False;;10;False;;3;1;False;;10;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;2;False;;True;3;False;;True;True;0;False;;0;False;;True;1;LightMode=UniversalForward;False;False;0;;0;0;Standard;0;False;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;115;1328,-784;Float;False;False;-1;2;UnityEditor.ShaderGraph.GenericShaderGraphMaterialGUI;0;1;New Amplify Shader;cf964e524c8e69742b1d21fbe2ebcc4a;True;SceneSelectionPass;0;2;SceneSelectionPass;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;True;0;True;12;all;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;1;LightMode=SceneSelectionPass;False;False;0;;0;0;Standard;0;False;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;116;1328,-784;Float;False;False;-1;2;UnityEditor.ShaderGraph.GenericShaderGraphMaterialGUI;0;1;New Amplify Shader;cf964e524c8e69742b1d21fbe2ebcc4a;True;ScenePickingPass;0;3;ScenePickingPass;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;True;0;True;12;all;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;1;LightMode=Picking;False;False;0;;0;0;Standard;0;False;0
-Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;113;1184,-960;Float;False;True;-1;2;UnityEditor.ShaderGraph.GenericShaderGraphMaterialGUI;0;15;AmplifyShaders/Particle/WobbleDissolve;cf964e524c8e69742b1d21fbe2ebcc4a;True;Sprite Unlit;0;0;Sprite Unlit;4;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;4;RenderPipeline=UniversalPipeline;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;DisableBatching=True=DisableBatching;True;0;True;12;all;0;True;True;2;5;False;;10;False;;3;1;False;;10;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;2;False;;True;3;False;;True;True;0;False;;0;False;;True;1;LightMode=Universal2D;False;False;0;;0;0;Standard;3;Vertex Position;1;638687503827006269;Debug Display;0;0;External Alpha;0;0;0;4;True;True;True;True;False;;False;0
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;113;1184,-960;Float;False;True;-1;2;UnityEditor.ShaderGraph.GenericShaderGraphMaterialGUI;0;14;AmplifyShaders/Particle/WobbleDissolve;cf964e524c8e69742b1d21fbe2ebcc4a;True;Sprite Unlit;0;0;Sprite Unlit;4;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;4;RenderPipeline=UniversalPipeline;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;DisableBatching=True=DisableBatching;True;0;True;12;all;0;True;True;2;5;False;;10;False;;3;1;False;;10;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;2;False;;True;3;False;;True;True;0;False;;0;False;;True;1;LightMode=Universal2D;False;False;0;;0;0;Standard;3;Vertex Position;1;638687503827006269;Debug Display;0;0;External Alpha;0;0;0;4;True;True;True;True;False;;False;0
 WireConnection;94;0;93;1
 WireConnection;94;1;93;2
+WireConnection;177;0;94;0
+WireConnection;177;1;179;0
+WireConnection;186;0;177;0
+WireConnection;178;1;186;0
+WireConnection;180;0;178;1
+WireConnection;180;1;178;2
+WireConnection;188;0;180;0
+WireConnection;181;0;188;0
+WireConnection;181;1;182;0
+WireConnection;185;0;184;0
+WireConnection;185;1;181;0
+WireConnection;183;0;185;0
 WireConnection;101;0;94;0
 WireConnection;101;1;102;0
 WireConnection;98;1;101;0
@@ -897,7 +1002,7 @@ WireConnection;138;0;136;0
 WireConnection;138;1;137;0
 WireConnection;95;0;157;0
 WireConnection;95;1;96;0
-WireConnection;2;1;152;0
+WireConnection;2;1;187;0
 WireConnection;120;0;98;1
 WireConnection;120;1;121;0
 WireConnection;132;0;130;0
@@ -950,4 +1055,4 @@ WireConnection;69;3;103;0
 WireConnection;113;1;69;0
 WireConnection;113;3;176;0
 ASEEND*/
-//CHKSM=A1200D6524B109403C5E4525007D4FB203A81ED0
+//CHKSM=716D95AF89B36418CA56DE4F8178DF0A6D67844D
