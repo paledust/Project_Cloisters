@@ -125,9 +125,9 @@ public class IC_Narrative : IC_Basic
                 controlledCircle.OnHeavyCollide();
                 lastCollisionTime = Time.time;
                 //Stop Input and bounce off the circle
-                EventHandler.Call_OnFlushInput();
+                // EventHandler.Call_OnFlushInput();
                 Vector3 force = collision.impulse.normalized * 5;
-                controlledCircle.m_rigid.velocity = -force;
+                // controlledCircle.m_rigid.velocity = -force;
                 collidableCircle.OnCollideWithControlledCircle(controlledCircle, collision.contacts[0].point, strength);
                 //Spawn Circle
                 //Don't spawn if no text needed
@@ -178,6 +178,7 @@ public class IC_Narrative : IC_Basic
                         //No spawn
                         return;
                 }
+                collidedCircle.ChangeCircleType(Clickable_Circle.CircleType.Hollow);
                 //Create Connection Line
                 connectLineController.BuildConnectLine(controlledCircle.GetNarrativeCircleNode(), collidedCircle.GetNarrativeCircleNode());
             }

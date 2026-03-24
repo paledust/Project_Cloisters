@@ -70,7 +70,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DistortTex:
-        m_Texture: {fileID: 2800000, guid: 201ebc1b7bdae184384a7832e8bc52e5, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5258764dd7274cb47bd6b840cf79dfb2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
@@ -139,7 +139,7 @@ Material:
     - _DissolveSmoothness: 0.5
     - _DissolveStart: 0.5
     - _Distort: 0.82
-    - _DistortScale: 0.1
+    - _DistortScale: 0.25
     - _DstBlend: 0
     - _EdgeMin: 0.82
     - _EdgeSmooth: 0.42

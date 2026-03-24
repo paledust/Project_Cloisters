@@ -10,6 +10,7 @@ public class Clickable_Circle : Basic_Clickable
         Normal, //Normal Circle, spawn new Circles once collide.
         Target, //Target Circle mostly same as Normal Circle, but the newly spanwed circles must contain a narrative circle.
         Narrative, //Contain text, collide will spawn nothing.
+        Hollow, //Circle that collided and poped other circles.
     }
     [System.Serializable]
     public class CircleWobble{
@@ -127,9 +128,16 @@ public class Clickable_Circle : Basic_Clickable
     public void TriggerCollideRipple()=>p_ripple.Play(true);
     public void ChangeCircleType(CircleType newType){
         circleType = newType;
-        if(circleType == CircleType.Target)
+        switch(newType)
         {
-            spriteGlow.DOFade(0.25f, 1f).SetEase(Ease.OutQuad);
+            case CircleType.Target:
+                spriteGlow.DOFade(0.25f, 1f).SetEase(Ease.OutQuad);
+                break;
+            case CircleType.Hollow:
+                spriteGlow.DOFade(0.05f, 0.5f).SetEase(Ease.OutQuad);
+                break;
+            default:
+                break;
         }
     }
     void OnCollisionEnter(Collision collision){
