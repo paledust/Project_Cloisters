@@ -82,6 +82,6 @@ public class NarrativeConnectLine : MonoBehaviour
         {
             yield break;
         }
-        joint = PhysicDragManager.GetNewBodyConnector(fromNode.GetComponent<Rigidbody>(), toNode.GetComponent<Rigidbody>(), 10f, 2f);
+        joint = PhysicDragManager.GetNewBodyConnector(fromNode.GetComponent<Rigidbody>(), toNode.GetComponent<Rigidbody>(), 10f, 2f, 6f);
     }
 }

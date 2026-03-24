@@ -178,6 +178,7 @@ public class IC_Narrative : IC_Basic
                         //No spawn
                         return;
                 }
+                collidableCircle.HollowCircle();
                 collidedCircle.ChangeCircleType(Clickable_Circle.CircleType.Hollow);
                 //Create Connection Line
                 connectLineController.BuildConnectLine(controlledCircle.GetNarrativeCircleNode(), collidedCircle.GetNarrativeCircleNode());
@@ -188,7 +189,7 @@ public class IC_Narrative : IC_Basic
     {
         var circle = circleManager.SpawnAtPoint(Pos, Random.Range(0.8f, 1.2f), NarrativeCircleManager.SpawnStyle.PopUp);
         Vector3 dir = (circle.transform.position - sourcePos).normalized;
-        circle.m_rigidbody.AddForce(dir * Random.Range(13, 15), ForceMode.VelocityChange);
+        circle.m_rigidbody.AddForce(dir * Random.Range(10, 14), ForceMode.VelocityChange);
         return circle;
     }
     public NarrativeTextData GetNextNarrativeTextData()

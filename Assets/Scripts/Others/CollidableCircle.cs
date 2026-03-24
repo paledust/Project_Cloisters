@@ -56,6 +56,7 @@ public class CollidableCircle : MonoBehaviour
     private const string EXPLODE_ANIMATION = "CircleExplode";
     private const string FLOAT_ANIMATION = "CircleFloat";
     private const string POPUP_ANIMATION = "CirclePopUp";
+    private const string HOLLOW_ANIMATION = "CircleHollow";
 
     private Action onCircleExplode;
 
@@ -93,6 +94,10 @@ public class CollidableCircle : MonoBehaviour
     public void ExplodeCircle()
     {
         circleAnime.Play(EXPLODE_ANIMATION);
+    }
+    public void HollowCircle()
+    {
+        circleAnime.Play(HOLLOW_ANIMATION);
     }
 
     #region Circle Motion

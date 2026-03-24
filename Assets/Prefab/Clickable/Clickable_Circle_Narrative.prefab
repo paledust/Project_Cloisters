@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.28130916, y: 0.28130916, z: 0.28130916}
+  m_LocalScale: {x: 4.2888665, y: 4.2888665, z: 4.2888665}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4527830689480472958}
@@ -14830,7 +14830,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.16818, y: 0.16818, z: 0.16818}
+  m_LocalScale: {x: 2.5640886, y: 2.5640886, z: 2.5640886}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4527830689480472958}
@@ -15085,6 +15085,21 @@ PrefabInstance:
       propertyPath: circleTransistors.Array.size
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4337985783947377353, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.92
+      objectReference: {fileID: 0}
+    - target: {fileID: 4337985783947377353, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.7045537
+      objectReference: {fileID: 0}
+    - target: {fileID: 4337985783947377353, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.60628
+      objectReference: {fileID: 0}
     - target: {fileID: 4337985784200938162, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -15224,6 +15239,7 @@ Animation:
   - {fileID: 7400000, guid: a1b601f2da93691409773939b92f9d37, type: 2}
   - {fileID: 7400000, guid: 17a1dc8551e07ec42b59cb35ca84fc5b, type: 2}
   - {fileID: 7400000, guid: ac01eeff1b775ba4e97c2a3eac599c50, type: 2}
+  - {fileID: 7400000, guid: d91cd4e829e0525498e719f5586992b3, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
@@ -15247,8 +15263,8 @@ MonoBehaviour:
   m_rigid: {fileID: 8964006862732702565}
   circleAnime: {fileID: 3675650337772343011}
   circleRoot: {fileID: 4527830689480472958}
-  noiseFreq: 11
-  noiseAmp: 6
+  noiseFreq: 4
+  noiseAmp: 3
   circleOpacity:
   - {fileID: 9107378040283928094}
   - {fileID: 5345266303561280828}
