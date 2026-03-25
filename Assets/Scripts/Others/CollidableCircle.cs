@@ -40,6 +40,9 @@ public class CollidableCircle : MonoBehaviour
     [SerializeField] private TextMeshPro txt;
     [SerializeField] private ParticleSystem p_hasText;
 
+[Header("VFX Explode Resolve")]
+    [SerializeField] private Transform vfxRoot;
+
     private bool isGrowing = false;
     private bool isSpawning = false;
     private Clickable_Circle circle;
@@ -71,6 +74,10 @@ public class CollidableCircle : MonoBehaviour
     void Update(){
         circleMotionControl.UpdateCircleMotion(m_rigid.velocity);
     }
+    void OnDestroy()
+    {
+        onCircleExplode = null;
+    }
     void OnDrawGizmos(){
         Gizmos.color = Color.green;
         Gizmos.DrawSphere(targetPoint, 0.01f);
@@ -94,6 +101,8 @@ public class CollidableCircle : MonoBehaviour
     public void ExplodeCircle()
     {
         circleAnime.Play(EXPLODE_ANIMATION);
+        vfxRoot.SetParent(null);
+        Destroy(vfxRoot.gameObject, 4f);
     }
     public void HollowCircle()
     {
@@ -157,9 +166,13 @@ public class CollidableCircle : MonoBehaviour
         txt.text = text.ToString();
         txt.gameObject.SetActive(true);
     }
-    public void OnExplode(Action onExplode)
+    public void RegisterOnExplode(Action onExplode)
     {
-        this.onCircleExplode = onExplode;
+        this.onCircleExplode += onExplode;
+    }
+    public void UnregisterOnExplode(Action onExplode)
+    {
+        this.onCircleExplode -= onExplode;
     }
     #endregion
 

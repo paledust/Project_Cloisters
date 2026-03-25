@@ -8,18 +8,24 @@ public class NarrativeCircleManager : Basic_ObjectPool<CollidableCircle>
         FloatUp,
         PopUp
     }
+    private IC_Narrative narrative;
 [Header("Spawn Settings")]
     [SerializeField] private Vector2 spawnSize;
+    
 [Header("Border Setting")]
     [SerializeField] private NarrativeRect rectSelector;
 
 [Header("Force Field")]
     [SerializeField] private NarrativeRandomForceField forceField;
+    [SerializeField, ShowOnly] private List<CollidableCircle> listCircles = new List<CollidableCircle>();
 
-    private List<CollidableCircle> listCircles = new List<CollidableCircle>();
-
+    void Start()
+    {
+        narrative = GetComponent<IC_Narrative>();
+    }
     void LateUpdate()
     {
+        //Remove Destroyed Circles
         for(int i = listCircles.Count - 1; i>=0; i--)
         {
             if(listCircles[i] == null)
@@ -27,6 +33,7 @@ public class NarrativeCircleManager : Basic_ObjectPool<CollidableCircle>
                 listCircles.RemoveAt(i);
             }
         }
+        //Add Force Field to all circle
         for(int i = listCircles.Count - 1; i>=0; i--)
         {
             var circle = listCircles[i];
@@ -72,7 +79,39 @@ public class NarrativeCircleManager : Basic_ObjectPool<CollidableCircle>
             }
         }
         listCircles.Add(go);
+        go.RegisterOnExplode(() => OnCircleExplode(go));
         return go;
+    }
+    void OnCircleExplode(CollidableCircle circle)
+    {
+        listCircles.Remove(circle);
+
+        if(narrative.m_isDone)
+            return;
+        if(listCircles.Count<2)
+        {
+            Debug.LogWarning("Too few circles left, spawn more circle");
+            SpawnMakeUpCircle();
+        }
+        else
+        {
+            foreach(var content in listCircles)
+            {
+                if(content.m_circle.m_circleType != Clickable_Circle.CircleType.Hollow)
+                {
+                    return;
+                }
+            }
+            SpawnMakeUpCircle();
+        }
+    }
+    void SpawnMakeUpCircle()
+    {
+        int spawnCount = Mathf.Max(0, 2-listCircles.Count) + Random.Range(0, 3);
+        for(int i=0; i<spawnCount; i++)
+        {
+            SpawnAtPoint(new Vector3(Random.Range(rectSelector.MinX, rectSelector.MaxX)*0.5f, Random.Range(rectSelector.MinY, rectSelector.MaxY)*0.5f, 35), Random.Range(3f, 4f), SpawnStyle.FloatUp);
+        }
     }
     protected override void PrepareTarget(CollidableCircle target)
     {
@@ -95,7 +134,7 @@ public class NarrativeCircleManager : Basic_ObjectPool<CollidableCircle>
         });
         return circles;
     }
-
+    public List<CollidableCircle> GetAllCircles() => listCircles;
 # if UNITY_EDITOR
     void OnDrawGizmosSelected()
     {

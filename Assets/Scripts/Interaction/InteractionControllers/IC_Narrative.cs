@@ -168,7 +168,7 @@ public class IC_Narrative : IC_Basic
                                                                                 collidedCircle.transform.position);
                             narrativeCircle.m_circle.ChangeCircleType(Clickable_Circle.CircleType.Narrative);
                             narrativeCircle.ShowText(narrativeText.content);
-                            narrativeCircle.OnExplode(narrativeText.ShowText);
+                            narrativeCircle.RegisterOnExplode(narrativeText.ShowText);
                         }
 
                         PopupCircleAtPosAndPushedAway(collidedCircle.transform.position-Quaternion.Euler(0,0,Random.Range(-spawnAngle, spawnAngle))*diff.normalized,

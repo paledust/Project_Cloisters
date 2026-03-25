@@ -93,6 +93,10 @@ public class Clickable_Circle : Basic_Clickable
         if(m_rigid.isKinematic)
             m_rigid.MovePosition(m_rigid.position + velocity * Time.fixedDeltaTime);
     }
+    void OnDestroy()
+    {
+        spriteGlow.DOKill();
+    }
     public override void OnClick(PlayerController player, Vector3 hitPos)
     {
         base.OnClick(player, hitPos);
