@@ -34,6 +34,7 @@ public class IC_Experimental : IC_Basic
 
 [Header("End")]
     [SerializeField] private PlayableDirector endDirector;
+    [SerializeField] private GameObject[] shapePushers;
 
     private int shapeFront;
     private int stageIndex = 0;
@@ -205,11 +206,15 @@ public class IC_Experimental : IC_Basic
     }
     IEnumerator coroutineEnd()
     {
+        foreach(var shapePusher in shapePushers)
+        {
+            shapePusher.SetActive(false);
+        }
         foreach(var shape in activeBodies)
         {
             shape.m_rigid.DOMove(shape.transform.localPosition.normalized*20+shape.m_rigid.position, Random.Range(0.5f,1f)).SetEase(Ease.InQuad).SetDelay(Random.Range(0, 0.5f));
         }
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(2f);
         endDirector.Play();
         yield return new WaitForSeconds(1f);
         EventHandler.Call_OnInteractionUnreachable(this);
