@@ -191,6 +191,8 @@ public class IC_Experimental : IC_Basic
         {
             if(stageIndex>=enlargeStage && rangeDetection.CanEnlarge())
                 rangeDetection.EnlargeDetection();
+            else if(stageIndex>= stages.Length-1 && rangeDetection.CanMaximum())
+                rangeDetection.MaximumDetection();
 
             rangeDetection.InitRangeDetect(activeBodies.Count);
             EventHandler.Call_OnTransitionEnd();
@@ -207,7 +209,7 @@ public class IC_Experimental : IC_Basic
         {
             shape.m_rigid.DOMove(shape.transform.localPosition.normalized*20+shape.m_rigid.position, Random.Range(0.5f,1f)).SetEase(Ease.InQuad).SetDelay(Random.Range(0, 0.5f));
         }
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2.5f);
         endDirector.Play();
         yield return new WaitForSeconds(1f);
         EventHandler.Call_OnInteractionUnreachable(this);

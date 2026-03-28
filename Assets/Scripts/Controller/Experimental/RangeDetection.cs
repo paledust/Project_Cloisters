@@ -17,10 +17,11 @@ public class RangeDetection : MonoBehaviour
     private Collider2D m_collider;
     private bool isPunching;
     private bool hasEnlarged = false;
+    private bool hasMaximized = false;
     private int totalBodyCount;
     private float testTimer = 0;
-    public int BodyCount => bodyHash.Count;
     private const string SHAPE_CHANGE_ANIM = "ShapeChange";
+    private const string SHAPE_EXPAND_ANIME = "ShapeExpand";
 
 
     void Awake() => m_collider = GetComponent<Collider2D>();
@@ -46,6 +47,11 @@ public class RangeDetection : MonoBehaviour
     {
         hasEnlarged = true;
         shapeAnimator.Play(SHAPE_CHANGE_ANIM);
+    }
+    public void MaximumDetection()
+    {
+        hasMaximized = true;
+        shapeAnimator.Play(SHAPE_EXPAND_ANIME);
     }
     public void RangeAppear(float scale)
     {
@@ -82,6 +88,7 @@ public class RangeDetection : MonoBehaviour
     public bool CheckPoint(Vector2 point) => m_collider.OverlapPoint(point);
     public void InitRangeDetect(int totalActiveBodyCount) => totalBodyCount = totalActiveBodyCount;
     public bool CanEnlarge() => !hasEnlarged;
+    public bool CanMaximum() => !hasMaximized;
     void OnTriggerEnter2D(Collider2D other)
     {
         var body = other.GetComponentInParent<ConnectBody>();
