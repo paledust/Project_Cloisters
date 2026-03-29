@@ -44,10 +44,13 @@ public class IC_Manager : MonoBehaviour
     void Start()
     {
     #if UNITY_EDITOR
-        StartAtInteraction(StartIndex);
-    #else
-        StartAtInteraction(LevelProgressionManager.Instance.levelProgress);
+        if(startAtDebugIndex)
+        {
+            StartAtInteraction(StartIndex);
+            return;
+        }
     #endif
+        StartAtInteraction(LevelProgressionManager.Instance.LevelProgress);
     }
 
 #if UNITY_EDITOR
@@ -94,6 +97,7 @@ public class IC_Manager : MonoBehaviour
         CleanUpAllInteractions();
 
         interactionIndex = startIndex;
+        LevelProgressionManager.Instance.SetProgress(interactionIndex);
         interactionControllers[startIndex].PreloadInteraction();
         interactionControllers[startIndex].EnterInteraction();
         loadedIC_Count ++;
@@ -109,11 +113,17 @@ public class IC_Manager : MonoBehaviour
 
     void Debug_Progress(InputAction.CallbackContext context)
     {
-        
+        int nextIndex = interactionIndex + 1;
+        nextIndex = Mathf.Clamp(nextIndex, 0, interactionControllers.Length-1);
+        LevelProgressionManager.Instance.SetProgress(nextIndex);
+        GameManager.Instance.RestartLevel();
     }
     void Debug_Regress(InputAction.CallbackContext context)
     {
-
+        int nextIndex = interactionIndex - 1;
+        nextIndex = Mathf.Clamp(nextIndex, 0, interactionControllers.Length-1);
+        LevelProgressionManager.Instance.SetProgress(nextIndex);
+        GameManager.Instance.RestartLevel();
     }
 
 #if UNITY_EDITOR

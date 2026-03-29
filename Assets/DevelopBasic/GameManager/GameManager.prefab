@@ -132,8 +132,6 @@ MonoBehaviour:
   isTesting: 1
   demoText: {fileID: 6073298263620526879}
   loadInitSceneFromGameManager: 1
-  launchSettings: {fileID: 11400000, guid: df611141ed597a341a14d67be49bf1fb, type: 2}
-  debugSettings: {fileID: 11400000, guid: a29fe9365c3ee6449be4fa007a8104a4, type: 2}
   debugActions:
     m_Name: Debug Actions
     m_Id: ba3d51f1-048f-4d77-8a8d-e1782e6bd764
@@ -175,22 +173,6 @@ MonoBehaviour:
       m_Type: 1
       m_ExpectedControlType: Button
       m_Id: 48da3fbc-5594-4630-ad29-26883c48625c
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    - m_Name: jump
-      m_Type: 1
-      m_ExpectedControlType: Button
-      m_Id: 90c7b68a-9c7f-48bb-8e15-3e5b590f4252
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    - m_Name: previous
-      m_Type: 1
-      m_ExpectedControlType: Button
-      m_Id: 72f206eb-1f24-4eef-a3cd-68aea51ad915
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -283,54 +265,6 @@ MonoBehaviour:
       m_Processors: 
       m_Groups: 
       m_Action: quit
-      m_Flags: 8
-    - m_Name: One Modifier
-      m_Id: 6a15838c-3f41-486a-9a5e-c0c1a41886b6
-      m_Path: OneModifier
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: jump
-      m_Flags: 4
-    - m_Name: modifier
-      m_Id: 6edb0701-1e3b-45c3-a9ff-00a79ddfd604
-      m_Path: <Keyboard>/shift
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: jump
-      m_Flags: 8
-    - m_Name: binding
-      m_Id: d93f3b5b-0f3f-4f4e-8223-8f6b70f9dcbf
-      m_Path: <Keyboard>/rightArrow
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: jump
-      m_Flags: 8
-    - m_Name: One Modifier
-      m_Id: de76eee3-853a-47f6-9a27-f6fde3255733
-      m_Path: OneModifier
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: previous
-      m_Flags: 4
-    - m_Name: modifier
-      m_Id: 561a80ce-a4c4-4631-8fe0-c9478b0fc87e
-      m_Path: <Keyboard>/shift
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: previous
-      m_Flags: 8
-    - m_Name: binding
-      m_Id: 6fa56765-cfd3-4007-b9f2-678d8b811b88
-      m_Path: <Keyboard>/leftArrow
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: previous
       m_Flags: 8
 --- !u!1 &6659232793029695398
 GameObject:
