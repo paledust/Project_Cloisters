@@ -23,8 +23,6 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private Text demoText;
 [Header("Debug")]
     [SerializeField] private bool loadInitSceneFromGameManager = false;
-    [SerializeField] private GameLaunchSettings launchSettings;
-    [SerializeField] private GameLaunchSettings debugSettings;
     [SerializeField] private InputActionMap debugActions;
 
     private static bool isPaused = false;
@@ -38,11 +36,12 @@ public class GameManager : Singleton<GameManager>
         SaveManager.Initialize();
 
     #if UNITY_EDITOR || DEVELOPMENT_BUILD
-        debugActions["reset"].performed += Debug_ResetAndStart;
         debugActions["restart"].performed += Debug_RestartLevel;
         debugActions["save"].performed += Debug_Save;
         debugActions["load"].performed += Debug_Load;
         debugActions["quit"].performed += Debug_EndGame;
+        debugActions["jumpInteraction"].performed += Debug_JumpInteraction;
+        debugActions["previousInteraction"].performed += Debug_PreviousInteraction;
 
         if(isTesting) debugActions.Enable();
     #endif
@@ -52,16 +51,14 @@ public class GameManager : Singleton<GameManager>
     //Load Level
         if(loadInitSceneFromGameManager){
             BlackScreenCanvasGroup.alpha = 1;
-            SwitchingScene(string.Empty, InitScene);
+            SwitchingScene(string.Empty, InitScene, transitionDuration);
         }
         else {
-            LaunchSetting(debugSettings);
             currentScene = SceneManager.GetActiveScene().name;
         }
 
     #else
     //Since we don't have the saving system yet, the initiation should be done by loading the debug progress data.
-        LaunchSetting(launchSettings);
         SwitchingScene(string.Empty, InitScene);
     #endif
     }
@@ -69,11 +66,13 @@ public class GameManager : Singleton<GameManager>
         base.OnDestroy();
 
     #if UNITY_EDITOR || DEVELOPMENT_BUILD
-        debugActions["reset"].performed += Debug_ResetAndStart;
         debugActions["restart"].performed -= Debug_RestartLevel;
         debugActions["save"].performed -= Debug_Save;
         debugActions["load"].performed -= Debug_Load;
         debugActions["quit"].performed -= Debug_EndGame;
+        debugActions["jumpInteraction"].performed -= Debug_JumpInteraction;
+        debugActions["previousInteraction"].performed -= Debug_PreviousInteraction;
+
 
         if(debugActions.enabled)debugActions.Disable();
     #endif
@@ -105,12 +104,12 @@ public class GameManager : Singleton<GameManager>
 #endregion
 
 #region Scene Transition
-    public void SwitchingScene(string to, bool autosaveAfterTransition = true){
+    public void SwitchingScene(string to, float transition = 1, bool autosaveAfterTransition = true){
         string from = SceneManager.GetActiveScene().name;
-        SwitchingScene(from, to, autosaveAfterTransition);
+        SwitchingScene(from, to, transition, autosaveAfterTransition);
     }
-    void SwitchingScene(string from, string to, bool autosaveAfterTransition = true){
-        if(!IsSwitchingScene) StartCoroutine(SwitchSceneCoroutine(from, to, autosaveAfterTransition));
+    void SwitchingScene(string from, string to, float transition, bool autosaveAfterTransition = true){
+        if(!IsSwitchingScene) StartCoroutine(SwitchSceneCoroutine(from, to, transition, autosaveAfterTransition));
     }
     IEnumerator EndGameCoroutine(string level){
         StartCoroutine(FadeInBlackScreen(1f));
@@ -144,7 +143,7 @@ public class GameManager : Singleton<GameManager>
         Application.Quit();
     }
     IEnumerator RestartLevel(string level){
-        yield return FadeInBlackScreen(0.5f);
+        yield return FadeInBlackScreen(transitionDuration*0.5f);
         IsSwitchingScene = true;
         //TO DO: do something before the last scene is unloaded. e.g: call event of saving 
         EventHandler.Call_BeforeUnloadScene();
@@ -156,19 +155,19 @@ public class GameManager : Singleton<GameManager>
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(level));
         //TO DO: do something after the next scene is loaded. e.g: call event of loading
         yield return null;
-        yield return FadeOutBlackScreen(transitionDuration);
+        yield return FadeOutBlackScreen(transitionDuration*0.5f);
         EventHandler.Call_AfterLoadScene();
         
         IsSwitchingScene = false;
     }
-    IEnumerator SwitchSceneCoroutine(string from, string to, bool autosaveAfterTransition){
+    IEnumerator SwitchSceneCoroutine(string from, string to, float transition, bool autosaveAfterTransition){
         IsSwitchingScene = true;
         if(from != string.Empty){
         //TO DO: do something before the last scene is unloaded. e.g: call event of saving 
             lastScene = from;
             
             EventHandler.Call_BeforeUnloadScene();
-            yield return FadeInBlackScreen(transitionDuration);
+            yield return FadeInBlackScreen(transition*0.5f);
             yield return SceneManager.UnloadSceneAsync(from);
         }
     //TO DO: do something after the last scene is unloaded.
@@ -182,7 +181,7 @@ public class GameManager : Singleton<GameManager>
         if(autosaveAfterTransition) SaveGame(0);
 
         yield return null;
-        yield return FadeOutBlackScreen(transitionDuration);
+        yield return FadeOutBlackScreen(transition*0.5f);
 
         IsSwitchingScene = false;
     }
@@ -200,10 +199,6 @@ public class GameManager : Singleton<GameManager>
     }
 #endregion
 
-#region Launching
-    void LaunchSetting(GameLaunchSettings gameLaunchSettings){}
-#endregion
-
     public void LoadGame(int slotIndex)=>SaveManager.LoadGameState(slotIndex);
     public void SaveGame(int slotIndex)=>SaveManager.SaveGameState(slotIndex);
 
@@ -216,10 +211,11 @@ public class GameManager : Singleton<GameManager>
     }
     void Debug_Save(InputAction.CallbackContext callback)=>SaveManager.SaveGameState(0);
     void Debug_Load(InputAction.CallbackContext callback)=>SaveManager.LoadGameState(0);
-    void Debug_ResetAndStart(InputAction.CallbackContext callback)
+    void Debug_JumpInteraction(InputAction.CallbackContext callback)
     {
-        LevelProgressionManager.Instance.ResetProgression();
-        SwitchingScene(InitScene);
+    }
+    void Debug_PreviousInteraction(InputAction.CallbackContext callback)
+    {
     }
 #endregion
 }
