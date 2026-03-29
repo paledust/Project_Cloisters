@@ -38,6 +38,7 @@ public class GameManager : Singleton<GameManager>
         SaveManager.Initialize();
 
     #if UNITY_EDITOR || DEVELOPMENT_BUILD
+        debugActions["reset"].performed += Debug_ResetAndStart;
         debugActions["restart"].performed += Debug_RestartLevel;
         debugActions["save"].performed += Debug_Save;
         debugActions["load"].performed += Debug_Load;
@@ -68,6 +69,7 @@ public class GameManager : Singleton<GameManager>
         base.OnDestroy();
 
     #if UNITY_EDITOR || DEVELOPMENT_BUILD
+        debugActions["reset"].performed += Debug_ResetAndStart;
         debugActions["restart"].performed -= Debug_RestartLevel;
         debugActions["save"].performed -= Debug_Save;
         debugActions["load"].performed -= Debug_Load;
@@ -214,5 +216,13 @@ public class GameManager : Singleton<GameManager>
     }
     void Debug_Save(InputAction.CallbackContext callback)=>SaveManager.SaveGameState(0);
     void Debug_Load(InputAction.CallbackContext callback)=>SaveManager.LoadGameState(0);
+<<<<<<< Updated upstream
+=======
+    void Debug_ResetAndStart(InputAction.CallbackContext callback)
+    {
+        LevelProgressionManager.Instance.ResetProgression();
+        SwitchingScene(InitScene);
+    }
+>>>>>>> Stashed changes
 #endregion
 }

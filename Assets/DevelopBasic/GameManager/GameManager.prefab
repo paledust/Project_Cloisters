@@ -132,9 +132,13 @@ MonoBehaviour:
   isDemo: 1
   isTesting: 1
   demoText: {fileID: 6073298263620526879}
+<<<<<<< Updated upstream
   loadInitSceneFromGameManager: 0
   launchSettings: {fileID: 11400000, guid: df611141ed597a341a14d67be49bf1fb, type: 2}
   debugSettings: {fileID: 11400000, guid: a29fe9365c3ee6449be4fa007a8104a4, type: 2}
+=======
+  loadInitSceneFromGameManager: 1
+>>>>>>> Stashed changes
   debugActions:
     m_Name: Debug Actions
     m_Id: ba3d51f1-048f-4d77-8a8d-e1782e6bd764
@@ -172,6 +176,25 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
+<<<<<<< Updated upstream
+=======
+    - m_Name: quit
+      m_Type: 1
+      m_ExpectedControlType: Button
+      m_Id: 48da3fbc-5594-4630-ad29-26883c48625c
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    - m_Name: reset
+      m_Type: 1
+      m_ExpectedControlType: Button
+      m_Id: 7a20433b-5677-421b-9b0f-5576e14c0eee
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+>>>>>>> Stashed changes
     m_Bindings:
     - m_Name: Keyboard
       m_Id: 52a09791-3885-4f73-868b-39ccfc9b874b
@@ -237,6 +260,65 @@ MonoBehaviour:
       m_Groups: 
       m_Action: load
       m_Flags: 0
+<<<<<<< Updated upstream
+=======
+    - m_Name: Keyboard
+      m_Id: 7c9bf5f8-890f-4aeb-9619-aef2453f0b2f
+      m_Path: OneModifier
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: quit
+      m_Flags: 4
+    - m_Name: modifier
+      m_Id: 5aa6d17e-32bc-4ceb-9db1-dea97724069f
+      m_Path: <Keyboard>/shift
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: quit
+      m_Flags: 8
+    - m_Name: binding
+      m_Id: 25636c4a-f010-420b-9934-ee2486fb58f7
+      m_Path: <Keyboard>/q
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: quit
+      m_Flags: 8
+    - m_Name: Two Modifiers
+      m_Id: b8cb387f-d207-4a8d-befd-77d3aacf404c
+      m_Path: TwoModifiers
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: reset
+      m_Flags: 4
+    - m_Name: modifier1
+      m_Id: 62525113-5236-45c9-a65a-3ac16e9fb935
+      m_Path: <Keyboard>/shift
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: reset
+      m_Flags: 8
+    - m_Name: modifier2
+      m_Id: 68245bb0-1569-4edf-a022-19b3c08ee48e
+      m_Path: <Keyboard>/ctrl
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: reset
+      m_Flags: 8
+    - m_Name: binding
+      m_Id: 721d98f3-9eb0-4f61-b8d1-a5ea9ac1f4ce
+      m_Path: <Keyboard>/r
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: reset
+      m_Flags: 8
+>>>>>>> Stashed changes
 --- !u!1 &6659232793029695398
 GameObject:
   m_ObjectHideFlags: 0
