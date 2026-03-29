@@ -26,7 +26,7 @@ public class IC_Manager : MonoBehaviour
         debugActions["progress"].performed += Debug_Progress;
         debugActions["regress"].performed += Debug_Regress;
         debugActions["restart"].performed += Debug_RestartLevel;
-
+        debugActions["reset"].performed += Debug_Reset;
         debugActions.Enable();
     #endif
     }
@@ -39,6 +39,7 @@ public class IC_Manager : MonoBehaviour
         debugActions["progress"].performed -= Debug_Progress;
         debugActions["regress"].performed -= Debug_Regress;
         debugActions["restart"].performed -= Debug_RestartLevel;
+        debugActions["reset"].performed -= Debug_Reset;
 
         debugActions.Disable();
     #endif
@@ -143,6 +144,13 @@ public class IC_Manager : MonoBehaviour
         {
             CleanUp();
             GameManager.Instance.RestartLevel();
+        }
+    }
+    void Debug_Reset(InputAction.CallbackContext callback){
+        if(callback.ReadValueAsButton())
+        {
+            CleanUp();
+            GameManager.Instance.SwitchingScene("Intro");
         }
     }
     void CleanUp()
