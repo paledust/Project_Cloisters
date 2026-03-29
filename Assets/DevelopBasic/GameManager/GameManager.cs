@@ -216,13 +216,10 @@ public class GameManager : Singleton<GameManager>
     }
     void Debug_Save(InputAction.CallbackContext callback)=>SaveManager.SaveGameState(0);
     void Debug_Load(InputAction.CallbackContext callback)=>SaveManager.LoadGameState(0);
-<<<<<<< Updated upstream
-=======
     void Debug_ResetAndStart(InputAction.CallbackContext callback)
     {
         LevelProgressionManager.Instance.ResetProgression();
         SwitchingScene(InitScene);
     }
->>>>>>> Stashed changes
 #endregion
 }
