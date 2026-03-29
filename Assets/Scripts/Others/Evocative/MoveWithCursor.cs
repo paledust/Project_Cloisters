@@ -13,14 +13,21 @@ public class MoveWithCursor : MonoBehaviour
     [SerializeField, Range(0, 1), ShowOnly] private float controlValue = 0;
     private float depth = 32;
     private Rigidbody m_rigid;
+    private Camera mainCam;
     void Awake()
     {
         m_rigid = GetComponent<Rigidbody>();
     }
+    void Start()
+    {
+        mainCam = Camera.main;
+    }
     // Update is called once per frame
     void FixedUpdate()
     {
-        Vector3 worldPos = PlayerManager.Instance.GetCursorWorldPos(depth);
+        Vector3 cursorPos = PlayerManager.Instance.GetCursorScreenPos();
+        cursorPos.z = depth;
+        Vector3 worldPos = mainCam.ScreenToWorldPoint(cursorPos);
         if (FollowY)
         {
             worldPos.x = m_rigid.position.x;

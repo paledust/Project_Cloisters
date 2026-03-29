@@ -48,7 +48,10 @@ public class IC_Stylized : IC_Basic
     private float introOffsetPlanetAngle;
     private bool isExtending = false;
     private bool transitioning = false;
-
+    void Awake()
+    {
+        this.enabled = false;
+    }
     protected override void LoadAssets()
     {
         base.LoadAssets();
@@ -83,8 +86,8 @@ public class IC_Stylized : IC_Basic
     protected override void OnInteractionEnd()
     {
         base.OnInteractionEnd();
+        this.enabled = false;
         clickablePlanet.DisableHitbox();
-
         EventHandler.E_OnDrumKnocked -= DrumKnockedHandler;
         EventHandler.E_OnBassChargeBeat -= BassChargeBeatHandler;
     }

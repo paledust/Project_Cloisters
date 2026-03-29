@@ -46,6 +46,7 @@ public class CollidableCircle : MonoBehaviour
     private bool isGrowing = false;
     private bool isSpawning = false;
     private Clickable_Circle circle;
+    private NarrativeCircleNode narrativeCircleNode;
     private Vector3 targetPoint;
 
     public bool Collidable => m_collider.enabled;
@@ -66,6 +67,7 @@ public class CollidableCircle : MonoBehaviour
     void Awake()
     {
         circle = GetComponent<Clickable_Circle>();
+        narrativeCircleNode = GetComponent<NarrativeCircleNode>();
     }
     void Start(){
         if(circle.m_circleType == Clickable_Circle.CircleType.Target)
@@ -145,6 +147,7 @@ public class CollidableCircle : MonoBehaviour
     public void AE_OnExplode()
     {
         EventHandler.Call_OnNarrativeExplode(this);
+        narrativeCircleNode.NodeExplode();
         onCircleExplode?.Invoke();
     }
     public void AE_EnableHitbox(){

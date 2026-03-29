@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -36,7 +35,6 @@ public class GameManager : Singleton<GameManager>
         SaveManager.Initialize();
 
     #if UNITY_EDITOR || DEVELOPMENT_BUILD
-        debugActions["restart"].performed += Debug_RestartLevel;
         debugActions["save"].performed += Debug_Save;
         debugActions["load"].performed += Debug_Load;
         debugActions["quit"].performed += Debug_EndGame;
@@ -64,7 +62,6 @@ public class GameManager : Singleton<GameManager>
         base.OnDestroy();
 
     #if UNITY_EDITOR || DEVELOPMENT_BUILD
-        debugActions["restart"].performed -= Debug_RestartLevel;
         debugActions["save"].performed -= Debug_Save;
         debugActions["load"].performed -= Debug_Load;
         debugActions["quit"].performed -= Debug_EndGame;
@@ -199,18 +196,7 @@ public class GameManager : Singleton<GameManager>
 
 #region DEBUG ACTION
     void Debug_EndGame(InputAction.CallbackContext callback)=>EndGame();
-    void Debug_RestartLevel(InputAction.CallbackContext callback){
-        if(callback.ReadValueAsButton()){
-            RestartLevel();
-        }
-    }
     void Debug_Save(InputAction.CallbackContext callback)=>SaveManager.SaveGameState(0);
     void Debug_Load(InputAction.CallbackContext callback)=>SaveManager.LoadGameState(0);
-    void Debug_JumpInteraction(InputAction.CallbackContext callback)
-    {
-    }
-    void Debug_PreviousInteraction(InputAction.CallbackContext callback)
-    {
-    }
 #endregion
 }

@@ -1,4 +1,4 @@
-using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -25,6 +25,7 @@ public class IC_Manager : MonoBehaviour
     #if UNITY_EDITOR || DEVELOPMENT_BUILD
         debugActions["progress"].performed += Debug_Progress;
         debugActions["regress"].performed += Debug_Regress;
+        debugActions["restart"].performed += Debug_RestartLevel;
 
         debugActions.Enable();
     #endif
@@ -37,6 +38,7 @@ public class IC_Manager : MonoBehaviour
     #if UNITY_EDITOR || DEVELOPMENT_BUILD
         debugActions["progress"].performed -= Debug_Progress;
         debugActions["regress"].performed -= Debug_Regress;
+        debugActions["restart"].performed -= Debug_RestartLevel;
 
         debugActions.Disable();
     #endif
@@ -68,15 +70,21 @@ public class IC_Manager : MonoBehaviour
             if(interactionIndex >= interactionControllers.Length-1){
                 StartCoroutine(CommonCoroutine.delayAction(()=>GameManager.Instance.SwitchingScene(endSceneName), endDelay));
             }
+            LevelProgressionManager.Instance.SetProgress(interactionIndex);
             return;
         }
     //Make sure to load interaction before enter
-        if(!interactionControllers[interactionIndex].m_isLoaded) PreloadInteraction(interactionControllers[interactionIndex]);
+        if(!interactionControllers[interactionIndex].m_isLoaded) 
+        {
+            PreloadInteraction(interactionControllers[interactionIndex]);
+        }
         interactionControllers[interactionIndex].EnterInteraction();
 
     //If no other interaction loaded, treat current game state as transition end.
         if(loadedIC_Count == 0) EventHandler.Call_OnTransitionEnd();
         loadedIC_Count ++;
+
+        LevelProgressionManager.Instance.SetProgress(interactionIndex);
     }
     void EndInteraction(IC_Basic interController){
         interController.ExitInteraction();
@@ -86,6 +94,7 @@ public class IC_Manager : MonoBehaviour
         if(loadedIC_Count == 0) EventHandler.Call_OnTransitionBegin();
     }
     void CleanUpInteraction(IC_Basic interController){
+        Debug.Log("Cleanup Interaction: "+interController.name);
         if(!interController.m_isDone) EndInteraction(interController);
         interController.CleanUpInteraction();
     }
@@ -116,6 +125,8 @@ public class IC_Manager : MonoBehaviour
         int nextIndex = interactionIndex + 1;
         nextIndex = Mathf.Clamp(nextIndex, 0, interactionControllers.Length-1);
         LevelProgressionManager.Instance.SetProgress(nextIndex);
+        EndInteraction(interactionControllers[interactionIndex]);
+        CleanUp();
         GameManager.Instance.RestartLevel();
     }
     void Debug_Regress(InputAction.CallbackContext context)
@@ -123,9 +134,31 @@ public class IC_Manager : MonoBehaviour
         int nextIndex = interactionIndex - 1;
         nextIndex = Mathf.Clamp(nextIndex, 0, interactionControllers.Length-1);
         LevelProgressionManager.Instance.SetProgress(nextIndex);
+        EndInteraction(interactionControllers[interactionIndex]);
+        CleanUp();
         GameManager.Instance.RestartLevel();
     }
-
+    void Debug_RestartLevel(InputAction.CallbackContext callback){
+        if(callback.ReadValueAsButton())
+        {
+            CleanUp();
+            GameManager.Instance.RestartLevel();
+        }
+    }
+    void CleanUp()
+    {
+        foreach (var interController in interactionControllers)
+        {
+            if(interController.m_isPlaying)
+            {
+                interController.ExitInteraction();
+            }
+            if(interController.m_isLoaded)
+            {
+                interController.CleanUpInteraction();
+            }
+        }
+    }
 #if UNITY_EDITOR
     public void Editor_ActivateInteractions(int index){
         interactionControllers[index].PreloadInteraction();

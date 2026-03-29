@@ -6,10 +6,9 @@ public abstract class Basic_Clickable : MonoBehaviour
 [Header("Clickable Basic")]
     public string sfx_clickSound = "group_click";
     [SerializeField] protected Collider hitbox;
-    [SerializeField] protected bool isFrozen = false; //If not available, player can still click on object but will show stop sign
     [SerializeField] protected bool disableClick = false; //If true, player cannot click on object, but hover still works
     
-    public bool m_isInteractable{get{return gameObject.activeInHierarchy && !isFrozen && hitbox.enabled;}}
+    public bool m_isInteractable{get{return gameObject.activeInHierarchy && hitbox.enabled;}}
     public Collider m_hitbox{get{return hitbox;}}
     public bool isControlling{get; private set;}
 
@@ -36,25 +35,24 @@ public abstract class Basic_Clickable : MonoBehaviour
     public virtual void ControllingUpdate(PlayerController player){}
     protected virtual void OnBecomeInteractable(){}
     protected virtual void OnBecomeUninteractable(){}
+    void OnDestroy()
+    {
+        onClick = null;
+        onRelease = null;
+        onHover = null;
+        onExitHover = null;
+    }
 #endregion
 
 #region Interaction Activation
     public void DisableClicking()=>disableClick = true;
     public void EnableClicking()=>disableClick = false;
-    public void FreezeInteraction(){
-        if(m_isInteractable) OnBecomeUninteractable();
-        isFrozen = true;
-    }
-    public void UnfreezeInteraction(){
-        if(gameObject.activeInHierarchy && m_hitbox.enabled) OnBecomeInteractable();
-        isFrozen = false;
-    }
     public void DisableHitbox(){
         if(m_isInteractable) OnBecomeUninteractable();
         m_hitbox.enabled = false;
     }
     public void EnableHitbox(){
-        if(gameObject.activeInHierarchy && isFrozen) OnBecomeInteractable();
+        if(gameObject.activeInHierarchy) OnBecomeInteractable();
         m_hitbox.enabled = true;
     }
     public void EnableRaycast()=>gameObject.layer = Service.InteractableLayer;

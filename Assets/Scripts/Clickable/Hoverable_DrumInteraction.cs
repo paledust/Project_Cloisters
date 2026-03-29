@@ -60,11 +60,7 @@ public class Hoverable_DrumInteraction : MonoBehaviour
     private int beatCounter = 0;
 
     public float m_accumulatePower => accumulatePower;
-    
-    void Awake()
-    {
-        EventHandler.E_OnDrumBeat += BeatCounting;
-    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -72,6 +68,7 @@ public class Hoverable_DrumInteraction : MonoBehaviour
         originalScale = heroSphereRenderTrans.localScale;
         self.onHover += KnockBassDrum;
         EventHandler.E_OnDrumKnocked += HarmDrum;
+        EventHandler.E_OnDrumBeat += BeatCounting;
         EventHandler.E_OnDrumBeat += StaticDrum;
         chargeColor = glowSprite.color;
         chargeColor.a = glowMaxAlpha;
@@ -130,9 +127,13 @@ public class Hoverable_DrumInteraction : MonoBehaviour
     }
     void OnDestroy()
     {
-        self.onHover -= KnockBassDrum;
+        if(self!=null)
+        {
+            self.onHover -= KnockBassDrum;
+        }
         EventHandler.E_OnDrumKnocked -= HarmDrum;
         EventHandler.E_OnDrumBeat -= StaticDrum;
+        EventHandler.E_OnDrumBeat -= BeatCounting;
     }
     void BeatCounting()
     {

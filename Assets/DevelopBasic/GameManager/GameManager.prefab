@@ -137,14 +137,6 @@ MonoBehaviour:
     m_Id: ba3d51f1-048f-4d77-8a8d-e1782e6bd764
     m_Asset: {fileID: 0}
     m_Actions:
-    - m_Name: restart
-      m_Type: 1
-      m_ExpectedControlType: Button
-      m_Id: 9333990d-63ee-4b41-9572-958daabbca11
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
     - m_Name: shake
       m_Type: 1
       m_ExpectedControlType: Button
@@ -178,30 +170,6 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Bindings:
-    - m_Name: Keyboard
-      m_Id: 52a09791-3885-4f73-868b-39ccfc9b874b
-      m_Path: OneModifier
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: restart
-      m_Flags: 4
-    - m_Name: modifier
-      m_Id: 3fc27c41-1551-4443-9aab-6dbde770788e
-      m_Path: <Keyboard>/leftShift
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: restart
-      m_Flags: 8
-    - m_Name: binding
-      m_Id: 2008c3c7-c1b0-4c84-9f22-1b7afd272ab2
-      m_Path: <Keyboard>/r
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: restart
-      m_Flags: 8
     - m_Name: One Modifier
       m_Id: 8d04b3da-684f-4f4d-984b-643f649b979d
       m_Path: OneModifier

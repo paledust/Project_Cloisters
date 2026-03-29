@@ -11,7 +11,7 @@ public class NarrativeCircleNode : MonoBehaviour
     {
         this.radius = radius;
     }
-    void OnDestroy()
+    public void NodeExplode()
     {
         EventHandler.Call_OnNarrativeNodeBreak(this);
     }

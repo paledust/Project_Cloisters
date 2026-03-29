@@ -167,6 +167,9 @@ namespace SimpleAudioSystem{
             from.enabled = false;
             to.enabled = true;
         }
+        public bool IsPlayAMB(string ambience_name){
+            return ambience_loop.isPlaying && current_ambience_name == ambience_name;
+        }
         public void FadeAmbience(float targetVolume, float transitionTime, bool StopOnFadeOut = false)=>FadeAudio(ambience_loop, targetVolume, transitionTime, StopOnFadeOut);
         public void FadeMusic(float targetVolume, float transitionTime, bool StopOnFadeOut = false)=>FadeAudio(music_loop, targetVolume, transitionTime, StopOnFadeOut);
         void FadeAudio(AudioSource m_audio, float targetVolume, float transitionTime, bool StopOnFadeOut = false){
