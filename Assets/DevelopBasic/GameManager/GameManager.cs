@@ -40,8 +40,6 @@ public class GameManager : Singleton<GameManager>
         debugActions["save"].performed += Debug_Save;
         debugActions["load"].performed += Debug_Load;
         debugActions["quit"].performed += Debug_EndGame;
-        debugActions["jumpInteraction"].performed += Debug_JumpInteraction;
-        debugActions["previousInteraction"].performed += Debug_PreviousInteraction;
 
         if(isTesting) debugActions.Enable();
     #endif
@@ -70,9 +68,6 @@ public class GameManager : Singleton<GameManager>
         debugActions["save"].performed -= Debug_Save;
         debugActions["load"].performed -= Debug_Load;
         debugActions["quit"].performed -= Debug_EndGame;
-        debugActions["jumpInteraction"].performed -= Debug_JumpInteraction;
-        debugActions["previousInteraction"].performed -= Debug_PreviousInteraction;
-
 
         if(debugActions.enabled)debugActions.Disable();
     #endif

@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [AddComponentMenu("InteractionController_Manager")]
 public class IC_Manager : MonoBehaviour
@@ -10,6 +11,9 @@ public class IC_Manager : MonoBehaviour
     [SerializeField] private float endDelay = 3f;
 [Header("Debug Option")]
     [SerializeField] private int StartIndex = 0;
+    [SerializeField] private bool startAtDebugIndex = false;
+    [SerializeField] private InputActionMap debugActions;
+
     private int interactionIndex = 0;
     private int loadedIC_Count = 0;
 
@@ -18,12 +22,24 @@ public class IC_Manager : MonoBehaviour
         EventHandler.E_OnNextInteraction        += NextInteraction;
         EventHandler.E_OnEndInteraction         += EndInteraction;
         EventHandler.E_OnInteractionUnreachable += CleanUpInteraction;
+    #if UNITY_EDITOR || DEVELOPMENT_BUILD
+        debugActions["progress"].performed += Debug_Progress;
+        debugActions["regress"].performed += Debug_Regress;
+
+        debugActions.Enable();
+    #endif
     }
     void OnDestroy(){
         EventHandler.E_OnInteractionReachable   -= PreloadInteraction; 
         EventHandler.E_OnNextInteraction        -= NextInteraction;
         EventHandler.E_OnEndInteraction         -= EndInteraction;
         EventHandler.E_OnInteractionUnreachable -= CleanUpInteraction; 
+    #if UNITY_EDITOR || DEVELOPMENT_BUILD
+        debugActions["progress"].performed -= Debug_Progress;
+        debugActions["regress"].performed -= Debug_Regress;
+
+        debugActions.Disable();
+    #endif
     }
     void Start()
     {
@@ -90,6 +106,15 @@ public class IC_Manager : MonoBehaviour
         }
     }
 #endregion
+
+    void Debug_Progress(InputAction.CallbackContext context)
+    {
+        
+    }
+    void Debug_Regress(InputAction.CallbackContext context)
+    {
+
+    }
 
 #if UNITY_EDITOR
     public void Editor_ActivateInteractions(int index){

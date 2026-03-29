@@ -2,5 +2,13 @@ using UnityEngine;
 
 public class LevelProgressionManager : Singleton<LevelProgressionManager>
 {
-    public int levelProgress = 0;
+    private int levelProgress = 0;
+    public void SetProgress(int progress)
+    {
+        levelProgress = progress;
+    }
+    public void ResetProgress()
+    {
+        levelProgress = 0;
+    }
 }
