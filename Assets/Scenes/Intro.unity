@@ -331,6 +331,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa10ae3032131de4587847130b2227b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameSceneName: Game
+  delayBeforeLoading: 1
+  transitionTime: 2.5
 --- !u!1 &1591100704
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,7 +5,8 @@ using UnityEngine;
 public class Intro : MonoBehaviour
 {
     [SerializeField] private string gameSceneName;
-    [SerializeField] private float delayBeforeLoading = 3f;
+    [SerializeField] private float delayBeforeLoading = 1f;
+    [SerializeField] private float transitionTime = 2.5f;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,6 +15,6 @@ public class Intro : MonoBehaviour
     IEnumerator LoadGameSceneAfterDelay()
     {
         yield return new WaitForSeconds(delayBeforeLoading);
-        GameManager.Instance.SwitchingScene(gameSceneName);
+        GameManager.Instance.SwitchingScene(gameSceneName, transitionTime);
     }
 }

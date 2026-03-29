@@ -10,7 +10,7 @@ public class IC_Manager : MonoBehaviour
     [SerializeField] private float endDelay = 3f;
 [Header("Debug Option")]
     [SerializeField] private int StartIndex = 0;
-    [SerializeField, ShowOnly] private int interactionIndex = 0;
+    private int interactionIndex = 0;
     private int loadedIC_Count = 0;
 
     void Awake(){
@@ -30,7 +30,7 @@ public class IC_Manager : MonoBehaviour
     #if UNITY_EDITOR
         StartAtInteraction(StartIndex);
     #else
-        StartAtInteraction(0);
+        StartAtInteraction(LevelProgressionManager.Instance.levelProgress);
     #endif
     }
 

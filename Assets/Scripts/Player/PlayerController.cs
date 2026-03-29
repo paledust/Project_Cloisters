@@ -92,8 +92,8 @@ public class PlayerController : MonoBehaviour
     public void ReleaseCurrentHolding()=>ClearHoldingInteractable();
     public void CheckControllable(){
         if(PlayerManager.Instance.m_canControl){
-            input.ActivateInput();
             this.enabled = true;
+            input.ActivateInput();
         }
         else{
             this.enabled = false;

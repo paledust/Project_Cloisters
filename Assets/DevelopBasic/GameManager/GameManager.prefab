@@ -31,7 +31,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 279387380931078898}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
@@ -104,6 +103,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4759861360168245592}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -111,7 +111,6 @@ Transform:
   m_Children:
   - {fileID: 279387380931078898}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4759861360168245595
 MonoBehaviour:
@@ -125,14 +124,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b035faf50d0c4547ab64d28c6066350, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetFrameRate: 60
+  targetFrameRate: 90
   BlackScreenCanvasGroup: {fileID: 4562222128510109114}
   transitionDuration: 0.5
-  InitScene: Village
-  isDemo: 1
+  InitScene: Intro
+  isDemo: 0
   isTesting: 1
   demoText: {fileID: 6073298263620526879}
-  loadInitSceneFromGameManager: 0
+  loadInitSceneFromGameManager: 1
   launchSettings: {fileID: 11400000, guid: df611141ed597a341a14d67be49bf1fb, type: 2}
   debugSettings: {fileID: 11400000, guid: a29fe9365c3ee6449be4fa007a8104a4, type: 2}
   debugActions:
@@ -168,6 +167,30 @@ MonoBehaviour:
       m_Type: 1
       m_ExpectedControlType: Button
       m_Id: 53b3c2c7-8266-49f1-8bcc-f935abe20d70
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    - m_Name: quit
+      m_Type: 1
+      m_ExpectedControlType: Button
+      m_Id: 48da3fbc-5594-4630-ad29-26883c48625c
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    - m_Name: jump
+      m_Type: 1
+      m_ExpectedControlType: Button
+      m_Id: 90c7b68a-9c7f-48bb-8e15-3e5b590f4252
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    - m_Name: previous
+      m_Type: 1
+      m_ExpectedControlType: Button
+      m_Id: 72f206eb-1f24-4eef-a3cd-68aea51ad915
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -237,6 +260,78 @@ MonoBehaviour:
       m_Groups: 
       m_Action: load
       m_Flags: 0
+    - m_Name: Keyboard
+      m_Id: 7c9bf5f8-890f-4aeb-9619-aef2453f0b2f
+      m_Path: OneModifier
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: quit
+      m_Flags: 4
+    - m_Name: modifier
+      m_Id: 5aa6d17e-32bc-4ceb-9db1-dea97724069f
+      m_Path: <Keyboard>/shift
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: quit
+      m_Flags: 8
+    - m_Name: binding
+      m_Id: 25636c4a-f010-420b-9934-ee2486fb58f7
+      m_Path: <Keyboard>/q
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: quit
+      m_Flags: 8
+    - m_Name: One Modifier
+      m_Id: 6a15838c-3f41-486a-9a5e-c0c1a41886b6
+      m_Path: OneModifier
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: jump
+      m_Flags: 4
+    - m_Name: modifier
+      m_Id: 6edb0701-1e3b-45c3-a9ff-00a79ddfd604
+      m_Path: <Keyboard>/shift
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: jump
+      m_Flags: 8
+    - m_Name: binding
+      m_Id: d93f3b5b-0f3f-4f4e-8223-8f6b70f9dcbf
+      m_Path: <Keyboard>/rightArrow
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: jump
+      m_Flags: 8
+    - m_Name: One Modifier
+      m_Id: de76eee3-853a-47f6-9a27-f6fde3255733
+      m_Path: OneModifier
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: previous
+      m_Flags: 4
+    - m_Name: modifier
+      m_Id: 561a80ce-a4c4-4631-8fe0-c9478b0fc87e
+      m_Path: <Keyboard>/shift
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: previous
+      m_Flags: 8
+    - m_Name: binding
+      m_Id: 6fa56765-cfd3-4007-b9f2-678d8b811b88
+      m_Path: <Keyboard>/leftArrow
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: previous
+      m_Flags: 8
 --- !u!1 &6659232793029695398
 GameObject:
   m_ObjectHideFlags: 0
@@ -272,7 +367,6 @@ RectTransform:
   - {fileID: 7556986947078525989}
   - {fileID: 8586808868068472399}
   m_Father: {fileID: 4759861360168245594}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -296,7 +390,9 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 1
   m_TargetDisplay: 0
@@ -383,7 +479,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 279387380931078898}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}

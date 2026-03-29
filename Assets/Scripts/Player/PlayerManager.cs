@@ -10,6 +10,7 @@ public class PlayerManager : Singleton<PlayerManager>
 
     void HideCursor()=>Cursor.visible = false;
     void ShowCursor()=>Cursor.visible = true;
+
     protected override void Awake(){
         base.Awake();
 
@@ -25,6 +26,8 @@ public class PlayerManager : Singleton<PlayerManager>
         if(currentPlayer!=null){
             UI_Manager.Instance.UpdateCursorPos(currentPlayer.PointerScrPos);
         }
+        else
+            UI_Manager.Instance.UpdateCursorPos(Vector2.one*-100);
     }
     protected override void OnDestroy()
     {
@@ -36,17 +39,20 @@ public class PlayerManager : Singleton<PlayerManager>
     }
     void TransitionBeginHandler(){
         IsInTransition = true;
-        currentPlayer?.CheckControllable();
+        if(currentPlayer!=null) 
+            currentPlayer.CheckControllable();
     }
     void TransitionEndHandler(){
         IsInTransition = false;
-        currentPlayer?.CheckControllable();
+        if(currentPlayer!=null) 
+            currentPlayer.CheckControllable();
     }
     void FindPlayer(){
         currentPlayer = FindObjectOfType<PlayerController>();
     }
     void FlashInputHandler(){
-        currentPlayer?.ReleaseCurrentHolding();
+        if(currentPlayer!=null) 
+            currentPlayer.ReleaseCurrentHolding();
     }
     public Vector3 GetCursorWorldPos(float depth)=>currentPlayer.GetCursorWorldPoint(depth);
     public void UpdateCursorState(CURSOR_STATE newState)=>UI_Manager.Instance.UpdateCursorState(newState);
