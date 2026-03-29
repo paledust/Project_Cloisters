@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [AddComponentMenu("InteractionController_Manager")]
 public class IC_Manager : MonoBehaviour
@@ -9,7 +10,10 @@ public class IC_Manager : MonoBehaviour
     [SerializeField] private string endSceneName;
     [SerializeField] private float endDelay = 3f;
 [Header("Debug Option")]
+    [SerializeField] private bool startAtDebugIndex = false;
     [SerializeField] private int StartIndex = 0;
+    [SerializeField] private InputActionMap debugActions;
+
     private int interactionIndex = 0;
     private int loadedIC_Count = 0;
 
@@ -18,20 +22,35 @@ public class IC_Manager : MonoBehaviour
         EventHandler.E_OnNextInteraction        += NextInteraction;
         EventHandler.E_OnEndInteraction         += EndInteraction;
         EventHandler.E_OnInteractionUnreachable += CleanUpInteraction;
+
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+        debugActions["jump"].performed += Debug_JumpInteraction;
+        debugActions["previous"].performed += Debug_PreviousInteraction;
+        debugActions.Enable();
+#endif
     }
     void OnDestroy(){
         EventHandler.E_OnInteractionReachable   -= PreloadInteraction; 
         EventHandler.E_OnNextInteraction        -= NextInteraction;
         EventHandler.E_OnEndInteraction         -= EndInteraction;
         EventHandler.E_OnInteractionUnreachable -= CleanUpInteraction; 
+
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+        debugActions["jump"].performed -= Debug_JumpInteraction;
+        debugActions["previous"].performed -= Debug_PreviousInteraction;
+        if(debugActions.enabled) debugActions.Disable();
+#endif
     }
     void Start()
     {
     #if UNITY_EDITOR
-        StartAtInteraction(StartIndex);
-    #else
-        StartAtInteraction(LevelProgressionManager.Instance.levelProgress);
+        if(startAtDebugIndex)
+        {
+            StartAtInteraction(StartIndex);
+            return;
+        }
     #endif
+        StartAtInteraction(LevelProgressionManager.Instance.LevelProgress);
     }
 
 #if UNITY_EDITOR
@@ -90,6 +109,21 @@ public class IC_Manager : MonoBehaviour
         }
     }
 #endregion
+
+    void Debug_JumpInteraction(InputAction.CallbackContext callback)
+    {
+        int nextIndex = interactionIndex + 1;
+        nextIndex = Mathf.Clamp(nextIndex, 0, interactionControllers.Length-1);
+        LevelProgressionManager.Instance.SetLevelProgress(nextIndex);
+        GameManager.Instance.RestartLevel();
+    }
+    void Debug_PreviousInteraction(InputAction.CallbackContext callback)
+    {
+        int nextIndex = interactionIndex -1;
+        nextIndex = Mathf.Clamp(nextIndex, 0, interactionControllers.Length-1);
+        LevelProgressionManager.Instance.SetLevelProgress(nextIndex);
+        GameManager.Instance.RestartLevel();
+    }
 
 #if UNITY_EDITOR
     public void Editor_ActivateInteractions(int index){

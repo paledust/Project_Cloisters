@@ -55,5 +55,6 @@ public class PlayerManager : Singleton<PlayerManager>
             currentPlayer.ReleaseCurrentHolding();
     }
     public Vector3 GetCursorWorldPos(float depth)=>currentPlayer.GetCursorWorldPoint(depth);
+    public Vector2 GetCursorScreenPos()=>currentPlayer.PointerScrPos;
     public void UpdateCursorState(CURSOR_STATE newState)=>UI_Manager.Instance.UpdateCursorState(newState);
 }
