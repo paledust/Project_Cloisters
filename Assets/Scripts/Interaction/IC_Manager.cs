@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using SimpleAudioSystem;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,6 +8,7 @@ public class IC_Manager : MonoBehaviour
 {
     [SerializeField] private IC_Basic[] interactionControllers;
 [Header("Game End")]
+    [SerializeField] private AmbienceHandler ambienceHandler;
     [SerializeField] private string endSceneName;
     [SerializeField] private float endDelay = 3f;
 [Header("Debug Option")]
@@ -53,6 +55,7 @@ public class IC_Manager : MonoBehaviour
             return;
         }
     #endif
+        ambienceHandler.Init(AudioManager.Instance);
         StartAtInteraction(LevelProgressionManager.Instance.LevelProgress);
     }
 
@@ -166,6 +169,7 @@ public class IC_Manager : MonoBehaviour
                 interController.CleanUpInteraction();
             }
         }
+        ambienceHandler.CleanUp();
     }
 #if UNITY_EDITOR
     public void Editor_ActivateInteractions(int index){

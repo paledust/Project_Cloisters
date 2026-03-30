@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Persistence.unity
     guid: 59c40c8abef98854eb8c73b59d6f5da7
   - enabled: 1
+    path: Assets/Scenes/Intro.unity
+    guid: 21620bda4ea1fb34a9cf972268465dfd
+  - enabled: 1
     path: Assets/Scenes/Game.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1

@@ -111,6 +111,10 @@ namespace SimpleAudioSystem{
             }
         //If the audio name is the same, only fade the volume to the target value
             if(current_ambience_name==audio_name){
+                if(volume>0 && !ambience_loop.isPlaying)
+                {
+                    ambience_loop.Play();
+                }
                 FadeAudio(ambience_loop, volume, 0.5f);
             }
             else{
@@ -134,6 +138,7 @@ namespace SimpleAudioSystem{
             }
         }
         public AudioClip PlaySoundEffect(AudioSource targetSource, string clip_name, float volumeScale){
+            Debug.LogWarning("Play Sound Effect "+targetSource.volume);
             if(string.IsNullOrEmpty(clip_name)) 
                 return null;
             AudioClip clip = audioInfo.GetSFXClipByName(clip_name);

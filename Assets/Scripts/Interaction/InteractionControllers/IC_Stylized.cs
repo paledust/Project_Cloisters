@@ -43,6 +43,7 @@ public class IC_Stylized : IC_Basic
     [SerializeField] private string sfxEnd;
     [SerializeField] private Vector2 ambFade = Vector2.one;
     [SerializeField] private float finalAmbVolume = 0.2f;
+    [SerializeField] private AmbienceHandler ambienceHandler;
 
     private int textShowIndex = 0;
     private float introOffsetPlanetAngle;
@@ -81,7 +82,7 @@ public class IC_Stylized : IC_Basic
         EventHandler.E_OnDrumKnocked += DrumKnockedHandler;
         EventHandler.E_OnBassChargeBeat += BassChargeBeatHandler;
 
-        AudioManager.Instance.PlayAmbience(ambKey, true, 0.2f, false);
+        ambienceHandler.PlayAmbience(ambKey, 0.2f);
     }
     protected override void OnInteractionEnd()
     {
@@ -191,7 +192,7 @@ public class IC_Stylized : IC_Basic
         geoTextController.PunchTextTogether();
         circleExplodeController.ExplodeFinal();
         yield return new WaitForSeconds(1.8f);
-        AudioManager.Instance.FadeAmbience(0, 2f, true);
+        ambienceHandler.FadeOutAmbience(2f, true);
         tl_end.Play();
         yield return new WaitForSeconds(3.5f);
         EventHandler.Call_OnInteractionUnreachable(this);
