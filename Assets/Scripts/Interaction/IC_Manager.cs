@@ -158,6 +158,7 @@ public class IC_Manager : MonoBehaviour
     }
     void CleanUp()
     {
+        EventHandler.Call_OnFlushInput();
         foreach (var interController in interactionControllers)
         {
             if(interController.m_isPlaying)
@@ -170,6 +171,7 @@ public class IC_Manager : MonoBehaviour
             }
         }
         ambienceHandler.CleanUp();
+        PhysicDragManager.Instance.CleanUp();
     }
 #if UNITY_EDITOR
     public void Editor_ActivateInteractions(int index){

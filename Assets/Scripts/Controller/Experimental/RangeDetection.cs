@@ -107,6 +107,10 @@ public class RangeDetection : MonoBehaviour
             PunchScale(0.025f);
         }
     }
+    void OnDisable()
+    {
+        rangeRenderer.transform.DOKill();
+    }
     void PunchScale(float amount)
     {
         if(!isPunching)

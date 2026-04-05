@@ -43,6 +43,14 @@ public class PhysicDragManager : Singleton<PhysicDragManager>
             dragger.joint.connectedBody = null;
         }
     }
+    public void CleanUp()
+    {
+        if(dragger!=null)
+        {
+            Destroy(dragger.rigidbody.gameObject);
+            dragger = null;
+        }
+    }
     static Dragger GetNewDragger()
     {
         var draggerRigid = new GameObject("Dragger").AddComponent<Rigidbody>();
