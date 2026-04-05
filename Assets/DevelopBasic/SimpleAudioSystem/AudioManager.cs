@@ -138,7 +138,6 @@ namespace SimpleAudioSystem{
             }
         }
         public AudioClip PlaySoundEffect(AudioSource targetSource, string clip_name, float volumeScale){
-            Debug.LogWarning("Play Sound Effect "+targetSource.volume);
             if(string.IsNullOrEmpty(clip_name)) 
                 return null;
             AudioClip clip = audioInfo.GetSFXClipByName(clip_name);

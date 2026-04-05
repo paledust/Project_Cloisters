@@ -71,7 +71,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentText: {fileID: 3399247669732470381}
-  chargeSpeed: 0.75
+  chargeSpeed: 1.5
   dropSpeed: 5
   additionalChargedTexts: []
 --- !u!1 &8554373234669498874

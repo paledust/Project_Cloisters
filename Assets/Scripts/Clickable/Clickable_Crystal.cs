@@ -7,6 +7,7 @@ public class Clickable_Crystal : Basic_Clickable
     [SerializeField] private float lerpSpeed = 10;
 
     [Header("Particle")]
+    [SerializeField] private ParticleSystem glowParticle;
     [SerializeField] private ParticleSystem blinkParticle;
     [SerializeField] private float particleExpandForce = 10f;
 
@@ -34,6 +35,7 @@ public class Clickable_Crystal : Basic_Clickable
     public override void OnClick(PlayerController player, Vector3 hitPos)
     {
         base.OnClick(player, hitPos);
+
         player.HoldInteractable(this);
         whimsicalTextSpoter.enabled = true;
 
@@ -50,6 +52,10 @@ public class Clickable_Crystal : Basic_Clickable
             particles[i].velocity = particles[i].position * particleExpandForce;
         }
         blinkParticle.SetParticles(particles, count);
+        if(glowParticle.isPlaying)
+        {
+            glowParticle.Stop();
+        }
         crystalAnimator.SetBool("controlling", true);
     }
     public override void OnRelease(PlayerController player)
@@ -63,6 +69,10 @@ public class Clickable_Crystal : Basic_Clickable
         spotterRender.transform.DOScale(0, 0.5f).SetEase(Ease.OutBack);
         spotterRender.DOFade(0, 0.25f);
         crystalAnimator.SetBool("controlling", false);
+        if(!glowParticle.isPlaying)
+        {
+            glowParticle.Play();
+        }
     }
     public override void ControllingUpdate(PlayerController player)
     {

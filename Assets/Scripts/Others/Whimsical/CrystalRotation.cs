@@ -9,7 +9,6 @@ public class CrystalRotation : MonoBehaviour
     [Header("Particle")]
     [SerializeField] private ParticleSystem blinkParticle;
     [SerializeField] private float particleAngleScale = 0.25f;
-    [SerializeField] private float particleFollowSpeed = 2;
 
     private float particleAngle;
     private float angle;
@@ -25,7 +24,7 @@ public class CrystalRotation : MonoBehaviour
         float targetAngle = angle + (transform.position.x * xPosToRotation);
         crystalTrans.localRotation = Quaternion.Euler(0, targetAngle, 0);
 
-        particleAngle = Mathf.Lerp(particleAngle, targetAngle * particleAngleScale, Time.deltaTime * particleFollowSpeed);
+        particleAngle = targetAngle * particleAngleScale;
         blinkParticle.transform.localRotation = Quaternion.Euler(0, particleAngle, 0);
     }
 }

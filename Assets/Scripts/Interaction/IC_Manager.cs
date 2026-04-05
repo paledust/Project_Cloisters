@@ -48,6 +48,7 @@ public class IC_Manager : MonoBehaviour
     }
     void Start()
     {
+        ambienceHandler.Init(AudioManager.Instance);
     #if UNITY_EDITOR
         if(startAtDebugIndex)
         {
@@ -55,7 +56,6 @@ public class IC_Manager : MonoBehaviour
             return;
         }
     #endif
-        ambienceHandler.Init(AudioManager.Instance);
         StartAtInteraction(LevelProgressionManager.Instance.LevelProgress);
     }
 
