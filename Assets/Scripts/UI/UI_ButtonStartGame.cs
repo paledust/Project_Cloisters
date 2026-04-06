@@ -21,7 +21,6 @@ public class UI_ButtonStartGame : MonoBehaviour
     void OnButtonClicked()
     {
         button.interactable = false;
-        Cursor.visible = false;
         LevelProgressionManager.Instance.ResetProgress();
         GameManager.Instance.SwitchingScene("Game", transitionTime);
 

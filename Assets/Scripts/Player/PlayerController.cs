@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using SimpleAudioSystem;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -17,15 +15,21 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 hoverPos;
     private Camera mainCam;
+    private UI_Manager uiManager;
 
     void Start()
     {
         mainCam = Camera.main;
+        PlayerManager.Instance.RegisterPlayer(this);
     }
-
-    // Update is called once per frame
+    void OnDestroy()
+    {
+        if(PlayerManager.Instance!=null)
+            PlayerManager.Instance.UnregisterPlayer(this);
+    }
     void Update()
     {
+        //Interaction Handle
         if(m_holdingInteractable==null)
         {
             Ray ray = mainCam.ScreenPointToRay(PointerScrPos);
@@ -52,8 +56,16 @@ public class PlayerController : MonoBehaviour
         else{
             m_holdingInteractable.ControllingUpdate(this);
         }
-    }
 
+        //Cursor Handle
+        if(Cursor.visible)
+            Cursor.visible = false;
+        uiManager.UpdateCursorPos(PointerScrPos);
+    }
+    public void Init(UI_Manager uiManager)
+    {
+        this.uiManager = uiManager;
+    }
     #region Handle Interactable
     void ClearHoveringInteractable(){
         if(m_hoveringInteractable != null){

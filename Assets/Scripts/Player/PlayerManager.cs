@@ -11,25 +11,13 @@ public class PlayerManager : Singleton<PlayerManager>
     protected override void Awake(){
         base.Awake();
 
-        EventHandler.E_AfterLoadScene += FindPlayer;
         EventHandler.E_OnTransitionBegin += TransitionBeginHandler;
         EventHandler.E_OnTransitionEnd += TransitionEndHandler;
         EventHandler.E_OnFlushInput += FlashInputHandler;
     }
-    void Start(){
-        FindPlayer();
-    }
-    void Update(){
-        if(currentPlayer!=null){
-            UI_Manager.Instance.UpdateCursorPos(currentPlayer.PointerScrPos);
-        }
-        else
-            UI_Manager.Instance.UpdateCursorPos(Vector2.one*-100);
-    }
     protected override void OnDestroy()
     {
         base.OnDestroy();
-        EventHandler.E_AfterLoadScene -= FindPlayer;
         EventHandler.E_OnTransitionBegin -= TransitionBeginHandler;
         EventHandler.E_OnTransitionEnd -= TransitionEndHandler;
         EventHandler.E_OnFlushInput -= FlashInputHandler;
@@ -44,13 +32,20 @@ public class PlayerManager : Singleton<PlayerManager>
         if(currentPlayer!=null) 
             currentPlayer.CheckControllable();
     }
-    void FindPlayer(){
-        currentPlayer = FindObjectOfType<PlayerController>();
-    }
+
     void FlashInputHandler(){
         if(currentPlayer!=null) 
             currentPlayer.ReleaseCurrentHolding();
     }
     public Vector2 GetCursorScreenPos()=>currentPlayer.PointerScrPos;
     public void UpdateCursorState(CURSOR_STATE newState)=>UI_Manager.Instance.UpdateCursorState(newState);
+    public void RegisterPlayer(PlayerController player)
+    {
+        currentPlayer = player;
+        currentPlayer.Init(UI_Manager.Instance);
+    }
+    public void UnregisterPlayer(PlayerController player){
+        if(currentPlayer == player) 
+            currentPlayer = null;
+    }
 }
