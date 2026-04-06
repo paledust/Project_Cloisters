@@ -1,21 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Intro : MonoBehaviour
 {
-    [SerializeField] private string gameSceneName;
-    [SerializeField] private float delayBeforeLoading = 1f;
-    [SerializeField] private float transitionTime = 2.5f;
-    // Start is called before the first frame update
     void Start()
     {
-        LevelProgressionManager.Instance.ResetProgress();
-        StartCoroutine(LoadGameSceneAfterDelay());        
-    }
-    IEnumerator LoadGameSceneAfterDelay()
-    {
-        yield return new WaitForSeconds(delayBeforeLoading);
-        GameManager.Instance.SwitchingScene(gameSceneName, transitionTime);
+        Cursor.visible = true;
+        UI_Manager.Instance.HideCursor();
     }
 }

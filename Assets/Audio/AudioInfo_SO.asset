@@ -29,6 +29,8 @@ MonoBehaviour:
     audio_clip: {fileID: 8300000, guid: 9079eeb5f14196e4389452fc2cd3d023, type: 3}
   - audio_name: sfx_jazz_end
     audio_clip: {fileID: 8300000, guid: 612e4a653344b4c4bae0f0b4882d9c3b, type: 3}
+  - audio_name: sfx_ui_select
+    audio_clip: {fileID: 8300000, guid: ae316f16a0c2eeb4693b6f0ad7abd40e, type: 3}
   sfx_group_info_list:
   - audio_group_name: group_click
     audioClips:

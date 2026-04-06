@@ -8,9 +8,6 @@ public class PlayerManager : Singleton<PlayerManager>
     public bool m_canControl => !IsInTransition;
     public bool m_isHovering => currentPlayer.m_hoveringInteractable!=null;
 
-    void HideCursor()=>Cursor.visible = false;
-    void ShowCursor()=>Cursor.visible = true;
-
     protected override void Awake(){
         base.Awake();
 

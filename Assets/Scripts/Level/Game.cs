@@ -5,6 +5,7 @@ public class Game : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        EventHandler.Call_OnTransitionEnd();
+        Cursor.visible = false;
+        UI_Manager.Instance.ShowCursor();
     }
 }

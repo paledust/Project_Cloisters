@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 [RequireComponent(typeof(Camera))]
 [AddComponentMenu("Camera/FixRatio")]
 public class FixRatio : MonoBehaviour {
@@ -48,12 +49,7 @@ public class FixRatio : MonoBehaviour {
  
         ScreenSize.x = Screen.width;
         ScreenSize.y = Screen.height;		
-        StartCoroutine(coroutineClearBuffer());
 	}
-    IEnumerator coroutineClearBuffer(){
-        yield return null;
-        GL.Clear(true, true, Color.black);
-    }
 	void Update(){
 		RescaleCamera();
 	}
