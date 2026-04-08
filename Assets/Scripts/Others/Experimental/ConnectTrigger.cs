@@ -12,9 +12,9 @@ public class ConnectTrigger : MonoBehaviour
     }
     [SerializeField] private bool isSunk = false;
     [SerializeField] private ConnectTriggerState connectTriggerState = ConnectTriggerState.Pending;
-    [SerializeField] private Basic_Clickable selfClickable;
     [SerializeField] private SpriteRenderer alignMask;
     private Collider m_collider;
+    private ShapeInteractionHandler interactionHandler;
     private ConnectTrigger pendingTrigger;
 
     public bool m_isLocked => connectTriggerState == ConnectTriggerState.Locking;
@@ -25,14 +25,11 @@ public class ConnectTrigger : MonoBehaviour
     private const float MAX_BREAK_DOT = 0.85f;
     private const float MAX_BREAK_DIST = 1.2f;
 
-    void Reset()
-    {
-        selfClickable = GetComponentInParent<Basic_Clickable>();
-    }
     void Start()
     {
         m_collider = GetComponent<Collider>();
-        m_connectBody = selfClickable.GetComponent<ConnectBody>();
+        interactionHandler = GetComponentInParent<ShapeInteractionHandler>();
+        m_connectBody = interactionHandler.GetComponent<ConnectBody>();
         Color defaultColor = alignMask.color;
         defaultColor.a = 0;
         alignMask.color = defaultColor;

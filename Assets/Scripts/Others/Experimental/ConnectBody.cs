@@ -9,10 +9,10 @@ public class ConnectBody : MonoBehaviour
     [Header("Vertices")]
     [SerializeField] private Transform[] points;
     private ConnectTrigger[] connectTriggers;
-    [SerializeField] private ConnectTrigger idealPendingTrigger; //the ideal connected trigger
-    [SerializeField] private ConnectTrigger idealSelfTrigger; //the trigger attached that connected to ideal trigger
+    private ConnectTrigger idealPendingTrigger; //the ideal connected trigger
+    private ConnectTrigger idealSelfTrigger; //the trigger attached that connected to ideal trigger
     public HashSet<ConnectBody> connectBodies = new HashSet<ConnectBody>();
-    private Clickable_Moveable clickable_Moveable;
+    private ShapeInteractionHandler clickable_Moveable;
 
     public bool m_isSpherical=>isSpherical;
     private bool hasIdealConnection => idealSelfTrigger != null;
@@ -20,12 +20,11 @@ public class ConnectBody : MonoBehaviour
     private Quaternion offsetRotToOther;
 
     public Rigidbody m_rigid{get; private set;}
-    public Clickable_Moveable m_clickable => clickable_Moveable;
 
     void Awake()
     {
         m_rigid = GetComponent<Rigidbody>();
-        clickable_Moveable = GetComponent<Clickable_Moveable>();
+        clickable_Moveable = GetComponent<ShapeInteractionHandler>();
         connectTriggers = GetComponentsInChildren<ConnectTrigger>();
     }
     void Start()
@@ -100,6 +99,7 @@ public class ConnectBody : MonoBehaviour
     }
     void OnReleaseBody()
     {
+        Debug.LogWarning("??");
         if(idealPendingTrigger!=null && idealSelfTrigger!=null)
         {
             if(!IsConnectedToBody(idealPendingTrigger.m_connectBody))
