@@ -99,7 +99,6 @@ public class ConnectBody : MonoBehaviour
     }
     void OnReleaseBody()
     {
-        Debug.LogWarning("??");
         if(idealPendingTrigger!=null && idealSelfTrigger!=null)
         {
             if(!IsConnectedToBody(idealPendingTrigger.m_connectBody))

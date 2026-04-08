@@ -6,15 +6,16 @@ public class Clickable_ExperimentalShapeDragger : Basic_Clickable
     [SerializeField] private Rigidbody m_rigid;
     [SerializeField] private Transform dragCenter;
     [SerializeField] private float maxDragOffset;
+    public float maskScaleMultiplier = 1f;
 
-    private ShapeInteractionHandler experimentalShape;
+    private ShapeInteractionHandler interactionHandler;
     private Dragger dragger;
     private Vector3 offset;
     private const float DEPTH = 32;
 
     void Start()
     {
-        experimentalShape = m_rigid.GetComponent<ShapeInteractionHandler>();
+        interactionHandler = m_rigid.GetComponent<ShapeInteractionHandler>();
     }
     public override void OnClick(PlayerController player, Vector3 hitPos)
     {
@@ -31,20 +32,22 @@ public class Clickable_ExperimentalShapeDragger : Basic_Clickable
         m_rigid.drag = 10;
         m_rigid.angularDrag = 10;
 
-        experimentalShape.OnControlled();
+        interactionHandler.OnControlled();
     }
     public override void OnHover(PlayerController player)
     {
         base.OnHover(player);
+        interactionHandler.OnHover(this);
     }
     public override void OnExitHover()
     {
         base.OnExitHover();
+        interactionHandler.OnExitHover(this);
     }
     public override void OnRelease(PlayerController player)
     {
         base.OnRelease(player);
-        experimentalShape.OnRelease();
+        interactionHandler.OnRelease();
         PhysicDragManager.Instance.BreakJoint();
         m_rigid.drag = 5;
         m_rigid.angularDrag = 7;

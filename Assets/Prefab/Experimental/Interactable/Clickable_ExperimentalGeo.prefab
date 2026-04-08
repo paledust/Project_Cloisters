@@ -236,6 +236,7 @@ MonoBehaviour:
   m_rigid: {fileID: 4792773300764216669}
   dragCenter: {fileID: 5994851824227480388}
   maxDragOffset: 0.25
+  maskScaleMultiplier: 1
 --- !u!1 &2521888297052198920
 GameObject:
   m_ObjectHideFlags: 0
@@ -392,6 +393,7 @@ MonoBehaviour:
   m_rigid: {fileID: 4792773300764216669}
   dragCenter: {fileID: 5190530940272532141}
   maxDragOffset: 0.25
+  maskScaleMultiplier: 4
 --- !u!1 &3284836911566307021
 GameObject:
   m_ObjectHideFlags: 0
@@ -591,6 +593,7 @@ MonoBehaviour:
   m_rigid: {fileID: 4792773300764216669}
   dragCenter: {fileID: 560748116101639199}
   maxDragOffset: 0.25
+  maskScaleMultiplier: 1
 --- !u!1 &5759619877422581607
 GameObject:
   m_ObjectHideFlags: 0
@@ -832,6 +835,7 @@ MonoBehaviour:
   m_rigid: {fileID: 4792773300764216669}
   dragCenter: {fileID: 404619460483777785}
   maxDragOffset: 0.25
+  maskScaleMultiplier: 1
 --- !u!1 &8982843657415732048
 GameObject:
   m_ObjectHideFlags: 0
