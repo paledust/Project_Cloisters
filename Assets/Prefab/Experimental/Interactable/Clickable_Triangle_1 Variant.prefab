@@ -596,6 +596,11 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5190530940272532141, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.209
+      objectReference: {fileID: 0}
     - target: {fileID: 6240990561836385197, guid: e843106840614744cae4702badee9286,
         type: 3}
       propertyPath: m_connectors.Array.size

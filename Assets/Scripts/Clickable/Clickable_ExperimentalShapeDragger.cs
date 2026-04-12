@@ -6,6 +6,7 @@ public class Clickable_ExperimentalShapeDragger : Basic_Clickable
     [SerializeField] private Rigidbody m_rigid;
     [SerializeField] private Transform dragCenter;
     [SerializeField] private float maxDragOffset;
+    [SerializeField] private bool isCenter;
     public float maskScaleMultiplier = 1f;
 
     private ShapeInteractionHandler interactionHandler;
@@ -24,6 +25,10 @@ public class Clickable_ExperimentalShapeDragger : Basic_Clickable
         
         Vector3 hitPoint = dragCenter.position + Vector3.ClampMagnitude(hitPos - dragCenter.position, maxDragOffset);
 
+        if(isCenter)
+        {
+            hitPoint = m_rigid.worldCenterOfMass;
+        }
         PhysicDragManager.Instance.SyncDraggerPos(hitPoint);
         dragger = PhysicDragManager.Instance.ConnectToRigid(m_rigid, m_rigid.transform.InverseTransformPoint(hitPoint));
         offset = dragger.rigidbody.position - player.GetCursorWorldPoint(DEPTH);

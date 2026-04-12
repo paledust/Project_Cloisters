@@ -101,6 +101,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 404619460483777785, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.71
+      objectReference: {fileID: 0}
+    - target: {fileID: 404619460483777785, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.86
+      objectReference: {fileID: 0}
+    - target: {fileID: 560748116101639199, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.909
+      objectReference: {fileID: 0}
+    - target: {fileID: 560748116101639199, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.762
+      objectReference: {fileID: 0}
     - target: {fileID: 1074785135901792360, guid: e843106840614744cae4702badee9286,
         type: 3}
       propertyPath: points.Array.size
@@ -171,6 +191,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: -1.47
+      objectReference: {fileID: 0}
+    - target: {fileID: 2112288953868468001, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: maskScaleMultiplier
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3148867474850406865, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 3809608919209285648, guid: e843106840614744cae4702badee9286,
         type: 3}
@@ -258,6 +288,11 @@ PrefabInstance:
       propertyPath: colorSheet.Array.data[4].g
       value: 0.57254905
       objectReference: {fileID: 0}
+    - target: {fileID: 3985213854442867250, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.75
+      objectReference: {fileID: 0}
     - target: {fileID: 4430065969378234566, guid: e843106840614744cae4702badee9286,
         type: 3}
       propertyPath: m_Sprite
@@ -273,6 +308,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.g
       value: 0.29803923
+      objectReference: {fileID: 0}
+    - target: {fileID: 5190530940272532141, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.78
+      objectReference: {fileID: 0}
+    - target: {fileID: 5190530940272532141, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994851824227480388, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.79
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994851824227480388, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.92
+      objectReference: {fileID: 0}
+    - target: {fileID: 6112514597771156020, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: maskScaleMultiplier
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 6240990561836385197, guid: e843106840614744cae4702badee9286,
         type: 3}
@@ -379,6 +439,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8138360011460092019, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 8329617022334359770, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: m_Radius
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8479223042040160016, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: maskScaleMultiplier
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8682329531307958821, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: maskScaleMultiplier
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8746590218325337101, guid: e843106840614744cae4702badee9286,
         type: 3}
