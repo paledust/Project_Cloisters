@@ -321,12 +321,12 @@ PrefabInstance:
     - target: {fileID: 404619460483777785, guid: e843106840614744cae4702badee9286,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.9
+      value: -1.72
       objectReference: {fileID: 0}
     - target: {fileID: 404619460483777785, guid: e843106840614744cae4702badee9286,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.108
+      value: -1.04
       objectReference: {fileID: 0}
     - target: {fileID: 560748116101639199, guid: e843106840614744cae4702badee9286,
         type: 3}
@@ -399,10 +399,15 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -1.443
       objectReference: {fileID: 0}
+    - target: {fileID: 2112288953868468001, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: maskScaleMultiplier
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3148867474850406865, guid: e843106840614744cae4702badee9286,
         type: 3}
       propertyPath: m_Radius
-      value: 0.75
+      value: 0.65
       objectReference: {fileID: 0}
     - target: {fileID: 3809608919209285648, guid: e843106840614744cae4702badee9286,
         type: 3}
@@ -485,6 +490,11 @@ PrefabInstance:
       propertyPath: colorSheet.Array.data[4].g
       value: 0.57254905
       objectReference: {fileID: 0}
+    - target: {fileID: 3985213854442867250, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.75
+      objectReference: {fileID: 0}
     - target: {fileID: 4430065969378234566, guid: e843106840614744cae4702badee9286,
         type: 3}
       propertyPath: m_Sprite
@@ -509,22 +519,27 @@ PrefabInstance:
     - target: {fileID: 5190530940272532141, guid: e843106840614744cae4702badee9286,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.797
+      value: -0.38
       objectReference: {fileID: 0}
     - target: {fileID: 5190530940272532141, guid: e843106840614744cae4702badee9286,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.048
+      value: -0.13
       objectReference: {fileID: 0}
     - target: {fileID: 5994851824227480388, guid: e843106840614744cae4702badee9286,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.919
+      value: -1.83
       objectReference: {fileID: 0}
     - target: {fileID: 5994851824227480388, guid: e843106840614744cae4702badee9286,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.399
+      value: 1.21
+      objectReference: {fileID: 0}
+    - target: {fileID: 6112514597771156020, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: maskScaleMultiplier
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6394442942731453241, guid: e843106840614744cae4702badee9286,
         type: 3}
@@ -611,6 +626,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8138360011460092019, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 8329617022334359770, guid: e843106840614744cae4702badee9286,
         type: 3}

@@ -195,7 +195,7 @@ PrefabInstance:
     - target: {fileID: 2112288953868468001, guid: e843106840614744cae4702badee9286,
         type: 3}
       propertyPath: maskScaleMultiplier
-      value: 1.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3148867474850406865, guid: e843106840614744cae4702badee9286,
         type: 3}
@@ -332,7 +332,7 @@ PrefabInstance:
     - target: {fileID: 6112514597771156020, guid: e843106840614744cae4702badee9286,
         type: 3}
       propertyPath: maskScaleMultiplier
-      value: 1.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6240990561836385197, guid: e843106840614744cae4702badee9286,
         type: 3}

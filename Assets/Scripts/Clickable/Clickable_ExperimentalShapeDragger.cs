@@ -12,6 +12,7 @@ public class Clickable_ExperimentalShapeDragger : Basic_Clickable
     private ShapeInteractionHandler interactionHandler;
     private Dragger dragger;
     private Vector3 offset;
+    private bool isHovering;
     private const float DEPTH = 32;
 
     void Start()
@@ -26,9 +27,8 @@ public class Clickable_ExperimentalShapeDragger : Basic_Clickable
         Vector3 hitPoint = dragCenter.position + Vector3.ClampMagnitude(hitPos - dragCenter.position, maxDragOffset);
 
         if(isCenter)
-        {
             hitPoint = m_rigid.worldCenterOfMass;
-        }
+
         PhysicDragManager.Instance.SyncDraggerPos(hitPoint);
         dragger = PhysicDragManager.Instance.ConnectToRigid(m_rigid, m_rigid.transform.InverseTransformPoint(hitPoint));
         offset = dragger.rigidbody.position - player.GetCursorWorldPoint(DEPTH);

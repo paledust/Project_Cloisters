@@ -2,13 +2,14 @@ using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ShapeInteractionHandler : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer outline;
     [SerializeField] private Transform outlineMaskTrans;
     private Vector3 pos;
-    private HashSet<Clickable_ExperimentalShapeDragger> hoveringDraggers;
+    private Clickable_ExperimentalShapeDragger currentHoverDragger;
     private ConnectBody connectBody;
 
     public event Action onRelease;
@@ -18,37 +19,49 @@ public class ShapeInteractionHandler : MonoBehaviour
     void Awake()
     {
         connectBody = GetComponent<ConnectBody>();
+        outline.color = new Color(outline.color.r, outline.color.g, outline.color.b, 0);
     }
-    void Start()
+    void Update()
     {
-        hoveringDraggers = new HashSet<Clickable_ExperimentalShapeDragger>();
+        if(currentHoverDragger!=null)
+        {
+            Vector3 targetPos = currentHoverDragger.transform.position;
+            if(!isControlling)
+            {
+                Vector3 mouseScr = PlayerManager.Instance.GetCursorScreenPos();
+                mouseScr.z = 32;
+                Vector3 mouseWorld = Camera.main.ScreenToWorldPoint(mouseScr);
+                targetPos = targetPos + Vector3.ClampMagnitude(mouseWorld - targetPos, .25f);
+            }
+            outlineMaskTrans.position = Vector3.Lerp(outlineMaskTrans.position, targetPos, Time.deltaTime * 20);
+        }
     }
     public void OnHover(Clickable_ExperimentalShapeDragger dragger)
     {
-        if(hoveringDraggers.Count == 0)
+        if(currentHoverDragger == null)
         {
             if(connectBody.connectBodies.Count==0)
             {
                 pos = transform.InverseTransformPoint(dragger.transform.position);
                 outlineMaskTrans.DOKill();
-                outlineMaskTrans.DOLocalMove(pos, 0.15f).SetEase(Ease.OutQuad);
+                // outlineMaskTrans.DOLocalMove(pos, 0.15f).SetEase(Ease.OutQuad);
                 outlineMaskTrans.DOScale(dragger.maskScaleMultiplier, 0.15f).SetEase(Ease.OutQuad);
             }
             else
             {
                 outlineMaskTrans.DOKill();
-                outlineMaskTrans.DOLocalMove(Vector2.zero, 0.15f).SetEase(Ease.OutQuad);
+                // outlineMaskTrans.DOLocalMove(Vector2.zero, 0.15f).SetEase(Ease.OutQuad);
                 outlineMaskTrans.DOScale(10, 0.15f).SetEase(Ease.OutQuad);
             }
+            currentHoverDragger = dragger;
         }
         FadeOutline(1, 0.15f);
-        hoveringDraggers.Add(dragger);
     }
     public void OnExitHover(Clickable_ExperimentalShapeDragger dragger)
     {
-        hoveringDraggers.Remove(dragger);
-        if(hoveringDraggers.Count == 0)
+        if(currentHoverDragger == dragger)
         {
+            currentHoverDragger = null;
             outlineMaskTrans.DOKill();
             outlineMaskTrans.DOLocalMove(Vector3.zero, 0.15f).SetEase(Ease.OutQuad);
             outlineMaskTrans.DOScale(0f, 0.15f).SetEase(Ease.OutQuad);
