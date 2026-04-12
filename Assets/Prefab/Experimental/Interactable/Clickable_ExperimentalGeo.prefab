@@ -26,11 +26,11 @@ Transform:
   m_GameObject: {fileID: 559600422400518160}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8982843657415732049}
+  m_Father: {fileID: 4369247819362133923}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!331 &6306280795752170426
 SpriteMask:
@@ -268,7 +268,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8982843657415732049}
+  m_Father: {fileID: 4369247819362133923}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7338580780453373564
 SpriteRenderer:
@@ -522,6 +522,39 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3376883102595898164}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5196869500864397553
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4369247819362133923}
+  m_Layer: 0
+  m_Name: geoOutlineRoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4369247819362133923
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5196869500864397553}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6595324795457809659}
+  - {fileID: 697556845096217361}
+  m_Father: {fileID: 8982843657415732049}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5538998305198639436
 GameObject:
@@ -877,8 +910,7 @@ Transform:
   - {fileID: 1033347627306513477}
   - {fileID: 3376883102595898164}
   - {fileID: 6334799828255061722}
-  - {fileID: 6595324795457809659}
-  - {fileID: 697556845096217361}
+  - {fileID: 4369247819362133923}
   - {fileID: 794102271927533770}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -923,6 +955,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outline: {fileID: 7338580780453373564}
   outlineMaskTrans: {fileID: 697556845096217361}
+  outlineRootTrans: {fileID: 4369247819362133923}
 --- !u!114 &1754560563833497679
 MonoBehaviour:
   m_ObjectHideFlags: 0

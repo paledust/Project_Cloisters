@@ -445,6 +445,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -1.13
       objectReference: {fileID: 0}
+    - target: {fileID: 2112288953868468001, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: maskScaleMultiplier
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3809608919209285648, guid: e843106840614744cae4702badee9286,
         type: 3}
       propertyPath: m_Enabled
@@ -601,6 +606,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -0.209
       objectReference: {fileID: 0}
+    - target: {fileID: 6112514597771156020, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: maskScaleMultiplier
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6240990561836385197, guid: e843106840614744cae4702badee9286,
         type: 3}
       propertyPath: m_connectors.Array.size
@@ -700,6 +710,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8479223042040160016, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: maskScaleMultiplier
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 8746590218325337101, guid: e843106840614744cae4702badee9286,
         type: 3}

@@ -134,6 +134,7 @@ MonoBehaviour:
   m_rigid: {fileID: 46155926008519090}
   dragCenter: {fileID: 2911996419240909009}
   maxDragOffset: 0.25
+  isCenter: 0
   maskScaleMultiplier: 2
 --- !u!1001 &1928575273295475436
 PrefabInstance:
@@ -791,12 +792,12 @@ PrefabInstance:
     - target: {fileID: 5190530940272532141, guid: e843106840614744cae4702badee9286,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: -0.11
       objectReference: {fileID: 0}
     - target: {fileID: 5190530940272532141, guid: e843106840614744cae4702badee9286,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5994851824227480388, guid: e843106840614744cae4702badee9286,
         type: 3}

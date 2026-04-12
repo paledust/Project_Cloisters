@@ -38,6 +38,7 @@ public class PlayerManager : Singleton<PlayerManager>
             currentPlayer.ReleaseCurrentHolding();
     }
     public Vector2 GetCursorScreenPos()=>currentPlayer.PointerScrPos;
+    public Vector2 GetCursorDelta()=>currentPlayer.PointerDelta;
     public void UpdateCursorState(CURSOR_STATE newState)=>UI_Manager.Instance.UpdateCursorState(newState);
     public void RegisterPlayer(PlayerController player)
     {

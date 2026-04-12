@@ -1,17 +1,14 @@
 using System;
-using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class ShapeInteractionHandler : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer outline;
     [SerializeField] private Transform outlineMaskTrans;
-    private Vector3 pos;
+    [SerializeField] private Transform outlineRootTrans;
     private Clickable_ExperimentalShapeDragger currentHoverDragger;
     private ConnectBody connectBody;
-
     public event Action onRelease;
 
     public bool isControlling { get; private set; }
@@ -23,18 +20,29 @@ public class ShapeInteractionHandler : MonoBehaviour
     }
     void Update()
     {
+        Vector3 targetOutlinePos = Vector3.zero;
+
         if(currentHoverDragger!=null)
         {
+            Vector3 mouseScr = PlayerManager.Instance.GetCursorScreenPos();
+            mouseScr.z = 32;
+            Vector3 mouseWorld = Camera.main.ScreenToWorldPoint(mouseScr);
             Vector3 targetPos = currentHoverDragger.transform.position;
+
             if(!isControlling)
             {
-                Vector3 mouseScr = PlayerManager.Instance.GetCursorScreenPos();
-                mouseScr.z = 32;
-                Vector3 mouseWorld = Camera.main.ScreenToWorldPoint(mouseScr);
-                targetPos = targetPos + Vector3.ClampMagnitude(mouseWorld - targetPos, .25f);
+                if(!currentHoverDragger.IsCenter)
+                {
+                    targetPos = targetPos + Vector3.ClampMagnitude(mouseWorld - currentHoverDragger.transform.position, .25f);
+                }
+            }
+            else
+            {
+                targetOutlinePos = Vector3.ClampMagnitude(transform.InverseTransformDirection(PlayerManager.Instance.GetCursorDelta())*0.2f, .25f);
             }
             outlineMaskTrans.position = Vector3.Lerp(outlineMaskTrans.position, targetPos, Time.deltaTime * 20);
         }
+        outlineRootTrans.localPosition = Vector3.Lerp(outlineRootTrans.localPosition, targetOutlinePos, Time.deltaTime * 2);
     }
     public void OnHover(Clickable_ExperimentalShapeDragger dragger)
     {
@@ -42,7 +50,6 @@ public class ShapeInteractionHandler : MonoBehaviour
         {
             if(connectBody.connectBodies.Count==0)
             {
-                pos = transform.InverseTransformPoint(dragger.transform.position);
                 outlineMaskTrans.DOKill();
                 // outlineMaskTrans.DOLocalMove(pos, 0.15f).SetEase(Ease.OutQuad);
                 outlineMaskTrans.DOScale(dragger.maskScaleMultiplier, 0.15f).SetEase(Ease.OutQuad);
@@ -86,6 +93,7 @@ public class ShapeInteractionHandler : MonoBehaviour
     {
         Gizmos.matrix = transform.localToWorldMatrix;
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(pos, 0.2f);
+        var rigid = GetComponent<Rigidbody>();
+        Gizmos.DrawSphere(rigid.centerOfMass, 0.2f);
     }
 }

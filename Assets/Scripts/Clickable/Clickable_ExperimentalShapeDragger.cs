@@ -1,4 +1,3 @@
-using DG.Tweening;
 using UnityEngine;
 
 public class Clickable_ExperimentalShapeDragger : Basic_Clickable
@@ -12,8 +11,11 @@ public class Clickable_ExperimentalShapeDragger : Basic_Clickable
     private ShapeInteractionHandler interactionHandler;
     private Dragger dragger;
     private Vector3 offset;
-    private bool isHovering;
+    
     private const float DEPTH = 32;
+
+    public Dragger currentDragger => dragger;
+    public bool IsCenter => isCenter;
 
     void Start()
     {
