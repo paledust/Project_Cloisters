@@ -81,9 +81,6 @@ public class Hoverable_DrumInteraction : MonoBehaviour
             accumulatePower -= beatDrainSpeed * Time.deltaTime;
             accumulatePower = Mathf.Clamp(accumulatePower, 0, 1f + beatOvershoot);
         }
-        Color targetColor = glowSprite.color;
-        targetColor.a = Mathf.Clamp01(accumulatePower) * glowMaxAlpha;
-        glowSprite.color = Color.Lerp(glowSprite.color, targetColor, Time.deltaTime * 20);
         switch(drumState)
         {
             case DrumState.Beating:
@@ -163,6 +160,8 @@ public class Hoverable_DrumInteraction : MonoBehaviour
         ShakeDrum(harmScale, harmVibration, hoverScaleDuration);
         accumulatePower += beatPowerAdd * strength;
         accumulatePower = Mathf.Min(1.5f, accumulatePower);
+        glowSprite.DOKill();
+        glowSprite.DOFade(Random.Range(0.5f,0.55f), 0.1f).OnComplete(()=>glowSprite.DOFade(0, 0.2f)).SetId(glowSprite);
         if(drumState == DrumState.MaxCharged)
         {
             rippleParticle.Emit(1);
