@@ -28,6 +28,7 @@ public class GeoFragmentController : MonoBehaviour
 [Header("Controlling Geos")]
     [SerializeField] private GeoFragGroup[] geoFragGroups;
 [Header("Expand")]
+    [SerializeField] private float ellipseYFactor = 0.6f;
     [SerializeField] private float expandPosAngleRND;
     [SerializeField] private Vector2 expandRadiusRange;
     [SerializeField] private Vector2 expandPosRatioRND;
@@ -54,7 +55,10 @@ public class GeoFragmentController : MonoBehaviour
     //Reposition geos to center of the sphere
         geoPoses = new Vector3[count];
         for(int i=0; i<geoPoses.Length; i++){
-            geoPoses[i] = Quaternion.Euler(0, 0, Random.Range(-expandPosAngleRND, expandPosAngleRND)+360*i/geoPoses.Length) * Vector2.right * expandPosRatioRND.GetRndValueInVector2Range();
+            float angle = Random.Range(-expandPosAngleRND, expandPosAngleRND)+360*i/geoPoses.Length;
+            float radian = angle*Mathf.Deg2Rad;
+            float radius = Mathf.Sin(radian)*Mathf.Sin(radian) + Mathf.Cos(radian)*Mathf.Cos(radian)*ellipseYFactor;
+            geoPoses[i] = Quaternion.Euler(0, 0, angle) * Vector2.right * expandPosRatioRND.GetRndValueInVector2Range() * radius;
         }
         Service.Shuffle(ref geoPoses);
 
@@ -116,5 +120,10 @@ public class GeoFragmentController : MonoBehaviour
         DebugExtension.DrawCircle(center.position, Vector3.forward, Color.red, expandRadiusRange.y);
         DebugExtension.DrawCircle(center.position, Vector3.forward, Color.yellow, expandRadiusRange.y+RayTrailRadiusRange.GetMin());
         DebugExtension.DrawCircle(center.position, Vector3.forward, Color.green, expandRadiusRange.y+RayTrailRadiusRange.GetMax());
+        if(geoPoses!=null){
+            for(int i=0; i<geoPoses.Length; i++){
+                DebugExtension.DrawPoint(center.position+geoPoses[i], Color.green, 0.2f);
+            }
+        }
     }
 }

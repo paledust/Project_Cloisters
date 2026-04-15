@@ -1,4 +1,5 @@
 using System.Collections;
+using DG.Tweening;
 using SimpleAudioSystem;
 using UnityEngine;
 using UnityEngine.Playables;
@@ -47,8 +48,10 @@ public class IC_Stylized : IC_Basic
 
     private int textShowIndex = 0;
     private float introOffsetPlanetAngle;
+    private float minAmbVolume;
     private bool isExtending = false;
     private bool transitioning = false;
+
     void Awake()
     {
         this.enabled = false;
@@ -82,6 +85,7 @@ public class IC_Stylized : IC_Basic
         EventHandler.E_OnDrumKnocked += DrumKnockedHandler;
         EventHandler.E_OnBassChargeBeat += BassChargeBeatHandler;
 
+        minAmbVolume = ambFade.x;
         ambienceHandler.PlayAmbience(ambKey, 0.2f);
     }
     protected override void OnInteractionEnd()
@@ -107,13 +111,11 @@ public class IC_Stylized : IC_Basic
             case StylizedState.Drum:
                 introExpandFactor = giantDrum.m_accumulatePower;
                 geoExpandFactor = introExpandFactor*geoExpandDrumFactor;
-                if(circleExpandingController.enabled)
-                    circleExpandingController.UpdateExpand(Mathf.Min(maxDrumKnockRadius, introExpandFactor));
                 break;
         }
         if(!m_isDone)
         {
-            AudioManager.Instance.FadeAmbience(Mathf.Lerp(ambFade.x, ambFade.y, EasingFunc.Easing.QuadEaseIn(introExpandFactor)), 0);
+            ambienceHandler.ChangeAmbienceVolume(Mathf.Lerp(minAmbVolume, ambFade.y, EasingFunc.Easing.QuadEaseIn(introExpandFactor)));
         }
         geoFragmentController.UpdateExpand(geoExpandFactor);
     }
@@ -143,6 +145,8 @@ public class IC_Stylized : IC_Basic
             }
             textShowIndex++;
         }
+
+        minAmbVolume = (ambFade.y-ambFade.x)/textShowOrder.Length * textShowIndex + ambFade.x;
 
         if(textShowIndex < textShowOrder.Length)
         {
@@ -182,10 +186,10 @@ public class IC_Stylized : IC_Basic
     IEnumerator coroutineFadeAmbToInitVolume(float delay)
     {
         yield return new WaitForSeconds(delay);
-        AudioManager.Instance.FadeAmbience(ambFade.x, 2f);
+        ambienceHandler.FadeAmbience(minAmbVolume, 2f);
     }
     IEnumerator coroutineEnd(){
-        AudioManager.Instance.FadeAmbience(finalAmbVolume, 1f);
+        ambienceHandler.FadeAmbience(finalAmbVolume, 1f);
         yield return new WaitForSeconds(1.2f);
         drumController.QueueBeat(sfxEnd, 1f, geoTextController.PutTextTogether);
         yield return new WaitForSeconds(1.2f);

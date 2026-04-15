@@ -6,7 +6,6 @@ public class ShapeInteractionHandler : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer outline;
     [SerializeField] private Transform outlineMaskTrans;
-    [SerializeField] private Transform outlineRootTrans;
     private Clickable_ExperimentalShapeDragger currentHoverDragger;
     private ConnectBody connectBody;
     public event Action onRelease;
@@ -42,7 +41,6 @@ public class ShapeInteractionHandler : MonoBehaviour
             }
             outlineMaskTrans.position = Vector3.Lerp(outlineMaskTrans.position, targetPos, Time.deltaTime * 20);
         }
-        outlineRootTrans.localPosition = Vector3.Lerp(outlineRootTrans.localPosition, targetOutlinePos, Time.deltaTime * 2);
     }
     public void OnHover(Clickable_ExperimentalShapeDragger dragger)
     {
@@ -51,13 +49,11 @@ public class ShapeInteractionHandler : MonoBehaviour
             if(connectBody.connectBodies.Count==0)
             {
                 outlineMaskTrans.DOKill();
-                // outlineMaskTrans.DOLocalMove(pos, 0.15f).SetEase(Ease.OutQuad);
                 outlineMaskTrans.DOScale(dragger.maskScaleMultiplier, 0.15f).SetEase(Ease.OutQuad);
             }
             else
             {
                 outlineMaskTrans.DOKill();
-                // outlineMaskTrans.DOLocalMove(Vector2.zero, 0.15f).SetEase(Ease.OutQuad);
                 outlineMaskTrans.DOScale(10, 0.15f).SetEase(Ease.OutQuad);
             }
             currentHoverDragger = dragger;

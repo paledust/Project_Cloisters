@@ -16,6 +16,14 @@ public class AmbienceHandler : MonoBehaviour
     {
         audioManager.FadeAmbience(0, duration, stopAfterFade);
     }
+    public void ChangeAmbienceVolume(float volume)
+    {
+        audioManager.FadeAmbience(volume, 0);
+    }
+    public void FadeAmbience(float targetVolume, float duration)
+    {
+        audioManager.FadeAmbience(targetVolume, duration, false);
+    }
     public void PlayAmbience(string ambienceName, float volume)
     {
         audioManager.PlayAmbience(ambienceName, true, volume, false);
