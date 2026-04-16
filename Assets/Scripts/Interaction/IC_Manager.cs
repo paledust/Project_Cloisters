@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using SimpleAudioSystem;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -62,6 +64,8 @@ public class IC_Manager : MonoBehaviour
 #if UNITY_EDITOR
     [ContextMenu("Set Up Scene To Interactions")]
     public void Editor_SetUpInteractions(){
+        if(EditorApplication.isPlaying)
+            return;
         CleanUpAllInteractions();
         Editor_ActivateInteractions(StartIndex);
     }
@@ -174,8 +178,16 @@ public class IC_Manager : MonoBehaviour
         PhysicDragManager.Instance.CleanUp();
     }
 #if UNITY_EDITOR
-    public void Editor_ActivateInteractions(int index){
-        interactionControllers[index].PreloadInteraction();
+    public void Editor_CleanUpInteractions()
+    {
+        for (int i = 0; i < interactionControllers.Length; i++)
+        {
+            interactionControllers[i].Editor_CleanUpInteraction();
+        }
+    }
+    public void Editor_ActivateInteractions(int index)
+    {
+        interactionControllers[index].Editor_LoadInteraction();
     }
 #endif
 }

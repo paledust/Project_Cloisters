@@ -13,6 +13,14 @@ public abstract class IC_Basic : MonoBehaviour
     public bool m_isDone{get; private set;} = false;
     public bool m_isPlaying{get; private set;} = false;
 
+    public void Editor_LoadInteraction()
+    {
+        if(interactionAssetsGroup!=null) interactionAssetsGroup.SetActive(true);
+    }
+    public void Editor_CleanUpInteraction()
+    {
+        if(interactionAssetsGroup!=null) interactionAssetsGroup.SetActive(false);
+    }
 //This might be an async function
     public void PreloadInteraction(){
         if(interactionAssetsGroup!=null) interactionAssetsGroup.SetActive(true);
@@ -32,6 +40,7 @@ public abstract class IC_Basic : MonoBehaviour
         if(interactionAssetsGroup!=null) interactionAssetsGroup.SetActive(false);
         UnloadAssets();
     }
+
 //When loading resources
     protected virtual void LoadAssets() { m_isLoaded = true; }
 //When unloading resources
