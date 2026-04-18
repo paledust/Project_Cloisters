@@ -112,6 +112,8 @@ public class IC_Narrative : IC_Basic
         if(Time.time - lastCollisionTime<=effectiveCollisionStep) 
             return;
         if(strength >= collisionStrength){
+            controlledCircle.GlowOnCollision(1);
+            collidedCircle.GlowOnCollision(1);
             //bounce off the other cirlce
             var collidableCircle = collidedCircle.GetComponent<CollidableCircle>();
             if(collidableCircle!=null)

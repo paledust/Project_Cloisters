@@ -47,6 +47,7 @@ public class Clickable_Circle : Basic_Clickable
     [SerializeField] private float lerpSpeed = 5;
     [SerializeField] private float followFactor = 1;
     [SerializeField, Range(0, 1)] private float speedDrag = 0;
+    
 [Header("Particles")]
     [SerializeField] private ParticleSystem p_trail;
     [SerializeField] private ParticleSystem p_ripple;
@@ -61,11 +62,15 @@ public class Clickable_Circle : Basic_Clickable
     [SerializeField] private Vector2 bounceRange;
     [SerializeField] private float bounceDuration; 
     [SerializeField] private AnimationCurve bounceCurve;
+    [SerializeField] private NarrativeCircleGlow narrativeCircleGlow;
+
 [Header("Circle Animation Control")]
     [SerializeField] private CircleWobble[] circleWobbles;
     [SerializeField] private CircleMotionControl circleMotionControl;
+
 [Header("Circle Type VFX")]
     [SerializeField] private SpriteRenderer spriteGlow;
+
 [Header("Circle Sprites")]
     [SerializeField] private IC_Narrative.HeroCircleTransistor[] circleTransistors;
 
@@ -140,7 +145,7 @@ public class Clickable_Circle : Basic_Clickable
         switch(newType)
         {
             case CircleType.Target:
-                spriteGlow.DOFade(0.25f, 1f).SetEase(Ease.OutQuad);
+                spriteGlow.DOFade(.25f, 1f).SetEase(Ease.OutQuad);
                 break;
             case CircleType.Hollow:
                 spriteGlow.DOFade(0.05f, 0.5f).SetEase(Ease.OutQuad);
@@ -165,6 +170,10 @@ public class Clickable_Circle : Basic_Clickable
         }
     }
     public void OnHeavyCollide()=>p_caustic.Play(true);
+    public void GlowOnCollision(float glowStrength)
+    {
+        narrativeCircleGlow.GlowOnCollision(glowStrength);
+    }
     public void TransitionCircles(float duration)
     {
         for(int i=0; i<circleTransistors.Length; i++)

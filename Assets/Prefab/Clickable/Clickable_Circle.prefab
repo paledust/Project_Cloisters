@@ -86,7 +86,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ee886d95f6d1a55468475fb1bc93681a, type: 2}
+  - {fileID: 2100000, guid: 31bf7d2d4e5057e4f82c9c25c87c32d7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5244,7 +5244,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sfx_clickSound: 
   hitbox: {fileID: 4337985783848230490}
-  isFrozen: 0
   disableClick: 0
   circleClass: 1
   maxfollowSpeed: 16
@@ -5254,6 +5253,7 @@ MonoBehaviour:
   p_trail: {fileID: 4337985782930849926}
   p_ripple: {fileID: 5037205659974870894}
   p_caustic: {fileID: 0}
+  p_targetRipple: {fileID: 0}
   circleType: 0
   bounceFactor: 0.3
   collisionFactor: 0.6
@@ -5347,6 +5347,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  narrativeCircleGlow: {fileID: 0}
   circleWobbles:
   - perRendererWobbles: {fileID: 762397713989493850}
     WobbleFactor: 1
