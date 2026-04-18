@@ -85,7 +85,7 @@ public class PhysicDragManager : Singleton<PhysicDragManager>
         };
         return _dragger;
     }
-    public static Joint GetNewBodyConnector(Rigidbody fromBody, Rigidbody toBody, float springStrength, float damper, float minimumDistance)
+    public static Joint GetNewBodyConnector(Rigidbody fromBody, Rigidbody toBody, float springStrength, float damper, float minimumDistance, float maximumDistance)
     {
         var joint = fromBody.gameObject.AddComponent<ConfigurableJoint>();
         joint.axis = Vector3.forward;
@@ -100,7 +100,7 @@ public class PhysicDragManager : Singleton<PhysicDragManager>
         joint.zMotion = ConfigurableJointMotion.Limited;
         joint.linearLimit = new SoftJointLimit()
         {
-            limit = Mathf.Max((fromBody.position - toBody.position).magnitude, minimumDistance),
+            limit = Mathf.Clamp((fromBody.position - toBody.position).magnitude, minimumDistance, maximumDistance),
         };
         joint.linearLimitSpring = new SoftJointLimitSpring()
         {

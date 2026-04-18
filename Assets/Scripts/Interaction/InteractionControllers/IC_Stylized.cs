@@ -33,9 +33,6 @@ public class IC_Stylized : IC_Basic
     [SerializeField] private float expandRange = 1800;
     [SerializeField] private float geoExpandDrumFactor = 0.65f;
 
-    [Header("Drum Explode")]
-    [SerializeField] private float maxDrumKnockRadius = 0.8f;
-
     [Header("Text Order")]
     [SerializeField] private int[] textShowOrder;
 

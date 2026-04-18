@@ -25,7 +25,6 @@ public class NarrativeConnectLineController : MonoBehaviour
     {
         if(nodeGraph.ContainsKey(fromCircle) && nodeGraph[fromCircle].Contains(toCircle))
         {
-            Debug.LogWarning("Already Connected");
             return;
         }
 

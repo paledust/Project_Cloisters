@@ -51,6 +51,8 @@ public class Clickable_Circle : Basic_Clickable
     [SerializeField] private ParticleSystem p_trail;
     [SerializeField] private ParticleSystem p_ripple;
     [SerializeField] private ParticleSystem p_caustic;
+    [SerializeField] private ParticleSystem p_targetRipple;
+
 [Header("Collision")]
     [SerializeField] private CircleType circleType;
     [SerializeField] private float bounceFactor;
@@ -102,12 +104,15 @@ public class Clickable_Circle : Basic_Clickable
         base.OnClick(player, hitPos);
         player.HoldInteractable(this);
         p_trail.Play(true);
+        var emission = p_targetRipple.emission;
+        emission.enabled = false;
         m_rigid.isKinematic = true;
     }
     public override void OnRelease(PlayerController player)
     {
         base.OnRelease(player);
-        p_trail.Stop(true);
+        var emission = p_targetRipple.emission;
+        emission.enabled = true;
         m_rigid.isKinematic = false;
     }
 
