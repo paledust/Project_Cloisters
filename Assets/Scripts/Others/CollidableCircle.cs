@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
@@ -37,22 +38,17 @@ public class CollidableCircle : MonoBehaviour
 [Header("SpawnCircle")]
     [SerializeField, ShowOnly] private bool hasCollided = false;
 [Header("Text")]
-    [SerializeField] private TextMeshPro txt;
+    [SerializeField] private NarrativeTxtSprite narrativeTxt;
     [SerializeField] private ParticleSystem p_hasText;
 
 [Header("VFX Explode Resolve")]
     [SerializeField] private Transform vfxRoot;
 
-    private bool isGrowing = false;
-    private bool isSpawning = false;
     private Clickable_Circle circle;
     private NarrativeCircleNode narrativeCircleNode;
     private Vector3 targetPoint;
 
-    public bool Collidable => m_collider.enabled;
-    public bool CanGrow => !circle.IsGrownCircle && !isGrowing && !isSpawning;
     public bool m_hasCollided => hasCollided;
-    public float radius => m_collider.radius * transform.localScale.x;
     public bool isPined{get; private set;} = false;
     public Clickable_Circle m_circle => circle;
     public Rigidbody m_rigidbody => m_rigid;
@@ -90,7 +86,7 @@ public class CollidableCircle : MonoBehaviour
         hasCollided = true;
         if(m_circle.m_circleType == Clickable_Circle.CircleType.Narrative)
         {
-            circleAnime.Play(EXPLODE_ANIMATION);
+            ExplodeCircle();
             return;
         }
         // m_rigid.velocity = (m_rigid.position - contact).normalized * strength;
@@ -104,6 +100,7 @@ public class CollidableCircle : MonoBehaviour
     {
         circleAnime.Play(EXPLODE_ANIMATION);
         vfxRoot.SetParent(null);
+        narrativeTxt.transform.SetParent(transform);
         Destroy(vfxRoot.gameObject, 4f);
     }
     public void HollowCircle()
@@ -123,8 +120,6 @@ public class CollidableCircle : MonoBehaviour
         for(int i=0; i<circleOpacity.Length; i++)
             circleOpacity[i].opacity = 0;
 
-        isSpawning = false;
-        isGrowing  = false;
         circle.ResetWobble();
         int currentClass = circle.m_circleClass;
         for(int i=0; i<resetCircles.Length; i++){
@@ -132,12 +127,10 @@ public class CollidableCircle : MonoBehaviour
         }
     }
     public void FloatUp(float duration){
-        isSpawning = true;
         StartCoroutine(coroutineFloatingUp(duration));
     }
     public void PopUp(float duration)
     {
-        isSpawning = true;
         circleAnime[POPUP_ANIMATION].speed = circleAnime[POPUP_ANIMATION].length/duration;
         circleAnime.Play(POPUP_ANIMATION);
     }
@@ -147,6 +140,12 @@ public class CollidableCircle : MonoBehaviour
     public void AE_OnExplode()
     {
         EventHandler.Call_OnNarrativeExplode(this);
+        //move text to world and detach from circle
+        if(narrativeTxt.gameObject.activeSelf)
+        {
+            narrativeTxt.transform.SetParent(null);
+            narrativeTxt.OnShowingText(m_rigid.velocity);
+        }
         narrativeCircleNode.NodeExplode();
         onCircleExplode?.Invoke();
     }
@@ -154,9 +153,7 @@ public class CollidableCircle : MonoBehaviour
         float size = renderRoot.transform.localScale.x;
         StartCoroutine(coroutineGrowHitbox(2f, size));
     }
-    public void AE_FloatDone(){
-        isSpawning = false;
-    }
+    public void AE_FloatDone(){}
     public void AE_ExplodeDone()
     {
         Destroy(gameObject);
@@ -164,10 +161,10 @@ public class CollidableCircle : MonoBehaviour
     #endregion
 
     #region Text
-    public void ShowText(char text)
+    public void ShowText(Sprite textSprite)
     {
-        txt.text = text.ToString();
-        txt.gameObject.SetActive(true);
+        narrativeTxt.AssignSprite(textSprite);
+        narrativeTxt.gameObject.SetActive(true);
     }
     public void RegisterOnExplode(Action onExplode)
     {

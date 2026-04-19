@@ -3,6 +3,12 @@ using UnityEngine;
 
 public class NarrativeCircleManager : Basic_ObjectPool<CollidableCircle>
 {
+    [System.Serializable]
+    public class TextCharSprite
+    {
+        public char character;
+        public Sprite sprite;
+    }
     public enum SpawnStyle
     {
         FloatUp,
@@ -19,9 +25,21 @@ public class NarrativeCircleManager : Basic_ObjectPool<CollidableCircle>
     [SerializeField] private NarrativeRandomForceField forceField;
     [SerializeField, ShowOnly] private List<CollidableCircle> listCircles = new List<CollidableCircle>();
 
+[Header("Spawn Text")]
+    [SerializeField] private TextCharSprite[] textCharSprites;
+    
+    private Dictionary<char, Sprite> dictTextSprite = new Dictionary<char, Sprite>();
+
     void Start()
     {
         narrative = GetComponent<IC_Narrative>();
+        foreach(var item in textCharSprites)
+        {
+            if(!dictTextSprite.ContainsKey(item.character))
+            {
+                dictTextSprite.Add(item.character, item.sprite);
+            }
+        }
     }
     void LateUpdate()
     {
@@ -121,6 +139,14 @@ public class NarrativeCircleManager : Basic_ObjectPool<CollidableCircle>
         target.ResetMotion();
         target.ResetSize(spawnSize.GetRndValueInVector2Range());
         target.m_circle.ChangeCircleType(Clickable_Circle.CircleType.Normal);
+    }
+    public Sprite GetTextSprite(char character)
+    {
+        if(dictTextSprite.ContainsKey(character))
+        {
+            return dictTextSprite[character];
+        }
+        return null;
     }
     public CollidableCircle[] GetCircleInDistanceOrder(Vector3 position)
     {

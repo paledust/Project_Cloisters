@@ -112,8 +112,6 @@ public class IC_Narrative : IC_Basic
         if(Time.time - lastCollisionTime<=effectiveCollisionStep) 
             return;
         if(strength >= collisionStrength){
-            controlledCircle.GlowOnCollision(1);
-            collidedCircle.GlowOnCollision(1);
             //bounce off the other cirlce
             var collidableCircle = collidedCircle.GetComponent<CollidableCircle>();
             if(collidableCircle!=null)
@@ -121,6 +119,7 @@ public class IC_Narrative : IC_Basic
                 if(collidableCircle.m_hasCollided)
                     return;
                 //Play Collision Particle
+                collidedCircle.GlowOnCollision(1);
                 Vector3 diff = controlledCircle.transform.position - collidedCircle.transform.position;
                 p_collideBurst.transform.position = collision.contacts[0].point;
                 p_collideBurst.transform.rotation = Quaternion.Euler(0,0,Vector3.SignedAngle(Vector3.right, diff, Vector3.forward));
@@ -157,6 +156,7 @@ public class IC_Narrative : IC_Basic
                                 hasTarget = true;
                             }
                         }
+
                         break;
                     case Clickable_Circle.CircleType.Target:
                     //Reroll the spawn amount
@@ -170,7 +170,7 @@ public class IC_Narrative : IC_Basic
                             var narrativeCircle = PopupCircleAtPosAndPushedAway(collidedCircle.transform.position-Quaternion.Euler(0,0,spawnAngle)*diff.normalized,
                                                                                 collidedCircle.transform.position, strength);
                             narrativeCircle.m_circle.ChangeCircleType(Clickable_Circle.CircleType.Narrative);
-                            narrativeCircle.ShowText(narrativeText.content);
+                            narrativeCircle.ShowText(narrativeCircleManager.GetTextSprite(narrativeText.content));
                             narrativeCircle.RegisterOnExplode(narrativeText.ShowText);
                         }
 
@@ -192,7 +192,7 @@ public class IC_Narrative : IC_Basic
     {
         var circle = circleManager.SpawnAtPoint(Pos, Random.Range(0.8f, 1.2f), NarrativeCircleManager.SpawnStyle.PopUp);
         Vector3 dir = (circle.transform.position - sourcePos).normalized;
-        circle.m_rigidbody.AddForce(dir * Random.Range(1, 1.5f) * Mathf.Min(10, collisionStrength), ForceMode.VelocityChange);
+        circle.m_rigidbody.AddForce(dir * Random.Range(.9f, 1.3f) * Mathf.Min(10, collisionStrength), ForceMode.VelocityChange);
         return circle;
     }
     public NarrativeTextData GetNextNarrativeTextData()
