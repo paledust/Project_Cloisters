@@ -12,9 +12,13 @@ public class NarrativeTxtSprite : MonoBehaviour
     {
         Destroy(floatingMotion);
         Destroy(angleMotion);
-        movingDir = Vector3.ClampMagnitude(movingDir, 8);
-        transform.DOScale(Vector3.one*Random.Range(0.5f, 1f), 1f).SetEase(Ease.OutBack);
-        transform.DOMove(transform.position + movingDir*Random.Range(0.25f, 0.5f), 1.5f).SetEase(Ease.OutQuad);
+        movingDir = Vector3.ClampMagnitude(movingDir, 4);
+        Vector3 finalPos = transform.position + movingDir;
+        finalPos.x = Mathf.Clamp(finalPos.x, -13, 13);
+        finalPos.y = Mathf.Clamp(finalPos.y, -7, 7);
+        
+        transform.DOScale(transform.localScale*2.2f, .25f).SetEase(Ease.OutBack);
+        transform.DOMove(finalPos, Random.Range(2f, 2.2f)).SetEase(Ease.OutCubic);
         anime.Play();
         Destroy(gameObject,2f);
     }

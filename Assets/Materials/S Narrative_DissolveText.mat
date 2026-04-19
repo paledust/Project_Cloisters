@@ -156,10 +156,11 @@ Material:
     - _GlowSoftness: 1
     - _GlowValue: 0
     - _Metallic: 0
-    - _NoiseMax1: 1
-    - _NoiseMin1: -1
+    - _NoiseDimScale: 10
+    - _NoiseMax1: 0.7
+    - _NoiseMin1: -1.25
     - _NoiseStrength: 0
-    - _NoiseTiling1: 0.5
+    - _NoiseTiling1: 0.75
     - _OcclusionStrength: 1
     - _Opacity: 1
     - _Parallax: 0.005
