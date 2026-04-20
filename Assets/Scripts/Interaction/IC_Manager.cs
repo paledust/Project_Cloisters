@@ -75,7 +75,12 @@ public class IC_Manager : MonoBehaviour
             interactionIndex --;
             Debug.LogWarning("No Interaction");
             if(interactionIndex >= interactionControllers.Length-1){
-                StartCoroutine(CommonCoroutine.delayAction(()=>GameManager.Instance.SwitchingScene(endSceneName), endDelay));
+                StartCoroutine(CommonCoroutine.delayAction(()=>
+                {
+                    ambienceHandler.CleanUp();
+                    PhysicDragManager.Instance.CleanUp();
+                    GameManager.Instance.SwitchingScene(endSceneName);
+                }, endDelay));
             }
             LevelProgressionManager.Instance.SetProgress(interactionIndex);
             return;

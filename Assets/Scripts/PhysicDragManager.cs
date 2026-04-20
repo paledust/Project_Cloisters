@@ -47,6 +47,7 @@ public class PhysicDragManager : Singleton<PhysicDragManager>
     {
         if(dragger!=null)
         {
+            // if(dragger.rigidbody!=null)
             Destroy(dragger.rigidbody.gameObject);
             dragger = null;
         }
