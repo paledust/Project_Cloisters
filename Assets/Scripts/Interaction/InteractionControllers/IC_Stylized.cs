@@ -48,6 +48,7 @@ public class IC_Stylized : IC_Basic
     private float minAmbVolume;
     private bool isExtending = false;
     private bool transitioning = false;
+    public bool IsIntro => stylizedState == StylizedState.Intro;
 
     void Awake()
     {
@@ -103,11 +104,17 @@ public class IC_Stylized : IC_Basic
                 introExpandFactor = (-clickablePlanet.m_accumulateYaw+introOffsetPlanetAngle)/expandRange;
                 geoExpandFactor = introExpandFactor;
                 if(!isExtending && circleExpandingController.enabled)
+                {
                     circleExpandingController.UpdateExpand(introExpandFactor);
+                    circleExpandingController.UpdateSphereTrans(introExpandFactor);
+                }
                 break;
             case StylizedState.Drum:
                 introExpandFactor = giantDrum.m_accumulatePower;
                 geoExpandFactor = introExpandFactor*geoExpandDrumFactor;
+                if(!isExtending && circleExpandingController.enabled)
+                    circleExpandingController.UpdateExpand(giantDrum.m_accumulatePower*0.5f);
+                
                 break;
         }
         if(!m_isDone)
@@ -116,7 +123,6 @@ public class IC_Stylized : IC_Basic
         }
         geoFragmentController.UpdateExpand(geoExpandFactor);
     }
-
     #region State Change
     public void StartExtending()
     {
@@ -163,7 +169,8 @@ public class IC_Stylized : IC_Basic
 
     void BassChargeBeatHandler()
     {
-        circleExplodeController.Explode();
+        if(geoFragmentController.IsGeoPrepared)
+            circleExplodeController.Explode();
     }
     void DrumKnockedHandler(float strength)
     {

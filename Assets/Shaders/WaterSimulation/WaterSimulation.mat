@@ -69,7 +69,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Atten: 0.975
+    - _Atten: 0.985
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DeltaUV: 1

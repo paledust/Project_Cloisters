@@ -44,7 +44,6 @@ public class IC_Manager : MonoBehaviour
         debugActions["regress"].performed -= Debug_Regress;
         debugActions["restart"].performed -= Debug_RestartLevel;
         debugActions["reset"].performed -= Debug_Reset;
-
         debugActions.Disable();
     #endif
     }
@@ -130,6 +129,11 @@ public class IC_Manager : MonoBehaviour
 
     void Debug_Progress(InputAction.CallbackContext context)
     {
+        if(GameManager.Instance.IsSwitchingScene)
+        {
+            Debug.LogWarning("Scene is switching, cannot proceed to next interaction.");
+            return;
+        }
         int nextIndex = interactionIndex + 1;
         nextIndex = Mathf.Clamp(nextIndex, 0, interactionControllers.Length-1);
         LevelProgressionManager.Instance.SetProgress(nextIndex);
@@ -139,6 +143,11 @@ public class IC_Manager : MonoBehaviour
     }
     void Debug_Regress(InputAction.CallbackContext context)
     {
+        if(GameManager.Instance.IsSwitchingScene)
+        {
+            Debug.LogWarning("Scene is switching, cannot regress to previous interaction.");
+            return;
+        }
         int nextIndex = interactionIndex - 1;
         nextIndex = Mathf.Clamp(nextIndex, 0, interactionControllers.Length-1);
         LevelProgressionManager.Instance.SetProgress(nextIndex);
@@ -149,6 +158,11 @@ public class IC_Manager : MonoBehaviour
     void Debug_RestartLevel(InputAction.CallbackContext callback){
         if(callback.ReadValueAsButton())
         {
+            if(GameManager.Instance.IsSwitchingScene)
+            {
+                Debug.LogWarning("Scene is switching, cannot restart level.");
+                return;
+            }
             CleanUp();
             GameManager.Instance.RestartLevel();
         }
@@ -156,6 +170,11 @@ public class IC_Manager : MonoBehaviour
     void Debug_Reset(InputAction.CallbackContext callback){
         if(callback.ReadValueAsButton())
         {
+            if(GameManager.Instance.IsSwitchingScene)
+            {
+                Debug.LogWarning("Scene is switching, cannot reset.");
+                return;
+            }
             CleanUp();
             GameManager.Instance.SwitchingScene("Intro");
         }

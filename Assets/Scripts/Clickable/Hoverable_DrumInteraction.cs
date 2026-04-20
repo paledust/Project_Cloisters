@@ -55,7 +55,8 @@ public class Hoverable_DrumInteraction : MonoBehaviour
 
     private Basic_Clickable self;
     private Vector3 originalScale;
-    [SerializeField, ShowOnly] private float accumulatePower = 0;
+    private float chargeMultiplier = 1;
+    private float accumulatePower = 0;
     private float chargeTimer = 0;
     private int beatCounter = 0;
 
@@ -64,6 +65,7 @@ public class Hoverable_DrumInteraction : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        chargeMultiplier = 1;
         self = GetComponent<Basic_Clickable>();
         originalScale = heroSphereRenderTrans.localScale;
         self.onHover += KnockBassDrum;
@@ -158,7 +160,7 @@ public class Hoverable_DrumInteraction : MonoBehaviour
     void HarmDrum(float strength)
     {
         ShakeDrum(harmScale, harmVibration, hoverScaleDuration);
-        accumulatePower += beatPowerAdd * strength;
+        accumulatePower += beatPowerAdd * strength * chargeMultiplier;
         accumulatePower = Mathf.Min(1.5f, accumulatePower);
         glowSprite.DOKill();
         glowSprite.DOFade(Random.Range(0.5f,0.55f), 0.1f).OnComplete(()=>glowSprite.DOFade(0, 0.2f)).SetId(glowSprite);
@@ -184,15 +186,17 @@ public class Hoverable_DrumInteraction : MonoBehaviour
         StylizedDrumController.Instance.QueueBeat(hoverSFX, Mathf.Clamp(player.PointerDelta.magnitude * speedToVolume, volumeRange.x, volumeRange.y));
         if(drumState == DrumState.MaxCharged)
         {
-            EventHandler.Call_OnBassChargeBeat();
             drumState = DrumState.Beating;
             chargeTimer = 0;
             accumulatePower = 0;
+            chargeMultiplier = 0;
             DOTween.Kill(heroColor);
             DOTween.To(()=> heroColor.tint, x=> heroColor.tint = x, normalHeroColor, 1f).SetId(heroColor);
+            DOTween.To(()=> chargeMultiplier, x=> chargeMultiplier = x, 0, 2f).OnComplete(()=>chargeMultiplier = 1).SetId(this);
             heroSphereRoot.DOKill();
             heroSphereRoot.DOScale(Vector3.one, 1f).SetEase(Ease.OutQuad);
             ShakeDrum(speedToVolume, 10, hoverScaleDuration*0.5f);
+            EventHandler.Call_OnBassChargeBeat();
         }
         else
         {

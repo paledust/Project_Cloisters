@@ -407,7 +407,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 16777215
+    rgba: 4294967295
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -635,7 +635,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 16777215
+    rgba: 4294967295
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -805,7 +805,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe1bdf3c176712f499749af724118614, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameSceneName: Game
+  gameSceneName: Intro
 --- !u!1 &1591100704
 GameObject:
   m_ObjectHideFlags: 0
@@ -921,7 +921,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Main Camera
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7085316780055515200, guid: 7671163c2c3bc7a4699f30c40e759e90, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

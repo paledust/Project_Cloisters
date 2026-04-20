@@ -23,7 +23,7 @@ public class CircleExplodeController : MonoBehaviour
     public void ResetController()=>exploded = false;
     void Update()
     {
-        if(expandCircle.circleRadius>=explodeRadius && !exploded)
+        if(expandCircle.circleRadius>=explodeRadius && !exploded && stylizedController.IsIntro)
         {
             Explode();
         }

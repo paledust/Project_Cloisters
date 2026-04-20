@@ -176,7 +176,7 @@ Material:
     - _wobbleIntensity: 0.2
     - _wobbleSpeed: 0.6
     m_Colors:
-    - _Color: {r: 0.6452105, g: 0.75550294, b: 0.943, a: 1}
+    - _Color: {r: 0.37852943, g: 0.4898709, b: 0.64705884, a: 1}
     - _DeepColor: {r: 0.028969372, g: 0.057316132, b: 0.06603767, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FlowColor: {r: 0, g: 0, b: 0, a: 1}

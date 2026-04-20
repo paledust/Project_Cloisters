@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Linq;
-using DG.Tweening;
 using UnityEngine;
 
 public class GeoFragmentController : MonoBehaviour
@@ -42,6 +40,8 @@ public class GeoFragmentController : MonoBehaviour
     private float controlFactor = 0;
     private Vector3[] geoPoses;
     private Clickable_Stylized[] controllingGeos;
+
+    public bool IsGeoPrepared => controllingGeos != null;
     
     void Start(){
         int count = 0;
@@ -80,7 +80,7 @@ public class GeoFragmentController : MonoBehaviour
     }
     void PrepareNextGeo(){
         if(geoGroupIndex>=geoFragGroups.Length){
-            controllingGeos = null;
+            controllingGeos = new Clickable_Stylized[0];
             return;
         }
         controllingGeos = geoFragGroups[geoGroupIndex].geos;

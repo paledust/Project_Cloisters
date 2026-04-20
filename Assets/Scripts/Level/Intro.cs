@@ -6,8 +6,9 @@ public class Intro : MonoBehaviour
     private UI_Manager uiManager;
     void Start()
     {
-        Cursor.visible = true;
         uiManager = UI_Manager.Instance;
+        uiManager.ChangeCursorColor(true);
+        uiManager.ShowCursor();
     }
     void Update()
     {

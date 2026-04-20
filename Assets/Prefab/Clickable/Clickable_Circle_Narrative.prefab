@@ -14944,6 +14944,16 @@ PrefabInstance:
       propertyPath: opacity
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4337985782930849921, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
+        type: 3}
+      propertyPath: m_MaxParticleSize
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4337985782930849923, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4337985782930849926, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
         type: 3}
       propertyPath: playOnAwake
@@ -14967,7 +14977,7 @@ PrefabInstance:
     - target: {fileID: 4337985782930849926, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
         type: 3}
       propertyPath: EmissionModule.rateOverDistance.scalar
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4337985782930849926, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
         type: 3}
@@ -15494,6 +15504,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  glowFadeDuration: 1
 --- !u!4 &4527830689499131789 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4337985783848230469, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
