@@ -52,3 +52,6 @@ TagManager:
   - name: VFX
     uniqueID: 2129508415
     locked: 0
+  - name: HUD
+    uniqueID: 3468423913
+    locked: 0
