@@ -15,7 +15,7 @@ public class IC_Manager : MonoBehaviour
     [SerializeField] private float endDelay = 3f;
 
 [Header("Menu Control")]
-    [SerializeField] private GameObject menuCanvas;
+    [SerializeField] private UI_Game gameCanvas;
     [SerializeField] private GameObject interactionBlocker;
     [SerializeField] private InputActionMap menuAction;
 
@@ -79,11 +79,11 @@ public class IC_Manager : MonoBehaviour
         if(context.ReadValueAsButton())
         {
             EventHandler.Call_OnFlushInput();
-            if(!menuCanvas.activeSelf)
-                menuCanvas.SetActive(true);
+            if(!gameCanvas.IsMenuOpen)
+                gameCanvas.EnableCanvas();
             else
-                menuCanvas.SetActive(false);
-            interactionBlocker.SetActive(menuCanvas.activeSelf);
+                gameCanvas.DisableCanvas();
+            interactionBlocker.SetActive(gameCanvas.IsMenuOpen);
         }
     }
 
