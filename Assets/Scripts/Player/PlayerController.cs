@@ -66,6 +66,7 @@ public class PlayerController : MonoBehaviour
     {
         this.uiManager = uiManager;
     }
+    
     #region Handle Interactable
     void ClearHoveringInteractable(){
         if(m_hoveringInteractable != null){

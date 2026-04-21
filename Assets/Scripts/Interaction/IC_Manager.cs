@@ -13,6 +13,12 @@ public class IC_Manager : MonoBehaviour
     [SerializeField] private AmbienceHandler ambienceHandler;
     [SerializeField] private string endSceneName;
     [SerializeField] private float endDelay = 3f;
+
+[Header("Menu Control")]
+    [SerializeField] private GameObject menuCanvas;
+    [SerializeField] private GameObject interactionBlocker;
+    [SerializeField] private InputActionMap menuAction;
+
 [Header("Debug Option")]
     [SerializeField] private int StartIndex = 0;
     [SerializeField] private bool startAtDebugIndex = false;
@@ -26,6 +32,10 @@ public class IC_Manager : MonoBehaviour
         EventHandler.E_OnNextInteraction        += NextInteraction;
         EventHandler.E_OnEndInteraction         += EndInteraction;
         EventHandler.E_OnInteractionUnreachable += CleanUpInteraction;
+
+        menuAction["menu"].performed += MenuAction_performed;
+        menuAction.Enable();
+
     #if UNITY_EDITOR || DEVELOPMENT_BUILD
         debugActions["progress"].performed += Debug_Progress;
         debugActions["regress"].performed += Debug_Regress;
@@ -39,6 +49,10 @@ public class IC_Manager : MonoBehaviour
         EventHandler.E_OnNextInteraction        -= NextInteraction;
         EventHandler.E_OnEndInteraction         -= EndInteraction;
         EventHandler.E_OnInteractionUnreachable -= CleanUpInteraction; 
+
+        menuAction["menu"].performed -= MenuAction_performed;
+        menuAction.Disable();
+
     #if UNITY_EDITOR || DEVELOPMENT_BUILD
         debugActions["progress"].performed -= Debug_Progress;
         debugActions["regress"].performed -= Debug_Regress;
@@ -60,6 +74,19 @@ public class IC_Manager : MonoBehaviour
         StartAtInteraction(LevelProgressionManager.Instance.LevelProgress);
     }
 
+    private void MenuAction_performed(InputAction.CallbackContext context)
+    {
+        if(context.ReadValueAsButton())
+        {
+            EventHandler.Call_OnFlushInput();
+            if(!menuCanvas.activeSelf)
+                menuCanvas.SetActive(true);
+            else
+                menuCanvas.SetActive(false);
+            interactionBlocker.SetActive(menuCanvas.activeSelf);
+        }
+    }
+
 #if UNITY_EDITOR
     [ContextMenu("Set Up Scene To Interactions")]
     public void Editor_SetUpInteractions(){
@@ -69,6 +96,7 @@ public class IC_Manager : MonoBehaviour
         Editor_ActivateInteractions(StartIndex);
     }
 #endif
+
     void NextInteraction(){
         interactionIndex ++;
         if(interactionIndex >= interactionControllers.Length){
@@ -132,6 +160,30 @@ public class IC_Manager : MonoBehaviour
     }
 #endregion
 
+#region Level Control
+    public void GoBackToMainMenu()
+    {
+        if(GameManager.Instance.IsSwitchingScene)
+        {
+            Debug.LogWarning("Scene is switching, cannot reset.");
+            return;
+        }
+        CleanUp();
+        GameManager.Instance.SwitchingScene("Intro");
+    }
+    public void RestartLevel()
+    {
+        if(GameManager.Instance.IsSwitchingScene)
+        {
+            Debug.LogWarning("Scene is switching, cannot restart level.");
+            return;
+        }
+        CleanUp();
+        GameManager.Instance.RestartLevel();   
+    }
+#endregion
+
+#region Debug Function
     void Debug_Progress(InputAction.CallbackContext context)
     {
         if(GameManager.Instance.IsSwitchingScene)
@@ -162,27 +214,11 @@ public class IC_Manager : MonoBehaviour
     }
     void Debug_RestartLevel(InputAction.CallbackContext callback){
         if(callback.ReadValueAsButton())
-        {
-            if(GameManager.Instance.IsSwitchingScene)
-            {
-                Debug.LogWarning("Scene is switching, cannot restart level.");
-                return;
-            }
-            CleanUp();
-            GameManager.Instance.RestartLevel();
-        }
+            RestartLevel();
     }
     void Debug_Reset(InputAction.CallbackContext callback){
         if(callback.ReadValueAsButton())
-        {
-            if(GameManager.Instance.IsSwitchingScene)
-            {
-                Debug.LogWarning("Scene is switching, cannot reset.");
-                return;
-            }
-            CleanUp();
-            GameManager.Instance.SwitchingScene("Intro");
-        }
+            GoBackToMainMenu();
     }
     void CleanUp()
     {
@@ -201,6 +237,8 @@ public class IC_Manager : MonoBehaviour
         ambienceHandler.CleanUp();
         PhysicDragManager.Instance.CleanUp();
     }
+#endregion
+
 #if UNITY_EDITOR
     public void Editor_CleanUpInteractions()
     {

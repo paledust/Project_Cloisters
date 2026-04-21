@@ -207,7 +207,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 413134941}
         m_TargetAssemblyTypeName: UI_Intro, Assembly-CSharp
-        m_MethodName: DisableAllCanvas
+        m_MethodName: Btn_DisableAllCanvas
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -524,7 +524,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 413134941}
         m_TargetAssemblyTypeName: UI_Intro, Assembly-CSharp
-        m_MethodName: DisableAllCanvas
+        m_MethodName: Btn_DisableAllCanvas
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -554,7 +554,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 458481eac6e30c940be141dcf3220b91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionTime: 2.5
   sfx_click: sfx_ui_select
 --- !u!1 &208329380
 GameObject:
