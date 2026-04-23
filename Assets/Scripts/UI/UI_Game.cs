@@ -88,6 +88,7 @@ public class UI_Game : MonoBehaviour
     {
         isMenuOpen = !isMenuOpen;
         UpdateMenuImmediately();
+        UnityEditor.EditorUtility.SetDirty(this);
     }
 #endif
 }

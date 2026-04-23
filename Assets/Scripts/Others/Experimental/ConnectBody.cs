@@ -151,7 +151,35 @@ public class ConnectBody : MonoBehaviour
     }
     public void BuildConnection(ConnectBody body)=>connectBodies.Add(body);
     public void BreakConnection(ConnectBody body)=>connectBodies.Remove(body);
-    public bool IsConnectedToBody(ConnectBody body)=>connectBodies.Contains(body);
+    public bool IsConnectedToBody(ConnectBody body)
+    {
+        if(connectBodies.Contains(body))
+            return true;
+        
+        Queue<ConnectBody> front = new Queue<ConnectBody>();
+        HashSet<ConnectBody> visited = new HashSet<ConnectBody>();
+
+        front.Enqueue(this);
+        visited.Add(this);
+
+        while(front.Count > 0)
+        {
+            ConnectBody current = front.Dequeue();
+            if(current == body)
+                return true;
+            
+            foreach(ConnectBody next in current.connectBodies)
+            {
+                if(!visited.Contains(next))
+                {
+                    visited.Add(next);
+                    front.Enqueue(next);
+                }
+            }
+        }
+
+        return false;
+    }
     public void ChangeActivateState(bool isActivate)
     {
         if (isActivate)

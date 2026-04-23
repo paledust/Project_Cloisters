@@ -1,14 +1,18 @@
 using UnityEngine;
 using DG.Tweening;
+using System.Collections.Generic;
 
 public class ShapeConnectController : MonoBehaviour
 {
     [SerializeField] private GameObject connectionBreakerPrefab;
     [SerializeField] private ParticleSystem p_collision;
     [SerializeField] private ParticleSystem p_break;
+
 [Header("Connection")]
     [SerializeField] private float intersection = 0.1f;
     [SerializeField] private float connectDuration = 0.15f;
+
+    private Dictionary<ConnectBody, ConnectBody[]> bodyGraph = new Dictionary<ConnectBody, ConnectBody[]>();
 
     void Awake()
     {
@@ -79,6 +83,7 @@ public class ShapeConnectController : MonoBehaviour
         //Create Joint
             var joint = mainBody.m_rigid.gameObject.AddComponent<FixedJoint>();
             joint.connectedBody = otherBody.m_rigid;
+            joint.enableCollision = false;
         //Create JointBreaker
             Quaternion breakerRot;
             if(!mainBody.m_isSpherical)

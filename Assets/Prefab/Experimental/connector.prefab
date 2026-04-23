@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8872291506766342016}
   - component: {fileID: 519072338224239371}
-  - component: {fileID: 4113545474634351628}
+  - component: {fileID: 5402370062247128099}
   m_Layer: 0
   m_Name: connector
   m_TagString: Untagged
@@ -48,10 +48,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isSunk: 0
   connectTriggerState: 0
-  selfClickable: {fileID: 0}
   alignMask: {fileID: 8553443054310199207}
---- !u!135 &4113545474634351628
-SphereCollider:
+--- !u!136 &5402370062247128099
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -68,8 +67,10 @@ SphereCollider:
   m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.3
+  serializedVersion: 2
+  m_Radius: 0.2
+  m_Height: 0.6
+  m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5705755640492605442
 GameObject:

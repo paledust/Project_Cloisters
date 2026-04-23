@@ -85,7 +85,7 @@ public class ConnectTrigger : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         var otherTrigger = other.GetComponent<ConnectTrigger>();
-        if(otherTrigger!=null && otherTrigger.m_connectBody!=m_connectBody)
+        if(otherTrigger!=null && otherTrigger.m_connectBody!=m_connectBody && !m_connectBody.IsConnectedToBody(otherTrigger.m_connectBody))
         {
             if(this.isSunk != otherTrigger.isSunk)
                 pendingTrigger = otherTrigger;
