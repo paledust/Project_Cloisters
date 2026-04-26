@@ -86,6 +86,7 @@ public class CollidableCircle : MonoBehaviour
         hasCollided = true;
         if(m_circle.m_circleType == Clickable_Circle.CircleType.Narrative)
         {
+            m_rigid.velocity = (m_rigid.position - contact).normalized * strength;
             ExplodeCircle();
             return;
         }

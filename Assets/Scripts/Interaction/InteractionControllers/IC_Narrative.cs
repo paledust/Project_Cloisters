@@ -138,7 +138,7 @@ public class IC_Narrative : IC_Basic
                     return;
                 }
                 int spawnAmount = Random.Range(1, 3);
-                float spawnAngle = Mathf.Sign(Random.value) * Random.Range(10, 35f);
+                float spawnAngle = Mathf.Sign(Random.value) * Random.Range(25f, 35f);
                 //Modify Circle type
                 switch(collidedCircle.m_circleType)
                 {
@@ -167,7 +167,7 @@ public class IC_Narrative : IC_Basic
                             NarrativeTextData narrativeText = GetNextNarrativeTextData();
                             if(narrativeText==null)
                                 continue;
-                            var narrativeCircle = PopupCircleAtPosAndPushedAway(collidedCircle.transform.position-Quaternion.Euler(0,0,spawnAngle)*diff.normalized,
+                            var narrativeCircle = PopupCircleAtPosAndPushedAway(collidedCircle.transform.position-Quaternion.Euler(0,0,spawnAngle-spawnAngle*i)*diff.normalized,
                                                                                 collidedCircle.transform.position, strength);
                             narrativeCircle.m_circle.ChangeCircleType(Clickable_Circle.CircleType.Narrative);
                             narrativeCircle.ShowText(narrativeCircleManager.GetTextSprite(narrativeText.content));

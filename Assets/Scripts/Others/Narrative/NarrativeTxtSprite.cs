@@ -15,11 +15,16 @@ public class NarrativeTxtSprite : MonoBehaviour
         if(movingDir == Vector3.zero) 
             movingDir = Vector3.up;
 
+        Vector3 pos = transform.position;
+        pos.x = Mathf.Clamp(pos.x, -14, 14);
+        pos.y = Mathf.Clamp(pos.y, -7, 7);
+        transform.position = pos;
+        
         movingDir = Quaternion.Euler(0,0,Random.Range(-30,30)) * movingDir;
         movingDir = Vector3.ClampMagnitude(movingDir, 4);
-        Vector3 finalPos = transform.position + movingDir;
-        finalPos.x = Mathf.Clamp(finalPos.x, -13, 13);
-        finalPos.y = Mathf.Clamp(finalPos.y, -7, 7);
+        Vector3 finalPos = pos + movingDir;
+        finalPos.x = Mathf.Clamp(finalPos.x, -11.5f, 11.5f);
+        finalPos.y = Mathf.Clamp(finalPos.y, -4.5f, 4.5f);
         
         float scale = transform.localScale.x * 2.2f;
         scale = Mathf.Max(scale, 1);
