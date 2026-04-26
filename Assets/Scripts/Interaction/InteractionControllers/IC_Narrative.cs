@@ -94,6 +94,7 @@ public class IC_Narrative : IC_Basic
             var narrativeCircle = col.GetComponent<CollidableCircle>();
             if(narrativeCircle!=null && narrativeCircle!=circle && narrativeCircle.m_circle.m_circleType == Clickable_Circle.CircleType.Narrative)
             {
+                narrativeCircle.m_rigidbody.velocity = (narrativeCircle.transform.position - circle.transform.position).normalized * 5f;
                 narrativeCircle.ExplodeCircle();
             }
         }
@@ -138,7 +139,7 @@ public class IC_Narrative : IC_Basic
                     return;
                 }
                 int spawnAmount = Random.Range(1, 3);
-                float spawnAngle = Mathf.Sign(Random.value) * Random.Range(25f, 35f);
+                float spawnAngle = Mathf.Sign(Random.value*0.5f - 1) * Random.Range(25f, 35f);
                 //Modify Circle type
                 switch(collidedCircle.m_circleType)
                 {

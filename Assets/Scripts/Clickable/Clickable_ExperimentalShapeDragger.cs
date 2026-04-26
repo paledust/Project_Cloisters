@@ -12,7 +12,7 @@ public class Clickable_ExperimentalShapeDragger : Basic_Clickable
     private Dragger dragger;
     private Vector3 offset;
     
-    private const float DEPTH = 32;
+    private const float DEPTH = 33;
 
     public Dragger currentDragger => dragger;
     public bool IsCenter => isCenter;
@@ -24,6 +24,7 @@ public class Clickable_ExperimentalShapeDragger : Basic_Clickable
     public override void OnClick(PlayerController player, Vector3 hitPos)
     {
         base.OnClick(player, hitPos);
+        hitPos.z = transform.position.z;
         player.HoldInteractable(this);
         
         Vector3 hitPoint = dragCenter.position + Vector3.ClampMagnitude(hitPos - dragCenter.position, maxDragOffset);
