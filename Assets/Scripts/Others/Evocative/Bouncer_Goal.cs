@@ -68,7 +68,7 @@ public class Bouncer_Goal : MonoBehaviour
             if(criticalHitCount > cracks.Length)
             {
                 bouncer.SwitchCanBounce(false);
-                bouncer.SwitchOffCollider();
+                bouncer.GetComponent<Collider>().enabled = false;
                 bounceBall.Bounce(-bounceBall.GetComponent<Rigidbody>().velocity, 0, 2f, AttributeModifyType.Add);
             }
         }

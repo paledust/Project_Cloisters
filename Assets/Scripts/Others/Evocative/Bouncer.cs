@@ -18,7 +18,6 @@ public class Bouncer : MonoBehaviour
     [SerializeField, ShowOnly] private bool canBounce = true;
     private Vector3 initRootSize;
     private Rigidbody m_rigid;
-    private Collider m_collider;
 
     public bool m_colliding => colliding;
     public event Action<BounceBall> onBounce;
@@ -27,7 +26,6 @@ public class Bouncer : MonoBehaviour
     void Awake()
     {
         m_rigid = GetComponent<Rigidbody>();
-        m_collider = GetComponent<Collider>();
         initRootSize = spriteRenderer.transform.localScale;
     }
     void OnDestroy()
@@ -40,10 +38,10 @@ public class Bouncer : MonoBehaviour
     {
         canBounce = isBounce;
     }
-    public void SwitchOffCollider()
+    public void DisableCollision()
     {
         SwitchCanBounce(false);
-        m_collider.enabled = false;
+        m_rigid.detectCollisions = false;
     }
     public void PlayBounceFeedback()
     {

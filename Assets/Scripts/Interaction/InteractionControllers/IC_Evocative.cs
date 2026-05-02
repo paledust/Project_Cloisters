@@ -138,7 +138,7 @@ public class IC_Evocative : IC_Basic
         foreach (var bouncer in bouncers)
         {
             if (bouncer != null && bouncer.tag != WALL_TAG)
-                bouncer.GetComponent<Collider>().enabled = false;
+                bouncer.DisableCollision();
         }
         cameraShaker.Excute(coroutineShakeCam(0.3f, 0.2f, true));
         EventHandler.Call_OnEndInteraction(this);
