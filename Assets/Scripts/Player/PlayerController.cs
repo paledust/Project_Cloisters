@@ -84,15 +84,6 @@ public class PlayerController : MonoBehaviour
         if(!m_hoveringInteractable) PlayerManager.Instance.UpdateCursorState(CURSOR_STATE.DEFAULT);
         else PlayerManager.Instance.UpdateCursorState(CURSOR_STATE.HOVER);
     }
-    void InteractWithClickable(){
-        if(m_hoveringInteractable.m_isInteractable){
-            m_hoveringInteractable.OnClick(this, hoverPos);
-            AudioManager.Instance.PlaySoundEffect(playerAudio, m_hoveringInteractable.sfx_clickSound, 1);
-        }
-        else{
-            m_hoveringInteractable.OnFailClick(this);
-        }
-    }
     public Vector3 GetCursorWorldPoint(float depth){
         Vector3 mousePoint = PointerScrPos;
         mousePoint.z = depth;
@@ -130,7 +121,13 @@ public class PlayerController : MonoBehaviour
             if(m_holdingInteractable != null) return;
             if(m_hoveringInteractable == null) return;
             
-            InteractWithClickable();
+            if(m_hoveringInteractable.m_isInteractable){
+                m_hoveringInteractable.OnClick(this, hoverPos);
+                AudioManager.Instance.PlaySoundEffect(playerAudio, m_hoveringInteractable.sfx_clickSound, 1);
+            }
+            else{
+                m_hoveringInteractable.OnFailClick(this);
+            }
         }
         else{
             ClearHoldingInteractable();

@@ -33,6 +33,8 @@ public class BounceBall : MonoBehaviour
     [SerializeField] private ParticleSystem p_trail;
 
     public bool m_isSuperCharge => isSuperCharge;
+    public float m_currentSpeed => currentSpeed.cachedValue;
+    public Vector2 m_velocity => m_rigid.velocity;
 
     private BuffProperty currentSpeed;
     private Rigidbody m_rigid;
@@ -77,6 +79,17 @@ public class BounceBall : MonoBehaviour
         currentSpeed.ModifiValue(speedMod, modifyType);
         realSpeed = Mathf.Max(realSpeed, currentSpeed.cachedValue * boostMulti * speedBoost);
         m_rigid.velocity = impulse.normalized * realSpeed;
+    }
+    public void PhysicsSleep()
+    {
+        m_rigid.Sleep();
+        m_rigid.detectCollisions = false;
+        m_rigid.velocity = Vector3.zero;
+    }
+    public void WakePhysics()
+    {
+        m_rigid.WakeUp();
+        m_rigid.detectCollisions = true;
     }
     #endregion
 
