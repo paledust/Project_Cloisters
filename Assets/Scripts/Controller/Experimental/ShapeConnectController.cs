@@ -12,7 +12,6 @@ public class ShapeConnectController : MonoBehaviour
     [SerializeField] private float intersection = 0.1f;
     [SerializeField] private float connectDuration = 0.15f;
 
-    private Dictionary<ConnectBody, ConnectBody[]> bodyGraph = new Dictionary<ConnectBody, ConnectBody[]>();
 
     void Awake()
     {
@@ -109,5 +108,13 @@ public class ShapeConnectController : MonoBehaviour
 
             EventHandler.Call_OnBuildConnectionBreaker(jointBreaker);
         });
+    }
+    public static (Vector3, Quaternion) GetConnectTransform(ConnectTrigger selfTrigger, ConnectTrigger pendingTrigger, float intersection)
+    {
+        Vector3 localPos = selfTrigger.m_connectBody.transform.InverseTransformPoint(selfTrigger.transform.position);
+        Vector3 face = pendingTrigger.normal.normalized;
+        float angle = Vector2.SignedAngle(selfTrigger.normal, -face);
+        Quaternion finalRot = selfTrigger.m_connectBody.transform.rotation * Quaternion.Euler(0,0,angle);
+        return (pendingTrigger.transform.position + face * intersection - finalRot*localPos, finalRot);
     }
 }

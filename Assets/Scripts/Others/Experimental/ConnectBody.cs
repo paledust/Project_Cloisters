@@ -6,17 +6,23 @@ public class ConnectBody : MonoBehaviour
     [SerializeField] private float sphereRadius;
     [SerializeField] private bool isSpherical = false;
     [SerializeField] private ShapeColorChanger shapeColorChanger;
+
     [Header("Vertices")]
     [SerializeField] private Transform[] points;
+
+    [Header("Collider")]
+    [SerializeField] private Collider geoCollider;
+    
     private ConnectTrigger[] connectTriggers;
     private ConnectTrigger idealPendingTrigger; //the ideal connected trigger
     private ConnectTrigger idealSelfTrigger; //the trigger attached that connected to ideal trigger
     public HashSet<ConnectBody> connectBodies = new HashSet<ConnectBody>();
     private ShapeInteractionHandler clickable_Moveable;
 
+    public Collider m_geoCollider=>geoCollider;
+    public bool m_iscontrolling=>clickable_Moveable.isControlling;
     public bool m_isSpherical=>isSpherical;
     private bool hasIdealConnection => idealSelfTrigger != null;
-    public float m_sphereRadius=>isSpherical?sphereRadius:0;
     private Quaternion offsetRotToOther;
 
     public Rigidbody m_rigid{get; private set;}

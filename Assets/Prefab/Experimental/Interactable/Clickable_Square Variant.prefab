@@ -103,6 +103,7 @@ MonoBehaviour:
   m_rigid: {fileID: 6527154590330879201}
   dragCenter: {fileID: 4719103481159891603}
   maxDragOffset: 0.25
+  isCenter: 0
   maskScaleMultiplier: 2
 --- !u!1001 &1735651021534356936
 PrefabInstance:
@@ -714,6 +715,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 496f19be268ecf740b7130c2b207d4ac,
         type: 3}
+    - target: {fileID: 1754560563833497679, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: geoCollider
+      value: 
+      objectReference: {fileID: 6525377886407010401}
     - target: {fileID: 1754560563833497679, guid: e843106840614744cae4702badee9286,
         type: 3}
       propertyPath: points.Array.size

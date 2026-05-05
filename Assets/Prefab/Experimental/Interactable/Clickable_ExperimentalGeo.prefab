@@ -955,7 +955,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outline: {fileID: 7338580780453373564}
   outlineMaskTrans: {fileID: 697556845096217361}
-  outlineRootTrans: {fileID: 4369247819362133923}
 --- !u!114 &1754560563833497679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -972,6 +971,7 @@ MonoBehaviour:
   isSpherical: 0
   shapeColorChanger: {fileID: 3983345643960549431}
   points: []
+  geoCollider: {fileID: 9190266374010824891}
 --- !u!114 &3983345643960549431
 MonoBehaviour:
   m_ObjectHideFlags: 0

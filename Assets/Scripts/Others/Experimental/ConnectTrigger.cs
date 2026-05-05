@@ -87,8 +87,13 @@ public class ConnectTrigger : MonoBehaviour
         var otherTrigger = other.GetComponent<ConnectTrigger>();
         if(otherTrigger!=null && otherTrigger.m_connectBody!=m_connectBody && !m_connectBody.IsConnectedToBody(otherTrigger.m_connectBody))
         {
-            if(this.isSunk != otherTrigger.isSunk)
-                pendingTrigger = otherTrigger;
+            if(m_connectBody.m_iscontrolling)
+            {
+                (Vector3 pos, Quaternion rot) = ShapeConnectController.GetConnectTransform(this, otherTrigger, 0.005f);
+                if(ShapeConnectValidator.ValidateBodyAt(m_connectBody, otherTrigger.m_connectBody, pos, rot))
+                if(this.isSunk != otherTrigger.isSunk)
+                    pendingTrigger = otherTrigger;
+            }
         }
     }
     void OnTriggerExit(Collider other)
