@@ -1,4 +1,5 @@
 using System.Collections;
+using Cinemachine;
 using UnityEngine;
 
 public class EvocativeTube : MonoBehaviour
@@ -12,6 +13,7 @@ public class EvocativeTube : MonoBehaviour
     [Header("Presentation")]
     [SerializeField] private Animation ejectAnim;
     [SerializeField] private ParticleSystem vfxEject;
+    [SerializeField] private CinemachineImpulseSource impulseSource;
 
     private bool isBallTravelling;
 
@@ -45,9 +47,11 @@ public class EvocativeTube : MonoBehaviour
         ejectAnim.Play();
         ball.gameObject.SetActive(false);
         yield return new WaitForSeconds(tubeTravelTime);
+        impulseSource.GenerateImpulse();
         ball.transform.position = eject.position;
         ball.gameObject.SetActive(true);
         ball.WakePhysics();
+        ball.GlowBall();
         ball.Bounce(eject.up * ejectSpeed, 0, 4);
         tubeTrigger.ResetTubeTrigger();
         isBallTravelling = false;

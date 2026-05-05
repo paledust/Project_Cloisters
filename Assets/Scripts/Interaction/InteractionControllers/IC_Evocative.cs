@@ -32,7 +32,7 @@ public class IC_Evocative : IC_Basic
     [SerializeField] private Bouncer[] bouncers;
 
     [Header("Camera")]
-    [SerializeField] private CinemachineVirtualCamera vc_cam;
+    [SerializeField] private CinemachineImpulseSource impulseSource;
 
     [Header("Control")]
     [SerializeField] private MoveWithCursor[] moveWithCursor;
@@ -41,10 +41,8 @@ public class IC_Evocative : IC_Basic
     private int collectedCount = 0;
     private int backgroundIndex = 0;
     private int finalgroundIndex = 0;
-    private CinemachineBasicMultiChannelPerlin perlineNoise;
     private CinemachineBrain brain;
     private Collectable[] collectables;
-    private CoroutineExcuter cameraShaker;
     private CoroutineExcuter timeStutter;
 
     private const string WALL_TAG = "BounceWall";
@@ -59,9 +57,7 @@ public class IC_Evocative : IC_Basic
 
         BallRespawn();
 
-        cameraShaker = new CoroutineExcuter(this);
         timeStutter = new CoroutineExcuter(this);
-        perlineNoise = vc_cam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
         brain = Camera.main.GetComponent<CinemachineBrain>();
         bouncers = interactionAssetsGroup.GetComponentsInChildren<Bouncer>();
         if (isGoalBreakable)
@@ -90,7 +86,7 @@ public class IC_Evocative : IC_Basic
     void OnBallHeavyBounce()
     {
         timeStutter.Excute(coroutineTimeStutter());
-        cameraShaker.Excute(coroutineShakeCam(0.2f, 0.15f, true));
+        impulseSource.GenerateImpulse(.75f);
     }
     void OnBallFall()
     {
@@ -125,9 +121,9 @@ public class IC_Evocative : IC_Basic
             finalgroundIndex %= finalColors.Length;
             backgroundColor = finalColors[finalgroundIndex];
         }
-        backgroundRenderer.DOKill();
-        backgroundRenderer.DOColor(backgroundColor, 0.1f);
-        cameraShaker.Excute(coroutineShakeCam(0.2f, bounceBall.m_isSuperCharge?0.2f:0.01f));
+        // backgroundRenderer.DOKill();
+        // backgroundRenderer.DOColor(backgroundColor, 0.1f);
+        impulseSource.GenerateImpulse(bounceBall.m_isSuperCharge?1f:0.5f);
     }
     void OnGoalBreak()
     {
@@ -140,7 +136,7 @@ public class IC_Evocative : IC_Basic
             if (bouncer != null && bouncer.tag != WALL_TAG)
                 bouncer.DisableCollision();
         }
-        cameraShaker.Excute(coroutineShakeCam(0.3f, 0.2f, true));
+        impulseSource.GenerateImpulse();
         EventHandler.Call_OnEndInteraction(this);
     }
     IEnumerator coroutineRespawn()
@@ -158,23 +154,12 @@ public class IC_Evocative : IC_Basic
     }
     IEnumerator coroutineTimeStutter()
     {
-        perlineNoise.m_AmplitudeGain = 0.25f;
-        CinemachineBrain brain = Camera.main.GetComponent<CinemachineBrain>();
+        impulseSource.GenerateImpulse(1.25f);
         brain.m_IgnoreTimeScale = true;
         float originalTimeScale = Time.timeScale;
         Time.timeScale = 0f;
         yield return new WaitForSecondsRealtime(0.1f);
-        perlineNoise.m_AmplitudeGain = 0f;
         brain.m_IgnoreTimeScale = false;
         Time.timeScale = originalTimeScale;
-    }
-    IEnumerator coroutineShakeCam(float duration, float amplitude, bool ignoreTimescale = false)
-    {
-        if(ignoreTimescale)
-            brain.m_IgnoreTimeScale = true;
-        perlineNoise.m_AmplitudeGain = amplitude;
-        yield return new WaitForSeconds(duration);
-        perlineNoise.m_AmplitudeGain = 0f;
-        brain.m_IgnoreTimeScale = false;
     }
 }

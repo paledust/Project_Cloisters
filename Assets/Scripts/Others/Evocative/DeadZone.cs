@@ -8,7 +8,7 @@ public class DeadZone : MonoBehaviour
         var bounceBall = other.GetComponent<BounceBall>();
         if (bounceBall != null)
         {
-            vfx_fallInto.PlayFallVFX();
+            vfx_fallInto.PlayFallVFXAt(other.transform.position);
             EventHandler.Call_OnBallFall();
         }
     }

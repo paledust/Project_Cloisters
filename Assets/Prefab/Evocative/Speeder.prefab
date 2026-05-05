@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8691958887618839210}
   - component: {fileID: 1765405501098353213}
-  - component: {fileID: 6408372395545071554}
+  - component: {fileID: 7498182287606633196}
   - component: {fileID: 3804139810967890625}
   m_Layer: 0
   m_Name: Speeder
@@ -146,8 +146,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &6408372395545071554
-BoxCollider:
+--- !u!135 &7498182287606633196
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -165,7 +165,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3, y: 4, z: 1}
+  m_Radius: 2.42
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3804139810967890625
 MonoBehaviour:
@@ -180,5 +180,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speederRenderer: {fileID: 8691958886735133313}
-  force: 0
-  drag: 2
+  force: 12

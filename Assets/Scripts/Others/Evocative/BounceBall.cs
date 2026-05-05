@@ -31,6 +31,7 @@ public class BounceBall : MonoBehaviour
 
     [Header("Charge")]
     [SerializeField] private ParticleSystem p_trail;
+    [SerializeField] private SpriteRenderer ballGlow;
 
     public bool m_isSuperCharge => isSuperCharge;
     public float m_currentSpeed => currentSpeed.cachedValue;
@@ -93,6 +94,19 @@ public class BounceBall : MonoBehaviour
     }
     #endregion
 
+    public void Respawn()
+    {
+        
+    }
+    public void GlowBall()
+    {   
+        ballGlow.gameObject.SetActive(true);
+        ballGlow.color = new Color(ballGlow.color.r, ballGlow.color.g, ballGlow.color.b, 1);
+        ballGlow.DOFade(0, 0.5f).OnComplete(() =>
+        {
+            ballGlow.gameObject.SetActive(false);
+        });
+    }
     public void BallFinal()
     {
         this.enabled = false;

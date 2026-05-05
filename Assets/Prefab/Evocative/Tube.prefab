@@ -417,6 +417,7 @@ GameObject:
   - component: {fileID: 345710116980125104}
   - component: {fileID: 3066382207128807262}
   - component: {fileID: 1368257593822912567}
+  - component: {fileID: 4300459439536373518}
   m_Layer: 0
   m_Name: Tube
   m_TagString: Untagged
@@ -472,10 +473,11 @@ MonoBehaviour:
   start: {fileID: 1958684511353618514}
   eject: {fileID: 1701539024385936971}
   tubeTrigger: {fileID: 4402468820231571022}
-  tubeTravelTime: 2
-  ejectSpeed: 8
+  tubeTravelTime: 2.2
+  ejectSpeed: 4
   ejectAnim: {fileID: 1368257593822912567}
   vfxEject: {fileID: 5131034513925558791}
+  impulseSource: {fileID: 4300459439536373518}
 --- !u!111 &1368257593822912567
 Animation:
   m_ObjectHideFlags: 0
@@ -492,6 +494,59 @@ Animation:
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!114 &4300459439536373518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3802831177533458170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ImpulseDefinition:
+    m_ImpulseChannel: 1
+    m_ImpulseShape: 2
+    m_CustomImpulseShape:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_ImpulseDuration: 0.2
+    m_ImpulseType: 0
+    m_DissipationRate: 0.25
+    m_RawSignal: {fileID: 0}
+    m_AmplitudeGain: 1
+    m_FrequencyGain: 1
+    m_RepeatMode: 0
+    m_Randomize: 1
+    m_TimeEnvelope:
+      m_AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_AttackTime: 0
+      m_SustainTime: 0.2
+      m_DecayTime: 0.7
+      m_ScaleWithImpact: 1
+      m_HoldForever: 0
+    m_ImpactRadius: 100
+    m_DirectionMode: 0
+    m_DissipationMode: 2
+    m_DissipationDistance: 100
+    m_PropagationSpeed: 343
+  m_DefaultVelocity: {x: 0.2, y: -0.2, z: 0}
 --- !u!1 &4007835397369477865
 GameObject:
   m_ObjectHideFlags: 0
@@ -567,7 +622,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b,
     type: 3}
-  m_Color: {r: 0.59099996, g: 0.43108234, b: 0.2850706, a: 0}
+  m_Color: {r: 1, g: 0.7284768, b: 0.48344374, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
