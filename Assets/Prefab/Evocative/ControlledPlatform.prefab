@@ -313,6 +313,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7148061842109763, guid: e8a900563de8a324bbda13b905867415, type: 3}
+      propertyPath: steerControl
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7148061842109763, guid: e8a900563de8a324bbda13b905867415, type: 3}
       propertyPath: bounceSpeedBoost
       value: 2
       objectReference: {fileID: 0}
@@ -562,6 +566,8 @@ MonoBehaviour:
   heightLimit: 4.8
   widthLimit: 8
   widthOffset: 0
+  lerpSpeed: 50
+  controlValue: 0
 --- !u!114 &4363380082862023571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -595,7 +601,6 @@ MonoBehaviour:
   bouncer: {fileID: 4655731381277360893}
   launchSpeed: 10
   boostSpeed: 5
-  maxSpeed: 15
   coolDown: 0.15
   p_launch: {fileID: 0}
 --- !u!114 &7756731229284826610

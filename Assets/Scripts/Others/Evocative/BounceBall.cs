@@ -93,11 +93,7 @@ public class BounceBall : MonoBehaviour
         m_rigid.detectCollisions = true;
     }
     #endregion
-
-    public void Respawn()
-    {
-        
-    }
+    
     public void GlowBall()
     {   
         ballGlow.gameObject.SetActive(true);

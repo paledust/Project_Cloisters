@@ -13,6 +13,7 @@ public class Bouncer : MonoBehaviour
     [SerializeField] private Vector2 reflectAngle = new Vector2(90, 180);
     [SerializeField] private float bounceSpeedBoost = 2;
     [SerializeField] private float bounceSpeedBonus = 0;
+    [SerializeField, Range(0, 1)] private float steerControl = 0.5f;
 
     private bool colliding = false;
     [SerializeField, ShowOnly] private bool canBounce = true;
@@ -66,7 +67,7 @@ public class Bouncer : MonoBehaviour
                 Vector3 normal = collision.GetContact(0).normal;
                 Vector2 vel = m_rigid.velocity + collision.relativeVelocity;
                 vel = Vector2.Reflect(vel, normal).normalized;
-
+                vel = ((Vector2)m_rigid.velocity.normalized * steerControl + vel.normalized).normalized * vel.magnitude;
                 float angle = Vector2.SignedAngle(normal, vel);
                 angle = Mathf.Sign(angle) * Mathf.Clamp(Mathf.Abs(angle), reflectAngle.x, reflectAngle.y);
                 vel = Quaternion.Euler(0, 0, angle) * normal;
