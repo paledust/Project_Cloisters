@@ -9,7 +9,8 @@ public class RotateAround : MonoBehaviour
     public Vector3 axisAdjust;
     public float angularSpeed = 10;
 
-    public Transform m_target{get{return targetTrans;}}
+    public Transform m_target => targetTrans;
+    public float m_rotateAngle => rotateAngle;
     
     private float rotateAngle;
     private Vector3 initDiff;

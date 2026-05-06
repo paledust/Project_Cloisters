@@ -2,9 +2,13 @@ using UnityEngine;
 
 public class Game : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] private string startRoomtone;
+    [SerializeField] private float volume = 0.5f;
+    [SerializeField] private AmbienceHandler ambienceHandler;
+
     void Start()
     {
+        ambienceHandler.PlayAmbience(startRoomtone, volume);
         Cursor.visible = false;
         UI_Manager.Instance.ShowCursor();
         int progress = LevelProgressionManager.Instance.LevelProgress;

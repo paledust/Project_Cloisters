@@ -16,6 +16,8 @@ MonoBehaviour:
   amb_info_list:
   - audio_name: amb_jazz_riff_105
     audio_clip: {fileID: 8300000, guid: e3a837595d0321b44aa25384c7e08617, type: 3}
+  - audio_name: amb_roomtone
+    audio_clip: {fileID: 8300000, guid: 53fd426ade19a444e997152438547367, type: 3}
   sfx_info_list:
   - audio_name: sfx_jazz_break
     audio_clip: {fileID: 8300000, guid: 27095b74a1c688d4482456318f99de6f, type: 3}
@@ -31,6 +33,10 @@ MonoBehaviour:
     audio_clip: {fileID: 8300000, guid: 612e4a653344b4c4bae0f0b4882d9c3b, type: 3}
   - audio_name: sfx_ui_select
     audio_clip: {fileID: 8300000, guid: ae316f16a0c2eeb4693b6f0ad7abd40e, type: 3}
+  - audio_name: sfx_spin
+    audio_clip: {fileID: 8300000, guid: 3c3cc0f20b72dd04283482653a923382, type: 3}
+  - audio_name: sfx_chime
+    audio_clip: {fileID: 8300000, guid: 4242007adea1fc64cb8c49763e126e4a, type: 3}
   sfx_group_info_list:
   - audio_group_name: group_click
     audioClips:

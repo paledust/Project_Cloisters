@@ -1,4 +1,6 @@
 using System.Collections;
+using Cinemachine;
+using SimpleAudioSystem;
 using UnityEngine;
 
 public class Clickable_ObjectRotator : Basic_Clickable
@@ -21,6 +23,14 @@ public class Clickable_ObjectRotator : Basic_Clickable
 [Header("Spring")]
     [SerializeField] private bool useSpring = false;
     [SerializeField] private float springFactor = 2f;
+[Header("Sound")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private string sfxSpin;
+    [SerializeField] private float angularSpeedToVolume = 0.5f;
+    [SerializeField] private float angularSpeedToPitch = 0.5f;
+    [SerializeField] private float maxAudioSpeed = 100f;
+    [SerializeField] private float rotateSoundInterval = 0.5f;
+    [SerializeField] private float rotateSoundPitchRange = 0.2f;
 
     public float m_angularSpeed{get; private set;}
     public float m_accumulateYaw{get; private set;}
@@ -30,6 +40,7 @@ public class Clickable_ObjectRotator : Basic_Clickable
     private float targetPitchAngle;
     private float pitchAngle;
     private float zeroSpringAngle = 0;
+    private float audioStep;
     
     private PlayerController playerController;
     private CoroutineExcuter sizeChanger;
@@ -40,6 +51,7 @@ public class Clickable_ObjectRotator : Basic_Clickable
         sizeChanger = new CoroutineExcuter(this);
         pitchOffset = pitchRotationTrans.localEulerAngles.x;
         pitchAngle = pitchOffset;
+        audioStep = 0;
     }
     void Update(){
         if(playerController!=null){
@@ -63,6 +75,18 @@ public class Clickable_ObjectRotator : Basic_Clickable
             m_angularSpeed = Mathf.Lerp(m_angularSpeed, idleAngularSpeed, Time.deltaTime*releaseAngularLerp);
             if(Mathf.Abs(m_angularSpeed-idleAngularSpeed)<=0.01f) m_angularSpeed = idleAngularSpeed;
         }
+        
+        float absSpeed = Mathf.Abs(m_angularSpeed);
+        float volume = absSpeed/maxAngularSpeed * angularSpeedToVolume;
+        if(volume>0.001f){
+            audioStep += Time.deltaTime * Mathf.Min(maxAudioSpeed, absSpeed);
+            if(audioStep>=rotateSoundInterval)
+            {
+                audioStep = 0;
+                AudioManager.Instance.PlaySoundEffectWithPitch(audioSource, sfxSpin, volume, Mathf.Lerp(1, 1+rotateSoundPitchRange, absSpeed/maxAngularSpeed * angularSpeedToPitch));
+            }
+        }
+
     }
     void FixedUpdate(){
         if(useSpring)m_angularSpeed += (m_accumulateYaw-zeroSpringAngle)*springFactor*Time.fixedDeltaTime;

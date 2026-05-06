@@ -158,6 +158,10 @@ namespace SimpleAudioSystem{
 
             return clip;
         }
+        public void PlaySoundEffectWithPitch(AudioSource targetSource, string clip_name, float volumeScale, float pitch){
+            targetSource.pitch = pitch;
+            PlaySoundEffect(targetSource, clip_name, volumeScale);
+        }
         public void PlaySoundEffect(AudioSource targetSource, string clip, float volumeScale, float delay, Action completeCallback=null)=>
             StartCoroutine(coroutineDelaySFX(targetSource, clip, volumeScale, delay, completeCallback));
         public void PlaySoundEffect_WithFinishCallback(AudioSource targetSource, string clip, float volumScale, Action finishCallback=null)=>
