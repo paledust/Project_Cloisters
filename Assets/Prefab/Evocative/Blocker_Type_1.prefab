@@ -363,7 +363,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -7.992, y: -3.634, z: 0}
-  m_LocalScale: {x: 0.9500447, y: 0.9500447, z: 0.9500447}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7574671469350982134}
@@ -414,10 +414,11 @@ MonoBehaviour:
   spriteRenderer: {fileID: 2992544951152563432}
   blinkRender: {fileID: 8553544604740672188}
   bounceSize: 0.15
-  reflectAngle: {x: 90, y: 180}
-  bounceSpeedBoost: 2.5
+  reflectAngle: {x: 0, y: 0}
+  reflectRandomRange: {x: 0, y: 0}
+  bounceSpeedBoost: 3
   bounceSpeedBonus: 0
-  steerControl: 0.5
+  steerControl: 0
   canBounce: 1
 --- !u!210 &5252115424980934595
 SortingGroup:

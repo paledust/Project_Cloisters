@@ -251,9 +251,10 @@ MonoBehaviour:
   spriteRenderer: {fileID: 6325276824694625841}
   blinkRender: {fileID: 5632383390755154058}
   bounceSize: 0.1
-  reflectAngle: {x: 90, y: 180}
+  reflectAngle: {x: 0, y: 0}
   bounceSpeedBoost: 2
   bounceSpeedBonus: 0
+  steerControl: 0
   canBounce: 1
 --- !u!1 &6969375221134759804
 GameObject:

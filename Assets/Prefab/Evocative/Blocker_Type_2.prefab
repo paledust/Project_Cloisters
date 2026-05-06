@@ -268,10 +268,11 @@ MonoBehaviour:
   spriteRenderer: {fileID: 7044680211414821198}
   blinkRender: {fileID: 2566268400064703902}
   bounceSize: 0.15
-  reflectAngle: {x: 90, y: 180}
+  reflectAngle: {x: 0, y: 180}
+  reflectRandomRange: {x: -30, y: 30}
   bounceSpeedBoost: 2.5
   bounceSpeedBonus: 0
-  steerControl: 0.5
+  steerControl: 0
   canBounce: 1
 --- !u!210 &6289990008052597725
 SortingGroup:

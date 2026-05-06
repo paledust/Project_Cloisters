@@ -317,6 +317,14 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7148061842109763, guid: e8a900563de8a324bbda13b905867415, type: 3}
+      propertyPath: reflectAngle.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7148061842109763, guid: e8a900563de8a324bbda13b905867415, type: 3}
+      propertyPath: reflectAngle.y
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7148061842109763, guid: e8a900563de8a324bbda13b905867415, type: 3}
       propertyPath: bounceSpeedBoost
       value: 2
       objectReference: {fileID: 0}
