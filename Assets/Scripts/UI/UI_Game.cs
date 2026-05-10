@@ -60,19 +60,19 @@ public class UI_Game : MonoBehaviour
     {
         raycaster.enabled = false;
         interactionManager.RestartLevel();
-        AudioManager.Instance.PlaySoundEffect(sfx_click, 1);
+        AudioManager.Instance.PlaySFX(sfx_click, 1);
     }
     public void Btn_BackToMainMenu()
     {
         raycaster.enabled = false;
         interactionManager.GoBackToMainMenu();
-        AudioManager.Instance.PlaySoundEffect(sfx_click, 1);
+        AudioManager.Instance.PlaySFX(sfx_click, 1);
     }
     public void Btn_QuitGame()
     {
         raycaster.enabled = false;
         GameManager.Instance.EndGame();
-        AudioManager.Instance.PlaySoundEffect(sfx_click, 1);
+        AudioManager.Instance.PlaySFX(sfx_click, 1);
     }
     void UpdateMenuImmediately()
     {

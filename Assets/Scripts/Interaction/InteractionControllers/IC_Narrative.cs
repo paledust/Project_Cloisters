@@ -1,5 +1,6 @@
 using System.Collections;
 using Cinemachine;
+using SimpleAudioSystem;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -45,6 +46,14 @@ public class IC_Narrative : IC_Basic
 [Header("Connection")]
     [SerializeField] private NarrativeConnectLineController connectLineController;
 
+[Header("Audio")]
+    [SerializeField] private string sfx_explode;
+    [SerializeField] private float explodeVolume = .25f;
+    [SerializeField] private string sfx_collide;
+    [SerializeField] private float collideVolume = .25f;
+    [SerializeField] private string sfx_textAppear;
+    [SerializeField] private float textAppearVolume = .25f;
+
     private int narrativeCharIndex = 0;
     private float lastCollisionTime;
 
@@ -86,14 +95,17 @@ public class IC_Narrative : IC_Basic
     }
     void OnNarrativeCircleExplode(CollidableCircle circle)
     {
-        PlayExplodeParticleAtPos(circle.transform.position);
+        OnCircleExplode(circle.transform.position);
 
         var collider = Physics.OverlapSphere(circle.transform.position, 3f);
+        if(circle.m_circle.m_circleType == Clickable_Circle.CircleType.Narrative)
+            AudioManager.Instance.PlaySFX(sfx_textAppear, textAppearVolume);
         foreach(var col in collider)
         {
             var narrativeCircle = col.GetComponent<CollidableCircle>();
             if(narrativeCircle!=null && narrativeCircle!=circle && narrativeCircle.m_circle.m_circleType == Clickable_Circle.CircleType.Narrative)
             {
+                AudioManager.Instance.PlaySFX(sfx_textAppear, textAppearVolume);
                 narrativeCircle.m_rigidbody.velocity = (narrativeCircle.transform.position - circle.transform.position).normalized * 5f;
                 narrativeCircle.ExplodeCircle();
             }
@@ -102,10 +114,11 @@ public class IC_Narrative : IC_Basic
         if(narrativeCharIndex>=narrativeTextDatas.Length)
             StartCoroutine(coroutineEndInteraction());
     }
-    void PlayExplodeParticleAtPos(Vector3 position)
+    void OnCircleExplode(Vector3 position)
     {
         p_explode.transform.position = position;
         p_explode.Play();
+        AudioManager.Instance.PlaySFX(sfx_explode, explodeVolume);
     }
     void OnCircleCollide(Clickable_Circle collidedCircle, Clickable_Circle controlledCircle, Collision collision){
         float strength = collision.relativeVelocity.magnitude;
@@ -113,6 +126,7 @@ public class IC_Narrative : IC_Basic
         if(Time.time - lastCollisionTime<=effectiveCollisionStep) 
             return;
         if(strength >= collisionStrength){
+            AudioManager.Instance.PlaySFX(sfx_collide, collideVolume);
             //bounce off the other cirlce
             var collidableCircle = collidedCircle.GetComponent<CollidableCircle>();
             if(collidableCircle!=null)
@@ -223,7 +237,7 @@ public class IC_Narrative : IC_Basic
         {
             if(!circles[i].gameObject.activeSelf)
                 continue;
-            PlayExplodeParticleAtPos(circles[i].transform.position);
+            OnCircleExplode(circles[i].transform.position);
             circles[i].ExplodeCircle();
             connectLineController.BreakLineForNode(circles[i].GetComponent<NarrativeCircleNode>());
             yield return new WaitForSeconds(Random.Range(0, 0.2f));

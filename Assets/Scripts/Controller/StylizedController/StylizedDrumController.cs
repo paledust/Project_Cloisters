@@ -38,18 +38,18 @@ public class StylizedDrumController : Singleton<StylizedDrumController>
             }
             stylizedDrumCommandManager.UpdateCommand();
             if(playBeats)
-                AudioManager.Instance.PlaySoundEffect("group_click", 1);
+                AudioManager.Instance.PlaySFX("group_click", 1);
             EventHandler.Call_OnDrumBeat();
         }
         lastpcmTime = pcmTime;
     }
     public void PlayBeats(string sfxKey, float volume = 1)
     {
-        AudioManager.Instance.PlaySoundEffect(sfxKey, volume);
+        AudioManager.Instance.PlaySFX(sfxKey, volume);
     }
     public void PlayContinuousBeat(string sfxKey, float volume = 1, AudioSource audioSource = null)
     {
-        AudioManager.Instance.PlaySoundEffectLoop(audioSource, sfxKey, volume, 0.2f);
+        AudioManager.Instance.PlaySFXLoop(audioSource, sfxKey, volume, 0.2f);
     }
     public PlayBeatCommand QueueBeat(string sfxKey, float volume = 1, Action beatCallback = null)
     {

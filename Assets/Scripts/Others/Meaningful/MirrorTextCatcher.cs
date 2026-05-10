@@ -38,7 +38,7 @@ public class MirrorTextCatcher : MonoBehaviour
                 {
                     TryClearCurrentText();
                     currentText = mirrorText;
-
+                    currentText.OnCatchText();
                     mirrorTextShowConstroller.ShowMirrorText(currentText.TextChar);
                 }
             }

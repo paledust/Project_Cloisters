@@ -21,6 +21,6 @@ public class UI_ButtonQuit : MonoBehaviour
     {
         button.interactable = false;
         GameManager.Instance.EndGame();
-        AudioManager.Instance.PlaySoundEffect(sfx_click, 1);
+        AudioManager.Instance.PlaySFX(sfx_click, 1);
     }
 }

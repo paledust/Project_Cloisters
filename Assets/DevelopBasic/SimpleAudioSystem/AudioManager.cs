@@ -137,7 +137,7 @@ namespace SimpleAudioSystem{
                 current_ambience_name = audio_name;
             }
         }
-        public AudioClip PlaySoundEffect(AudioSource targetSource, string clip_name, float volumeScale){
+        public AudioClip PlaySFX(AudioSource targetSource, string clip_name, float volumeScale){
             if(string.IsNullOrEmpty(clip_name)) 
                 return null;
             AudioClip clip = audioInfo.GetSFXClipByName(clip_name);
@@ -147,22 +147,26 @@ namespace SimpleAudioSystem{
                 Debug.LogAssertion($"No Clip found:{clip_name}");
             return clip;
         }
-        public AudioClip PlaySoundEffect(string clip_name, float volumeScale) => PlaySoundEffect(sfx_trigger, clip_name, volumeScale);
+        public AudioClip PlaySFX(string clip_name, float volumeScale) => PlaySFX(sfx_trigger, clip_name, volumeScale);
         
-        public AudioClip PlaySoundEffectLoop(AudioSource targetSource, string clip_name, float volumeScale, float transition = 1f){
+        public AudioClip PlaySFXLoop(AudioSource targetSource, string clip_name, float volumeScale, float transition = 1f, float time = 0){
             AudioClip clip = audioInfo.GetSFXClipByName(clip_name);
             targetSource.clip = clip;
             targetSource.loop = true;
+            targetSource.time = time;
             targetSource.Play();
-            FadeAudio(targetSource, volumeScale, transition);
+            if(transition>0)
+                FadeAudio(targetSource, volumeScale, transition);
+            else
+                targetSource.volume = volumeScale;
 
             return clip;
         }
-        public void PlaySoundEffectWithPitch(AudioSource targetSource, string clip_name, float volumeScale, float pitch){
+        public void PlaySFXWithPitch(AudioSource targetSource, string clip_name, float volumeScale, float pitch){
             targetSource.pitch = pitch;
-            PlaySoundEffect(targetSource, clip_name, volumeScale);
+            PlaySFX(targetSource, clip_name, volumeScale);
         }
-        public void PlaySoundEffect(AudioSource targetSource, string clip, float volumeScale, float delay, Action completeCallback=null)=>
+        public void PlaySFX(AudioSource targetSource, string clip, float volumeScale, float delay, Action completeCallback=null)=>
             StartCoroutine(coroutineDelaySFX(targetSource, clip, volumeScale, delay, completeCallback));
         public void PlaySoundEffect_WithFinishCallback(AudioSource targetSource, string clip, float volumScale, Action finishCallback=null)=>
             StartCoroutine(coroutineSFX_WithFinishAction(targetSource, clip, volumScale, finishCallback));
@@ -235,11 +239,11 @@ namespace SimpleAudioSystem{
         }
         IEnumerator coroutineDelaySFX(AudioSource m_audio, string clip, float volumeScale, float delay, Action completeCallback){
             yield return new WaitForSeconds(delay);
-            PlaySoundEffect(m_audio, clip, volumeScale);
+            PlaySFX(m_audio, clip, volumeScale);
             completeCallback?.Invoke();
         }
         IEnumerator coroutineSFX_WithFinishAction(AudioSource m_audio, string clip, float volumeScale, Action finishCallback){
-            var playedClip = PlaySoundEffect(m_audio, clip, volumeScale);
+            var playedClip = PlaySFX(m_audio, clip, volumeScale);
             yield return new WaitForSeconds(playedClip==null?0:playedClip.length);
             finishCallback?.Invoke();
         }

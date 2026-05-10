@@ -76,6 +76,7 @@ public class Clickable_ObjectRotator : Basic_Clickable
             if(Mathf.Abs(m_angularSpeed-idleAngularSpeed)<=0.01f) m_angularSpeed = idleAngularSpeed;
         }
         
+        if(string.IsNullOrEmpty(sfxSpin)) return;
         float absSpeed = Mathf.Abs(m_angularSpeed);
         float volume = absSpeed/maxAngularSpeed * angularSpeedToVolume;
         if(volume>0.001f){
@@ -83,7 +84,7 @@ public class Clickable_ObjectRotator : Basic_Clickable
             if(audioStep>=rotateSoundInterval)
             {
                 audioStep = 0;
-                AudioManager.Instance.PlaySoundEffectWithPitch(audioSource, sfxSpin, volume, Mathf.Lerp(1, 1+rotateSoundPitchRange, absSpeed/maxAngularSpeed * angularSpeedToPitch));
+                AudioManager.Instance.PlaySFXWithPitch(audioSource, sfxSpin, volume, Mathf.Lerp(1, 1+rotateSoundPitchRange, absSpeed/maxAngularSpeed * angularSpeedToPitch));
             }
         }
 

@@ -1,5 +1,6 @@
 using UnityEngine;
 using DG.Tweening;
+using SimpleAudioSystem;
 
 public class MirrorText : MonoBehaviour
 {
@@ -11,12 +12,20 @@ public class MirrorText : MonoBehaviour
     [SerializeField] private Collider hitbox;
     [SerializeField] private Transform mirrorCenter;
     [SerializeField] private ParticleSystem p_spot;
+
 [Header("Motion")]
     [SerializeField] private AngleMotion angleMotion;
     [SerializeField] private FloatingMotion floatMotion;
 
+[Header("Audio")]
+    [SerializeField] private string sfxTextFound;
+    [SerializeField] private string sfxTextFocus;
+    [SerializeField] private float focusVolumeLerpSpeed = 5f;
+    [SerializeField] private AudioSource focusAudioSource;
+
     private Color originColor;
     private bool isFocus = false;
+    private bool isCatched = false;
     private bool isRevealed  = false;
     private float focusFactor = 0;
     public float m_focusFactor => isFocus?0:focusFactor;
@@ -26,6 +35,30 @@ public class MirrorText : MonoBehaviour
     void Awake()
     {
         originColor = fontColor.Tint;
+    }
+    void Update()
+    {
+        if(isCatched)
+        {
+            if(!focusAudioSource.isPlaying)
+                AudioManager.Instance.PlaySFXLoop(focusAudioSource, sfxTextFocus, 0, 0);
+            if(!isFocus)
+                focusAudioSource.volume = Mathf.Lerp(focusAudioSource.volume, .2f, Time.deltaTime*focusVolumeLerpSpeed);
+        }
+        if(isFocus)
+        {
+            if(!focusAudioSource.isPlaying)
+                AudioManager.Instance.PlaySFXLoop(focusAudioSource, sfxTextFocus, 0, 0);
+            focusAudioSource.volume = Mathf.Lerp(focusAudioSource.volume, 1, Time.deltaTime*focusVolumeLerpSpeed);
+        }
+        if(!isCatched && !isFocus && focusAudioSource.isPlaying)
+        {
+            focusAudioSource.volume = Mathf.Lerp(focusAudioSource.volume, 0, Time.deltaTime);
+            if(focusAudioSource.volume < 0.01f)
+            {
+                focusAudioSource.Stop();
+            }
+        }
     }
     public void CopyText(MirrorText mirrorText)
     {
@@ -77,6 +110,8 @@ public class MirrorText : MonoBehaviour
                     transform.localScale = transform.localScale * 0.25f;
                     fontColor.gameObject.layer = LayerMask.NameToLayer("NoReflex");
 
+                    AudioManager.Instance.PlaySFX(sfxTextFound, 1);
+
                     transform.DOKill();
                     transform.DOScale(0.27f*0.25f, 0.5f * timeScale)
                     .SetEase(Ease.OutBack, 2.5f * timeScale).OnComplete(()=>{
@@ -105,6 +140,7 @@ public class MirrorText : MonoBehaviour
     public void OnMirrorTextHide()
     {
         isFocus = false;
+        isCatched = false;
 
         if(!isRevealed)
         {
@@ -114,5 +150,9 @@ public class MirrorText : MonoBehaviour
             transform.DOScale(0.15f, 0.5f)
             .SetEase(Ease.OutQuad);
         }
+    }
+    public void OnCatchText()
+    {
+        isCatched = true;
     }
 }

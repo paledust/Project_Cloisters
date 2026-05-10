@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
-using DG.Tweening;
-using TMPro;
+using SimpleAudioSystem;
 using UnityEngine;
 
 public class CollidableCircle : MonoBehaviour
@@ -44,6 +43,14 @@ public class CollidableCircle : MonoBehaviour
 [Header("VFX Explode Resolve")]
     [SerializeField] private Transform vfxRoot;
 
+[Header("Audio")]
+    [SerializeField] private AudioSource loopSource;
+    [SerializeField] private string sfx_drag_circle;
+    [SerializeField] private float maxVolume = .5f;
+    [SerializeField] private float speedGate = 0.1f;
+    [SerializeField] private float dragToVolumeScale = 1;
+    [SerializeField] private float speedLerp = 4f;
+
     private Clickable_Circle circle;
     private NarrativeCircleNode narrativeCircleNode;
     private Vector3 targetPoint;
@@ -57,6 +64,8 @@ public class CollidableCircle : MonoBehaviour
     private const string FLOAT_ANIMATION = "CircleFloat";
     private const string POPUP_ANIMATION = "CirclePopUp";
     private const string HOLLOW_ANIMATION = "CircleHollow";
+    private float audioSpeed;
+    [SerializeField] private float audioTime;
 
     private Action onCircleExplode;
 
@@ -64,6 +73,8 @@ public class CollidableCircle : MonoBehaviour
     {
         circle = GetComponent<Clickable_Circle>();
         narrativeCircleNode = GetComponent<NarrativeCircleNode>();
+        audioSpeed = 0;
+        audioTime = 0;
     }
     void Start(){
         if(circle.m_circleType == Clickable_Circle.CircleType.Target)
@@ -71,6 +82,23 @@ public class CollidableCircle : MonoBehaviour
     }
     void Update(){
         circleMotionControl.UpdateCircleMotion(m_rigid.velocity);
+
+        float speed = m_rigid.velocity.magnitude;
+        audioSpeed = Mathf.Lerp(audioSpeed, speed, Time.deltaTime*speedLerp);
+        float volume = Mathf.Clamp((audioSpeed-speedGate)*dragToVolumeScale, 0, maxVolume);
+
+        if(loopSource.isPlaying)
+            loopSource.volume = volume;
+
+        if(audioSpeed > speedGate && !loopSource.isPlaying)
+        {
+            AudioManager.Instance.PlaySFXLoop(loopSource, sfx_drag_circle, volume, 0, audioTime);
+        }
+        else if(audioSpeed <= speedGate && loopSource.isPlaying)
+        {
+            audioTime = loopSource.time;
+            loopSource.Stop();
+        }
     }
     void OnDestroy()
     {

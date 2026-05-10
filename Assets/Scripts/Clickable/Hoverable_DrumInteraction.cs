@@ -152,7 +152,7 @@ public class Hoverable_DrumInteraction : MonoBehaviour
                     heroSphereRoot.DOKill();
                     heroSphereRoot.DOScale(Vector3.one*1.5f, 0.3f).SetEase(Ease.OutBack);
 
-                    AudioManager.Instance.PlaySoundEffect(m_audio, sfxCharge, 1f);
+                    AudioManager.Instance.PlaySFX(m_audio, sfxCharge, 1f);
                 }
             }
         }

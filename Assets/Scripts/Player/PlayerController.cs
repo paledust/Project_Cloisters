@@ -123,7 +123,7 @@ public class PlayerController : MonoBehaviour
             
             if(m_hoveringInteractable.m_isInteractable){
                 m_hoveringInteractable.OnClick(this, hoverPos);
-                AudioManager.Instance.PlaySoundEffect(playerAudio, m_hoveringInteractable.sfx_clickSound, 1);
+                AudioManager.Instance.PlaySFX(playerAudio, m_hoveringInteractable.sfx_clickSound, 1);
             }
             else{
                 m_hoveringInteractable.OnFailClick(this);

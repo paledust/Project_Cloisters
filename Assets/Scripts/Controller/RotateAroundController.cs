@@ -36,7 +36,7 @@ public class RotateAroundController : MonoBehaviour
         {
             sphereFadeIn = true;
             blueSphere.Play();
-            AudioManager.Instance.PlaySoundEffect(sfx_shine, volume);
+            AudioManager.Instance.PlaySFX(sfx_shine, volume);
         }
     }
 }
