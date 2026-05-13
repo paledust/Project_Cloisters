@@ -11,6 +11,7 @@ public class RotatorAudioHandler : MonoBehaviour
     [SerializeField] private float angularSpeedToVolume = 10;
 [Header("Audio")]
     [SerializeField] private AudioSource audioSource;
+    [SerializeField, Range(0, 1)] private float volumeScale = 1f;
     [SerializeField] private float volumeLerpSpeed = 5f;
     [SerializeField] private string sfxRotating;
 
@@ -27,7 +28,7 @@ public class RotatorAudioHandler : MonoBehaviour
         {
             if(!audioSource.isPlaying)
                 AudioManager.Instance.PlaySFXLoop(audioSource, sfxRotating, 0, 0);
-            audioSource.volume = Mathf.Lerp(audioSource.volume, Mathf.Clamp01((speed-angularSpeedThreshold)*angularSpeedToVolume), Time.deltaTime*volumeLerpSpeed);
+            audioSource.volume = Mathf.Lerp(audioSource.volume, Mathf.Clamp01((speed-angularSpeedThreshold)*angularSpeedToVolume)*volumeScale, Time.deltaTime*volumeLerpSpeed);
         }
         else
         {

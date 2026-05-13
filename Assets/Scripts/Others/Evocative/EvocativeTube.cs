@@ -9,6 +9,7 @@ public class EvocativeTube : MonoBehaviour
     [SerializeField] private TubeEntranceTrigger tubeTrigger;
     [SerializeField] private float tubeTravelTime;
     [SerializeField] private float ejectSpeed;
+    [SerializeField] private float ejectSpeedBoost;
 
     [Header("Presentation")]
     [SerializeField] private Animation ejectAnim;
@@ -52,7 +53,7 @@ public class EvocativeTube : MonoBehaviour
         ball.gameObject.SetActive(true);
         ball.WakePhysics();
         ball.GlowBall();
-        ball.Bounce(eject.up * ejectSpeed, 0, 4);
+        ball.Bounce(eject.up * ejectSpeed, ejectSpeedBoost, 4);
         tubeTrigger.ResetTubeTrigger();
         isBallTravelling = false;
     }

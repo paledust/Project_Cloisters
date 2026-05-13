@@ -1,4 +1,5 @@
 using System.Collections;
+using SimpleAudioSystem;
 using UnityEngine;
 
 public class WhimsicalText_SpotDetection : MonoBehaviour
@@ -9,12 +10,14 @@ public class WhimsicalText_SpotDetection : MonoBehaviour
 
     [Header("Additional text lighten")]
     [SerializeField] private ChargeText[] additionalChargedTexts;
+
     private float chargeProgress = 0;
     private WhimsicalTextSpoter whimsicalTextSpoter;
 
     public void OnDetected(WhimsicalTextSpoter whimsicalTextSpoter)
     {
         this.whimsicalTextSpoter = whimsicalTextSpoter;
+        parentText.OnCharged();
     }
     void Update()
     {
@@ -35,6 +38,7 @@ public class WhimsicalText_SpotDetection : MonoBehaviour
     public void OnNotDetected()
     {
         whimsicalTextSpoter = null;
+        parentText.OnNotCharged();
     }
     IEnumerator coroutineChargeNearbyText()
     {

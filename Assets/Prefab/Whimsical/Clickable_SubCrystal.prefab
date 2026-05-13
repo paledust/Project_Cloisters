@@ -5091,7 +5091,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a768ff8f23d0b846bdda784024ae0a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sfx_clickSound: 
+  sfx_clickSound: group_shine
   hitbox: {fileID: 8939477281556912884}
   disableClick: 0
   depth: 16
@@ -5101,6 +5101,7 @@ MonoBehaviour:
   particleExpandForce: 10
   spotterRender: {fileID: 3206506852181161756}
   whimsicalTextSpoter: {fileID: 1709645491460985981}
+  sfxRelease: group_shine
 --- !u!114 &87022129037143106
 MonoBehaviour:
   m_ObjectHideFlags: 0

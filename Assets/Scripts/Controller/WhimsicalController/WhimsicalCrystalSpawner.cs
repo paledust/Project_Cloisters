@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using System.Linq;
 using DG.Tweening;
+using SimpleAudioSystem;
 using UnityEngine;
 
 public class WhimsicalCrystalSpawner : MonoBehaviour
@@ -17,6 +17,7 @@ public class WhimsicalCrystalSpawner : MonoBehaviour
 
     [Header("Spawn Radius")]
     [SerializeField] private Transform[] spawnPoints;
+    [SerializeField] private string sfxCrystal;
 
     private float spawnTimer = 0;
     private int spawnCount = 0;
@@ -42,6 +43,7 @@ public class WhimsicalCrystalSpawner : MonoBehaviour
             if(spawnTimer >= 1)
             {
                 spawnTimer = 0;
+                AudioManager.Instance.PlaySFX(sfxCrystal, 1);
                 var crystal = Instantiate(prefabCrystal, heroDiamond.transform.position, Quaternion.identity, crystalParent).GetComponent<Clickable_Crystal>();
                 crystal.enabled = false;
                 crystal.DisableHitbox();

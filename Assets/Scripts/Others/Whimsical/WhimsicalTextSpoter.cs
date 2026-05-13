@@ -14,8 +14,7 @@ public class WhimsicalTextSpoter : MonoBehaviour
         var ray = new Ray(transform.position, -transform.forward);
         if(Physics.Raycast(ray, out var hit, 100, spotLayer))
         {
-            var spot = hit.collider.GetComponent<WhimsicalText_SpotDetection>();
-            if(spot!=null)
+            if(hit.collider.TryGetComponent<WhimsicalText_SpotDetection>(out var spot))
             {
                 if(currentSpot!=null)
                 {
