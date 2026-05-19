@@ -1,6 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
 using System.Collections.Generic;
+using SimpleAudioSystem;
 
 public class ShapeConnectController : MonoBehaviour
 {
@@ -12,6 +13,9 @@ public class ShapeConnectController : MonoBehaviour
     [SerializeField] private float intersection = 0.1f;
     [SerializeField] private float connectDuration = 0.15f;
 
+[Header("Audio")]
+    [SerializeField] private string sfxOnMerge;
+    [SerializeField] private string sfxOnSeparate;
 
     void Awake()
     {
@@ -27,6 +31,7 @@ public class ShapeConnectController : MonoBehaviour
     {
         p_break.transform.position = breakPoint;
         p_break.Play(true);
+        AudioManager.Instance.PlaySFX(sfxOnSeparate, 1);
     }
     void OnShapeConnect(ConnectTrigger main, ConnectTrigger other)
     {
@@ -107,6 +112,8 @@ public class ShapeConnectController : MonoBehaviour
             other.m_connectBody.m_rigid.isKinematic = false;
 
             EventHandler.Call_OnBuildConnectionBreaker(jointBreaker);
+
+            AudioManager.Instance.PlaySFX(sfxOnMerge, 1);
         });
     }
     public static (Vector3, Quaternion) GetConnectTransform(ConnectTrigger selfTrigger, ConnectTrigger pendingTrigger, float intersection)

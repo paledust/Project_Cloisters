@@ -1,4 +1,5 @@
 using DG.Tweening;
+using SimpleAudioSystem;
 using UnityEngine;
 
 public class CollectableText : MonoBehaviour
