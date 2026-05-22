@@ -199,6 +199,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotateSpeedMulti: 100
   rotateTarget: {fileID: 1845645188608425967}
+  sfxFlip: sfx_pinball_flip_gate
 --- !u!135 &5125999164517172604
 SphereCollider:
   m_ObjectHideFlags: 0

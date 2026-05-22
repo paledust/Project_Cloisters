@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using SimpleAudioSystem;
 using UnityEngine;
 
 public class Collectable : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer chargeSprite;
+    [SerializeField] private string sfxCollect;
     private bool isCharged = false;
 
     void OnCollisionEnter(Collision other)
@@ -19,6 +21,7 @@ public class Collectable : MonoBehaviour
             }
             else
             {
+                AudioManager.Instance.PlaySFX(sfxCollect, 1);
                 EventHandler.Call_OnCollect(this);
             }
         }

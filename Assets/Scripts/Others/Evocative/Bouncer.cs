@@ -1,6 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
 using System;
+using SimpleAudioSystem;
 
 public class Bouncer : MonoBehaviour
 {
@@ -15,6 +16,9 @@ public class Bouncer : MonoBehaviour
     [SerializeField] private float bounceSpeedBoost = 2;
     [SerializeField] private float bounceSpeedBonus = 0;
     [SerializeField, Range(0, 1)] private float steerControl = 0.5f;
+    
+    [Header("Audio")]
+    [SerializeField] private string sfxBounce;
 
     private bool colliding = false;
     [SerializeField, ShowOnly] private bool canBounce = true;
@@ -76,6 +80,7 @@ public class Bouncer : MonoBehaviour
 
                 PlayBounceFeedback();
                 bounceBall.Bounce(vel, bounceSpeedBonus, bounceSpeedBoost);
+                AudioManager.Instance.PlaySFX(sfxBounce, Mathf.Clamp(collision.relativeVelocity.magnitude * 0.1f, 0.01f, 1f));
                 onBounce?.Invoke(bounceBall);
             }
         }

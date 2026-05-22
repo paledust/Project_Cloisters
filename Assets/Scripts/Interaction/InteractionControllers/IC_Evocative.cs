@@ -1,6 +1,7 @@
 using System.Collections;
 using Cinemachine;
 using DG.Tweening;
+using SimpleAudioSystem;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.VFX;
@@ -39,8 +40,6 @@ public class IC_Evocative : IC_Basic
     [SerializeField] private float startSpeedDuration = 1f;
 
     private int collectedCount = 0;
-    private int backgroundIndex = 0;
-    private int finalgroundIndex = 0;
     private CinemachineBrain brain;
     private Collectable[] collectables;
     private CoroutineExcuter timeStutter;
@@ -108,21 +107,6 @@ public class IC_Evocative : IC_Basic
     }
     void OnHitGoal(bool isCriticalHit)
     {
-        Color backgroundColor;
-        if (!isCriticalHit)
-        {
-            backgroundIndex++;
-            backgroundIndex %= backgroundColors.Length;
-            backgroundColor = backgroundColors[backgroundIndex];
-        }
-        else
-        {
-            finalgroundIndex ++;
-            finalgroundIndex %= finalColors.Length;
-            backgroundColor = finalColors[finalgroundIndex];
-        }
-        // backgroundRenderer.DOKill();
-        // backgroundRenderer.DOColor(backgroundColor, 0.1f);
         impulseSource.GenerateImpulse(bounceBall.m_isSuperCharge?1f:0.5f);
     }
     void OnGoalBreak()

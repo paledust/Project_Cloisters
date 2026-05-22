@@ -1,3 +1,4 @@
+using SimpleAudioSystem;
 using UnityEngine;
 
 public class Bouncer_Goal : MonoBehaviour
@@ -14,6 +15,10 @@ public class Bouncer_Goal : MonoBehaviour
     [SerializeField] private ParticleSystem p_emit_loop;
     [SerializeField] private SpriteRenderer glow;
     [SerializeField] private Color glowColor;
+
+    [Header("SFX")]
+    [SerializeField] private string sfxBreaking;
+    [SerializeField] private string sfxExplode;
 
     private int criticalHitCount;
     private float lastHitTime = 0f;
@@ -47,9 +52,11 @@ public class Bouncer_Goal : MonoBehaviour
                 float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
                 p_break.transform.rotation = Quaternion.Euler(0, 0, angle);
                 p_break.Play();
+                AudioManager.Instance.PlaySFX(sfxBreaking, 1);
             }
             else
             {
+                AudioManager.Instance.PlaySFX(sfxExplode, 1);
                 EventHandler.Call_OnGoalBreak();    
             }
 

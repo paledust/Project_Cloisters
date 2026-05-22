@@ -10191,8 +10191,11 @@ MonoBehaviour:
   blinkRender: {fileID: 1550733921086647596}
   bounceSize: 0.1
   reflectAngle: {x: 90, y: 180}
+  reflectRandomRange: {x: 0, y: 0}
   bounceSpeedBoost: 3
   bounceSpeedBonus: 0
+  steerControl: 0.5
+  sfxBounce: sfx_pinball_launch
   canBounce: 1
 --- !u!114 &5079350425550156287
 MonoBehaviour:

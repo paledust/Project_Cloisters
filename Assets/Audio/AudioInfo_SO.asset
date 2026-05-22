@@ -51,6 +51,18 @@ MonoBehaviour:
     audio_clip: {fileID: 8300000, guid: 13a42336e64d80a4f982d2681df63005, type: 3}
   - audio_name: foley_flickering
     audio_clip: {fileID: 8300000, guid: ad7a5798cc3c76044977c4eb7f296566, type: 3}
+  - audio_name: sfx_pinball_collect
+    audio_clip: {fileID: 8300000, guid: 5bda5f383795aaf4bba3499b058424ed, type: 3}
+  - audio_name: sfx_pinball_dead
+    audio_clip: {fileID: 8300000, guid: f817212aa40445542a8c91b3f5f4d631, type: 3}
+  - audio_name: sfx_pinball_flip_gate
+    audio_clip: {fileID: 8300000, guid: 69e3145b587a5ce449c0654b5cda3f49, type: 3}
+  - audio_name: sfx_pinball_launch
+    audio_clip: {fileID: 8300000, guid: 5d4fb6f4bcebb004fa717ea1f0ab6118, type: 3}
+  - audio_name: sfx_pinball_tunnel
+    audio_clip: {fileID: 8300000, guid: b43982f0d8763fd42b02f9d5189e8870, type: 3}
+  - audio_name: sfx_pinball_upgrade
+    audio_clip: {fileID: 8300000, guid: 2a63615f6a73278459c1cceb41eb3e49, type: 3}
   sfx_group_info_list:
   - audio_group_name: group_click
     audioClips:
@@ -141,3 +153,9 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 457fe96709bae304192fa1a86915accb, type: 3}
     - {fileID: 8300000, guid: bb419ac68dbb91e43a39e7039a0cd15a, type: 3}
     - {fileID: 8300000, guid: 44b5c4026a6e33e4dacccd5cd4188707, type: 3}
+  - audio_group_name: group_flipper
+    audioClips:
+    - {fileID: 8300000, guid: 1cfdd1cd9aba7dc4893427107475089f, type: 3}
+    - {fileID: 8300000, guid: 37ec855544e03714b876e72654c998fc, type: 3}
+    - {fileID: 8300000, guid: c13976fd3495acd459575f2bcbaa5215, type: 3}
+    - {fileID: 8300000, guid: bb7bcfeae18a965468d4a1edf2427942, type: 3}

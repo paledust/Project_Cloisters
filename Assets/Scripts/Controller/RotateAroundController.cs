@@ -17,8 +17,6 @@ public class RotateAroundController : MonoBehaviour
     [SerializeField] private float fadeInAngle = 30;
 
 [Header("Audio")]
-    [SerializeField] private string sfx_shine;
-    [SerializeField] private float volume = 0.1f;
     private bool sphereFadeIn;
 
     void Update()
@@ -36,7 +34,6 @@ public class RotateAroundController : MonoBehaviour
         {
             sphereFadeIn = true;
             blueSphere.Play();
-            AudioManager.Instance.PlaySFX(sfx_shine, volume);
         }
     }
 }

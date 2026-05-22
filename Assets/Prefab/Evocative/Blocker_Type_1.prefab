@@ -419,6 +419,7 @@ MonoBehaviour:
   bounceSpeedBoost: 3
   bounceSpeedBonus: 0
   steerControl: 0
+  sfxBounce: group_flipper
   canBounce: 1
 --- !u!210 &5252115424980934595
 SortingGroup:

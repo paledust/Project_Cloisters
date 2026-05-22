@@ -192,6 +192,7 @@ MonoBehaviour:
   bounceSpeedBoost: 2
   bounceSpeedBonus: 0
   steerControl: 0.5
+  sfxBounce: 
   canBounce: 1
 --- !u!114 &6142004257145916415
 MonoBehaviour:
@@ -206,7 +207,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkAngle: 45
-  correctForce: 10
+  correctForce: 5
   minAngularSpeed: 3
   stopAngularSpeed: 1
   collisionBoost: -1.1
