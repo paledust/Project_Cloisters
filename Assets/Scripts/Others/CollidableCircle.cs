@@ -50,6 +50,7 @@ public class CollidableCircle : MonoBehaviour
     [SerializeField] private float speedGate = 0.1f;
     [SerializeField] private float dragToVolumeScale = 1;
     [SerializeField] private float speedLerp = 4f;
+    [SerializeField] private float speedFade = 1f;
 
     private Clickable_Circle circle;
     private NarrativeCircleNode narrativeCircleNode;
@@ -64,6 +65,8 @@ public class CollidableCircle : MonoBehaviour
     private const string FLOAT_ANIMATION = "CircleFloat";
     private const string POPUP_ANIMATION = "CirclePopUp";
     private const string HOLLOW_ANIMATION = "CircleHollow";
+    private const string TRANS_ANIMATION = "CircleTransition";
+    
     private float audioSpeed;
     [SerializeField] private float audioTime;
 
@@ -84,7 +87,7 @@ public class CollidableCircle : MonoBehaviour
         circleMotionControl.UpdateCircleMotion(m_rigid.velocity);
 
         float speed = m_rigid.velocity.magnitude;
-        audioSpeed = Mathf.Lerp(audioSpeed, speed, Time.deltaTime*speedLerp);
+        audioSpeed = Mathf.Lerp(audioSpeed, speed, Time.deltaTime*speed>speedGate?speedLerp:speedFade);
         float volume = Mathf.Clamp((audioSpeed-speedGate)*dragToVolumeScale, 0, maxVolume);
 
         if(loopSource.isPlaying)
@@ -161,6 +164,11 @@ public class CollidableCircle : MonoBehaviour
     {
         circleAnime[POPUP_ANIMATION].speed = circleAnime[POPUP_ANIMATION].length/duration;
         circleAnime.Play(POPUP_ANIMATION);
+    }
+    public void TransitionCircles()
+    {
+        circleAnime[TRANS_ANIMATION].layer = 2;
+        circleAnime.Play(TRANS_ANIMATION);
     }
     #endregion
 

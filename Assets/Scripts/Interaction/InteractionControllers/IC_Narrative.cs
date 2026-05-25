@@ -7,11 +7,6 @@ using UnityEngine.Playables;
 public class IC_Narrative : IC_Basic
 {
     [System.Serializable]
-    public struct HeroCircleTransistor{
-        public SpriteRenderer heroCircleSprite;
-        public Color transitionColor;
-    }
-    [System.Serializable]
     public class NarrativeTextData{
         public char content;
         public NarrativeText textMesh;
@@ -242,7 +237,7 @@ public class IC_Narrative : IC_Basic
             connectLineController.BreakLineForNode(circles[i].GetComponent<NarrativeCircleNode>());
             yield return new WaitForSeconds(Random.Range(0, 0.2f));
         }
-        circles[0].m_circle.TransitionCircles(1);
+        circles[0].TransitionCircles();
         
         TL_End.Play();
         yield return new WaitForSeconds(2f);
