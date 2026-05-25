@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using SimpleAudioSystem;
 using UnityEngine;
 
 public class RotateAroundController : MonoBehaviour
@@ -10,22 +7,25 @@ public class RotateAroundController : MonoBehaviour
     [SerializeField] private float controlAgility = 5;
 [Header("Speed Remapping")]
     [SerializeField] private float speedScale;
+    [SerializeField] private float maxSpeed;
 
 [Header("Sphere")]
     [SerializeField] private Animation blueSphere;
     [SerializeField] private Transform pivotSphere;
     [SerializeField] private float fadeInAngle = 30;
 
-[Header("Audio")]
+    private float targetSpeed;
     private bool sphereFadeIn;
 
+    void Start()
+    {
+        targetSpeed = 0;
+    }
     void Update()
     {
-        rotateAround.angularSpeed = Mathf.Lerp(rotateAround.angularSpeed, clickable_Planet.m_angularSpeed*speedScale, Time.deltaTime * controlAgility);
-
-        Vector3 euler = rotateAround.m_target.eulerAngles;
-        if(euler.x > 180) euler.x -= 360;
-        euler *= 0.5f;
+        targetSpeed = Mathf.Lerp(targetSpeed, clickable_Planet.m_angularSpeed*speedScale, Time.deltaTime * controlAgility);
+        targetSpeed = Mathf.Clamp(targetSpeed, -maxSpeed, maxSpeed);
+        rotateAround.angularSpeed = targetSpeed;
 
         Vector3 dir = blueSphere.transform.position - pivotSphere.position;
         float angle = Vector3.SignedAngle(Vector3.forward, dir, Vector3.up);

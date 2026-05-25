@@ -12,8 +12,7 @@ public class IC_Intro : IC_Basic
     [SerializeField] private RotateAroundController rotateController;
 [Header("Interaction")]
     [SerializeField] private Clickable_ObjectRotator clickable_redPlanet;
-    [SerializeField] private Transform centerPos;
-    [SerializeField] private float angleTolrence = 10;
+    [SerializeField] private float alignTolrence = 10;
 [Header("Planet")]
     [SerializeField] private Transform surroundPlanet;
     [SerializeField] private Transform centerPlanet;
@@ -49,24 +48,28 @@ public class IC_Intro : IC_Basic
         float angle = Vector3.SignedAngle(diff, Vector3.back, Vector3.up);
         angle = Mathf.Abs(angle);
 
-        if(angle < angleTolrence && !m_isDone){
+        if(angle < alignTolrence && !m_isDone){
             EventHandler.Call_OnEndInteraction(this);
-            StartCoroutine(coroutinePutPlanetToCenter((surroundPlanet.position-lastSurroundPlanetPos)/Time.deltaTime));
+            StartCoroutine(coroutinePutPlanetToCenter());
         }
         lastSurroundPlanetPos = surroundPlanet.position;
     }
-    IEnumerator coroutinePutPlanetToCenter(Vector3 startVelocity){
-        surroundPlanet.GetComponent<RotateAround>().enabled = false;
+    IEnumerator coroutinePutPlanetToCenter(){
+        var rotatAround = surroundPlanet.GetComponent<RotateAround>();
+        rotatAround.enabled = false;
 
-        Vector3 startPos = surroundPlanet.position;
-        Vector3 finalPos = centerPos.position;
-        Vector3 startVel = startVelocity;
-        Vector3 endVel   = (finalPos-startPos)*0.01f;
-        Vector3 dynamicPos = startPos;
-        yield return new WaitForLoop(1f, (t)=>{
-            dynamicPos = dynamicPos + Vector3.Slerp(startVel, endVel, t)*Time.deltaTime;
-            Vector3 staticPos  = Vector3.Lerp(startPos, finalPos, EasingFunc.Easing.SmoothInOut(t));
-            surroundPlanet.position = Vector3.Lerp(dynamicPos, staticPos, EasingFunc.Easing.SmoothInOut(t));
+        float targetAngle = rotatAround.m_rotateAngle>0?180:-180;
+
+        float currentAngularSpeed = rotatAround.angularSpeed;
+        float currentAngle = rotatAround.m_rotateAngle;
+
+        float leftAngle = targetAngle - currentAngle;
+        float duration = leftAngle * 2 / currentAngularSpeed;
+
+        yield return new WaitForLoop(duration, (t) =>
+        {
+            float speed = Mathf.Lerp(currentAngularSpeed, 0, t);
+            rotatAround.StepSim(speed * Time.deltaTime);
         });
 
         endTimeline.Play();
