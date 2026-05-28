@@ -12,7 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7da7ef804e50b694abf4bd5bd0a081d2, type: 3}
   m_Name: AudioInfo_SO
   m_EditorClassIdentifier: 
-  bgm_info_list: []
+  bgm_info_list:
+  - audio_name: bgm_intro_intro
+    audio_clip: {fileID: 8300000, guid: 9f5df06827714114abcbf8ccdaebf503, type: 3}
+  - audio_name: bgm_intro_loop
+    audio_clip: {fileID: 8300000, guid: f2dc2c624d9a5e34483b58c99b276a9c, type: 3}
+  - audio_name: bgm_narrative
+    audio_clip: {fileID: 8300000, guid: 1c82855b5be286d4ebbb8893f2bce7fb, type: 3}
   amb_info_list:
   - audio_name: amb_jazz_riff_105
     audio_clip: {fileID: 8300000, guid: e3a837595d0321b44aa25384c7e08617, type: 3}

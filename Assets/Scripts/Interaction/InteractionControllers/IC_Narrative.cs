@@ -49,6 +49,10 @@ public class IC_Narrative : IC_Basic
     [SerializeField] private string sfx_textAppear;
     [SerializeField] private float textAppearVolume = .25f;
 
+[Header("BGM")]
+    [SerializeField] private BGMHandler bgmHandler;
+    [SerializeField] private string bgmNarrative;
+
     private int narrativeCharIndex = 0;
     private float lastCollisionTime;
 

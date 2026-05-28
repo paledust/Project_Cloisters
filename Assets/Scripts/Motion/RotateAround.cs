@@ -6,12 +6,18 @@ using UnityEngine;
 
 public class RotateAround : MonoBehaviour
 {
+    public enum RotateAxis
+    {
+        Foward = 0,
+        Up = 1,
+        Right = 2,
+    }
     [SerializeField] private Transform targetTrans;
     [SerializeField, ShowOnly] private float rotateAngle;
+    [SerializeField] private RotateAxis rotateAxis = RotateAxis.Foward;
     public Vector3 axisAdjust;
     public float angularSpeed = 10;
 
-    public Transform m_target => targetTrans;
     public float m_rotateAngle => rotateAngle;
     
     private Vector3 initDiff;
@@ -22,7 +28,6 @@ public class RotateAround : MonoBehaviour
     {
         InitializeRotateParam();
     }
-
     void FixedUpdate(){
         StepSim(angularSpeed * Time.fixedDeltaTime);
     }
@@ -30,7 +35,21 @@ public class RotateAround : MonoBehaviour
         Vector3 diff = transform.position - targetTrans.position;
         initDiff = diff;
         rotateAngle = 0;
-        axis = Vector3.Cross(targetTrans.forward, diff).normalized;        
+
+        Vector3 targetAxis = targetTrans.forward;
+        switch(rotateAxis)
+        {
+            case RotateAxis.Foward:
+                targetAxis = targetTrans.forward;
+                break;
+            case RotateAxis.Up:
+                targetAxis = targetTrans.up;
+                break;
+            case RotateAxis.Right:
+                targetAxis = targetTrans.right;
+                break;
+        }
+        axis = Vector3.Cross(targetAxis, diff).normalized;
     }
     public void StepSim(float angleStep)
     {

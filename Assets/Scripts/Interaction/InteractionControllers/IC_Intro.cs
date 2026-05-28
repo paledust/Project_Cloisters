@@ -10,16 +10,22 @@ public class IC_Intro : IC_Basic
     [SerializeField] private MotionSetController motionController;
     [SerializeField] private PlanetCameraController camController;
     [SerializeField] private RotateAroundController rotateController;
+
 [Header("Interaction")]
     [SerializeField] private Clickable_ObjectRotator clickable_redPlanet;
     [SerializeField] private float alignTolrence = 10;
+
 [Header("Planet")]
     [SerializeField] private Transform surroundPlanet;
     [SerializeField] private Transform centerPlanet;
+
 [Header("End")]
     [SerializeField] private PlayableDirector endTimeline;
 
-    private Vector3 lastSurroundPlanetPos;
+[Header("Audio")]
+    [SerializeField] private string bgmIntroKey;
+    [SerializeField] private string bgmLoopKey;
+    [SerializeField] private BGMHandler bgmHandler;
 
     protected override void OnInteractionEnter()
     {
@@ -29,11 +35,13 @@ public class IC_Intro : IC_Basic
         rotateController.enabled = true;
         clickable_redPlanet.EnableHitbox();
         UI_Manager.Instance.ChangeCursorColor(true);
+        bgmHandler.PlayMusicIntroToLoop(bgmIntroKey, bgmLoopKey, 1f, 0f);
     }
     protected override void OnInteractionEnd()
     {
         this.enabled = false;
         clickable_redPlanet.DisableHitbox();
+        bgmHandler.FadeOutMusic(4f);
     }
     protected override void UnloadAssets()
     {
@@ -52,7 +60,6 @@ public class IC_Intro : IC_Basic
             EventHandler.Call_OnEndInteraction(this);
             StartCoroutine(coroutinePutPlanetToCenter());
         }
-        lastSurroundPlanetPos = surroundPlanet.position;
     }
     IEnumerator coroutinePutPlanetToCenter(){
         var rotatAround = surroundPlanet.GetComponent<RotateAround>();
@@ -65,6 +72,7 @@ public class IC_Intro : IC_Basic
 
         float leftAngle = targetAngle - currentAngle;
         float duration = leftAngle * 2 / currentAngularSpeed;
+        duration = Mathf.Min(2, duration);
 
         yield return new WaitForLoop(duration, (t) =>
         {

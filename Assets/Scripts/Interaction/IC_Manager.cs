@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using SimpleAudioSystem;
 using UnityEditor;
 using UnityEngine;
@@ -11,6 +10,7 @@ public class IC_Manager : MonoBehaviour
     [SerializeField] private IC_Basic[] interactionControllers;
 [Header("Game End")]
     [SerializeField] private AmbienceHandler ambienceHandler;
+    [SerializeField] private BGMHandler bgmHandler;
     [SerializeField] private string endSceneName;
     [SerializeField] private float endDelay = 3f;
 
@@ -64,6 +64,7 @@ public class IC_Manager : MonoBehaviour
     void Start()
     {
         ambienceHandler.Init(AudioManager.Instance);
+        bgmHandler.Init(AudioManager.Instance);
     #if UNITY_EDITOR
         if(startAtDebugIndex)
         {
@@ -106,6 +107,7 @@ public class IC_Manager : MonoBehaviour
                 StartCoroutine(CommonCoroutine.delayAction(()=>
                 {
                     ambienceHandler.CleanUp();
+                    bgmHandler.CleanUp();
                     PhysicDragManager.Instance.CleanUp();
                     GameManager.Instance.SwitchingScene(endSceneName);
                 }, endDelay));
@@ -168,7 +170,7 @@ public class IC_Manager : MonoBehaviour
             Debug.LogWarning("Scene is switching, cannot reset.");
             return;
         }
-        CleanUp();
+        CleanUpImmediately();
         GameManager.Instance.SwitchingScene("Intro");
     }
     public void RestartLevel()
@@ -178,7 +180,7 @@ public class IC_Manager : MonoBehaviour
             Debug.LogWarning("Scene is switching, cannot restart level.");
             return;
         }
-        CleanUp();
+        CleanUpImmediately();
         GameManager.Instance.RestartLevel();   
     }
 #endregion
@@ -195,7 +197,7 @@ public class IC_Manager : MonoBehaviour
         nextIndex = Mathf.Clamp(nextIndex, 0, interactionControllers.Length-1);
         LevelProgressionManager.Instance.SetProgress(nextIndex);
         EndInteraction(interactionControllers[interactionIndex]);
-        CleanUp();
+        CleanUpImmediately();
         GameManager.Instance.RestartLevel();
     }
     void Debug_Regress(InputAction.CallbackContext context)
@@ -209,7 +211,7 @@ public class IC_Manager : MonoBehaviour
         nextIndex = Mathf.Clamp(nextIndex, 0, interactionControllers.Length-1);
         LevelProgressionManager.Instance.SetProgress(nextIndex);
         EndInteraction(interactionControllers[interactionIndex]);
-        CleanUp();
+        CleanUpImmediately();
         GameManager.Instance.RestartLevel();
     }
     void Debug_RestartLevel(InputAction.CallbackContext callback){
@@ -220,7 +222,7 @@ public class IC_Manager : MonoBehaviour
         if(callback.ReadValueAsButton())
             GoBackToMainMenu();
     }
-    void CleanUp()
+    void CleanUpImmediately()
     {
         EventHandler.Call_OnFlushInput();
         foreach (var interController in interactionControllers)
@@ -235,6 +237,7 @@ public class IC_Manager : MonoBehaviour
             }
         }
         ambienceHandler.CleanUp();
+        bgmHandler.CleanUp();
         PhysicDragManager.Instance.CleanUp();
     }
 #endregion

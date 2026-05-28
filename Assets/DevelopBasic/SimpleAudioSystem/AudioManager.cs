@@ -43,25 +43,32 @@ namespace SimpleAudioSystem{
                 music_loop.Play();
             }
         }
+        public void PlayMusicDelayed(string audio_name, float delayed)
+        {
+            if(audio_name == string.Empty)
+                return;
+            music_loop.PlayDelayed(delayed);
+        }
         public void PlayMusic(string audio_name, bool startOver, float transitionTime, float volume = 1, bool forcePlay = false){
         //If no audio name, fade out the ambience
             if(audio_name == string.Empty){
                 FadeAudio(music_loop, 0, transitionTime, true);
                 current_music_name = string.Empty;
+                return;
             }
         //If the audio name is the same, only fade the volume to the target value
-            if(current_music_name==audio_name){
+            if(current_music_name == audio_name){
                 FadeAudio(music_loop, volume, transitionTime);
             }
             else{
                 if(current_music_name == string.Empty || !music_loop.isPlaying){
-                    music_loop.clip = audioInfo.GetAMBClipByName(audio_name);
+                    music_loop.clip = audioInfo.GetBGMClipByName(audio_name);
                     if(music_loop.clip==null){
                         Debug.LogWarning("No clip found, nothing will be done for ambient");
                         return;
                     }
-                    music_loop.volume = volume;
                     music_loop.Play();
+                    FadeAudio(music_loop, volume, transitionTime);
                 }
                 else{
                     if(music_loop.clip==null){
