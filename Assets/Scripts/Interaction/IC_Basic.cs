@@ -1,4 +1,5 @@
 using System;
+using Cinemachine;
 using UnityEngine;
 
 [AddComponentMenu("InteractionController")]
@@ -9,10 +10,23 @@ public abstract class IC_Basic : MonoBehaviour
     [SerializeField] protected Vector2 interact_rect;
     [SerializeField] protected float interact_depth;
 
+[Header("Music")]
+    [SerializeField] protected AmbienceHandler ambHandler;
+    [SerializeField] protected BGMHandler bgmHandler;
+    [SerializeField] protected string ambKey;
+    [SerializeField] protected string musKey;
+
     public bool m_isLoaded{get; private set;} = false;
     public bool m_isDone{get; private set;} = false;
     public bool m_isPlaying{get; private set;} = false;
 
+    public virtual void TL_FadeInSound(float crossFadeTime)
+    {
+        if(!string.IsNullOrEmpty(ambKey))
+            ambHandler.PlayAmbience(ambKey, 1, crossFadeTime);
+        if(!string.IsNullOrEmpty(musKey))
+            bgmHandler.PlayMusic(musKey, 1, crossFadeTime);
+    }
     public void Editor_LoadInteraction()
     {
         if(interactionAssetsGroup!=null) interactionAssetsGroup.SetActive(true);

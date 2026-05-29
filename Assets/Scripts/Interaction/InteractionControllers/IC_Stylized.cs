@@ -15,6 +15,10 @@ public class IC_Stylized : IC_Basic
         //Prepare to the next drum expand
         Extending,
     }
+    [SerializeField] private Vector2 ambFade = Vector2.one;
+    [SerializeField] private float finalAmbVolume = 0.2f;
+
+[Header("Stylized")]
     [SerializeField, ShowOnly] private StylizedState stylizedState;
 
     [Header("Script Control")]
@@ -37,11 +41,8 @@ public class IC_Stylized : IC_Basic
     [SerializeField] private int[] textShowOrder;
 
     [Header("Audio")]
-    [SerializeField] private string ambKey;
     [SerializeField] private string sfxEnd;
-    [SerializeField] private Vector2 ambFade = Vector2.one;
-    [SerializeField] private float finalAmbVolume = 0.2f;
-    [SerializeField] private AmbienceHandler ambienceHandler;
+
 
     private int textShowIndex = 0;
     private float introOffsetPlanetAngle;
@@ -84,7 +85,7 @@ public class IC_Stylized : IC_Basic
         EventHandler.E_OnBassChargeBeat += BassChargeBeatHandler;
 
         minAmbVolume = ambFade.x;
-        ambienceHandler.PlayAmbience(ambKey, 0.2f);
+        ambHandler.PlayAmbience(ambKey, 0.2f);
     }
     protected override void OnInteractionEnd()
     {
@@ -119,7 +120,7 @@ public class IC_Stylized : IC_Basic
         }
         if(!m_isDone)
         {
-            ambienceHandler.ChangeAmbienceVolume(Mathf.Lerp(minAmbVolume, ambFade.y, EasingFunc.Easing.QuadEaseIn(introExpandFactor)));
+            ambHandler.ChangeAmbienceVolume(Mathf.Lerp(minAmbVolume, ambFade.y, EasingFunc.Easing.QuadEaseIn(introExpandFactor)));
         }
         geoFragmentController.UpdateExpand(geoExpandFactor);
     }
@@ -190,17 +191,17 @@ public class IC_Stylized : IC_Basic
     IEnumerator coroutineFadeAmbToInitVolume(float delay)
     {
         yield return new WaitForSeconds(delay);
-        ambienceHandler.FadeAmbience(minAmbVolume, 2f);
+        ambHandler.FadeAmbience(minAmbVolume, 2f);
     }
     IEnumerator coroutineEnd(){
-        ambienceHandler.FadeAmbience(finalAmbVolume, 1f);
+        ambHandler.FadeAmbience(finalAmbVolume, 1f);
         yield return new WaitForSeconds(1.2f);
         drumController.QueueBeat(sfxEnd, 1f, geoTextController.PutTextTogether);
         yield return new WaitForSeconds(1.2f);
         geoTextController.PunchTextTogether();
         circleExplodeController.ExplodeFinal();
         yield return new WaitForSeconds(1.8f);
-        ambienceHandler.FadeOutAmbience(2f, true);
+        ambHandler.FadeOutAmbience(2f, true);
         tl_end.Play();
         yield return new WaitForSeconds(3.5f);
         EventHandler.Call_OnInteractionUnreachable(this);

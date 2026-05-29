@@ -1,11 +1,12 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 
 [AddComponentMenu("Interaction Controller/IC_Intro")]
 public class IC_Intro : IC_Basic
 {
+    [SerializeField] private string bgmIntroKey;
+    [SerializeField] private string bgmLoopKey;
 [Header("Controller")]
     [SerializeField] private MotionSetController motionController;
     [SerializeField] private PlanetCameraController camController;
@@ -22,11 +23,6 @@ public class IC_Intro : IC_Basic
 [Header("End")]
     [SerializeField] private PlayableDirector endTimeline;
 
-[Header("Audio")]
-    [SerializeField] private string bgmIntroKey;
-    [SerializeField] private string bgmLoopKey;
-    [SerializeField] private BGMHandler bgmHandler;
-
     protected override void OnInteractionEnter()
     {
         this.enabled = true;
@@ -35,7 +31,7 @@ public class IC_Intro : IC_Basic
         rotateController.enabled = true;
         clickable_redPlanet.EnableHitbox();
         UI_Manager.Instance.ChangeCursorColor(true);
-        bgmHandler.PlayMusicIntroToLoop(bgmIntroKey, bgmLoopKey, 1f, 0f);
+        bgmHandler.PlayMusic(bgmIntroKey, 1, 3f);
     }
     protected override void OnInteractionEnd()
     {
