@@ -13,6 +13,7 @@ public class IC_Meaningful : IC_Basic
         public char recieveChar;
         public Transform[] charPoses;
     }
+    [Header("Meaningful")]
     [SerializeField] private Clickable_ObjectRotator clickable_Mirror;
     [SerializeField] private List<TextShownData> textShownDatas;
 

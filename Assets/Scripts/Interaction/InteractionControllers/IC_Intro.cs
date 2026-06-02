@@ -5,8 +5,6 @@ using UnityEngine.Playables;
 [AddComponentMenu("Interaction Controller/IC_Intro")]
 public class IC_Intro : IC_Basic
 {
-    [SerializeField] private string bgmIntroKey;
-    [SerializeField] private string bgmLoopKey;
 [Header("Controller")]
     [SerializeField] private MotionSetController motionController;
     [SerializeField] private PlanetCameraController camController;
@@ -31,13 +29,11 @@ public class IC_Intro : IC_Basic
         rotateController.enabled = true;
         clickable_redPlanet.EnableHitbox();
         UI_Manager.Instance.ChangeCursorColor(true);
-        bgmHandler.PlayMusic(bgmIntroKey, 1, 3f);
     }
     protected override void OnInteractionEnd()
     {
         this.enabled = false;
         clickable_redPlanet.DisableHitbox();
-        bgmHandler.FadeOutMusic(4f);
     }
     protected override void UnloadAssets()
     {

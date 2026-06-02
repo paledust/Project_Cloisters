@@ -6,7 +6,7 @@ using UnityEngine.Audio;
 namespace SimpleAudioSystem{
     public class AudioManager : Singleton<AudioManager>
     {
-        private enum AudioType{BGM, AMB, SFX}
+        public enum AudioType{BGM, AMB, SFX}
         [SerializeField] private AudioInfo_SO audioInfo;
     [Header("Audio source")]
         [SerializeField] private AudioSource sfx_trigger;
@@ -263,22 +263,27 @@ namespace SimpleAudioSystem{
         }
         IEnumerator coroutineCrossFadeMusic(string from_clip, string to_clip, float targetVolume, bool startOver, float transitionTime){
             music_crossfading = true;
-
             yield return coroutineCrossFadeAudio(music_loop, from_clip, to_clip, targetVolume, startOver, transitionTime, AudioType.BGM);
             current_music_name = to_clip;
-
             music_crossfading = false;
         }
         IEnumerator coroutineCrossFadeAudio(AudioSource targetSource, string from_clip, string to_clip, float targetVolume, bool startOver, float transitionTime, AudioType audioType){
-            if(from_clip!=string.Empty){
-                StartCoroutine(coroutineFadeAudio(targetSource, 0, transitionTime));
+            int audioTime = targetSource.timeSamples;
+            if (from_clip != string.Empty)
+            {
+                AudioSource tempAudio = new GameObject($"[_Temp_{targetSource.name}]").AddComponent<AudioSource>();
+                Destroy(tempAudio.gameObject, transitionTime+0.1f); //Schedule an auto Destruction;
+                tempAudio.loop   = true;
+                tempAudio.timeSamples = targetSource.timeSamples;
+                tempAudio.volume = targetSource.volume;
+                tempAudio.outputAudioMixerGroup = targetSource.outputAudioMixerGroup;
+                tempAudio.loop   = targetSource.loop;
+                tempAudio.pitch  = targetSource.pitch;
+                tempAudio.clip   = targetSource.clip;
+                tempAudio.Play();
+                StartCoroutine(coroutineFadeAudio(tempAudio, 0, transitionTime));
             }
 
-            AudioSource tempAudio = new GameObject($"[_Temp_{targetSource.name}]").AddComponent<AudioSource>();
-            Destroy(tempAudio.gameObject, transitionTime+0.1f); //Schedule an auto Destruction;
-
-            tempAudio.volume = 0;
-            tempAudio.loop   = true;
         //Get Audio clip based on type
             AudioClip targetClip;
             switch(audioType){
@@ -297,17 +302,16 @@ namespace SimpleAudioSystem{
             }
 
         //Fade In Clip
-            tempAudio.clip   = targetClip;
-            if(!startOver) tempAudio.time   = targetSource.time;
-            tempAudio.outputAudioMixerGroup = targetSource.outputAudioMixerGroup;
-            tempAudio.Play();
-            yield return coroutineFadeAudio(tempAudio, targetVolume, transitionTime);
+            targetSource.clip = targetClip;
+            targetSource.volume = 0;
 
-        //Swap audio
-            targetSource.clip = tempAudio.clip;
-            targetSource.time = tempAudio.time;
-            targetSource.volume = tempAudio.volume;
+            if(startOver) 
+                targetSource.timeSamples = 0;
+            else 
+                targetSource.timeSamples = audioTime;
+
             targetSource.Play();
+            yield return coroutineFadeAudio(targetSource, targetVolume, transitionTime);
         }
         IEnumerator coroutineFadeAudio(AudioSource source, float targetVolume, float transition, bool StopOnFadeOut = false){
             float initVolume = source.volume;

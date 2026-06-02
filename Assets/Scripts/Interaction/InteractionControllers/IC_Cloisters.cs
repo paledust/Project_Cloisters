@@ -4,6 +4,7 @@ using UnityEngine.Playables;
 
 public class IC_Cloisters : IC_Basic
 {
+    [Header("Cloisters")]
     [SerializeField] private Clickable_CloisterSphere heroSphere;
     
     [Header("Main Feedback")]

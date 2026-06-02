@@ -124,6 +124,7 @@ MonoBehaviour:
   angularSpeedThreshold: 20
   angularSpeedToVolume: 0.005
   audioSource: {fileID: 8419376207248997928}
+  volumeScale: 1
   volumeLerpSpeed: 2
   sfxRotating: sfx_shine_loop_02
 --- !u!1 &6235808070743501217
@@ -199,7 +200,8 @@ AudioSource:
   m_GameObject: {fileID: 6376730306153790866}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: f6c02be646bcea74fbaf33509a868ee4,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 0

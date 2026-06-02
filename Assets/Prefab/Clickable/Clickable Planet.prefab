@@ -86,7 +86,10 @@ MonoBehaviour:
   useSpring: 0
   springFactor: 2
   audioSource: {fileID: 39528651396116294}
-  rotateSound: sfx_spin
+  sfxSpin: 
+  angularSpeedToVolume: 0.5
+  angularSpeedToPitch: 0.5
+  maxAudioSpeed: 100
   rotateSoundInterval: 0.5
   rotateSoundPitchRange: 0.2
 --- !u!82 &39528651396116294
@@ -98,7 +101,8 @@ AudioSource:
   m_GameObject: {fileID: 4167929499371950569}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: f6c02be646bcea74fbaf33509a868ee4,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1

@@ -1,10 +1,8 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using EasingFunc;
 using TMPro;
-using UnityEngine.Rendering;
 
 public static class CommonCoroutine{
     public static IEnumerator delayAction(Action action, float delay){

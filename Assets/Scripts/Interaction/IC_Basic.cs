@@ -16,17 +16,13 @@ public abstract class IC_Basic : MonoBehaviour
     [SerializeField] protected string ambKey;
     [SerializeField] protected string musKey;
 
+    private bool m_hasMusicStarted = false;
+
     public bool m_isLoaded{get; private set;} = false;
     public bool m_isDone{get; private set;} = false;
     public bool m_isPlaying{get; private set;} = false;
 
-    public virtual void TL_FadeInSound(float crossFadeTime)
-    {
-        if(!string.IsNullOrEmpty(ambKey))
-            ambHandler.PlayAmbience(ambKey, 1, crossFadeTime);
-        if(!string.IsNullOrEmpty(musKey))
-            bgmHandler.PlayMusic(musKey, 1, crossFadeTime);
-    }
+    public virtual void TL_FadeInSound(float crossFadeTime) => FocusMusic(crossFadeTime);
     public void Editor_LoadInteraction()
     {
         if(interactionAssetsGroup!=null) interactionAssetsGroup.SetActive(true);
@@ -43,6 +39,7 @@ public abstract class IC_Basic : MonoBehaviour
     public void EnterInteraction(){
         m_isPlaying = true;
         OnInteractionEnter();
+        FocusMusic(1f);
     }
     public void ExitInteraction(){
         OnInteractionEnd();
@@ -54,7 +51,27 @@ public abstract class IC_Basic : MonoBehaviour
         if(interactionAssetsGroup!=null) interactionAssetsGroup.SetActive(false);
         UnloadAssets();
     }
-
+    void FocusMusic(float transition)
+    {
+        if(m_hasMusicStarted) 
+            return;
+            
+        m_hasMusicStarted = true;
+        if(!string.IsNullOrEmpty(ambKey))
+        {
+            if(ambKey == "{stop}")
+                ambHandler.FadeOutAmbience(1);
+            else
+                ambHandler.PlayAmbience(ambKey, 1, transition);
+        }
+        if(!string.IsNullOrEmpty(musKey))
+        {
+            if(musKey == "{stop}")
+                bgmHandler.FadeOutMusic(1);
+            else
+                bgmHandler.PlayMusic(musKey, 1, transition);
+        }
+    }
 //When loading resources
     protected virtual void LoadAssets() { m_isLoaded = true; }
 //When unloading resources

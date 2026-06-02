@@ -13,8 +13,6 @@ MonoBehaviour:
   m_Name: AudioInfo_SO
   m_EditorClassIdentifier: 
   bgm_info_list:
-  - audio_name: bgm_intro_intro
-    audio_clip: {fileID: 8300000, guid: 9f5df06827714114abcbf8ccdaebf503, type: 3}
   - audio_name: bgm_intro_loop
     audio_clip: {fileID: 8300000, guid: f2dc2c624d9a5e34483b58c99b276a9c, type: 3}
   - audio_name: bgm_narrative
@@ -69,6 +67,12 @@ MonoBehaviour:
     audio_clip: {fileID: 8300000, guid: b43982f0d8763fd42b02f9d5189e8870, type: 3}
   - audio_name: sfx_pinball_upgrade
     audio_clip: {fileID: 8300000, guid: 2a63615f6a73278459c1cceb41eb3e49, type: 3}
+  - audio_name: foley_swoosh_extra_light
+    audio_clip: {fileID: 8300000, guid: 28aaede33a167b540810b339ed089adc, type: 3}
+  - audio_name: foley_swoosh_heavy
+    audio_clip: {fileID: 8300000, guid: 3d7b5ed5d2165e94c9646e59757e377b, type: 3}
+  - audio_name: foley_swoosh_light
+    audio_clip: {fileID: 8300000, guid: 179073997d0da1e4484f851772f02fb5, type: 3}
   sfx_group_info_list:
   - audio_group_name: group_click
     audioClips:

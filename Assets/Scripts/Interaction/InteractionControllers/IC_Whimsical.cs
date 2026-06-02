@@ -5,6 +5,7 @@ using UnityEngine.Playables;
 
 public class IC_Whimsical : IC_Basic
 {
+    [Header("Whimsical")]
     [SerializeField] private Clickable_ObjectRotator crystal;
     [SerializeField] private WhimsicalTextController textController;
     [SerializeField] private int count = 0;

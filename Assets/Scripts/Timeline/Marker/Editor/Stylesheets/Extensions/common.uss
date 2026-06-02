@@ -23,11 +23,11 @@ NextMiniGameMarker:hover:focus:checked
     background-image:resource("Assets/Scripts/Timeline/Marker/Editor/Icon/SkipPoint_highlight.png");
 }
 
-AmbientFadeMarker{
+AudioPlayMarker{
     width:18px;
     height:18px;
     background-image:resource("Assets/Scripts/Timeline/Marker/Editor/Icon/audiomarker_normal.png");
 }
-AmbientFadeMarker:hover:focus:checked{
+AudioPlayMarker:hover:focus:checked{
     background-image:resource("Assets/Scripts/Timeline/Marker/Editor/Icon/audiomarker_focus.png");
 }
