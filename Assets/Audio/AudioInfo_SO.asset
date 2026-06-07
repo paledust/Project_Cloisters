@@ -16,12 +16,20 @@ MonoBehaviour:
   - audio_name: bgm_intro_loop
     audio_clip: {fileID: 8300000, guid: f2dc2c624d9a5e34483b58c99b276a9c, type: 3}
   - audio_name: bgm_narrative
-    audio_clip: {fileID: 8300000, guid: 1c82855b5be286d4ebbb8893f2bce7fb, type: 3}
+    audio_clip: {fileID: 8300000, guid: 807e599bf91f3bf40ad8db1f63c2f169, type: 3}
+  - audio_name: bgm_meaningful
+    audio_clip: {fileID: 8300000, guid: 140fa4e4f5a233141a739b91746abe96, type: 3}
+  - audio_name: bgm_whimsical
+    audio_clip: {fileID: 8300000, guid: 38c2871d9b6b8bd48b663c0cc266c413, type: 3}
+  - audio_name: bgm_experimental
+    audio_clip: {fileID: 8300000, guid: 299c4ad350fff71478fdd8188b6cbf8f, type: 3}
   amb_info_list:
   - audio_name: amb_jazz_riff_105
     audio_clip: {fileID: 8300000, guid: e3a837595d0321b44aa25384c7e08617, type: 3}
   - audio_name: amb_roomtone
     audio_clip: {fileID: 8300000, guid: 53fd426ade19a444e997152438547367, type: 3}
+  - audio_name: amb_stylized
+    audio_clip: {fileID: 8300000, guid: b871c41187168ea42ba4c1ad3e0cd0e1, type: 3}
   sfx_info_list:
   - audio_name: sfx_jazz_break
     audio_clip: {fileID: 8300000, guid: 27095b74a1c688d4482456318f99de6f, type: 3}
@@ -47,14 +55,8 @@ MonoBehaviour:
     audio_clip: {fileID: 8300000, guid: afcd062d63dc3f44cb7fa7180c253e35, type: 3}
   - audio_name: sfx_magic_wave
     audio_clip: {fileID: 8300000, guid: 1abc9507dd09d4a4d868b2bf55d4e995, type: 3}
-  - audio_name: sfx_shine_loop_01
-    audio_clip: {fileID: 8300000, guid: 787a4f429fea7ae479bb9770760b6c0c, type: 3}
-  - audio_name: sfx_shine_loop_02
-    audio_clip: {fileID: 8300000, guid: 94652b4da96cddf4cb97ae08a780fc76, type: 3}
   - audio_name: sfx_twinkle_loop
     audio_clip: {fileID: 8300000, guid: 13a42336e64d80a4f982d2681df63005, type: 3}
-  - audio_name: foley_flickering
-    audio_clip: {fileID: 8300000, guid: ad7a5798cc3c76044977c4eb7f296566, type: 3}
   - audio_name: sfx_pinball_collect
     audio_clip: {fileID: 8300000, guid: 5bda5f383795aaf4bba3499b058424ed, type: 3}
   - audio_name: sfx_pinball_dead
@@ -67,6 +69,12 @@ MonoBehaviour:
     audio_clip: {fileID: 8300000, guid: b43982f0d8763fd42b02f9d5189e8870, type: 3}
   - audio_name: sfx_pinball_upgrade
     audio_clip: {fileID: 8300000, guid: 2a63615f6a73278459c1cceb41eb3e49, type: 3}
+  - audio_name: sfx_harp_long
+    audio_clip: {fileID: 8300000, guid: 21accee0a86862d48b34d2165296e3ba, type: 3}
+  - audio_name: sfx_harp_loop
+    audio_clip: {fileID: 8300000, guid: 5306f9cd2f818db4ebcdd1551227828a, type: 3}
+  - audio_name: sfx_rock_moving_loop
+    audio_clip: {fileID: 8300000, guid: b620bdb948a26164da176173f629c8e0, type: 3}
   - audio_name: foley_swoosh_extra_light
     audio_clip: {fileID: 8300000, guid: 28aaede33a167b540810b339ed089adc, type: 3}
   - audio_name: foley_swoosh_heavy
@@ -114,29 +122,29 @@ MonoBehaviour:
     - {fileID: 8300000, guid: ff87fbb7ace859545bbebf50ac1af01d, type: 3}
   - audio_group_name: group_bubble
     audioClips:
-    - {fileID: 8300000, guid: 9e522907a06d5d041bcd700029e4ccf2, type: 3}
+    - {fileID: 8300000, guid: f6fca53aa47bff64387ae741cf4100d7, type: 3}
     - {fileID: 8300000, guid: 9e80fa93d30f7f2468fa92cc1900a7d2, type: 3}
     - {fileID: 8300000, guid: 7374019023e0fbd469b8dfe50c16b17c, type: 3}
+    - {fileID: 8300000, guid: 9e522907a06d5d041bcd700029e4ccf2, type: 3}
     - {fileID: 8300000, guid: d31d7fc93ae859f4a8bc99fb237d4e7d, type: 3}
-    - {fileID: 8300000, guid: f6fca53aa47bff64387ae741cf4100d7, type: 3}
   - audio_group_name: group_chime
     audioClips:
-    - {fileID: 8300000, guid: 8e1a010935b13054ca6c1aee320bfd98, type: 3}
-    - {fileID: 8300000, guid: 0d34aaa88b6d25e45a317b88319a2f29, type: 3}
     - {fileID: 8300000, guid: e7cce16d68a25fa478e4bda543490230, type: 3}
+    - {fileID: 8300000, guid: 0d34aaa88b6d25e45a317b88319a2f29, type: 3}
     - {fileID: 8300000, guid: ab944cb4fbe1d2a49a3c4762498ef187, type: 3}
+    - {fileID: 8300000, guid: 8e1a010935b13054ca6c1aee320bfd98, type: 3}
   - audio_group_name: group_shine
     audioClips:
+    - {fileID: 8300000, guid: ab81a3be454e7814db7dfaf062a1d3a3, type: 3}
     - {fileID: 8300000, guid: 5699396be39ad1a459e226489636afc0, type: 3}
     - {fileID: 8300000, guid: 0210d2c33716c7d4a9ed341446771cae, type: 3}
     - {fileID: 8300000, guid: de3a28f8cf429f545bca110374361810, type: 3}
-    - {fileID: 8300000, guid: ab81a3be454e7814db7dfaf062a1d3a3, type: 3}
   - audio_group_name: group_magic_woosh
     audioClips:
+    - {fileID: 8300000, guid: 366c4d6c7f7499446b391fc66727b051, type: 3}
+    - {fileID: 8300000, guid: b5cef951ca970b4489d2f704950649ad, type: 3}
     - {fileID: 8300000, guid: 0857448eeeaa059459cd2051e7d53bbc, type: 3}
     - {fileID: 8300000, guid: bfb51f0ed11b242418d9d92493ef6798, type: 3}
-    - {fileID: 8300000, guid: b5cef951ca970b4489d2f704950649ad, type: 3}
-    - {fileID: 8300000, guid: 366c4d6c7f7499446b391fc66727b051, type: 3}
   - audio_group_name: group_twinkle
     audioClips:
     - {fileID: 8300000, guid: 35f62f842fad622498f2652d57a163eb, type: 3}
@@ -169,3 +177,9 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 37ec855544e03714b876e72654c998fc, type: 3}
     - {fileID: 8300000, guid: c13976fd3495acd459575f2bcbaa5215, type: 3}
     - {fileID: 8300000, guid: bb7bcfeae18a965468d4a1edf2427942, type: 3}
+  - audio_group_name: group_rock_moving
+    audioClips:
+    - {fileID: 8300000, guid: 5d4810935f955c04bb4be50e05c44b7c, type: 3}
+    - {fileID: 8300000, guid: a07ef1839f3dfca4d8a307d71253a266, type: 3}
+    - {fileID: 8300000, guid: ae485331cb4dc46439b1f9cc849f6e8e, type: 3}
+    - {fileID: 8300000, guid: 03734c7c513a2554699b6b92522350d1, type: 3}

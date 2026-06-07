@@ -10,12 +10,14 @@ public class IC_Cloisters : IC_Basic
     [Header("Main Feedback")]
     [SerializeField] private PerRendererCloistersDissolve shineDissolve;
     [SerializeField] private float threasholdRotatorSpeed;
-    [SerializeField] private float grawingSpeed = 1f;
+    [SerializeField] private float maxProgressSpeed = 1f;
+    [SerializeField] private float progressLerp = 10f;
     
     [Header("Totem")]
     [SerializeField] private PlayableDirector cloistersTimeline;
-    [SerializeField, ShowOnly] private float progress;
 
+    private float progress;
+    private float progressSpeed;
     private float duration;
 
     protected override void OnInteractionEnter()
@@ -35,13 +37,16 @@ public class IC_Cloisters : IC_Basic
     {
         if(heroSphere.m_angularSpeed > threasholdRotatorSpeed)
         {
-            progress += Time.deltaTime * grawingSpeed;
+            progressSpeed = Mathf.Lerp(progressSpeed, maxProgressSpeed, Time.deltaTime * progressLerp);
             shineDissolve.dissolveRadius = Mathf.Lerp(shineDissolve.dissolveRadius, 1, Time.deltaTime);
         }
         else
         {
+            progressSpeed = Mathf.Lerp(progressSpeed, 0, Time.deltaTime * progressLerp);
             shineDissolve.dissolveRadius = Mathf.Lerp(shineDissolve.dissolveRadius, 0, Time.deltaTime);
         }
+
+        progress += Time.deltaTime * progressSpeed;
         cloistersTimeline.playableGraph.GetRootPlayable(0).SetTime(progress);
     }
     public void TL_Signal_AutoPlay()

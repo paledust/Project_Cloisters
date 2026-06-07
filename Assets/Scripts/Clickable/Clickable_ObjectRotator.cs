@@ -1,9 +1,13 @@
 using System.Collections;
-using Cinemachine;
 using SimpleAudioSystem;
 using UnityEngine;
 
-public class Clickable_ObjectRotator : Basic_Clickable
+public interface IRotator
+{
+    public float m_angularSpeed{get;}
+}
+
+public class Clickable_ObjectRotator : Basic_Clickable, IRotator
 {
     [SerializeField] private Transform pitchRotationTrans;
     [SerializeField] private Transform yawRotationTrans;
@@ -87,7 +91,6 @@ public class Clickable_ObjectRotator : Basic_Clickable
                 AudioManager.Instance.PlaySFXWithPitch(audioSource, sfxSpin, volume, Mathf.Lerp(1, 1+rotateSoundPitchRange, absSpeed/maxAngularSpeed * angularSpeedToPitch));
             }
         }
-
     }
     void FixedUpdate(){
         if(useSpring)m_angularSpeed += (m_accumulateYaw-zeroSpringAngle)*springFactor*Time.fixedDeltaTime;

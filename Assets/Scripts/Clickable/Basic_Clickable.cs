@@ -5,6 +5,7 @@ public abstract class Basic_Clickable : MonoBehaviour
 {
 [Header("Clickable Basic")]
     public string sfx_clickSound = "group_click";
+    [Range(0, 1)] public float clickVolume = 1f;
     [SerializeField] protected Collider hitbox;
     [SerializeField] protected bool disableClick = false; //If true, player cannot click on object, but hover still works
     

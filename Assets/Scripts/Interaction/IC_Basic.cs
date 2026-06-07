@@ -1,5 +1,3 @@
-using System;
-using Cinemachine;
 using UnityEngine;
 
 [AddComponentMenu("InteractionController")]
@@ -12,7 +10,9 @@ public abstract class IC_Basic : MonoBehaviour
 
 [Header("Music")]
     [SerializeField] protected AmbienceHandler ambHandler;
+    [SerializeField] protected float ambienceVolume = 1f;
     [SerializeField] protected BGMHandler bgmHandler;
+    [SerializeField] protected float musicVolume = 1f;
     [SerializeField] protected string ambKey;
     [SerializeField] protected string musKey;
 
@@ -62,14 +62,14 @@ public abstract class IC_Basic : MonoBehaviour
             if(ambKey == "{stop}")
                 ambHandler.FadeOutAmbience(1);
             else
-                ambHandler.PlayAmbience(ambKey, 1, transition);
+                ambHandler.PlayAmbience(ambKey, transition, ambienceVolume);
         }
         if(!string.IsNullOrEmpty(musKey))
         {
             if(musKey == "{stop}")
                 bgmHandler.FadeOutMusic(1);
             else
-                bgmHandler.PlayMusic(musKey, 1, transition);
+                bgmHandler.PlayMusic(musKey, transition, musicVolume);
         }
     }
 //When loading resources

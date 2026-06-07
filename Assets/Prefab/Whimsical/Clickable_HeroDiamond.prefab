@@ -124,9 +124,9 @@ MonoBehaviour:
   angularSpeedThreshold: 20
   angularSpeedToVolume: 0.005
   audioSource: {fileID: 8419376207248997928}
-  volumeScale: 1
+  volumeScale: 0.5
   volumeLerpSpeed: 2
-  sfxRotating: sfx_shine_loop_02
+  sfxRotating: sfx_harp_loop
 --- !u!1 &6235808070743501217
 GameObject:
   m_ObjectHideFlags: 0

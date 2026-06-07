@@ -1,20 +1,22 @@
 using System.Collections;
 using UnityEngine;
 
-public class Clickable_CloisterSphere : Basic_Clickable
+public class Clickable_CloisterSphere : Basic_Clickable, IRotator
 {
     [SerializeField] private Transform rotateTrans;
 [Header("Control")]
     [SerializeField] private float dragStrength = 1f;
     [SerializeField] private float maxAngularSpeed = 200f;
+    [SerializeField] private float maxNegativeAngularSpeed = 50f;
+
 [Header("Resize")]
     [SerializeField] private float resizeFactor = 1.02f;
     [SerializeField] private float resizeTime = 0.4f;
     [SerializeField] private float backTime = 0.5f;
+
 [Header("AngularSpeed Lerp")]
     [SerializeField] private float controllingAngularLerp = 10f;
     [SerializeField] private float releaseAngularLerp = 1f;
-
     public float m_angularSpeed{get; private set;}
 
     private PlayerController playerController;
@@ -28,7 +30,7 @@ public class Clickable_CloisterSphere : Basic_Clickable
     {
         if(playerController!=null){
             Vector2 delta = playerController.PointerDelta;
-            m_angularSpeed = Mathf.Lerp(m_angularSpeed, Mathf.Clamp(delta.x * dragStrength, -maxAngularSpeed, maxAngularSpeed), Time.deltaTime*controllingAngularLerp);
+            m_angularSpeed = Mathf.Lerp(m_angularSpeed, Mathf.Clamp(delta.x * dragStrength, -maxNegativeAngularSpeed, maxAngularSpeed), Time.deltaTime*controllingAngularLerp);
         }
         else{
             m_angularSpeed = Mathf.Lerp(m_angularSpeed, 0, Time.deltaTime*releaseAngularLerp);
