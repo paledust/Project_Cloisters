@@ -560,10 +560,10 @@ MonoBehaviour:
   m_Time: 3.5833333333333335
   audioType: 2
   audioKey: group_chime_subtle
-  volume: 0
+  volume: 1
   transitionTime: 1
   retroactive: 0
-  emitOnce: 0
+  emitOnce: 1
 --- !u!114 &-1660659624343285485
 MonoBehaviour:
   m_ObjectHideFlags: 1
