@@ -30,6 +30,8 @@ MonoBehaviour:
     audio_clip: {fileID: 8300000, guid: 53fd426ade19a444e997152438547367, type: 3}
   - audio_name: amb_stylized
     audio_clip: {fileID: 8300000, guid: b871c41187168ea42ba4c1ad3e0cd0e1, type: 3}
+  - audio_name: amb_narrative
+    audio_clip: {fileID: 8300000, guid: 53a89143f96273040a0540b97b253666, type: 3}
   sfx_info_list:
   - audio_name: sfx_jazz_break
     audio_clip: {fileID: 8300000, guid: 27095b74a1c688d4482456318f99de6f, type: 3}
@@ -133,6 +135,10 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 0d34aaa88b6d25e45a317b88319a2f29, type: 3}
     - {fileID: 8300000, guid: ab944cb4fbe1d2a49a3c4762498ef187, type: 3}
     - {fileID: 8300000, guid: 8e1a010935b13054ca6c1aee320bfd98, type: 3}
+  - audio_group_name: group_chime_subtle
+    audioClips:
+    - {fileID: 8300000, guid: 645fcb30702f6dd46928e10a07e804ec, type: 3}
+    - {fileID: 8300000, guid: 6f61d5c1251361546af19a2de7cb9797, type: 3}
   - audio_group_name: group_shine
     audioClips:
     - {fileID: 8300000, guid: ab81a3be454e7814db7dfaf062a1d3a3, type: 3}
@@ -179,7 +185,7 @@ MonoBehaviour:
     - {fileID: 8300000, guid: bb7bcfeae18a965468d4a1edf2427942, type: 3}
   - audio_group_name: group_rock_moving
     audioClips:
-    - {fileID: 8300000, guid: 5d4810935f955c04bb4be50e05c44b7c, type: 3}
-    - {fileID: 8300000, guid: a07ef1839f3dfca4d8a307d71253a266, type: 3}
-    - {fileID: 8300000, guid: ae485331cb4dc46439b1f9cc849f6e8e, type: 3}
     - {fileID: 8300000, guid: 03734c7c513a2554699b6b92522350d1, type: 3}
+    - {fileID: 8300000, guid: ae485331cb4dc46439b1f9cc849f6e8e, type: 3}
+    - {fileID: 8300000, guid: a07ef1839f3dfca4d8a307d71253a266, type: 3}
+    - {fileID: 8300000, guid: 5d4810935f955c04bb4be50e05c44b7c, type: 3}
