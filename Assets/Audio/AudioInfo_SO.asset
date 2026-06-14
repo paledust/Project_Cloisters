@@ -144,18 +144,18 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 44b5c4026a6e33e4dacccd5cd4188707, type: 3}
   - audio_group_name: group_bubble
     audioClips:
-    - {fileID: 8300000, guid: cebccb40ebb3ad648b50a8db56f6d8e1, type: 3}
     - {fileID: 8300000, guid: fa66fbf2ef101d148818422c3410fd1b, type: 3}
-    - {fileID: 8300000, guid: 2838731eed60d5e4fbd8776928387163, type: 3}
     - {fileID: 8300000, guid: 125d167a9c19e6a4ba9fdbaa627645ff, type: 3}
+    - {fileID: 8300000, guid: 2838731eed60d5e4fbd8776928387163, type: 3}
+    - {fileID: 8300000, guid: cebccb40ebb3ad648b50a8db56f6d8e1, type: 3}
   - audio_group_name: group_water_swish
     audioClips:
-    - {fileID: 8300000, guid: d92913d6032ed854aaece5719832df6e, type: 3}
+    - {fileID: 8300000, guid: e081770d838d44843af84a435afee6e4, type: 3}
     - {fileID: 8300000, guid: 504054c9351e4b74187f127debf8cda5, type: 3}
+    - {fileID: 8300000, guid: d92913d6032ed854aaece5719832df6e, type: 3}
+    - {fileID: 8300000, guid: d7380c9e569938049a71cc032b7c7d57, type: 3}
     - {fileID: 8300000, guid: 7bba682204da8054c8c3929cfb498ae4, type: 3}
     - {fileID: 8300000, guid: 2672f563bc83abb4c8bb7ca1af582c6b, type: 3}
-    - {fileID: 8300000, guid: d7380c9e569938049a71cc032b7c7d57, type: 3}
-    - {fileID: 8300000, guid: e081770d838d44843af84a435afee6e4, type: 3}
   - audio_group_name: group_chime
     audioClips:
     - {fileID: 8300000, guid: e7cce16d68a25fa478e4bda543490230, type: 3}
@@ -229,3 +229,9 @@ MonoBehaviour:
     - {fileID: 8300000, guid: beaf1d269af722a4a9d11edebb4c76c9, type: 3}
     - {fileID: 8300000, guid: a4f61a37e6e7fc848a3e99c21299c271, type: 3}
     - {fileID: 8300000, guid: 0ad288ff9f0860547b60f5f479d95e9c, type: 3}
+  - audio_group_name: group_star
+    audioClips:
+    - {fileID: 8300000, guid: 1cb11457566c1fa45bbd58f4e9eac0bb, type: 3}
+    - {fileID: 8300000, guid: fb0e078095207df468a7260d87d25401, type: 3}
+    - {fileID: 8300000, guid: 6fa5b5927eb122645a0b77613e356354, type: 3}
+    - {fileID: 8300000, guid: e2fe19893ca639f478a482a831ee90c9, type: 3}

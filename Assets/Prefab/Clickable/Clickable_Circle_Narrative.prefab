@@ -15413,6 +15413,11 @@ PrefabInstance:
       objectReference: {fileID: 5412969083001241458}
     - target: {fileID: 4337985783848230491, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
         type: 3}
+      propertyPath: sfx_clickSound
+      value: group_water_swish
+      objectReference: {fileID: 0}
+    - target: {fileID: 4337985783848230491, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
+        type: 3}
       propertyPath: narrativeCircleGlow
       value: 
       objectReference: {fileID: 4102565553141834639}
