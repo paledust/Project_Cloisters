@@ -16,7 +16,7 @@ public class IC_Stylized : IC_Basic
     }
 
 
-[Header("Stylized")]
+    [Header("Stylized")]
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private Vector2 musicFade = Vector2.one;
     [SerializeField] private float finalMusicVolume = 0.2f;
@@ -38,12 +38,14 @@ public class IC_Stylized : IC_Basic
     [SerializeField] private float expandRange = 1800;
     [SerializeField] private float geoExpandDrumFactor = 0.65f;
 
+
     [Header("Text Order")]
     [SerializeField] private int[] textShowOrder;
 
     [Header("Audio")]
     [SerializeField] private string sfxEnd;
-
+    [SerializeField] private float introMinVolume;
+    [SerializeField] private float introMaxVolume;
 
     private int textShowIndex = 0;
     private float introOffsetPlanetAngle;
@@ -123,7 +125,7 @@ public class IC_Stylized : IC_Basic
                 break;
         }
         if(!m_isDone)
-            musicSource.volume = Mathf.Lerp(minAmbVolume, musicFade.y, EasingFunc.Easing.QuadEaseIn(introExpandFactor));
+            musicSource.volume = Mathf.Lerp(IsIntro?introMinVolume:minAmbVolume, IsIntro?introMaxVolume:musicFade.y, EasingFunc.Easing.QuadEaseIn(introExpandFactor));
         geoFragmentController.UpdateExpand(geoExpandFactor);
     }
     #region State Change
@@ -201,7 +203,7 @@ public class IC_Stylized : IC_Basic
     IEnumerator coroutineEnd(){
         musicSource.DOFade(finalMusicVolume, 1f);
         yield return new WaitForSeconds(1.2f);
-        drumController.QueueBeat(sfxEnd, 1f, geoTextController.PutTextTogether);
+        drumController.QueueBeat(sfxEnd, 1f, geoTextController.PutTextTogether, false);
         yield return new WaitForSeconds(1.2f);
         geoTextController.PunchTextTogether();
         circleExplodeController.ExplodeFinal();

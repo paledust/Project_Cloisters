@@ -47,10 +47,10 @@ public class Hoverable_DrumInteraction : MonoBehaviour
     [SerializeField] private Color chargeHeroColor;
     [SerializeField] private Color normalHeroColor;
     [SerializeField] private float glowMaxAlpha = 0.5f;
+    
     [Header("Audio")]
     [SerializeField] private int prepBeat = 25;
     [SerializeField] private string sfxCharge;
-    [SerializeField] private AudioSource m_audio;
     private Color chargeColor;
 
     private Basic_Clickable self;
@@ -152,7 +152,7 @@ public class Hoverable_DrumInteraction : MonoBehaviour
                     heroSphereRoot.DOKill();
                     heroSphereRoot.DOScale(Vector3.one*1.5f, 0.3f).SetEase(Ease.OutBack);
 
-                    AudioManager.Instance.PlaySFX(m_audio, sfxCharge, 1f);
+                    AudioManager.Instance.PlaySFX(sfxCharge, 1f);
                 }
             }
         }

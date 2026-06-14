@@ -15398,6 +15398,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4337985783848230491, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
         type: 3}
+      propertyPath: clickVolume
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4337985783848230491, guid: c221e6f97fdc78f4db73057f2ae9b5b3,
+        type: 3}
       propertyPath: followFactor
       value: 15
       objectReference: {fileID: 0}

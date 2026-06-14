@@ -1,9 +1,9 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SimpleAudioSystem{
+namespace SimpleAudioSystem
+{
     [CreateAssetMenu(fileName = "AudioInfo_SO", menuName = "DevelopBasic/AudioSystem/AudioInfo_SO")]
     public class AudioInfo_SO : ScriptableObject
     {
