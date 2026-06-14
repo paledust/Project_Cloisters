@@ -214,17 +214,17 @@ namespace SimpleAudioSystem{
     #endregion
         
         #region PCM Time
-        public double GetAmbiencePCMTime()
+        public double GetAudioPCMTime(AudioSource audioSource)
         {
-            if(ambience_loop.clip == null) 
+            if(audioSource.clip == null) 
                 return 0;
-            return ambience_loop.timeSamples / (double)ambience_loop.clip.frequency;
+            return audioSource.timeSamples / (double)audioSource.clip.frequency;
         }
-        public double GetAmbienceLength()
+        public double GetAmbienceLength(AudioSource audioSource)
         {
-            if(ambience_loop.clip == null) 
+            if(audioSource.clip == null) 
                 return 0;
-            return ambience_loop.clip.length;
+            return audioSource.clip.length;
         }
 
         #endregion

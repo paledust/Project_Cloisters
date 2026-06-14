@@ -1,6 +1,5 @@
 using System.Collections;
 using DG.Tweening;
-using SimpleAudioSystem;
 using UnityEngine;
 
 public class CircleExplodeController : MonoBehaviour
@@ -33,7 +32,7 @@ public class CircleExplodeController : MonoBehaviour
         exploded = true;
         expandController.enabled = false;
         StartCoroutine(coroutineExplode(1f));
-        StylizedDrumController.Instance.QueueBeat(explodeSFX, 1);
+        StylizedDrumController.Instance.QueueBeat(explodeSFX, 1, null, false);
         clickable_Planet.transform.DOScale(Vector3.one * 0.375f, 0.1f).SetEase(Ease.OutQuad).OnComplete(() =>
         {
             clickable_Planet.transform.DOScale(Vector3.one*0.3f, 0.3f).SetEase(Ease.InOutQuad);

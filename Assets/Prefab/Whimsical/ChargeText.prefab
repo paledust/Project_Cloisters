@@ -271,9 +271,11 @@ MonoBehaviour:
   perRendererColor: {fileID: 509792960820809809}
   blinkColor: {r: 2, g: 2, b: 2, a: 1}
   birghtColor: {r: 2.9960785, g: 2.9960785, b: 2.9960785, a: 1}
-  sfxReveal: group_magic_woosh
+  sfxReveal: group_harp_short
   sfxCharge: sfx_twinkle_loop
-  chargeVolume: 0.4
+  chargeVolume: 0.2
+  chargeLerpSpeed: 5
+  chargeFadeSpeed: 3
   sfxChargeLoopSource: {fileID: 8328857745601811453}
 --- !u!114 &509792960820809809
 MonoBehaviour:
@@ -302,7 +304,7 @@ AudioSource:
   m_GameObject: {fileID: 8554373234669498874}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24300002, guid: f6c02be646bcea74fbaf33509a868ee4,
+  OutputAudioMixerGroup: {fileID: 3946455334239931675, guid: f6c02be646bcea74fbaf33509a868ee4,
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0

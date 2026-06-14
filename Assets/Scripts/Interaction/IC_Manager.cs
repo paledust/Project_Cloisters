@@ -109,7 +109,7 @@ public class IC_Manager : MonoBehaviour
                     ambienceHandler.CleanUp();
                     bgmHandler.CleanUp();
                     PhysicDragManager.Instance.CleanUp();
-                    GameManager.Instance.SwitchingScene(endSceneName);
+                    GameManager.Instance.SwitchingScene(endSceneName, 2);
                 }, endDelay));
             }
             LevelProgressionManager.Instance.SetProgress(interactionIndex);

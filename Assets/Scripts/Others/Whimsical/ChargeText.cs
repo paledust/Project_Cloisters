@@ -22,6 +22,8 @@ public class ChargeText : MonoBehaviour
     [SerializeField] private string sfxReveal;
     [SerializeField] private string sfxCharge;
     [SerializeField] private float chargeVolume = 0.2f;
+    [SerializeField] private float chargeLerpSpeed = 4f;
+    [SerializeField] private float chargeFadeSpeed = 1f;
     [SerializeField] private AudioSource sfxChargeLoopSource;
     private bool isCharging;
     private float seed;
@@ -69,13 +71,13 @@ public class ChargeText : MonoBehaviour
         {
             if(!sfxChargeLoopSource.isPlaying)
                 AudioManager.Instance.PlaySFXLoop(sfxChargeLoopSource, sfxCharge, 0, 0);
-            sfxChargeLoopSource.volume = Mathf.Lerp(sfxChargeLoopSource.volume, chargeVolume, Time.deltaTime*5);
+            sfxChargeLoopSource.volume = Mathf.Lerp(sfxChargeLoopSource.volume, chargeVolume, Time.deltaTime*chargeLerpSpeed);
         }
         else
         {
             if(sfxChargeLoopSource.isPlaying)
             {
-                sfxChargeLoopSource.volume = Mathf.Lerp(sfxChargeLoopSource.volume, 0, Time.deltaTime*1);
+                sfxChargeLoopSource.volume = Mathf.Lerp(sfxChargeLoopSource.volume, 0, Time.deltaTime*chargeFadeSpeed);
                 if(sfxChargeLoopSource.volume<0.01f)
                     sfxChargeLoopSource.Stop();
             }
@@ -87,7 +89,7 @@ public class ChargeText : MonoBehaviour
     {
         this.enabled = false;
         isCharging = false;
-        sfxChargeLoopSource.DOFade(0, 0.25f);
+        sfxChargeLoopSource.DOFade(0, 1f);
         transform.DOScale(Vector3.one, 0.2f).SetEase(Ease.OutBack, 4);
         tmp.DOFade(1, 0.2f);
 

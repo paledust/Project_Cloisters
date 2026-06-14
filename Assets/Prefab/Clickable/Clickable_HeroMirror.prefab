@@ -68,6 +68,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sfx_clickSound: 
+  clickVolume: 1
   hitbox: {fileID: 1520769983141112898}
   disableClick: 0
   pitchRotationTrans: {fileID: 2381693302797345780}
@@ -100,7 +101,7 @@ AudioSource:
   m_GameObject: {fileID: 1603018881477947607}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24300002, guid: f6c02be646bcea74fbaf33509a868ee4,
+  OutputAudioMixerGroup: {fileID: 3946455334239931675, guid: f6c02be646bcea74fbaf33509a868ee4,
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1

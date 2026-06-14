@@ -173,7 +173,10 @@ public class IC_Stylized : IC_Basic
     void BassChargeBeatHandler()
     {
         if(geoFragmentController.IsGeoPrepared)
+        {
+            drumController.EvolveBeatType();
             circleExplodeController.Explode();
+        }
     }
     void DrumKnockedHandler(float strength)
     {

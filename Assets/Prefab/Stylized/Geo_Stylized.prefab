@@ -112,15 +112,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sfx_clickSound: 
+  clickVolume: 1
   hitbox: {fileID: 4331690724906713858}
-  isFrozen: 0
   disableClick: 0
   doubleTap: 1
   hoverSFX: group_click
   hoverScalePunch: 0.25
   hoverScaleDuration: 0.2
   initScaleOnAwake: 1
-  volumeRange: {x: 0, y: 1}
+  volumeRange: {x: 0.2, y: 1}
   speedToVolume: 1
 --- !u!135 &4331690724906713858
 SphereCollider:

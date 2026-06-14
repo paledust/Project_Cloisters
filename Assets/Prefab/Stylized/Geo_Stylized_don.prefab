@@ -161,11 +161,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5424239467753454169, guid: 8bb6e3f5fd951d740a8e34bd850fc193,
         type: 3}
-      propertyPath: volumeRange.x
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5424239467753454169, guid: 8bb6e3f5fd951d740a8e34bd850fc193,
-        type: 3}
       propertyPath: sfx_clickSound
       value: group_midtom
       objectReference: {fileID: 0}

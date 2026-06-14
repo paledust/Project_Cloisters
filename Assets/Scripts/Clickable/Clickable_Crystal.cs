@@ -1,6 +1,5 @@
 using UnityEngine;
 using DG.Tweening;
-using SimpleAudioSystem;
 
 public class Clickable_Crystal : Basic_Clickable
 {
@@ -15,8 +14,6 @@ public class Clickable_Crystal : Basic_Clickable
     [Header("Spoter")]
     [SerializeField] private SpriteRenderer spotterRender;
     [SerializeField] private WhimsicalTextSpoter whimsicalTextSpoter;
-
-    [SerializeField] private string sfxRelease;
 
     private Animator crystalAnimator;
     private Vector3 targetPos;
@@ -65,7 +62,6 @@ public class Clickable_Crystal : Basic_Clickable
     {
         base.OnRelease(player);
         whimsicalTextSpoter.enabled = false;
-        AudioManager.Instance.PlaySFX(sfxRelease, 1);
 
         transform.DOKill();
         transform.DOScale(1f, 0.25f).SetEase(Ease.OutBack);

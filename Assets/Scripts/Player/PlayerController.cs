@@ -5,8 +5,6 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private PlayerInput input;
-[Header("Audio")]
-    [SerializeField] private AudioSource playerAudio;
 
     public Basic_Clickable m_hoveringInteractable{get; private set;} //The hovering interactable.
     public Basic_Clickable m_holdingInteractable{get; private set;} //Currently holding interactable.
@@ -123,7 +121,7 @@ public class PlayerController : MonoBehaviour
             
             if(m_hoveringInteractable.m_isInteractable){
                 m_hoveringInteractable.OnClick(this, hoverPos);
-                AudioManager.Instance.PlaySFX(playerAudio, m_hoveringInteractable.sfx_clickSound, m_hoveringInteractable.clickVolume);
+                AudioManager.Instance.PlaySFX(m_hoveringInteractable.sfx_clickSound, m_hoveringInteractable.clickVolume);
             }
             else{
                 m_hoveringInteractable.OnFailClick(this);

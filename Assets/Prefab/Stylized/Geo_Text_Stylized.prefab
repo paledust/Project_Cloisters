@@ -152,12 +152,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sfx_clickSound: group_snare
+  clickVolume: 1
   hitbox: {fileID: 5429172983381673177}
-  isFrozen: 0
   disableClick: 0
   doubleTap: 1
   hoverSFX: group_snare
   hoverScalePunch: 5
   hoverScaleDuration: 0.25
-  volumeRange: {x: 0, y: 1}
+  initScaleOnAwake: 0
+  volumeRange: {x: 0.2, y: 1}
   speedToVolume: 1
