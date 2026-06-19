@@ -1,1 +1,3 @@
 Jazz Sample: https://www.remodevicocomposer.eu/sample-packs/nu-jazz-drum-loops-1/
+sfxgroup_bubble: https://pixabay.com/sound-effects/film-special-effects-bubble-pop-06-351337/
+sfxgroup_bell: https://pixabay.com/sound-effects/film-special-effects-chromatic-handbells-12-tones-f1-31332/

@@ -32,6 +32,7 @@ public class IC_Narrative : IC_Basic
     [SerializeField] private CameraPanWithPointer cameraPanController;
     [SerializeField] private NarrativeCircleManager narrativeCircleManager;
     [SerializeField] private NarrativeRandomForceField randomForceField;
+
 [Header("End")]
     [SerializeField] private NarrativeText finalNarrativeTextData;
     [SerializeField] private PlayableDirector TL_End;
@@ -49,6 +50,7 @@ public class IC_Narrative : IC_Basic
     [SerializeField] private float collideVolume = .25f;
     [SerializeField] private string sfx_textAppear;
     [SerializeField] private float textAppearVolume = .25f;
+    [SerializeField] private AudioSource collideAudio;
 
     private int narrativeCharIndex = 0;
     private float lastCollisionTime;
@@ -122,7 +124,8 @@ public class IC_Narrative : IC_Basic
         if(Time.time - lastCollisionTime<=effectiveCollisionStep) 
             return;
         if(strength >= collisionStrength){
-            AudioManager.Instance.PlaySFX(sfx_collide, collideVolume);
+            collideAudio.pitch = Random.Range(.95f, 1.05f);
+            AudioManager.Instance.PlaySFX(collideAudio, sfx_collide, collideVolume);
             //bounce off the other cirlce
             var collidableCircle = collidedCircle.GetComponent<CollidableCircle>();
             if(collidableCircle!=null)
