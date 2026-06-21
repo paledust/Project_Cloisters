@@ -18,6 +18,7 @@ public class WhimsicalCrystalSpawner : MonoBehaviour
     [Header("Spawn Radius")]
     [SerializeField] private Transform[] spawnPoints;
     [SerializeField] private string sfxCrystal;
+    [SerializeField] private string sfxwoosh;
     [SerializeField, Range(0, 1)] private float crystalVolume = 1;
 
     private float spawnTimer = 0;
@@ -45,6 +46,7 @@ public class WhimsicalCrystalSpawner : MonoBehaviour
             {
                 spawnTimer = 0;
                 AudioManager.Instance.PlaySFX(sfxCrystal, crystalVolume);
+                AudioManager.Instance.PlaySFX(sfxwoosh, crystalVolume);
                 var crystal = Instantiate(prefabCrystal, heroDiamond.transform.position, Quaternion.identity, crystalParent).GetComponent<Clickable_Crystal>();
                 crystal.enabled = false;
                 crystal.DisableHitbox();

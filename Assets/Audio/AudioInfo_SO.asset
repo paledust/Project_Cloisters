@@ -63,8 +63,8 @@ MonoBehaviour:
     audio_clip: {fileID: 8300000, guid: afcd062d63dc3f44cb7fa7180c253e35, type: 3}
   - audio_name: sfx_magic_wave
     audio_clip: {fileID: 8300000, guid: 1abc9507dd09d4a4d868b2bf55d4e995, type: 3}
-  - audio_name: sfx_twinkle_loop
-    audio_clip: {fileID: 8300000, guid: 13a42336e64d80a4f982d2681df63005, type: 3}
+  - audio_name: sfx_neon_buzz_loop
+    audio_clip: {fileID: 8300000, guid: d4624c0197c8dad449f9c127cb1f1084, type: 3}
   - audio_name: sfx_pinball_collect
     audio_clip: {fileID: 8300000, guid: 5bda5f383795aaf4bba3499b058424ed, type: 3}
   - audio_name: sfx_pinball_dead
@@ -87,6 +87,8 @@ MonoBehaviour:
     audio_clip: {fileID: 8300000, guid: b620bdb948a26164da176173f629c8e0, type: 3}
   - audio_name: sfx_crystal
     audio_clip: {fileID: 8300000, guid: 9dbf324f34817354b8cf6ad45fcc1bb5, type: 3}
+  - audio_name: sfx_crystal_woosh
+    audio_clip: {fileID: 8300000, guid: d239a9ce19737694e866210386d697c4, type: 3}
   - audio_name: foley_swoosh_extra_light
     audio_clip: {fileID: 8300000, guid: 28aaede33a167b540810b339ed089adc, type: 3}
   - audio_name: foley_swoosh_heavy
@@ -231,10 +233,10 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 7fda8de6a52c1aa4f86ced7ef6b01085, type: 3}
   - audio_group_name: group_harp_short
     audioClips:
-    - {fileID: 8300000, guid: c4551ca7e9e16a842a2ebf3476ddd144, type: 3}
-    - {fileID: 8300000, guid: beaf1d269af722a4a9d11edebb4c76c9, type: 3}
     - {fileID: 8300000, guid: a4f61a37e6e7fc848a3e99c21299c271, type: 3}
     - {fileID: 8300000, guid: 0ad288ff9f0860547b60f5f479d95e9c, type: 3}
+    - {fileID: 8300000, guid: beaf1d269af722a4a9d11edebb4c76c9, type: 3}
+    - {fileID: 8300000, guid: c4551ca7e9e16a842a2ebf3476ddd144, type: 3}
   - audio_group_name: group_bell
     audioClips:
     - {fileID: 8300000, guid: 86b685e95c63cfa41bd5275b7d5d2454, type: 3}
@@ -252,3 +254,8 @@ MonoBehaviour:
     - {fileID: 8300000, guid: f7a4f120d9032ac4f9696de4e8e802da, type: 3}
     - {fileID: 8300000, guid: 5c105fdb8aed4994887bfaa6328469dd, type: 3}
     - {fileID: 8300000, guid: f2e1048a4d5f18b4a8b0135d711fd87f, type: 3}
+  - audio_group_name: group_light_on
+    audioClips:
+    - {fileID: 8300000, guid: 775f292c6a65d274093c06deb373803b, type: 3}
+    - {fileID: 8300000, guid: d691c1944348b7b4cb22b6ae6486731e, type: 3}
+    - {fileID: 8300000, guid: 9a14e5512c7eabd448f8f787013b1716, type: 3}

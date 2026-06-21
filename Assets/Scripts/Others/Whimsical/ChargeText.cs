@@ -12,6 +12,7 @@ public class ChargeText : MonoBehaviour
     [SerializeField] private float chargeDim = 0.5f;
     [SerializeField] private float blinkFreq;
     [SerializeField] private ParticleSystem p_fireburst;
+    [SerializeField] private ParticleSystem p_charge;
 
 [Header("Fully Charge")]
     [SerializeField] private PerRendererColor perRendererColor;
@@ -83,12 +84,26 @@ public class ChargeText : MonoBehaviour
             }
         }
     }
-    public void OnCharged()=>isCharging = true;
-    public void OnNotCharged()=>isCharging = false;
+    public void OnCharged()
+    {
+        if(!isCharging)
+        {
+            isCharging = true;
+            p_charge.Play(true);
+        }
+    }
+    public void OnNotCharged()
+    {
+        if(isCharging)
+        {
+            isCharging = false;
+            p_charge.Stop(true);
+        }
+    }
     void FullyCharged()
     {
         this.enabled = false;
-        isCharging = false;
+        OnNotCharged();
         sfxChargeLoopSource.DOFade(0, 1f);
         transform.DOScale(Vector3.one, 0.2f).SetEase(Ease.OutBack, 4);
         tmp.DOFade(1, 0.2f);

@@ -1,5 +1,4 @@
 using System.Collections;
-using SimpleAudioSystem;
 using UnityEngine;
 
 public class WhimsicalText_SpotDetection : MonoBehaviour
