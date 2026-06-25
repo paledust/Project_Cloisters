@@ -20,6 +20,7 @@ public class ChargeText : MonoBehaviour
     [SerializeField, ColorUsage(true, true)] private Color birghtColor;
 
 [Header("Audio")]
+    [SerializeField] private string sfxHide;
     [SerializeField] private string sfxReveal;
     [SerializeField] private string sfxCharge;
     [SerializeField] private float chargeVolume = 0.2f;
@@ -122,6 +123,7 @@ public class ChargeText : MonoBehaviour
         tmp.DOFade(0, 0.15f).SetDelay(delay).OnStart(() =>
         {
             p_fireburst.Play();
+            AudioManager.Instance.PlaySFX(sfxHide, 0.25f);
         });
     }
     IEnumerator coroutineFadeText(float duration, AnimationCurve curve)

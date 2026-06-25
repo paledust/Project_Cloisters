@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MirrorDiamondCatcher : MonoBehaviour
@@ -7,6 +5,7 @@ public class MirrorDiamondCatcher : MonoBehaviour
     [SerializeField] private Transform rootTrans;
     [SerializeField] private LayerMask layerMask;
     [SerializeField] private float castRadius;
+    [SerializeField] private ParticleSystem vfxSplat;
 
     private Ray ray;
     private Camera mainCam;

@@ -17,9 +17,11 @@ public class RotatorAudioHandler : MonoBehaviour
     [SerializeField] private float negativePitch = 0.8f;
 
     private IRotator rotator;
+    [SerializeField] private float audioTime;
 
     void Awake()
     {
+        audioTime = 0;
         rotator = GetComponent<IRotator>();
     }
     void Update()
@@ -30,14 +32,14 @@ public class RotatorAudioHandler : MonoBehaviour
             if(speed > angularSpeedThreshold)
             {
                 if(!audioSource.isPlaying)
-                    AudioManager.Instance.PlaySFXLoop(audioSource, sfxRotating, 0, 0);
+                    AudioManager.Instance.PlaySFXLoop(audioSource, sfxRotating, 0, 0, audioTime);
                 audioSource.volume = Mathf.Lerp(audioSource.volume, Mathf.Clamp01((speed-angularSpeedThreshold)*angularSpeedToVolume)*negativeSpeedVolume, Time.deltaTime*volumeLerpSpeed);
                 audioSource.pitch = 1f;
             }
             else if(speed < -angularSpeedThreshold)
             {
                 if(!audioSource.isPlaying)
-                    AudioManager.Instance.PlaySFXLoop(audioSource, sfxRotating, 0, 0);
+                    AudioManager.Instance.PlaySFXLoop(audioSource, sfxRotating, 0, 0, audioTime);
                 audioSource.volume = Mathf.Lerp(audioSource.volume, Mathf.Clamp01((-speed-angularSpeedThreshold)*angularSpeedToVolume)*negativeSpeedVolume, Time.deltaTime*volumeLerpSpeed);
                 audioSource.pitch = negativePitch;
             }
@@ -48,15 +50,20 @@ public class RotatorAudioHandler : MonoBehaviour
             if(speed > angularSpeedThreshold)
             {
                 if(!audioSource.isPlaying)
-                    AudioManager.Instance.PlaySFXLoop(audioSource, sfxRotating, 0, 0);
+                    AudioManager.Instance.PlaySFXLoop(audioSource, sfxRotating, 0, 0, audioTime);
                 audioSource.volume = Mathf.Lerp(audioSource.volume, Mathf.Clamp01((speed-angularSpeedThreshold)*angularSpeedToVolume)*volumeScale, Time.deltaTime*volumeLerpSpeed);
             }
             else
             {
                 if(audioSource.isPlaying)
+                {
                     audioSource.volume = Mathf.Lerp(audioSource.volume, 0, Time.deltaTime*volumeLerpSpeed);
-                if(audioSource.volume < 0.01f)
-                    audioSource.Stop();
+                    if(audioSource.volume < 0.01f)
+                    {
+                        audioTime = audioSource.time;
+                        audioSource.Stop();
+                    }
+                }
             }        
         }
     }

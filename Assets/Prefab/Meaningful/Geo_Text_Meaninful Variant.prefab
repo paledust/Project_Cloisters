@@ -343,7 +343,7 @@ MonoBehaviour:
   angleMotion: {fileID: 540870253}
   floatMotion: {fileID: 540870254}
   sfxTextFound: group_shine
-  sfxTextFocus: sfx_shine_loop
+  sfxTextFocus: sfx_meaningful_text_hint_loop
   focusVolumeLerpSpeed: 5
   focusAudioSource: {fileID: 1908673570878594160}
 --- !u!114 &540870253

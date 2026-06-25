@@ -11,7 +11,8 @@ public class IC_Whimsical : IC_Basic
     [SerializeField] private int count = 0;
     [SerializeField] private PlayableDirector endDirector;
     [SerializeField] private string foleyBlink;
-    [SerializeField] private string foleyPop;
+    [SerializeField] private string foleyTextOut;
+    
     protected override void OnInteractionEnter()
     {
         base.OnInteractionEnter();
@@ -39,7 +40,7 @@ public class IC_Whimsical : IC_Basic
         crystal.FadeIdleAngularSpeed(150, 4f);
         yield return new WaitForSeconds(3f);
         textController.PopoutAllText();
-        AudioManager.Instance.PlaySFX(foleyPop, 1);
+        AudioManager.Instance.PlaySFX(foleyTextOut, 1);
         yield return new WaitForSeconds(1f);
         endDirector.Play();
         yield return new WaitForSeconds(2f);

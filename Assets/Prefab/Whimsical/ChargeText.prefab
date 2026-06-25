@@ -5103,6 +5103,7 @@ MonoBehaviour:
   perRendererColor: {fileID: 509792960820809809}
   blinkColor: {r: 2, g: 2, b: 2, a: 1}
   birghtColor: {r: 2.9960785, g: 2.9960785, b: 2.9960785, a: 1}
+  sfxHide: group_light_off
   sfxReveal: group_light_on
   sfxCharge: sfx_neon_buzz_loop
   chargeVolume: 0.5

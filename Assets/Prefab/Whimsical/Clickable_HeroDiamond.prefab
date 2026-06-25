@@ -125,12 +125,13 @@ MonoBehaviour:
   angularSpeedThreshold: 20
   angularSpeedToVolume: 0.005
   audioSource: {fileID: 8419376207248997928}
-  volumeScale: 0.5
-  volumeLerpSpeed: 2
-  sfxRotating: sfx_harp_loop
+  volumeScale: 0.25
+  volumeLerpSpeed: 10
+  sfxRotating: sfx_whimsical_loop
   separateNegativeSpeed: 0
   negativeSpeedVolume: 0.5
   negativePitch: 0.8
+  audioTime: 0
 --- !u!1 &6235808070743501217
 GameObject:
   m_ObjectHideFlags: 0
@@ -206,7 +207,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 3946455334239931675, guid: f6c02be646bcea74fbaf33509a868ee4,
     type: 2}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: c07316ab5fcc45c4aa9aa70015101ab1, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0
   m_Pitch: 1

@@ -17,54 +17,27 @@ public class MirrorText : MonoBehaviour
     [SerializeField] private AngleMotion angleMotion;
     [SerializeField] private FloatingMotion floatMotion;
 
-[Header("Audio")]
-    [SerializeField] private string sfxTextFound;
-    [SerializeField] private string sfxTextFocus;
-    [SerializeField] private float focusVolumeLerpSpeed = 5f;
-    [SerializeField] private AudioSource focusAudioSource;
 
     private Color originColor;
     private bool isFocus = false;
-    private bool isCatched = false;
     private bool isRevealed  = false;
-    private float focusFactor = 0;
-    public float m_focusFactor => isFocus?0:focusFactor;
+    private float focusDist = 0;
+    private Tween factorTween;
 
+    public float m_focusDist => isFocus?0:focusDist;
+    public float m_focusFactor;
     public char TextChar => textChar;
 
     void Awake()
     {
         originColor = fontColor.Tint;
-    }
-    void Update()
-    {
-        if(isCatched)
-        {
-            if(!focusAudioSource.isPlaying)
-                AudioManager.Instance.PlaySFXLoop(focusAudioSource, sfxTextFocus, 0, 0);
-            if(!isFocus)
-                focusAudioSource.volume = Mathf.Lerp(focusAudioSource.volume, .2f, Time.deltaTime*focusVolumeLerpSpeed);
-        }
-        if(isFocus)
-        {
-            if(!focusAudioSource.isPlaying)
-                AudioManager.Instance.PlaySFXLoop(focusAudioSource, sfxTextFocus, 0, 0);
-            focusAudioSource.volume = Mathf.Lerp(focusAudioSource.volume, 1, Time.deltaTime*focusVolumeLerpSpeed);
-        }
-        if(!isCatched && !isFocus && focusAudioSource.isPlaying)
-        {
-            focusAudioSource.volume = Mathf.Lerp(focusAudioSource.volume, 0, Time.deltaTime);
-            if(focusAudioSource.volume < 0.01f)
-            {
-                focusAudioSource.Stop();
-            }
-        }
+        m_focusFactor = 0;
     }
     public void CopyText(MirrorText mirrorText)
     {
         isFocus = mirrorText.isFocus;
         isRevealed = mirrorText.isRevealed;
-        focusFactor = mirrorText.focusFactor;
+        focusDist = mirrorText.focusDist;
         textChar = mirrorText.textChar;
         hitbox.enabled = mirrorText.hitbox.enabled;
         fontColor.Tint = mirrorText.fontColor.Tint;
@@ -76,7 +49,7 @@ public class MirrorText : MonoBehaviour
         Vector3 mirrorDir = (mirrorCenter.position - transform.position).normalized;
         Vector3 t = diff - mirrorDir * Vector3.Dot(mirrorDir, diff);
 
-        focusFactor = Mathf.Clamp01((t.magnitude-focusRadius)/(searchRadius-focusRadius));
+        focusDist = Mathf.Clamp01((t.magnitude-focusRadius)/(searchRadius-focusRadius));
 
         if(t.sqrMagnitude<focusRadius*focusRadius)
         {
@@ -87,6 +60,7 @@ public class MirrorText : MonoBehaviour
                 transform.DOScale(0.18f, 1f * timeScale)
                 .SetEase(Ease.InQuad);
 
+                TweenFactor(1, 1f*timeScale);
                 DOTween.Kill(this);
                 DOTween.To(()=>fontColor.Tint, x=>fontColor.Tint = x, foundColor, 1f*timeScale)
                 .SetEase(Ease.InQuad)
@@ -110,8 +84,7 @@ public class MirrorText : MonoBehaviour
                     transform.localScale = transform.localScale * 0.25f;
                     fontColor.gameObject.layer = LayerMask.NameToLayer("NoReflex");
 
-                    AudioManager.Instance.PlaySFX(sfxTextFound, 1);
-
+                    EventHandler.Call_OnMirrorTextPop(this);
                     transform.DOKill();
                     transform.DOScale(0.27f*0.25f, 0.5f * timeScale)
                     .SetEase(Ease.OutBack, 2.5f * timeScale).OnComplete(()=>{
@@ -140,10 +113,10 @@ public class MirrorText : MonoBehaviour
     public void OnMirrorTextHide()
     {
         isFocus = false;
-        isCatched = false;
 
         if(!isRevealed)
         {
+            TweenFactor(0, 0.5f);
             DOTween.Kill(this);
             DOTween.To(()=>fontColor.Tint, x=>fontColor.Tint = x, originColor, 0.5f).SetId(this);
             transform.DOKill();
@@ -151,8 +124,10 @@ public class MirrorText : MonoBehaviour
             .SetEase(Ease.OutQuad);
         }
     }
-    public void OnCatchText()
+    void TweenFactor(float final, float duration)
     {
-        isCatched = true;
+        if(factorTween!=null)
+            factorTween.Kill();
+        factorTween = DOTween.To(()=>m_focusFactor, x=>m_focusFactor = x, final, duration);
     }
 }
