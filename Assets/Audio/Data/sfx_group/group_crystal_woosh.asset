@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55b4a7a6e7b8e4b498c722058235f5a3, type: 3}
+  m_Name: group_crystal_woosh
+  m_EditorClassIdentifier: 
+  audioClips:
+  - {fileID: 8300000, guid: 985202d6a2594b243ad4d4c40e16c1ec, type: 3}
+  - {fileID: 8300000, guid: 2810328d04c593d41ae7218137b03042, type: 3}
+  - {fileID: 8300000, guid: 716b37d6a8fb5a4428e2b1945650cad4, type: 3}

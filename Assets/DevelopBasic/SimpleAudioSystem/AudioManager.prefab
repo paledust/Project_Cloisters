@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioInfo: {fileID: 11400000, guid: 631aa24ea4e64554ba244ec701ad6c0a, type: 2}
+  audioCollection: {fileID: 11400000, guid: f41118d15e37db541bcf4a877000473c, type: 2}
   sfx_trigger: {fileID: 70258621617920145}
   ambience_loop: {fileID: 5275165435782480257}
   music_loop: {fileID: 5275165436332487226}

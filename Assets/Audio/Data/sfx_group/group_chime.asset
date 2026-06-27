@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55b4a7a6e7b8e4b498c722058235f5a3, type: 3}
+  m_Name: group_chime
+  m_EditorClassIdentifier: 
+  audioClips:
+  - {fileID: 8300000, guid: 0d34aaa88b6d25e45a317b88319a2f29, type: 3}
+  - {fileID: 8300000, guid: e7cce16d68a25fa478e4bda543490230, type: 3}
+  - {fileID: 8300000, guid: 8e1a010935b13054ca6c1aee320bfd98, type: 3}
+  - {fileID: 8300000, guid: ab944cb4fbe1d2a49a3c4762498ef187, type: 3}

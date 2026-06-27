@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55b4a7a6e7b8e4b498c722058235f5a3, type: 3}
+  m_Name: group_door_chime
+  m_EditorClassIdentifier: 
+  audioClips:
+  - {fileID: 8300000, guid: 5c105fdb8aed4994887bfaa6328469dd, type: 3}
+  - {fileID: 8300000, guid: f7a4f120d9032ac4f9696de4e8e802da, type: 3}
+  - {fileID: 8300000, guid: 3505010f4a2b3b2478cb339bf2dbc3c1, type: 3}
+  - {fileID: 8300000, guid: f2e1048a4d5f18b4a8b0135d711fd87f, type: 3}

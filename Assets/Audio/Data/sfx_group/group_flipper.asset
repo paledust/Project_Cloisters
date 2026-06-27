@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55b4a7a6e7b8e4b498c722058235f5a3, type: 3}
+  m_Name: group_flipper
+  m_EditorClassIdentifier: 
+  audioClips:
+  - {fileID: 8300000, guid: 1cfdd1cd9aba7dc4893427107475089f, type: 3}
+  - {fileID: 8300000, guid: 37ec855544e03714b876e72654c998fc, type: 3}
+  - {fileID: 8300000, guid: c13976fd3495acd459575f2bcbaa5215, type: 3}
+  - {fileID: 8300000, guid: bb7bcfeae18a965468d4a1edf2427942, type: 3}

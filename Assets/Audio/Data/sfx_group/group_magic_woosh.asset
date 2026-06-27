@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55b4a7a6e7b8e4b498c722058235f5a3, type: 3}
+  m_Name: group_magic_woosh
+  m_EditorClassIdentifier: 
+  audioClips:
+  - {fileID: 8300000, guid: b5cef951ca970b4489d2f704950649ad, type: 3}
+  - {fileID: 8300000, guid: bfb51f0ed11b242418d9d92493ef6798, type: 3}
+  - {fileID: 8300000, guid: 0857448eeeaa059459cd2051e7d53bbc, type: 3}
+  - {fileID: 8300000, guid: 366c4d6c7f7499446b391fc66727b051, type: 3}

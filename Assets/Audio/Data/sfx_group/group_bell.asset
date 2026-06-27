@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55b4a7a6e7b8e4b498c722058235f5a3, type: 3}
+  m_Name: group_bell
+  m_EditorClassIdentifier: 
+  audioClips:
+  - {fileID: 8300000, guid: da9c4286bd304f74b8f530e2ffa9d5bd, type: 3}
+  - {fileID: 8300000, guid: b23d24e0636544b41a259560b3260228, type: 3}
+  - {fileID: 8300000, guid: ed8a43ed1de33db44be8e5575705dcbe, type: 3}
+  - {fileID: 8300000, guid: ff89d4f4d37354f4fb24d8a423538b9b, type: 3}
+  - {fileID: 8300000, guid: 4277d08e11da28d4e830007546df323d, type: 3}
+  - {fileID: 8300000, guid: 86b685e95c63cfa41bd5275b7d5d2454, type: 3}
+  - {fileID: 8300000, guid: 4f3ff8f39270b4844a10391a37f6c1d1, type: 3}
+  - {fileID: 8300000, guid: d1f1d48b1267c9b4ca154b14cbaf6610, type: 3}
+  - {fileID: 8300000, guid: 26b4a95d3163f4640a8b02d753b868ef, type: 3}
