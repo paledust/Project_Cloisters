@@ -18,6 +18,8 @@ public class MirrorDiamond : MonoBehaviour
     private Collider hitbox;
     private MeshRenderer meshRenderer;
 
+    public float m_focusFactor => Mathf.Clamp01(focusTimer/focusDuration);
+
     private const string ACTIVATE_TRIGGER = "activate";
     private const string FOUND_TRIGGER = "found";
     private const string FOCUS_BOOL = "isFocused";

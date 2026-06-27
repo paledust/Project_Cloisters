@@ -8,6 +8,7 @@ namespace SimpleAudioSystem{
     {
         public enum AudioType{BGM, AMB, SFX}
         [SerializeField] private AudioInfo_SO audioInfo;
+        [SerializeField] private AudioDataCollection_SO audioCollection;
     [Header("Audio source")]
         [SerializeField] private AudioSource sfx_trigger;
         [SerializeField] private AudioSource ambience_loop;

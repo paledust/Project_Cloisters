@@ -73,14 +73,10 @@ public class MirrorTextCatcher : MonoBehaviour
                 }
             }
             else
-            {
                 TryClearCurrentText();
-            }
         }
         else
-        {
             TryClearCurrentText();
-        }
 
         if(mirrorTimeScale < 1f)
         {

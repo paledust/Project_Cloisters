@@ -586,15 +586,15 @@ MonoBehaviour:
     m_Bits: 1
   mirrorTextShowConstroller: {fileID: 0}
   vfxSparkle: {fileID: 7216205397476640320}
-  bounceScale: 0.03
-  bounceDuration: 0.35
+  bounceScale: 0.035
+  bounceDuration: 0.4
   catcherAudio: {fileID: 1051571298326533854}
   sfxHint: group_meaningful_hint
   hintVolume: 0.05
   sfxCharge: sfx_magic_shine_loop
   minChargeVolume: 0.05
-  maxChargeVolume: 1
-  sfxSpot: group_magic_woosh
+  maxChargeVolume: 0.6
+  sfxSpot: group_meaningful_spot
   focusVolumeLerpSpeed: 5
   focusVolumeFadeLerp: 2
   mirrorTimeScale: 1
@@ -615,7 +615,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   castRadius: 0.015
-  vfxSplat: {fileID: 0}
+  catcherAudio: {fileID: 1051571298326533854}
+  sfxCharge: sfx_magic_shine_loop
+  minChargeVolume: 0.05
+  maxChargeVolume: 0.6
 --- !u!95 &5258057447120753139
 Animator:
   serializedVersion: 5
