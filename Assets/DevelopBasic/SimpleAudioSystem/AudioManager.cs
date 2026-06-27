@@ -7,7 +7,7 @@ namespace SimpleAudioSystem{
     public class AudioManager : Singleton<AudioManager>
     {
         public enum AudioType{BGM, AMB, SFX}
-        [SerializeField] private AudioInfo_SO audioInfo;
+        // [SerializeField] private AudioInfo_SO audioInfo;
         [SerializeField] private AudioDataCollection_SO audioCollection;
     [Header("Audio source")]
         [SerializeField] private AudioSource sfx_trigger;
@@ -37,7 +37,7 @@ namespace SimpleAudioSystem{
             current_music_name = audio_name;
             if(audio_name == string.Empty) music_loop.Stop();
 
-            music_loop.clip = audioInfo.GetBGMClipByName(audio_name);
+            music_loop.clip = audioCollection.GetBGMClipByName(audio_name);
             if(music_loop.clip!=null){
                 music_loop.volume = volume;
                 music_loop.Play();
@@ -62,7 +62,7 @@ namespace SimpleAudioSystem{
             }
             else{
                 if(current_music_name == string.Empty || !music_loop.isPlaying){
-                    music_loop.clip = audioInfo.GetBGMClipByName(audio_name);
+                    music_loop.clip = audioCollection.GetBGMClipByName(audio_name);
                     if(music_loop.clip==null){
                         Debug.LogWarning("No clip found, nothing will be done for ambient");
                         return;
@@ -92,7 +92,7 @@ namespace SimpleAudioSystem{
             }
             else{
                 if(current_ambience_name == string.Empty || !ambience_loop.isPlaying){
-                    ambience_loop.clip = audioInfo.GetAMBClipByName(audio_name);
+                    ambience_loop.clip = audioCollection.GetAMBClipByName(audio_name);
                     if(ambience_loop.clip==null){
                         Debug.LogWarning("No clip found, nothing will be done for ambient");
                         return;
@@ -126,7 +126,7 @@ namespace SimpleAudioSystem{
             }
             else{
                 if(current_ambience_name == string.Empty || !ambience_loop.isPlaying){
-                    ambience_loop.clip = audioInfo.GetAMBClipByName(audio_name);
+                    ambience_loop.clip = audioCollection.GetAMBClipByName(audio_name);
                     if(ambience_loop.clip==null){
                         Debug.LogWarning("No clip found, nothing will be done for ambient");
                         return;
@@ -147,7 +147,7 @@ namespace SimpleAudioSystem{
         public AudioClip PlaySFX(AudioSource targetSource, string clip_name, float volumeScale){
             if(string.IsNullOrEmpty(clip_name)) 
                 return null;
-            AudioClip clip = audioInfo.GetSFXClipByName(clip_name);
+            AudioClip clip = audioCollection.GetSFXClipByName(clip_name);
             if(clip!=null)
                 targetSource.PlayOneShot(clip, volumeScale);
             else
@@ -157,7 +157,7 @@ namespace SimpleAudioSystem{
         public AudioClip PlaySFX(string clip_name, float volumeScale) => PlaySFX(sfx_trigger, clip_name, volumeScale);
         
         public AudioClip PlaySFXLoop(AudioSource targetSource, string clip_name, float volumeScale, float transition = 1f, float time = 0){
-            AudioClip clip = audioInfo.GetSFXClipByName(clip_name);
+            AudioClip clip = audioCollection.GetSFXClipByName(clip_name);
             targetSource.clip = clip;
             targetSource.loop = true;
             targetSource.time = time;
@@ -235,7 +235,7 @@ namespace SimpleAudioSystem{
             tempAudio.name = "_TempSFX";
             tempAudio.volume = 0;
             tempAudio.loop   = true;
-            tempAudio.clip   = audioInfo.GetSFXClipByName(clip);
+            tempAudio.clip   = audioCollection.GetSFXClipByName(clip);
             tempAudio.Play();
 
             yield return new WaitForLoop(fadeIn, (t)=>tempAudio.volume = Mathf.Lerp(0, maxVolume, t));
@@ -289,16 +289,16 @@ namespace SimpleAudioSystem{
             AudioClip targetClip;
             switch(audioType){
                 case AudioType.SFX:
-                    targetClip = audioInfo.GetSFXClipByName(to_clip);
+                    targetClip = audioCollection.GetSFXClipByName(to_clip);
                     break;
                 case AudioType.AMB:
-                    targetClip = audioInfo.GetAMBClipByName(to_clip);
+                    targetClip = audioCollection.GetAMBClipByName(to_clip);
                     break;
                 case AudioType.BGM:
-                    targetClip = audioInfo.GetBGMClipByName(to_clip);
+                    targetClip = audioCollection.GetBGMClipByName(to_clip);
                     break;
                 default:
-                    targetClip = audioInfo.GetAMBClipByName(to_clip);
+                    targetClip = audioCollection.GetAMBClipByName(to_clip);
                     break;
             }
 
