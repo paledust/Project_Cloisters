@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace SimpleAudioSystem
+namespace SimpleAudioSystem.Edit
 {
     [CustomEditor(typeof(AudioDataCollection_SO))]
     public class AudioDataCollectionInspector : Editor

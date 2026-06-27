@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using UnityEngine;
 using EasingFunc;
-using TMPro;
 
 public static class CommonCoroutine{
     public static IEnumerator delayAction(Action action, float delay){
@@ -30,20 +29,6 @@ public static class CommonCoroutine{
             m_sprite.color = Color.Lerp(initColor, targetColor, Easing.SmoothInOut(t));
         });
     }
-    public static IEnumerator coroutineFadePerRenderColor(PerRendererColor m_renderer, float targetAlpha, float duration, float delay = 0){
-        yield return new WaitForSeconds(delay);
-        if(targetAlpha == 1) m_renderer.m_Renderer.enabled = true;
-
-        Color initColor = m_renderer.tint;
-        Color targetColor = initColor;
-        targetColor.a = targetAlpha;
-
-        yield return new WaitForLoop(duration, (t)=>
-            m_renderer.tint = Color.Lerp(initColor, targetColor, Easing.SmoothInOut(t))
-        );
-
-        if(targetAlpha == 0) m_renderer.m_Renderer.enabled = false;
-    }
     public static IEnumerator coroutineFadeUI(UnityEngine.UI.MaskableGraphic graphic, float targetAlpha, float duration){
         Color initColor, targetColor;
         initColor = graphic.color;
@@ -52,22 +37,6 @@ public static class CommonCoroutine{
 
         yield return new WaitForLoop(duration, (t)=>{
             graphic.color = Color.Lerp(initColor, targetColor, t);
-        });
-    }
-    public static IEnumerator CoroutineFadeCharacter(TMP_CharacterInfo c, float targetAlpha, float duration, Easing.FunctionType easeType=Easing.FunctionType.QuadEaseOut){
-        Color initColor = c.color;
-        Color targetColor = initColor;
-        targetColor.a = targetAlpha;
-
-        string outlineSoftnessName = "_OutlineSoftness";
-        c.material = Material.Instantiate(c.material);
-        float initSoftness = c.material.GetFloat(outlineSoftnessName);
-        float targetSoftness = 1-targetAlpha;
-
-        var easeFunc = Easing.GetFunctionWithTypeEnum(easeType);
-        yield return new WaitForLoop(duration, (t)=>{
-            c.material.SetFloat(outlineSoftnessName, Mathf.Lerp(initSoftness, targetSoftness, easeFunc(Mathf.Clamp01(t*5))));
-            c.color = Color.Lerp(initColor, targetColor, easeFunc(t));
         });
     }
     public static IEnumerator CoroutineDestroyDelay(float delay, GameObject gameObject){
