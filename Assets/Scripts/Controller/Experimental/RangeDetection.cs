@@ -1,17 +1,21 @@
 using System.Collections.Generic;
 using DG.Tweening;
+using SimpleAudioSystem;
 using UnityEngine;
 
 public class RangeDetection : MonoBehaviour
 {
 [Header("Basic")]
     [SerializeField] private SpriteRenderer rangeRenderer;
+    [SerializeField] private SpriteRenderer boundryRenderer;
     [SerializeField] private float testPerSec = 1;
     [SerializeField] private Color fullfillColor;
     [SerializeField] private Color defaultColor;
     [SerializeField] private bool isRange;
 [Header("Animation")]
     [SerializeField] private Animator shapeAnimator;
+[Header("Audio")]
+    [SerializeField] private AudioData_SO sfxOnShapeContained;
     
     private List<ConnectBody> bodyHash;
     private Collider2D m_collider;
@@ -20,14 +24,17 @@ public class RangeDetection : MonoBehaviour
     private bool hasMaximized = false;
     private int totalBodyCount;
     private float testTimer = 0;
+    private Color boundryInitColor;
     private const string SHAPE_CHANGE_ANIM = "ShapeChange";
     private const string SHAPE_EXPAND_ANIME = "ShapeExpand";
+    private const string SHAPE_BLINK_BOOL = "IsBlink";
 
 
     void Awake() => m_collider = GetComponent<Collider2D>();
     void Start()
     {
         bodyHash = new List<ConnectBody>();
+        boundryInitColor = boundryRenderer.color;
     }
     void Update()
     {
@@ -39,7 +46,18 @@ public class RangeDetection : MonoBehaviour
             if(newFlag != isRange)
             {
                 isRange = newFlag;
-                PunchCondition(newFlag?fullfillColor:defaultColor);
+            //Force Reset DOTWEEN
+                rangeRenderer.transform.DOKill();
+                rangeRenderer.transform.localScale = Vector3.one;
+                isPunching = false;
+                if(newFlag)
+                    PunchScale(0.035f, 0.4f, 10);
+                rangeRenderer.DOKill();
+                rangeRenderer.DOColor(newFlag?fullfillColor:defaultColor, 0.2f);
+                boundryRenderer.DOKill();
+                boundryRenderer.DOColor(newFlag?Color.clear:boundryInitColor, 0.2f);
+                if(newFlag)
+                    AudioManager.Instance.PlaySFX(sfxOnShapeContained.AudioKey, 1);
             }
         }
     }
@@ -60,6 +78,8 @@ public class RangeDetection : MonoBehaviour
             m_collider.enabled = true
         );
     }
+    public void FailBlink() => shapeAnimator.SetBool(SHAPE_BLINK_BOOL, true);
+    public void RecoverBlink() => shapeAnimator.SetBool(SHAPE_BLINK_BOOL, false);
     public bool CheckRange()
     {
         if(bodyHash.Count>=totalBodyCount)
@@ -95,7 +115,7 @@ public class RangeDetection : MonoBehaviour
         if(body != null && !bodyHash.Contains(body))
         {
             bodyHash.Add(body);
-            PunchScale(-0.025f);
+            PunchScale(-0.02f,.2f, 1);
         }
     }
     void OnTriggerExit2D(Collider2D other)
@@ -104,29 +124,19 @@ public class RangeDetection : MonoBehaviour
         if(body != null && bodyHash.Contains(body))
         {
             bodyHash.Remove(body);
-            PunchScale(0.025f);
+            PunchScale(0.02f, 0.2f, 1);
         }
     }
     void OnDisable()
     {
         rangeRenderer.transform.DOKill();
     }
-    void PunchScale(float amount)
+    void PunchScale(float amount, float duration, int vibration)
     {
         if(!isPunching)
         {
             isPunching = true;
-            rangeRenderer.transform.DOPunchScale(Vector3.one * amount, 0.4f, 1).OnComplete(()=>isPunching = false);
+            rangeRenderer.transform.DOPunchScale(Vector3.one * amount, duration, vibration).OnComplete(()=>isPunching = false);
         }
-    }
-    void PunchCondition(Color targetColor)
-    {
-    //Force Reset DOTWEEN
-        rangeRenderer.transform.DOKill();
-        rangeRenderer.transform.localScale = Vector3.one;
-        isPunching = false;
-        PunchScale(0.05f);
-        rangeRenderer.DOKill();
-        rangeRenderer.DOColor(targetColor, 0.2f);
     }
 }

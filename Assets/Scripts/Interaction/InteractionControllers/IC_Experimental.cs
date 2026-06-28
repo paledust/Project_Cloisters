@@ -122,6 +122,7 @@ public class IC_Experimental : IC_Basic
         {
             shape.BlinkShape(blinkColor1, blinkColor2);
         }
+        rangeDetection.FailBlink();
         yield return new WaitForSeconds(1);
         for(int i=builtConnections.Count-1; i>=0; i--)
         {
@@ -130,6 +131,7 @@ public class IC_Experimental : IC_Basic
             connection.BreakConnection(10f, 0, connection.transform.position);
             yield return new WaitForSeconds(Random.Range(0f, 0.05f));
         }
+        rangeDetection.RecoverBlink();
     }
     IEnumerator coroutineCompletingStage(int textAmount, int throwBodyAmount)
     {
@@ -156,7 +158,7 @@ public class IC_Experimental : IC_Basic
             text.transform.localScale = Vector3.one * 0.5f;
             text.transform.localRotation = Quaternion.Euler(0,0,Random.Range(-20, 20));
             text.gameObject.SetActive(true);
-            AudioManager.Instance.PlaySFX(sfxTextPopIn, 0.1f);
+            AudioManager.Instance.PlaySFX(sfxTextPopIn, 0.5f);
             text.transform.DOScale(Vector3.one, 0.5f).SetEase(Ease.OutBack, 10);
             text.transform.DOLocalMove(position + (Vector3)Random.insideUnitCircle*2, 1f).SetEase(Ease.OutCirc).OnComplete(()=>
             {
