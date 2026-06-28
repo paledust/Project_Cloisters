@@ -90,12 +90,7 @@ public class ShapeConnectController : MonoBehaviour
             joint.enableCollision = false;
         //Create JointBreaker
             Quaternion breakerRot;
-            if(!mainBody.m_isSpherical)
-                breakerRot = main.transform.rotation;
-            else if(!otherBody.m_isSpherical)
-                breakerRot = other.transform.rotation;
-            else
-                breakerRot = Quaternion.Euler(0,0,-Vector2.SignedAngle(main.transform.position - other.transform.position, Vector2.up));
+            breakerRot = main.transform.rotation;
             
             var jointBreaker = Instantiate(connectionBreakerPrefab, mid, breakerRot).GetComponent<Clickable_ConnectionBreaker>();
             jointBreaker.transform.position = mid;

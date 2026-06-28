@@ -40,7 +40,7 @@ public class Clickable_ExperimentalShapeDragger : Basic_Clickable
         m_rigid.drag = 10;
         m_rigid.angularDrag = 10;
 
-        interactionHandler.OnControlled();
+        interactionHandler.OnControlled(isCenter);
     }
     public override void OnHover(PlayerController player)
     {

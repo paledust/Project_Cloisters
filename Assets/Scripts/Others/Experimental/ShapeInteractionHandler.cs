@@ -1,11 +1,15 @@
 using System;
 using DG.Tweening;
+using SimpleAudioSystem;
 using UnityEngine;
 
 public class ShapeInteractionHandler : MonoBehaviour
 {
+    [SerializeField] private Transform renderRoot;
     [SerializeField] private SpriteRenderer outline;
     [SerializeField] private Transform outlineMaskTrans;
+    [SerializeField] private AudioData_SO sfxOnCenter;
+    [SerializeField] private AudioData_SO sfxOnCorner;
     private Clickable_ExperimentalShapeDragger currentHoverDragger;
     private ConnectBody connectBody;
     public event Action onRelease;
@@ -19,8 +23,6 @@ public class ShapeInteractionHandler : MonoBehaviour
     }
     void Update()
     {
-        Vector3 targetOutlinePos = Vector3.zero;
-
         if(currentHoverDragger!=null)
         {
             Vector3 mouseScr = PlayerManager.Instance.GetCursorScreenPos();
@@ -34,10 +36,6 @@ public class ShapeInteractionHandler : MonoBehaviour
                 {
                     targetPos = targetPos + Vector3.ClampMagnitude(mouseWorld - currentHoverDragger.transform.position, .25f);
                 }
-            }
-            else
-            {
-                targetOutlinePos = Vector3.ClampMagnitude(transform.InverseTransformDirection(PlayerManager.Instance.GetCursorDelta())*0.2f, .25f);
             }
             outlineMaskTrans.position = Vector3.Lerp(outlineMaskTrans.position, targetPos, Time.deltaTime * 20);
         }
@@ -71,9 +69,13 @@ public class ShapeInteractionHandler : MonoBehaviour
             FadeOutline(0, 0.15f);
         }
     }
-    public void OnControlled()
+    public void OnControlled(bool isCenter)
     {
         isControlling = true;
+        renderRoot.localRotation = Quaternion.identity;
+        renderRoot.DOKill();
+        renderRoot.DOPunchRotation(Vector3.forward * (isCenter?8:4), 0.25f, isCenter?25:17);
+        AudioManager.Instance.PlaySFX(isCenter?sfxOnCenter.AudioKey:sfxOnCorner.AudioKey, 1);
     }
     public void OnRelease()
     {

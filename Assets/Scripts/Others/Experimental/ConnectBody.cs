@@ -4,7 +4,6 @@ using UnityEngine;
 public class ConnectBody : MonoBehaviour
 {
     [SerializeField] private float sphereRadius;
-    [SerializeField] private bool isSpherical = false;
     [SerializeField] private ShapeColorChanger shapeColorChanger;
 
     [Header("Vertices")]
@@ -21,7 +20,6 @@ public class ConnectBody : MonoBehaviour
 
     public Collider m_geoCollider=>geoCollider;
     public bool m_iscontrolling=>clickable_Moveable.isControlling;
-    public bool m_isSpherical=>isSpherical;
     private bool hasIdealConnection => idealSelfTrigger != null;
     private Quaternion offsetRotToOther;
 
@@ -86,21 +84,10 @@ public class ConnectBody : MonoBehaviour
     {
         if(clickable_Moveable.isControlling && hasIdealConnection)
         {
-            if(!m_isSpherical)
-            {
-                Quaternion targetRot;
-                if(idealPendingTrigger.m_connectBody.m_isSpherical)
-                {
-                    float angle = Vector2.SignedAngle(idealSelfTrigger.normal, idealPendingTrigger.transform.position - transform.position);
-                    targetRot = Quaternion.Euler(0,0,angle) * m_rigid.rotation;
-                }
-                else
-                {
-                    targetRot = offsetRotToOther * idealPendingTrigger.m_connectBody.m_rigid.rotation;
-                }
-                Quaternion idealRot = Quaternion.Lerp(m_rigid.rotation, targetRot, Time.fixedDeltaTime * (idealPendingTrigger.m_connectBody.m_isSpherical?10:5));
-                m_rigid.MoveRotation(idealRot);
-            }
+            Quaternion targetRot;
+            targetRot = offsetRotToOther * idealPendingTrigger.m_connectBody.m_rigid.rotation;
+            Quaternion idealRot = Quaternion.Lerp(m_rigid.rotation, targetRot, Time.fixedDeltaTime * 5);
+            m_rigid.MoveRotation(idealRot);
         }
     }
     void OnReleaseBody()
@@ -130,23 +117,12 @@ public class ConnectBody : MonoBehaviour
         {
             idealSelfTrigger.OnConnectionCatch(idealPendingTrigger);
         //Find the align rotation
-            if(!m_isSpherical)
-            {
-                float rotation;
-                if(!otherTrigger.m_connectBody.m_isSpherical) 
-                {
-                    rotation = Vector2.SignedAngle(idealSelfTrigger.normal, -idealPendingTrigger.normal);
-                    Quaternion idealRot = Quaternion.Euler(0,0,rotation) * m_rigid.rotation;
-                    Quaternion otherBodyRot = idealPendingTrigger.m_connectBody.m_rigid.rotation;
-                    offsetRotToOther = idealRot * Quaternion.Inverse(otherBodyRot);
-                }
-                else
-                {
-                    rotation = Vector2.SignedAngle(idealSelfTrigger.normal, otherTrigger.transform.position - transform.position);
-                    Quaternion idealRot = Quaternion.Euler(0,0,rotation) * m_rigid.rotation;
-                    offsetRotToOther = idealRot;
-                }
-            }
+            float rotation;
+
+            rotation = Vector2.SignedAngle(idealSelfTrigger.normal, -idealPendingTrigger.normal);
+            Quaternion idealRot = Quaternion.Euler(0,0,rotation) * m_rigid.rotation;
+            Quaternion otherBodyRot = idealPendingTrigger.m_connectBody.m_rigid.rotation;
+            offsetRotToOther = idealRot * Quaternion.Inverse(otherBodyRot);
 
             m_rigid.freezeRotation = true;
         }
@@ -201,13 +177,5 @@ public class ConnectBody : MonoBehaviour
             vertices[i] = points[i].position;
         }
         return vertices;
-    }
-    void OnDrawGizmos()
-    {
-        if(isSpherical)
-        {
-            Gizmos.color = Color.green;
-            Gizmos.DrawWireSphere(transform.position, sphereRadius);
-        }
     }
 }

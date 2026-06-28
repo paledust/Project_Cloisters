@@ -88,7 +88,7 @@ public class IC_Experimental : IC_Basic
         //All bodies are connected together
         if(builtConnections.Count >= activeBodies.Count-1)
         {
-            if (rangeDetection.CheckRange())
+            if (rangeDetection.CheckIsAllShapeContained())
             {
                 int textAmount = stages[stageIndex].textAmount;
                 int throwBodyAmount = stages[stageIndex].throwBodiesAmount;
@@ -122,7 +122,7 @@ public class IC_Experimental : IC_Basic
         {
             shape.BlinkShape(blinkColor1, blinkColor2);
         }
-        rangeDetection.FailBlink();
+        rangeDetection.SwitchBlink(true);
         yield return new WaitForSeconds(1);
         for(int i=builtConnections.Count-1; i>=0; i--)
         {
@@ -131,12 +131,12 @@ public class IC_Experimental : IC_Basic
             connection.BreakConnection(10f, 0, connection.transform.position);
             yield return new WaitForSeconds(Random.Range(0f, 0.05f));
         }
-        rangeDetection.RecoverBlink();
+        rangeDetection.SwitchBlink(false);
     }
     IEnumerator coroutineCompletingStage(int textAmount, int throwBodyAmount)
     {
         EventHandler.Call_OnTransitionBegin();
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(.8f);
 
         //Break Connections
         for(int i=builtConnections.Count-1; i>=0; i--)
@@ -145,7 +145,7 @@ public class IC_Experimental : IC_Basic
             connection.BreakConnection(10f, 0, connection.transform.position);
             yield return new WaitForSeconds(Random.Range(0f, 0.05f));
         }
-
+        
         //Pop texts
         for(int i=0; i<textAmount; i++)
         {
