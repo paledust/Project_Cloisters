@@ -1,3 +1,4 @@
+using SimpleAudioSystem;
 using UnityEngine;
 
 [AddComponentMenu("InteractionController")]
@@ -8,13 +9,15 @@ public abstract class IC_Basic : MonoBehaviour
     [SerializeField] protected Vector2 interact_rect;
     [SerializeField] protected float interact_depth;
 
-[Header("Music")]
+[Header("Ambient")]
     [SerializeField] protected AmbienceHandler ambHandler;
-    [SerializeField] protected float ambienceVolume = 1f;
-    [SerializeField] protected BGMHandler bgmHandler;
-    [SerializeField] protected float musicVolume = 1f;
     [SerializeField] protected string ambKey;
+    [SerializeField] protected float ambienceVolume = 1f;
+
+[Header("Music")]
+    [SerializeField] protected BGMHandler bgmHandler;
     [SerializeField] protected string musKey;
+    [SerializeField] protected float musicVolume = 1f;
 
     private bool m_hasMusicStarted = false;
 
@@ -66,12 +69,15 @@ public abstract class IC_Basic : MonoBehaviour
         }
         if(!string.IsNullOrEmpty(musKey))
         {
+            if(!bgmHandler.isInitialized)
+                bgmHandler.Init(AudioManager.Instance);
             if(musKey == "{stop}")
                 bgmHandler.FadeOutMusic(1);
             else
                 bgmHandler.PlayMusic(musKey, transition, musicVolume);
         }
     }
+
 //When loading resources
     protected virtual void LoadAssets() { m_isLoaded = true; }
 //When unloading resources

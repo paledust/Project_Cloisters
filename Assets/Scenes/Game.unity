@@ -27202,11 +27202,11 @@ MonoBehaviour:
   interact_rect: {x: 27, y: 15}
   interact_depth: 35
   ambHandler: {fileID: 601070084}
+  ambKey: amb_roomtone
   ambienceVolume: 1
   bgmHandler: {fileID: 601070085}
-  musicVolume: 1
-  ambKey: amb_roomtone
   musKey: bgm_cloisters
+  musicVolume: 1
   heroSphere: {fileID: 200087326}
   shineDissolve: {fileID: 1773863635}
   threasholdRotatorSpeed: 50
@@ -32476,11 +32476,11 @@ MonoBehaviour:
   interact_rect: {x: 0, y: 0}
   interact_depth: 0
   ambHandler: {fileID: 601070084}
+  ambKey: amb_roomtone
   ambienceVolume: 1
   bgmHandler: {fileID: 601070085}
-  musicVolume: 1
-  ambKey: amb_roomtone
   musKey: bgm_intro_loop
+  musicVolume: 1
   motionController: {fileID: 179842572}
   camController: {fileID: 179842573}
   rotateController: {fileID: 179842574}
@@ -38290,11 +38290,11 @@ MonoBehaviour:
   interact_rect: {x: 27, y: 15}
   interact_depth: 35
   ambHandler: {fileID: 601070084}
+  ambKey: amb_roomtone
   ambienceVolume: 1
   bgmHandler: {fileID: 601070085}
-  musicVolume: 1
-  ambKey: amb_roomtone
   musKey: bgm_evocative
+  musicVolume: 1
   restartPos: {fileID: 1751796355}
   ballLauncher: {fileID: 1828492710}
   bounceBall: {fileID: 844904207}
@@ -88491,11 +88491,11 @@ MonoBehaviour:
   interact_rect: {x: 27, y: 15}
   interact_depth: 0
   ambHandler: {fileID: 601070084}
+  ambKey: amb_stylized
   ambienceVolume: 0.5
   bgmHandler: {fileID: 601070085}
-  musicVolume: 1
-  ambKey: amb_stylized
   musKey: '{stop}'
+  musicVolume: 1
   musicSource: {fileID: 858665675}
   musicFade: {x: 0.15, y: 0.35}
   finalMusicVolume: 0.6
@@ -88986,7 +88986,7 @@ MonoBehaviour:
       m_Action: menu
       m_Flags: 0
   StartIndex: 5
-  startAtDebugIndex: 1
+  startAtDebugIndex: 0
   debugActions:
     m_Name: Debug Actions
     m_Id: 61c845d5-958f-43ed-86d7-6a4ad0af5089
@@ -114328,6 +114328,7 @@ GameObject:
   - component: {fileID: 975206077}
   - component: {fileID: 975206078}
   - component: {fileID: 975206079}
+  - component: {fileID: 975206080}
   m_Layer: 0
   m_Name: IC Experimental
   m_TagString: Untagged
@@ -114366,11 +114367,11 @@ MonoBehaviour:
   interact_rect: {x: 27, y: 15}
   interact_depth: 35
   ambHandler: {fileID: 601070084}
-  ambienceVolume: 1
-  bgmHandler: {fileID: 601070085}
-  musicVolume: 1
   ambKey: amb_roomtone
+  ambienceVolume: 1
+  bgmHandler: {fileID: 975206080}
   musKey: bgm_experimental
+  musicVolume: 1
   stages:
   - textAmount: 2
     throwBodiesAmount: 1
@@ -114447,6 +114448,7 @@ MonoBehaviour:
   sfxTextPopIn: {fileID: 11400000, guid: 95ab78f40d184d7da4160bc844c9bb85, type: 2}
   sfxTextPopOut: {fileID: 11400000, guid: 95ab78f40d184d7da4160bc844c9bb85, type: 2}
   sfxFail: {fileID: 11400000, guid: ba5fdea7d75975f42a7a294d64cb9e3f, type: 2}
+  musicLoopDuration: 0
 --- !u!114 &975206079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114467,6 +114469,19 @@ MonoBehaviour:
   connectDuration: 0.75
   sfxOnMerge: group_click_on
   sfxOnSeparate: group_click_off
+--- !u!114 &975206080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 975206076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f35c496b8cd96c46b0aa78533f6d617, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bgmLoopTime: 200
 --- !u!1001 &978177926
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -139054,11 +139069,11 @@ MonoBehaviour:
   interact_rect: {x: 0, y: 0}
   interact_depth: 0
   ambHandler: {fileID: 601070084}
+  ambKey: amb_roomtone
   ambienceVolume: 1
   bgmHandler: {fileID: 601070085}
-  musicVolume: 1
-  ambKey: amb_roomtone
   musKey: bgm_whimsical
+  musicVolume: 1
   crystal: {fileID: 1943220756}
   textController: {fileID: 1281400411}
   count: 0
@@ -146393,11 +146408,11 @@ MonoBehaviour:
   interact_rect: {x: 27, y: 15}
   interact_depth: 35
   ambHandler: {fileID: 601070084}
+  ambKey: amb_narrative
   ambienceVolume: 0.2
   bgmHandler: {fileID: 601070085}
-  musicVolume: 1
-  ambKey: amb_narrative
   musKey: bgm_narrative
+  musicVolume: 1
   rippleParticleController: {fileID: 1382798986}
   circleManager: {fileID: 1382798987}
   p_collideBurst: {fileID: 6889873}
@@ -195708,11 +195723,11 @@ MonoBehaviour:
   interact_rect: {x: 0, y: 0}
   interact_depth: 0
   ambHandler: {fileID: 601070084}
+  ambKey: amb_roomtone
   ambienceVolume: 1
   bgmHandler: {fileID: 601070085}
-  musicVolume: 1
-  ambKey: amb_roomtone
   musKey: bgm_meaningful
+  musicVolume: 1
   clickable_Mirror: {fileID: 994141888}
   textShownDatas:
   - recieveChar: 77

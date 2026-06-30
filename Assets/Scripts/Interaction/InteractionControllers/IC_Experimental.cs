@@ -42,6 +42,9 @@ public class IC_Experimental : IC_Basic
     [SerializeField] private AudioData_SO sfxTextPopOut;
     [SerializeField] private AudioData_SO sfxFail;
 
+[Header("Music")]
+    [SerializeField] private float musicLoopDuration;
+
     private int shapeFront;
     private int stageIndex = 0;
     private int textIndex = 0;
@@ -62,6 +65,8 @@ public class IC_Experimental : IC_Basic
         rangeDetection.RangeAppear(0.01f);
         rangeDetection.InitRangeDetect(activeBodies.Count);
 
+        bgmHandler.enabled = true;
+        bgmHandler.Init(AudioManager.Instance);
         EventHandler.E_OnCollectExperimentalText += OnCollectionText;
         EventHandler.E_OnBuildConnectionBreaker += OnBuildConnectionBreaker;
         EventHandler.E_OnBreakConnectionBreaker += OnBreakConnectionBreaker;
@@ -69,9 +74,11 @@ public class IC_Experimental : IC_Basic
     protected override void OnInteractionEnd()
     {
         base.OnInteractionEnd();
+
         EventHandler.E_OnCollectExperimentalText -= OnCollectionText;
         EventHandler.E_OnBuildConnectionBreaker -= OnBuildConnectionBreaker;
         EventHandler.E_OnBreakConnectionBreaker -= OnBreakConnectionBreaker;
+        bgmHandler.enabled = false;
     }
     void OnBreakConnectionBreaker(Clickable_ConnectionBreaker connectionBreaker, Vector3 breakPoint)
     {
@@ -210,11 +217,6 @@ public class IC_Experimental : IC_Basic
             EventHandler.Call_OnTransitionEnd();
         }
     }
-    [ContextMenu("Debug End Test")]
-    public void Debug_EndTest()
-    {
-        StartCoroutine(coroutineEnd());
-    }
     IEnumerator coroutineEnd()
     {
         foreach(var shapePusher in shapePushers)
@@ -255,5 +257,10 @@ public class IC_Experimental : IC_Basic
         Gizmos.DrawWireCube(pos, new Vector3(textPopRect.x, textPopRect.y, 0.01f));
         Gizmos.color = new Color(1,0,0,0.5f);
         Gizmos.DrawWireCube(pos, new Vector3(forbidZone, textPopRect.y, 0.01f));
+    }
+    [ContextMenu("Debug End Test")]
+    public void Debug_EndTest()
+    {
+        StartCoroutine(coroutineEnd());
     }
 }

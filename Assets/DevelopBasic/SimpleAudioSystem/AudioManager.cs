@@ -48,13 +48,14 @@ namespace SimpleAudioSystem{
                 return;
             music_loop.PlayDelayed(delayed);
         }
-        public void PlayMusic(string audio_name, bool startOver, float transitionTime, float volume = 1, bool forcePlay = false){
+        public void PlayMusic(string audio_name, bool startOver, float transitionTime, float volume = 1, bool forcePlay = false, bool isLoop = true){
         //If no audio name, fade out the ambience
             if(audio_name == string.Empty){
                 FadeAudio(music_loop, 0, transitionTime, true);
                 current_music_name = string.Empty;
                 return;
             }
+            music_loop.loop = isLoop;
         //If the audio name is the same, only fade the volume to the target value
             if(current_music_name == audio_name){
                 FadeAudio(music_loop, volume, transitionTime);
