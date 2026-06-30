@@ -38,8 +38,9 @@ public class IC_Experimental : IC_Basic
     [SerializeField] private GameObject[] shapePushers;
 
 [Header("Audio")]
-    [SerializeField] private string sfxTextPopIn;
-    [SerializeField] private string sfxTextPopOut;
+    [SerializeField] private AudioData_SO sfxTextPopIn;
+    [SerializeField] private AudioData_SO sfxTextPopOut;
+    [SerializeField] private AudioData_SO sfxFail;
 
     private int shapeFront;
     private int stageIndex = 0;
@@ -114,10 +115,11 @@ public class IC_Experimental : IC_Basic
         matchText.transform.localScale = Vector3.zero;
         matchText.gameObject.SetActive(true);
         matchText.transform.DOScale(Vector3.one*targetScale, 0.3f).SetEase(Ease.OutBack, 2);
-        AudioManager.Instance.PlaySFX(sfxTextPopOut, .5f);
+        AudioManager.Instance.PlaySFX(sfxTextPopOut.AudioKey, .5f);
     }
     IEnumerator coroutineFailStage()
     {
+        AudioManager.Instance.PlaySFX(sfxFail.AudioKey, 1);
         foreach(var shape in activeBodies)
         {
             shape.BlinkShape(blinkColor1, blinkColor2);
@@ -158,7 +160,7 @@ public class IC_Experimental : IC_Basic
             text.transform.localScale = Vector3.one * 0.5f;
             text.transform.localRotation = Quaternion.Euler(0,0,Random.Range(-20, 20));
             text.gameObject.SetActive(true);
-            AudioManager.Instance.PlaySFX(sfxTextPopIn, 0.5f);
+            AudioManager.Instance.PlaySFX(sfxTextPopIn.AudioKey, 0.5f);
             text.transform.DOScale(Vector3.one, 0.5f).SetEase(Ease.OutBack, 10);
             text.transform.DOLocalMove(position + (Vector3)Random.insideUnitCircle*2, 1f).SetEase(Ease.OutCirc).OnComplete(()=>
             {

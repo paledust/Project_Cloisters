@@ -5084,7 +5084,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
-  m_Size: {x: 16.54, y: 10.07}
+  m_Size: {x: 18.46, y: 12.1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -5275,11 +5275,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rangeRenderer: {fileID: 1166006711043572542}
   boundryRenderer: {fileID: 9050233495557863180}
-  testPerSec: 10
   fullfillColor: {r: 0.7254902, g: 0.87058824, b: 0.72156864, a: 1}
   defaultColor: {r: 0.92156863, g: 0.8901961, b: 0.8745098, a: 1}
-  isRange: 0
+  testPerSec: 10
+  allContained: 0
   p_burst: {fileID: 2475649534493884013}
   shapeAnimator: {fileID: 3002747064857914275}
   sfxOnShapeContained: {fileID: 11400000, guid: 1df4d692129f68e42a9a138fd3c9d6a4,
     type: 2}
+  sfxOnDetected: {fileID: 11400000, guid: 6705629f179ba7049a0317c1f5729b2a, type: 2}
+  detectedVolume: 0.3
+  undetectedVolume: 0.1
+  hasIntersect: 0

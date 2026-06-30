@@ -21,7 +21,10 @@ public class RangeDetection : MonoBehaviour
 
 [Header("Audio")]
     [SerializeField] private AudioData_SO sfxOnShapeContained;
-    
+    [SerializeField] private AudioData_SO sfxOnDetected;
+    [SerializeField, Range(0, 1)] private float detectedVolume;
+    [SerializeField, Range(0, 1)] private float undetectedVolume;
+
     private List<ConnectBody> bodyHash;
     private Collider2D m_collider;
     private Color boundryInitColor;
@@ -97,6 +100,7 @@ public class RangeDetection : MonoBehaviour
         {
             hasIntersect = !hashedContained;
             shapeAnimator.SetBool(SHAPE_INTERSECT_BOOL, hasIntersect);
+            AudioManager.Instance.PlaySFX(sfxOnDetected.AudioKey, hasIntersect?detectedVolume:undetectedVolume);
         }
         return bodyHash.Count>=totalBodyCount && hashedContained;
     }
