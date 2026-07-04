@@ -39,6 +39,8 @@ public class RangeDetection : MonoBehaviour
     private const string SHAPE_EXPAND_ANIME = "ShapeExpand";
     private const string SHAPE_BLINK_BOOL = "IsBlink";
     private const string SHAPE_INTERSECT_BOOL = "IsIntersect";
+    private const string SHAPE_FULLFILL_BOOL = "IsFullfill";
+    private const string SHAPE_FILL_BOOL = "IsFill";
 
 
     void Awake() => m_collider = GetComponent<Collider2D>();
@@ -64,7 +66,8 @@ public class RangeDetection : MonoBehaviour
                 if(newFlag)
                     PunchScale(0.035f, 0.4f, 10);
                 rangeRenderer.DOKill();
-                rangeRenderer.DOColor(newFlag?fullfillColor:defaultColor, 0.2f);
+                // rangeRenderer.DOColor(newFlag?fullfillColor:defaultColor, 0.2f);
+                shapeAnimator.SetBool(SHAPE_FILL_BOOL, newFlag);
                 boundryRenderer.DOKill();
                 boundryRenderer.DOColor(newFlag?Color.clear:boundryInitColor, 0.2f);
                 if(newFlag)
@@ -92,6 +95,7 @@ public class RangeDetection : MonoBehaviour
             m_collider.enabled = true
         );
     }
+    public void SwitchCoreBlink(bool isBlink) => shapeAnimator.SetBool(SHAPE_FULLFILL_BOOL, isBlink);
     public void SwitchBlink(bool isBlink) => shapeAnimator.SetBool(SHAPE_BLINK_BOOL, isBlink);
     public bool CheckIsAllShapeContained()
     {

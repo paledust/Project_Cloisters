@@ -1,10 +1,12 @@
 using DG.Tweening;
-using SimpleAudioSystem;
 using UnityEngine;
 
 public class CollectableText : MonoBehaviour
 {
     [SerializeField] private char collectKey;
+    [SerializeField] private Animation textAnimation;
+    [SerializeField] private ParticleSystem P_textPop;
+
     public char m_collectKey=>collectKey;
 
     public void CollectText(float delay)
@@ -13,5 +15,11 @@ public class CollectableText : MonoBehaviour
         .SetDelay(delay).OnComplete(()=>{
             EventHandler.Call_OnCollectExperimentalText(this);
         });
+    }
+    public void PopText()
+    {
+        P_textPop.Play();
+        textAnimation.Play();
+        transform.DOScale(Vector3.one, 0.5f).SetEase(Ease.OutBack, 10);
     }
 }

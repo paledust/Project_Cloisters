@@ -2,11 +2,14 @@ using UnityEngine;
 
 public class Clickable_ConnectionBreaker : Basic_Clickable
 {
+    [SerializeField] private SpriteRenderer hintSprite;
     [SerializeField] private float breakForce = 20f;
     [SerializeField] private float breakTorque = 30f;
+
     private ConnectTrigger main;
     private ConnectTrigger other;
     private Joint connectJoint;
+
     public void InitConnection(Joint joint, ConnectTrigger main, ConnectTrigger other)
     {
         this.main = main;
@@ -17,6 +20,16 @@ public class Clickable_ConnectionBreaker : Basic_Clickable
     {
         base.OnClick(player, hitPos);
         BreakConnection(breakForce, breakTorque, hitPos);
+    }
+    public override void OnHover(PlayerController player)
+    {
+        base.OnHover(player);
+        hintSprite.enabled = true;
+    }
+    public override void OnExitHover()
+    {
+        base.OnExitHover();
+        hintSprite.enabled = false;
     }
     public void BreakConnection(float force, float torque, Vector3 breakPos)
     {

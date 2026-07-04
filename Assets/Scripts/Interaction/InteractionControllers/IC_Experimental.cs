@@ -144,6 +144,7 @@ public class IC_Experimental : IC_Basic
     }
     IEnumerator coroutineCompletingStage(int textAmount, int throwBodyAmount)
     {
+        rangeDetection.SwitchCoreBlink(true);
         EventHandler.Call_OnTransitionBegin();
         yield return new WaitForSeconds(.8f);
 
@@ -154,7 +155,7 @@ public class IC_Experimental : IC_Basic
             connection.BreakConnection(10f, 0, connection.transform.position);
             yield return new WaitForSeconds(Random.Range(0f, 0.05f));
         }
-        
+        rangeDetection.SwitchCoreBlink(false);
         //Pop texts
         for(int i=0; i<textAmount; i++)
         {
@@ -168,7 +169,7 @@ public class IC_Experimental : IC_Basic
             text.transform.localRotation = Quaternion.Euler(0,0,Random.Range(-20, 20));
             text.gameObject.SetActive(true);
             AudioManager.Instance.PlaySFX(sfxTextPopIn.AudioKey, 0.5f);
-            text.transform.DOScale(Vector3.one, 0.5f).SetEase(Ease.OutBack, 10);
+            text.PopText();
             text.transform.DOLocalMove(position + (Vector3)Random.insideUnitCircle*2, 1f).SetEase(Ease.OutCirc).OnComplete(()=>
             {
                 text.CollectText(textCollectDelay.GetRndValueInVector2Range());
