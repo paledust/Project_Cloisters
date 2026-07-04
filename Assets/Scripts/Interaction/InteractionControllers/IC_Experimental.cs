@@ -66,7 +66,7 @@ public class IC_Experimental : IC_Basic
         rangeDetection.InitRangeDetect(activeBodies.Count);
 
         bgmHandler.enabled = true;
-        bgmHandler.Init(AudioManager.Instance);
+        bgmHandler.Init();
         EventHandler.E_OnCollectExperimentalText += OnCollectionText;
         EventHandler.E_OnBuildConnectionBreaker += OnBuildConnectionBreaker;
         EventHandler.E_OnBreakConnectionBreaker += OnBreakConnectionBreaker;

@@ -3,25 +3,21 @@ using UnityEngine;
 
 public class AmbienceHandler : MonoBehaviour
 {
-    private AudioManager audioManager;
-    public void Init(AudioManager audioManager)
-    {
-        this.audioManager = audioManager;
-    }
+    public void Init(){}
     public void CleanUp()
     {
         FadeOutAmbience(0.5f, true);
     }
     public void FadeOutAmbience(float duration, bool stopAfterFade = false)
     {
-        audioManager.FadeAmbience(0, duration, stopAfterFade);
+        AudioManager.Instance.FadeAmbience(0, duration, stopAfterFade);
     }
     public void PlayAmbience(string ambienceName, float volume)
     {
-        audioManager.PlayAmbience(ambienceName, true, volume, false);
+        AudioManager.Instance.PlayAmbience(ambienceName, true, volume, false);
     }
     public void PlayAmbience(string ambienceName, float transitionTime, float volume)
     {
-        audioManager.PlayAmbience(ambienceName, true, transitionTime, volume);
+        AudioManager.Instance.PlayAmbience(ambienceName, true, transitionTime, volume);
     }
 }

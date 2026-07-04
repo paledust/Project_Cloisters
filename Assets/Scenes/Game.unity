@@ -88986,7 +88986,7 @@ MonoBehaviour:
       m_Action: menu
       m_Flags: 0
   StartIndex: 5
-  startAtDebugIndex: 0
+  startAtDebugIndex: 1
   debugActions:
     m_Name: Debug Actions
     m_Id: 61c845d5-958f-43ed-86d7-6a4ad0af5089
@@ -114481,7 +114481,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f35c496b8cd96c46b0aa78533f6d617, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bgmLoopTime: 200
+  bgmDuration: 200
+  silcenDuration: 30
+  fadeDuration: 2
+  resumeOnTime: 1
 --- !u!1001 &978177926
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -63,8 +63,8 @@ public class IC_Manager : MonoBehaviour
     }
     void Start()
     {
-        ambienceHandler.Init(AudioManager.Instance);
-        bgmHandler.Init(AudioManager.Instance);
+        ambienceHandler.Init();
+        bgmHandler.Init();
     #if UNITY_EDITOR
         if(startAtDebugIndex)
         {

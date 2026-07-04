@@ -70,7 +70,7 @@ public abstract class IC_Basic : MonoBehaviour
         if(!string.IsNullOrEmpty(musKey))
         {
             if(!bgmHandler.isInitialized)
-                bgmHandler.Init(AudioManager.Instance);
+                bgmHandler.Init();
             if(musKey == "{stop}")
                 bgmHandler.FadeOutMusic(1);
             else
