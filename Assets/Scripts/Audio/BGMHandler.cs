@@ -15,6 +15,6 @@ public class BGMHandler : MonoBehaviour
     public void CleanUp() => FadeOutMusic(0.5f, true);
     public void FadeOutMusic(float duration, bool stopAfterFade) => audioManager.FadeMusic(0, duration, stopAfterFade);
     public void FadeOutMusic(float duration) => FadeOutMusic(duration, false);
-    public virtual void PlayMusic(string bgmName, float volume, float transition = 0.5f)=>audioManager.PlayMusic(bgmName, true, transition, volume, false, true);
+    public virtual void PlayMusic(string bgmName, float volume, float transition = 0.5f)=>audioManager.PlayMusic(bgmName, true, transition, volume, false);
     protected virtual void OnInit() {}
 }

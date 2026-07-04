@@ -1,15 +1,22 @@
+using DG.Tweening;
 using UnityEngine;
 
 public class Clickable_ConnectionBreaker : Basic_Clickable
 {
-    [SerializeField] private SpriteRenderer hintSprite;
+    [SerializeField] private Transform hintTrans;
     [SerializeField] private float breakForce = 20f;
     [SerializeField] private float breakTorque = 30f;
 
     private ConnectTrigger main;
     private ConnectTrigger other;
     private Joint connectJoint;
+    private float initHintScale;
 
+    void Awake()
+    {
+        initHintScale = hintTrans.localScale.x;
+        hintTrans.localScale = Vector3.zero;
+    }
     public void InitConnection(Joint joint, ConnectTrigger main, ConnectTrigger other)
     {
         this.main = main;
@@ -24,12 +31,12 @@ public class Clickable_ConnectionBreaker : Basic_Clickable
     public override void OnHover(PlayerController player)
     {
         base.OnHover(player);
-        hintSprite.enabled = true;
+        hintTrans.DOScale(Vector3.one * initHintScale, 0.15f).SetEase(Ease.OutBack);
     }
     public override void OnExitHover()
     {
         base.OnExitHover();
-        hintSprite.enabled = false;
+        hintTrans.DOScale(Vector3.zero, 0.2f).SetEase(Ease.InBack);
     }
     public void BreakConnection(float force, float torque, Vector3 breakPos)
     {

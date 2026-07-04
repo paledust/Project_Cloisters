@@ -21,14 +21,14 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: M Experimental ConnectionBreaker
-  m_Shader: {fileID: 4800000, guid: 45c9ef50ca9ec5c4fa9e7f09cb52d191, type: 3}
+  m_Shader: {fileID: 4800000, guid: 950f2d6a26cb4bc4b87ec70060777ddf, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords:
+  m_ValidKeywords: []
+  m_InvalidKeywords:
   - _DISSOLVETYPE_RADIUS
   - _EDGEBLEND_ALPHABLEND
   - _FILLCOLORMODE_MULTIPLY
-  m_InvalidKeywords:
   - _RECEIVESHADOWS_OFF
   - _RECEIVE_SHADOWS_OFF
   m_LightmapFlags: 4
@@ -184,11 +184,12 @@ Material:
     - _Dissolve: 0
     - _DissolveDirection: 0
     - _DissolveDistance: 0
-    - _DissolveLength: -0.15
+    - _DissolveLength: -0.05
     - _DissolveNoiseStrength: 0.1
+    - _DissolveRadius: 0.5
     - _DissolveSmooth: 0.01
     - _DissolveSoftness: 0.01
-    - _DissolveStart: 0.3
+    - _DissolveStart: 0.35
     - _DissolveType: 0
     - _DistortionBlend: 0.5
     - _DistortionEnabled: 0
@@ -201,7 +202,7 @@ Material:
     - _EdgeValue: 0
     - _EmissionScale: 1
     - _Emissive: 2
-    - _EmissiveStrength: 5
+    - _EmissiveStrength: 3
     - _EnvironmentReflections: 1
     - _ExternalNoiseMovement: 0
     - _FadeLength: 1
@@ -216,6 +217,7 @@ Material:
     - _FresnelPower: 0.89
     - _FresnelScale: 1.5
     - _FresnelSmooth: 0.25
+    - _Gap: 0.5
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
@@ -257,12 +259,18 @@ Material:
     - _PatternScale: 0.1
     - _PhaseOffset: 0
     - _Power: 550
+    - _Progress: 0
     - _QueueControl: 0
     - _QueueOffset: 0
     - _RNDSeed: 0
     - _RadialScale: 1
+    - _RadiusBlink: 0
     - _RadiusCenterX: 0.5
     - _RadiusCenterY: 0.5
+    - _RadiusMin: 0
+    - _RadiusNoiseX: 0
+    - _RadiusNoiseY: 0
+    - _RadiusSmooth: 0
     - _RampLevel: 0.76
     - _RampNoise: 0.5
     - _RampNoiseStrength: -1.06
@@ -348,7 +356,7 @@ Material:
     - _DissolvePanSpeed: {r: 0.3, g: 0.5, b: 0, a: 0}
     - _EdgeColor: {r: 1, g: 0.78512925, b: 0.16862746, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _FillColor: {r: 13.928808, g: 9.038873, b: 5.2298717, a: 1}
+    - _FillColor: {r: 3.9999998, g: 2.0123298, b: 0.4754715, a: 1}
     - _FresenelDirOffset: {r: 0, g: 0.2, b: 0, a: 0}
     - _FresnelColor: {r: 2.072162, g: 0.7297614, b: 0.1531598, a: 1}
     - _GlowColor: {r: 1, g: 1, b: 1, a: 1}
@@ -362,6 +370,7 @@ Material:
     - _NoiseTile: {r: 1, g: 1, b: 0, a: 0}
     - _NoiseUVOffset: {r: 0, g: 0, b: 0, a: 0}
     - _PlanetMapSpeed: {r: 0.02, g: 0.05, b: 0, a: 0}
+    - _RadiusColor: {r: 1, g: 1, b: 1, a: 1}
     - _ReflectDir: {r: 1.7, g: 1, b: -1, a: 0}
     - _ReflectionColor: {r: 1, g: 0.56037736, b: 0.56037736, a: 1}
     - _SoftParticleFadeParams: {r: 0, g: 0, b: 0, a: 0}

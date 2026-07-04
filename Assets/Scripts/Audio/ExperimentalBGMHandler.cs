@@ -29,7 +29,7 @@ public class ExperimentalBGMHandler : BGMHandler
         {
             stateTime = 0;
             state = BGMState.Playing;
-            audioManager.PlayMusic(bgmName, true, transition, volume, false, false);
+            audioManager.PlayMusic(bgmName, true, transition, volume, false);
         }
     }
     void Update()

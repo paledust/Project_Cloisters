@@ -53,7 +53,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.12
+  m_Radius: 0.2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &534317504960064169
 MonoBehaviour:
@@ -71,7 +71,7 @@ MonoBehaviour:
   clickVolume: 1
   hitbox: {fileID: 2869868705587538938}
   disableClick: 0
-  hintSprite: {fileID: 4914442394766676426}
+  hintTrans: {fileID: 927921818641658926}
   breakForce: 5
   breakTorque: 2
 --- !u!1 &2474079501955048625
@@ -101,7 +101,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1766277912551381424}
@@ -147,8 +147,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 92603860724534f40ad316e7f19ee332, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 201f233bc7d34ba44900eecef9e2e28b, type: 3}
+  m_Color: {r: 1, g: 0.5157564, b: 0.1415093, a: 0.9019608}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
