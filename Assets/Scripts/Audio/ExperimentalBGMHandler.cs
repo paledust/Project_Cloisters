@@ -61,7 +61,7 @@ public class ExperimentalBGMHandler : BGMHandler
                 {
                     state = BGMState.Playing;
                     stateTime = 0;
-                    audioManager.FadeMusic(lastVolume, 0.5f, false);
+                    audioManager.FadeMusic(lastVolume, fadeDuration, false);
                 }
                 break;
             default:

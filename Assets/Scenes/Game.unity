@@ -114371,7 +114371,7 @@ MonoBehaviour:
   ambienceVolume: 0.5
   bgmHandler: {fileID: 975206080}
   musKey: bgm_experimental
-  musicVolume: 1
+  musicVolume: 0.5
   stages:
   - textAmount: 2
     throwBodiesAmount: 1

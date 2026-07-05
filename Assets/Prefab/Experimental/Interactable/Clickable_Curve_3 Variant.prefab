@@ -56,7 +56,7 @@ Transform:
   m_GameObject: {fileID: 1208881693}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.22, y: 0.08, z: 0}
+  m_LocalPosition: {x: -3.186, y: 0.08, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -129,6 +129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sfx_clickSound: 
+  clickVolume: 1
   hitbox: {fileID: 7012952556765596769}
   disableClick: 0
   m_rigid: {fileID: 46155926008519090}
@@ -848,6 +849,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_connectors.Array.data[2].connectLength
       value: 5.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334799828255061722, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334799828255061722, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334799828255061722, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334799828255061722, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.012
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334799828255061722, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.024
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334799828255061722, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6394442942731453241, guid: e843106840614744cae4702badee9286,
         type: 3}
@@ -1827,6 +1858,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1836400631658203142, guid: 637d8c00940d24f439b5e25f8b74d291,
         type: 3}
+    - target: {fileID: 9190266374010824891, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9190266374010824891, guid: e843106840614744cae4702badee9286,
         type: 3}
       propertyPath: m_Material
