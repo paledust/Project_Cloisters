@@ -7,9 +7,10 @@ public class ExperimentalBGMHandler : BGMHandler
         Stop,
         Playing,
         Fading,
-        Silent
+        Weak
     }
     [SerializeField, ShowOnly] private BGMState state;
+    [SerializeField, Range(0, 1)] private float weakVolume;
     [SerializeField] private float bgmDuration;
     [SerializeField] private float silcenDuration;
     [SerializeField] private float fadeDuration;
@@ -28,6 +29,7 @@ public class ExperimentalBGMHandler : BGMHandler
         if(state!=BGMState.Playing)
         {
             stateTime = 0;
+            lastVolume = volume;
             state = BGMState.Playing;
             audioManager.PlayMusic(bgmName, true, transition, volume, false);
         }
@@ -42,18 +44,18 @@ public class ExperimentalBGMHandler : BGMHandler
                 {
                     state = BGMState.Fading;
                     stateTime = 0;
-                    audioManager.FadeMusic(0, fadeDuration, false);
+                    audioManager.FadeMusic(weakVolume, fadeDuration, false);
                 }
                 break;
             case BGMState.Fading:
                 stateTime += Time.deltaTime;
                 if(stateTime > fadeDuration)
                 {
-                    state = BGMState.Silent;
+                    state = BGMState.Weak;
                     stateTime = 0;
                 }
                 break;
-            case BGMState.Silent:
+            case BGMState.Weak:
                 stateTime += Time.deltaTime;
                 if(stateTime > silcenDuration)
                 {

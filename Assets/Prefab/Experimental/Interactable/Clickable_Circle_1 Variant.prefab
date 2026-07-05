@@ -129,6 +129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sfx_clickSound: 
+  clickVolume: 1
   hitbox: {fileID: 5505718738346508093}
   disableClick: 0
   m_rigid: {fileID: 2385563603428212756}
@@ -203,6 +204,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sfx_clickSound: 
+  clickVolume: 1
   hitbox: {fileID: 5562514836806390327}
   disableClick: 0
   m_rigid: {fileID: 2385563603428212756}
@@ -277,6 +279,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sfx_clickSound: 
+  clickVolume: 1
   hitbox: {fileID: 8007800626257488373}
   disableClick: 0
   m_rigid: {fileID: 2385563603428212756}
@@ -999,17 +1002,17 @@ PrefabInstance:
     - target: {fileID: 6334799828255061722, guid: e843106840614744cae4702badee9286,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.74544
+      value: 0.725
       objectReference: {fileID: 0}
     - target: {fileID: 6334799828255061722, guid: e843106840614744cae4702badee9286,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.74544
+      value: 0.725
       objectReference: {fileID: 0}
     - target: {fileID: 6334799828255061722, guid: e843106840614744cae4702badee9286,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.74544
+      value: 0.725
       objectReference: {fileID: 0}
     - target: {fileID: 6334799828255061722, guid: e843106840614744cae4702badee9286,
         type: 3}
@@ -1025,6 +1028,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334799828255061722, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6394442942731453241, guid: e843106840614744cae4702badee9286,
         type: 3}

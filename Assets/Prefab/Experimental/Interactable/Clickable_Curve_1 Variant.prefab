@@ -561,6 +561,16 @@ PrefabInstance:
       propertyPath: m_connectors.Array.data[1].connectLength
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 6334799828255061722, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334799828255061722, guid: e843106840614744cae4702badee9286,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.02
+      objectReference: {fileID: 0}
     - target: {fileID: 6394442942731453241, guid: e843106840614744cae4702badee9286,
         type: 3}
       propertyPath: m_LocalPosition.x

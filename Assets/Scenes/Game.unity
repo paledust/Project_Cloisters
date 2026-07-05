@@ -114368,7 +114368,7 @@ MonoBehaviour:
   interact_depth: 35
   ambHandler: {fileID: 601070084}
   ambKey: amb_roomtone
-  ambienceVolume: 1
+  ambienceVolume: 0.5
   bgmHandler: {fileID: 975206080}
   musKey: bgm_experimental
   musicVolume: 1
@@ -114448,6 +114448,7 @@ MonoBehaviour:
   sfxTextPopIn: {fileID: 11400000, guid: 95ab78f40d184d7da4160bc844c9bb85, type: 2}
   sfxTextPopOut: {fileID: 11400000, guid: 95ab78f40d184d7da4160bc844c9bb85, type: 2}
   sfxFail: {fileID: 11400000, guid: ba5fdea7d75975f42a7a294d64cb9e3f, type: 2}
+  sfxSuccess: {fileID: 11400000, guid: 01061fc4d43750b439e1aba32777dd11, type: 2}
   musicLoopDuration: 0
 --- !u!114 &975206079
 MonoBehaviour:
@@ -114482,9 +114483,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
-  bgmDuration: 100
-  silcenDuration: 30
-  fadeDuration: 2
+  weakVolume: 0.07
+  bgmDuration: 45
+  silcenDuration: 10
+  fadeDuration: 5
   resumeOnTime: 1
 --- !u!1001 &978177926
 PrefabInstance:

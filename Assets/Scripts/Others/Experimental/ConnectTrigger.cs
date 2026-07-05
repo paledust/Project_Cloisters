@@ -90,9 +90,14 @@ public class ConnectTrigger : MonoBehaviour
             if(m_connectBody.m_iscontrolling)
             {
                 (Vector3 pos, Quaternion rot) = ShapeConnectController.GetConnectTransform(this, otherTrigger, 0.005f);
-                if(ShapeConnectValidator.ValidateBodyAt(m_connectBody, otherTrigger.m_connectBody, pos, rot))
+                Debug.LogWarning("Validate Connect Trigger: " + m_connectBody.gameObject.name + " -> " + otherTrigger.m_connectBody.gameObject.name);
                 if(this.isSunk != otherTrigger.isSunk)
-                    pendingTrigger = otherTrigger;
+                {
+                    if(ShapeConnectValidator.ValidateBodyAt(m_connectBody, otherTrigger.m_connectBody, pos, rot))
+                    {
+                        pendingTrigger = otherTrigger;
+                    }
+                }
             }
         }
     }

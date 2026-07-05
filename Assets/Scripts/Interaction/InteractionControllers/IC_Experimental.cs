@@ -41,6 +41,7 @@ public class IC_Experimental : IC_Basic
     [SerializeField] private AudioData_SO sfxTextPopIn;
     [SerializeField] private AudioData_SO sfxTextPopOut;
     [SerializeField] private AudioData_SO sfxFail;
+    [SerializeField] private AudioData_SO sfxSuccess;
 
 [Header("Music")]
     [SerializeField] private float musicLoopDuration;
@@ -145,6 +146,7 @@ public class IC_Experimental : IC_Basic
     IEnumerator coroutineCompletingStage(int textAmount, int throwBodyAmount)
     {
         rangeDetection.SwitchCoreBlink(true);
+        AudioManager.Instance.PlaySFX(sfxSuccess.AudioKey, 1);
         EventHandler.Call_OnTransitionBegin();
         yield return new WaitForSeconds(.8f);
 

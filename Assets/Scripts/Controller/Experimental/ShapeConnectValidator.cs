@@ -6,7 +6,6 @@ public static class ShapeConnectValidator
     {
         Collider source = body.m_geoCollider;
         GameObject probeObject = new GameObject("TempConnectBodyProbe");
-        probeObject.hideFlags = HideFlags.DontSave;
 
         // Create a probe root at the requested pose.
         probeObject.transform.SetPositionAndRotation(position, rotation);
@@ -61,12 +60,12 @@ public static class ShapeConnectValidator
                 out _
             ))
             {
-                GameObject.Destroy(probeObject);
+                // GameObject.Destroy(probeObject);
                 return false;
             }
         }
 
-        GameObject.Destroy(probeObject);
+        // GameObject.Destroy(probeObject);
         return true;
     }
 }
