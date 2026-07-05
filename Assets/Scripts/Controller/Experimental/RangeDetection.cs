@@ -81,12 +81,12 @@ public class RangeDetection : MonoBehaviour
     public void EnlargeDetection()
     {
         hasEnlarged = true;
-        shapeAnimator.Play(SHAPE_CHANGE_ANIM);
+        shapeAnimator.Play(SHAPE_CHANGE_ANIM, 3);
     }
     public void MaximumDetection()
     {
         hasMaximized = true;
-        shapeAnimator.Play(SHAPE_EXPAND_ANIME);
+        shapeAnimator.Play(SHAPE_EXPAND_ANIME, 3);
     }
     public void RangeAppear(float scale)
     {
