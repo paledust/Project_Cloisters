@@ -166,6 +166,7 @@ Material:
     - _FillColorMode: 0
     - _FlipX: 0
     - _Float0: 0
+    - _FragStrength: 0.263
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0

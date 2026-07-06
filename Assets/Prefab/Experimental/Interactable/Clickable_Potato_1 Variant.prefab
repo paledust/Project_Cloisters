@@ -67,6 +67,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sfx_clickSound: 
+  clickVolume: 1
   hitbox: {fileID: 4963596986557778383}
   disableClick: 0
   m_rigid: {fileID: 7237023357969076353}
@@ -172,6 +173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sfx_clickSound: 
+  clickVolume: 1
   hitbox: {fileID: 956920749270044734}
   disableClick: 0
   m_rigid: {fileID: 7237023357969076353}
@@ -370,6 +372,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sfx_clickSound: 
+  clickVolume: 1
   hitbox: {fileID: 7658894676067548286}
   disableClick: 0
   m_rigid: {fileID: 7237023357969076353}
@@ -475,6 +478,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sfx_clickSound: 
+  clickVolume: 1
   hitbox: {fileID: 6004466153225987379}
   disableClick: 0
   m_rigid: {fileID: 7237023357969076353}
@@ -971,21 +975,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 4cb9c31fb0b564743b9f25339ad71954,
         type: 3}
-    - target: {fileID: 4430065969378234566, guid: e843106840614744cae4702badee9286,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 0.476213
-      objectReference: {fileID: 0}
-    - target: {fileID: 4430065969378234566, guid: e843106840614744cae4702badee9286,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 0.5529412
-      objectReference: {fileID: 0}
-    - target: {fileID: 4430065969378234566, guid: e843106840614744cae4702badee9286,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 0.28918824
-      objectReference: {fileID: 0}
     - target: {fileID: 5190530940272532141, guid: e843106840614744cae4702badee9286,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -1805,7 +1794,7 @@ PrefabInstance:
     - target: {fileID: 8982843657415732048, guid: e843106840614744cae4702badee9286,
         type: 3}
       propertyPath: m_Name
-      value: Clickable_potato_1 Variant
+      value: Clickable_Potato_1 Variant
       objectReference: {fileID: 0}
     - target: {fileID: 8982843657415732049, guid: e843106840614744cae4702badee9286,
         type: 3}

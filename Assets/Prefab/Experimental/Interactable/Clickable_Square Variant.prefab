@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sfx_clickSound: 
+  clickVolume: 1
   hitbox: {fileID: 2871068792385875259}
   disableClick: 0
   m_rigid: {fileID: 6527154590330879201}
@@ -911,16 +912,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 496f19be268ecf740b7130c2b207d4ac,
         type: 3}
-    - target: {fileID: 4430065969378234566, guid: e843106840614744cae4702badee9286,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 0.38039216
-      objectReference: {fileID: 0}
-    - target: {fileID: 4430065969378234566, guid: e843106840614744cae4702badee9286,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 0.7294118
-      objectReference: {fileID: 0}
     - target: {fileID: 5190530940272532141, guid: e843106840614744cae4702badee9286,
         type: 3}
       propertyPath: m_LocalScale.x

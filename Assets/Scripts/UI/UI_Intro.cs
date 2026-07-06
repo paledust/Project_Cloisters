@@ -34,6 +34,7 @@ public class UI_Intro : MonoBehaviour
     {
         groupSetting.gameObject.SetActive(true);
         groupSetting.interactable = true;
+        groupSetting.blocksRaycasts = true;
         groupSetting.DOFade(1, 0.15f);
     }
 #if UNITY_EDITOR

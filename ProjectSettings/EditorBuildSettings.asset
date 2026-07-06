@@ -22,3 +22,7 @@ EditorBuildSettings:
       type: 2}
     com.unity.input.settings: {fileID: 11400000, guid: 955c9c94011e5794cb3edf375599d239,
       type: 2}
+    com.unity.localization.addressable-group-rules: {fileID: 11400000, guid: 8c2e6bcf068ad524eaa713207e96af59,
+      type: 2}
+    com.unity.localization.settings: {fileID: 11400000, guid: d8e7c182588f8bf42801d9dbe7c0c8fc,
+      type: 2}

@@ -12,6 +12,7 @@ public class UI_Game : MonoBehaviour
     [SerializeField] private bool isMenuOpen = false;
     [SerializeField] private float menuTime = .3f;
     [SerializeField] private Volume menuVolume;
+    [SerializeField] private CanvasGroup groupSetting;
 
 [Header("BlackBar")]
     [SerializeField] private Image blackBar_Top;
@@ -55,6 +56,13 @@ public class UI_Game : MonoBehaviour
 
         menuVolume.DOKill();
         DOTween.To(() => menuVolume.weight, x => menuVolume.weight = x, 0, menuTime).SetEase(Ease.OutQuad);
+    }
+    public void Btn_Settings()
+    {
+        groupSetting.gameObject.SetActive(true);
+        groupSetting.interactable = true;
+        groupSetting.blocksRaycasts = true;
+        groupSetting.DOFade(1, 0.15f);
     }
     public void Btn_RestartGame()
     {

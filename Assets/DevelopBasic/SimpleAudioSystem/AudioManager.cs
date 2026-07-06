@@ -22,7 +22,11 @@ namespace SimpleAudioSystem{
         public string current_music_name{get; private set;} = string.Empty;
         public string current_ambience_name{get; private set;} = string.Empty;
 
-        private const string masterVolumeName = "MasterVolume";
+        private const string VOLUME_MASTER = "Volume_Master";
+        private const string VOLUME_MUS = "Volume_MUS";
+        private const string VOLUME_AMB = "Volume_AMB";
+        private const string VOLUME_SFX = "Volume_SFX";
+        
         private CoroutineExcuter ambFader;
         private CoroutineExcuter musicFader;
 
@@ -199,7 +203,7 @@ namespace SimpleAudioSystem{
             StartCoroutine(coroutineFadeAudio(m_audio, targetVolume, transitionTime, StopOnFadeOut));
         }
         public void ChangeMasterVolume(float targetVolume){
-            mainMixer.SetFloat(masterVolumeName, targetVolume);
+            mainMixer.SetFloat(VOLUME_MASTER, targetVolume);
         }
         void CrossFadeAmbience(string audio_name, float targetVolume, bool startOver, float transitionTime, bool forceCrossFade = false){
             if(!forceCrossFade && ambience_crossfading) return;
