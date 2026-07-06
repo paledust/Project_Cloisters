@@ -30,11 +30,6 @@ namespace SimpleAudioSystem{
         private CoroutineExcuter ambFader;
         private CoroutineExcuter musicFader;
 
-        protected override void Awake()
-        {
-            base.Awake();
-        }
-
         #region Sound Play
         public void PlayMusic(string audio_name, float volume = 1){
             current_music_name = audio_name;
@@ -202,9 +197,6 @@ namespace SimpleAudioSystem{
             }
             StartCoroutine(coroutineFadeAudio(m_audio, targetVolume, transitionTime, StopOnFadeOut));
         }
-        public void ChangeMasterVolume(float targetVolume){
-            mainMixer.SetFloat(VOLUME_MASTER, targetVolume);
-        }
         void CrossFadeAmbience(string audio_name, float targetVolume, bool startOver, float transitionTime, bool forceCrossFade = false){
             if(!forceCrossFade && ambience_crossfading) return;
             if(ambFader==null) ambFader = new CoroutineExcuter(this);
@@ -215,7 +207,19 @@ namespace SimpleAudioSystem{
             if(musicFader==null) musicFader = new CoroutineExcuter(this);
             musicFader.Excute(coroutineCrossFadeMusic(current_music_name, audio_name, targetVolume, startOver, transitionTime));           
         }
-    #endregion
+        #endregion
+
+        #region Audio Volume Setting
+        float NormalizedToDB(float normalizedValue)
+        {
+            normalizedValue = Mathf.Max(0.0001f, normalizedValue);
+            return Mathf.Log10(normalizedValue) * 20.0f;
+        }
+        internal void ChangeMasterVolume(float targetVolume)=>mainMixer.SetFloat(VOLUME_MASTER, NormalizedToDB(targetVolume));
+        internal void ChangeAMBVolume(float targetVolume)=>mainMixer.SetFloat(VOLUME_AMB, NormalizedToDB(targetVolume));
+        internal void ChangeMUSVolume(float targetVolume)=>mainMixer.SetFloat(VOLUME_MUS, NormalizedToDB(targetVolume));
+        internal void ChangeSFXVolume(float targetVolume)=>mainMixer.SetFloat(VOLUME_SFX, NormalizedToDB(targetVolume));
+        #endregion
         
         #region PCM Time
         public double GetAudioPCMTime(AudioSource audioSource)
