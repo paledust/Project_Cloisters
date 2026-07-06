@@ -74,7 +74,7 @@ public abstract class IC_Basic : MonoBehaviour
             if(musKey == "{stop}")
                 bgmHandler.FadeOutMusic(1);
             else
-                bgmHandler.PlayMusic(musKey, transition, musicVolume);
+                bgmHandler.PlayMusic(musKey, musicVolume, transition);
         }
     }
 

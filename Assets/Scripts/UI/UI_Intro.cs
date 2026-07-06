@@ -12,6 +12,7 @@ public class UI_Intro : MonoBehaviour
 {
     [SerializeField] private GraphicRaycaster raycaster;
     [SerializeField] private CanvasGroup groupCredit;
+    [SerializeField] private CanvasGroup groupSetting;
 
     void Awake()
     {
@@ -28,6 +29,12 @@ public class UI_Intro : MonoBehaviour
         groupCredit.gameObject.SetActive(true);
         groupCredit.interactable = true;
         groupCredit.DOFade(1, 0.15f);
+    }
+    public void Btn_Setting()
+    {
+        groupSetting.gameObject.SetActive(true);
+        groupSetting.interactable = true;
+        groupSetting.DOFade(1, 0.15f);
     }
 #if UNITY_EDITOR
     [Button("Switch Credit Preview")]
