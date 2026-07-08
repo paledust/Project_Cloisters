@@ -22,7 +22,10 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: M Evocative Blink
   m_Shader: {fileID: 4800000, guid: 950f2d6a26cb4bc4b87ec70060777ddf, type: 3}
-  m_ValidKeywords: []
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords:
+  - _USEMASK_ON
   m_InvalidKeywords:
   - _COLORADDSUBDIFF_ON
   - _FLIPBOOKBLENDING_OFF
@@ -32,6 +35,7 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -72,6 +76,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MaskTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -229,6 +237,7 @@ Material:
     - _Tangent: -0.08
     - _Tile: 500
     - _Tiling: 1
+    - _UseMask: 1
     - _VNoiseOnFresnel: 0.42
     - _VNoiseOnRamp: 0.38
     - _WorkflowMode: 1

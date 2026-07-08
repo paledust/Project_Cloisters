@@ -19,6 +19,9 @@ public class UI_Game : MonoBehaviour
     [SerializeField] private Image blackBar_Bottom;
     [SerializeField] private string sfx_click;
 
+[Header("UI Sound Muffle")]
+    [SerializeField] private Vector2 CutOffRange = new Vector2(700f, 22000.00f);
+    private Tween cutOffTween;
     public bool IsMenuOpen => isMenuOpen;
 
     public void Start()
@@ -41,9 +44,13 @@ public class UI_Game : MonoBehaviour
 
         menuVolume.DOKill();
         DOTween.To(() => menuVolume.weight, x => menuVolume.weight = x, 1, menuTime).SetEase(Ease.OutQuad);
+
+        TweenAudioCutOff(CutOffRange.x, menuTime);
+        // GameManager.Instance.PauseTheGame();
     }
     public void DisableCanvas()
     {
+        // GameManager.Instance.ResumeTheGame();
         isMenuOpen = false;
         canvasGroup.interactable = false;
         canvasGroup.DOKill();
@@ -56,6 +63,7 @@ public class UI_Game : MonoBehaviour
 
         menuVolume.DOKill();
         DOTween.To(() => menuVolume.weight, x => menuVolume.weight = x, 0, menuTime).SetEase(Ease.OutQuad);
+        TweenAudioCutOff(CutOffRange.y, menuTime);
     }
     public void Btn_Settings()
     {
@@ -89,7 +97,11 @@ public class UI_Game : MonoBehaviour
         canvasGroup.alpha = isMenuOpen?1:0;
         canvasGroup.interactable = isMenuOpen;
     }
-
+    void TweenAudioCutOff(float targetCutOff, float transition)
+    {
+        cutOffTween?.Kill();
+        cutOffTween = DOTween.To(() => AudioManager.Instance.GetCutOff(), x => AudioManager.Instance.ChangeCutOff(x), targetCutOff, transition);
+    }
 #if UNITY_EDITOR
     [ContextMenu("Switch Menu State")]
     public void SwitchMenuState()

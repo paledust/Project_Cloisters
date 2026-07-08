@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -26,6 +27,7 @@ namespace SimpleAudioSystem{
         private const string VOLUME_MUS = "Volume_MUS";
         private const string VOLUME_AMB = "Volume_AMB";
         private const string VOLUME_SFX = "Volume_SFX";
+        private const string CUT_OFF = "CutOff";
         
         private CoroutineExcuter ambFader;
         private CoroutineExcuter musicFader;
@@ -219,6 +221,13 @@ namespace SimpleAudioSystem{
         internal void ChangeAMBVolume(float targetVolume)=>mainMixer.SetFloat(VOLUME_AMB, NormalizedToDB(targetVolume));
         internal void ChangeMUSVolume(float targetVolume)=>mainMixer.SetFloat(VOLUME_MUS, NormalizedToDB(targetVolume));
         internal void ChangeSFXVolume(float targetVolume)=>mainMixer.SetFloat(VOLUME_SFX, NormalizedToDB(targetVolume));
+        internal void ChangeCutOff(float targetCutOff) => mainMixer.SetFloat(CUT_OFF, targetCutOff);
+        internal float GetCutOff()
+        {
+            float cutOff;
+            mainMixer.GetFloat(CUT_OFF, out cutOff);
+            return cutOff;
+        }
         #endregion
         
         #region PCM Time

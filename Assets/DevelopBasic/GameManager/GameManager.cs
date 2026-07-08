@@ -75,13 +75,11 @@ public class GameManager : Singleton<GameManager>
         if(isPaused) return;
         
         Time.timeScale = 0;
-        AudioListener.pause = true;
         isPaused = true;
     }
     public void ResumeTheGame(){
         if(!isPaused) return;
 
-        AudioListener.pause = false;
         Time.timeScale = 1;
         isPaused = false;
     }

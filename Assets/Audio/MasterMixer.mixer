@@ -1,5 +1,23 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!244 &-7599671877442213475
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 6c91ed3153700494987fde64f2e5fdbe
+  m_EffectName: Lowpass
+  m_MixLevel: d610eba372ac33d42ab22f10dc4e2cfa
+  m_Parameters:
+  - m_ParameterName: Cutoff freq
+    m_GUID: ef1aaafbb00d5744596546169ecb71c5
+  - m_ParameterName: Resonance
+    m_GUID: 1732752ae17610e4b9210ad1a1a8a7dc
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!244 &-2513613798829722492
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
@@ -71,6 +89,8 @@ AudioMixerController:
     name: Volume_MUS
   - guid: 1de5e6df9c886154c96fb3b118db07f6
     name: Volume_Master
+  - guid: ef1aaafbb00d5744596546169ecb71c5
+    name: CutOff
   - guid: c59cf5c7ea1a13146847a78adc6c18e1
     name: Volume_SFX
   m_AudioMixerGroupViews:
@@ -100,6 +120,7 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: 24400004}
+  - {fileID: -7599671877442213475}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
@@ -132,30 +153,37 @@ AudioMixerSnapshotController:
     c0e538b02e387804aaf2bd83cc96b6a3: -767
     3f1718d0418837e4185385ef0981a2a6: -1759
     147cd4026f146b042aa5ee4abe9fe265: 15478
+    b3f13e0212a0a45418923fb908d07e06: 3503
+    725ce3c34313f2a4691fae4c39f56e04: 0.35
     e40de3148526dfa40a12e5826b3a6e3c: 168
     62323c24a4cff3f49810613651cffdc9: -10000
     8f2f2e44002a6544898a288787285a4c: 1000
     60b508b456cb1ea4cbffec8babc19ce4: 125
+    c7a02225862bc6b4cab41fbe9f753d7f: 6323
     b358bc550900fdf4688f47ccc36d3a15: 0.139
     513ba7958c7725d4f9042fcdd2d911af: 0
     5ef016a5f1d5a5a4e860bf779be52dbb: -1037
     ea1daac55a624dd4fb2b54877b2b436b: 0.046
     10e01436a88435c42aeada93f39fd062: 16565
     3b694b564f896cf4bba55773cdcd22ea: 84
+    4f5c8e96a4efc9e4384244b42f5fb456: 2.92
     9ff6f8d6c87fd6a4c8b8d065008357d1: -42
     d25a2247fc0e41a4fbf1aa08c3505cfb: 0
     580892584c751f24887756d1e809ff16: 0.402
     e93c1c694881cb142b35582eee46231a: 11726
     e856bb99ef9ce0940995819992509d63: 0.0666
     6e4a792a5f130064a8b99458cabcb03d: 0.0594
+    0a703f8a4d6d7a640bf20eaf8135baf0: 0
     3fcacc0b005dfe14893d9a6c5b89186b: -3112
     ee11c6cb76492214c899a7a1f9ba6946: 0
     9750fdcbc40bbe94bbabeb47f21c7031: 2000
+    ef1aaafbb00d5744596546169ecb71c5: 22000
     1f38f27d26726e946b4798e86da93520: 3
     857adfade16cc5e4cb297fdafbd39757: 100
     5bbea4ed7f01f43449f201adb6d9ad86: -5637
     250e67be11a856945a4330160a293233: 0
     cfe23d3fcf676ad419fb39207c2b2fdf: 3
+    1ed2b84f29b4d1449841bb7b888b92b0: 5000
     cf6f237f54064344ba223ac7f2bb8ae3: 0.645
     a150b67f99f9ef54d830ef58376d4f9f: 0
     ae4772cf0c822354480f0b470d5cc360: -271
