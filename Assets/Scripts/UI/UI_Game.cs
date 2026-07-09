@@ -17,12 +17,13 @@ public class UI_Game : MonoBehaviour
 [Header("BlackBar")]
     [SerializeField] private Image blackBar_Top;
     [SerializeField] private Image blackBar_Bottom;
-    [SerializeField] private string sfx_click;
+    [SerializeField] private AudioData_SO sfx_click;
 
 [Header("UI Sound Muffle")]
     [SerializeField] private Vector2 CutOffRange = new Vector2(700f, 22000.00f);
     private Tween cutOffTween;
     public bool IsMenuOpen => isMenuOpen;
+    private Sequence pauseTween;
 
     public void Start()
     {
@@ -32,38 +33,35 @@ public class UI_Game : MonoBehaviour
     public void EnableCanvas()
     {
         isMenuOpen = true;
-        canvasGroup.DOKill();
-        canvasGroup.DOFade(1, menuTime).OnComplete(()=>canvasGroup.interactable = true);
-
-        blackBar_Top.DOKill();
-        blackBar_Bottom.DOKill();
         blackBar_Top.rectTransform.anchoredPosition = new Vector2(0, 100);
         blackBar_Bottom.rectTransform.anchoredPosition = new Vector2(0, -100);
-        blackBar_Top.rectTransform.DOAnchorPosY(0, menuTime).SetEase(Ease.OutQuad);
-        blackBar_Bottom.rectTransform.DOAnchorPosY(0, menuTime).SetEase(Ease.OutQuad);
 
-        menuVolume.DOKill();
-        DOTween.To(() => menuVolume.weight, x => menuVolume.weight = x, 1, menuTime).SetEase(Ease.OutQuad);
+        pauseTween.Kill();
+        pauseTween = DOTween.Sequence();
+        pauseTween.Join(blackBar_Top.rectTransform.DOAnchorPosY(0, menuTime).SetEase(Ease.OutQuad))
+                    .Join(blackBar_Bottom.rectTransform.DOAnchorPosY(0, menuTime).SetEase(Ease.OutQuad))
+                    .Join(DOTween.To(() => menuVolume.weight, x => menuVolume.weight = x, 1, menuTime).SetEase(Ease.OutQuad))
+                    .Join(DOTween.To(() => AudioManager.Instance.GetCutOff(), x => AudioManager.Instance.ChangeCutOff(x), CutOffRange.x, menuTime))
+                    .Join(canvasGroup.DOFade(1, menuTime).OnComplete(()=>canvasGroup.interactable = true))
+                    .SetUpdate(true);
 
-        TweenAudioCutOff(CutOffRange.x, menuTime);
-        // GameManager.Instance.PauseTheGame();
+        GameManager.Instance.PauseTheGame();
     }
     public void DisableCanvas()
     {
-        // GameManager.Instance.ResumeTheGame();
+        GameManager.Instance.ResumeTheGame();
+
         isMenuOpen = false;
         canvasGroup.interactable = false;
-        canvasGroup.DOKill();
-        canvasGroup.DOFade(0, menuTime);
 
-        blackBar_Top.DOKill();
-        blackBar_Bottom.DOKill();
-        blackBar_Top.rectTransform.DOAnchorPosY(100, menuTime).SetEase(Ease.OutQuad);
-        blackBar_Bottom.rectTransform.DOAnchorPosY(-100, menuTime).SetEase(Ease.OutQuad);
-
-        menuVolume.DOKill();
-        DOTween.To(() => menuVolume.weight, x => menuVolume.weight = x, 0, menuTime).SetEase(Ease.OutQuad);
-        TweenAudioCutOff(CutOffRange.y, menuTime);
+        pauseTween.Kill();
+        pauseTween = DOTween.Sequence();
+        pauseTween.Join(blackBar_Top.rectTransform.DOAnchorPosY(100, menuTime).SetEase(Ease.OutQuad))
+                    .Join(blackBar_Bottom.rectTransform.DOAnchorPosY(-100, menuTime).SetEase(Ease.OutQuad))
+                    .Join(DOTween.To(() => menuVolume.weight, x => menuVolume.weight = x, 0, menuTime).SetEase(Ease.OutQuad))
+                    .Join(cutOffTween = DOTween.To(() => AudioManager.Instance.GetCutOff(), x => AudioManager.Instance.ChangeCutOff(x), CutOffRange.y, menuTime))
+                    .Join(canvasGroup.DOFade(0, menuTime))
+                    .SetUpdate(true);
     }
     public void Btn_Settings()
     {
@@ -76,19 +74,19 @@ public class UI_Game : MonoBehaviour
     {
         raycaster.enabled = false;
         interactionManager.RestartLevel();
-        AudioManager.Instance.PlaySFX(sfx_click, 1);
+        AudioManager.Instance.PlaySFX(sfx_click.AudioKey, 1);
     }
     public void Btn_BackToMainMenu()
     {
         raycaster.enabled = false;
         interactionManager.GoBackToMainMenu();
-        AudioManager.Instance.PlaySFX(sfx_click, 1);
+        AudioManager.Instance.PlaySFX(sfx_click.AudioKey, 1);
     }
     public void Btn_QuitGame()
     {
         raycaster.enabled = false;
         GameManager.Instance.EndGame();
-        AudioManager.Instance.PlaySFX(sfx_click, 1);
+        AudioManager.Instance.PlaySFX(sfx_click.AudioKey, 1);
     }
     void UpdateMenuImmediately()
     {
@@ -96,11 +94,6 @@ public class UI_Game : MonoBehaviour
         blackBar_Bottom.rectTransform.anchoredPosition = new Vector2(0, isMenuOpen?0:-100);
         canvasGroup.alpha = isMenuOpen?1:0;
         canvasGroup.interactable = isMenuOpen;
-    }
-    void TweenAudioCutOff(float targetCutOff, float transition)
-    {
-        cutOffTween?.Kill();
-        cutOffTween = DOTween.To(() => AudioManager.Instance.GetCutOff(), x => AudioManager.Instance.ChangeCutOff(x), targetCutOff, transition);
     }
 #if UNITY_EDITOR
     [ContextMenu("Switch Menu State")]
