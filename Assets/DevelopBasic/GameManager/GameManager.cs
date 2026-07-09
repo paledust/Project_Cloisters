@@ -103,12 +103,12 @@ public class GameManager : Singleton<GameManager>
     }
     IEnumerator EndGameCoroutine(string level){
         StartCoroutine(FadeInBlackScreen(1f));
-        StartCoroutine(new WaitForLoop(3f, (t)=>{
+        StartCoroutine(new WaitForLoopUnscale(3f, (t)=>{
             AudioManager.Instance.ChangeMasterVolume(Mathf.Lerp(0, -80, EasingFunc.Easing.QuadEaseIn(t)));
         }));
 
         if(isDemo) {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSecondsRealtime(1f);
 
             Color initCol = demoText.color;
             Color targetCol = initCol;
@@ -117,19 +117,19 @@ public class GameManager : Singleton<GameManager>
 
             demoText.color = initCol;
             demoText.gameObject.SetActive(true);
-            yield return new WaitForLoop(0.5f, (t)=>
+            yield return new WaitForLoopUnscale(0.5f, (t)=>
                 demoText.color = Color.Lerp(initCol, targetCol, EasingFunc.Easing.SmoothInOut(t))
             );
-            yield return new WaitForSeconds(2f);
-            yield return new WaitForLoop(0.5f, (t)=>
+            yield return new WaitForSecondsRealtime(2f);
+            yield return new WaitForLoopUnscale(0.5f, (t)=>
                 demoText.color = Color.Lerp(targetCol, initCol, EasingFunc.Easing.SmoothInOut(t))
             );            
         }
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSecondsRealtime(1f);
         EventHandler.Call_BeforeUnloadScene();
         yield return SceneManager.UnloadSceneAsync(level);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSecondsRealtime(1f);
         Application.Quit();
     }
     IEnumerator RestartLevel(string level){
@@ -177,13 +177,13 @@ public class GameManager : Singleton<GameManager>
     }
     public IEnumerator FadeInBlackScreen(float fadeDuration){
         float initAlpha = BlackScreenCanvasGroup.alpha;
-        yield return new WaitForLoop(fadeDuration, (t)=>{
+        yield return new WaitForLoopUnscale(fadeDuration, (t)=>{
             BlackScreenCanvasGroup.alpha = Mathf.Lerp(initAlpha, 1, EasingFunc.Easing.QuadEaseOut(t));
         });
     }
     public IEnumerator FadeOutBlackScreen(float fadeDuration){
         float initAlpha = BlackScreenCanvasGroup.alpha;
-        yield return new WaitForLoop(fadeDuration, (t)=>{
+        yield return new WaitForLoopUnscale(fadeDuration, (t)=>{
             BlackScreenCanvasGroup.alpha = Mathf.Lerp(initAlpha, 0, EasingFunc.Easing.QuadEaseIn(t));
         });
     }

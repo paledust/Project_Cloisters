@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class UI_Game : MonoBehaviour
 {
+[Header("Menu Control")]
     [SerializeField] private IC_Manager interactionManager;
     [SerializeField] private GraphicRaycaster raycaster;
     [SerializeField] private CanvasGroup canvasGroup;
@@ -21,7 +22,6 @@ public class UI_Game : MonoBehaviour
 
 [Header("UI Sound Muffle")]
     [SerializeField] private Vector2 CutOffRange = new Vector2(700f, 22000.00f);
-    private Tween cutOffTween;
     public bool IsMenuOpen => isMenuOpen;
     private Sequence pauseTween;
 
@@ -59,7 +59,7 @@ public class UI_Game : MonoBehaviour
         pauseTween.Join(blackBar_Top.rectTransform.DOAnchorPosY(100, menuTime).SetEase(Ease.OutQuad))
                     .Join(blackBar_Bottom.rectTransform.DOAnchorPosY(-100, menuTime).SetEase(Ease.OutQuad))
                     .Join(DOTween.To(() => menuVolume.weight, x => menuVolume.weight = x, 0, menuTime).SetEase(Ease.OutQuad))
-                    .Join(cutOffTween = DOTween.To(() => AudioManager.Instance.GetCutOff(), x => AudioManager.Instance.ChangeCutOff(x), CutOffRange.y, menuTime))
+                    .Join(DOTween.To(() => AudioManager.Instance.GetCutOff(), x => AudioManager.Instance.ChangeCutOff(x), CutOffRange.y, menuTime))
                     .Join(canvasGroup.DOFade(0, menuTime))
                     .SetUpdate(true);
     }
