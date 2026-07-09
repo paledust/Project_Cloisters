@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class UI_Game : MonoBehaviour
 {
 [Header("Menu Control")]
-    [SerializeField] private IC_Manager interactionManager;
+    [SerializeField] private Game gameControl;
     [SerializeField] private GraphicRaycaster raycaster;
     [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] private bool isMenuOpen = false;
@@ -73,13 +73,13 @@ public class UI_Game : MonoBehaviour
     public void Btn_RestartGame()
     {
         raycaster.enabled = false;
-        interactionManager.RestartLevel();
+        gameControl.RestartLevel();
         AudioManager.Instance.PlaySFX(sfx_click.AudioKey, 1);
     }
     public void Btn_BackToMainMenu()
     {
         raycaster.enabled = false;
-        interactionManager.GoBackToMainMenu();
+        gameControl.GoBackToMainMenu();
         AudioManager.Instance.PlaySFX(sfx_click.AudioKey, 1);
     }
     public void Btn_QuitGame()

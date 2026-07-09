@@ -38759,7 +38759,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8a6863f07596094ea392fe73cde9831, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionManager: {fileID: 601070083}
+  gameControl: {fileID: 0}
   raycaster: {fileID: 261737428}
   canvasGroup: {fileID: 2071508334}
   isMenuOpen: 0
@@ -88880,22 +88880,6 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    - m_Name: restart
-      m_Type: 1
-      m_ExpectedControlType: Button
-      m_Id: 3f2eac34-aa75-43d7-9b34-089e15f2e170
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    - m_Name: reset
-      m_Type: 1
-      m_ExpectedControlType: Button
-      m_Id: 369a7c9f-9aba-40fd-a4fc-3d4cac374b4d
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
     m_Bindings:
     - m_Name: One Modifier
       m_Id: 463f2347-769f-4c94-8452-5893328daef5
@@ -88944,54 +88928,6 @@ MonoBehaviour:
       m_Processors: 
       m_Groups: 
       m_Action: regress
-      m_Flags: 8
-    - m_Name: Keyboard
-      m_Id: e48af860-89d5-4784-ae8b-152536ae42fd
-      m_Path: OneModifier
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: restart
-      m_Flags: 4
-    - m_Name: modifier
-      m_Id: fe4fe4b0-c577-461f-887a-b2b1748b9ff8
-      m_Path: <Keyboard>/leftShift
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: restart
-      m_Flags: 8
-    - m_Name: binding
-      m_Id: 49f96cef-7eea-475a-85be-0ac13979aa67
-      m_Path: <Keyboard>/r
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: restart
-      m_Flags: 8
-    - m_Name: One Modifier
-      m_Id: 6c91f931-3b0c-48e6-a370-9e8c3b4a94ed
-      m_Path: OneModifier
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: reset
-      m_Flags: 4
-    - m_Name: modifier
-      m_Id: ff23a3b9-99d0-4914-9171-f5390716ba8d
-      m_Path: <Keyboard>/shift
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: reset
-      m_Flags: 8
-    - m_Name: binding
-      m_Id: 033bdef2-169b-4518-a4a6-c9780e4186e3
-      m_Path: <Keyboard>/t
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: reset
       m_Flags: 8
 --- !u!114 &601070084
 MonoBehaviour:
@@ -89923,7 +89859,77 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f3d79103d18ea94fbaadc764c022a4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionManager: {fileID: 0}
+  interactionManager: {fileID: 601070083}
+  debugActions:
+    m_Name: Debug Actions
+    m_Id: 61c845d5-958f-43ed-86d7-6a4ad0af5089
+    m_Asset: {fileID: 0}
+    m_Actions:
+    - m_Name: restart
+      m_Type: 1
+      m_ExpectedControlType: Button
+      m_Id: 3f2eac34-aa75-43d7-9b34-089e15f2e170
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    - m_Name: reset
+      m_Type: 1
+      m_ExpectedControlType: Button
+      m_Id: 369a7c9f-9aba-40fd-a4fc-3d4cac374b4d
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Bindings:
+    - m_Name: Keyboard
+      m_Id: e48af860-89d5-4784-ae8b-152536ae42fd
+      m_Path: OneModifier
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: restart
+      m_Flags: 4
+    - m_Name: modifier
+      m_Id: fe4fe4b0-c577-461f-887a-b2b1748b9ff8
+      m_Path: <Keyboard>/leftShift
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: restart
+      m_Flags: 8
+    - m_Name: binding
+      m_Id: 49f96cef-7eea-475a-85be-0ac13979aa67
+      m_Path: <Keyboard>/r
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: restart
+      m_Flags: 8
+    - m_Name: One Modifier
+      m_Id: 6c91f931-3b0c-48e6-a370-9e8c3b4a94ed
+      m_Path: OneModifier
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: reset
+      m_Flags: 4
+    - m_Name: modifier
+      m_Id: ff23a3b9-99d0-4914-9171-f5390716ba8d
+      m_Path: <Keyboard>/shift
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: reset
+      m_Flags: 8
+    - m_Name: binding
+      m_Id: 033bdef2-169b-4518-a4a6-c9780e4186e3
+      m_Path: <Keyboard>/t
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: reset
+      m_Flags: 8
 --- !u!4 &704034409
 Transform:
   m_ObjectHideFlags: 0

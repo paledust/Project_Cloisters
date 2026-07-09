@@ -1,6 +1,7 @@
-using System;
-using SimpleAudioSystem;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
+
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -39,8 +40,6 @@ public class IC_Manager : MonoBehaviour
     #if UNITY_EDITOR || DEVELOPMENT_BUILD
         debugActions["progress"].performed += Debug_Progress;
         debugActions["regress"].performed += Debug_Regress;
-        debugActions["restart"].performed += Debug_RestartLevel;
-        debugActions["reset"].performed += Debug_Reset;
         debugActions.Enable();
     #endif
     }
@@ -56,8 +55,6 @@ public class IC_Manager : MonoBehaviour
     #if UNITY_EDITOR || DEVELOPMENT_BUILD
         debugActions["progress"].performed -= Debug_Progress;
         debugActions["regress"].performed -= Debug_Regress;
-        debugActions["restart"].performed -= Debug_RestartLevel;
-        debugActions["reset"].performed -= Debug_Reset;
         debugActions.Disable();
     #endif
     }
@@ -87,16 +84,6 @@ public class IC_Manager : MonoBehaviour
             interactionBlocker.SetActive(gameCanvas.IsMenuOpen);
         }
     }
-
-#if UNITY_EDITOR
-    [ContextMenu("Set Up Scene To Interactions")]
-    public void Editor_SetUpInteractions(){
-        if(EditorApplication.isPlaying)
-            return;
-        CleanUpAllInteractions();
-        Editor_ActivateInteractions(StartIndex);
-    }
-#endif
 
     void NextInteraction(){
         interactionIndex ++;
@@ -162,29 +149,6 @@ public class IC_Manager : MonoBehaviour
     }
 #endregion
 
-#region Level Control
-    public void GoBackToMainMenu()
-    {
-        if(GameManager.Instance.IsSwitchingScene)
-        {
-            Debug.LogWarning("Scene is switching, cannot reset.");
-            return;
-        }
-        CleanUpImmediately();
-        GameManager.Instance.SwitchingScene("Intro");
-    }
-    public void RestartLevel()
-    {
-        if(GameManager.Instance.IsSwitchingScene)
-        {
-            Debug.LogWarning("Scene is switching, cannot restart level.");
-            return;
-        }
-        CleanUpImmediately();
-        GameManager.Instance.RestartLevel();   
-    }
-#endregion
-
 #region Debug Function
     void Debug_Progress(InputAction.CallbackContext context)
     {
@@ -214,15 +178,7 @@ public class IC_Manager : MonoBehaviour
         CleanUpImmediately();
         GameManager.Instance.RestartLevel();
     }
-    void Debug_RestartLevel(InputAction.CallbackContext callback){
-        if(callback.ReadValueAsButton())
-            RestartLevel();
-    }
-    void Debug_Reset(InputAction.CallbackContext callback){
-        if(callback.ReadValueAsButton())
-            GoBackToMainMenu();
-    }
-    void CleanUpImmediately()
+    public void CleanUpImmediately()
     {
         EventHandler.Call_OnFlushInput();
         foreach (var interController in interactionControllers)
@@ -253,6 +209,13 @@ public class IC_Manager : MonoBehaviour
     public void Editor_ActivateInteractions(int index)
     {
         interactionControllers[index].Editor_LoadInteraction();
+    }
+    [ContextMenu("Set Up Scene To Interactions")]
+    public void Editor_SetUpInteractions(){
+        if(EditorApplication.isPlaying)
+            return;
+        CleanUpAllInteractions();
+        Editor_ActivateInteractions(StartIndex);
     }
 #endif
 }
