@@ -15,11 +15,6 @@ public class IC_Manager : MonoBehaviour
     [SerializeField] private string endSceneName;
     [SerializeField] private float endDelay = 3f;
 
-[Header("Menu Control")]
-    [SerializeField] private UI_Game gameCanvas;
-    [SerializeField] private GameObject interactionBlocker;
-    [SerializeField] private InputActionMap menuAction;
-
 [Header("Debug Option")]
     [SerializeField] private int StartIndex = 0;
     [SerializeField] private bool startAtDebugIndex = false;
@@ -34,9 +29,6 @@ public class IC_Manager : MonoBehaviour
         EventHandler.E_OnEndInteraction         += EndInteraction;
         EventHandler.E_OnInteractionUnreachable += CleanUpInteraction;
 
-        menuAction["menu"].performed += MenuAction_performed;
-        menuAction.Enable();
-
     #if UNITY_EDITOR || DEVELOPMENT_BUILD
         debugActions["progress"].performed += Debug_Progress;
         debugActions["regress"].performed += Debug_Regress;
@@ -48,9 +40,6 @@ public class IC_Manager : MonoBehaviour
         EventHandler.E_OnNextInteraction        -= NextInteraction;
         EventHandler.E_OnEndInteraction         -= EndInteraction;
         EventHandler.E_OnInteractionUnreachable -= CleanUpInteraction; 
-
-        menuAction["menu"].performed -= MenuAction_performed;
-        menuAction.Disable();
 
     #if UNITY_EDITOR || DEVELOPMENT_BUILD
         debugActions["progress"].performed -= Debug_Progress;
@@ -70,19 +59,6 @@ public class IC_Manager : MonoBehaviour
         }
     #endif
         StartAtInteraction(LevelProgressionManager.Instance.LevelProgress);
-    }
-
-    private void MenuAction_performed(InputAction.CallbackContext context)
-    {
-        if(context.ReadValueAsButton())
-        {
-            EventHandler.Call_OnFlushInput();
-            if(!gameCanvas.IsMenuOpen)
-                gameCanvas.EnableCanvas();
-            else
-                gameCanvas.DisableCanvas();
-            interactionBlocker.SetActive(gameCanvas.IsMenuOpen);
-        }
     }
 
     void NextInteraction(){

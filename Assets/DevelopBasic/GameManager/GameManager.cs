@@ -145,6 +145,7 @@ public class GameManager : Singleton<GameManager>
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(level));
         //TO DO: do something after the next scene is loaded. e.g: call event of loading
         yield return null;
+        ResumeTheGame();
         yield return FadeOutBlackScreen(transitionDuration*0.5f);
         EventHandler.Call_AfterLoadScene();
         
@@ -170,6 +171,7 @@ public class GameManager : Singleton<GameManager>
     //AutoSave Game when transition to New Scene
         if(autosaveAfterTransition) SaveGame(0);
 
+        ResumeTheGame();
         yield return null;
         yield return FadeOutBlackScreen(transition*0.5f);
 

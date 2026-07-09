@@ -38759,7 +38759,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8a6863f07596094ea392fe73cde9831, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameControl: {fileID: 0}
+  interactionBlocker: {fileID: 985170924}
+  menuAction:
+    m_Name: Menu Action
+    m_Id: 9346fbf5-3e23-4db4-b1d5-b13968bca6c2
+    m_Asset: {fileID: 0}
+    m_Actions:
+    - m_Name: menu
+      m_Type: 1
+      m_ExpectedControlType: Button
+      m_Id: 14ab5088-0b6c-4893-a201-722d37d622a4
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Bindings:
+    - m_Name: 
+      m_Id: 92c652c6-947e-4979-8a24-aca63a9f64b6
+      m_Path: <Keyboard>/escape
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: menu
+      m_Flags: 0
+  gameControl: {fileID: 704034408}
   raycaster: {fileID: 261737428}
   canvasGroup: {fileID: 2071508334}
   isMenuOpen: 0

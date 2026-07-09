@@ -9,6 +9,6 @@ public class UI_Setting : MonoBehaviour
     {
         canvasGroup.interactable = false;
         canvasGroup.blocksRaycasts = false;
-        canvasGroup.DOFade(0, 0.15f).OnComplete(()=>gameObject.SetActive(false));
+        canvasGroup.DOFade(0, 0.15f).OnComplete(()=>gameObject.SetActive(false)).SetUpdate(true);
     }
 }

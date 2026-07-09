@@ -1,11 +1,16 @@
 using DG.Tweening;
 using SimpleAudioSystem;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class UI_Game : MonoBehaviour
 {
+[Header("Menu Activation")]
+    [SerializeField] private GameObject interactionBlocker;
+    [SerializeField] private InputActionMap menuAction;
+
 [Header("Menu Control")]
     [SerializeField] private Game gameControl;
     [SerializeField] private GraphicRaycaster raycaster;
@@ -29,6 +34,14 @@ public class UI_Game : MonoBehaviour
     {
         isMenuOpen = false;
         UpdateMenuImmediately();
+    }
+    void Awake(){
+        menuAction["menu"].performed += MenuAction_performed;
+        menuAction.Enable();
+    }
+    void OnDestroy(){
+        menuAction["menu"].performed -= MenuAction_performed;
+        menuAction.Disable();
     }
     public void EnableCanvas()
     {
@@ -68,23 +81,26 @@ public class UI_Game : MonoBehaviour
         groupSetting.gameObject.SetActive(true);
         groupSetting.interactable = true;
         groupSetting.blocksRaycasts = true;
-        groupSetting.DOFade(1, 0.15f);
+        groupSetting.DOFade(1, 0.15f).SetUpdate(true);
     }
     public void Btn_RestartGame()
     {
         raycaster.enabled = false;
+        menuAction.Disable();
         gameControl.RestartLevel();
         AudioManager.Instance.PlaySFX(sfx_click.AudioKey, 1);
     }
     public void Btn_BackToMainMenu()
     {
         raycaster.enabled = false;
+        menuAction.Disable();
         gameControl.GoBackToMainMenu();
         AudioManager.Instance.PlaySFX(sfx_click.AudioKey, 1);
     }
     public void Btn_QuitGame()
     {
         raycaster.enabled = false;
+        menuAction.Disable();
         GameManager.Instance.EndGame();
         AudioManager.Instance.PlaySFX(sfx_click.AudioKey, 1);
     }
@@ -94,6 +110,18 @@ public class UI_Game : MonoBehaviour
         blackBar_Bottom.rectTransform.anchoredPosition = new Vector2(0, isMenuOpen?0:-100);
         canvasGroup.alpha = isMenuOpen?1:0;
         canvasGroup.interactable = isMenuOpen;
+    }
+    void MenuAction_performed(InputAction.CallbackContext context)
+    {
+        if(context.ReadValueAsButton())
+        {
+            EventHandler.Call_OnFlushInput();
+            if(!isMenuOpen)
+                EnableCanvas();
+            else
+                DisableCanvas();
+            interactionBlocker.SetActive(isMenuOpen);
+        }
     }
 #if UNITY_EDITOR
     [ContextMenu("Switch Menu State")]
