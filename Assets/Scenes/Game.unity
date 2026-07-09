@@ -38788,7 +38788,7 @@ MonoBehaviour:
   isMenuOpen: 0
   menuTime: 0.3
   menuVolume: {fileID: 1344062905}
-  groupSetting: {fileID: 1520913712}
+  groupSetting: {fileID: 1520913713}
   blackBar_Top: {fileID: 409804511}
   blackBar_Bottom: {fileID: 656823705}
   sfx_click: {fileID: 11400000, guid: 161506c7203f415b8f7d42b4e110dd11, type: 2}
@@ -88856,30 +88856,6 @@ MonoBehaviour:
   bgmHandler: {fileID: 601070085}
   endSceneName: Ending
   endDelay: 1
-  gameCanvas: {fileID: 261737431}
-  interactionBlocker: {fileID: 985170924}
-  menuAction:
-    m_Name: Menu Action
-    m_Id: 9346fbf5-3e23-4db4-b1d5-b13968bca6c2
-    m_Asset: {fileID: 0}
-    m_Actions:
-    - m_Name: menu
-      m_Type: 1
-      m_ExpectedControlType: Button
-      m_Id: 14ab5088-0b6c-4893-a201-722d37d622a4
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Bindings:
-    - m_Name: 
-      m_Id: 92c652c6-947e-4979-8a24-aca63a9f64b6
-      m_Path: <Keyboard>/escape
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: menu
-      m_Flags: 0
   StartIndex: 4
   startAtDebugIndex: 1
   debugActions:
@@ -158849,12 +158825,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1520913710}
   m_PrefabAsset: {fileID: 0}
---- !u!225 &1520913712 stripped
-CanvasGroup:
-  m_CorrespondingSourceObject: {fileID: 1974528698542609353, guid: 24df55302675fc24ab5ca82b4c111390,
+--- !u!114 &1520913713 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7640150032151835800, guid: 24df55302675fc24ab5ca82b4c111390,
     type: 3}
   m_PrefabInstance: {fileID: 1520913710}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3764ebc8ff3861d4f955de786b882086, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &1523647739 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8554373234669498875, guid: 566f83b00b0edfc42bcb5c83698b05e5,

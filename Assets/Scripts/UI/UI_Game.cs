@@ -18,7 +18,7 @@ public class UI_Game : MonoBehaviour
     [SerializeField] private bool isMenuOpen = false;
     [SerializeField] private float menuTime = .3f;
     [SerializeField] private Volume menuVolume;
-    [SerializeField] private CanvasGroup groupSetting;
+    [SerializeField] private UI_Setting groupSetting;
 
 [Header("BlackBar")]
     [SerializeField] private Image blackBar_Top;
@@ -27,7 +27,7 @@ public class UI_Game : MonoBehaviour
 
 [Header("UI Sound Muffle")]
     [SerializeField] private Vector2 CutOffRange = new Vector2(700f, 22000.00f);
-    public bool IsMenuOpen => isMenuOpen;
+
     private Sequence pauseTween;
 
     public void Start()
@@ -78,10 +78,7 @@ public class UI_Game : MonoBehaviour
     }
     public void Btn_Settings()
     {
-        groupSetting.gameObject.SetActive(true);
-        groupSetting.interactable = true;
-        groupSetting.blocksRaycasts = true;
-        groupSetting.DOFade(1, 0.15f).SetUpdate(true);
+        groupSetting.SwitchSetting(true);
     }
     public void Btn_RestartGame()
     {
@@ -115,12 +112,19 @@ public class UI_Game : MonoBehaviour
     {
         if(context.ReadValueAsButton())
         {
-            EventHandler.Call_OnFlushInput();
-            if(!isMenuOpen)
-                EnableCanvas();
+            if(groupSetting.isSettingOpen)
+            {
+                groupSetting.SwitchSetting(false);
+            }
             else
-                DisableCanvas();
-            interactionBlocker.SetActive(isMenuOpen);
+            {
+                EventHandler.Call_OnFlushInput();
+                if(!isMenuOpen)
+                    EnableCanvas();
+                else
+                    DisableCanvas();
+                interactionBlocker.SetActive(isMenuOpen);
+            }
         }
     }
 #if UNITY_EDITOR
