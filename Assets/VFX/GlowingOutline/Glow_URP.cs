@@ -68,7 +68,7 @@ public class Glow_URP_Pass : ScriptableRenderPass
 #endregion
 
     public Glow_URP_Pass(){
-        renderPassEvent = RenderPassEvent.AfterRenderingTransparents;
+        renderPassEvent = RenderPassEvent.AfterRenderingOpaques;
     }
 
     public override void OnCameraSetup(CommandBuffer cmd, ref RenderingData renderingData){
