@@ -115,11 +115,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5424239467753454169, guid: 8bb6e3f5fd951d740a8e34bd850fc193,
         type: 3}
-      propertyPath: speedToVolume
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 5424239467753454169, guid: 8bb6e3f5fd951d740a8e34bd850fc193,
-        type: 3}
       propertyPath: sfx_clickSound
       value: group_hitom
       objectReference: {fileID: 0}
@@ -138,12 +133,6 @@ PrefabInstance:
       propertyPath: beatGlowColor.r
       value: 1.4980392
       objectReference: {fileID: 0}
-    - target: {fileID: 6395048226699834327, guid: 8bb6e3f5fd951d740a8e34bd850fc193,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: -2124705421725058983, guid: 1f18c89016ca0f8448e1f84c1b77f790,
-        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

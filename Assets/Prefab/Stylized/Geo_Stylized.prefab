@@ -120,8 +120,8 @@ MonoBehaviour:
   hoverScalePunch: 0.25
   hoverScaleDuration: 0.2
   initScaleOnAwake: 1
-  volumeRange: {x: 0.2, y: 1}
-  speedToVolume: 1
+  volumeRange: {x: 0.25, y: 1}
+  speedToVolume: 0.1
 --- !u!135 &4331690724906713858
 SphereCollider:
   m_ObjectHideFlags: 0
