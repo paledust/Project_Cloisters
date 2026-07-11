@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Playables;
@@ -16,6 +17,9 @@ public class IC_Meaningful : IC_Basic
     [SerializeField] private Clickable_ObjectRotator clickable_Mirror;
     [SerializeField] private List<TextShownData> textShownDatas;
 
+    [Header("Diamond Specular")]
+    [SerializeField] private Animation specularAnimation;
+
     [Header("Diamond")]
     [SerializeField] private MirrorDiamond mirrorDiamond;
     [SerializeField] private ParticleSystem diamondFoundEffect;
@@ -25,9 +29,12 @@ public class IC_Meaningful : IC_Basic
     [SerializeField] private Transform mirrorRenderTrans;
     [SerializeField] private PlayableDirector director;
 
+    private bool IsAllTextFound = false;
+
     protected override void OnInteractionEnter()
     {
         base.OnInteractionEnter();
+        IsAllTextFound = false;
         EventHandler.E_OnMirrorText += ShowText;
         EventHandler.E_OnMirrorDiamondFound += MirrorDiamondFoundHandler;
         clickable_Mirror.EnableHitbox();
@@ -47,12 +54,12 @@ public class IC_Meaningful : IC_Basic
         textShownDatas.Remove(data);
 
         int count = 0;
-        MirrorText tempText = mirrorText;
         foreach(var pos in data.charPoses)
         {
+            var tempText = mirrorText;
             if(count > 0)
             {
-                tempText = Instantiate(mirrorText.gameObject).GetComponent<MirrorText>();
+                tempText = Instantiate(mirrorText.gameObject, mirrorText.transform.parent).GetComponent<MirrorText>();
                 tempText.transform.position = mirrorText.transform.position;
                 tempText.transform.rotation = mirrorText.transform.rotation;
                 tempText.CopyText(mirrorText);
@@ -63,9 +70,11 @@ public class IC_Meaningful : IC_Basic
             tempText.transform.DOScale(pos.localScale, duration).SetEase(Ease.InOutQuad);
             tempText.transform.DOMove(pos.position, duration).SetEase(Ease.InOutQuad)
             .OnComplete(()=>{
-                if(textShownDatas.Count == 0)
+                tempText.TurnOnSpecularShell();
+                if(textShownDatas.Count == 0 && !IsAllTextFound)
                 {
-                    mirrorDiamond.ActivateDiamond();
+                    IsAllTextFound = true;
+                    StartCoroutine(coroutineDiamond());
                 }
             });
             count ++;
@@ -93,5 +102,12 @@ public class IC_Meaningful : IC_Basic
     {
         yield return new WaitForSeconds(1f);
         director.Play();
+    }
+    IEnumerator coroutineDiamond()
+    {
+        yield return new WaitForSeconds(3f);
+        specularAnimation.Play();
+        yield return new WaitForSeconds(specularAnimation.clip.length+1);
+        mirrorDiamond.ActivateDiamond();
     }
 }

@@ -17,6 +17,8 @@ public class MirrorText : MonoBehaviour
     [SerializeField] private AngleMotion angleMotion;
     [SerializeField] private FloatingMotion floatMotion;
 
+[Header("Reflective")]
+    [SerializeField] private MeshRenderer specularShellRenderer;
 
     private Color originColor;
     private bool isFocus = false;
@@ -25,13 +27,14 @@ public class MirrorText : MonoBehaviour
     private Tween factorTween;
 
     public float m_focusDist => isFocus?0:focusDist;
-    public float m_focusFactor;
+    public float m_focusFactor {get; private set;}
     public char TextChar => textChar;
 
     void Awake()
     {
         originColor = fontColor.Tint;
         m_focusFactor = 0;
+        specularShellRenderer.GetComponent<MeshFilter>().sharedMesh = fontColor.GetComponent<MeshFilter>().sharedMesh;
     }
     public void CopyText(MirrorText mirrorText)
     {
@@ -109,6 +112,10 @@ public class MirrorText : MonoBehaviour
     {
         Vector3 n = Vector3.Dot(mirrorCenter.forward, inDir) * mirrorCenter.forward;
         return inDir - n*2;
+    }
+    public void TurnOnSpecularShell()
+    {
+       specularShellRenderer.gameObject.SetActive(true);
     }
     public void OnMirrorTextHide()
     {
