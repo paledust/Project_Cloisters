@@ -28,7 +28,7 @@ public class IC_Meaningful : IC_Basic
     [SerializeField] private Transform finalMirrorTrans;
     [SerializeField] private Transform mirrorRenderTrans;
     [SerializeField] private PlayableDirector director;
-
+    [SerializeField] private List<Transform> textList;
     private bool IsAllTextFound = false;
 
     protected override void OnInteractionEnter()
@@ -63,6 +63,7 @@ public class IC_Meaningful : IC_Basic
                 tempText.transform.position = mirrorText.transform.position;
                 tempText.transform.rotation = mirrorText.transform.rotation;
                 tempText.CopyText(mirrorText);
+                textList.Insert(5, tempText.transform);
             }
             float duration = Random.Range(2,2.5f);
             
@@ -107,7 +108,17 @@ public class IC_Meaningful : IC_Basic
     {
         yield return new WaitForSeconds(3f);
         specularAnimation.Play();
-        yield return new WaitForSeconds(specularAnimation.clip.length+1);
+        foreach(var text in textList)
+        {
+            text.DOPunchScale(Vector3.one * .0025f, 1f, 1);
+            yield return new WaitForSeconds(0.17f);
+        }
+        yield return new WaitForSeconds(2);
         mirrorDiamond.ActivateDiamond();
+    }
+    [ContextMenu("Editor_TestDiamond")]
+    public void TestDiamond()
+    {
+        StartCoroutine(coroutineDiamond());
     }
 }

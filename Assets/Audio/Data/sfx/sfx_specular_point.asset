@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c16331b23b28b714699aa703a52b32f5, type: 3}
   m_Name: sfx_specular_point
   m_EditorClassIdentifier: 
-  audioClip: {fileID: 8300000, guid: 4242007adea1fc64cb8c49763e126e4a, type: 3}
+  audioClip: {fileID: 8300000, guid: 5c105fdb8aed4994887bfaa6328469dd, type: 3}

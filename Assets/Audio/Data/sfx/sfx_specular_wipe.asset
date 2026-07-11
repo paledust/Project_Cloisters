@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c16331b23b28b714699aa703a52b32f5, type: 3}
   m_Name: sfx_specular_wipe
   m_EditorClassIdentifier: 
-  audioClip: {fileID: 8300000, guid: f2e1048a4d5f18b4a8b0135d711fd87f, type: 3}
+  audioClip: {fileID: 8300000, guid: 3505010f4a2b3b2478cb339bf2dbc3c1, type: 3}
