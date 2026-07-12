@@ -1,6 +1,5 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Rendering;
+﻿using UnityEngine;
+using DG.Tweening;
 
 public class GlowObjectCmd : MonoBehaviour
 {
@@ -18,4 +17,5 @@ public class GlowObjectCmd : MonoBehaviour
 		// GlowController.UnregisterGlowObject(this);
 		Glow_URP.UnregisterGlowObject(this);
 	}
+	public Tween DoGlow(Color targetColor, float duration) => DOTween.To(()=>GlowColor, x=> GlowColor = x, targetColor, duration);
 }

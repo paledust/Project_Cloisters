@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
+using SimpleAudioSystem;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -17,9 +18,6 @@ public class IC_Meaningful : IC_Basic
     [SerializeField] private Clickable_ObjectRotator clickable_Mirror;
     [SerializeField] private List<TextShownData> textShownDatas;
 
-    [Header("Diamond Specular")]
-    [SerializeField] private Animation specularAnimation;
-
     [Header("Diamond")]
     [SerializeField] private MirrorDiamond mirrorDiamond;
     [SerializeField] private ParticleSystem diamondFoundEffect;
@@ -28,7 +26,8 @@ public class IC_Meaningful : IC_Basic
     [SerializeField] private Transform finalMirrorTrans;
     [SerializeField] private Transform mirrorRenderTrans;
     [SerializeField] private PlayableDirector director;
-    [SerializeField] private List<Transform> textList;
+    [SerializeField] private List<MirrorText> textList;
+    [SerializeField] private AudioData_SO glowSFX;
     private bool IsAllTextFound = false;
 
     protected override void OnInteractionEnter()
@@ -63,7 +62,7 @@ public class IC_Meaningful : IC_Basic
                 tempText.transform.position = mirrorText.transform.position;
                 tempText.transform.rotation = mirrorText.transform.rotation;
                 tempText.CopyText(mirrorText);
-                textList.Insert(5, tempText.transform);
+                textList.Insert(5, tempText);
             }
             float duration = Random.Range(2,2.5f);
             
@@ -71,7 +70,6 @@ public class IC_Meaningful : IC_Basic
             tempText.transform.DOScale(pos.localScale, duration).SetEase(Ease.InOutQuad);
             tempText.transform.DOMove(pos.position, duration).SetEase(Ease.InOutQuad)
             .OnComplete(()=>{
-                tempText.TurnOnSpecularShell();
                 if(textShownDatas.Count == 0 && !IsAllTextFound)
                 {
                     IsAllTextFound = true;
@@ -107,13 +105,19 @@ public class IC_Meaningful : IC_Basic
     IEnumerator coroutineDiamond()
     {
         yield return new WaitForSeconds(3f);
-        specularAnimation.Play();
+        AudioManager.Instance.PlaySFX(glowSFX.AudioKey, 0.5f);
         foreach(var text in textList)
         {
-            text.DOPunchScale(Vector3.one * .0025f, 1f, 1);
-            yield return new WaitForSeconds(0.17f);
+            text.transform.DOPunchScale(Vector3.one * .005f, 1.5f, 1);
+            text.TurnOnGlow();
+            yield return new WaitForSeconds(0.12f);
         }
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(0.5f);
+        foreach(var text in textList)
+        {
+            text.TurnOffGlow();
+        }
+        yield return new WaitForSeconds(.5f);
         mirrorDiamond.ActivateDiamond();
     }
     [ContextMenu("Editor_TestDiamond")]

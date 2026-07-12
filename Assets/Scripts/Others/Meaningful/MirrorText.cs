@@ -18,7 +18,8 @@ public class MirrorText : MonoBehaviour
     [SerializeField] private FloatingMotion floatMotion;
 
 [Header("Reflective")]
-    [SerializeField] private MeshRenderer specularShellRenderer;
+    [SerializeField] private GlowObjectCmd glow;
+    [SerializeField, ColorUsage(true, true)] private Color finalGlow;
 
     private Color originColor;
     private bool isFocus = false;
@@ -34,7 +35,6 @@ public class MirrorText : MonoBehaviour
     {
         originColor = fontColor.Tint;
         m_focusFactor = 0;
-        specularShellRenderer.GetComponent<MeshFilter>().sharedMesh = fontColor.GetComponent<MeshFilter>().sharedMesh;
     }
     public void CopyText(MirrorText mirrorText)
     {
@@ -113,9 +113,13 @@ public class MirrorText : MonoBehaviour
         Vector3 n = Vector3.Dot(mirrorCenter.forward, inDir) * mirrorCenter.forward;
         return inDir - n*2;
     }
-    public void TurnOnSpecularShell()
+    public void TurnOnGlow()
     {
-       specularShellRenderer.gameObject.SetActive(true);
+       glow.DoGlow(finalGlow, 0.25f);
+    }
+    public void TurnOffGlow()
+    {
+        glow.DoGlow(Color.clear, 1f);
     }
     public void OnMirrorTextHide()
     {
