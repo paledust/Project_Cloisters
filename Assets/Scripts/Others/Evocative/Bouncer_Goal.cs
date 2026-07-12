@@ -42,16 +42,18 @@ public class Bouncer_Goal : MonoBehaviour
             return;
         }
         lastHitTime = Time.time;
-
+        
+        var dir = bounceBall.transform.position - transform.position;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        p_break.transform.rotation = Quaternion.Euler(0, 0, angle);
+        p_break.Play();
+        
         if(bounceBall.m_isSuperCharge)
         {
             if (criticalHitCount < cracks.Length)
             {
                 cracks[criticalHitCount].SetActive(true);
-                var dir = bounceBall.transform.position - transform.position;
-                float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-                p_break.transform.rotation = Quaternion.Euler(0, 0, angle);
-                p_break.Play();
+
                 AudioManager.Instance.PlaySFX(sfxBreaking, 1);
             }
             else
