@@ -1,20 +1,20 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!244 &-7599671877442213475
+--- !u!244 &-5927825629197480356
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_EffectID: 6c91ed3153700494987fde64f2e5fdbe
+  m_EffectID: f9fe53fde2938464eba0319233903d36
   m_EffectName: Lowpass
-  m_MixLevel: d610eba372ac33d42ab22f10dc4e2cfa
+  m_MixLevel: 4857c8413ca2dbb42b006a3fc9d9781d
   m_Parameters:
   - m_ParameterName: Cutoff freq
-    m_GUID: ef1aaafbb00d5744596546169ecb71c5
+    m_GUID: ae9601651eaba514f93124caa72fae89
   - m_ParameterName: Resonance
-    m_GUID: 1732752ae17610e4b9210ad1a1a8a7dc
+    m_GUID: b67a0f40ea265c14ba5e22a0518a2746
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
@@ -87,10 +87,10 @@ AudioMixerController:
     name: Volume_AMB
   - guid: c676c668906f0934a8e75fdbc37741ec
     name: Volume_MUS
+  - guid: ae9601651eaba514f93124caa72fae89
+    name: CutOff
   - guid: 1de5e6df9c886154c96fb3b118db07f6
     name: Volume_Master
-  - guid: ef1aaafbb00d5744596546169ecb71c5
-    name: CutOff
   - guid: c59cf5c7ea1a13146847a78adc6c18e1
     name: Volume_SFX
   m_AudioMixerGroupViews:
@@ -120,7 +120,6 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: 24400004}
-  - {fileID: -7599671877442213475}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
@@ -161,6 +160,7 @@ AudioMixerSnapshotController:
     60b508b456cb1ea4cbffec8babc19ce4: 125
     c7a02225862bc6b4cab41fbe9f753d7f: 6323
     b358bc550900fdf4688f47ccc36d3a15: 0.139
+    ae9601651eaba514f93124caa72fae89: 22000
     513ba7958c7725d4f9042fcdd2d911af: 0
     5ef016a5f1d5a5a4e860bf779be52dbb: -1037
     ea1daac55a624dd4fb2b54877b2b436b: 0.046
@@ -309,6 +309,7 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: 6613151159601850269}
+  - {fileID: -5927825629197480356}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0

@@ -20,7 +20,7 @@ public class UI_Intro : MonoBehaviour
         groupCredit.alpha = 0;
         groupCredit.interactable = false;
     }
-    public void DisableAllCanvas()
+    public void Btn_DisableAllCanvas()
     {
         raycaster.enabled = false;
     }

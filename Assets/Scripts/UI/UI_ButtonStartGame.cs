@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class UI_ButtonStartGame : MonoBehaviour
 {
     [SerializeField] private float transitionTime = 2.5f;
-    [SerializeField] private string sfx_click;
     private Button button;
 
     void Awake()
@@ -23,6 +22,5 @@ public class UI_ButtonStartGame : MonoBehaviour
         button.interactable = false;
         LevelProgressionManager.Instance.ResetProgress();
         GameManager.Instance.SwitchingScene("Game", transitionTime);
-        AudioManager.Instance.PlaySFX(sfx_click, 1);
     }
 }

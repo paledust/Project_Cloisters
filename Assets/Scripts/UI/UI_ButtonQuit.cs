@@ -1,11 +1,9 @@
-using SimpleAudioSystem;
 using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Button))]
 public class UI_ButtonQuit : MonoBehaviour
 {
-    [SerializeField] private string sfx_click;
     private Button button;
 
     void Awake()
@@ -21,6 +19,5 @@ public class UI_ButtonQuit : MonoBehaviour
     {
         button.interactable = false;
         GameManager.Instance.EndGame();
-        AudioManager.Instance.PlaySFX(sfx_click, 1);
     }
 }

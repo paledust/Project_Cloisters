@@ -491,7 +491,7 @@ GameObject:
   - component: {fileID: 2761644587440312903}
   - component: {fileID: 4789978352654037810}
   - component: {fileID: 6018621585103257836}
-  - component: {fileID: 1782069941399570349}
+  - component: {fileID: 3596595772563921417}
   m_Layer: 5
   m_Name: btn_back_to_menu
   m_TagString: Untagged
@@ -583,7 +583,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &1782069941399570349
+--- !u!114 &3596595772563921417
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -592,11 +592,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 4686739428704511302}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e2dc3fa381335e4e936ff9a35308bd8, type: 3}
+  m_Script: {fileID: 11500000, guid: 53af826ecdb238d4b8f7b00f86aa29b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionTime: 2.5
-  sfx_click: sfx_ui_select
+  sfxClick: {fileID: 11400000, guid: a0637730a65471c42b97146558447d22, type: 2}
+  volumeClick: 1
+  sfxHover: {fileID: 11400000, guid: 66a823f73beda1442bba5ba6cb8430f7, type: 2}
+  volumeHover: 0.5
 --- !u!1 &5037576610364245092
 GameObject:
   m_ObjectHideFlags: 0
@@ -608,6 +610,7 @@ GameObject:
   - component: {fileID: 7387997786323211562}
   - component: {fileID: 7694215255362896346}
   - component: {fileID: 905437845003621841}
+  - component: {fileID: 5015739420040993763}
   m_Layer: 5
   m_Name: btn_restart
   m_TagString: Untagged
@@ -699,6 +702,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &5015739420040993763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5037576610364245092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53af826ecdb238d4b8f7b00f86aa29b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sfxClick: {fileID: 11400000, guid: feff8e5b23821be4dbcb066411714814, type: 2}
+  volumeClick: 1
+  sfxHover: {fileID: 11400000, guid: 66a823f73beda1442bba5ba6cb8430f7, type: 2}
+  volumeHover: 0.5
 --- !u!1 &6137348603398931087
 GameObject:
   m_ObjectHideFlags: 0
@@ -760,6 +779,7 @@ GameObject:
   - component: {fileID: 7310905459231685012}
   - component: {fileID: 4054277015018282709}
   - component: {fileID: 4350668562581936960}
+  - component: {fileID: 6442149045160004928}
   m_Layer: 5
   m_Name: btn_quit
   m_TagString: Untagged
@@ -851,6 +871,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &6442149045160004928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7206860691484508833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53af826ecdb238d4b8f7b00f86aa29b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sfxClick: {fileID: 11400000, guid: a0637730a65471c42b97146558447d22, type: 2}
+  volumeClick: 1
+  sfxHover: {fileID: 11400000, guid: cd14c419c9df074489fee461be9c081d, type: 2}
+  volumeHover: 0.5
 --- !u!1 &7294393430562278121
 GameObject:
   m_ObjectHideFlags: 0
@@ -1188,6 +1224,7 @@ GameObject:
   - component: {fileID: 975509243609401071}
   - component: {fileID: 3440381414375404030}
   - component: {fileID: 6870738388473750675}
+  - component: {fileID: 8494781380810478644}
   m_Layer: 5
   m_Name: btn_setting
   m_TagString: Untagged
@@ -1279,3 +1316,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &8494781380810478644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8154131927515132171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53af826ecdb238d4b8f7b00f86aa29b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sfxClick: {fileID: 11400000, guid: cd14c419c9df074489fee461be9c081d, type: 2}
+  volumeClick: 1
+  sfxHover: {fileID: 11400000, guid: 66a823f73beda1442bba5ba6cb8430f7, type: 2}
+  volumeHover: 0.5

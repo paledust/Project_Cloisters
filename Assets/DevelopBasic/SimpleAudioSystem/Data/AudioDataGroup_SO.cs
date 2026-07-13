@@ -3,6 +3,7 @@ using System;
 
 namespace SimpleAudioSystem
 {
+    [CreateAssetMenu(fileName = "group_", menuName = "DevelopBasic/AudioSystem/AudioDataGroup")]
     public class AudioDataGroup_SO : AudioData_SO
     {
         [SerializeField] private AudioClip[] audioClips;

@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -58,6 +57,8 @@ namespace SimpleAudioSystem{
             }
         //If the audio name is the same, only fade the volume to the target value
             if(current_music_name == audio_name){
+                if(volume > 0 && !music_loop.isPlaying)
+                    music_loop.Play();
                 FadeAudio(music_loop, volume, transitionTime);
             }
             else{

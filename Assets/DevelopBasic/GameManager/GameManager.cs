@@ -104,7 +104,7 @@ public class GameManager : Singleton<GameManager>
     IEnumerator EndGameCoroutine(string level){
         StartCoroutine(FadeInBlackScreen(1f));
         StartCoroutine(new WaitForLoopUnscale(3f, (t)=>{
-            AudioManager.Instance.ChangeMasterVolume(Mathf.Lerp(0, -80, EasingFunc.Easing.QuadEaseIn(t)));
+            AudioManager.Instance.ChangeMasterVolume(Mathf.Lerp(1, 0, EasingFunc.Easing.QuadEaseIn(t)));
         }));
 
         if(isDemo) {

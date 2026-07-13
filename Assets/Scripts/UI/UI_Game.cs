@@ -23,7 +23,6 @@ public class UI_Game : MonoBehaviour
 [Header("BlackBar")]
     [SerializeField] private Image blackBar_Top;
     [SerializeField] private Image blackBar_Bottom;
-    [SerializeField] private AudioData_SO sfx_click;
 
 [Header("UI Sound Muffle")]
     [SerializeField] private Vector2 CutOffRange = new Vector2(700f, 22000.00f);
@@ -33,6 +32,7 @@ public class UI_Game : MonoBehaviour
     public void Start()
     {
         isMenuOpen = false;
+        raycaster.enabled = false;
         UpdateMenuImmediately();
     }
     void Awake(){
@@ -46,6 +46,7 @@ public class UI_Game : MonoBehaviour
     public void EnableCanvas()
     {
         isMenuOpen = true;
+        raycaster.enabled = true;
         blackBar_Top.rectTransform.anchoredPosition = new Vector2(0, 100);
         blackBar_Bottom.rectTransform.anchoredPosition = new Vector2(0, -100);
 
@@ -63,7 +64,7 @@ public class UI_Game : MonoBehaviour
     public void DisableCanvas()
     {
         GameManager.Instance.ResumeTheGame();
-
+        raycaster.enabled = false;
         isMenuOpen = false;
         canvasGroup.interactable = false;
 
@@ -85,21 +86,18 @@ public class UI_Game : MonoBehaviour
         raycaster.enabled = false;
         menuAction.Disable();
         gameControl.RestartLevel();
-        AudioManager.Instance.PlaySFX(sfx_click.AudioKey, 1);
     }
     public void Btn_BackToMainMenu()
     {
         raycaster.enabled = false;
         menuAction.Disable();
         gameControl.GoBackToMainMenu();
-        AudioManager.Instance.PlaySFX(sfx_click.AudioKey, 1);
     }
     public void Btn_QuitGame()
     {
         raycaster.enabled = false;
         menuAction.Disable();
         GameManager.Instance.EndGame();
-        AudioManager.Instance.PlaySFX(sfx_click.AudioKey, 1);
     }
     void UpdateMenuImmediately()
     {
