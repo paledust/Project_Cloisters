@@ -18,8 +18,8 @@ public class EvocativeTube : MonoBehaviour
     [SerializeField] private CinemachineImpulseSource impulseSource;
 
     [Header("Audio")]
-    [SerializeField] private string sfxTunnel;
-    [SerializeField] private string sfxLaunch;
+    [SerializeField] private AudioData_SO sfxTunnel;
+    [SerializeField] private AudioData_SO sfxLaunch;
 
     private bool isBallTravelling;
 
@@ -40,7 +40,7 @@ public class EvocativeTube : MonoBehaviour
     }
     IEnumerator coroutineTubeTravel(BounceBall ball)
     {
-        AudioManager.Instance.PlaySFX(sfxTunnel, 1);
+        AudioManager.Instance.PlaySFX(sfxTunnel.AudioKey, 1);
         isBallTravelling = true;
         ball.PhysicsSleep();
         Vector3 initPos = ball.transform.position;
@@ -60,7 +60,7 @@ public class EvocativeTube : MonoBehaviour
         ball.WakePhysics();
         ball.GlowBall();
         ball.Bounce(eject.up * ejectSpeed, ejectSpeedBoost, 4);
-        AudioManager.Instance.PlaySFX(sfxLaunch, 1);
+        AudioManager.Instance.PlaySFX(sfxLaunch.AudioKey, 1);
         tubeTrigger.ResetTubeTrigger();
         isBallTravelling = false;
     }

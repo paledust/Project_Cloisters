@@ -67,5 +67,7 @@ public static class EventHandler
     public static void Call_OnGoalBreak() => E_OnGoalBreak?.Invoke();
     public static event Action E_OnBallHeavyBounce;
     public static void Call_OnBallHeavyBounce() => E_OnBallHeavyBounce?.Invoke();
+    public static event Action E_OnBallSuperCharge;
+    public static void Call_OnBallSuperCharge() => E_OnBallSuperCharge?.Invoke();
     #endregion
 }

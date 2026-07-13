@@ -42,7 +42,7 @@ public class Bouncer_Goal : MonoBehaviour
             return;
         }
         lastHitTime = Time.time;
-        
+
         var dir = bounceBall.transform.position - transform.position;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         p_break.transform.rotation = Quaternion.Euler(0, 0, angle);
@@ -53,7 +53,6 @@ public class Bouncer_Goal : MonoBehaviour
             if (criticalHitCount < cracks.Length)
             {
                 cracks[criticalHitCount].SetActive(true);
-
                 AudioManager.Instance.PlaySFX(sfxBreaking, 1);
             }
             else
@@ -63,9 +62,8 @@ public class Bouncer_Goal : MonoBehaviour
             }
 
             if(!p_emit_loop.isPlaying)
-            {
                 p_emit_loop.Play();
-            }
+                
             var emission = p_emit_loop.emission;
             emission.rateOverTimeMultiplier = Mathf.Lerp(7, 30, criticalHitCount/2f);
 

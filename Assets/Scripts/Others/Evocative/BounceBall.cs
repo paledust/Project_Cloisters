@@ -137,5 +137,6 @@ public class BounceBall : MonoBehaviour
         isSuperCharge = true;
         p_trail.gameObject.SetActive(true);
         m_respawnAnime.Play(ANIME_GLOW);
+        EventHandler.Call_OnBallSuperCharge();
     }
 }
