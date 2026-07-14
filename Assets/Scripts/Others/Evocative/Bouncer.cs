@@ -18,6 +18,7 @@ public class Bouncer : MonoBehaviour
     [SerializeField, Range(0, 1)] private float steerControl = 0.5f;
     
     [Header("Audio")]
+    [SerializeField] private AudioData_SO sfxBounceData;
     [SerializeField] private string sfxBounce;
 
     private bool colliding = false;
@@ -80,7 +81,8 @@ public class Bouncer : MonoBehaviour
 
                 PlayBounceFeedback();
                 bounceBall.Bounce(vel, bounceSpeedBonus, bounceSpeedBoost);
-                AudioManager.Instance.PlaySFX(sfxBounce, Mathf.Clamp(collision.relativeVelocity.magnitude * 0.1f, 0.01f, 1f));
+                if(sfxBounceData!=null)
+                    AudioManager.Instance.PlaySFX(sfxBounceData.AudioKey, Mathf.Clamp(collision.relativeVelocity.magnitude * 0.1f, 0.01f, 1f));
                 onBounce?.Invoke(bounceBall);
             }
         }
