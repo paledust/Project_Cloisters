@@ -273,6 +273,7 @@ MonoBehaviour:
   bounceSpeedBoost: 2.5
   bounceSpeedBonus: 0
   steerControl: 0
+  sfxBounceData: {fileID: 11400000, guid: f6beefd55aa34499ae108fb2f3df70cd, type: 2}
   sfxBounce: group_flipper
   canBounce: 1
 --- !u!210 &6289990008052597725

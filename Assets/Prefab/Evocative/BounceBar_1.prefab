@@ -192,6 +192,7 @@ MonoBehaviour:
   bounceSpeedBoost: 2
   bounceSpeedBonus: 0
   steerControl: 0.5
+  sfxBounceData: {fileID: 11400000, guid: f6beefd55aa34499ae108fb2f3df70cd, type: 2}
   sfxBounce: 
   canBounce: 1
 --- !u!114 &6142004257145916415

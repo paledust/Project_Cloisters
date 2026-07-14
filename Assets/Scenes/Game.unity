@@ -89831,6 +89831,7 @@ MonoBehaviour:
   bounceSpeedBoost: 1
   bounceSpeedBonus: 0
   steerControl: 0.5
+  sfxBounceData: {fileID: 0}
   sfxBounce: 
   canBounce: 1
 --- !u!54 &678608256
@@ -102357,6 +102358,7 @@ MonoBehaviour:
   bounceSpeedBoost: 1
   bounceSpeedBonus: 0
   steerControl: 0.5
+  sfxBounceData: {fileID: 0}
   sfxBounce: 
   canBounce: 1
 --- !u!136 &842031958
@@ -145828,6 +145830,7 @@ MonoBehaviour:
   bounceSpeedBoost: 1
   bounceSpeedBonus: 0
   steerControl: 0.5
+  sfxBounceData: {fileID: 0}
   sfxBounce: 
   canBounce: 1
 --- !u!54 &1380191791
@@ -158129,6 +158132,7 @@ MonoBehaviour:
   bounceSpeedBoost: 1
   bounceSpeedBonus: 0
   steerControl: 0.5
+  sfxBounceData: {fileID: 0}
   sfxBounce: 
   canBounce: 1
 --- !u!136 &1511441095
@@ -172648,6 +172652,7 @@ MonoBehaviour:
   bounceSpeedBoost: 1
   bounceSpeedBonus: 0
   steerControl: 0.5
+  sfxBounceData: {fileID: 0}
   sfxBounce: 
   canBounce: 1
 --- !u!54 &1731337636
@@ -190664,6 +190669,7 @@ MonoBehaviour:
   bounceSpeedBoost: 1
   bounceSpeedBonus: 0
   steerControl: 0.5
+  sfxBounceData: {fileID: 0}
   sfxBounce: 
   canBounce: 1
 --- !u!54 &2000682176

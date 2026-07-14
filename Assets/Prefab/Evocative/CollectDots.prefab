@@ -182,7 +182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chargeSprite: {fileID: 4117493812276684931}
-  sfxCollect: sfx_pinball_collect
+  sfxCollect: {fileID: 11400000, guid: 7a8465e08231dda49b22bab39c372b58, type: 2}
 --- !u!114 &6297073106155712770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,6 +203,7 @@ MonoBehaviour:
   bounceSpeedBoost: 2
   bounceSpeedBonus: 0
   steerControl: 0.5
+  sfxBounceData: {fileID: 11400000, guid: dc495bee33da94344b6b77c3f0ba5d99, type: 2}
   sfxBounce: group_flipper
   canBounce: 1
 --- !u!210 &8378757489218548392

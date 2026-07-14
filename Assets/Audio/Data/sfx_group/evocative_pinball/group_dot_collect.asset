@@ -9,7 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c16331b23b28b714699aa703a52b32f5, type: 3}
-  m_Name: sfx_pinball_collect
+  m_Script: {fileID: 11500000, guid: 55b4a7a6e7b8e4b498c722058235f5a3, type: 3}
+  m_Name: group_dot_collect
   m_EditorClassIdentifier: 
-  audioClip: {fileID: 8300000, guid: 434f15dd21cc3d146be14b7af26fa0df, type: 3}
+  audioClips:
+  - {fileID: 8300000, guid: 434f15dd21cc3d146be14b7af26fa0df, type: 3}

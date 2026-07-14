@@ -19,7 +19,6 @@ public class Bouncer : MonoBehaviour
     
     [Header("Audio")]
     [SerializeField] private AudioData_SO sfxBounceData;
-    [SerializeField] private string sfxBounce;
 
     private bool colliding = false;
     [SerializeField, ShowOnly] private bool canBounce = true;
