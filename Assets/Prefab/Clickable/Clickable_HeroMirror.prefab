@@ -563,7 +563,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mirrorTrans: {fileID: 8440476972217594787}
   sfxFlip: {fileID: 4380858166835701198}
-  sfxOnFlip: sfx_spin_loud
+  sfxOnFlip: {fileID: 11400000, guid: ccd2c3beff8942ecb5b9831735413b9b, type: 2}
   sfxVolume: 0.3
 --- !u!114 &205437484449596921
 MonoBehaviour:
@@ -585,9 +585,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   mirrorTextShowConstroller: {fileID: 0}
-  vfxSparkle: {fileID: 7216205397476640320}
-  bounceScale: 0.035
-  bounceDuration: 0.4
+  mirrorGlow: {fileID: 6440260927516084968}
+  glowColor: {r: 1, g: 0.5554858, b: 0.1641509, a: 1}
+  bounceScale: 0.07
+  bounceDuration: 0.6
   catcherAudio: {fileID: 1051571298326533854}
   sfxHint: group_meaningful_hint
   hintVolume: 0.05
@@ -640,86 +641,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!1001 &7660410283906571428
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 8384941206551509128}
-    m_Modifications:
-    - target: {fileID: 3326284743599634210, guid: c106af27654661c47abd96ec720283f8,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3326284743599634210, guid: c106af27654661c47abd96ec720283f8,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3326284743599634210, guid: c106af27654661c47abd96ec720283f8,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3326284743599634210, guid: c106af27654661c47abd96ec720283f8,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3326284743599634210, guid: c106af27654661c47abd96ec720283f8,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3326284743599634210, guid: c106af27654661c47abd96ec720283f8,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3326284743599634210, guid: c106af27654661c47abd96ec720283f8,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3326284743599634210, guid: c106af27654661c47abd96ec720283f8,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3326284743599634210, guid: c106af27654661c47abd96ec720283f8,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3326284743599634210, guid: c106af27654661c47abd96ec720283f8,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5706818911658346444, guid: c106af27654661c47abd96ec720283f8,
-        type: 3}
-      propertyPath: m_Name
-      value: vfx_mirror_splat
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: c106af27654661c47abd96ec720283f8, type: 3}
---- !u!4 &4928742054064728966 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3326284743599634210, guid: c106af27654661c47abd96ec720283f8,
-    type: 3}
-  m_PrefabInstance: {fileID: 7660410283906571428}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &7216205397476640320 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 1038680057672506084, guid: c106af27654661c47abd96ec720283f8,
-    type: 3}
-  m_PrefabInstance: {fileID: 7660410283906571428}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8347407509945114467
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -880,15 +801,19 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 7689956643521563650}
-    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: cc02833a295d8c440a8257e2d0116c45,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4928742054064728966}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: -3111565609762313623, guid: cc02833a295d8c440a8257e2d0116c45,
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1424729146846037812}
+    - targetCorrespondingSourceObject: {fileID: -3111565609762313623, guid: cc02833a295d8c440a8257e2d0116c45,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6440260927516084968}
+    - targetCorrespondingSourceObject: {fileID: -3111565609762313623, guid: cc02833a295d8c440a8257e2d0116c45,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6575689489086387852}
     - targetCorrespondingSourceObject: {fileID: 8093904995948005384, guid: cc02833a295d8c440a8257e2d0116c45,
         type: 3}
       insertIndex: -1
@@ -946,6 +871,31 @@ MonoBehaviour:
   Tint: {r: 0.6924528, g: 1, b: 0.9429435, a: 1}
   ShadeMin: 0.3
   ShadeSmooth: 1
+--- !u!114 &6440260927516084968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2812090560376960266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a67fbc006332d24480a1bd3952d9dab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlowColor: {r: 1, g: 0.5554858, b: 0.1641509, a: 0}
+--- !u!114 &6575689489086387852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2812090560376960266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 466cf6c33cb50e74388f526606d9d662, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!23 &5751150057990131517 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: -4897732323685117858, guid: cc02833a295d8c440a8257e2d0116c45,

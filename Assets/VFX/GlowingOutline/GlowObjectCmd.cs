@@ -6,6 +6,7 @@ public class GlowObjectCmd : MonoBehaviour
 	[ColorUsage(true, true)] public Color GlowColor = new Color(1,1,1,0);
 
 	public Renderer m_renderer{get;private set;}
+	private Tween glowTween;
 
 	void OnEnable()
 	{
@@ -17,5 +18,13 @@ public class GlowObjectCmd : MonoBehaviour
 		// GlowController.UnregisterGlowObject(this);
 		Glow_URP.UnregisterGlowObject(this);
 	}
-	public Tween DoGlow(Color targetColor, float duration) => DOTween.To(()=>GlowColor, x=> GlowColor = x, targetColor, duration);
+	public Tween DoGlow(Color targetColor, float duration)
+	{
+		if(glowTween!=null)
+		{
+			glowTween.Kill();
+		}
+		glowTween = DOTween.To(()=>GlowColor, x=> GlowColor = x, targetColor, duration);
+		return glowTween;
+	}
 }

@@ -12,7 +12,8 @@ public class MirrorTextCatcher : MonoBehaviour
     [SerializeField] private MirrorTextShowController mirrorTextShowConstroller;
 
     [Header("VFX")]
-    [SerializeField] private ParticleSystem vfxSparkle;
+    [SerializeField] private GlowObjectCmd mirrorGlow;
+    [SerializeField, ColorUsage(true, true)] private Color glowColor;
     [SerializeField] private float bounceScale = 0.05f;
     [SerializeField] private float bounceDuration = 0.2f;
 
@@ -57,8 +58,7 @@ public class MirrorTextCatcher : MonoBehaviour
             var mirrorText = hit.collider.GetComponent<MirrorText>();
             if(mirrorText != null)
             {
-                if(!vfxSparkle.isPlaying)
-                    vfxSparkle.Play();
+                mirrorGlow.DoGlow(glowColor, 0.4f);
                 if(currentText!=mirrorText)
                 {
                     if(currentText == null)
@@ -125,7 +125,7 @@ public class MirrorTextCatcher : MonoBehaviour
     {
         if(currentText != null)
         {
-            vfxSparkle.Stop();
+            mirrorGlow.DoGlow(Color.clear, 1f);
             currentText.OnMirrorTextHide();
             currentText = null;
 
