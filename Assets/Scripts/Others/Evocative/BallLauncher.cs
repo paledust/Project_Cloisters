@@ -12,7 +12,7 @@ public class BallLauncher : MonoBehaviour
     [SerializeField] private float boostSpeed = 3;
     [SerializeField] private float coolDown = 0.15f;
     [SerializeField] private ParticleSystem p_launch;
-    [SerializeField] private string sfxLaunch;
+    [SerializeField] private AudioData_SO sfxLaunch;
 
     private bool isfirstLaunch;
     private bool isSuperCharge = false;
@@ -64,7 +64,7 @@ public class BallLauncher : MonoBehaviour
             if (isfirstLaunch)
             {
                 isfirstLaunch = false;
-                AudioManager.Instance.PlaySFX(sfxLaunch, 1);
+                AudioManager.Instance.PlaySFX(sfxLaunch.AudioKey, 1);
                 ball.Launch(Vector2.right * (launchSpeed + (isSuperCharge ? boostSpeed * 0.5f : 0)), 2);
             }
             else

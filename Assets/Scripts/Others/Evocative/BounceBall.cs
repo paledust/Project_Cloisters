@@ -1,5 +1,7 @@
 using System.Collections;
 using DG.Tweening;
+using SimpleAudioSystem;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.Rendering;
@@ -32,6 +34,9 @@ public class BounceBall : MonoBehaviour
     [Header("Charge")]
     [SerializeField] private ParticleSystem p_trail;
     [SerializeField] private SpriteRenderer ballGlow;
+
+    [Header("Audio")]
+    [SerializeField] private AudioData_SO sfxReset;
 
     public bool m_isSuperCharge => isSuperCharge;
     public float m_currentSpeed => currentSpeed.cachedValue;
@@ -125,6 +130,8 @@ public class BounceBall : MonoBehaviour
         //Ball Spawn Effect
         p_respawn.Play();
         m_respawnAnime.Play(ANIME_RESPAWN);
+
+        AudioManager.Instance.PlaySFX(sfxReset.AudioKey, 1);
     }
     public void Launch(Vector2 force, float speedBoost)
     {

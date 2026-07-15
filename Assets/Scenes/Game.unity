@@ -38175,24 +38175,12 @@ MonoBehaviour:
   ambienceVolume: 1
   bgmHandler: {fileID: 601070085}
   musKey: bgm_evocative
-  musicVolume: 1
+  musicVolume: 0.5
   restartPos: {fileID: 1751796355}
   ballLauncher: {fileID: 1828492710}
   bounceBall: {fileID: 844904207}
   bounceParticle: {fileID: 132335854}
   breakEffect: {fileID: 1598962716}
-  backgroundRenderer: {fileID: 0}
-  backgroundColors:
-  - {r: 0.1137255, g: 0.15294118, b: 0.62352943, a: 1}
-  - {r: 0.60784316, g: 0.16470589, b: 0.11372549, a: 1}
-  - {r: 1, g: 0.4039216, b: 0.6509804, a: 1}
-  - {r: 0.735849, g: 0.4847005, b: 0.08191521, a: 1}
-  - {r: 0, g: 0.5372549, b: 0.32156864, a: 1}
-  finalColors:
-  - {r: 0.21038158, g: 0.07149685, b: 0.39200002, a: 1}
-  - {r: 0.2980189, g: 0.12877358, b: 0.585, a: 1}
-  - {r: 0.11372549, g: 0.15294118, b: 0.62352943, a: 1}
-  - {r: 0.11372549, g: 0.15294118, b: 0.62352943, a: 1}
   isGoalBreakable: 0
   goal: {fileID: 8771863911515989234}
   finalBoundry: {fileID: 1340485039}
@@ -66929,7 +66917,6 @@ Transform:
   - {fileID: 1468977096447107883}
   - {fileID: 8771863911515989232}
   - {fileID: 844904203}
-  - {fileID: 1510079979}
   - {fileID: 1828492704}
   - {fileID: 57197830}
   m_Father: {fileID: 845432874}
@@ -89832,7 +89819,6 @@ MonoBehaviour:
   bounceSpeedBonus: 0
   steerControl: 0.5
   sfxBounceData: {fileID: 0}
-  sfxBounce: 
   canBounce: 1
 --- !u!54 &678608256
 Rigidbody:
@@ -102359,7 +102345,6 @@ MonoBehaviour:
   bounceSpeedBonus: 0
   steerControl: 0.5
   sfxBounceData: {fileID: 0}
-  sfxBounce: 
   canBounce: 1
 --- !u!136 &842031958
 CapsuleCollider:
@@ -120915,109 +120900,6 @@ MonoBehaviour:
   m_MaximumFOV: 60
   m_MinimumOrthoSize: 1
   m_MaximumOrthoSize: 5000
---- !u!1001 &1101939946
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 447260755}
-    m_Modifications:
-    - target: {fileID: 1684321961, guid: 669790e6223ceb84c946e3617b688641, type: 3}
-      propertyPath: m_Sources.Array.data[0].sourceTransform
-      value: 
-      objectReference: {fileID: 1751796355}
-    - target: {fileID: 7835286026554675344, guid: 669790e6223ceb84c946e3617b688641,
-        type: 3}
-      propertyPath: m_Name
-      value: '[BounceBall_Test]'
-      objectReference: {fileID: 0}
-    - target: {fileID: 7835286026554675344, guid: 669790e6223ceb84c946e3617b688641,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7835286026554675345, guid: 669790e6223ceb84c946e3617b688641,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7835286026554675345, guid: 669790e6223ceb84c946e3617b688641,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7835286026554675345, guid: 669790e6223ceb84c946e3617b688641,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7835286026554675345, guid: 669790e6223ceb84c946e3617b688641,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7835286026554675345, guid: 669790e6223ceb84c946e3617b688641,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -6.665
-      objectReference: {fileID: 0}
-    - target: {fileID: 7835286026554675345, guid: 669790e6223ceb84c946e3617b688641,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 4.437
-      objectReference: {fileID: 0}
-    - target: {fileID: 7835286026554675345, guid: 669790e6223ceb84c946e3617b688641,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 35
-      objectReference: {fileID: 0}
-    - target: {fileID: 7835286026554675345, guid: 669790e6223ceb84c946e3617b688641,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7835286026554675345, guid: 669790e6223ceb84c946e3617b688641,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7835286026554675345, guid: 669790e6223ceb84c946e3617b688641,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7835286026554675345, guid: 669790e6223ceb84c946e3617b688641,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7835286026554675345, guid: 669790e6223ceb84c946e3617b688641,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7835286026554675345, guid: 669790e6223ceb84c946e3617b688641,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7835286026554675345, guid: 669790e6223ceb84c946e3617b688641,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7835286026554675349, guid: 669790e6223ceb84c946e3617b688641,
-        type: 3}
-      propertyPath: constraint
-      value: 
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1684321961, guid: 669790e6223ceb84c946e3617b688641, type: 3}
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 669790e6223ceb84c946e3617b688641, type: 3}
 --- !u!1 &1109248832
 GameObject:
   m_ObjectHideFlags: 0
@@ -138566,7 +138448,7 @@ MonoBehaviour:
   ambienceVolume: 1
   bgmHandler: {fileID: 601070085}
   musKey: bgm_whimsical
-  musicVolume: 1
+  musicVolume: 0.5
   crystal: {fileID: 1943220756}
   textController: {fileID: 1281400411}
   count: 0
@@ -145831,7 +145713,6 @@ MonoBehaviour:
   bounceSpeedBonus: 0
   steerControl: 0.5
   sfxBounceData: {fileID: 0}
-  sfxBounce: 
   canBounce: 1
 --- !u!54 &1380191791
 Rigidbody:
@@ -158018,12 +157899,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59a7996eb265f4342aaffdaff4001a57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &1510079979 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7835286026554675345, guid: 669790e6223ceb84c946e3617b688641,
-    type: 3}
-  m_PrefabInstance: {fileID: 1101939946}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1511441091
 GameObject:
   m_ObjectHideFlags: 0
@@ -158133,7 +158008,6 @@ MonoBehaviour:
   bounceSpeedBonus: 0
   steerControl: 0.5
   sfxBounceData: {fileID: 0}
-  sfxBounce: 
   canBounce: 1
 --- !u!136 &1511441095
 CapsuleCollider:
@@ -172653,7 +172527,6 @@ MonoBehaviour:
   bounceSpeedBonus: 0
   steerControl: 0.5
   sfxBounceData: {fileID: 0}
-  sfxBounce: 
   canBounce: 1
 --- !u!54 &1731337636
 Rigidbody:
@@ -190670,7 +190543,6 @@ MonoBehaviour:
   bounceSpeedBonus: 0
   steerControl: 0.5
   sfxBounceData: {fileID: 0}
-  sfxBounce: 
   canBounce: 1
 --- !u!54 &2000682176
 Rigidbody:
@@ -190752,7 +190624,7 @@ MonoBehaviour:
   ambienceVolume: 1
   bgmHandler: {fileID: 601070085}
   musKey: bgm_meaningful
-  musicVolume: 1
+  musicVolume: 0.5
   clickable_Mirror: {fileID: 994141888}
   textShownDatas:
   - recieveChar: 77
@@ -210462,6 +210334,12 @@ PrefabInstance:
       propertyPath: p_launch
       value: 
       objectReference: {fileID: 1323792508}
+    - target: {fileID: 4363380082862023571, guid: be75cff89979c2d40a0e21b486dee3ce,
+        type: 3}
+      propertyPath: sfxLaunch
+      value: 
+      objectReference: {fileID: 11400000, guid: 2fc11b8b95be480597aa7688e5f301d8,
+        type: 2}
     - target: {fileID: 4655731381277360893, guid: be75cff89979c2d40a0e21b486dee3ce,
         type: 3}
       propertyPath: p_hit

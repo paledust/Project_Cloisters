@@ -1,7 +1,5 @@
 using System.Collections;
 using Cinemachine;
-using DG.Tweening;
-using SimpleAudioSystem;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.VFX;
@@ -16,11 +14,6 @@ public class IC_Evocative : IC_Basic
     [Header("Hit Feedback")]
     [SerializeField] private ParticleSystem bounceParticle;
     [SerializeField] private VisualEffect breakEffect;
-
-    [Header("Background")]
-    [SerializeField] private SpriteRenderer backgroundRenderer;
-    [SerializeField] private Color[] backgroundColors;
-    [SerializeField] private Color[] finalColors;
 
     [Header("Goal")]
     [SerializeField] private bool isGoalBreakable = false;

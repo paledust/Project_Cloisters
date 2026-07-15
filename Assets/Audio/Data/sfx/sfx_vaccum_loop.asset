@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c16331b23b28b714699aa703a52b32f5, type: 3}
-  m_Name: sfx_pinball_tunnel
+  m_Name: sfx_vaccum_loop
   m_EditorClassIdentifier: 
-  audioClip: {fileID: 8300000, guid: 9c00cfe357f18e14b95c2da993d20ed8, type: 3}
+  audioClip: {fileID: 8300000, guid: 3c15854d7b9e6654395fac9f9f5f85fa, type: 3}

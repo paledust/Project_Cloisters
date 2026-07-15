@@ -1,5 +1,6 @@
 using System.Collections;
 using Cinemachine;
+using DG.Tweening;
 using SimpleAudioSystem;
 using UnityEngine;
 
@@ -11,6 +12,12 @@ public class EvocativeTube : MonoBehaviour
     [SerializeField] private float tubeTravelTime;
     [SerializeField] private float ejectSpeed;
     [SerializeField] private float ejectSpeedBoost;
+    [SerializeField] private GameObject entranceCircleIndicator;
+
+    [Header("Tube Parent")]
+    [SerializeField] private Transform tubeRoot;
+    [SerializeField] private float shakeStrength;
+    [SerializeField] private int shakeVibration = 10;
 
     [Header("Presentation")]
     [SerializeField] private Animation ejectAnim;
@@ -22,9 +29,12 @@ public class EvocativeTube : MonoBehaviour
     [SerializeField] private AudioData_SO sfxLaunch;
 
     private bool isBallTravelling;
+    private Tween tubeShakeTween;
+    private Vector3 tubeLocalPos;
 
     void Start()
     {
+        tubeLocalPos = tubeRoot.localPosition;
         tubeTrigger.InitTrigger(this);
     }
     public void EnterTube(BounceBall ball)
@@ -38,9 +48,21 @@ public class EvocativeTube : MonoBehaviour
     {
         vfxEject.Play();
     }
+    public void StartTubeShake()
+    {
+        if(tubeShakeTween!=null)
+            tubeShakeTween.Kill();
+        tubeShakeTween = tubeRoot.DOShakePosition(2f, shakeStrength, shakeVibration).SetLoops(-1);
+    }
+    public void StopTubeShake()
+    {
+        if(tubeShakeTween!=null)
+            tubeShakeTween.Kill();
+        tubeShakeTween = tubeRoot.DOLocalMove(tubeLocalPos, 1f);
+    }
     IEnumerator coroutineTubeTravel(BounceBall ball)
     {
-        AudioManager.Instance.PlaySFX(sfxTunnel.AudioKey, 1);
+        entranceCircleIndicator.SetActive(true);
         isBallTravelling = true;
         ball.PhysicsSleep();
         Vector3 initPos = ball.transform.position;
@@ -51,8 +73,12 @@ public class EvocativeTube : MonoBehaviour
         {
             ball.transform.position = Vector3.Lerp(initPos, start.position, t);
         });
-        ejectAnim.Play();
+        AudioManager.Instance.PlaySFX(sfxTunnel.AudioKey, 1);
+        tubeRoot.DOShakePosition(.25f, shakeStrength, shakeVibration*2);
+
         ball.gameObject.SetActive(false);
+        yield return new WaitForSeconds(.25f);
+        ejectAnim.Play();
         yield return new WaitForSeconds(tubeTravelTime);
         impulseSource.GenerateImpulse();
         ball.transform.position = eject.position;
