@@ -2,21 +2,25 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class GlobalSaveData{
-    public string currentScene = string.Empty;
-    public int MaxLevelIndex = 0;
+public class SettingSaveData
+{
+    public int localeIndex;
 }
-[Serializable]
-public class SettingSaveData{
 
-}
+public class GlobalSaveData{}
+
 [Serializable]
-public class PlayerSaveData{
-    public Vector3 playerPos;
-    public Quaternion playerRot;
-    public Quaternion camRot;
+public class AudioSettingData
+{
+    public float masterVolume;
+    public float ambVolume;
+    public float musVolume;
+    public float sfxVolume;
 }
+
 [Serializable]
-public class SaveData{
-    public PlayerSaveData playerSaveData;
+public class PlayerSaveData
+{
+    public int levelIndex;
+    public int localeIndex;
 }

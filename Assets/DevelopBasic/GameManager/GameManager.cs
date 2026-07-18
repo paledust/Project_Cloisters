@@ -35,6 +35,7 @@ public class GameManager : Singleton<GameManager>
         base.Awake();
         Application.targetFrameRate = targetFrameRate;
         SaveManager.Initialize();
+        LoadGame(0);
 
     #if UNITY_EDITOR || DEVELOPMENT_BUILD
         debugActions["save"].performed += Debug_Save;

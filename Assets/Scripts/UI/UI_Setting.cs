@@ -1,5 +1,6 @@
 using DG.Tweening;
 using UnityEngine;
+using SimpleLocalization;
 
 public class UI_Setting : MonoBehaviour
 {
@@ -7,13 +8,13 @@ public class UI_Setting : MonoBehaviour
     public bool isSettingOpen { get; private set; }
 
     public void Btn_OnReturn() => SwitchSetting(false);
-    public void Btn_OnNextLaunguage()
+    public void Btn_OnNextLanguage()
     {
-        LocaleControl.NextLocale();
+        LocalizeManager.NextLocale();
     }
-    public void Btn_OnPreviousLaunguage()
+    public void Btn_OnPreviousLanguage()
     {
-        LocaleControl.PreviousLocale();
+        LocalizeManager.PreviousLocale();
     }
     public void SwitchSetting(bool isOn)
     {

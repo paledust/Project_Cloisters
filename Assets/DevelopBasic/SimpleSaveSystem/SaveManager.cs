@@ -14,6 +14,7 @@ namespace SimpleSaveSystem{
         public const string GLOBALFILE_NAME = "Global.sav";
         public const string SAVEFILE_NAME = "Data.sav";
         public static GlobalSaveData globalSaveData;
+        
         public static void CleanGameState(int slotIndex){
             string filePath = Application.persistentDataPath + SAVEFILE_DIRECTOR + $"/{slotIndex}/" + SAVEFILE_NAME;
             if(File.Exists(filePath)) File.Delete(filePath);
@@ -23,8 +24,8 @@ namespace SimpleSaveSystem{
             string folderPath = Application.persistentDataPath + SAVEFILE_DIRECTOR + $"/{slotIndex}/";
 
         //To save, we first Load
-            var saveData = Load<SaveData>(folderPath, SAVEFILE_NAME, Serializer.Json);
-            if(saveData == null) saveData = new SaveData();
+            var saveData = Load<PlayerSaveData>(folderPath, SAVEFILE_NAME, Serializer.Json);
+            if(saveData == null) saveData = new PlayerSaveData();
 
             EventHandler.Call_OnBeginSave();
         //Capture State
@@ -47,7 +48,7 @@ namespace SimpleSaveSystem{
 
         public static void LoadGameState(int slotIndex){
             string path = Application.persistentDataPath + SAVEFILE_DIRECTOR + $"/{slotIndex}/";
-            var saveData = Load<SaveData>(path, SAVEFILE_NAME, Serializer.Json);
+            var saveData = Load<PlayerSaveData>(path, SAVEFILE_NAME, Serializer.Json);
             if(saveData == null){
                 Debug.LogWarning("No Valid Save Data");
                 return;

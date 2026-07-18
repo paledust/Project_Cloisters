@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_StartupSelectors:
   - rid: 811025215408046080
+  - rid: 811025479972159517
   - rid: 811025215408046081
   - rid: 811025215408046082
   m_AvailableLocales:
@@ -26,7 +27,7 @@ MonoBehaviour:
     m_Items: []
   m_ProjectLocaleIdentifier:
     m_Code: en
-  m_PreloadBehavior: 3
+  m_PreloadBehavior: 1
   m_InitializeSynchronously: 0
   references:
     version: 2
@@ -226,3 +227,6 @@ MonoBehaviour:
         - default
         - d
         - 
+    - rid: 811025479972159517
+      type: {class: CustomLocalizeSelector, ns: SimpleLocalization, asm: Assembly-CSharp}
+      data: 

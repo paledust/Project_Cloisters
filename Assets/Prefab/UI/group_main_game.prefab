@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1452522129013502340}
   - component: {fileID: 4673203712407848869}
   - component: {fileID: 2219529960596744881}
-  - component: {fileID: 444212878281801998}
+  - component: {fileID: 1087516819142440317}
   m_Layer: 5
   m_Name: txt
   m_TagString: Untagged
@@ -135,7 +135,7 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &444212878281801998
+--- !u!114 &1087516819142440317
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,22 +144,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 576456781694337315}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Script: {fileID: 11500000, guid: ae94c6bd28cd149439217dda552ddfd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_StringReference:
+  tmpText: {fileID: 2219529960596744881}
+  localizedString:
     m_TableReference:
-      m_TableCollectionName: 
+      m_TableCollectionName: GUID:02743b220cb422b47a63ffcb26d4bfd7
     m_TableEntryReference:
-      m_KeyId: 0
+      m_KeyId: 130695041024
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
-  m_FormatArguments: []
-  m_UpdateString:
-    m_PersistentCalls:
-      m_Calls: []
   references:
     version: 2
     RefIds: []
@@ -249,7 +246,7 @@ GameObject:
   - component: {fileID: 7944759861561651146}
   - component: {fileID: 2448043939361406080}
   - component: {fileID: 9053259927342367793}
-  - component: {fileID: 7464511467646929185}
+  - component: {fileID: 9036058678873461593}
   m_Layer: 5
   m_Name: txt
   m_TagString: Untagged
@@ -373,7 +370,7 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &7464511467646929185
+--- !u!114 &9036058678873461593
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -382,22 +379,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 2188808673072170404}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Script: {fileID: 11500000, guid: ae94c6bd28cd149439217dda552ddfd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_StringReference:
+  tmpText: {fileID: 9053259927342367793}
+  localizedString:
     m_TableReference:
-      m_TableCollectionName: 
+      m_TableCollectionName: GUID:02743b220cb422b47a63ffcb26d4bfd7
     m_TableEntryReference:
-      m_KeyId: 0
+      m_KeyId: 4138084077568
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
-  m_FormatArguments: []
-  m_UpdateString:
-    m_PersistentCalls:
-      m_Calls: []
   references:
     version: 2
     RefIds: []
@@ -898,7 +892,7 @@ GameObject:
   - component: {fileID: 4121405390282886624}
   - component: {fileID: 8437637558494073391}
   - component: {fileID: 103604263286030404}
-  - component: {fileID: 4997731179072935891}
+  - component: {fileID: 8783559729939382229}
   m_Layer: 5
   m_Name: txt
   m_TagString: Untagged
@@ -1022,7 +1016,7 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &4997731179072935891
+--- !u!114 &8783559729939382229
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1031,22 +1025,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 7294393430562278121}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Script: {fileID: 11500000, guid: ae94c6bd28cd149439217dda552ddfd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_StringReference:
+  tmpText: {fileID: 103604263286030404}
+  localizedString:
     m_TableReference:
       m_TableCollectionName: GUID:02743b220cb422b47a63ffcb26d4bfd7
     m_TableEntryReference:
-      m_KeyId: 0
+      m_KeyId: 4171894362112
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
-  m_FormatArguments: []
-  m_UpdateString:
-    m_PersistentCalls:
-      m_Calls: []
   references:
     version: 2
     RefIds: []
@@ -1061,7 +1052,7 @@ GameObject:
   - component: {fileID: 6200099084186711561}
   - component: {fileID: 4391432290728140465}
   - component: {fileID: 6875212092516536610}
-  - component: {fileID: 2640153084914691708}
+  - component: {fileID: 3185660880548146454}
   m_Layer: 5
   m_Name: txt
   m_TagString: Untagged
@@ -1185,7 +1176,7 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &2640153084914691708
+--- !u!114 &3185660880548146454
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1194,22 +1185,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 7923411946169566106}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Script: {fileID: 11500000, guid: ae94c6bd28cd149439217dda552ddfd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_StringReference:
+  tmpText: {fileID: 6875212092516536610}
+  localizedString:
     m_TableReference:
       m_TableCollectionName: GUID:02743b220cb422b47a63ffcb26d4bfd7
     m_TableEntryReference:
-      m_KeyId: 0
+      m_KeyId: 4101862068224
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
-  m_FormatArguments: []
-  m_UpdateString:
-    m_PersistentCalls:
-      m_Calls: []
   references:
     version: 2
     RefIds: []

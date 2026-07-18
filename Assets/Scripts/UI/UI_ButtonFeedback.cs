@@ -12,10 +12,10 @@ public class UI_ButtonFeedback : MonoBehaviour, IPointerEnterHandler, IPointerCl
     [SerializeField] private float volumeHover;
     public void OnPointerEnter(PointerEventData eventData)
     {
-        AudioManager.Instance.PlaySFX(sfxHover.AudioKey, volumeHover);
+        AudioManager.Instance.PlaySFX(sfxHover?.AudioKey, volumeHover);
     }
     public void OnPointerClick(PointerEventData eventData)
     {
-        AudioManager.Instance.PlaySFX(sfxClick.AudioKey, volumeClick);
+        AudioManager.Instance.PlaySFX(sfxClick?.AudioKey, volumeClick);
     }
 }

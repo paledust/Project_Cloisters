@@ -2,7 +2,7 @@ namespace SimpleSaveSystem{
     public interface ISaveable
     {
         System.Guid guid{get;}
-        void RestoreState(SaveData state);
-        void CaptureState(ref SaveData saveData);
+        void RestoreState(PlayerSaveData state);
+        void CaptureState(ref PlayerSaveData saveData);
     }
 }
