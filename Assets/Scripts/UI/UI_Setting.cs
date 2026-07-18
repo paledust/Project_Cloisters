@@ -9,10 +9,11 @@ public class UI_Setting : MonoBehaviour
     public void Btn_OnReturn() => SwitchSetting(false);
     public void Btn_OnNextLaunguage()
     {
+        LocaleControl.NextLocale();
     }
     public void Btn_OnPreviousLaunguage()
     {
-        
+        LocaleControl.PreviousLocale();
     }
     public void SwitchSetting(bool isOn)
     {

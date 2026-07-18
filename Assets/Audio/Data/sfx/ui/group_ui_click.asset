@@ -10,9 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 55b4a7a6e7b8e4b498c722058235f5a3, type: 3}
-  m_Name: group_ui_select
+  m_Name: group_ui_click
   m_EditorClassIdentifier: 
   audioClips:
-  - {fileID: 8300000, guid: 19fea51cd0576664085b9ec656b27b04, type: 3}
-  - {fileID: 8300000, guid: 96ed616eb2b05664083d2cdfae24680f, type: 3}
-  - {fileID: 8300000, guid: 8e695811097250f468948ac8fc0cd81a, type: 3}
+  - {fileID: 8300000, guid: 4a66b78874f645649926b48c8e757d7f, type: 3}
+  - {fileID: 8300000, guid: 5aeaba07261928b40a09c3bb3cc20620, type: 3}
