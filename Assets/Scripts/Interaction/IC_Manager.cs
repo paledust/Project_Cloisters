@@ -18,7 +18,9 @@ public class IC_Manager : MonoBehaviour
 [Header("Debug Option")]
     [SerializeField] private int StartIndex = 0;
     [SerializeField] private bool startAtDebugIndex = false;
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
     [SerializeField] private InputActionMap debugActions;
+#endif
 
     private int interactionIndex = 0;
     private int loadedIC_Count = 0;

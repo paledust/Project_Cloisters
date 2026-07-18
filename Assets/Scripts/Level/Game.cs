@@ -4,7 +4,9 @@ using UnityEngine.InputSystem;
 public class Game : MonoBehaviour
 {
     [SerializeField] private IC_Manager interactionManager;
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
     [SerializeField] private InputActionMap debugActions;
+#endif
     void Start()
     {
         Cursor.visible = false;
@@ -13,18 +15,18 @@ public class Game : MonoBehaviour
         UI_Manager.Instance.ChangeCursorColor(progress!=7);
     }
     void Awake(){
-    #if UNITY_EDITOR || DEVELOPMENT_BUILD
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
         debugActions["restart"].performed += Debug_RestartLevel;
         debugActions["reset"].performed += Debug_Reset;
         debugActions.Enable();
-    #endif
+#endif
     }
     void OnDestroy(){
-    #if UNITY_EDITOR || DEVELOPMENT_BUILD
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
         debugActions["restart"].performed -= Debug_RestartLevel;
         debugActions["reset"].performed -= Debug_Reset;
         debugActions.Disable();
-    #endif
+#endif
     }
 #region Level Control
     public void GoBackToMainMenu()

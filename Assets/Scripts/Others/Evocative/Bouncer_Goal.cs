@@ -13,12 +13,14 @@ public class Bouncer_Goal : MonoBehaviour
     [Header("VFX")]
     [SerializeField] private ParticleSystem p_break;
     [SerializeField] private ParticleSystem p_emit_loop;
+    [SerializeField] private ParticleSystem p_ring_critical;
+    [SerializeField] private ParticleSystem p_ring_undamaged;
     [SerializeField] private SpriteRenderer glow;
     [SerializeField] private Color glowColor;
 
     [Header("SFX")]
-    [SerializeField] private string sfxBreaking;
-    [SerializeField] private string sfxExplode;
+    [SerializeField] private AudioData_SO sfxNormalBounce;
+    [SerializeField] private AudioData_SO[] sfxBreakings;
 
     private int criticalHitCount;
     private float lastHitTime = 0f;
@@ -53,11 +55,11 @@ public class Bouncer_Goal : MonoBehaviour
             if (criticalHitCount < cracks.Length)
             {
                 cracks[criticalHitCount].SetActive(true);
-                AudioManager.Instance.PlaySFX(sfxBreaking, 1);
+                p_ring_critical.Play(true);
+                AudioManager.Instance.PlaySFX(sfxBreakings[criticalHitCount]?.AudioKey, 1);
             }
             else
             {
-                AudioManager.Instance.PlaySFX(sfxExplode, 1);
                 EventHandler.Call_OnGoalBreak();    
             }
 
@@ -78,6 +80,11 @@ public class Bouncer_Goal : MonoBehaviour
                 bouncer.GetComponent<Collider>().enabled = false;
                 bounceBall.Bounce(-bounceBall.GetComponent<Rigidbody>().velocity, 0, 2f, AttributeModifyType.Add);
             }
+        }
+        else
+        {
+            AudioManager.Instance.PlaySFX(sfxNormalBounce?.AudioKey, 1);
+            p_ring_undamaged.Play();
         }
 
         EventHandler.Call_OnHitGoal(bounceBall.m_isSuperCharge);

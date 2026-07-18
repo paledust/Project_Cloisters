@@ -22,7 +22,9 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private Text demoText;
 [Header("Debug")]
     [SerializeField] private bool loadInitSceneFromGameManager = false;
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
     [SerializeField] private InputActionMap debugActions;
+#endif
 
     private static bool isPaused = false;
 

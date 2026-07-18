@@ -615,7 +615,8 @@ MonoBehaviour:
   boostSpeed: 5
   coolDown: 0.15
   p_launch: {fileID: 0}
-  sfxLaunch: group_flipper
+  sfxLaunch: {fileID: 0}
+  sfxUpgrade: {fileID: 11400000, guid: 47ab15beadd0d3143a9cb657dc9f67fc, type: 2}
 --- !u!114 &7756731229284826610
 MonoBehaviour:
   m_ObjectHideFlags: 0

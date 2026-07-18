@@ -15,7 +15,7 @@ MonoBehaviour:
   m_DefaultGroup: 297b43d7bc93a2f4a95f80efe5973409
   m_currentHash:
     serializedVersion: 2
-    Hash: 5e0d09d448a4b1a3793311a4a0d21567
+    Hash: 7c401f01c42465963aefcf6ab66f9808
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 0
   m_BundleLocalCatalog: 0
@@ -46,17 +46,35 @@ MonoBehaviour:
   m_GroupAssets:
   - {fileID: 11400000, guid: cf7eb32d604b2454b861e245631735ee, type: 2}
   - {fileID: 11400000, guid: cf8c50f07d98fda469bbfa61b1befa17, type: 2}
+  - {fileID: 11400000, guid: a66832ebf6d254b4caac05689c55c246, type: 2}
   - {fileID: 11400000, guid: f46722eb62d0be74a941e1843dc7194c, type: 2}
   - {fileID: 11400000, guid: 302163089d9e96746a230fd7d66d513d, type: 2}
+  - {fileID: 11400000, guid: 48e325e62e7c59643bcc86a89b41e831, type: 2}
+  - {fileID: 11400000, guid: a252df190f060e74f81b830aeac0bbc7, type: 2}
+  - {fileID: 11400000, guid: c3ef2c2d039798048ba8ec655a9794c7, type: 2}
+  - {fileID: 11400000, guid: e46960cf9a1d9fa48829d6cae03900f2, type: 2}
+  - {fileID: 11400000, guid: e618409622b69c64c9c3f38240ce1f45, type: 2}
+  - {fileID: 11400000, guid: f67706bca77a6b4488ca2ecb383802ea, type: 2}
+  - {fileID: 11400000, guid: b9fdfcf88777c594db98d19711b438bf, type: 2}
+  - {fileID: 11400000, guid: 1e069d9a0186fba4cb5c55719567bf7d, type: 2}
+  - {fileID: 11400000, guid: a5c7850161fc6404892c3786e897ccc3, type: 2}
+  - {fileID: 11400000, guid: 65395a830e51cad4db80820d92240709, type: 2}
   - {fileID: 11400000, guid: 532e75cabfe7cd34693ed332a58d04f1, type: 2}
+  - {fileID: 11400000, guid: 307e2ed8e404edc4b9985f82f459c1e2, type: 2}
+  - {fileID: 11400000, guid: 423956c1d73341d43bbfba6bd48bdd67, type: 2}
   - {fileID: 11400000, guid: 27a3a0be6c5e09a46b2ab43b934b1d34, type: 2}
   - {fileID: 11400000, guid: ef3f83cd6aa1aed4cb01ca1e21c57bd7, type: 2}
   - {fileID: 11400000, guid: 7bfc4454d8c23dc42a12da9da3bbf5aa, type: 2}
   - {fileID: 11400000, guid: eb8c050edd198b147bd591494e18be50, type: 2}
+  - {fileID: 11400000, guid: 4a63919a4c65a2d4a9230d0224a1a0ed, type: 2}
   - {fileID: 11400000, guid: 34f4822a09cdf204abe0b6fc36707cc1, type: 2}
   - {fileID: 11400000, guid: 9775739478dfe0f4d88a4505681073a4, type: 2}
+  - {fileID: 11400000, guid: a44c4ef8f4831b847b521b3159db6e2b, type: 2}
+  - {fileID: 11400000, guid: 6627eecf9d55dc346b9df0aac3158a69, type: 2}
   - {fileID: 11400000, guid: 9af8106acdba4f245a27f7effdf6adef, type: 2}
+  - {fileID: 11400000, guid: 18da3d17914745d4682140e537e6a26f, type: 2}
   - {fileID: 11400000, guid: 10d99d5c11cea724095040091ff3f116, type: 2}
+  - {fileID: 11400000, guid: 48fffd3ab5abac7408729eeda7938fb5, type: 2}
   m_BuildSettings:
     m_CompileScriptsInVirtualMode: 0
     m_CleanupStreamingAssetsAfterBuilds: 1
@@ -108,6 +126,7 @@ MonoBehaviour:
     - Locale-pt
     - Locale-ru
     - Locale-es-PA
+    - Preload
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 615d454e7c1a53a49a2a96c5293433b7, type: 2}

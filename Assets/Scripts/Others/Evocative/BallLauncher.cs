@@ -10,13 +10,11 @@ public class BallLauncher : MonoBehaviour
     [SerializeField] private Bouncer bouncer;
     [SerializeField] private float launchSpeed = 10;
     [SerializeField] private float boostSpeed = 3;
-    [SerializeField] private float coolDown = 0.15f;
-    [SerializeField] private ParticleSystem p_launch;
     [SerializeField] private AudioData_SO sfxLaunch;
+    [SerializeField] private AudioData_SO sfxUpgrade;
 
-    private bool isfirstLaunch;
+    private bool ballLaunched;
     private bool isSuperCharge = false;
-    private float lastLaunchTime;
     public Action<BounceBall> onLaunchBall;
 
     void OnEnable()
@@ -31,21 +29,19 @@ public class BallLauncher : MonoBehaviour
     }
     void OnLaunch(InputAction.CallbackContext context)
     {
-        if (Time.time - lastLaunchTime < coolDown)
+        if(!ballLaunched)
             return;
-
-        lastLaunchTime = Time.time;
         bounceAnimation.Play();
     }
     public void SuperCharge()
     {
         isSuperCharge = true;
         bouncer.ChangeBounceParam(0, 4f);
+        AudioManager.Instance.PlaySFX(sfxUpgrade.AudioKey, 1);
     }
     public void ResetLauncher()
     {
-        isfirstLaunch = true;
-        lastLaunchTime = Time.time;
+        ballLaunched = true;
     }
     public void AE_ResetCanBounce()
     {
@@ -61,20 +57,21 @@ public class BallLauncher : MonoBehaviour
 
             onLaunchBall?.Invoke(ball);
 
-            if (isfirstLaunch)
+            if (ballLaunched)
             {
-                isfirstLaunch = false;
+                ballLaunched = false;
                 AudioManager.Instance.PlaySFX(sfxLaunch.AudioKey, 1);
                 ball.Launch(Vector2.right * (launchSpeed + (isSuperCharge ? boostSpeed * 0.5f : 0)), 2);
             }
-            else
-            {
-                ball.Bounce(Vector2.right, boostSpeed, 4f);
+            // Obselete Heavy Bounce Code
+            // else
+            // {
+            //     ball.Bounce(Vector2.right, boostSpeed, 4f);
 
-                p_launch.transform.position = ball.transform.position;
-                p_launch.Play();
-                EventHandler.Call_OnBallHeavyBounce();
-            }
+            //     p_launch.transform.position = ball.transform.position;
+            //     p_launch.Play();
+            //     EventHandler.Call_OnBallHeavyBounce();
+            // }
         }
     }
     void OnTriggerExit(Collider other)

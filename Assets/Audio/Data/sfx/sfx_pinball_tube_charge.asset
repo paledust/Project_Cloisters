@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c16331b23b28b714699aa703a52b32f5, type: 3}
-  m_Name: sfx_pinball_charge
+  m_Name: sfx_pinball_tube_charge
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: d254bd944d73df34d8c4b9304b5b4589, type: 3}
