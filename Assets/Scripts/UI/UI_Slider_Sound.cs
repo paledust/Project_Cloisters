@@ -11,6 +11,10 @@ public class UI_Slider_Sound : MonoBehaviour
     {
         slider.onValueChanged.AddListener(OnSliderValueChange);
     }
+    void Start()
+    {
+        slider.SetValueWithoutNotify(AudioSettingService.GetAudioVolume(settingType));
+    }
     void OnDisable()
     {
         slider.onValueChanged.RemoveListener(OnSliderValueChange);

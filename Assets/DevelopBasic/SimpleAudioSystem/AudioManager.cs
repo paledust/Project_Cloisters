@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using SimpleSaveSystem;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -14,7 +15,6 @@ namespace SimpleAudioSystem{
         [SerializeField] private AudioSource music_loop;
     [Header("Audio mixer")]
         [SerializeField] private AudioMixer mainMixer;
-        [SerializeField] private AudioMixerSnapshot[] mixerSnapShots;
 
         private bool ambience_crossfading = false;
         private bool music_crossfading = false;
@@ -31,7 +31,7 @@ namespace SimpleAudioSystem{
         private CoroutineExcuter ambFader;
         private CoroutineExcuter musicFader;
 
-        #region Sound Play
+    #region Sound Play
         public void PlayMusic(string audio_name, float volume = 1){
             current_music_name = audio_name;
             if(audio_name == string.Empty) music_loop.Stop();
@@ -182,7 +182,7 @@ namespace SimpleAudioSystem{
             StartCoroutine(coroutineFadeInAndOutSFX(targetSource, clip, maxVolume, duration, fadeIn, fadeOut));
     #endregion
 
-        #region Helper function
+    #region Helper function
         public static void SwitchAudioListener(AudioListener from, AudioListener to){
             from.enabled = false;
             to.enabled = true;
@@ -212,16 +212,16 @@ namespace SimpleAudioSystem{
         }
         #endregion
 
-        #region Audio Volume Setting
+    #region Audio Volume Setting
         float NormalizedToDB(float normalizedValue)
         {
             normalizedValue = Mathf.Max(0.0001f, normalizedValue);
             return Mathf.Log10(normalizedValue) * 20.0f;
         }
-        internal void ChangeMasterVolume(float targetVolume)=>mainMixer.SetFloat(VOLUME_MASTER, NormalizedToDB(targetVolume));
-        internal void ChangeAMBVolume(float targetVolume)=>mainMixer.SetFloat(VOLUME_AMB, NormalizedToDB(targetVolume));
-        internal void ChangeMUSVolume(float targetVolume)=>mainMixer.SetFloat(VOLUME_MUS, NormalizedToDB(targetVolume));
-        internal void ChangeSFXVolume(float targetVolume)=>mainMixer.SetFloat(VOLUME_SFX, NormalizedToDB(targetVolume));
+        internal void ChangeMasterVolume(float targetVolume) => mainMixer.SetFloat(VOLUME_MASTER, NormalizedToDB(targetVolume));
+        internal void ChangeAMBVolume(float targetVolume) => mainMixer.SetFloat(VOLUME_AMB, NormalizedToDB(targetVolume));
+        internal void ChangeMUSVolume(float targetVolume) => mainMixer.SetFloat(VOLUME_MUS, NormalizedToDB(targetVolume));
+        internal void ChangeSFXVolume(float targetVolume) => mainMixer.SetFloat(VOLUME_SFX, NormalizedToDB(targetVolume));
         internal void ChangeCutOff(float targetCutOff) => mainMixer.SetFloat(CUT_OFF, targetCutOff);
         internal float GetCutOff()
         {
@@ -231,7 +231,7 @@ namespace SimpleAudioSystem{
         }
         #endregion
         
-        #region PCM Time
+    #region PCM Time
         public double GetAudioPCMTime(AudioSource audioSource)
         {
             if(audioSource.clip == null) 
@@ -246,7 +246,8 @@ namespace SimpleAudioSystem{
         }
 
         #endregion
-
+    
+    #region coroutine
         IEnumerator coroutineFadeInAndOutSFX(AudioSource m_audio, string clip, float maxVolume, float duration, float fadeIn, float fadeOut){
             AudioSource tempAudio = Instantiate(m_audio);
             tempAudio.name = "_TempSFX";
@@ -340,5 +341,6 @@ namespace SimpleAudioSystem{
 
             if(StopOnFadeOut && source.volume == 0) source.Stop();
         }
+    #endregion
     }
 }

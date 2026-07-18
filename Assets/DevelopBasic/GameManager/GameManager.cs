@@ -35,7 +35,6 @@ public class GameManager : Singleton<GameManager>
         base.Awake();
         Application.targetFrameRate = targetFrameRate;
         SaveManager.Initialize();
-        LoadGame(0);
 
     #if UNITY_EDITOR || DEVELOPMENT_BUILD
         debugActions["save"].performed += Debug_Save;
@@ -44,7 +43,10 @@ public class GameManager : Singleton<GameManager>
 
         if(isTesting) debugActions.Enable();
     #endif
-
+    }
+    void Start()
+    {
+        LoadGame(0);
     //To Do: Game Loading
     #if UNITY_EDITOR
     //Load Level
@@ -194,8 +196,8 @@ public class GameManager : Singleton<GameManager>
     }
 #endregion
 
-    public void LoadGame(int slotIndex)=>SaveManager.LoadGameState(slotIndex);
-    public void SaveGame(int slotIndex)=>SaveManager.SaveGameState(slotIndex);
+    void LoadGame(int slotIndex)=>SaveManager.LoadGameState(slotIndex);
+    void SaveGame(int slotIndex)=>SaveManager.SaveGameState(slotIndex);
 
 #region DEBUG ACTION
     void Debug_EndGame(InputAction.CallbackContext callback)=>EndGame();

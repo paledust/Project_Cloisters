@@ -1,13 +1,18 @@
 using DG.Tweening;
 using UnityEngine;
 using SimpleLocalization;
+using SimpleSaveSystem;
 
 public class UI_Setting : MonoBehaviour
 {
     [SerializeField] private CanvasGroup canvasGroup;
     public bool isSettingOpen { get; private set; }
 
-    public void Btn_OnReturn() => SwitchSetting(false);
+    public void Btn_OnReturn()
+    {
+        SwitchSetting(false);
+        SaveManager.SaveGameState(0);
+    }
     public void Btn_OnNextLanguage()
     {
         LocalizeManager.NextLocale();

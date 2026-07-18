@@ -16,7 +16,6 @@ namespace SimpleLocalization
         private TMP_FontAsset currentFont;
 
         private static int localeIndex = 0;
-        private const string LOCALE_KEY = "selected-locale";
         private static readonly string[] localeKey = new string[] {"en", "zh", "zh-Hant"};
 
         public TMP_FontAsset CurrentFont => currentFont;
@@ -67,6 +66,7 @@ namespace SimpleLocalization
         public void RestoreState(PlayerSaveData state)
         {
             localeIndex = state.localeIndex;
+            RefreshLocale();
         }
         public void CaptureState(ref PlayerSaveData saveData)
         {
