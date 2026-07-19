@@ -113775,6 +113775,7 @@ GameObject:
   - component: {fileID: 959170691}
   - component: {fileID: 959170692}
   - component: {fileID: 959170693}
+  - component: {fileID: 959170694}
   m_Layer: 0
   m_Name: TL_7_EvocativeComplete
   m_TagString: Untagged
@@ -113890,6 +113891,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   previewKeyWord: preview
+--- !u!114 &959170694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 959170689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 0915ffd4e5ea0d648b9a4bdef8e0cffa, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 216064831}
+          m_TargetAssemblyTypeName: IC_Basic, Assembly-CSharp
+          m_MethodName: TL_FadeOutSound
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0.4
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &966519405
 GameObject:
   m_ObjectHideFlags: 0
@@ -165863,7 +165894,7 @@ VFXRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1598962713}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -166026,9 +166057,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ExecuteInEditor: 1
-  m_Bindings:
-  - {fileID: 1598962717}
-  - {fileID: 1598962719}
+  m_Bindings: []
   m_VisualEffect: {fileID: 1598962716}
 --- !u!114 &1598962719
 MonoBehaviour:

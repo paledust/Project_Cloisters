@@ -26,6 +26,7 @@ public abstract class IC_Basic : MonoBehaviour
     public bool m_isPlaying{get; private set;} = false;
 
     public virtual void TL_FadeInSound(float crossFadeTime) => FocusMusic(crossFadeTime);
+    public virtual void TL_FadeOutSound(float crossFadeTime) => bgmHandler.FadeOutMusic(crossFadeTime);
     public void Editor_LoadInteraction()
     {
         if(interactionAssetsGroup!=null) interactionAssetsGroup.SetActive(true);
@@ -54,6 +55,7 @@ public abstract class IC_Basic : MonoBehaviour
         if(interactionAssetsGroup!=null) interactionAssetsGroup.SetActive(false);
         UnloadAssets();
     }
+
     void FocusMusic(float transition)
     {
         if(m_hasMusicStarted) 

@@ -56,6 +56,7 @@ public class Bouncer_Goal : MonoBehaviour
             {
                 cracks[criticalHitCount].SetActive(true);
                 p_ring_critical.Play(true);
+                AudioManager.Instance.PlaySFX(sfxNormalBounce?.AudioKey, .25f);
                 AudioManager.Instance.PlaySFX(sfxBreakings[criticalHitCount]?.AudioKey, 1);
             }
             else

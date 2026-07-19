@@ -134,6 +134,7 @@ MonoBehaviour:
   m_Markers:
     m_Objects:
     - {fileID: 1895313584104272134}
+    - {fileID: -1615069950162530740}
 --- !u!114 &-8127267912500317063
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2994,6 +2995,22 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events: []
+--- !u!114 &-1615069950162530740
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15c38f6fa1940124db1ab7f6fe7268d1, type: 3}
+  m_Name: Signal Emitter
+  m_EditorClassIdentifier: 
+  m_Time: 1.8333333333333333
+  m_Retroactive: 0
+  m_EmitOnce: 0
+  m_Asset: {fileID: 11400000, guid: 0915ffd4e5ea0d648b9a4bdef8e0cffa, type: 2}
 --- !u!114 &-971858383404677236
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4246,7 +4263,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c177094487706344eabf25549f41e5f4, type: 3}
   m_Name: NextMiniGame Marker
   m_EditorClassIdentifier: 
-  m_Time: 2.716666618983333
+  m_Time: 4
   retroactive: 0
   emitOnce: 0
 --- !u!114 &2049664745232460407

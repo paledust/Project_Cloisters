@@ -139,4 +139,9 @@ public class IC_Evocative : IC_Basic
         brain.m_IgnoreTimeScale = false;
         Time.timeScale = originalTimeScale;
     }
+    [ContextMenu("Debug_End")]
+    public void DebugEnd()
+    {
+        OnGoalBreak();
+    }
 }
