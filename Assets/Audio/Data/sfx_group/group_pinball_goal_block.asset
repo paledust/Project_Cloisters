@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 55b4a7a6e7b8e4b498c722058235f5a3, type: 3}
-  m_Name: group_pinball_goal_light
+  m_Name: group_pinball_goal_block
   m_EditorClassIdentifier: 
   audioClips:
-  - {fileID: 8300000, guid: f7ada3629da132d42a6dbb1e236c6a68, type: 3}
-  - {fileID: 8300000, guid: 3406104a7a7af3b4e8726807cb5c3b4e, type: 3}
-  - {fileID: 8300000, guid: 86c2a1c9535520c48af997bab9442e81, type: 3}
+  - {fileID: 8300000, guid: 7594f2d21375e6244a9bda2bbfb6565c, type: 3}
+  - {fileID: 8300000, guid: 3495c2ab47cc1e849896713e0f147dbe, type: 3}
+  - {fileID: 8300000, guid: 128a3a43ac187e4449b3fc2f0a334888, type: 3}

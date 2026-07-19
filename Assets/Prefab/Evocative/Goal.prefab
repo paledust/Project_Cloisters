@@ -10199,7 +10199,7 @@ MonoBehaviour:
   bounceSpeedBoost: 3
   bounceSpeedBonus: 0
   steerControl: 0.5
-  sfxBounceData: {fileID: 11400000, guid: abae69330fcaf9643982bf22ef6b5dd9, type: 2}
+  sfxBounceData: {fileID: 0}
   canBounce: 1
 --- !u!114 &5079350425550156287
 MonoBehaviour:
@@ -10227,7 +10227,7 @@ MonoBehaviour:
   p_ring_undamaged: {fileID: 1990719574986250050}
   glow: {fileID: 1360973107209907377}
   glowColor: {r: 0.3283019, g: 0.10928609, b: 0, a: 1}
-  sfxNormalBounce: {fileID: 0}
+  sfxNormalBounce: {fileID: 11400000, guid: abae69330fcaf9643982bf22ef6b5dd9, type: 2}
   sfxBreakings:
   - {fileID: 11400000, guid: e816dd908c16ad74899d4274bfc6087a, type: 2}
   - {fileID: 11400000, guid: 0feac79526ed5b7419856bf860c5f177, type: 2}
