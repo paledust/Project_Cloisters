@@ -16,6 +16,8 @@ public class Bouncer : MonoBehaviour
     [SerializeField] private float bounceSpeedBoost = 2;
     [SerializeField] private float bounceSpeedBonus = 0;
     [SerializeField, Range(0, 1)] private float steerControl = 0.5f;
+
+    [SerializeField] private ParticleSystem vfxBounce;
     
     [Header("Audio")]
     [SerializeField] private AudioData_SO sfxBounceData;
@@ -51,6 +53,8 @@ public class Bouncer : MonoBehaviour
     }
     public void PlayBounceFeedback()
     {
+        if(vfxBounce!=null)
+            vfxBounce.Play();
         var rootTrans = spriteRenderer.transform;
         var blinker = blinkRender;
         blinker.DOKill();

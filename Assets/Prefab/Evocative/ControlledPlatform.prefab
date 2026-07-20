@@ -317,6 +317,10 @@ PrefabInstance:
       value: group_flipper
       objectReference: {fileID: 0}
     - target: {fileID: 7148061842109763, guid: e8a900563de8a324bbda13b905867415, type: 3}
+      propertyPath: vfxBounce
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7148061842109763, guid: e8a900563de8a324bbda13b905867415, type: 3}
       propertyPath: steerControl
       value: 1
       objectReference: {fileID: 0}
@@ -481,7 +485,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8771863912461656049, guid: e8a900563de8a324bbda13b905867415, type: 3}
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5241485945693637122, guid: e8a900563de8a324bbda13b905867415, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 8771863912461656051, guid: e8a900563de8a324bbda13b905867415,
         type: 3}

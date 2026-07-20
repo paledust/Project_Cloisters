@@ -50113,7 +50113,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8554373234669498874, guid: 566f83b00b0edfc42bcb5c83698b05e5,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 566f83b00b0edfc42bcb5c83698b05e5, type: 3}
 --- !u!224 &360995250 stripped
 RectTransform:
@@ -55691,7 +55695,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8554373234669498874, guid: 566f83b00b0edfc42bcb5c83698b05e5,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 566f83b00b0edfc42bcb5c83698b05e5, type: 3}
 --- !u!224 &406574719 stripped
 RectTransform:
@@ -65997,14 +66005,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 417202002}
-    - targetCorrespondingSourceObject: {fileID: 5659119156619008648, guid: 26d8f798f3d258e42aabb1da850f3379,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 6270966796492869626, guid: 26d8f798f3d258e42aabb1da850f3379,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 26d8f798f3d258e42aabb1da850f3379, type: 3}
 --- !u!224 &417201998 stripped
 RectTransform:
@@ -77670,14 +77670,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2109249349}
-    - targetCorrespondingSourceObject: {fileID: 5659119156619008648, guid: 26d8f798f3d258e42aabb1da850f3379,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 6270966796492869626, guid: 26d8f798f3d258e42aabb1da850f3379,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 26d8f798f3d258e42aabb1da850f3379, type: 3}
 --- !u!224 &532612060 stripped
 RectTransform:
@@ -88017,7 +88009,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8554373234669498874, guid: 566f83b00b0edfc42bcb5c83698b05e5,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 566f83b00b0edfc42bcb5c83698b05e5, type: 3}
 --- !u!224 &563073423 stripped
 RectTransform:
@@ -88344,14 +88340,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 661645459}
-    - targetCorrespondingSourceObject: {fileID: 5659119156619008648, guid: 26d8f798f3d258e42aabb1da850f3379,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 6270966796492869626, guid: 26d8f798f3d258e42aabb1da850f3379,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 26d8f798f3d258e42aabb1da850f3379, type: 3}
 --- !u!224 &586023090 stripped
 RectTransform:
@@ -88929,7 +88917,7 @@ MonoBehaviour:
   bgmHandler: {fileID: 601070085}
   endSceneName: Ending
   endDelay: 1
-  StartIndex: 6
+  StartIndex: 4
   startAtDebugIndex: 1
   debugActions:
     m_Name: Debug Actions
@@ -89842,6 +89830,7 @@ MonoBehaviour:
   bounceSpeedBoost: 1
   bounceSpeedBonus: 0
   steerControl: 0.5
+  vfxBounce: {fileID: 0}
   sfxBounceData: {fileID: 0}
   canBounce: 1
 --- !u!54 &678608256
@@ -101983,14 +101972,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1338303648}
-    - targetCorrespondingSourceObject: {fileID: 5659119156619008648, guid: 26d8f798f3d258e42aabb1da850f3379,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 6270966796492869626, guid: 26d8f798f3d258e42aabb1da850f3379,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 26d8f798f3d258e42aabb1da850f3379, type: 3}
 --- !u!224 &814035996 stripped
 RectTransform:
@@ -102376,6 +102357,7 @@ MonoBehaviour:
   bounceSpeedBoost: 1
   bounceSpeedBonus: 0
   steerControl: 0.5
+  vfxBounce: {fileID: 0}
   sfxBounceData: {fileID: 0}
   canBounce: 1
 --- !u!136 &842031958
@@ -102563,7 +102545,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &845432874
 Transform:
   m_ObjectHideFlags: 0
@@ -114911,14 +114893,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1163638720}
-    - targetCorrespondingSourceObject: {fileID: 5659119156619008648, guid: 26d8f798f3d258e42aabb1da850f3379,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 6270966796492869626, guid: 26d8f798f3d258e42aabb1da850f3379,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 26d8f798f3d258e42aabb1da850f3379, type: 3}
 --- !u!224 &992768972 stripped
 RectTransform:
@@ -137024,7 +136998,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8554373234669498874, guid: 566f83b00b0edfc42bcb5c83698b05e5,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 566f83b00b0edfc42bcb5c83698b05e5, type: 3}
 --- !u!224 &1204382761 stripped
 RectTransform:
@@ -137175,7 +137153,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8554373234669498874, guid: 566f83b00b0edfc42bcb5c83698b05e5,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 566f83b00b0edfc42bcb5c83698b05e5, type: 3}
 --- !u!224 &1206900164 stripped
 RectTransform:
@@ -138451,7 +138433,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8554373234669498874, guid: 566f83b00b0edfc42bcb5c83698b05e5,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 566f83b00b0edfc42bcb5c83698b05e5, type: 3}
 --- !u!224 &1278559851 stripped
 RectTransform:
@@ -139059,14 +139045,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1292265799}
-    - targetCorrespondingSourceObject: {fileID: 5659119156619008648, guid: 26d8f798f3d258e42aabb1da850f3379,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 6270966796492869626, guid: 26d8f798f3d258e42aabb1da850f3379,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 26d8f798f3d258e42aabb1da850f3379, type: 3}
 --- !u!224 &1292265795 stripped
 RectTransform:
@@ -145799,6 +145777,7 @@ MonoBehaviour:
   bounceSpeedBoost: 1
   bounceSpeedBonus: 0
   steerControl: 0.5
+  vfxBounce: {fileID: 0}
   sfxBounceData: {fileID: 0}
   canBounce: 1
 --- !u!54 &1380191791
@@ -158094,6 +158073,7 @@ MonoBehaviour:
   bounceSpeedBoost: 1
   bounceSpeedBonus: 0
   steerControl: 0.5
+  vfxBounce: {fileID: 0}
   sfxBounceData: {fileID: 0}
   canBounce: 1
 --- !u!136 &1511441095
@@ -166672,7 +166652,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1652011119
 Transform:
   m_ObjectHideFlags: 0
@@ -172611,6 +172591,7 @@ MonoBehaviour:
   bounceSpeedBoost: 1
   bounceSpeedBonus: 0
   steerControl: 0.5
+  vfxBounce: {fileID: 0}
   sfxBounceData: {fileID: 0}
   canBounce: 1
 --- !u!54 &1731337636
@@ -172771,7 +172752,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8554373234669498874, guid: 566f83b00b0edfc42bcb5c83698b05e5,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 566f83b00b0edfc42bcb5c83698b05e5, type: 3}
 --- !u!224 &1732338495 stripped
 RectTransform:
@@ -177932,14 +177917,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1752150267}
-    - targetCorrespondingSourceObject: {fileID: 5659119156619008648, guid: 26d8f798f3d258e42aabb1da850f3379,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 6270966796492869626, guid: 26d8f798f3d258e42aabb1da850f3379,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 26d8f798f3d258e42aabb1da850f3379, type: 3}
 --- !u!224 &1752150263 stripped
 RectTransform:
@@ -179807,7 +179784,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8554373234669498874, guid: 566f83b00b0edfc42bcb5c83698b05e5,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 566f83b00b0edfc42bcb5c83698b05e5, type: 3}
 --- !u!224 &1880184159 stripped
 RectTransform:
@@ -190635,6 +190616,7 @@ MonoBehaviour:
   bounceSpeedBoost: 1
   bounceSpeedBonus: 0
   steerControl: 0.5
+  vfxBounce: {fileID: 0}
   sfxBounceData: {fileID: 0}
   canBounce: 1
 --- !u!54 &2000682176
@@ -197948,14 +197930,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2131831218}
-    - targetCorrespondingSourceObject: {fileID: 5659119156619008648, guid: 26d8f798f3d258e42aabb1da850f3379,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 6270966796492869626, guid: 26d8f798f3d258e42aabb1da850f3379,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 26d8f798f3d258e42aabb1da850f3379, type: 3}
 --- !u!224 &2131831214 stripped
 RectTransform:
@@ -211651,14 +211625,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1299796670}
-    - targetCorrespondingSourceObject: {fileID: 5659119156619008648, guid: 26d8f798f3d258e42aabb1da850f3379,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 6270966796492869626, guid: 26d8f798f3d258e42aabb1da850f3379,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 26d8f798f3d258e42aabb1da850f3379, type: 3}
 --- !u!1001 &7085316780383962508
 PrefabInstance:
@@ -211691,17 +211657,17 @@ PrefabInstance:
     - target: {fileID: 7085316780055515206, guid: 7671163c2c3bc7a4699f30c40e759e90,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -260
+      value: -79.97
       objectReference: {fileID: 0}
     - target: {fileID: 7085316780055515206, guid: 7671163c2c3bc7a4699f30c40e759e90,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7085316780055515206, guid: 7671163c2c3bc7a4699f30c40e759e90,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7085316780055515206, guid: 7671163c2c3bc7a4699f30c40e759e90,
         type: 3}
@@ -212892,7 +212858,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8554373234669498874, guid: 566f83b00b0edfc42bcb5c83698b05e5,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 566f83b00b0edfc42bcb5c83698b05e5, type: 3}
 --- !u!114 &8554373233758221569 stripped
 MonoBehaviour:
