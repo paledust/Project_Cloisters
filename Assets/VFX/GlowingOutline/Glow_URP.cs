@@ -73,8 +73,10 @@ public class Glow_URP_Pass : ScriptableRenderPass
 
     public override void OnCameraSetup(CommandBuffer cmd, ref RenderingData renderingData){
     //Glow Control
-		_glowMat = new Material(Shader.Find("Hidden/AmplifyShaders/GlowReplace"));
-		_blurMaterial = new Material(Shader.Find("Hidden/GausseBlur"));
+		if(_glowMat==null)
+			_glowMat = new Material(Shader.Find("Hidden/AmplifyShaders/GlowReplace"));
+		if(_blurMaterial==null)
+			_blurMaterial = new Material(Shader.Find("Hidden/GausseBlur"));
 
 		_blurSizeID = Shader.PropertyToID("_BlurSize");
 		_blurRadiusID = Shader.PropertyToID("_BlurRadius");
@@ -91,7 +93,8 @@ public class Glow_URP_Pass : ScriptableRenderPass
 		maskID = new RenderTargetIdentifier(_maskPassRenderTexID);
         
     //Glow Compose
-        _composeMaterial = CoreUtils.CreateEngineMaterial(Shader.Find("Hidden/GlowComposite"));
+		if(_composeMaterial == null)
+        	_composeMaterial = CoreUtils.CreateEngineMaterial(Shader.Find("Hidden/GlowComposite"));
 
         src = renderingData.cameraData.renderer.cameraColorTargetHandle;
         
@@ -177,7 +180,7 @@ public class Glow_URP_Pass : ScriptableRenderPass
     //Compose Command
         Blit(cmd, src, tempID, _composeMaterial, 0);
         Blit(cmd, tempID, src);
-
+		
         context.ExecuteCommandBuffer(cmd);
         CommandBufferPool.Release(cmd);
     }
