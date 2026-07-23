@@ -88905,7 +88905,7 @@ MonoBehaviour:
   bgmHandler: {fileID: 601070085}
   endSceneName: Ending
   endDelay: 1
-  StartIndex: 7
+  StartIndex: 0
   startAtDebugIndex: 1
   debugActions:
     m_Name: Debug Actions
@@ -166667,7 +166667,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1659850854
 Transform:
   m_ObjectHideFlags: 0
@@ -179254,7 +179254,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1844645715
 Transform:
   m_ObjectHideFlags: 0
@@ -190339,7 +190339,7 @@ Transform:
   m_GameObject: {fileID: 1986279813}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.95, z: -6.4190006}
+  m_LocalPosition: {x: 0, y: 0.95, z: -0.13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -211627,7 +211627,7 @@ PrefabInstance:
     - target: {fileID: 7085316780055515206, guid: 7671163c2c3bc7a4699f30c40e759e90,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -435
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7085316780055515206, guid: 7671163c2c3bc7a4699f30c40e759e90,
         type: 3}
@@ -211637,7 +211637,7 @@ PrefabInstance:
     - target: {fileID: 7085316780055515206, guid: 7671163c2c3bc7a4699f30c40e759e90,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3
+      value: -23.23
       objectReference: {fileID: 0}
     - target: {fileID: 7085316780055515206, guid: 7671163c2c3bc7a4699f30c40e759e90,
         type: 3}

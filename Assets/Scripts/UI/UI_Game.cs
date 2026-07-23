@@ -36,10 +36,14 @@ public class UI_Game : MonoBehaviour
         UpdateMenuImmediately();
     }
     void Awake(){
+        EventHandler.E_OnTransitionBegin += TransitionBeginHandler;
+        EventHandler.E_OnTransitionEnd += TransitionEndHandler;
         menuAction["menu"].performed += MenuAction_performed;
         menuAction.Enable();
     }
     void OnDestroy(){
+        EventHandler.E_OnTransitionBegin += TransitionBeginHandler;
+        EventHandler.E_OnTransitionEnd += TransitionEndHandler;
         menuAction["menu"].performed -= MenuAction_performed;
         menuAction.Disable();
     }
@@ -125,6 +129,15 @@ public class UI_Game : MonoBehaviour
             }
         }
     }
+    void TransitionBeginHandler()
+    {
+        menuAction.Disable();
+    }
+    void TransitionEndHandler()
+    {
+        menuAction.Enable();
+    }
+
 #if UNITY_EDITOR
     [ContextMenu("Switch Menu State")]
     public void SwitchMenuState()
