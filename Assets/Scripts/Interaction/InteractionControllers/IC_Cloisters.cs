@@ -57,13 +57,15 @@ public class IC_Cloisters : IC_Basic
 
         float startSpeed = progressSpeed;
         float speed = startSpeed;
+        float t = 0;
 
         for(; progress<duration; progress += Time.deltaTime * speed)
         {
-            if(speed < 1)
+            if(t < 1)
             {
-                speed += Time.deltaTime*0.5f;
-                speed = Mathf.Min(1, speed);
+                t += Time.deltaTime;
+                t = Mathf.Clamp01(t);
+                speed = Mathf.Lerp(startSpeed, 1, t);
             }
             progress = Mathf.Min(duration, progress);
             rootPlayable.SetTime(progress);

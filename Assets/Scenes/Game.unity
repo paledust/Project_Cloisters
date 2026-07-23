@@ -27128,7 +27128,7 @@ MonoBehaviour:
   shineDissolve: {fileID: 1773863635}
   threasholdRotatorSpeed: 50
   maxProgressSpeed: 0.5
-  progressLerp: 5
+  progressLerp: 10
   cloistersTimeline: {fileID: 1071416984}
 --- !u!1 &148063008
 GameObject:
