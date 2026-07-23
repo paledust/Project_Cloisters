@@ -11,6 +11,7 @@ namespace SimpleAudioSystem{
         [SerializeField] private AudioDataCollection_SO audioCollection;
     [Header("Audio source")]
         [SerializeField] private AudioSource sfx_trigger;
+        [SerializeField] private AudioSource sfx_UI;
         [SerializeField] private AudioSource ambience_loop;
         [SerializeField] private AudioSource music_loop;
     [Header("Audio mixer")]
@@ -31,6 +32,13 @@ namespace SimpleAudioSystem{
         private CoroutineExcuter ambFader;
         private CoroutineExcuter musicFader;
 
+        protected override void Awake()
+        {
+            base.Awake();
+            ambience_loop.ignoreListenerPause = true;
+            music_loop.ignoreListenerPause = true;
+            sfx_UI.ignoreListenerPause = true;
+        }
     #region Sound Play
         public void PlayMusic(string audio_name, float volume = 1){
             current_music_name = audio_name;
@@ -155,6 +163,7 @@ namespace SimpleAudioSystem{
                 Debug.LogAssertion($"No Clip found:{clip_name}");
             return clip;
         }
+        public AudioClip PlaySFXUI(string clip_name, float volumeScale) => PlaySFX(sfx_UI, clip_name, volumeScale);
         public AudioClip PlaySFX(string clip_name, float volumeScale) => PlaySFX(sfx_trigger, clip_name, volumeScale);
         
         public AudioClip PlaySFXLoop(AudioSource targetSource, string clip_name, float volumeScale, float transition = 1f, float time = 0){
