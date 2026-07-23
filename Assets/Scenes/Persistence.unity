@@ -174,6 +174,7 @@ MonoBehaviour:
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
+  byteGuid: 92ecf7cb-d199-4a96-9049-9aae1794973a
 --- !u!1 &400117799
 GameObject:
   m_ObjectHideFlags: 0
@@ -695,11 +696,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4759861360168245595, guid: 12e0e346df9c8f049906162f53c5e766,
-        type: 3}
-      propertyPath: isTesting
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4759861360168245595, guid: 12e0e346df9c8f049906162f53c5e766,
         type: 3}

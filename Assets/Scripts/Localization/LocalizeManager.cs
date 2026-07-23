@@ -25,6 +25,7 @@ namespace SimpleLocalization
         {
             base.Awake();
             localeFont.AssetChanged += OnFontChange;
+            currentFont = localeFont.LoadAsset();
         }
         protected override void OnDestroy()
         {
@@ -56,7 +57,7 @@ namespace SimpleLocalization
         internal static string GetSelectedLocale() => localeKey[localeIndex];
 #endregion
 
-        public void OnFontChange(TMP_FontAsset font)
+        void OnFontChange(TMP_FontAsset font)
         {
             currentFont = font;
             OnLocaleUpdate?.Invoke(font);

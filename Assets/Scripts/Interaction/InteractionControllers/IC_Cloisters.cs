@@ -19,12 +19,15 @@ public class IC_Cloisters : IC_Basic
     private float progress;
     private float progressSpeed;
     private float duration;
+    private Playable rootPlayable;
 
     protected override void OnInteractionEnter()
     {
         base.OnInteractionEnter();
         this.enabled = true;
         cloistersTimeline.Play();
+        rootPlayable = cloistersTimeline.playableGraph.GetRootPlayable(0);
+        rootPlayable.SetSpeed(0);
         duration = (float)cloistersTimeline.duration;
         UI_Manager.Instance.ChangeCursorColor(false);
     }
@@ -35,35 +38,38 @@ public class IC_Cloisters : IC_Basic
     }
     protected void Update()
     {
-        if(heroSphere.m_angularSpeed > threasholdRotatorSpeed)
-        {
-            progressSpeed = Mathf.Lerp(progressSpeed, maxProgressSpeed, Time.deltaTime * progressLerp);
-            shineDissolve.dissolveRadius = Mathf.Lerp(shineDissolve.dissolveRadius, 1, Time.deltaTime);
-        }
-        else
-        {
-            progressSpeed = Mathf.Lerp(progressSpeed, 0, Time.deltaTime * progressLerp);
-            shineDissolve.dissolveRadius = Mathf.Lerp(shineDissolve.dissolveRadius, 0, Time.deltaTime);
-        }
+        bool speedGate = heroSphere.m_angularSpeed > threasholdRotatorSpeed;
+        progressSpeed = Mathf.Lerp(progressSpeed, speedGate?maxProgressSpeed:0, Time.deltaTime * progressLerp);
+        shineDissolve.dissolveRadius = Mathf.Lerp(shineDissolve.dissolveRadius, speedGate?1:0, Time.deltaTime);
 
         progress += Time.deltaTime * progressSpeed;
-        cloistersTimeline.playableGraph.GetRootPlayable(0).SetTime(progress);
+        rootPlayable.SetTime(progress);
     }
     public void TL_Signal_AutoPlay()
     {
-        StartCoroutine(coroutineAutoPlayTimeline());        
+        StartCoroutine(coroutineAutoPlayTimeline());  
     }
     IEnumerator coroutineAutoPlayTimeline()
     {
         this.enabled = false;
         EventHandler.Call_OnTransitionBegin();
         EventHandler.Call_OnEndInteraction(this);
-        float currentProgress = progress;
-        yield return new WaitForLoop(6f, t =>
+
+        float startSpeed = progressSpeed;
+        float speed = startSpeed;
+
+        for(; progress<duration; progress += Time.deltaTime * speed)
         {
-            progress += Time.deltaTime;
+            if(speed < 1)
+            {
+                speed += Time.deltaTime*0.5f;
+                speed = Mathf.Min(1, speed);
+            }
             progress = Mathf.Min(duration, progress);
-        });
+            rootPlayable.SetTime(progress);
+            cloistersTimeline.Evaluate();
+            yield return null;
+        }
         progress = duration;
     }
 }

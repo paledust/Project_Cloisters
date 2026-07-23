@@ -166,6 +166,10 @@ public class GameManager : Singleton<GameManager>
             yield return FadeInBlackScreen(transition*0.5f);
             yield return SceneManager.UnloadSceneAsync(from);
         }
+        else
+        {
+            yield return null;
+        }
     //TO DO: do something after the last scene is unloaded.
         yield return SceneManager.LoadSceneAsync(to, LoadSceneMode.Additive);
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(to));
