@@ -88906,7 +88906,7 @@ MonoBehaviour:
   endSceneName: Ending
   endDelay: 1
   StartIndex: 0
-  startAtDebugIndex: 1
+  startAtDebugIndex: 0
   debugActions:
     m_Name: Debug Actions
     m_Id: 61c845d5-958f-43ed-86d7-6a4ad0af5089

@@ -1,15 +1,23 @@
 using UnityEngine;
+using SimpleSaveSystem;
+using System;
 
-public class LevelProgressionManager : Singleton<LevelProgressionManager>
+public class LevelProgressionManager : Singleton<LevelProgressionManager>, ISaveable
 {
+    [SerializeField, ShowOnly] private string byteGuid = Guid.NewGuid().ToString();
     private int levelProgress = 0;
+
     public int LevelProgress => levelProgress;
-    public void SetProgress(int progress)
+    public Guid guid => new Guid(byteGuid);
+
+    public void SetProgress(int progress) => levelProgress = progress;
+    public void ResetProgress() => levelProgress = 0;
+    public void RestoreState(PlayerSaveData state)
     {
-        levelProgress = progress;
+        levelProgress = state.levelIndex;
     }
-    public void ResetProgress()
+    public void CaptureState(ref PlayerSaveData saveData)
     {
-        levelProgress = 0;
+        saveData.levelIndex = levelProgress;
     }
 }

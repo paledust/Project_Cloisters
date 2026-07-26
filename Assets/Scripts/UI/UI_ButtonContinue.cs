@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Button))]
-public class UI_ButtonStartGame : MonoBehaviour
+public class UI_ButtonContinue : MonoBehaviour
 {
     [SerializeField] private float transitionTime = 2.5f;
     private Button button;
@@ -19,7 +19,6 @@ public class UI_ButtonStartGame : MonoBehaviour
     void OnButtonClicked()
     {
         button.interactable = false;
-        LevelProgressionManager.Instance.ResetProgress();
         GameManager.Instance.SwitchingScene("Game", transitionTime);
     }
 }

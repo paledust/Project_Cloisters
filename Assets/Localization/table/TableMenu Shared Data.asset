@@ -15,44 +15,20 @@ MonoBehaviour:
   m_TableCollectionName: TableMenu
   m_TableCollectionNameGuidString: 02743b220cb422b47a63ffcb26d4bfd7
   m_Entries:
-  - m_Id: 44837638144
-    m_Key: start_game
-    m_Metadata:
-      m_Items: []
   - m_Id: 130695041024
     m_Key: settings
     m_Metadata:
       m_Items: []
-  - m_Id: 150571847680
-    m_Key: credits
-    m_Metadata:
-      m_Items: []
-  - m_Id: 4101862068224
-    m_Key: restart
-    m_Metadata:
-      m_Items: []
-  - m_Id: 4138084077568
-    m_Key: back_to_menu
-    m_Metadata:
-      m_Items: []
-  - m_Id: 173720211456
-    m_Key: quit
-    m_Metadata:
-      m_Items: []
-  - m_Id: 4171894362112
-    m_Key: quit_game
-    m_Metadata:
-      m_Items: []
-  - m_Id: 206347702272
-    m_Key: setting_lang_title
-    m_Metadata:
-      m_Items: []
-  - m_Id: 303596834816
-    m_Key: setting_lang_content
-    m_Metadata:
-      m_Items: []
   - m_Id: 260257091584
     m_Key: setting_sound_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 443682394112
+    m_Key: setting_sound_sfx
+    m_Metadata:
+      m_Items: []
+  - m_Id: 426997452800
+    m_Key: setting_sound_music
     m_Metadata:
       m_Items: []
   - m_Id: 374237302784
@@ -63,12 +39,40 @@ MonoBehaviour:
     m_Key: setting_sound_ambience
     m_Metadata:
       m_Items: []
-  - m_Id: 426997452800
-    m_Key: setting_sound_music
+  - m_Id: 206347702272
+    m_Key: setting_lang_title
     m_Metadata:
       m_Items: []
-  - m_Id: 443682394112
-    m_Key: setting_sound_sfx
+  - m_Id: 303596834816
+    m_Key: setting_lang_content
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4101862068224
+    m_Key: restart
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4171894362112
+    m_Key: quit_game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 173720211456
+    m_Key: quit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44837638144
+    m_Key: new_game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7218629297311744
+    m_Key: continue_game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 150571847680
+    m_Key: credits
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4138084077568
+    m_Key: back_to_menu
     m_Metadata:
       m_Items: []
   m_Metadata:
