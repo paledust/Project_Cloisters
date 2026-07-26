@@ -16,7 +16,7 @@ namespace SimpleLocalization
         private TMP_FontAsset currentFont;
 
         private static int localeIndex = 0;
-        private static readonly string[] localeKey = new string[] {"en", "zh", "zh-Hant"};
+        private static readonly string[] localeKey = new string[] {"en", "ja", "zh", "zh-Hant"};
 
         public TMP_FontAsset CurrentFont => currentFont;
         public static event Action<TMP_FontAsset> OnLocaleUpdate;

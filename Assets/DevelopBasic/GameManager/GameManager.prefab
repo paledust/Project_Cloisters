@@ -127,6 +127,7 @@ MonoBehaviour:
   targetFrameRate: 90
   BlackScreenCanvasGroup: {fileID: 4562222128510109114}
   transitionDuration: 0.5
+  restartDuration: 2
   InitScene: Intro
   isDemo: 0
   isTesting: 0

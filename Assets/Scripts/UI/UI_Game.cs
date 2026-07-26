@@ -88,18 +88,21 @@ public class UI_Game : MonoBehaviour
     public void Btn_RestartGame()
     {
         raycaster.enabled = false;
+        DisableCanvas();
         menuAction.Disable();
         gameControl.RestartLevel();
     }
     public void Btn_BackToMainMenu()
     {
         raycaster.enabled = false;
+        DisableCanvas();
         menuAction.Disable();
         gameControl.GoBackToMainMenu();
     }
     public void Btn_QuitGame()
     {
         raycaster.enabled = false;
+        DisableCanvas();
         menuAction.Disable();
         GameManager.Instance.EndGame();
     }

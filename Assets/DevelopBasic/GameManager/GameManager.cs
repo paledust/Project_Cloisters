@@ -14,6 +14,7 @@ public class GameManager : Singleton<GameManager>
 [Header("Scene Transition")]
     [SerializeField] private CanvasGroup BlackScreenCanvasGroup;
     [SerializeField] private float transitionDuration = 1;
+    [SerializeField] private float restartDuration = 1;
 [Header("Init")]
     [SerializeField] private string InitScene;
 [Header("Demo")]
@@ -140,7 +141,7 @@ public class GameManager : Singleton<GameManager>
         Application.Quit();
     }
     IEnumerator RestartLevel(string level){
-        yield return FadeInBlackScreen(transitionDuration*0.5f);
+        yield return FadeInBlackScreen(restartDuration*0.5f);
         IsSwitchingScene = true;
         //TO DO: do something before the last scene is unloaded. e.g: call event of saving 
         EventHandler.Call_BeforeUnloadScene();
@@ -153,7 +154,7 @@ public class GameManager : Singleton<GameManager>
         //TO DO: do something after the next scene is loaded. e.g: call event of loading
         yield return null;
         ResumeTheGame();
-        yield return FadeOutBlackScreen(transitionDuration*0.5f);
+        yield return FadeOutBlackScreen(restartDuration*0.5f);
         EventHandler.Call_AfterLoadScene();
         
         IsSwitchingScene = false;
