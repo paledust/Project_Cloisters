@@ -174,7 +174,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 128}
+  m_AnchoredPosition: {x: 0, y: 276}
   m_SizeDelta: {x: 600, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &130231723
@@ -225,8 +225,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 111
-  m_fontSizeBase: 111
+  m_fontSize: 110
+  m_fontSizeBase: 110
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1095,7 +1095,7 @@ PrefabInstance:
     - target: {fileID: 1345811952740348996, guid: 46df495a12c1ad149928b581840d813c,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 9
+      value: 144
       objectReference: {fileID: 0}
     - target: {fileID: 1345811952740348996, guid: 46df495a12c1ad149928b581840d813c,
         type: 3}
@@ -1177,11 +1177,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 413134941}
-    - target: {fileID: 7789652770493850557, guid: 46df495a12c1ad149928b581840d813c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Btn_DisableAllCanvas
-      objectReference: {fileID: 0}
     - target: {fileID: 8796500686695814503, guid: 46df495a12c1ad149928b581840d813c,
         type: 3}
       propertyPath: m_AnchorMax.y

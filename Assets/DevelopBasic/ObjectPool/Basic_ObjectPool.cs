@@ -26,16 +26,12 @@ public class Basic_ObjectPool<T> : MonoBehaviour where T: MonoBehaviour
         }
     //If not try Spawn one
         else{
-            if(pools.Count<MaxAmount){
-                var obj = SpawnTarget();
-                pools.Add(obj);
-                return obj;
-            }
-        //If spawn too much, then return null and marked as needing one.
-            else{
+            if(pools.Count>=MaxAmount){
                 neededAmount ++;
-                return null;
             }
+            var obj = SpawnTarget();
+            pools.Add(obj);
+            return obj;
         }
     }
     protected T SpawnTarget(){

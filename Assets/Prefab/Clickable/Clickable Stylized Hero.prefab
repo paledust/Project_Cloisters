@@ -234,6 +234,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5880977012390747775, guid: 75e2a487e01f5ac4482f92663c5d3040,
         type: 3}
+      propertyPath: springFactor
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5880977012390747775, guid: 75e2a487e01f5ac4482f92663c5d3040,
+        type: 3}
       propertyPath: idleAngularSpeed
       value: 0
       objectReference: {fileID: 0}
@@ -314,4 +319,3 @@ MonoBehaviour:
   glowMaxAlpha: 1
   prepBeat: 4
   sfxCharge: sfx_jazz_fill
-  m_audio: {fileID: 0}

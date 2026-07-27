@@ -49336,7 +49336,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &320034177
 Transform:
   m_ObjectHideFlags: 0
@@ -88905,8 +88905,8 @@ MonoBehaviour:
   bgmHandler: {fileID: 601070085}
   endSceneName: Ending
   endDelay: 1
-  StartIndex: 0
-  startAtDebugIndex: 0
+  StartIndex: 1
+  startAtDebugIndex: 1
   debugActions:
     m_Name: Debug Actions
     m_Id: 61c845d5-958f-43ed-86d7-6a4ad0af5089
@@ -145932,7 +145932,7 @@ MonoBehaviour:
   poolPrefab: {fileID: 4527830689499131788, guid: cd8e26b321cb4374a98041df5cf8bc8f,
     type: 3}
   spawnRoot: {fileID: 584839597}
-  MaxAmount: 100
+  MaxAmount: 10
   spawnSize: {x: 0.85, y: 0.4}
   rectSelector:
     centerTrans: {fileID: 584839597}
@@ -179254,7 +179254,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1844645715
 Transform:
   m_ObjectHideFlags: 0
@@ -211637,7 +211637,7 @@ PrefabInstance:
     - target: {fileID: 7085316780055515206, guid: 7671163c2c3bc7a4699f30c40e759e90,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -23.23
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7085316780055515206, guid: 7671163c2c3bc7a4699f30c40e759e90,
         type: 3}
