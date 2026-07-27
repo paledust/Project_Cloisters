@@ -26,9 +26,9 @@ public class Basic_ObjectPool<T> : MonoBehaviour where T: MonoBehaviour
         }
     //If not try Spawn one
         else{
-            if(pools.Count>=MaxAmount){
+            if(pools.Count>=MaxAmount)
                 neededAmount ++;
-            }
+                
             var obj = SpawnTarget();
             pools.Add(obj);
             return obj;

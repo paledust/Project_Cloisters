@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using Cinemachine;
 using SimpleAudioSystem;
 using UnityEngine;
@@ -53,6 +54,7 @@ public class IC_Narrative : IC_Basic
     [SerializeField] private AudioSource collideAudio;
 
     private int narrativeCharIndex = 0;
+    private int narrativeCharExplodeIndex = 0;
     private float lastCollisionTime;
 
     protected override void LoadAssets()
@@ -97,7 +99,10 @@ public class IC_Narrative : IC_Basic
 
         var collider = Physics.OverlapSphere(circle.transform.position, 3f);
         if(circle.m_circle.m_circleType == Clickable_Circle.CircleType.Narrative)
+        {
             AudioManager.Instance.PlaySFX(sfx_textAppear, textAppearVolume);
+            narrativeCharExplodeIndex ++;
+        }
         foreach(var col in collider)
         {
             var narrativeCircle = col.GetComponent<CollidableCircle>();
@@ -109,7 +114,7 @@ public class IC_Narrative : IC_Basic
             }
         }
 
-        if(narrativeCharIndex>=narrativeTextDatas.Length)
+        if(narrativeCharExplodeIndex>=narrativeTextDatas.Length)
             StartCoroutine(coroutineEndInteraction());
     }
     void OnCircleExplode(Vector3 position)
@@ -229,6 +234,9 @@ public class IC_Narrative : IC_Basic
         yield return new WaitForSeconds(2f);
         //Do Circle Sequence
         var circles = circleManager.GetCircleInDistanceOrder(centerTrans.position);
+        if(circles == null || circles.Length == 0)
+            circleManager.SpawnAtPoint(spawnPointAtStart[0].position, Random.Range(0.8f, 1.2f), NarrativeCircleManager.SpawnStyle.PopUp);
+
         //Set Up Transition Camera
         vc_transist.m_Follow = circles[0].transform;
         //Explode Circles

@@ -95,9 +95,9 @@ public class NarrativeCircleManager : Basic_ObjectPool<CollidableCircle>
                     go.FloatUp(duration);
                     break;
             }
+            listCircles.Add(go);
+            go.RegisterOnExplode(() => OnCircleExplode(go));
         }
-        listCircles.Add(go);
-        go.RegisterOnExplode(() => OnCircleExplode(go));
         return go;
     }
     void OnCircleExplode(CollidableCircle circle)
