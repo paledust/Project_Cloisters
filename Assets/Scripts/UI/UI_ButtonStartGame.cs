@@ -20,6 +20,6 @@ public class UI_ButtonStartGame : MonoBehaviour
     {
         button.interactable = false;
         LevelProgressionManager.Instance.ResetProgress();
-        GameManager.Instance.SwitchingScene("Game", transitionTime);
+        GameManager.Instance.SwitchingScene("Game", transitionTime, 1);
     }
 }

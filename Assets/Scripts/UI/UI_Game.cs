@@ -13,7 +13,9 @@ public class UI_Game : MonoBehaviour
 
 [Header("Menu Control")]
     [SerializeField] private Game gameControl;
-    [SerializeField] private GraphicRaycaster raycaster;
+    [SerializeField] private CanvasGroup canvasMenu;
+    [SerializeField] private CanvasGroup canvasGame;
+
     [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] private bool isMenuOpen = false;
     [SerializeField] private float menuTime = .3f;
@@ -32,7 +34,6 @@ public class UI_Game : MonoBehaviour
     public void Start()
     {
         isMenuOpen = false;
-        raycaster.enabled = false;
         UpdateMenuImmediately();
     }
     void Awake(){
@@ -50,7 +51,6 @@ public class UI_Game : MonoBehaviour
     public void EnableCanvas()
     {
         isMenuOpen = true;
-        raycaster.enabled = true;
         blackBar_Top.rectTransform.anchoredPosition = new Vector2(0, 100);
         blackBar_Bottom.rectTransform.anchoredPosition = new Vector2(0, -100);
 
@@ -60,7 +60,9 @@ public class UI_Game : MonoBehaviour
                     .Join(blackBar_Bottom.rectTransform.DOAnchorPosY(0, menuTime).SetEase(Ease.OutQuad))
                     .Join(DOTween.To(() => menuVolume.weight, x => menuVolume.weight = x, 1, menuTime).SetEase(Ease.OutQuad))
                     .Join(DOTween.To(() => AudioManager.Instance.GetCutOff(), x => AudioManager.Instance.ChangeCutOff(x), CutOffRange.x, menuTime))
-                    .Join(canvasGroup.DOFade(1, menuTime).OnComplete(()=>canvasGroup.interactable = true))
+                    .Join(canvasGroup.DOFade(1, menuTime).OnComplete(()=>SwitchCanvas(canvasGroup, true)))
+                    .Join(canvasMenu.DOFade(1, menuTime).OnComplete(()=>SwitchCanvas(canvasMenu, true)))
+                    .Join(canvasGame.DOFade(0, menuTime).OnStart(()=>SwitchCanvas(canvasGame, false)))
                     .SetUpdate(true);
 
         GameManager.Instance.PauseTheGame();
@@ -68,7 +70,6 @@ public class UI_Game : MonoBehaviour
     public void DisableCanvas()
     {
         GameManager.Instance.ResumeTheGame();
-        raycaster.enabled = false;
         isMenuOpen = false;
         canvasGroup.interactable = false;
 
@@ -78,7 +79,9 @@ public class UI_Game : MonoBehaviour
                     .Join(blackBar_Bottom.rectTransform.DOAnchorPosY(-100, menuTime).SetEase(Ease.OutQuad))
                     .Join(DOTween.To(() => menuVolume.weight, x => menuVolume.weight = x, 0, menuTime).SetEase(Ease.OutQuad))
                     .Join(DOTween.To(() => AudioManager.Instance.GetCutOff(), x => AudioManager.Instance.ChangeCutOff(x), CutOffRange.y, menuTime))
-                    .Join(canvasGroup.DOFade(0, menuTime))
+                    .Join(canvasGroup.DOFade(0, menuTime).OnStart(()=>SwitchCanvas(canvasGroup, false)))
+                    .Join(canvasMenu.DOFade(0, menuTime).OnStart(()=>SwitchCanvas(canvasMenu, false)))
+                    .Join(canvasGame.DOFade(1, menuTime).OnComplete(()=>SwitchCanvas(canvasGame, true)))
                     .SetUpdate(true);
     }
     public void Btn_Settings()
@@ -87,24 +90,33 @@ public class UI_Game : MonoBehaviour
     }
     public void Btn_RestartGame()
     {
-        raycaster.enabled = false;
         DisableCanvas();
         menuAction.Disable();
         gameControl.RestartLevel();
     }
     public void Btn_BackToMainMenu()
     {
-        raycaster.enabled = false;
         DisableCanvas();
         menuAction.Disable();
         gameControl.GoBackToMainMenu();
     }
     public void Btn_QuitGame()
     {
-        raycaster.enabled = false;
         DisableCanvas();
         menuAction.Disable();
         GameManager.Instance.EndGame();
+    }
+    public void Btn_QuitMenu()
+    {
+        EventHandler.Call_OnFlushInput();
+        DisableCanvas();
+        interactionBlocker.SetActive(isMenuOpen);
+    }
+    public void Btn_OpenMenu()
+    {
+        EventHandler.Call_OnFlushInput();
+        EnableCanvas();
+        interactionBlocker.SetActive(isMenuOpen);
     }
     void UpdateMenuImmediately()
     {
@@ -139,6 +151,11 @@ public class UI_Game : MonoBehaviour
     void TransitionEndHandler()
     {
         menuAction.Enable();
+    }
+    void SwitchCanvas(CanvasGroup canvas, bool isOn)
+    {
+        canvas.interactable = isOn;
+        canvas.blocksRaycasts = isOn;
     }
 
 #if UNITY_EDITOR

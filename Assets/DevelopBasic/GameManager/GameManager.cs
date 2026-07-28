@@ -53,7 +53,7 @@ public class GameManager : Singleton<GameManager>
     //Load Level
         if(loadInitSceneFromGameManager){
             BlackScreenCanvasGroup.alpha = 1;
-            SwitchingScene(string.Empty, InitScene, transitionDuration);
+            SwitchingScene(string.Empty, InitScene, 0, transitionDuration);
         }
         else {
             currentScene = SceneManager.GetActiveScene().name;
@@ -102,12 +102,12 @@ public class GameManager : Singleton<GameManager>
 #endregion
 
 #region Scene Transition
-    public void SwitchingScene(string to, float transition = 1, bool autosaveAfterTransition = true){
+    public void SwitchingScene(string to, float transition = 1, float intersection = 0, bool autosaveAfterTransition = true){
         string from = SceneManager.GetActiveScene().name;
-        SwitchingScene(from, to, transition, autosaveAfterTransition);
+        SwitchingScene(from, to, transition, intersection, autosaveAfterTransition);
     }
-    void SwitchingScene(string from, string to, float transition, bool autosaveAfterTransition = true){
-        if(!IsSwitchingScene) StartCoroutine(SwitchSceneCoroutine(from, to, transition, autosaveAfterTransition));
+    void SwitchingScene(string from, string to, float transition, float intersection, bool autosaveAfterTransition = true){
+        if(!IsSwitchingScene) StartCoroutine(SwitchSceneCoroutine(from, to, transition, intersection, autosaveAfterTransition));
     }
     IEnumerator EndGameCoroutine(string level){
         StartCoroutine(FadeInBlackScreen(1f));
@@ -159,7 +159,7 @@ public class GameManager : Singleton<GameManager>
         
         IsSwitchingScene = false;
     }
-    IEnumerator SwitchSceneCoroutine(string from, string to, float transition, bool autosaveAfterTransition){
+    IEnumerator SwitchSceneCoroutine(string from, string to, float transition, float intersection, bool autosaveAfterTransition){
         IsSwitchingScene = true;
         if(from != string.Empty){
         //TO DO: do something before the last scene is unloaded. e.g: call event of saving 
@@ -170,9 +170,10 @@ public class GameManager : Singleton<GameManager>
             yield return SceneManager.UnloadSceneAsync(from);
         }
         else
-        {
             yield return null;
-        }
+            
+        if(intersection>0)
+            yield return new WaitForSeconds(intersection);
     //TO DO: do something after the last scene is unloaded.
         yield return SceneManager.LoadSceneAsync(to, LoadSceneMode.Additive);
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(to));

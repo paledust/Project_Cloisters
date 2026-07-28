@@ -471,7 +471,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.5773585, g: 0.5773585, b: 0.5773585, a: 1}
+    m_NormalColor: {r: 0.2981131, g: 0.2981131, b: 0.2981131, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -518,7 +518,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08addab9846f5ba4a898df9c7210c4f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionTime: 2.5
+  transitionTime: 2
 --- !u!114 &8985671321648493013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -535,6 +535,8 @@ MonoBehaviour:
   volumeClick: 1
   sfxHover: {fileID: 11400000, guid: 66a823f73beda1442bba5ba6cb8430f7, type: 2}
   volumeHover: 0.5
+  text: {fileID: 6146996704750909286}
+  enableHoverUnderline: 1
 --- !u!1 &5186298965629752338
 GameObject:
   m_ObjectHideFlags: 0
@@ -603,7 +605,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.5773585, g: 0.5773585, b: 0.5773585, a: 1}
+    m_NormalColor: {r: 0.2981131, g: 0.2981131, b: 0.2981131, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -654,6 +656,8 @@ MonoBehaviour:
   volumeClick: 1
   sfxHover: {fileID: 11400000, guid: 66a823f73beda1442bba5ba6cb8430f7, type: 2}
   volumeHover: 0.5
+  text: {fileID: 7957821424093002371}
+  enableHoverUnderline: 1
 --- !u!1 &5999164547008651819
 GameObject:
   m_ObjectHideFlags: 0
@@ -1044,7 +1048,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.5773585, g: 0.5773585, b: 0.5773585, a: 1}
+    m_NormalColor: {r: 0.2981131, g: 0.2981131, b: 0.2981131, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -1095,6 +1099,8 @@ MonoBehaviour:
   volumeClick: 1
   sfxHover: {fileID: 11400000, guid: 66a823f73beda1442bba5ba6cb8430f7, type: 2}
   volumeHover: 0.5
+  text: {fileID: 8461137285436706962}
+  enableHoverUnderline: 1
 --- !u!1 &7330388135969352249
 GameObject:
   m_ObjectHideFlags: 0
@@ -1325,7 +1331,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.5773585, g: 0.5773585, b: 0.5773585, a: 1}
+    m_NormalColor: {r: 0.2981131, g: 0.2981131, b: 0.2981131, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -1372,7 +1378,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e2dc3fa381335e4e936ff9a35308bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionTime: 2.5
+  transitionTime: 2
 --- !u!114 &3613415368085387295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1389,6 +1395,8 @@ MonoBehaviour:
   volumeClick: 1
   sfxHover: {fileID: 11400000, guid: 66a823f73beda1442bba5ba6cb8430f7, type: 2}
   volumeHover: 0.5
+  text: {fileID: 8801192437572551539}
+  enableHoverUnderline: 1
 --- !u!1 &8917702911518991124
 GameObject:
   m_ObjectHideFlags: 0
@@ -1458,7 +1466,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.5773585, g: 0.5773585, b: 0.5773585, a: 1}
+    m_NormalColor: {r: 0.2981131, g: 0.2981131, b: 0.2981131, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -1521,3 +1529,5 @@ MonoBehaviour:
   volumeClick: 1
   sfxHover: {fileID: 11400000, guid: 66a823f73beda1442bba5ba6cb8430f7, type: 2}
   volumeHover: 0.5
+  text: {fileID: 6449915695111498305}
+  enableHoverUnderline: 1
