@@ -20,6 +20,7 @@ public class EvocativeTube : MonoBehaviour
     [SerializeField] private int shakeVibration = 10;
 
     [Header("Presentation")]
+    [SerializeField] private SpriteRenderer tubeGlow;
     [SerializeField] private Animation ejectAnim;
     [SerializeField] private ParticleSystem vfxEject;
     [SerializeField] private CinemachineImpulseSource impulseSource;
@@ -75,6 +76,7 @@ public class EvocativeTube : MonoBehaviour
         });
         AudioManager.Instance.PlaySFX(sfxTunnel.AudioKey, 1);
         tubeRoot.DOShakePosition(.25f, shakeStrength, shakeVibration*2);
+        tubeGlow.DOFade(1, 0.25f);
 
         ball.gameObject.SetActive(false);
         yield return new WaitForSeconds(.25f);
