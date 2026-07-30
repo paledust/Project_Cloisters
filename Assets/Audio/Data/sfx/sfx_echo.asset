@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c16331b23b28b714699aa703a52b32f5, type: 3}
   m_Name: sfx_echo
   m_EditorClassIdentifier: 
-  audioClip: {fileID: 8300000, guid: 548c1200feaa0e34c96a8bb29f25fdab, type: 3}
+  audioClip: {fileID: 8300000, guid: 039b9ce164ae9e241a66e0129920852c, type: 3}

@@ -5090,6 +5090,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7975842067981239157}
   - component: {fileID: 3206506852181161756}
+  - component: {fileID: 7269072330390302161}
   m_Layer: 0
   m_Name: spot_circle
   m_TagString: Untagged
@@ -5165,6 +5166,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7269072330390302161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 882637585606262283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f6e84c8c089023489ac9e66b6ea4b21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3799233664355523238
 GameObject:
   m_ObjectHideFlags: 0
@@ -5280,6 +5293,7 @@ MonoBehaviour:
   spotLayer:
     serializedVersion: 2
     m_Bits: 2
+  spotCircleTrans: {fileID: 7975842067981239157}
 --- !u!95 &536806699821499853
 Animator:
   serializedVersion: 5

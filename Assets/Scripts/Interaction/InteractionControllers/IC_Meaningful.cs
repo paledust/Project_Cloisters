@@ -104,7 +104,7 @@ public class IC_Meaningful : IC_Basic
     }
     IEnumerator coroutineDiamond()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1.75f);
         AudioManager.Instance.PlaySFX(glowSFX.AudioKey, 0.5f);
         foreach(var text in textList)
         {

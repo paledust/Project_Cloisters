@@ -9,8 +9,8 @@ public class MirrorDiamond : MonoBehaviour
     [SerializeField] private ParticleSystem rippleEffect;
 
 [Header("Audio")]
-    [SerializeField] private string sfxDiamondFound;
-    [SerializeField] private string sfxRipple;
+    [SerializeField] private AudioData_SO sfxDiamondFound;
+    [SerializeField] private AudioData_SO sfxRipple;
 
     private bool isFocused = false;
     private float focusTimer = 0f;
@@ -46,7 +46,7 @@ public class MirrorDiamond : MonoBehaviour
             {
                 EventHandler.Call_OnMirrorDiamondFound();
                 animator_diamond.SetTrigger(FOUND_TRIGGER);
-                AudioManager.Instance.PlaySFX(sfxDiamondFound, 1);
+                AudioManager.Instance.PlaySFX(sfxDiamondFound.AudioKey, 1);
                 this.enabled = false;
             }
         }
@@ -68,7 +68,7 @@ public class MirrorDiamond : MonoBehaviour
         if (rippleEffect != null)
         {
             rippleEffect.Emit(1);
-            AudioManager.Instance.PlaySFX(sfxRipple, 1);
+            AudioManager.Instance.PlaySFX(sfxRipple.AudioKey, 1);
         }
     }
 }
