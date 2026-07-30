@@ -8,14 +8,14 @@ public class AudioSettingData
 {
     public float masterVolume = 1;
     public float ambVolume = 1;
-    public float musVolume = 1;
+    public float musVolume = 0.5f;
     public float sfxVolume = 1;
     public static AudioSettingData defaultSetting = new AudioSettingData();
     public AudioSettingData()
     {
         masterVolume = 1;
         ambVolume = 1;
-        musVolume = 1;
+        musVolume = 0.5f;
         sfxVolume = 1;
     }
 }

@@ -15,7 +15,7 @@ namespace SimpleAudioSystem
             var audioSetting = state.audioSettingData;
             AudioSettingService.SetAudioVolume(AudioSettingType.Master, audioSetting.masterVolume);
             AudioSettingService.SetAudioVolume(AudioSettingType.AMB, audioSetting.ambVolume);
-            AudioSettingService.SetAudioVolume(AudioSettingType.MUS, audioSetting.musVolume);
+            AudioSettingService.SetAudioVolume(AudioSettingType.MUS, Mathf.Min(0.5f, audioSetting.musVolume));
             AudioSettingService.SetAudioVolume(AudioSettingType.SFX, audioSetting.sfxVolume);
         }
         public void CaptureState(ref PlayerSaveData saveData)
