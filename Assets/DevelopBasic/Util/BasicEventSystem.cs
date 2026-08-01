@@ -19,6 +19,8 @@ public static class EventHandler
     public static void Call_OnEndInteraction(IC_Basic interactionController) => E_OnEndInteraction?.Invoke(interactionController);
     public static event Action<IC_Basic> E_OnInteractionUnreachable;
     public static void Call_OnInteractionUnreachable(IC_Basic interactionController) => E_OnInteractionUnreachable?.Invoke(interactionController);
+    public static event Action E_OnUnloadCurrentInteraction;
+    public static void Call_OnUnloadCurrentInteraction() => E_OnUnloadCurrentInteraction?.Invoke();
     public static event Action<IC_Basic> E_OnInteractionReachable;
     public static void Call_OnInteractionReachable(IC_Basic interactionController) => E_OnInteractionReachable?.Invoke(interactionController);
     public static event Action E_OnFlushInput;

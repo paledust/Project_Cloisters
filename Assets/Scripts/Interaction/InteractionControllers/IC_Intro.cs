@@ -73,7 +73,5 @@ public class IC_Intro : IC_Basic
         });
 
         endTimeline.Play();
-        yield return new WaitForSeconds(1f);
-        EventHandler.Call_OnInteractionUnreachable(this);
     }
 }

@@ -30,6 +30,7 @@ public class IC_Manager : MonoBehaviour
         EventHandler.E_OnNextInteraction        += NextInteraction;
         EventHandler.E_OnEndInteraction         += EndInteraction;
         EventHandler.E_OnInteractionUnreachable += CleanUpInteraction;
+        EventHandler.E_OnUnloadCurrentInteraction += CleanUpCurrentInteraction;
 
     #if UNITY_EDITOR || DEVELOPMENT_BUILD
         debugActions["progress"].performed += Debug_Progress;
@@ -42,6 +43,7 @@ public class IC_Manager : MonoBehaviour
         EventHandler.E_OnNextInteraction        -= NextInteraction;
         EventHandler.E_OnEndInteraction         -= EndInteraction;
         EventHandler.E_OnInteractionUnreachable -= CleanUpInteraction; 
+        EventHandler.E_OnUnloadCurrentInteraction -= CleanUpCurrentInteraction;
 
     #if UNITY_EDITOR || DEVELOPMENT_BUILD
         debugActions["progress"].performed -= Debug_Progress;
@@ -106,6 +108,11 @@ public class IC_Manager : MonoBehaviour
         interController.CleanUpInteraction();
     }
     void PreloadInteraction(IC_Basic interController)=>interactionControllers[interactionIndex].PreloadInteraction();
+    void CleanUpCurrentInteraction()
+    {
+        Debug.Log("Cleanup Interaction: "+interactionControllers[interactionIndex].name);
+        CleanUpInteraction(interactionControllers[interactionIndex]);
+    }
 
 #region Tool Function
     public IC_Basic GetMiniGame(int index)=>interactionControllers[index];

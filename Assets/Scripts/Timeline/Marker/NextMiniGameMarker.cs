@@ -8,6 +8,7 @@ public class NextMiniGameMarker : Marker, INotification, INotificationOptionProv
 {
     public bool retroactive;
     public bool emitOnce;
+    public bool autoUnloadLastInteraction = false;
     public PropertyName id{get{return new PropertyName();}}
     NotificationFlags INotificationOptionProvider.flags{
         get

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 public class NextMiniGameMarker_Receiver : MonoBehaviour, INotificationReceiver
@@ -9,6 +7,8 @@ public class NextMiniGameMarker_Receiver : MonoBehaviour, INotificationReceiver
         if (mark == null)
             return;
         
+        if(mark.autoUnloadLastInteraction)
+            EventHandler.Call_OnUnloadCurrentInteraction();
         EventHandler.Call_OnNextInteraction();
     }
 }

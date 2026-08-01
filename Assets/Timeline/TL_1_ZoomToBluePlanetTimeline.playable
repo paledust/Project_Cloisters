@@ -31,6 +31,7 @@ MonoBehaviour:
   m_Time: 1
   retroactive: 0
   emitOnce: 0
+  autoUnloadLastInteraction: 1
 --- !u!114 &-6675310972476742151
 MonoBehaviour:
   m_ObjectHideFlags: 1
