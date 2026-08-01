@@ -89017,7 +89017,7 @@ MonoBehaviour:
   bgmHandler: {fileID: 601070085}
   endSceneName: Ending
   endDelay: 1
-  StartIndex: 4
+  StartIndex: 0
   startAtDebugIndex: 1
   debugActions:
     m_Name: Debug Actions
