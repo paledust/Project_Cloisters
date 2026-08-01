@@ -3,6 +3,7 @@ using UnityEngine;
 public class WhimsicalTextSpoter : MonoBehaviour
 {
     [SerializeField] private LayerMask spotLayer;
+    [SerializeField] private WhimsicalSpotCircle whimsicalSpotCircle;
     private WhimsicalText_SpotDetection currentSpot;
 
     void OnDisable()
@@ -16,15 +17,13 @@ public class WhimsicalTextSpoter : MonoBehaviour
         {
             if(hit.collider.TryGetComponent<WhimsicalText_SpotDetection>(out var spot))
             {
-                if(currentSpot!=null)
+                if(currentSpot != spot)
                 {
-                    if(currentSpot!=spot)
+                    if(currentSpot != null)
                         ClearCurrentSpot();
-                }
-                else
-                {
                     currentSpot = spot;
                     currentSpot.OnDetected(this);
+                    whimsicalSpotCircle.OnDetect();
                 }
             }
             else
@@ -43,6 +42,7 @@ public class WhimsicalTextSpoter : MonoBehaviour
         {
             currentSpot.OnNotDetected();
             currentSpot = null;
+            whimsicalSpotCircle.OnExitDetect();
         }
     }
     public void OnConsumed()

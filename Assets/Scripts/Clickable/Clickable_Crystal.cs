@@ -12,7 +12,7 @@ public class Clickable_Crystal : Basic_Clickable
     [SerializeField] private float particleExpandForce = 10f;
 
     [Header("Spoter")]
-    [SerializeField] private SpriteRenderer spotterRender;
+    [SerializeField] private WhimsicalSpotCircle whimsicalSpotCircle;
     [SerializeField] private WhimsicalTextSpoter whimsicalTextSpoter;
 
     private Animator crystalAnimator;
@@ -21,8 +21,7 @@ public class Clickable_Crystal : Basic_Clickable
     void Awake()
     {
         crystalAnimator = GetComponent<Animator>();
-        spotterRender.transform.localScale = Vector3.zero;
-        spotterRender.color = new Color(1, 1, 1, 0);
+
     }
     void Start()
     {
@@ -41,9 +40,7 @@ public class Clickable_Crystal : Basic_Clickable
 
         transform.DOKill();
         transform.DOScale(1.2f, 0.25f).SetEase(Ease.OutBack);
-        spotterRender.DOKill();
-        spotterRender.transform.DOScale(1.7f, 0.25f).SetEase(Ease.OutBack);
-        spotterRender.DOFade(1, 0.25f);
+        whimsicalSpotCircle.ShowUp();
         
         var particles = new ParticleSystem.Particle[blinkParticle.main.maxParticles];
         int count = blinkParticle.GetParticles(particles);
@@ -65,9 +62,7 @@ public class Clickable_Crystal : Basic_Clickable
 
         transform.DOKill();
         transform.DOScale(1f, 0.25f).SetEase(Ease.OutBack);
-        spotterRender.DOKill();
-        spotterRender.transform.DOScale(0, 0.5f).SetEase(Ease.OutBack);
-        spotterRender.DOFade(0, 0.25f);
+        whimsicalSpotCircle.HideOut();
         crystalAnimator.SetBool("controlling", false);
         if(!glowParticle.isPlaying)
         {
