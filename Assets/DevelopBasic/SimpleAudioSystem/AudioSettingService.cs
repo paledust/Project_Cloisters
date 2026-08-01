@@ -15,6 +15,7 @@ namespace SimpleAudioSystem
         private static float ambVolume = AudioSettingData.defaultSetting.ambVolume;
         private static float musVolume = AudioSettingData.defaultSetting.musVolume;
         private static float sfxVolume = AudioSettingData.defaultSetting.sfxVolume;
+        private const float MUS_SCALE = 0.6f;
         
         public static void SetAudioVolume(AudioSettingType audioSettingType, float volume)
         {
@@ -32,7 +33,7 @@ namespace SimpleAudioSystem
                     ambVolume = volume;
                     break;
                 case AudioSettingType.MUS:
-                    AudioManager.Instance.ChangeMUSVolume(volume);
+                    AudioManager.Instance.ChangeMUSVolume(volume*MUS_SCALE);
                     musVolume = volume;
                     break;
                 case AudioSettingType.SFX:

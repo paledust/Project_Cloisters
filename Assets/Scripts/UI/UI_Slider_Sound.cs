@@ -7,7 +7,6 @@ public class UI_Slider_Sound : MonoBehaviour
 {
     [SerializeField] private AudioSettingType settingType;
     [SerializeField] private Slider slider;
-    [SerializeField, Range(0, 2)] private float valueRematch = 1;
     void OnEnable()
     {
         slider.onValueChanged.AddListener(OnSliderValueChange);
@@ -22,6 +21,6 @@ public class UI_Slider_Sound : MonoBehaviour
     }
     void OnSliderValueChange(float value)
     {
-        AudioSettingService.SetAudioVolume(settingType, value * valueRematch);
+        AudioSettingService.SetAudioVolume(settingType, value);
     }
 }
