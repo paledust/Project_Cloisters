@@ -61,7 +61,7 @@ public class GameManager : Singleton<GameManager>
 
     #else
     //Since we don't have the saving system yet, the initiation should be done by loading the debug progress data.
-        SwitchingScene(string.Empty, InitScene, transitionDuration);
+        SwitchingScene(string.Empty, InitScene, 0, transitionDuration);
     #endif
     }
     protected override void OnDestroy(){
