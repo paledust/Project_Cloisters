@@ -75,6 +75,7 @@ public class ShapeInteractionHandler : MonoBehaviour
         renderRoot.localRotation = Quaternion.identity;
         renderRoot.DOKill();
         renderRoot.DOPunchRotation(Vector3.forward * (isCenter?8:4), 0.25f, isCenter?25:17);
+        connectBody.ReactivateTrigger();
         AudioManager.Instance.PlaySFX(isCenter?sfxOnCenter.AudioKey:sfxOnCorner.AudioKey, 1);
     }
     public void OnRelease()

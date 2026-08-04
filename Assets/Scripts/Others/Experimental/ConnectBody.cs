@@ -40,6 +40,17 @@ public class ConnectBody : MonoBehaviour
         clickable_Moveable.onRelease -= OnReleaseBody;
     }
     public void BlinkShape(Color blinkColor1, Color blinkColor2)=>shapeColorChanger.BlinkColor(blinkColor1, blinkColor2);
+    public void ReactivateTrigger()
+    {
+        foreach(ConnectTrigger connectTrigger in connectTriggers)
+        {
+            if(!connectTrigger.m_isLocked)
+            {
+                connectTrigger.gameObject.SetActive(false);
+                connectTrigger.gameObject.SetActive(true);
+            }
+        }
+    }
     void Update()
     {
         if (clickable_Moveable.isControlling)
