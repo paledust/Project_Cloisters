@@ -33,6 +33,11 @@ public class UI_Game : MonoBehaviour
     public void Start()
     {
         isMenuOpen = false;
+        canvasMenu.alpha = 0;
+        canvasGame.alpha = 1;
+        interactionBlocker.SetActive(false);
+        SwitchCanvas(canvasMenu, false);
+        SwitchCanvas(canvasGame, true);
         blackBar_Top.rectTransform.anchoredPosition = new Vector2(0, isMenuOpen?0:100);
         blackBar_Bottom.rectTransform.anchoredPosition = new Vector2(0, isMenuOpen?0:-100);
     }
@@ -43,8 +48,8 @@ public class UI_Game : MonoBehaviour
         menuAction.Enable();
     }
     void OnDestroy(){
-        EventHandler.E_OnTransitionBegin += TransitionBeginHandler;
-        EventHandler.E_OnTransitionEnd += TransitionEndHandler;
+        EventHandler.E_OnTransitionBegin -= TransitionBeginHandler;
+        EventHandler.E_OnTransitionEnd -= TransitionEndHandler;
         menuAction["menu"].performed -= MenuAction_performed;
         menuAction.Disable();
     }
@@ -54,6 +59,7 @@ public class UI_Game : MonoBehaviour
         blackBar_Top.rectTransform.anchoredPosition = new Vector2(0, 100);
         blackBar_Bottom.rectTransform.anchoredPosition = new Vector2(0, -100);
 
+        SwitchCanvas(canvasGame, false);
         pauseTween.Kill();
         pauseTween = DOTween.Sequence();
         pauseTween.Join(blackBar_Top.rectTransform.DOAnchorPosY(0, menuTime).SetEase(Ease.OutQuad))
@@ -61,7 +67,7 @@ public class UI_Game : MonoBehaviour
                     .Join(DOTween.To(() => menuVolume.weight, x => menuVolume.weight = x, 1, menuTime).SetEase(Ease.OutQuad))
                     .Join(DOTween.To(() => AudioManager.Instance.GetCutOff(), x => AudioManager.Instance.ChangeCutOff(x), CutOffRange.x, menuTime))
                     .Join(canvasMenu.DOFade(1, menuTime).OnComplete(()=>SwitchCanvas(canvasMenu, true)))
-                    .Join(canvasGame.DOFade(0, menuTime).OnStart(()=>SwitchCanvas(canvasGame, false)))
+                    .Join(canvasGame.DOFade(0, menuTime))
                     .SetUpdate(true);
 
         GameManager.Instance.PauseTheGame();
@@ -72,13 +78,14 @@ public class UI_Game : MonoBehaviour
         isMenuOpen = false;
         // canvasMain.interactable = false;
 
+        SwitchCanvas(canvasMenu, false);
         pauseTween.Kill();
         pauseTween = DOTween.Sequence();
         pauseTween.Join(blackBar_Top.rectTransform.DOAnchorPosY(100, menuTime).SetEase(Ease.OutQuad))
                     .Join(blackBar_Bottom.rectTransform.DOAnchorPosY(-100, menuTime).SetEase(Ease.OutQuad))
                     .Join(DOTween.To(() => menuVolume.weight, x => menuVolume.weight = x, 0, menuTime).SetEase(Ease.OutQuad))
                     .Join(DOTween.To(() => AudioManager.Instance.GetCutOff(), x => AudioManager.Instance.ChangeCutOff(x), CutOffRange.y, menuTime))
-                    .Join(canvasMenu.DOFade(0, menuTime).OnStart(()=>SwitchCanvas(canvasMenu, false)))
+                    .Join(canvasMenu.DOFade(0, menuTime))
                     .Join(canvasGame.DOFade(1, menuTime).OnComplete(()=>SwitchCanvas(canvasGame, true)))
                     .SetUpdate(true);
     }
