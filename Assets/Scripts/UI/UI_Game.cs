@@ -15,8 +15,7 @@ public class UI_Game : MonoBehaviour
     [SerializeField] private Game gameControl;
     [SerializeField] private CanvasGroup canvasMenu;
     [SerializeField] private CanvasGroup canvasGame;
-
-    [SerializeField] private CanvasGroup canvasGroup;
+    
     [SerializeField] private bool isMenuOpen = false;
     [SerializeField] private float menuTime = .3f;
     [SerializeField] private Volume menuVolume;
@@ -34,7 +33,8 @@ public class UI_Game : MonoBehaviour
     public void Start()
     {
         isMenuOpen = false;
-        UpdateMenuImmediately();
+        blackBar_Top.rectTransform.anchoredPosition = new Vector2(0, isMenuOpen?0:100);
+        blackBar_Bottom.rectTransform.anchoredPosition = new Vector2(0, isMenuOpen?0:-100);
     }
     void Awake(){
         EventHandler.E_OnTransitionBegin += TransitionBeginHandler;
@@ -60,7 +60,6 @@ public class UI_Game : MonoBehaviour
                     .Join(blackBar_Bottom.rectTransform.DOAnchorPosY(0, menuTime).SetEase(Ease.OutQuad))
                     .Join(DOTween.To(() => menuVolume.weight, x => menuVolume.weight = x, 1, menuTime).SetEase(Ease.OutQuad))
                     .Join(DOTween.To(() => AudioManager.Instance.GetCutOff(), x => AudioManager.Instance.ChangeCutOff(x), CutOffRange.x, menuTime))
-                    .Join(canvasGroup.DOFade(1, menuTime).OnComplete(()=>SwitchCanvas(canvasGroup, true)))
                     .Join(canvasMenu.DOFade(1, menuTime).OnComplete(()=>SwitchCanvas(canvasMenu, true)))
                     .Join(canvasGame.DOFade(0, menuTime).OnStart(()=>SwitchCanvas(canvasGame, false)))
                     .SetUpdate(true);
@@ -71,7 +70,7 @@ public class UI_Game : MonoBehaviour
     {
         GameManager.Instance.ResumeTheGame();
         isMenuOpen = false;
-        canvasGroup.interactable = false;
+        // canvasMain.interactable = false;
 
         pauseTween.Kill();
         pauseTween = DOTween.Sequence();
@@ -79,7 +78,6 @@ public class UI_Game : MonoBehaviour
                     .Join(blackBar_Bottom.rectTransform.DOAnchorPosY(-100, menuTime).SetEase(Ease.OutQuad))
                     .Join(DOTween.To(() => menuVolume.weight, x => menuVolume.weight = x, 0, menuTime).SetEase(Ease.OutQuad))
                     .Join(DOTween.To(() => AudioManager.Instance.GetCutOff(), x => AudioManager.Instance.ChangeCutOff(x), CutOffRange.y, menuTime))
-                    .Join(canvasGroup.DOFade(0, menuTime).OnStart(()=>SwitchCanvas(canvasGroup, false)))
                     .Join(canvasMenu.DOFade(0, menuTime).OnStart(()=>SwitchCanvas(canvasMenu, false)))
                     .Join(canvasGame.DOFade(1, menuTime).OnComplete(()=>SwitchCanvas(canvasGame, true)))
                     .SetUpdate(true);
@@ -118,21 +116,12 @@ public class UI_Game : MonoBehaviour
         EnableCanvas();
         interactionBlocker.SetActive(isMenuOpen);
     }
-    void UpdateMenuImmediately()
-    {
-        blackBar_Top.rectTransform.anchoredPosition = new Vector2(0, isMenuOpen?0:100);
-        blackBar_Bottom.rectTransform.anchoredPosition = new Vector2(0, isMenuOpen?0:-100);
-        canvasGroup.alpha = isMenuOpen?1:0;
-        canvasGroup.interactable = isMenuOpen;
-    }
     void MenuAction_performed(InputAction.CallbackContext context)
     {
         if(context.ReadValueAsButton())
         {
             if(groupSetting.isSettingOpen)
-            {
                 groupSetting.SwitchSetting(false);
-            }
             else
             {
                 EventHandler.Call_OnFlushInput();
@@ -157,14 +146,4 @@ public class UI_Game : MonoBehaviour
         canvas.interactable = isOn;
         canvas.blocksRaycasts = isOn;
     }
-
-#if UNITY_EDITOR
-    [ContextMenu("Switch Menu State")]
-    public void SwitchMenuState()
-    {
-        isMenuOpen = !isMenuOpen;
-        UpdateMenuImmediately();
-        UnityEditor.EditorUtility.SetDirty(this);
-    }
-#endif
 }

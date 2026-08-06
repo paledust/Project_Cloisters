@@ -38839,7 +38839,7 @@ MonoBehaviour:
   gameControl: {fileID: 704034408}
   canvasMenu: {fileID: 143844752}
   canvasGame: {fileID: 451140973}
-  canvasGroup: {fileID: 2071508334}
+  canvasMain: {fileID: 2071508334}
   isMenuOpen: 0
   menuTime: 0.3
   menuVolume: {fileID: 1344062905}
@@ -166262,7 +166262,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ExecuteInEditor: 1
-  m_Bindings: []
+  m_Bindings:
+  - {fileID: 1598962717}
+  - {fileID: 1598962719}
   m_VisualEffect: {fileID: 1598962716}
 --- !u!114 &1598962719
 MonoBehaviour:

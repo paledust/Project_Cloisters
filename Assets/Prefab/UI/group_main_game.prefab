@@ -510,7 +510,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53af826ecdb238d4b8f7b00f86aa29b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sfxClick: {fileID: 11400000, guid: feff8e5b23821be4dbcb066411714814, type: 2}
+  sfxClick: {fileID: 11400000, guid: cd14c419c9df074489fee461be9c081d, type: 2}
   volumeClick: 1
   sfxHover: {fileID: 11400000, guid: 66a823f73beda1442bba5ba6cb8430f7, type: 2}
   volumeHover: 0.5
@@ -1044,8 +1044,8 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6137348603398931087}
   m_Enabled: 1
-  m_Alpha: 0
-  m_Interactable: 0
+  m_Alpha: 1
+  m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
 --- !u!1 &7206860691484508833
