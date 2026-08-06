@@ -26,7 +26,7 @@ public static class EventHandler
     public static event Action<IC_Basic> E_OnInteractionReachable;
     public static void Call_OnInteractionReachable(IC_Basic interactionController) => E_OnInteractionReachable?.Invoke(interactionController);
     public static event Action E_OnFlushInput;
-    public static void Call_OnFlushInput() => E_OnFlushInput();
+    public static void Call_OnFlushInput() => E_OnFlushInput?.Invoke();
 
     #region Interaction Event
     public static event Action<NarrativeCircleNode> E_OnNarrativeNodeBreak;
