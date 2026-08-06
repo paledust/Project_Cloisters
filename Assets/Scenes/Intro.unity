@@ -538,6 +538,7 @@ MonoBehaviour:
   raycaster: {fileID: 413134938}
   groupCredit: {fileID: 9204824206761975071}
   groupSetting: {fileID: 54982946}
+  objContinue: {fileID: 3691985940875268263}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -1202,6 +1203,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 46df495a12c1ad149928b581840d813c, type: 3}
+--- !u!1 &3691985940875268263 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4607717419157474547, guid: 46df495a12c1ad149928b581840d813c,
+    type: 3}
+  m_PrefabInstance: {fileID: 3691985940875268262}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3701810775784498155
 PrefabInstance:
   m_ObjectHideFlags: 0

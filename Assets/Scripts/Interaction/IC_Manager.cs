@@ -1,4 +1,5 @@
 #if UNITY_EDITOR
+using SimpleSaveSystem;
 using UnityEditor;
 #endif
 
@@ -63,6 +64,7 @@ public class IC_Manager : MonoBehaviour
         }
     #endif
         StartAtInteraction(LevelProgressionManager.Instance.LevelProgress);
+        SaveManager.SaveGameState(0);
     }
 
     void NextInteraction(){

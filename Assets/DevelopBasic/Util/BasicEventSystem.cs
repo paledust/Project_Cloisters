@@ -12,6 +12,8 @@ public static class EventHandler
     public static void Call_OnBeginSave() => E_OnBeginSave?.Invoke();
     public static event Action E_OnCompleteSave;
     public static void Call_OnCompleteSave() => E_OnCompleteSave?.Invoke();
+    public static event Action E_OnLevelStateRestore;
+    public static void Call_OnLevelStateRestored()=>E_OnLevelStateRestore?.Invoke();
 
     public static event Action E_OnNextInteraction;
     public static void Call_OnNextInteraction() => E_OnNextInteraction?.Invoke();

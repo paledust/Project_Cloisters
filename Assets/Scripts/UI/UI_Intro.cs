@@ -2,6 +2,8 @@ using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
+using SimpleSaveSystem;
+
 
 #if UNITY_EDITOR
 using UnityEngine.SceneManagement;
@@ -13,13 +15,28 @@ public class UI_Intro : MonoBehaviour
     [SerializeField] private GraphicRaycaster raycaster;
     [SerializeField] private CanvasGroup groupCredit;
     [SerializeField] private CanvasGroup groupSetting;
+    [SerializeField] private GameObject objContinue;
 
     void Awake()
     {
         groupCredit.gameObject.SetActive(false);
         groupCredit.alpha = 0;
         groupCredit.interactable = false;
+        EventHandler.E_OnLevelStateRestore += RefreshState;
     }
+    void Start()
+    {
+        objContinue.SetActive(!LevelProgressionManager.Instance.IsFreshStart);
+    }
+    void OnDestroy()
+    {
+        EventHandler.E_OnLevelStateRestore -= RefreshState;
+    }
+    void RefreshState()
+    {
+        objContinue.SetActive(!LevelProgressionManager.Instance.IsFreshStart);
+    }
+
     public void Btn_DisableAllCanvas()
     {
         raycaster.enabled = false;

@@ -23,12 +23,14 @@ public class AudioSettingData
 [Serializable]
 public class PlayerSaveData
 {
+    public bool isNew;
     public int levelIndex;
     public int localeIndex;
     public AudioSettingData audioSettingData;
     
     public PlayerSaveData()
     {
+        isNew = true;
         levelIndex = 0;
         localeIndex = 0;
         audioSettingData = AudioSettingData.defaultSetting;
