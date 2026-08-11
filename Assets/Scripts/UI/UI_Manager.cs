@@ -1,7 +1,7 @@
-using System.Collections;
-using DG.Tweening;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.UI;   
+using DG.Tweening;
+using System;
 
 public class UI_Manager : Singleton<UI_Manager>
 {
@@ -12,24 +12,25 @@ public class UI_Manager : Singleton<UI_Manager>
     [SerializeField] private Image imgCursor;
 
     private CURSOR_STATE currentCursorState = CURSOR_STATE.DEFAULT;
-    private CoroutineExcuter cursorChanger;
+    private bool cursorVisible = true;
+    private Sequence cursorTween;
 
     protected override void Awake()
     {
         base.Awake();
         imgCursor.color = Color.white;
+        cursorVisible = true;
 
-        cursorChanger = new CoroutineExcuter(this);
         UpdateCursorState(currentCursorState);
 
-        EventHandler.E_OnTransitionBegin += TransitionBeginHandler;
-        EventHandler.E_OnTransitionEnd += TransitionEndHandler;
+        EventHandler.E_OnTransitionBegin += HideCursor;
+        EventHandler.E_OnTransitionEnd += ShowCursor;
     }
     protected override void OnDestroy()
     {
         base.OnDestroy();
-        EventHandler.E_OnTransitionBegin -= TransitionBeginHandler;
-        EventHandler.E_OnTransitionEnd -= TransitionEndHandler;
+        EventHandler.E_OnTransitionBegin -= HideCursor;
+        EventHandler.E_OnTransitionEnd -= ShowCursor;
     }
     public void ChangeCursorColor(bool isWhite)
     {
@@ -40,60 +41,58 @@ public class UI_Manager : Singleton<UI_Manager>
         customCursor.transform.position = scrPos;
     }
     public void UpdateCursorState(CURSOR_STATE newState){
+        if(!cursorVisible)
+            return;
         switch(currentCursorState){
             case CURSOR_STATE.DEFAULT:
                 switch(newState){
                     case CURSOR_STATE.HOVER:
-                        cursorChanger.Excute(coroutineChangeCursor(0.8f, 1.2f, 0.2f));
+                        ChangeCursorVisual(0.8f, 1.2f, 0.2f);
                         break;
                     case CURSOR_STATE.DRAG:
-                        cursorChanger.Excute(coroutineChangeCursor(0.2f, 0f, 0.2f));
+                        ChangeCursorVisual(0.2f, 0f, 0.2f);
                         break;
                 }
                 break;
             case CURSOR_STATE.HOVER:
                 switch(newState){
                     case CURSOR_STATE.DEFAULT:
-                        cursorChanger.Excute(coroutineChangeCursor(0.5f, 1f, 0.2f));
+                        ChangeCursorVisual(0.5f, 1f, 0.2f);
                         break;
                     case CURSOR_STATE.DRAG:
-                        cursorChanger.Excute(coroutineChangeCursor(0.2f, 0f, 0.2f));
+                        ChangeCursorVisual(0.2f, 0f, 0.2f);
                         break;
                 }
                 break;
             case CURSOR_STATE.DRAG:
                 switch(newState){
                     case CURSOR_STATE.DEFAULT:
-                        cursorChanger.Excute(coroutineChangeCursor(0.5f, 1f, 0.2f));
+                        ChangeCursorVisual(0.5f, 1f, 0.2f);
                         break;
                     case CURSOR_STATE.HOVER:
-                        cursorChanger.Excute(coroutineChangeCursor(0.8f, 1.2f, 0.2f));
+                        ChangeCursorVisual(0.8f, 1.2f, 0.2f);
                         break;
                 }
                 break;
         }
         currentCursorState = newState;
     }
-    void TransitionBeginHandler(){
-        cursorChanger.Excute(coroutineChangeCursor(0f, 1f, 0.5f));
-    }
-    void TransitionEndHandler(){
-        cursorChanger.Excute(coroutineChangeCursor(0.5f, 1f, 0.5f));
-    }
-    public void HideCursor()
-    {
-        cursorChanger.Excute(coroutineChangeCursor(0f, 1f, 0.2f));
+    void HideCursor(){
+        cursorVisible = false;
+        ChangeCursorVisual(0f, 1f, 0.2f);
     }
     public void ShowCursor()
     {
-        cursorChanger.Excute(coroutineChangeCursor(0.5f, 1f, 0.5f));
+        cursorVisible = true;
+        ChangeCursorVisual(0.5f, 1f, 0.5f);
     }
-    IEnumerator coroutineChangeCursor(float alpha, float size, float duration){
-        float initSize = customCursor.transform.localScale.x;
-        float initAlpha = customCursor.alpha;
-        yield return new WaitForLoop(duration, (t)=>{
-            customCursor.alpha = Mathf.Lerp(initAlpha, alpha, EasingFunc.Easing.SmoothInOut(t));
-            customCursor.transform.localScale = Vector3.one * Mathf.Lerp(initSize, size, EasingFunc.Easing.SmoothInOut(t));
-        });
+    void ChangeCursorVisual(float alpha, float size, float duration, Action completeCallback = null)
+    {
+        if(cursorTween!=null)
+            cursorTween.Kill();
+        cursorTween = DOTween.Sequence();
+        cursorTween.Join(customCursor.DOFade(alpha, duration)).SetEase(Ease.InOutQuad)
+            .Join(customCursor.transform.DOScale(size, duration)).SetEase(Ease.InOutQuad)
+            .OnComplete(()=>completeCallback?.Invoke());
     }
 }

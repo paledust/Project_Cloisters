@@ -16453,7 +16453,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &87636802
 Transform:
   m_ObjectHideFlags: 0
@@ -38839,7 +38839,6 @@ MonoBehaviour:
   gameControl: {fileID: 704034408}
   canvasMenu: {fileID: 143844752}
   canvasGame: {fileID: 451140973}
-  canvasMain: {fileID: 2071508334}
   isMenuOpen: 0
   menuTime: 0.3
   menuVolume: {fileID: 1344062905}
@@ -89005,7 +89004,7 @@ MonoBehaviour:
   bgmHandler: {fileID: 601070085}
   endSceneName: Ending
   endDelay: 1
-  StartIndex: 5
+  StartIndex: 2
   startAtDebugIndex: 1
   debugActions:
     m_Name: Debug Actions
@@ -159400,7 +159399,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1531122235
 Transform:
   m_ObjectHideFlags: 0
@@ -192227,12 +192226,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 2559675379271047827}
   m_PrefabAsset: {fileID: 0}
---- !u!225 &2071508334 stripped
-CanvasGroup:
-  m_CorrespondingSourceObject: {fileID: 1512769258210006666, guid: 809aa6b047288ad46a7f0b412e783f88,
-    type: 3}
-  m_PrefabInstance: {fileID: 2559675379271047827}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2074348511
 GameObject:
   m_ObjectHideFlags: 0
@@ -211911,17 +211904,17 @@ PrefabInstance:
     - target: {fileID: 7085316780055515206, guid: 7671163c2c3bc7a4699f30c40e759e90,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -160
-      objectReference: {fileID: 0}
-    - target: {fileID: 7085316780055515206, guid: 7671163c2c3bc7a4699f30c40e759e90,
-        type: 3}
-      propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7085316780055515206, guid: 7671163c2c3bc7a4699f30c40e759e90,
         type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.58
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085316780055515206, guid: 7671163c2c3bc7a4699f30c40e759e90,
+        type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2
+      value: 1.69
       objectReference: {fileID: 0}
     - target: {fileID: 7085316780055515206, guid: 7671163c2c3bc7a4699f30c40e759e90,
         type: 3}

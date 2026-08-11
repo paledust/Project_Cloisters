@@ -76,7 +76,6 @@ public class UI_Game : MonoBehaviour
     {
         GameManager.Instance.ResumeTheGame();
         isMenuOpen = false;
-        // canvasMain.interactable = false;
 
         SwitchCanvas(canvasMenu, false);
         pauseTween.Kill();
