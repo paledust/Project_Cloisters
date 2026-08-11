@@ -19,12 +19,12 @@ public class MirrorTextCatcher : MonoBehaviour
 
     [Header("Audio")]
     [SerializeField] private AudioSource catcherAudio;
-    [SerializeField] private string sfxHint;
+    [SerializeField] private AudioData_SO sfxHint;
     [SerializeField, Range(0, 1)] private float hintVolume;
-    [SerializeField] private string sfxCharge;
+    [SerializeField] private AudioData_SO sfxCharge;
     [SerializeField, Range(0, 1)] private float minChargeVolume;
     [SerializeField, Range(0, 1)] private float maxChargeVolume;
-    [SerializeField] private string sfxSpot;
+    [SerializeField] private AudioData_SO sfxSpot;
     [SerializeField] private float focusVolumeLerpSpeed = 5f;
     [SerializeField] private float focusVolumeFadeLerp = 1f;
 
@@ -64,7 +64,7 @@ public class MirrorTextCatcher : MonoBehaviour
                     if(currentText == null)
                     {
                         rootTrans.DOPunchScale(Vector3.one*bounceScale, bounceDuration, 1);
-                        AudioManager.Instance.PlaySFX(sfxHint, hintVolume);
+                        AudioManager.Instance.PlaySFX(sfxHint.AudioKey, hintVolume);
                     }
 
                     TryClearCurrentText();
@@ -104,7 +104,7 @@ public class MirrorTextCatcher : MonoBehaviour
         if(catchedText)
         {
             if(!catcherAudio.isPlaying)
-                AudioManager.Instance.PlaySFXLoop(catcherAudio, sfxCharge, 0, 0, hintAudioTime);
+                AudioManager.Instance.PlaySFXLoop(catcherAudio, sfxCharge.AudioKey, 0, 0, hintAudioTime);
             
             float volume = Mathf.Lerp(minChargeVolume, maxChargeVolume, currentText.m_focusFactor);
             catcherAudio.volume = Mathf.Lerp(catcherAudio.volume, volume, Time.deltaTime*focusVolumeLerpSpeed);
@@ -120,7 +120,7 @@ public class MirrorTextCatcher : MonoBehaviour
         }
     }
     void OnTextFound(MirrorText mirrorText) => mirrorTimeScale = 0.25f;
-    void OnTextPop(MirrorText mirrorText) => AudioManager.Instance.PlaySFX(sfxSpot, 1);
+    void OnTextPop(MirrorText mirrorText) => AudioManager.Instance.PlaySFX(sfxSpot.AudioKey, 1);
     void TryClearCurrentText()
     {
         if(currentText != null)

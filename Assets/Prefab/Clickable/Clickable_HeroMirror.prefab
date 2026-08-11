@@ -590,12 +590,12 @@ MonoBehaviour:
   bounceScale: 0.02
   bounceDuration: 0.6
   catcherAudio: {fileID: 1051571298326533854}
-  sfxHint: group_meaningful_hint
+  sfxHint: {fileID: 11400000, guid: fb49185ab168489eae5810e94b377d67, type: 2}
   hintVolume: 0.05
-  sfxCharge: sfx_magic_shine_loop
+  sfxCharge: {fileID: 11400000, guid: 85f8f54b773546f8b5f703b16e2e703e, type: 2}
   minChargeVolume: 0.05
   maxChargeVolume: 0.6
-  sfxSpot: group_meaningful_spot
+  sfxSpot: {fileID: 11400000, guid: 087e82356b7f4b84b6d8cb4622f8accd, type: 2}
   focusVolumeLerpSpeed: 5
   focusVolumeFadeLerp: 2
   mirrorTimeScale: 1

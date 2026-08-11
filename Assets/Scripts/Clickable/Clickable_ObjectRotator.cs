@@ -59,11 +59,13 @@ public class Clickable_ObjectRotator : Basic_Clickable, IRotator
     }
     void Update(){
         if(playerController!=null){
+            bool flip = Vector3.Dot(pitchRotationTrans.up, Vector3.forward)<0;
+
             Vector2 delta = playerController.PointerDelta;
             
             m_angularSpeed = Mathf.Lerp(m_angularSpeed, Mathf.Clamp(delta.x * dragStrength, -maxAngularSpeed, maxAngularSpeed), Time.deltaTime*controllingAngularLerp);
 
-            targetPitchAngle += delta.y * dragStrength * 0.5f * Time.deltaTime;
+            targetPitchAngle += delta.y * dragStrength * 0.5f * Time.deltaTime * (flip?1:-1);
             targetPitchAngle = Mathf.Clamp(targetPitchAngle, -maxVerticalAngle - pitchOffset, maxVerticalAngle - pitchOffset);
             float finalAngle = targetPitchAngle + pitchOffset;
             pitchAngle = Mathf.Lerp(pitchAngle, finalAngle, Time.deltaTime*controllingAngularLerp);
