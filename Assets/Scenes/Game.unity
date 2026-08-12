@@ -49332,7 +49332,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &320034177
 Transform:
   m_ObjectHideFlags: 0
@@ -88950,7 +88950,7 @@ MonoBehaviour:
   bgmHandler: {fileID: 601070085}
   endSceneName: Ending
   endDelay: 1
-  StartIndex: 3
+  StartIndex: 1
   startAtDebugIndex: 1
   debugActions:
     m_Name: Debug Actions
@@ -146198,6 +146198,7 @@ GameObject:
   - component: {fileID: 1382798988}
   - component: {fileID: 1382798989}
   - component: {fileID: 1382798990}
+  - component: {fileID: 1382798992}
   - component: {fileID: 1382798991}
   m_Layer: 0
   m_Name: IC_Narrative
@@ -146279,8 +146280,7 @@ MonoBehaviour:
   vc_transist: {fileID: 1334743532}
   TextAmount: {x: 2, y: 4}
   connectLineController: {fileID: 1382798988}
-  sfx_explode: group_bubble_echo
-  explodeVolume: 0.5
+  soundHandler: {fileID: 1382798992}
   sfx_collide: group_bell
   collideVolume: 0.2
   sfx_textAppear: group_door_chime
@@ -146508,6 +146508,26 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1382798992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1382798983}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afb9ad743a184bf4d8a9486e9d13546d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  narrativeSoundSource: {fileID: 1382798991}
+  sfxExplode: {fileID: 11400000, guid: 98425277aec045d69062c33f1553a0c4, type: 2}
+  explodeVolume: 0.5
+  sfxCollide: {fileID: 11400000, guid: 7a3c8f8965b34947b8e9f7f1d0306de3, type: 2}
+  collideVolume: 0.2
+  collisionStep: 0
+  sfxTextAppear: {fileID: 11400000, guid: 998b6b070f4c46fcb2d99678b7bf481f, type: 2}
+  textAppearVolume: 0.015
 --- !u!1 &1385414730
 GameObject:
   m_ObjectHideFlags: 0
@@ -165053,7 +165073,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1567444745
 Transform:
   m_ObjectHideFlags: 0
@@ -212166,17 +212186,17 @@ PrefabInstance:
     - target: {fileID: 7085316780055515206, guid: 7671163c2c3bc7a4699f30c40e759e90,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -44
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7085316780055515206, guid: 7671163c2c3bc7a4699f30c40e759e90,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.58
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7085316780055515206, guid: 7671163c2c3bc7a4699f30c40e759e90,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.69
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7085316780055515206, guid: 7671163c2c3bc7a4699f30c40e759e90,
         type: 3}

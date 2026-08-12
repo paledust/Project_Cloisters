@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Linq;
 using Cinemachine;
 using SimpleAudioSystem;
 using UnityEngine;
@@ -45,13 +44,7 @@ public class IC_Narrative : IC_Basic
     [SerializeField] private NarrativeConnectLineController connectLineController;
 
 [Header("Audio")]
-    [SerializeField] private string sfx_explode;
-    [SerializeField] private float explodeVolume = .25f;
-    [SerializeField] private string sfx_collide;
-    [SerializeField] private float collideVolume = .25f;
-    [SerializeField] private string sfx_textAppear;
-    [SerializeField] private float textAppearVolume = .25f;
-    [SerializeField] private AudioSource collideAudio;
+    [SerializeField] private NarrativeCircleGroupSoundHandler soundHandler;
 
     private int narrativeCharIndex = 0;
     private int narrativeCharExplodeIndex = 0;
@@ -100,7 +93,7 @@ public class IC_Narrative : IC_Basic
         var collider = Physics.OverlapSphere(circle.transform.position, 3f);
         if(circle.m_circle.m_circleType == Clickable_Circle.CircleType.Narrative)
         {
-            AudioManager.Instance.PlaySFX(sfx_textAppear, textAppearVolume);
+            soundHandler.PlayTextAppear();
             narrativeCharExplodeIndex ++;
         }
         foreach(var col in collider)
@@ -108,7 +101,7 @@ public class IC_Narrative : IC_Basic
             var narrativeCircle = col.GetComponent<CollidableCircle>();
             if(narrativeCircle!=null && narrativeCircle!=circle && narrativeCircle.m_circle.m_circleType == Clickable_Circle.CircleType.Narrative)
             {
-                AudioManager.Instance.PlaySFX(sfx_textAppear, textAppearVolume);
+                soundHandler.PlayTextAppear();
                 narrativeCircle.m_rigidbody.velocity = (narrativeCircle.transform.position - circle.transform.position).normalized * 5f;
                 narrativeCircle.ExplodeCircle();
             }
@@ -121,7 +114,7 @@ public class IC_Narrative : IC_Basic
     {
         p_explode.transform.position = position;
         p_explode.Play();
-        AudioManager.Instance.PlaySFX(sfx_explode, explodeVolume);
+        soundHandler.PlayCircleExplode();
     }
     void OnCircleCollide(Clickable_Circle collidedCircle, Clickable_Circle controlledCircle, Collision collision){
         float strength = collision.relativeVelocity.magnitude;
@@ -129,8 +122,7 @@ public class IC_Narrative : IC_Basic
         if(Time.time - lastCollisionTime<=effectiveCollisionStep) 
             return;
         if(strength >= collisionStrength){
-            collideAudio.pitch = Random.Range(.95f, 1.05f);
-            AudioManager.Instance.PlaySFX(collideAudio, sfx_collide, collideVolume);
+            soundHandler.PlayCollisionSound();
             //bounce off the other cirlce
             var collidableCircle = collidedCircle.GetComponent<CollidableCircle>();
             if(collidableCircle!=null)
