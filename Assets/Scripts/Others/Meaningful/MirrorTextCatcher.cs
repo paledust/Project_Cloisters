@@ -24,7 +24,6 @@ public class MirrorTextCatcher : MonoBehaviour
     [SerializeField] private AudioData_SO sfxCharge;
     [SerializeField, Range(0, 1)] private float minChargeVolume;
     [SerializeField, Range(0, 1)] private float maxChargeVolume;
-    [SerializeField] private AudioData_SO sfxSpot;
     [SerializeField] private float focusVolumeLerpSpeed = 5f;
     [SerializeField] private float focusVolumeFadeLerp = 1f;
 
@@ -39,12 +38,10 @@ public class MirrorTextCatcher : MonoBehaviour
     {
         mainCam = Camera.main;
         EventHandler.E_OnMirrorText += OnTextFound;
-        EventHandler.E_OnMirrorTextPop += OnTextPop;
     }
     void OnDestroy()
     {
         EventHandler.E_OnMirrorText -= OnTextFound;
-        EventHandler.E_OnMirrorTextPop -= OnTextPop;
     }
     void Update()
     {
@@ -120,7 +117,6 @@ public class MirrorTextCatcher : MonoBehaviour
         }
     }
     void OnTextFound(MirrorText mirrorText) => mirrorTimeScale = 0.25f;
-    void OnTextPop(MirrorText mirrorText) => AudioManager.Instance.PlaySFX(sfxSpot.AudioKey, 1);
     void TryClearCurrentText()
     {
         if(currentText != null)

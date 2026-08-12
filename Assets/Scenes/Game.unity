@@ -49386,7 +49386,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &320034177
 Transform:
   m_ObjectHideFlags: 0
@@ -89004,7 +89004,7 @@ MonoBehaviour:
   bgmHandler: {fileID: 601070085}
   endSceneName: Ending
   endDelay: 1
-  StartIndex: 3
+  StartIndex: 1
   startAtDebugIndex: 1
   debugActions:
     m_Name: Debug Actions
@@ -164903,7 +164903,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1567444745
 Transform:
   m_ObjectHideFlags: 0
@@ -190964,6 +190964,16 @@ MonoBehaviour:
   - {fileID: 1975855364}
   - {fileID: 1930760239}
   glowSFX: {fileID: 11400000, guid: 177724976950b3547a1ea43831764e2f, type: 2}
+  sfxMirrorTextPops:
+  - {fileID: 11400000, guid: 2228207ddf0db8c4fb75b95b80d6a690, type: 2}
+  - {fileID: 11400000, guid: 868fa2ccb4b1f1849ab843143ea0d650, type: 2}
+  - {fileID: 11400000, guid: da36ade52059a6b45b24185378bc8eaf, type: 2}
+  - {fileID: 11400000, guid: bc9f6a1a7b662964ea179a01ea8c7b5f, type: 2}
+  - {fileID: 11400000, guid: dff36ae1f64f779469eaa8d898b83f29, type: 2}
+  - {fileID: 11400000, guid: d8e2cd28837f71845888f0b86d672471, type: 2}
+  - {fileID: 11400000, guid: bdd5ef8dce68ffe4382fcf1607d532dd, type: 2}
+  - {fileID: 11400000, guid: df934d1a9f492f8428c89bdebb60b178, type: 2}
+  - {fileID: 11400000, guid: ca5312f10c78d3a44a1f7348797235ec, type: 2}
 --- !u!114 &2005268744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211904,17 +211914,17 @@ PrefabInstance:
     - target: {fileID: 7085316780055515206, guid: 7671163c2c3bc7a4699f30c40e759e90,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -44
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7085316780055515206, guid: 7671163c2c3bc7a4699f30c40e759e90,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.58
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7085316780055515206, guid: 7671163c2c3bc7a4699f30c40e759e90,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.69
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7085316780055515206, guid: 7671163c2c3bc7a4699f30c40e759e90,
         type: 3}

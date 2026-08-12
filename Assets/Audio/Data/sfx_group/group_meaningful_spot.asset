@@ -13,7 +13,12 @@ MonoBehaviour:
   m_Name: group_meaningful_spot
   m_EditorClassIdentifier: 
   audioClips:
-  - {fileID: 8300000, guid: 6c65f1987d153e448b7656eab7ef4208, type: 3}
-  - {fileID: 8300000, guid: 4857003c5b48b514ca7e67dfb6f478e0, type: 3}
-  - {fileID: 8300000, guid: 4d1c164c7a195734a980d4568e7b3774, type: 3}
-  - {fileID: 8300000, guid: ba49d8b88f113774c9562ad2cd2fc8f7, type: 3}
+  - {fileID: 8300000, guid: 275c4baeb5cec134399719b301486333, type: 3}
+  - {fileID: 8300000, guid: 229bb4cdb9dca3f449b7569a6223ffcc, type: 3}
+  - {fileID: 8300000, guid: 4cd424df46915414ba34362047a4d1f1, type: 3}
+  - {fileID: 8300000, guid: 90ddbf5b0eaf0e742b75ae3008527fb5, type: 3}
+  - {fileID: 8300000, guid: 371d2dd2355985a4abc9e896fc682ad1, type: 3}
+  - {fileID: 8300000, guid: 5c3554263b56c8741b9807ced69f930b, type: 3}
+  - {fileID: 8300000, guid: a3290be85855c6046808d9cf5201ab9f, type: 3}
+  - {fileID: 8300000, guid: 9d01323b36290554fa4da0e90f98c450, type: 3}
+  - {fileID: 8300000, guid: 164fd252ea8afab4a915e1e692e28083, type: 3}

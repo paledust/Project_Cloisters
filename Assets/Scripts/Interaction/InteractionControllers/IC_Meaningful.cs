@@ -28,12 +28,19 @@ public class IC_Meaningful : IC_Basic
     [SerializeField] private PlayableDirector director;
     [SerializeField] private List<MirrorText> textList;
     [SerializeField] private AudioData_SO glowSFX;
+
+    [Header("Mirror Text")]
+    [SerializeField] private AudioData_SO[] sfxMirrorTextPops;
+
+    private int sfxPopIndex = 0;
     private bool IsAllTextFound = false;
 
     protected override void OnInteractionEnter()
     {
         base.OnInteractionEnter();
         IsAllTextFound = false;
+        sfxPopIndex = 0;
+        EventHandler.E_OnMirrorTextPop += OnTextPop;
         EventHandler.E_OnMirrorText += ShowText;
         EventHandler.E_OnMirrorDiamondFound += MirrorDiamondFoundHandler;
         clickable_Mirror.EnableHitbox();
@@ -41,6 +48,7 @@ public class IC_Meaningful : IC_Basic
     protected override void OnInteractionEnd()
     {
         base.OnInteractionEnd();
+        EventHandler.E_OnMirrorTextPop -= OnTextPop;
         EventHandler.E_OnMirrorText -= ShowText;
         EventHandler.E_OnMirrorDiamondFound -= MirrorDiamondFoundHandler;
         clickable_Mirror.DisableHitbox();
@@ -78,6 +86,13 @@ public class IC_Meaningful : IC_Basic
             });
             count ++;
         }
+    }
+    void OnTextPop(MirrorText mirrorText)
+    {
+        sfxPopIndex = Mathf.Min(sfxPopIndex, sfxMirrorTextPops.Length-1);
+        var sfxSpot = sfxMirrorTextPops[sfxPopIndex];
+        AudioManager.Instance.PlaySFX(sfxSpot.AudioKey, 1);
+        sfxPopIndex ++;
     }
     void MirrorDiamondFoundHandler()
     {
