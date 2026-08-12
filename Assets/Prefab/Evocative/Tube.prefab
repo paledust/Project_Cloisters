@@ -6467,7 +6467,7 @@ Transform:
   m_GameObject: {fileID: 5353945212615528158}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0.42126238, w: 0.90693885}
-  m_LocalPosition: {x: -9.61, y: -1.62, z: 0}
+  m_LocalPosition: {x: -9.273, y: -1.336, z: 0}
   m_LocalScale: {x: 0.9400002, y: 0.9400002, z: 0.94}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6492,8 +6492,8 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.76
-  m_Height: 4
+  m_Radius: 1.14
+  m_Height: 3.17
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3862557157106462080
@@ -6508,7 +6508,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da991184bf5baae44ba36eda67631d12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forceScale: 45
+  forceScale: 65
   correctForceScale: 1
   vfxAttraction: {fileID: 7363518232081604856}
   evocativeTube: {fileID: 3066382207128807262}
