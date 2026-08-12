@@ -13,9 +13,7 @@
     <list default="true" id="858b2bd2-ab0a-4df1-ba81-9c9743c37f9d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Project_Cloisters/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Project_Cloisters/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Game.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Game.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Clickable/Clickable_Circle.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Clickable/Clickable_Circle.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Interaction/InteractionControllers/IC_Narrative.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Interaction/InteractionControllers/IC_Narrative.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Others/Narrative/NarrativeCircleGroupSoundHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Others/Narrative/NarrativeCircleGroupSoundHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Others/Evocative/Bouncer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Others/Evocative/Bouncer.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +22,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Others/Evocative/Bouncer.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="McpProjectServerCommands">
     <commands />
@@ -34,60 +35,63 @@
     <decayedCancelled>
       <entry key="MS100" value="1.0" />
       <entry key="MS500" value="1.0" />
-      <entry key="S2" value="1.0000146370100509" />
-      <entry key="S5" value="1.0587110987224193" />
-      <entry key="S10" value="2.017366843451426" />
-      <entry key="S30" value="8.238978943526195" />
-      <entry key="S60" value="14.187419892075107" />
-      <entry key="M2" value="21.289443980930695" />
-      <entry key="M5" value="38.37224712203176" />
-      <entry key="M10" value="77.5615308386178" />
-      <entry key="M15" value="115.5168397052026" />
-      <entry key="M30" value="197.99575662987456" />
-      <entry key="H1" value="279.3198597779449" />
-      <entry key="H2" value="339.5895195184708" />
-      <entry key="H4" value="376.8292130258732" />
-      <entry key="D1" value="412.3477476244517" />
-      <entry key="W1" value="418.89497993083245" />
+      <entry key="S2" value="1.0" />
+      <entry key="S5" value="1.0000000000000404" />
+      <entry key="S10" value="1.0000002543621507" />
+      <entry key="S30" value="1.03423493984894" />
+      <entry key="S60" value="2.3027543226713156" />
+      <entry key="M2" value="11.208666631873353" />
+      <entry key="M5" value="40.01447088353554" />
+      <entry key="M10" value="73.90140469484834" />
+      <entry key="M15" value="106.30690365669234" />
+      <entry key="M30" value="194.05324439708124" />
+      <entry key="H1" value="302.967274048754" />
+      <entry key="H2" value="396.14664882567774" />
+      <entry key="H4" value="458.49044065123445" />
+      <entry key="D1" value="521.1181325704321" />
+      <entry key="W1" value="532.9870391525425" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="5.436994952285127E-100" />
-      <entry key="MS500" value="1.4030455994085773E-20" />
-      <entry key="S2" value="1.0883484084083773E-5" />
-      <entry key="S5" value="0.010344444612469559" />
-      <entry key="S10" value="0.10170771919055922" />
-      <entry key="S30" value="0.47420360021368996" />
-      <entry key="S60" value="0.8614333025115799" />
-      <entry key="M2" value="1.7859476415480215" />
-      <entry key="M5" value="5.4471877616847" />
-      <entry key="M10" value="14.531911995723677" />
-      <entry key="M15" value="24.123009223699686" />
-      <entry key="M30" value="46.707657621657376" />
-      <entry key="H1" value="70.0091859598737" />
-      <entry key="H2" value="87.52226343692294" />
-      <entry key="H4" value="98.38689837110049" />
-      <entry key="D1" value="108.76350458389693" />
-      <entry key="W1" value="110.67702799742082" />
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="5.308193287838931E-136" />
+      <entry key="S2" value="1.5178773607774453E-34" />
+      <entry key="S5" value="2.969389760420204E-14" />
+      <entry key="S10" value="1.757649503375101E-7" />
+      <entry key="S30" value="0.008009708030307915" />
+      <entry key="S60" value="0.1852859583115122" />
+      <entry key="M2" value="1.1195182910988788" />
+      <entry key="M5" value="3.7615325426152584" />
+      <entry key="M10" value="7.900806946069723" />
+      <entry key="M15" value="13.60787170722725" />
+      <entry key="M30" value="33.146515959604415" />
+      <entry key="H1" value="60.62034142875242" />
+      <entry key="H2" value="85.28494832460433" />
+      <entry key="H4" value="102.11333859579568" />
+      <entry key="D1" value="119.19473647092045" />
+      <entry key="W1" value="122.44783055712102" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.016288527513142526" />
-      <entry key="MS500" value="0.43891089880475964" />
-      <entry key="S2" value="0.8139659184062047" />
-      <entry key="S5" value="0.987680197514845" />
-      <entry key="S10" value="2.0620977695894895" />
-      <entry key="S30" value="8.664405029460257" />
-      <entry key="S60" value="15.009366373248875" />
-      <entry key="M2" value="23.04327587671781" />
-      <entry key="M5" value="43.78977953631847" />
-      <entry key="M10" value="92.05685966415903" />
-      <entry key="M15" value="139.59873169552063" />
-      <entry key="M30" value="244.66151609512377" />
-      <entry key="H1" value="349.2965235556519" />
-      <entry key="H2" value="427.09108102154795" />
-      <entry key="H4" value="475.20437050448743" />
-      <entry key="D1" value="521.1090730371586" />
-      <entry key="W1" value="529.5716907459685" />
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="2.2360709334362625E-134" />
+      <entry key="S2" value="6.579572566131063E-34" />
+      <entry key="S5" value="9.998442264974862E-14" />
+      <entry key="S10" value="6.008326416263541E-7" />
+      <entry key="S30" value="0.04764472071785079" />
+      <entry key="S60" value="1.5583281364672696" />
+      <entry key="M2" value="11.582377030837842" />
+      <entry key="M5" value="43.33638141283458" />
+      <entry key="M10" value="81.53206556308689" />
+      <entry key="M15" value="119.71110589904606" />
+      <entry key="M30" value="227.0706441428782" />
+      <entry key="H1" value="363.50680031764045" />
+      <entry key="H2" value="481.38423852200634" />
+      <entry key="H4" value="560.5777684946502" />
+      <entry key="D1" value="640.3081427795955" />
+      <entry key="W1" value="655.4341839283904" />
     </decayedShown>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3,
@@ -98,25 +102,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "cidr.known.project.marker": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="$USER_HOME$/Desktop/Concept_One_Win_Beta_v0.1.007\Concept_One.exe" />

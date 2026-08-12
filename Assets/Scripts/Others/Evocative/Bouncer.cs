@@ -1,6 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
 using System;
+using System.Collections.Generic;
 using SimpleAudioSystem;
 
 public class Bouncer : MonoBehaviour
@@ -16,7 +17,8 @@ public class Bouncer : MonoBehaviour
     [SerializeField] private float bounceSpeedBoost = 2;
     [SerializeField] private float bounceSpeedBonus = 0;
     [SerializeField, Range(0, 1)] private float steerControl = 0.5f;
-
+	
+	[Header("VFX")]
     [SerializeField] private ParticleSystem vfxBounce;
     
     [Header("Audio")]
