@@ -1,5 +1,6 @@
 using UnityEngine;
 using DG.Tweening;
+using UnityEditor.Localization.Plugins.XLIFF.V12;
 
 public class Clickable_Crystal : Basic_Clickable
 {
@@ -17,11 +18,13 @@ public class Clickable_Crystal : Basic_Clickable
 
     private Animator crystalAnimator;
     private Vector3 targetPos;
+    private Tween crystalPushTween;
+    
+    private static readonly int CONTROLLING_BOOL_HASH = Animator.StringToHash("controlling");
 
     void Awake()
     {
         crystalAnimator = GetComponent<Animator>();
-
     }
     void Start()
     {
@@ -63,18 +66,27 @@ public class Clickable_Crystal : Basic_Clickable
         transform.DOKill();
         transform.DOScale(1f, 0.25f).SetEase(Ease.OutBack);
         whimsicalSpotCircle.HideOut();
-        crystalAnimator.SetBool("controlling", false);
+        crystalAnimator.SetBool(CONTROLLING_BOOL_HASH, false);
         if(!glowParticle.isPlaying)
         {
             glowParticle.Play();
         }
     }
-    public override void ControllingUpdate(PlayerController player)
-    {
-        targetPos = player.GetCursorWorldPoint(depth);
-    }
+    public override void ControllingUpdate(PlayerController player) => targetPos = player.GetCursorWorldPoint(depth);
     void Update()
     {
         transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * lerpSpeed);
+    }
+
+    public void PushTowardPos(Vector3 pos, float duration)
+    {
+        if(isControlling)
+            EventHandler.Call_OnFlushInput();
+        disableClick = true;
+        if(crystalPushTween != null)
+            crystalPushTween.Kill();
+        crystalPushTween = DOTween.To(()=>targetPos, x=>targetPos=x, pos, duration).SetEase(Ease.OutQuad)
+                                  .OnComplete(()=>disableClick = false);
+        
     }
 }

@@ -1,16 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="CMakeProjectFlavorService">
+    <option name="flavorId" value="CMakePlainProjectFlavor" />
+  </component>
+  <component name="CMakeSettings">
+    <configurations />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="858b2bd2-ab0a-4df1-ba81-9c9743c37f9d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Audio/Data/sfx_group/group_meaningful_spot.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Audio/Data/sfx_group/group_meaningful_spot.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Audio/SoundFiles/SFX/Special/sfx_meaningful_spot_001.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Audio/SoundFiles/SFX/Special/sfx_meaningful_spot_001.wav.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Audio/SoundFiles/SFX/Special/sfx_meaningful_spot_002.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Audio/SoundFiles/SFX/Special/sfx_meaningful_spot_002.wav.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Audio/SoundFiles/SFX/Special/sfx_meaningful_spot_003.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Audio/SoundFiles/SFX/Special/sfx_meaningful_spot_003.wav.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Audio/SoundFiles/SFX/Special/sfx_meaningful_spot_004.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Audio/SoundFiles/SFX/Special/sfx_meaningful_spot_004.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Project_Cloisters/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Project_Cloisters/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Clickable/Clickable_HeroMirror.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Clickable/Clickable_HeroMirror.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Whimsical/Clickable_SubCrystal.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Whimsical/Clickable_SubCrystal.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Game.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Game.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Clickable/Clickable_Crystal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Clickable/Clickable_Crystal.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Clickable/Clickable_ObjectRotator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Clickable/Clickable_ObjectRotator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,10 +32,69 @@
     <commands />
     <urls />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 3,
-  "fromUser": false
-}]]></component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="2.379528836679442" />
+      <entry key="MS500" value="6.166906992239637" />
+      <entry key="S2" value="10.313165078051519" />
+      <entry key="S5" value="12.194085102735707" />
+      <entry key="S10" value="13.024506812822908" />
+      <entry key="S30" value="13.67684782421693" />
+      <entry key="S60" value="14.012903672131518" />
+      <entry key="M2" value="14.857620363916745" />
+      <entry key="M5" value="21.45523005509603" />
+      <entry key="M10" value="40.92577884264563" />
+      <entry key="M15" value="61.18621027982059" />
+      <entry key="M30" value="103.96323070536415" />
+      <entry key="H1" value="142.3408862373942" />
+      <entry key="H2" value="168.51950019330138" />
+      <entry key="H4" value="183.8778035552873" />
+      <entry key="D1" value="198.01484546799728" />
+      <entry key="W1" value="200.57020601466823" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="1.9736272198013642E-16" />
+      <entry key="MS500" value="7.228580556640865E-4" />
+      <entry key="S2" value="0.16396956945301605" />
+      <entry key="S5" value="0.4851826950276048" />
+      <entry key="S10" value="0.6965505688949891" />
+      <entry key="S30" value="0.8865415678267854" />
+      <entry key="S60" value="0.9565100035977004" />
+      <entry key="M2" value="1.2111685252390378" />
+      <entry key="M5" value="4.0344510616028915" />
+      <entry key="M10" value="12.360708701714923" />
+      <entry key="M15" value="20.26589637706244" />
+      <entry key="M30" value="35.55647666937618" />
+      <entry key="H1" value="48.36797303979838" />
+      <entry key="H2" value="56.797398208340404" />
+      <entry key="H4" value="61.65305663552803" />
+      <entry key="D1" value="66.07246045378695" />
+      <entry key="W1" value="66.86657212947924" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="2.150878546789899" />
+      <entry key="MS500" value="6.0456670974471685" />
+      <entry key="S2" value="10.30551973277393" />
+      <entry key="S5" value="12.531921858664994" />
+      <entry key="S10" value="13.6237022841482" />
+      <entry key="S30" value="14.523963289169265" />
+      <entry key="S60" value="14.948069687551277" />
+      <entry key="M2" value="16.055106550826327" />
+      <entry key="M5" value="25.46750827839185" />
+      <entry key="M10" value="53.24752344215381" />
+      <entry key="M15" value="81.40815166528236" />
+      <entry key="M30" value="139.48042838794345" />
+      <entry key="H1" value="190.6820385121791" />
+      <entry key="H2" value="225.30114060346523" />
+      <entry key="H4" value="245.52230760817443" />
+      <entry key="D1" value="264.0857785343952" />
+      <entry key="W1" value="267.4365573320015" />
+    </decayedShown>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3,
+  &quot;fromUser&quot;: false
+}</component>
   <component name="ProjectId" id="3Hm96iT6MnwulZHytXVxTHRMwBk" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -44,10 +111,25 @@
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "cidr.known.project.marker": "true",
     "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "main"
+    "git-widget-placeholder": "main",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm"
   }
 }]]></component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
+    <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="$USER_HOME$/Desktop/Concept_One_Win_Beta_v0.1.007\Concept_One.exe" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="C:\Users\paledust\Desktop\Concept_One_Win_Beta_v0.1.007" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="ENV_FILE_PATHS" value="" />
+      <option name="REDIRECT_INPUT_PATH" value="" />
+      <option name="MIXED_MODE_DEBUG" value="0" />
+      <method v="2" />
+    </configuration>
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="D:\Program Files\Unity\Hub\Editor\2022.3.62f3\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-projectPath D:\UnityProject\Project_Cloisters -debugCodeOptimization" />
@@ -95,12 +177,16 @@
     </task>
     <servers />
   </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
   <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
   <component name="UnityProjectDiscoverer">
     <option name="hasUnityReference" value="true" />
     <option name="unityProject" value="true" />
     <option name="unityProjectFolder" value="true" />
   </component>
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="Both" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>

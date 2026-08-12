@@ -77,6 +77,7 @@ MonoBehaviour:
   idleAngularSpeed: 0
   maxAngularSpeed: 500
   verticalAccumulate: 1
+  flipPtich: 1
   maxVerticalAngle: 40
   resizeFactor: 1.02
   resizeTime: 0.4
@@ -595,7 +596,6 @@ MonoBehaviour:
   sfxCharge: {fileID: 11400000, guid: 85f8f54b773546f8b5f703b16e2e703e, type: 2}
   minChargeVolume: 0.05
   maxChargeVolume: 0.6
-  sfxSpot: {fileID: 11400000, guid: 087e82356b7f4b84b6d8cb4622f8accd, type: 2}
   focusVolumeLerpSpeed: 5
   focusVolumeFadeLerp: 2
   mirrorTimeScale: 1
