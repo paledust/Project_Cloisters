@@ -73,9 +73,14 @@ public class BounceBall : MonoBehaviour
     void LateUpdate()
     {
         Vector2 vel = m_rigid.velocity;
-        float angle = Mathf.Atan2(vel.y, vel.x);
+        ShapeBallToVel(vel);
+    }
+
+    public void ShapeBallToVel(Vector2 velocity)
+    {
+        float angle = Mathf.Atan2(velocity.y, velocity.x);
         ballRender.transform.rotation = Quaternion.Euler(0, 0, angle * Mathf.Rad2Deg);
-        float shape = Mathf.Lerp(0, 1, Mathf.InverseLerp(shrinkVelRange.x, shrinkVelRange.y, m_rigid.velocity.magnitude)) * shrinkFactor;
+        float shape = Mathf.Lerp(0, 1, Mathf.InverseLerp(shrinkVelRange.x, shrinkVelRange.y, velocity.magnitude)) * shrinkFactor;
         ballRender.transform.localScale = new Vector3(1 + shape, 1 - shape, 1);
     }
 

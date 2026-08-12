@@ -11,9 +11,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="858b2bd2-ab0a-4df1-ba81-9c9743c37f9d" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Project_Cloisters/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Project_Cloisters/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefab/Evocative/Blocker_Triangle.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Evocative/Blocker_Triangle.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefab/Evocative/Tube.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Evocative/Tube.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Evocative/hidden_tube_down.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Evocative/hidden_tube_down.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Game.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Game.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Persistence.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Persistence.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Others/Evocative/BounceBall.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Others/Evocative/BounceBall.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +31,8 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Others/Evocative/Bouncer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Others/Evocative/HiddenTubeTrigger.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.cinemachine@2.10.3/Runtime/Core/CinemachinePathBase.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="McpProjectServerCommands">
     <commands />
@@ -35,59 +43,59 @@
     <decayedCancelled>
       <entry key="MS100" value="1.0" />
       <entry key="MS500" value="1.0" />
-      <entry key="S2" value="1.0" />
-      <entry key="S5" value="1.0000000000000404" />
-      <entry key="S10" value="1.0000002543621507" />
-      <entry key="S30" value="1.03423493984894" />
-      <entry key="S60" value="2.3027543226713156" />
-      <entry key="M2" value="11.208666631873353" />
-      <entry key="M5" value="40.01447088353554" />
-      <entry key="M10" value="73.90140469484834" />
-      <entry key="M15" value="106.30690365669234" />
-      <entry key="M30" value="194.05324439708124" />
-      <entry key="H1" value="302.967274048754" />
-      <entry key="H2" value="396.14664882567774" />
-      <entry key="H4" value="458.49044065123445" />
-      <entry key="D1" value="521.1181325704321" />
-      <entry key="W1" value="532.9870391525425" />
+      <entry key="S2" value="1.0000079681796286" />
+      <entry key="S5" value="1.013681011039761" />
+      <entry key="S10" value="1.2051751253356515" />
+      <entry key="S30" value="3.35384058678834" />
+      <entry key="S60" value="6.0303810350959965" />
+      <entry key="M2" value="9.05211274821199" />
+      <entry key="M5" value="15.647752798056356" />
+      <entry key="M10" value="29.781679266422152" />
+      <entry key="M15" value="49.851769163904066" />
+      <entry key="M30" value="124.15341915888666" />
+      <entry key="H1" value="267.3983399580772" />
+      <entry key="H2" value="454.72883733737" />
+      <entry key="H4" value="621.7164187451889" />
+      <entry key="D1" value="827.7673424877895" />
+      <entry key="W1" value="871.441746028109" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="0.0" />
-      <entry key="MS500" value="5.308193287838931E-136" />
-      <entry key="S2" value="1.5178773607774453E-34" />
-      <entry key="S5" value="2.969389760420204E-14" />
-      <entry key="S10" value="1.757649503375101E-7" />
-      <entry key="S30" value="0.008009708030307915" />
-      <entry key="S60" value="0.1852859583115122" />
-      <entry key="M2" value="1.1195182910988788" />
-      <entry key="M5" value="3.7615325426152584" />
-      <entry key="M10" value="7.900806946069723" />
-      <entry key="M15" value="13.60787170722725" />
-      <entry key="M30" value="33.146515959604415" />
-      <entry key="H1" value="60.62034142875242" />
-      <entry key="H2" value="85.28494832460433" />
-      <entry key="H4" value="102.11333859579568" />
-      <entry key="D1" value="119.19473647092045" />
-      <entry key="W1" value="122.44783055712102" />
+      <entry key="MS100" value="2.537040747900514E-124" />
+      <entry key="MS500" value="2.4979477690591E-25" />
+      <entry key="S2" value="1.155253676737807E-6" />
+      <entry key="S5" value="0.006819532964177451" />
+      <entry key="S10" value="0.14268562434685642" />
+      <entry key="S30" value="1.2634422064330202" />
+      <entry key="S60" value="2.344117260184715" />
+      <entry key="M2" value="3.834301509382942" />
+      <entry key="M5" value="7.7389847333693185" />
+      <entry key="M10" value="13.785566519420902" />
+      <entry key="M15" value="20.654148442191445" />
+      <entry key="M30" value="42.53977730245984" />
+      <entry key="H1" value="80.11547515954855" />
+      <entry key="H2" value="127.54281055300794" />
+      <entry key="H4" value="169.71565719141964" />
+      <entry key="D1" value="221.9647921268244" />
+      <entry key="W1" value="233.07583107817337" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.0" />
-      <entry key="MS500" value="2.2360709334362625E-134" />
-      <entry key="S2" value="6.579572566131063E-34" />
-      <entry key="S5" value="9.998442264974862E-14" />
-      <entry key="S10" value="6.008326416263541E-7" />
-      <entry key="S30" value="0.04764472071785079" />
-      <entry key="S60" value="1.5583281364672696" />
-      <entry key="M2" value="11.582377030837842" />
-      <entry key="M5" value="43.33638141283458" />
-      <entry key="M10" value="81.53206556308689" />
-      <entry key="M15" value="119.71110589904606" />
-      <entry key="M30" value="227.0706441428782" />
-      <entry key="H1" value="363.50680031764045" />
-      <entry key="H2" value="481.38423852200634" />
-      <entry key="H4" value="560.5777684946502" />
-      <entry key="D1" value="640.3081427795955" />
-      <entry key="W1" value="655.4341839283904" />
+      <entry key="MS100" value="0.21763764082403103" />
+      <entry key="MS500" value="0.7371346086455506" />
+      <entry key="S2" value="0.9265954956791997" />
+      <entry key="S5" value="0.988550064169269" />
+      <entry key="S10" value="1.3141990743211753" />
+      <entry key="S30" value="4.549943800587113" />
+      <entry key="S60" value="8.31184695030541" />
+      <entry key="M2" value="12.838760706619272" />
+      <entry key="M5" value="23.351399791662015" />
+      <entry key="M10" value="43.53039274734787" />
+      <entry key="M15" value="70.46426954772289" />
+      <entry key="M30" value="166.64116719667226" />
+      <entry key="H1" value="347.45761121413824" />
+      <entry key="H2" value="582.224458844228" />
+      <entry key="H4" value="791.40023688276" />
+      <entry key="D1" value="1049.7251722164397" />
+      <entry key="W1" value="1104.5165329675226" />
     </decayedShown>
   </component>
   <component name="ProblemsViewState">

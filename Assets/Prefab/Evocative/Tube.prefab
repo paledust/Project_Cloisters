@@ -6508,7 +6508,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da991184bf5baae44ba36eda67631d12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forceScale: 65
+  forceScale: 85
   correctForceScale: 1
   vfxAttraction: {fileID: 7363518232081604856}
   evocativeTube: {fileID: 3066382207128807262}
