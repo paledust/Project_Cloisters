@@ -117,10 +117,16 @@ public class IC_Narrative : IC_Basic
         soundHandler.PlayCircleExplode();
     }
     void OnCircleCollide(Clickable_Circle collidedCircle, Clickable_Circle controlledCircle, Collision collision){
-        float strength = collision.relativeVelocity.magnitude;
-        //Check if collision too frequent
-        if(Time.time - lastCollisionTime<=effectiveCollisionStep) 
+        //Check if controlled circle is not controlled
+        if (!controlledCircle.isControlling)
+        {
+            soundHandler.PlayCollisionSound(false, 0.1f, false);
             return;
+        }
+        //Check if collision too frequent
+        if(Time.time - lastCollisionTime <= effectiveCollisionStep) 
+            return;
+        float strength = collision.relativeVelocity.magnitude;
         if(strength >= collisionStrength){
             soundHandler.PlayCollisionSound();
             //bounce off the other cirlce

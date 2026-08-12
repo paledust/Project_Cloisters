@@ -17,13 +17,14 @@ public class NarrativeCircleGroupSoundHandler : MonoBehaviour
     [SerializeField] private float textAppearVolume = .25f;
     private float _collisionSoundTime = 0;
 
-    public void PlayCollisionSound(bool forcePlay = true)
+    public void PlayCollisionSound(bool forcePlay = true, float volumeScale = 1, bool randomPitch = true)
     {
         bool shouldPlay = forcePlay || Time.time > (_collisionSoundTime+collisionStep);
         if (shouldPlay)
         {
-            narrativeSoundSource.pitch = Random.Range(.95f, 1.05f);
-            AudioManager.Instance.PlaySFX(narrativeSoundSource, sfxCollide.AudioKey, collideVolume);
+            if(randomPitch)
+                narrativeSoundSource.pitch = Random.Range(.95f, 1.05f);
+            AudioManager.Instance.PlaySFX(narrativeSoundSource, sfxCollide.AudioKey, collideVolume*volumeScale);
             _collisionSoundTime = Time.time;
         }
     }

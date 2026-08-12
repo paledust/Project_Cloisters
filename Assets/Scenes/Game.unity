@@ -146281,11 +146281,6 @@ MonoBehaviour:
   TextAmount: {x: 2, y: 4}
   connectLineController: {fileID: 1382798988}
   soundHandler: {fileID: 1382798992}
-  sfx_collide: group_bell
-  collideVolume: 0.2
-  sfx_textAppear: group_door_chime
-  textAppearVolume: 0.015
-  collideAudio: {fileID: 1382798991}
 --- !u!114 &1382798986
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146525,7 +146520,7 @@ MonoBehaviour:
   explodeVolume: 0.5
   sfxCollide: {fileID: 11400000, guid: 7a3c8f8965b34947b8e9f7f1d0306de3, type: 2}
   collideVolume: 0.2
-  collisionStep: 0
+  collisionStep: 0.1
   sfxTextAppear: {fileID: 11400000, guid: 998b6b070f4c46fcb2d99678b7bf481f, type: 2}
   textAppearVolume: 0.015
 --- !u!1 &1385414730
