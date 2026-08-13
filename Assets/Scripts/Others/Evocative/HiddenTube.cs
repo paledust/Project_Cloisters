@@ -12,6 +12,11 @@ public class HiddenTube : MonoBehaviour
     [SerializeField] private Transform exit;
     [SerializeField] private SplineContainer path;
 
+    [SerializeField] private Animation pathAnimation;
+
+    private const string PATH_ANIME = "EVO_Path";
+    private const string PATH_ANIME_REVERSE = "EVO_Path_Reverse";
+    
     private bool isBallTravelling = false;
 
     public bool TryStartTravelling(BounceBall ball, bool reversePath)
@@ -32,16 +37,18 @@ public class HiddenTube : MonoBehaviour
         SplineUtility.GetNearestPoint(path.Spline, (float3)startPos, out float3 nearest, out float startRatio);
         float targetRatio = reversePath?0:1;
         ball.PhysicsSleep();
+        ball.enabled = false;
         
         Vector3 startTangent = path.EvaluateTangent(1-targetRatio);
         Quaternion startTangentRotation = Quaternion.FromToRotation(startTangent, Vector3.up);
-        
+
+        pathAnimation.Play(reversePath ? PATH_ANIME_REVERSE : PATH_ANIME);
         yield return new WaitForLoop(.2f, (t) =>
         {
             float ratio = Mathf.Lerp(1-targetRatio, targetRatio, t*t);
             ball.transform.position = path.EvaluatePosition(ratio);
             Vector3 tangent = path.EvaluateTangent(ratio);
-            ball.ShapeBallToVel(tangent);
+            ball.ShapeBallToVel(tangent*20);
         });
         ball.transform.position = path.EvaluatePosition(targetRatio);
         yield return null;
@@ -49,6 +56,7 @@ public class HiddenTube : MonoBehaviour
         
         Transform finalTrans = reversePath?entrance:exit;
         ball.Launch(finalTrans.up, 1);
+        ball.enabled = true;
         yield return new WaitForSeconds(0.2f);
         isBallTravelling = false;
     }
