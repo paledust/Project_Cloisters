@@ -1,13 +1,15 @@
+using System.Collections;
 using DG.Tweening;
 using UnityEngine;
 using SimpleLocalization;
 using SimpleSaveSystem;
-using TMPro;
+using UnityEngine.UI;
 
 public class UI_Setting : MonoBehaviour
 {
     [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] private float languageSwapStep = 0.2f;
+    [SerializeField] private Button[] langBtns;
 
     private float languageSwapTime;
     
@@ -26,6 +28,7 @@ public class UI_Setting : MonoBehaviour
     {
         if(Time.time<languageSwapTime+languageSwapStep)
             return;
+        StartCoroutine(coroutineBtnRefresh());
         languageSwapTime = Time.time;
         LocalizeManager.NextLocale();
     }
@@ -33,6 +36,7 @@ public class UI_Setting : MonoBehaviour
     {
         if(Time.time<languageSwapTime+languageSwapStep)
             return;
+        StartCoroutine(coroutineBtnRefresh());
         languageSwapTime = Time.time;
         LocalizeManager.PreviousLocale();
     }
@@ -52,6 +56,23 @@ public class UI_Setting : MonoBehaviour
             canvasGroup.blocksRaycasts = false;
             canvasGroup.DOFade(0, 0.15f).OnComplete(()=>gameObject.SetActive(false)).SetUpdate(true);
             isSettingOpen = false;
+        }
+    }
+
+    IEnumerator coroutineBtnRefresh()
+    {
+        foreach (var btn in langBtns)
+        {
+            btn.interactable = false;
+            btn.targetGraphic.raycastTarget = false;
+        }
+
+        yield return new WaitForSecondsRealtime(languageSwapStep);
+
+        foreach (var btn in langBtns)
+        {
+            btn.interactable = true;
+            btn.targetGraphic.raycastTarget = true;
         }
     }
 }

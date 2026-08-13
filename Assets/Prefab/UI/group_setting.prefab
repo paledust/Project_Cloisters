@@ -483,6 +483,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvasGroup: {fileID: 1974528698542609353}
   languageSwapStep: 0.5
+  langBtns:
+  - {fileID: 3785309960109487760}
+  - {fileID: 310017473080197200}
 --- !u!1 &6009804792693661374
 GameObject:
   m_ObjectHideFlags: 0
