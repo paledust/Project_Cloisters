@@ -63,15 +63,6 @@ public class BallLauncher : MonoBehaviour
                 AudioManager.Instance.PlaySFX(sfxLaunch.AudioKey, 1);
                 ball.Launch(Vector2.right * (launchSpeed + (isSuperCharge ? boostSpeed * 0.5f : 0)), 2);
             }
-            // Obselete Heavy Bounce Code
-            // else
-            // {
-            //     ball.Bounce(Vector2.right, boostSpeed, 4f);
-
-            //     p_launch.transform.position = ball.transform.position;
-            //     p_launch.Play();
-            //     EventHandler.Call_OnBallHeavyBounce();
-            // }
         }
     }
     void OnTriggerExit(Collider other)

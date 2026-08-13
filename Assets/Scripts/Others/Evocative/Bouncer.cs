@@ -72,17 +72,16 @@ public class Bouncer : MonoBehaviour
         {
             colliding = true;
             onPreBounce?.Invoke(bounceBall);
-
             if(canBounce)
             {
                 Vector3 normal = collision.GetContact(0).normal;
                 Vector2 vel = m_rigid.velocity + collision.relativeVelocity;
                 vel = Vector2.Reflect(vel, normal).normalized;
                 vel = ((Vector2)m_rigid.velocity.normalized * steerControl + vel.normalized).normalized * vel.magnitude;
-                vel = Quaternion.Euler(0, 0, UnityEngine.Random.Range(-reflectRandomRange.x, reflectRandomRange.y)) * vel;
-                float angle = Vector2.SignedAngle(normal, vel);
-                angle = Mathf.Sign(angle) * Mathf.Clamp(Mathf.Abs(angle), reflectAngle.x, reflectAngle.y);
-                vel = Quaternion.Euler(0, 0, angle) * normal;
+                // vel = Quaternion.Euler(0, 0, UnityEngine.Random.Range(-reflectRandomRange.x, reflectRandomRange.y)) * vel;
+                // float angle = Vector2.SignedAngle(normal, vel);
+                // angle = Mathf.Sign(angle) * Mathf.Clamp(Mathf.Abs(angle), reflectAngle.x, reflectAngle.y);
+                // vel = Quaternion.Euler(0, 0, angle) * normal;
 
                 PlayBounceFeedback();
                 bounceBall.Bounce(vel, bounceSpeedBonus, bounceSpeedBoost);
@@ -104,7 +103,8 @@ public class Bouncer : MonoBehaviour
     }
     void OnCollisionExit(Collision collision)
     {
-        if (colliding)
+        var bounceBall = collision.gameObject.GetComponent<BounceBall>();
+        if (colliding && bounceBall != null)
             colliding = false;
     }
 }

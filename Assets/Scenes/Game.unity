@@ -11278,6 +11278,11 @@ PrefabInstance:
       objectReference: {fileID: 407037979}
     - target: {fileID: 4655731381277360893, guid: be75cff89979c2d40a0e21b486dee3ce,
         type: 3}
+      propertyPath: debugLog
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4655731381277360893, guid: be75cff89979c2d40a0e21b486dee3ce,
+        type: 3}
       propertyPath: bounceSpeedBoost
       value: 2.5
       objectReference: {fileID: 0}
@@ -166410,7 +166415,7 @@ VisualEffect:
       - m_Value: {x: 0, y: 0, z: 0}
         m_Name: Target_position
         m_Overridden: 0
-      - m_Value: {x: -271.37, y: 0, z: 35}
+      - m_Value: {x: -272, y: 0, z: 35}
         m_Name: TargetPos
         m_Overridden: 1
       - m_Value: {x: -265.24, y: -1.63, z: 35}
@@ -211068,7 +211073,7 @@ PrefabInstance:
     - target: {fileID: 4125004621881747533, guid: be75cff89979c2d40a0e21b486dee3ce,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -11.37
+      value: -12
       objectReference: {fileID: 0}
     - target: {fileID: 4125004621881747533, guid: be75cff89979c2d40a0e21b486dee3ce,
         type: 3}
@@ -211131,6 +211136,11 @@ PrefabInstance:
       propertyPath: p_hit
       value: 
       objectReference: {fileID: 407037979}
+    - target: {fileID: 4655731381277360893, guid: be75cff89979c2d40a0e21b486dee3ce,
+        type: 3}
+      propertyPath: debugLog
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4655731381277360893, guid: be75cff89979c2d40a0e21b486dee3ce,
         type: 3}
       propertyPath: bounceSize
