@@ -246,6 +246,8 @@ MonoBehaviour:
   entrance: {fileID: 1043879777230967622}
   exit: {fileID: 2285507180743731960}
   path: {fileID: 5469921611954472490}
+  vfxSpeed: {fileID: 0}
+  vfxSpeedReverse: {fileID: 0}
 --- !u!1 &2170531157812903349
 GameObject:
   m_ObjectHideFlags: 0
