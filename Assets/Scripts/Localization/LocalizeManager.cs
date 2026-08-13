@@ -30,7 +30,7 @@ namespace SimpleLocalization
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            localeFont.AssetChanged += OnFontChange;
+            localeFont.AssetChanged -= OnFontChange;
         }
 
 #region Locale Setting

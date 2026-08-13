@@ -2,12 +2,21 @@ using DG.Tweening;
 using UnityEngine;
 using SimpleLocalization;
 using SimpleSaveSystem;
+using TMPro;
 
 public class UI_Setting : MonoBehaviour
 {
     [SerializeField] private CanvasGroup canvasGroup;
+    [SerializeField] private float languageSwapStep = 0.2f;
+
+    private float languageSwapTime;
+    
     public bool isSettingOpen { get; private set; }
 
+    void OnEnable()
+    {
+        languageSwapTime = Time.time;
+    }
     public void Btn_OnReturn()
     {
         SwitchSetting(false);
@@ -15,10 +24,16 @@ public class UI_Setting : MonoBehaviour
     }
     public void Btn_OnNextLanguage()
     {
+        if(Time.time<languageSwapTime+languageSwapStep)
+            return;
+        languageSwapTime = Time.time;
         LocalizeManager.NextLocale();
     }
     public void Btn_OnPreviousLanguage()
     {
+        if(Time.time<languageSwapTime+languageSwapStep)
+            return;
+        languageSwapTime = Time.time;
         LocalizeManager.PreviousLocale();
     }
     public void SwitchSetting(bool isOn)
