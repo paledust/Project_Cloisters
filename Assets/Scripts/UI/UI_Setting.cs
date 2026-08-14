@@ -17,7 +17,7 @@ public class UI_Setting : MonoBehaviour
 
     void OnEnable()
     {
-        languageSwapTime = Time.time;
+        languageSwapTime = Time.realtimeSinceStartup;
     }
     public void Btn_OnReturn()
     {
@@ -26,19 +26,25 @@ public class UI_Setting : MonoBehaviour
     }
     public void Btn_OnNextLanguage()
     {
-        if(Time.time<languageSwapTime+languageSwapStep)
-            return;
-        StartCoroutine(coroutineBtnRefresh());
-        languageSwapTime = Time.time;
-        LocalizeManager.NextLocale();
+        if (Time.realtimeSinceStartup > languageSwapTime + languageSwapStep)
+        {
+            StartCoroutine(coroutineBtnRefresh());
+            languageSwapTime = Time.realtimeSinceStartup;
+            LocalizeManager.NextLocale();
+        }
+        else
+        {
+            Debug.LogWarning("Step Time not enough");
+        }
     }
     public void Btn_OnPreviousLanguage()
     {
-        if(Time.time<languageSwapTime+languageSwapStep)
-            return;
-        StartCoroutine(coroutineBtnRefresh());
-        languageSwapTime = Time.time;
-        LocalizeManager.PreviousLocale();
+        if (Time.realtimeSinceStartup > languageSwapTime + languageSwapStep)
+        {
+            StartCoroutine(coroutineBtnRefresh());
+            languageSwapTime = Time.realtimeSinceStartup;
+            LocalizeManager.PreviousLocale();
+        }
     }
     public void SwitchSetting(bool isOn)
     {
