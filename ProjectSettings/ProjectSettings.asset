@@ -16,7 +16,7 @@ PlayerSettings:
   productName: Concept_One
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
-  m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
+  m_SplashScreenBackgroundColor: {r: 0, g: 0, b: 0, a: 1}
   m_ShowUnitySplashScreen: 1
   m_ShowUnitySplashLogo: 1
   m_SplashScreenOverlayOpacity: 1
@@ -141,7 +141,7 @@ PlayerSettings:
   loadStoreDebugModeEnabled: 0
   visionOSBundleVersion: 1.0
   tvOSBundleVersion: 1.0
-  bundleVersion: 1.0
+  bundleVersion: 1.002
   preloadedAssets:
   - {fileID: 11400000, guid: 955c9c94011e5794cb3edf375599d239, type: 2}
   - {fileID: 11400000, guid: d8e7c182588f8bf42801d9dbe7c0c8fc, type: 2}

@@ -19,7 +19,8 @@ public class UI_Manager : Singleton<UI_Manager>
     {
         base.Awake();
         imgCursor.color = Color.white;
-        cursorVisible = true;
+        customCursor.alpha = 0;
+        cursorVisible = false;
 
         UpdateCursorState(currentCursorState);
 
