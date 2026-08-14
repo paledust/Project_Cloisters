@@ -1,6 +1,5 @@
 using UnityEngine;
 using DG.Tweening;
-using UnityEditor.Localization.Plugins.XLIFF.V12;
 
 public class Clickable_Crystal : Basic_Clickable
 {
