@@ -24,7 +24,7 @@ public class Intro : MonoBehaviour
 
     IEnumerator coroutineActivation()
     {
-        yield return new WaitForSeconds(activationDelay);
+        yield return new WaitForSecondsRealtime(activationDelay);
         uiIntro.ActivateCanvasRaycast();
         uiManager.ChangeCursorColor(true);
         uiManager.ShowCursor();
