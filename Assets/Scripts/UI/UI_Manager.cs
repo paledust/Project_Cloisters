@@ -38,7 +38,6 @@ public class UI_Manager : Singleton<UI_Manager>
 
     public void ChangeCursorColor(bool isWhite, bool recordCursorColor = true)
     {
-        Debug.LogWarning($"UI Manager Cursor Color white: {isWhite}");
         imgCursor.DOKill();
         imgCursor.DOColor(isWhite? Color.white : Color.black, 0.2f).SetUpdate(true);
         if(recordCursorColor)
