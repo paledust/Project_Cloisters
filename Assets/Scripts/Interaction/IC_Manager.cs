@@ -82,6 +82,7 @@ public class IC_Manager : MonoBehaviour
                 }, endDelay));
             }
             LevelProgressionManager.Instance.SetProgress(interactionIndex);
+            SaveManager.SaveGameState(0);
             return;
         }
     //Make sure to load interaction before enter
@@ -96,6 +97,7 @@ public class IC_Manager : MonoBehaviour
         loadedIC_Count ++;
 
         LevelProgressionManager.Instance.SetProgress(interactionIndex);
+        SaveManager.SaveGameState(0);
     }
     void EndInteraction(IC_Basic interController){
         interController.ExitInteraction();

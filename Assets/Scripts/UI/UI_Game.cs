@@ -1,5 +1,6 @@
 using DG.Tweening;
 using SimpleAudioSystem;
+using SimpleSaveSystem;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
@@ -108,6 +109,7 @@ public class UI_Game : MonoBehaviour
     {
         DisableCanvas();
         menuAction.Disable();
+        SaveManager.SaveGameState(0);
         GameManager.Instance.EndGame();
     }
     public void Btn_QuitMenu()
