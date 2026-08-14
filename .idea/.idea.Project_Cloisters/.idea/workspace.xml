@@ -10,10 +10,7 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="858b2bd2-ab0a-4df1-ba81-9c9743c37f9d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/UI/group_setting.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/UI/group_setting.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/UI_Setting.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/UI_Setting.cs" afterDir="false" />
-    </list>
+    <list default="true" id="858b2bd2-ab0a-4df1-ba81-9c9743c37f9d" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

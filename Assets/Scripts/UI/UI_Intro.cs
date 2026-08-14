@@ -21,6 +21,7 @@ public class UI_Intro : MonoBehaviour
         groupCredit.gameObject.SetActive(false);
         groupCredit.alpha = 0;
         groupCredit.interactable = false;
+        raycaster.enabled = false;
         EventHandler.E_OnLevelStateRestore += RefreshState;
     }
     void Start()
@@ -36,6 +37,10 @@ public class UI_Intro : MonoBehaviour
         objContinue.SetActive(!LevelProgressionManager.Instance.IsFreshStart);
     }
 
+    public void ActivateCanvasRaycast()
+    {
+        raycaster.enabled = true;
+    }
     public void Btn_DisableAllCanvas()
     {
         raycaster.enabled = false;
