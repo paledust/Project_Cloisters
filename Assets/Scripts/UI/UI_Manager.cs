@@ -11,8 +11,9 @@ public class UI_Manager : Singleton<UI_Manager>
 [Header("Cursor Sprite")]
     [SerializeField] private Image imgCursor;
 
-    private CURSOR_STATE currentCursorState = CURSOR_STATE.DEFAULT;
     private bool cursorVisible = true;
+    private bool isGameCursorWhite;
+    private CURSOR_STATE currentCursorState = CURSOR_STATE.DEFAULT;
     private Sequence cursorTween;
 
     protected override void Awake()
@@ -20,6 +21,7 @@ public class UI_Manager : Singleton<UI_Manager>
         base.Awake();
         imgCursor.color = Color.white;
         customCursor.alpha = 0;
+        isGameCursorWhite = true;
         cursorVisible = false;
 
         UpdateCursorState(currentCursorState);
@@ -33,10 +35,14 @@ public class UI_Manager : Singleton<UI_Manager>
         EventHandler.E_OnTransitionBegin -= HideCursor;
         EventHandler.E_OnTransitionEnd -= ShowCursor;
     }
-    public void ChangeCursorColor(bool isWhite)
+
+    public void ChangeCursorColor(bool isWhite, bool recordCursorColor = true)
     {
+        Debug.LogWarning($"UI Manager Cursor Color white: {isWhite}");
         imgCursor.DOKill();
-        imgCursor.DOColor(isWhite? Color.white : Color.black, 0.2f);
+        imgCursor.DOColor(isWhite? Color.white : Color.black, 0.2f).SetUpdate(true);
+        if(recordCursorColor)
+            isGameCursorWhite =  isWhite;
     }
     public void UpdateCursorPos(Vector2 scrPos){
         customCursor.transform.position = scrPos;
@@ -78,6 +84,13 @@ public class UI_Manager : Singleton<UI_Manager>
         }
         currentCursorState = newState;
     }
+    public void SwitchingInGameMenuCursor(bool isOn)
+    {
+        if (isOn)
+            ChangeCursorColor(true, false);
+        else
+            ChangeCursorColor(isGameCursorWhite, false);
+    }
     void HideCursor(){
         cursorVisible = false;
         ChangeCursorVisual(0f, 1f, 0.2f);
@@ -94,6 +107,7 @@ public class UI_Manager : Singleton<UI_Manager>
         cursorTween = DOTween.Sequence();
         cursorTween.Join(customCursor.DOFade(alpha, duration)).SetEase(Ease.InOutQuad)
             .Join(customCursor.transform.DOScale(size, duration)).SetEase(Ease.InOutQuad)
-            .OnComplete(()=>completeCallback?.Invoke());
+            .OnComplete(()=>completeCallback?.Invoke())
+            .SetUpdate(true);
     }
 }

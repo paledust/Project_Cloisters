@@ -70,7 +70,8 @@ public class UI_Game : MonoBehaviour
                     .Join(canvasMenu.DOFade(1, menuTime).OnComplete(()=>SwitchCanvas(canvasMenu, true)))
                     .Join(canvasGame.DOFade(0, menuTime))
                     .SetUpdate(true);
-
+        
+        UI_Manager.Instance.SwitchingInGameMenuCursor(true);
         GameManager.Instance.PauseTheGame();
     }
     public void DisableCanvas()
@@ -79,6 +80,7 @@ public class UI_Game : MonoBehaviour
         isMenuOpen = false;
 
         SwitchCanvas(canvasMenu, false);
+        UI_Manager.Instance.SwitchingInGameMenuCursor(false);
         pauseTween.Kill();
         pauseTween = DOTween.Sequence();
         pauseTween.Join(blackBar_Top.rectTransform.DOAnchorPosY(100, menuTime).SetEase(Ease.OutQuad))
