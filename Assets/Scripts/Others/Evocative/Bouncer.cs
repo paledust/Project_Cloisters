@@ -12,8 +12,6 @@ public class Bouncer : MonoBehaviour
     [SerializeField] private float bounceSize = 1;
 
     [Header("Bounce Settings")]
-    [SerializeField] private Vector2 reflectAngle = new Vector2(90, 180);
-    [SerializeField] private Vector2 reflectRandomRange = Vector2.zero;
     [SerializeField] private float bounceSpeedBoost = 2;
     [SerializeField] private float bounceSpeedBonus = 0;
     [SerializeField, Range(0, 1)] private float steerControl = 0.5f;
@@ -29,7 +27,6 @@ public class Bouncer : MonoBehaviour
     private Vector3 initRootSize;
     private Rigidbody m_rigid;
 
-    public bool m_colliding => colliding;
     public event Action<BounceBall> onBounce;
     public event Action<BounceBall> onPreBounce;
 
@@ -78,10 +75,6 @@ public class Bouncer : MonoBehaviour
                 Vector2 vel = m_rigid.velocity + collision.relativeVelocity;
                 vel = Vector2.Reflect(vel, normal).normalized;
                 vel = ((Vector2)m_rigid.velocity.normalized * steerControl + vel.normalized).normalized * vel.magnitude;
-                // vel = Quaternion.Euler(0, 0, UnityEngine.Random.Range(-reflectRandomRange.x, reflectRandomRange.y)) * vel;
-                // float angle = Vector2.SignedAngle(normal, vel);
-                // angle = Mathf.Sign(angle) * Mathf.Clamp(Mathf.Abs(angle), reflectAngle.x, reflectAngle.y);
-                // vel = Quaternion.Euler(0, 0, angle) * normal;
 
                 PlayBounceFeedback();
                 bounceBall.Bounce(vel, bounceSpeedBonus, bounceSpeedBoost);

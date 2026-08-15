@@ -89864,8 +89864,6 @@ MonoBehaviour:
   spriteRenderer: {fileID: 678608254}
   blinkRender: {fileID: 1320595785}
   bounceSize: 0
-  reflectAngle: {x: 120, y: 145}
-  reflectRandomRange: {x: 0, y: 0}
   bounceSpeedBoost: 1
   bounceSpeedBonus: 0
   steerControl: 0.5
@@ -102527,8 +102525,6 @@ MonoBehaviour:
   spriteRenderer: {fileID: 842031956}
   blinkRender: {fileID: 897520898}
   bounceSize: 0
-  reflectAngle: {x: 120, y: 145}
-  reflectRandomRange: {x: 0, y: 0}
   bounceSpeedBoost: 1
   bounceSpeedBonus: 0
   steerControl: 0.5
@@ -146228,8 +146224,6 @@ MonoBehaviour:
   spriteRenderer: {fileID: 1380191789}
   blinkRender: {fileID: 107403839}
   bounceSize: 0
-  reflectAngle: {x: 120, y: 145}
-  reflectRandomRange: {x: 0, y: 0}
   bounceSpeedBoost: 1
   bounceSpeedBonus: 0
   steerControl: 0.5
@@ -158537,8 +158531,6 @@ MonoBehaviour:
   spriteRenderer: {fileID: 1511441093}
   blinkRender: {fileID: 1268417782}
   bounceSize: 0
-  reflectAngle: {x: 120, y: 145}
-  reflectRandomRange: {x: 0, y: 0}
   bounceSpeedBoost: 1
   bounceSpeedBonus: 0
   steerControl: 0.5
@@ -173058,8 +173050,6 @@ MonoBehaviour:
   spriteRenderer: {fileID: 1731337634}
   blinkRender: {fileID: 2074348513}
   bounceSize: 0
-  reflectAngle: {x: 120, y: 145}
-  reflectRandomRange: {x: 0, y: 0}
   bounceSpeedBoost: 1
   bounceSpeedBonus: 0
   steerControl: 0.5
@@ -191177,8 +191167,6 @@ MonoBehaviour:
   spriteRenderer: {fileID: 2000682174}
   blinkRender: {fileID: 1347164226}
   bounceSize: 0
-  reflectAngle: {x: 120, y: 145}
-  reflectRandomRange: {x: 0, y: 0}
   bounceSpeedBoost: 1
   bounceSpeedBonus: 0
   steerControl: 0.5
@@ -211125,12 +211113,6 @@ PrefabInstance:
       propertyPath: p_launch
       value: 
       objectReference: {fileID: 1323792508}
-    - target: {fileID: 4363380082862023571, guid: be75cff89979c2d40a0e21b486dee3ce,
-        type: 3}
-      propertyPath: sfxLaunch
-      value: 
-      objectReference: {fileID: 11400000, guid: 2fc11b8b95be480597aa7688e5f301d8,
-        type: 2}
     - target: {fileID: 4655731381277360893, guid: be75cff89979c2d40a0e21b486dee3ce,
         type: 3}
       propertyPath: p_hit

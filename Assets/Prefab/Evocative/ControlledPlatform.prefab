@@ -623,8 +623,9 @@ MonoBehaviour:
   bouncer: {fileID: 4655731381277360893}
   launchSpeed: 10
   boostSpeed: 5
-  sfxLaunch: {fileID: 0}
+  sfxLaunch: {fileID: 11400000, guid: 2fc11b8b95be480597aa7688e5f301d8, type: 2}
   sfxUpgrade: {fileID: 11400000, guid: 47ab15beadd0d3143a9cb657dc9f67fc, type: 2}
+  ballReady: 0
 --- !u!114 &7756731229284826610
 MonoBehaviour:
   m_ObjectHideFlags: 0

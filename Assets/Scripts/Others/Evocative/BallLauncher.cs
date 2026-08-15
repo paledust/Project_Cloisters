@@ -29,9 +29,8 @@ public class BallLauncher : MonoBehaviour
     }
     void OnLaunch(InputAction.CallbackContext context)
     {
-        if(!ballReady)
-            return;
-        bounceAnimation.Play();
+        if(ballReady)
+            bounceAnimation.Play();
     }
     public void SuperCharge()
     {
@@ -50,27 +49,17 @@ public class BallLauncher : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         var ball = other.GetComponent<BounceBall>();
-        if (ball != null && !bouncer.m_colliding)
+        if (ball != null)
         {
-            bouncer.SwitchCanBounce(false);
             bouncer.PlayBounceFeedback();
-
             onLaunchBall?.Invoke(ball);
 
             if (ballReady)
             {
                 ballReady = false;
-                AudioManager.Instance.PlaySFX(sfxLaunch.AudioKey, 1);
                 ball.Launch(Vector2.right * (launchSpeed + (isSuperCharge ? boostSpeed * 0.5f : 0)), 2);
+                AudioManager.Instance.PlaySFX(sfxLaunch.AudioKey, 1);
             }
-        }
-    }
-    void OnTriggerExit(Collider other)
-    {
-        var ball = other.GetComponent<BounceBall>();
-        if (ball != null)
-        {
-            bouncer.SwitchCanBounce(true);
         }
     }
 }
