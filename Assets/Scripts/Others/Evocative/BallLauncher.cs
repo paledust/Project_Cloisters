@@ -13,7 +13,7 @@ public class BallLauncher : MonoBehaviour
     [SerializeField] private AudioData_SO sfxLaunch;
     [SerializeField] private AudioData_SO sfxUpgrade;
 
-    private bool ballLaunched;
+    [SerializeField, ShowOnly] private bool ballReady = false;
     private bool isSuperCharge = false;
     public Action<BounceBall> onLaunchBall;
 
@@ -29,7 +29,7 @@ public class BallLauncher : MonoBehaviour
     }
     void OnLaunch(InputAction.CallbackContext context)
     {
-        if(!ballLaunched)
+        if(!ballReady)
             return;
         bounceAnimation.Play();
     }
@@ -41,7 +41,7 @@ public class BallLauncher : MonoBehaviour
     }
     public void ResetLauncher()
     {
-        ballLaunched = true;
+        ballReady = true;
     }
     public void AE_ResetCanBounce()
     {
@@ -57,9 +57,9 @@ public class BallLauncher : MonoBehaviour
 
             onLaunchBall?.Invoke(ball);
 
-            if (ballLaunched)
+            if (ballReady)
             {
-                ballLaunched = false;
+                ballReady = false;
                 AudioManager.Instance.PlaySFX(sfxLaunch.AudioKey, 1);
                 ball.Launch(Vector2.right * (launchSpeed + (isSuperCharge ? boostSpeed * 0.5f : 0)), 2);
             }
