@@ -13,7 +13,7 @@ public class BallLauncher : MonoBehaviour
     [SerializeField] private AudioData_SO sfxLaunch;
     [SerializeField] private AudioData_SO sfxUpgrade;
 
-    [SerializeField, ShowOnly] private bool ballReady = false;
+    private bool ballReady = false;
     private bool isSuperCharge = false;
     public Action<BounceBall> onLaunchBall;
 

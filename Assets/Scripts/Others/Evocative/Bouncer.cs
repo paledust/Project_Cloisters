@@ -84,6 +84,12 @@ public class Bouncer : MonoBehaviour
             }
         }
     }
+    void OnCollisionExit(Collision collision)
+    {
+        var bounceBall = collision.gameObject.GetComponent<BounceBall>();
+        if (colliding && bounceBall != null)
+            colliding = false;
+    }
     public void SwapRender(SpriteRenderer rootRender, SpriteRenderer blinkRender)
     {
         this.spriteRenderer = rootRender;
@@ -93,11 +99,5 @@ public class Bouncer : MonoBehaviour
     {
         bounceSpeedBonus = newSpeedBonus;
         bounceSpeedBoost = newSpeedBoost;
-    }
-    void OnCollisionExit(Collision collision)
-    {
-        var bounceBall = collision.gameObject.GetComponent<BounceBall>();
-        if (colliding && bounceBall != null)
-            colliding = false;
     }
 }
