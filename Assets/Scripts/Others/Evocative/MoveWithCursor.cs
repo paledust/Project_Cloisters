@@ -14,6 +14,9 @@ public class MoveWithCursor : MonoBehaviour
     private float depth = 32;
     private Rigidbody m_rigid;
     private Camera mainCam;
+    
+    public float m_verticalVelocity => m_rigid.velocity.y;
+    
     void Awake()
     {
         m_rigid = GetComponent<Rigidbody>();
@@ -38,6 +41,7 @@ public class MoveWithCursor : MonoBehaviour
             worldPos.x = Mathf.Clamp(worldPos.x, -widthLimit+widthOffset, widthLimit+widthOffset);
             worldPos.y = m_rigid.position.y;
         }
+        Vector2 lastPos = m_rigid.position;
         m_rigid.MovePosition(Vector3.Lerp(m_rigid.position, worldPos, lerpSpeed * controlValue * Time.fixedDeltaTime));
     }
     public void StartControl(float duration)

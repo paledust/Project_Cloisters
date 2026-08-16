@@ -10,6 +10,8 @@ public class BallLauncher : MonoBehaviour
     [SerializeField] private Bouncer bouncer;
     [SerializeField] private float launchSpeed = 10;
     [SerializeField] private float boostSpeed = 3;
+    [SerializeField] private MoveWithCursor movement;
+    [SerializeField, Range(0f, 1f)] private float launchSteer = 0;
     [SerializeField] private AudioData_SO sfxLaunch;
     [SerializeField] private AudioData_SO sfxUpgrade;
 
@@ -57,7 +59,7 @@ public class BallLauncher : MonoBehaviour
             if (ballReady)
             {
                 ballReady = false;
-                ball.Launch(Vector2.right * (launchSpeed + (isSuperCharge ? boostSpeed * 0.5f : 0)), 2);
+                ball.Launch((Vector2.right+Vector2.up * Mathf.Clamp(movement.m_verticalVelocity, -1, 1) * launchSteer).normalized * (launchSpeed + (isSuperCharge ? boostSpeed * 0.5f : 0)), 2);
                 AudioManager.Instance.PlaySFX(sfxLaunch.AudioKey, 1);
             }
         }
