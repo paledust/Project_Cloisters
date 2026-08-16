@@ -59,10 +59,11 @@ public class BallLauncher : MonoBehaviour
             if (ballReady)
             {
                 ballReady = false;
-                if(movement!=null)
-                    ball.Launch((Vector2.right+Vector2.up * Mathf.Clamp(movement.m_verticalVelocity, -1, 1) * launchSteer).normalized * (launchSpeed + (isSuperCharge ? boostSpeed * 0.5f : 0)), 2);
-                else
-                    ball.Launch(Vector2.right * (launchSpeed + (isSuperCharge ? boostSpeed * 0.5f : 0)), 2);
+                float steerValue = 0;
+                if (movement != null)
+                    steerValue = Mathf.Clamp(movement.m_verticalVelocity, -1, 1) * launchSteer;
+                
+                ball.Launch((Vector2.right+Vector2.up * steerValue).normalized * (launchSpeed + (isSuperCharge ? boostSpeed * 0.5f : 0)), 2);
                 AudioManager.Instance.PlaySFX(sfxLaunch.AudioKey, 1);
             }
         }
