@@ -87,7 +87,7 @@ public class CollidableCircle : MonoBehaviour
         circleMotionControl.UpdateCircleMotion(m_rigid.velocity);
 
         float speed = m_rigid.velocity.magnitude;
-        audioSpeed = Mathf.Lerp(audioSpeed, speed, Time.deltaTime*speed>speedGate?speedLerp:speedFade);
+        audioSpeed = Mathf.Lerp(audioSpeed, speed, Time.deltaTime*(speed>speedGate?speedLerp:speedFade));
         float volume = Mathf.Clamp((audioSpeed-speedGate)*dragToVolumeScale, 0, maxVolume);
 
         if(loopSource.isPlaying)

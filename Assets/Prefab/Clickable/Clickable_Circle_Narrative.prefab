@@ -15681,10 +15681,10 @@ MonoBehaviour:
   loopSource: {fileID: 5400981115759159639}
   sfx_drag_circle: sfx_water_splash_loop
   maxVolume: 0.6
-  speedGate: 6
+  speedGate: 3
   dragToVolumeScale: 0.01
-  speedLerp: 4
-  speedFade: 1
+  speedLerp: 10
+  speedFade: 3
   audioTime: 0
 --- !u!114 &-6295686749355873733
 MonoBehaviour:
