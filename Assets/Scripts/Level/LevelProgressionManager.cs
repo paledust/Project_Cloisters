@@ -8,7 +8,10 @@ public class LevelProgressionManager : Singleton<LevelProgressionManager>, ISave
     private int levelProgress = 0;
     [SerializeField, ShowOnly] private bool isFreshStart = true;
 
-    public int LevelProgress => levelProgress;
+    [Header("Demo Option")]
+    [SerializeField] private int DemoStartIndex = 5;
+
+    public int LevelProgress => GameManager.Instance.IsDemo?DemoStartIndex:levelProgress;
     public bool IsFreshStart => isFreshStart;
     public Guid guid => new Guid(byteGuid);
 
