@@ -43,12 +43,16 @@ public class UI_Game : MonoBehaviour
         blackBar_Bottom.rectTransform.anchoredPosition = new Vector2(0, isMenuOpen?0:-100);
     }
     void Awake(){
+        if(GameManager.Instance.IsDemo)
+            return;
         EventHandler.E_OnTransitionBegin += TransitionBeginHandler;
         EventHandler.E_OnTransitionEnd += TransitionEndHandler;
         menuAction["menu"].performed += MenuAction_performed;
         menuAction.Enable();
     }
     void OnDestroy(){
+        if(GameManager.Instance.IsDemo)
+            return;
         EventHandler.E_OnTransitionBegin -= TransitionBeginHandler;
         EventHandler.E_OnTransitionEnd -= TransitionEndHandler;
         menuAction["menu"].performed -= MenuAction_performed;
