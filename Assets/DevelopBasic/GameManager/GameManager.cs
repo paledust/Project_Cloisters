@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 
@@ -18,9 +17,8 @@ public class GameManager : Singleton<GameManager>
 [Header("Init")]
     [SerializeField] private string InitScene;
 [Header("Demo")]
+    [SerializeField] private string InitDemoScene;
     [SerializeField] private bool isDemo = true;
-    [SerializeField] private bool isTesting = true;
-    [SerializeField] private Text demoText;
 [Header("Debug")]
     [SerializeField] private bool loadInitSceneFromGameManager = false;
 #if UNITY_EDITOR || DEVELOPMENT_BUILD
@@ -30,30 +28,32 @@ public class GameManager : Singleton<GameManager>
     private static bool isPaused = false;
 
     public bool IsSwitchingScene{get; private set;} = false;
+    public bool IsDemo => isDemo;
     public string lastScene{get; private set;} = string.Empty;
     public string currentScene{get; private set;} = string.Empty;
+
     protected override void Awake(){
         base.Awake();
         Application.targetFrameRate = targetFrameRate;
         SaveManager.Initialize();
+        if(isDemo)
+            SaveManager.SwitchSaving(false);
 
     #if UNITY_EDITOR || DEVELOPMENT_BUILD
         debugActions["save"].performed += Debug_Save;
         debugActions["load"].performed += Debug_Load;
         debugActions["quit"].performed += Debug_EndGame;
-
-        if(isTesting) debugActions.Enable();
     #endif
     }
     void Start()
     {
-        LoadGame(0);
+        SaveManager.LoadGameState(0);
     //To Do: Game Loading
     #if UNITY_EDITOR
     //Load Level
         if(loadInitSceneFromGameManager){
             BlackScreenCanvasGroup.alpha = 1;
-            SwitchingScene(string.Empty, InitScene, 0.5f, transitionDuration);
+            SwitchingScene(string.Empty, GetInitSceneName(), 0.5f, transitionDuration);
         }
         else {
             currentScene = SceneManager.GetActiveScene().name;
@@ -61,7 +61,7 @@ public class GameManager : Singleton<GameManager>
 
     #else
     //Since we don't have the saving system yet, the initiation should be done by loading the debug progress data.
-        SwitchingScene(string.Empty, InitScene, 0.5f, transitionDuration);
+        SwitchingScene(string.Empty, GetInitSceneName(), 0.5f, transitionDuration);
     #endif
     }
     protected override void OnDestroy(){
@@ -100,7 +100,10 @@ public class GameManager : Singleton<GameManager>
         StartCoroutine(RestartLevel(currentLevel));
     }
 #endregion
-
+    string GetInitSceneName()
+    {
+        return isDemo?InitDemoScene:InitScene;
+    }
 #region Scene Transition
     public void SwitchingScene(string to, float transition = 1, float intersection = 0, bool autosaveAfterTransition = true){
         string from = SceneManager.GetActiveScene().name;
@@ -114,25 +117,6 @@ public class GameManager : Singleton<GameManager>
         StartCoroutine(new WaitForLoopUnscale(3f, (t)=>{
             AudioManager.Instance.ChangeMasterVolume(Mathf.Lerp(1, 0, EasingFunc.Easing.QuadEaseIn(t)));
         }));
-
-        if(isDemo) {
-            yield return new WaitForSecondsRealtime(1f);
-
-            Color initCol = demoText.color;
-            Color targetCol = initCol;
-            initCol.a = 0;
-            targetCol.a = 1;
-
-            demoText.color = initCol;
-            demoText.gameObject.SetActive(true);
-            yield return new WaitForLoopUnscale(0.5f, (t)=>
-                demoText.color = Color.Lerp(initCol, targetCol, EasingFunc.Easing.SmoothInOut(t))
-            );
-            yield return new WaitForSecondsRealtime(2f);
-            yield return new WaitForLoopUnscale(0.5f, (t)=>
-                demoText.color = Color.Lerp(targetCol, initCol, EasingFunc.Easing.SmoothInOut(t))
-            );            
-        }
 
         yield return new WaitForSecondsRealtime(1f);
         EventHandler.Call_BeforeUnloadScene();
@@ -182,7 +166,8 @@ public class GameManager : Singleton<GameManager>
     //TO DO: do something after the next scene is loaded. e.g: call event of loading
         EventHandler.Call_AfterLoadScene();
     //AutoSave Game when transition to New Scene
-        if(autosaveAfterTransition) SaveGame(0);
+        if(autosaveAfterTransition) 
+            SaveManager.SaveGameState(0);
 
         ResumeTheGame();
         yield return null;
@@ -203,9 +188,6 @@ public class GameManager : Singleton<GameManager>
         });
     }
 #endregion
-
-    void LoadGame(int slotIndex)=>SaveManager.LoadGameState(slotIndex);
-    void SaveGame(int slotIndex)=>SaveManager.SaveGameState(slotIndex);
 
 #region DEBUG ACTION
     void Debug_EndGame(InputAction.CallbackContext callback)=>EndGame();
