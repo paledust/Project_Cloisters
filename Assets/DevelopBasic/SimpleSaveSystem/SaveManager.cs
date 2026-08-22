@@ -12,12 +12,20 @@ namespace SimpleSaveSystem{
         public const string GLOBALFILE_NAME = "Global.sav";
         public const string SAVEFILE_NAME = "Data.sav";
         public static GlobalSaveData globalSaveData;
+        public static bool BanSaving = false;
         
+        public static void SwitchSaving(bool isBaned) => BanSaving = isBaned; 
         public static void CleanGameState(int slotIndex){
             string filePath = Application.persistentDataPath + SAVEFILE_DIRECTOR + $"/{slotIndex}/" + SAVEFILE_NAME;
             if(File.Exists(filePath)) File.Delete(filePath);
         }
         public static async void SaveGameState(int slotIndex){
+            if(BanSaving)
+            {
+                Debug.LogWarning("Saving is Banned during Demo");
+                return;
+            }
+
             string globalFolderPath = Application.persistentDataPath + SAVEFILE_DIRECTOR;
             string folderPath = Application.persistentDataPath + SAVEFILE_DIRECTOR + $"/{slotIndex}/";
 
@@ -45,6 +53,12 @@ namespace SimpleSaveSystem{
         }
 
         public static void LoadGameState(int slotIndex){
+            if(BanSaving)
+            {
+                Debug.LogWarning("Saving is Banned during Demo");
+                return;
+            }
+                
             string path = Application.persistentDataPath + SAVEFILE_DIRECTOR + $"/{slotIndex}/";
             var saveData = Load<PlayerSaveData>(path, SAVEFILE_NAME, Serializer.Json);
             if(saveData == null){
