@@ -53,7 +53,7 @@ public class GameManager : Singleton<GameManager>
     //Load Level
         if(loadInitSceneFromGameManager){
             BlackScreenCanvasGroup.alpha = 1;
-            SwitchingScene(string.Empty, GetInitSceneName(), 0.5f, transitionDuration);
+            SwitchingScene(string.Empty, GetInitSceneName(), transitionDuration, 0.5f);
         }
         else {
             currentScene = SceneManager.GetActiveScene().name;
@@ -61,7 +61,7 @@ public class GameManager : Singleton<GameManager>
 
     #else
     //Since we don't have the saving system yet, the initiation should be done by loading the debug progress data.
-        SwitchingScene(string.Empty, GetInitSceneName(), 0.5f, transitionDuration);
+        SwitchingScene(string.Empty, GetInitSceneName(), transitionDuration, 0.5f);
     #endif
     }
     protected override void OnDestroy(){

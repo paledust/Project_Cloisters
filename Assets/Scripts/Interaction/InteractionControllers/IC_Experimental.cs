@@ -191,9 +191,7 @@ public class IC_Experimental : IC_Basic
             {
                 var shape = connectBodies[shapeFront];
                 shape.transform.position = pos;
-                shape.transform.localScale = Vector3.zero;
                 shape.gameObject.SetActive(true);
-                shape.transform.DOScale(Vector3.one, 0.5f).SetEase(Ease.OutQuad);
                 activeBodies.Add(shape);
                 shapeFront ++;
                 StartCoroutine(coroutineThrowShape(shape.m_rigid, dir*Random.Range(35, 40), Random.Range(-4, 4), 0.5f, 0.5f));
