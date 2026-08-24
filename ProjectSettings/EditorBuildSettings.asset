@@ -6,9 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/demo/Shader_Test.unity
-    guid: cd6f816d3d15ebb42a8316747d0d9af9
-  - enabled: 1
     path: Assets/Scenes/Persistence.unity
     guid: 59c40c8abef98854eb8c73b59d6f5da7
   - enabled: 0

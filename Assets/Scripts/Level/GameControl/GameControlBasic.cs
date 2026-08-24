@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class GameDemo : MonoBehaviour
+public class GameControlBasic : MonoBehaviour
 {
-    [SerializeField] private IC_Manager interactionManager;
+    [SerializeField] protected IC_Manager interactionManager;
 
     void Start()
     {

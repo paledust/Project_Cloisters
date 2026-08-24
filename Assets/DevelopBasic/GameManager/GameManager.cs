@@ -61,6 +61,7 @@ public class GameManager : Singleton<GameManager>
 
     #else
     //Since we don't have the saving system yet, the initiation should be done by loading the debug progress data.
+        BlackScreenCanvasGroup.alpha = 1;
         SwitchingScene(string.Empty, GetInitSceneName(), transitionDuration, 0.5f);
     #endif
     }
