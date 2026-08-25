@@ -211948,6 +211948,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6235808070560946395, guid: 05b06ddead44dfc45a226cfc780b31d3,
+        type: 3}
+      propertyPath: dragStrength
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 6235808070560946395, guid: 05b06ddead44dfc45a226cfc780b31d3,
+        type: 3}
+      propertyPath: maxAngularSpeed
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 6235808070560946395, guid: 05b06ddead44dfc45a226cfc780b31d3,
+        type: 3}
+      propertyPath: controllingAngularLerp
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -213315,6 +213330,31 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8475184786922790869, guid: 8d2339b213fc52d459526c7025bff913,
+        type: 3}
+      propertyPath: press.m_Name
+      value: Press
+      objectReference: {fileID: 0}
+    - target: {fileID: 8475184786922790869, guid: 8d2339b213fc52d459526c7025bff913,
+        type: 3}
+      propertyPath: press.m_SingletonActionBindings.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8475184786922790869, guid: 8d2339b213fc52d459526c7025bff913,
+        type: 3}
+      propertyPath: press.m_SingletonActionBindings.Array.data[0].m_Id
+      value: 924e68cf-2c42-4753-87fe-936bd18fb367
+      objectReference: {fileID: 0}
+    - target: {fileID: 8475184786922790869, guid: 8d2339b213fc52d459526c7025bff913,
+        type: 3}
+      propertyPath: press.m_SingletonActionBindings.Array.data[0].m_Path
+      value: <Mouse>/press
+      objectReference: {fileID: 0}
+    - target: {fileID: 8475184786922790869, guid: 8d2339b213fc52d459526c7025bff913,
+        type: 3}
+      propertyPath: press.m_SingletonActionBindings.Array.data[0].m_Action
+      value: Press
+      objectReference: {fileID: 0}
     - target: {fileID: 8475184786922790872, guid: 8d2339b213fc52d459526c7025bff913,
         type: 3}
       propertyPath: m_Name
